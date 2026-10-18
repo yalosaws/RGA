@@ -48,16 +48,30 @@ while i < len(lines):
         out.append('<p>' + '<br>'.join(p) + '</p>'); continue
     i += 1
 close_lists()
-css = """@page{size:A4;margin:16mm 15mm}
+# 标题后接短段落或短表格：整块放进不可拆分的容器；其余标题只要求不留在页底
+for k in range(len(out) - 1):
+    if re.match(r'<h[23]>', out[k]):
+        nxt = out[k + 1]
+        if nxt.startswith('<p>') or (nxt.startswith('<table') and nxt.count('<tr>') <= 8):
+            out[k] = '<div class="keep">' + out[k]; out[k + 1] = nxt + '</div>'
+        else:
+            out[k] = out[k].replace('<h2>', '<h2 class="kn">').replace('<h3>', '<h3 class="kn">')
+css ="""@page{size:A4;margin:16mm 15mm}
 body{font-family:"Microsoft YaHei","PingFang SC",sans-serif;font-size:10.5pt;line-height:1.65;color:#222}
 h1{font-size:20pt;border-bottom:3px solid #7a4bd0;padding-bottom:6px;margin:0 0 12px}
-h2{font-size:14.5pt;color:#5a2fa8;margin:22px 0 8px;border-left:5px solid #7a4bd0;padding-left:8px;page-break-after:avoid}
+h2{font-size:14.5pt;color:#5a2fa8;margin:20px 0 8px;border-left:5px solid #7a4bd0;padding-left:8px}
+h3{font-size:12pt;color:#333;margin:14px 0 6px}
+p,li{orphans:2;widows:2}
+.keep{break-inside:avoid} .kn{break-after:avoid}
 blockquote{margin:0 0 12px;padding:8px 12px;background:#f4f0fb;border-left:4px solid #b9a3e3;color:#444;font-size:9.5pt}
-hr{border:none;border-top:1px solid #ddd;margin:18px 0}
+hr{border:none;border-top:1px solid #ddd;margin:14px 0}
 code{font-family:Consolas,monospace;background:#eee;padding:1px 4px;border-radius:3px}
-table{border-collapse:collapse;margin:8px 0 12px;width:100%;page-break-inside:avoid}
+table{border-collapse:collapse;margin:8px 0 12px;width:100%}
+thead{display:table-header-group}
+tr{break-inside:avoid}
 th,td{border:1px solid #ccc;padding:5px 8px;text-align:left;vertical-align:top}
-th{background:#ede6f8}
+th{background:#ede6f8;white-space:nowrap}
 ul,ol{margin:4px 0 10px;padding-left:24px} li{margin:2px 0}
 strong{color:#000}"""
-open(dst, 'w', encoding='utf-8').write('<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><title>Realm Grinder R0 攻略</title><style>%s</style></head><body>%s</body></html>' % (css, '\n'.join(out)))
+title = next((re.sub(r'^#\s*', '', l) for l in lines if l.startswith('# ')), 'Realm Grinder')
+open(dst, 'w', encoding='utf-8').write('<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><title>%s</title><style>%s</style></head><body>%s</body></html>' % (html.escape(title), css, '\n'.join(out)))
