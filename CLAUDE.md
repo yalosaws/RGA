@@ -15,7 +15,7 @@
 | `表格/旧版/RG综合列表（4.2.0.1）_修改前备份.xlsx` | 用户下载来的原始 4.2.0.1 表，未经任何修改 |
 | `攻略/` | Discord #pre-ascension 置顶 Beginner Guide（作者 ensteffahn）的中文翻译，md + pdf |
 | `脚本/` | 表格更新脚本，见下文 |
-| `资料/` | 抓取的原始资料：官方 4.3+ 补丁说明、Not a Wiki 页面（`naw_*.txt`）、Fandom wikitext（`fandom/`）、changelog、旧表各工作表的文本导出（`sheetN.txt`）、`4.3.14更新笔记.md`（含补丁说明各段行号索引） |
+| `资料/` | 抓取的原始资料：`A0 Guide.txt`（Discord 置顶 full A0 Guide 英文原文，用户下载；`攻略/A0攻略要点-*.md` 据此整理）、官方 4.3+ 补丁说明、Not a Wiki 页面（`naw_*.txt`）、Fandom wikitext（`fandom/`）、changelog、旧表各工作表的文本导出（`sheetN.txt`）、`4.3.14更新笔记.md`（含补丁说明各段行号索引） |
 | `汉化/` | 游戏汉化包（PC 解压版 + PC/安卓 rar），体积大，**不进 git** |
 
 ## 资料可信度
@@ -52,4 +52,4 @@
 
 ## Discord 上的教程
 
-官方 Discord #pre-ascension 置顶还有：**full A0 Guide**（逐个 R 讲解到 R39，未翻译），以及 **Ascension 0 complete build package**（A0Templates.txt，适配 v4.3.11，在游戏设置 → Import Templates 导入）。
+官方 Discord #pre-ascension 置顶还有：**full A0 Guide**（逐个 R 讲解到 R39；原文在 `资料/A0 Guide.txt`，中文要点在 `攻略/A0攻略要点-R1-R3.md` 和 `A0攻略要点-R3-R39.md`。攻略只整理要点、不做整篇逐句翻译，回答细节问题时对照原文），以及 **Ascension 0 complete build package**（A0Templates.txt，适配 v4.3.11，在游戏设置 → Import Templates 导入）。
