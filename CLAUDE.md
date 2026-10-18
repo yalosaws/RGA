@@ -52,4 +52,4 @@
 
 ## Discord 上的教程
 
-官方 Discord #pre-ascension 置顶还有：**full A0 Guide**（逐个 R 讲解到 R39；原文在 `资料/A0 Guide.txt`，中文要点在 `攻略/A0攻略要点.md`（md + pdf）。攻略只整理要点、不做整篇逐句翻译，回答细节问题时对照原文），以及 **Ascension 0 complete build package**（A0Templates.txt，适配 v4.3.11，在游戏设置 → Import Templates 导入）。
+官方 Discord #pre-ascension 置顶还有：**full A0 Guide**（逐个 R 讲解到 R39；原文在 `资料/A0 Guide.txt`，中文要点在 `攻略/A0攻略要点.md`（md + pdf）。攻略只整理要点、不做整篇逐句翻译，回答细节问题时对照原文。整理时不能缩小或改变原文的适用范围；原文没直接写的推论标〔推断〕，原文含糊或笔误标〔原文：…〕），以及 **Ascension 0 complete build package**（A0Templates.txt，适配 v4.3.11，在游戏设置 → Import Templates 导入）。
