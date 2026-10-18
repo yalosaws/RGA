@@ -121,6 +121,6 @@ Not a Wiki 上的 build 页面标着 "Not updated for v4.2"，已经过时。**�
 build 命名格式：
 - 佣兵：`类型 - 阵营倾向 - 血统 - 说明`，例如 `P G FC idle high gem`
 - 研究：`R# - 血统 - 阵营 - 说明`，例如 `R21+ DNGB low gem`
-- 阵营代码：FR 妖精、EL 精灵、AN 天使、GB 哥布林、UD 亡灵、DM 恶魔、TT 泰坦、DD 德鲁伊、FC 无面者、DN 卓尔……
+- 阵营代码：FR 妖精、EL 精灵、AN 天使、GB 哥布林、UD 亡灵、DM 恶魔、TT 泰坦、DD 德鲁伊、FC 无面者、DN 矮人、DW 卓尔……
 
 置顶里还有一份更长的 "full A0 Guide"（逐个 R 讲解到 R39）。
