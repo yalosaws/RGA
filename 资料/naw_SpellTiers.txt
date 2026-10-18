@@ -1,0 +1,60 @@
+R220+ Builds (Not updated for v4.2) 
+ From R42+, Spell Tiers become available and based on the number of tiers for a single spell unlocked allows to cast that spell up to that times simultaneously, increasing the overall spell bonus multiplicatively.
+ The generalized formula for the final spell bonus is (B ^ T), where B is the base spell production ( not as a percentage bonus but as a multiplier) and T is the tier of the spell. The exceptions to this are Gem Grinder, which increases its production by a linear amount, and Dragon's Breath, which simply adds one new type of Dragon Breath to the current breaths in effect. Other peripheral effects, such as the tripling of assistants granted from Fairy Chanting, are also not impacted by spell tiers.
+ Each tier also doubles the Mana cost of the spell compared to the previous one starting at the base cost of the spell.
+ Mana cost for the n-th tier : (c * (2 ^ (T - 1)), where c is the base mana cost and T is the n-th tier of the spell.
+ From R100+ , a tier 7 spell upgrade becomes available to unlock.
+ Note for Ascension 1 : Tier 1-6 production bonus are considered an Ascension 0 upgrade, so each tier defacto adds after ascension penalty +0.1 to the exponent, giving a final production bonus for T6 of (x ^ (0.1 * 6) = x ^ 0.6), where x is the original Ascension 0 production multiplier.
+ Note for Ascension 2 : Tier 7 is considered an Ascension 2 upgrade but with a weaker effect, it adds + 0.2 per tier, making a T7 spell in Ascension 2: ((x ^ 0.6) ^ 0.1 * x ^ 0.2 = x ^ 0.26), where x is the original Ascension 0 production multiplier.
+ Note for subsequent Ascensions : With no additional tiers the overall bonus is (x ^ 0.026) in Ascension 3 and (x ^ 0.0026) in Ascension 4.
+ Spell Tier Upgrades and Autocasting :
+ Require the Tiered Autocasting (R40+, 200 M Mana Produced this Reincarnation) trophy.
+ Tiered Autocasting will automatically set the autocasted spell tier at the highest you have bought, but you can change it to a lower tier if you wish.
+ The Spell Tier upgrades need to be unlocked once (see chapter below), but they need to be purchased in every abdication and cost Diamond Coins (free in A2+) and Faction Coins.
+ Additional Effect : The spell tier upgrades also have an additional effect themselves, apart from allowing an extra cast spell. Each tier upgrades increases offline production based on Mana statistics. (Not Tax Collection)
+ Formula : ((m + r) ^ (1 + 0.05 * T))%, where m is Maximum mana, r is Mana Regeneration and T is the specific tier.
+ Note : An individual bonus for each tier upgrade (beginning from tier 2 up to tier 6 (or 7 in A2+)), ingame tooltip shows the combined bonus.
+ Note : Tier 2-6 are considered an Ascension 0 upgrade and Tier 7 is considered an Ascension 1 upgrade for Ascension penalty purposes. 
+ Spell Tier Unlocks 
+ Unlock Requirement : Depends on the respective spell's activity time in this Reincarnation, and is reduced by the number of times you have reincarnated as well as the amount of spell tiers you have already unlocked of any spell (not just the spells available).
+ Formula : (57600 * (0.4 + 0.1 * T) * ((T ^ 2 + 1) / (0.1 * U + 1)) * (0.97 ^ (R - 35))) Where T is Tier, U is number of unlocked tier upgrades in all spells (so tiers above tier 1), R is is the number of times you have reincarnated.
+ Because of above factors, if you attempt to unlock multiple spells at once, the unlock time of tiers will be reduce during the unlock process. For this reason it is difficult to show how long your current tiering target will take.
+ The chart below will only show how long it takes to unlock a tier with no other spell tiering in the meantime.
+ Please use the following tool for a full tiering timeline. 
+ At R40 you can unlock Requirement: R40+, 200M Mana Produced (Total this R). Note: This trophy unlocks at R40, The upgrade unlocks at R42"> Tiered Autocasting , At R42 you can unlock spell tiers
+ Click here to see your unlocked tiers 
+ Input the Tier and the Reincarnation you want to unlock it at and the amount of unlocked tiers (tiers gotten above tier 1 in any spell) then click Show
+ Tiers
+ - 
+ Total Unlocked Tier Upgrades
+ Reincarnations
+ - 
+ Unlock Spell Active Time (Total) Per R# & Tier
+ | Resources | Soft Resets | Buildings | Heritages | Bloodlines 
+ | Spells | Excavations | Challenges | Upgrades | Trophies 
+ | Factions | Research |
+ | Merc Builds | Research Builds | Prestige Builds | Dragon Unlock | Neutral Prestige Builds | Research Tree |
+ | Good : Fairy, Elf , Angel Evil : Goblin , Undead , Demon Neutral : Titan , Druid , Faceless"> Vanilla Factions 
+ | Fairy Elf Angel "> Good Factions 
+ | Goblin Undead Demon"> Evil Factions 
+ | Titan Druid Faceless"> Neutral Factions 
+ | Dwarf Drow Dragon"> Prestige Factions 
+ | Archon Djinn Makers"> A2 Elite Factions |
+ | Events | Latest Major Patch | Changelog | Notation | Terminology | Tools | Kongregate Links |
+ | Fairy 
+ | Elven 
+ | Angel 
+ | Goblin 
+ | Undead 
+ | Demon 
+ | Titan 
+ | Druid 
+ | Faceless |
+ | Mercenary 
+ | Dwarf 
+ | Drow 
+ | Dragon 
+ | Archon 
+ | Djinn 
+ | Makers |
+ 

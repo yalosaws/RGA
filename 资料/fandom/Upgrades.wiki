@@ -1,0 +1,1980 @@
+[[File:Gametab-Upgrades.png|centre]] '''Upgrades''' help you either directly by improving the production of your buildings and click rewards, or indirectly by increasing your [[mana]] regeneration rate, or your [[Faction Coins|faction coins]] find chance etc. Unless you are aiming for a special trophy such as [[Faction Run]], upgrades on this page are simply to be collected, unlike the [[Faction upgrades|Faction]] or [[Research]] upgrades which require strategic choices.
+
+They are unlocked when you complete certain tasks or receive a [[trophy]], and will show up progressively in the upgrades tab when you become close to affording them. Depending on your game [[options]], upgrades can be sorted by category, by price, consolidated by series, and purchased upgrades can be hidden. It is advised to enable the option '''Don't Group Upgrades by Category''<nowiki/>' to have all the unpurchased upgrades easily at reach side by side.
+
+Below are upgrades by category as visible in the game. (PA = Post [[Ascension]])
+
+== Allegiances Upgrades ==
+The first category in the sidebar, a player's Allegiance can refer to both [[Alignment]] and [[Factions]] and their related categories of upgrades. Only the core upgrades from this category are listed below; many of these are [[Faction upgrades]] (this group includes the series of allying Treaties). Alongside those big groups are the [[Heritages]], [[Bloodlines|Bloodline]], and the [[Royal Exchange]] interface.
+<table-progress-tracking table-id="1" unique-column-index="2">
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%;" id="Alignment Upgrades" cellpadding="10"
+! colspan="6" |[[Proofs]]
+|-
+! colspan="2" |Name
+!Cost
+! scope="col" |Unlock Requirements
+!Alignment
+!Effect
+|-
+![[File:Goodproof.png]]
+!Proof of Good Deed
+|25,000
+|None
+|Any
+|Enables to join a [[Factions#Good Factions|Good]] Faction
+|-
+![[File:Evilproof.png]]
+!Proof of Evil Deed
+|25,000
+|None
+|Any
+|Enables to join an [[Factions#Evil Factions|Evil]] Faction
+|-
+![[File:Neutral.png]]
+!Proof of Neutrality
+|{{Number|10 Qa|table}}
+|At least one neutral faction unlocked
+|Any
+|Enables to join a [[Factions#Neutral Factions|Neutral]] Faction
+|-
+![[File:Order.png]]
+!Proof of Order
+|{{Number|1Qa|table}} [[Coins|Emerald]]
+|[[Ascension#Ascension 2|R100+]]
+|Any
+|Enables ''Angels, Undead'' or ''Titans'' to join the Order [[Alignments|Leges]].
+|-
+![[File:Chaos.png]]
+!Proof of Chaos
+|{{Number|1Qa|table}} Emerald
+|R100+
+|Any
+|Enables ''Fairies, Demons'' or ''Faceless'' to join the Chaos [[Alignments|Leges]].
+|-
+![[File:Balance.png]]
+!Proof of Balance
+|{{Number|1Qa|table}} Emerald
+|R100+
+|Any
+|Enables ''Elves, Goblins'' or ''Druids'' to join the Balance [[Alignments|Leges]].
+|}
+</table-progress-tracking>
+
+<table-progress-tracking table-id="2" unique-column-index="2">
+{| class="mw-collapsible mw-collapsed sortable wikitable" style="width:100%"
+! colspan="5" |Spell Upgrades
+|-
+! colspan="2" class="unsortable" |Name
+! class="unsortable" |Cost
+! class="unsortable" |Requirements
+! class="unsortable" |Effects
+|-
+![[File:Coin Pillage.png]]
+!Coin Pillage
+| style="padding-left:10px;" |{{Number|1 Dc|table}}
+| style="padding-left:10px;" |Cast 150 Tax Collection in less than 5 seconds.
+| style="padding-left:10px;" |Tax Collection also finds 30 seconds worth of Faction Coins.
+|-
+![[File:Fairy Choir.png]]
+!Fairy Choir
+| style="padding-left:10px;" |{{Number|1 M|table}}
+| style="padding-left:10px;" |Cast [[Fairy]] Chanting while having 45 or more assistants.
+| style="padding-left:10px;" |Fairy Chanting triples your assistants for its duration.
+|-
+![[File:Sun Blessing.png]]
+!Sun Blessing
+| style="padding-left:10px;" |{{Number|1 M|table}}
+| style="padding-left:10px;" |Cast the [[Elven]] spell Moon Blessing between 6 am and 12 pm (noon)
+| style="padding-left:10px;" |The treasure is autoclicked 15 times per second while Moon Blessing is active.
+|-
+![[File:God's Rest.png]]
+!God's Rest
+| style="padding-left:10px;" |{{Number|1 M|table}}
+| style="padding-left:10px;" |Cast [[Angel]]'s God’s Hand on a Sunday.
+| style="padding-left:10px;" |Gives random [[Faction Coins]] based on your [[mana]] regeneration for each other spell you cast while God's Hand is active.
+{{Formula|(floor(x^{1.1})|mana regen per second}}
+|-
+![[File:Greed Drive.png]]
+!Greed Drive
+| style="padding-left:10px;" |{{Number|1 M|table}}
+| style="padding-left:10px;" |Cast 100 [[Goblin]]'s Greed spells in a row. The chain is interrupted by casting other spells.
+| style="padding-left:10px;" |Goblin's Greed costs 150 less mana.
+|-
+![[File:True Night.png]]
+!True Night
+| style="padding-left:10px;" |{{Number|1 M|table}}
+| style="padding-left:10px;" |Cast [[Undead]]'s Night Time spell between 11 pm and 6 am.
+| style="padding-left:10px;" |Increase Night Time boost to assistants production to 40% per Necropolis.
+|-
+![[File:Hell-rush-spell-upgrade.png]]
+!Hell Rush
+| style="padding-left:10px;" |{{Number|1 M|table}}
+| style="padding-left:10px;" |Cast [[Demon]]'s Hellfire Blast spell in the first 60 seconds of playtime.
+| style="padding-left:10px;" |Hellfire Blast also boosts Hall of Legends.
+|-
+![[File:Lightning Storm.png]]
+!Lightning Storm
+| style="padding-left:10px;" |{{Number|10 Dd|table}}
+| style="padding-left:10px;" |Cast 100 [[Titan]]'s Lightning Strike spell in a single game.
+| style="padding-left:10px;" |Increase Lightning Strike multiplier to 5x Iron Strongholds.
+|-
+![[File:Halls Of Balance.png]]
+!Halls of Balance
+| style="padding-left:10px;" |{{Number|10 Dd|table}}
+| style="padding-left:10px;" |Have [[Druid]]'s Grand Balance spell affect Hall of Legends.
+| style="padding-left:10px;" |Increase Grand Balance duration to 24 seconds and lower its cost by 200.
+|-
+![[File:Faceless-Overmind-spell-upgrade.png]]
+!Faceless Overmind
+| style="padding-left:10px;" |{{Number|10 Dd|table}}
+| style="padding-left:10px;" |Affiliate with the [[Faceless]] 5 times in a row.
+| style="padding-left:10px;" |Increase Brainwave ticks to 3% per second.
+|-
+![[File:Minedwarf.png]]
+!Minedwarf
+| style="padding-left:10px;" |{{Number|100 Sxd|table}}
+| style="padding-left:10px;" |Find 30,000 faction coins from the [[Dwarf]] spell Diamond Pickaxe in a single game.
+| style="padding-left:10px;" |Increase Diamond Pickaxe bonus to Faction Coin find chance to 300%
+|-
+![[File:Perfect Combo.png]]
+!Perfect Combo
+| style="padding-left:10px;" |{{Number|100 Sxd|table}}
+| style="padding-left:10px;" |Cast 100 [[Drow]]'s combo strike spell in a row. The chain is interrupted by casting other spells.
+| style="padding-left:10px;" |Increase Combo Strike bonus.
+{{Formula|40*(x^{0.9})%|the number of times you have cast Combo Strike}}
+|-
+![[File:DragonSpellUpgrade.png]]
+!Dragon's Roar<br />{{PA}}
+| style="padding-left:10px;" |{{Number|1 Qad|table}} R46+
+| style="padding-left:10px;" |Cast [[Dragon]]'s Breath while having at least 4 other active spells.
+| style="padding-left:10px;" |Dragon's Breath also produces Faction Coins based on its activity time.
+{{Formula|floor(135 * x^{0.98})|all Rs activity time in seconds}}
+|-
+![[File:Round Table.png]]
+!Round Table<br />{{PA}}
+| style="padding-left:10px;" |{{Number|1 Qaqag|table}}
+| style="padding-left:10px;" |''Mercenary Camp'' Upgrade
+| style="padding-left:10px;" |Upgrades ''Tax Collection'' to ''Share Benefits''.<br />Increases the production of all buildings and Faction Coin find chance based on this spell tier level for 20 seconds. Can be cast up to 35 tiers.
+{{Formula|20 ^{(0.25 * x)}|tier (FC chance multiplier)}}<br />{{Formula|naked|((2.20 ^x) - 1) * 100|multiplicative (production multiplier)}}
+|-
+![[File:Dark Covenant.png]]
+!Dark Covenant<br />{{PA}}
+| style="padding-left:10px;" |{{Number|1 Qaqag|table}}
+| style="padding-left:10px;" |''Tyrant Garrison'' Upgrade
+| style="padding-left:10px;" |Upgrades ''Tax Collection'' to ''Reap Interests''.<br />Additional casts of Reap Interests increase its seconds worth of production.
+{{Formula|yx|y ^{(1 + 0.2 * \log_{10}(1 + x))}|TC original power|amount of TC casts}}<br />(Extra time from reap interests does apply to S50. S50 tax collections do increase reap interests.)
+|-
+![[File:Secret Exchange.png]]
+!Secret Exchange<br />{{PA}}
+| style="padding-left:10px;" |{{Number|1 Qaqag|table}}
+| style="padding-left:10px;" |''Freemason's Hall'' Upgrade
+| style="padding-left:10px;" |Upgrades ''Tax Collection'' to ''Appraisal Vantage''.<br />Generates additional Faction Coins per cast.
+{{Formula|(2.5 * x^{2.5})|original Faction Coin chance}}
+|-
+|}
+</table-progress-tracking>
+
+<table-progress-tracking table-id="3" unique-column-index="2">
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%;" id="Unique Building Upgrades" cellpadding="10"
+! colspan="6" |[[Unique Building]] Upgrades
+|-
+! colspan="2" |Name
+!Cost
+!Unlock Requirements
+!Alignment
+!Effect
+|-
+![[File:Enchanted_Fields_icon.png]]
+!Enchanted Fields
+|{{Number| 10 Ttg|table}}
+|R16 + 2250 Farms, Enchanted Fields Quest
+|[[Fairy]]
+|Upgrade Farms to ''Enchanted Fields'', boosting their production based on the amount of assistants you own and unlocking more unique perks for the building.<br />Also allows access to the [[Research]] Facilities.
+{{Formula|stat|47 * (750 * x)^{0.7}|Assistants}}
+|-
+![[File:Elven_Training_Grounds_icon.png]]
+!Elven Training Grounds
+|{{Number|10Ttg|table}}
+|R16 + 1750 Barracks, Elven Training Grounds Quest
+|[[Elf]]
+|Upgrade Warrior Barracks to ''Elven Training Grounds'', boosting their production based on the total amount of clicks you made and unlocking more unique perks for the building.<br />Also allows access to the Research Facilities.
+{{Formula|stat|((50 * x^{0.85}) + 50 * ln^6(1 + x))%|Treasure Clicks (Total)}}
+|-
+![[File:Heaven's_Domain_icon.png]]
+!Heaven's Domain
+|{{Number|10Ttg|table}}
+|R16 + 1500 Heaven's Gate, Heaven's Domain Quest
+|[[Angel]]
+|Upgrade Heaven’s Gates to ''Heaven’s Domains'', boosting their production by x350 per spell affecting them and unlocking more unique perks for the building.<br />Also allows access to the Research Facilities.
+|-
+![[File:Goblin_Bank_icon.png]]
+!Goblin Banks
+|{{Number| 10 Ttg|table}}
+|R16 + 1750 Witch Conclaves, Goblin Banks Quest
+|[[Goblin]]
+|Upgrade Witch Conclaves to ''Goblin Banks'', boosting their base production based on the amount of gold you own and unlocking more unique perks for the building.<br />Also allows access to the Research Facilities.
+{{Formula|650 + 10000 * log^{1.5}(1 + x)|your current amount of Coins}}<br />{{Formula|naked|650 + 10000 * log^{1.5/(A + 1)}(1 + x)|where x is your current amount of Coins and A is your Ascension count.}}
+|-
+![[File:Undercity_icon.png]]
+!Undercities
+|{{Number| 10 Ttg|table}}
+|R16 + 1750 Necropolises, Undercities Quest
+|[[Undead]]
+|Upgrade Necropolises to ''Undercities'', boosting their production based on time spent in this game and unlocking more unique perks for the building.<br />Also allows access to the Research Facilities.
+{{Formula|stat|(10 * (2x)^{0.75})%|Playtime (This Game)}}
+|-
+![[File:Infernal_Realm_icon.png]]
+!Infernal Realms
+|{{Number| 10 Ttg|table}}
+|R16 + 1500 Hell Portals, Infernal Realm Quest
+|[[Demon]]
+|Upgrade Hell Portals to ''Infernal Realms'', boosting their production by 100% per trophy you unlocked and unlocking more unique perks for the building.<br />Also allows access to the Research Facilities.
+|-
+![[File:Olympian_Hall_icon.png]]
+!Olympian Halls
+|{{Number| 10 Ttg|table}}
+|R22 + 2000 Hall of Legends, Olympian Hall Quest
+|[[Titan]]
+|Upgrade Halls of Legend to ''Olympian Halls'', boosting their production by 15% per [[Royal Exchange]] you purchased and unlocking more unique perks for the building.<br />Also allows access to the Research Facilities.
+|-
+![[File:Stonehenge_Circle_icon.png]]
+!Stonehenge Circles
+|{{Number| 10 Ttg|table}}
+|R22 + 2000 Stone Pillars, Stonehenge Circle Quest
+|[[Druid]]
+|Upgrade Stone Pillars to ''Stonehenge Circles'', boosting their production by 25% per point of Maximum Mana and unlocking more unique perks for the building.<br />Also allows access to the Research Facilities.
+<small>''Note: The listed bonus is not a multiple of 25; this discrepancy appears to be due to maximum mana being represented as a floating point number, not an integer as it is displayed.''</small>
+|-
+![[File:Sunken_City_icon.png]]
+!Sunken Cities
+|{{Number| 10 Ttg|table}}
+|R22 + 2000 Labyrinths, Sunken City Quest
+|[[Faceless]]
+|Upgrade Labyrinths to ''Sunken Cities'', boosting their production based on time spent in your longest game session and unlocking more unique perks for the building.<br />Also allows access to the Research Facilities.
+{{Formula|stat|75 * x^{0.9}%|Playtime (Longest Session)}}
+|-
+![[File:Dwarven_Forge_icon.png]]
+!Dwarven Forges
+|{{Number|10 USxg|table}}
+|R28 + 5000 Blacksmiths, Dwarven Forge Quest (as [[Dwarf]])
+|[[Good]]
+|Upgrade Blacksmiths to ''Dwarven Forges'', boosting their production based on mana regen and unlocking more unique perks for the building.<br />Also allows access to the Research Facilities.
+{{Formula|stat|100 * x^{0.9}%|Mana per Second}}
+|-
+![[File:Spider_Sanctuary_icon.png]]
+!Spider Sanctuary
+|{{Number|10 USxg|table}}
+|R28 + 3333 Dark Temples, Spider Sanctuary Quest (as [[Drow]])
+|[[Evil]]
+|Upgrade Dark Temples to ''Spider Sanctuaries'', boosting their production based on time spent [[offline]] and unlocking more unique perks for the building.<br />Also allows access to the Research Facilities.
+{{Formula|stat|30 * x^{0.8}|your Time Spent Offline (Total)}}
+|-
+![[File:WyrmsDen.png]]
+!Wyrm's Den<br />{{PA}}
+|{{Number| 10 Nod|table}}
+|R46 + 4500 Iron Strongholds, Wyrm's Den Quest (as [[Dragon]])
+|[[Neutral]]
+|Upgrade Iron Strongholds to ''Wyrm's Den'', boosting their production based on the total amount of Faction Coins you collected and unlocking more unique perks for the building.<br />Also allows access to the Research Facilities.
+{{Formula|xy|(0.065 * (ln(1 + x/ 2 + y))^{3.65})|faction coins (This Game)|Faction Coins (This R)}}
+|-
+![[File:Mercenary Camp icon.png]]
+!Mercenary Camp<br />{{PA}}
+|{{Number| 10 Nod|table}}
+|R75 + 125K buildings, Mercenary Encampment Quest (as [[Mercenary]])
+|[[Good]]
+|Upgrade Knights Jousts to ''Mercenary Camps'', boosting their production based on the amount of Non-Unique buildings you own and unlocking more unique perks for the building.<br />Also allows access to the Research Facilities.
+{{Formula|build|1.5 * (1+x)|Non-Unique Buildings}}
+|-
+![[File:Tyrant Garrison icon.png]]
+!Tyrant Garrison<br />{{PA}}
+|{{Number| 10 Nod|table}}
+|R75 + 125K buildings, Mercenary Encampment Quest (as [[Mercenary]])
+|[[Evil]]
+|Upgrade Evil Fortresses to Tyrant Garrisons, boosting their production based on Offline Production Bonus and unlocking more unique perks for the building.<br />Also allows access to the Research Facilities.
+{{Formula|0.5 * \log_{10}(1+x)^{4.5}|the Offline Production Bonus}}
+|-
+![[File:Freemason's Hall icon.png]]
+!Freemason's Hall<br />{{PA}}
+|{{Number| 10 Nod|table}}
+|R75 + 125K buildings, Mercenary Encampment Quest (as [[Mercenary]])
+|[[Neutral]]
+|Upgrade Inns to Freemason's Halls, boosting their production based on the highest amount of assistants you had in a single game and unlocking more unique perks for the building.<br />Also allows access to the Research Facilities.
+{{Formula|2.5 * x^{2.5}|assistants you had in a single game (This R)}}
+|-
+|}
+</table-progress-tracking>
+<table-progress-tracking table-id="4" unique-column-index="2">
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%;" id="Leges Unique Building Upgrades" cellpadding="10"
+! colspan="6" |[[Alignments#Leges|Leges]] Unique Building Upgrades {{PA|2}}
+|-
+! colspan="2" |Name
+!Cost
+!Unlock Requirements
+!Alignment
+!Effect
+|-
+![[File:Swarming Tower Upgrade.png]]
+!Swarming Tower
+|{{Number|1 Td|table}}
+|R100 + 200K Assistants, Swarming Towers Quest
+|[[Fairy]]
+|Upgrade ''Wizard Towers'' to ''Swarming Towers'', boosting their production based on the amount of active spells and unlocking more unique perks for the building.<br />Also allows access to the [[Faction Union]].
+{{Formula|(0.35 * x^{2.35})%|active spells}}
+|-
+![[File:Arboreal City Upgrade.png]]
+!Arboreal City
+|{{Number|1 Td|table}}
+|R100 + {{Number|1e23}} Elf Faction Coins found, Swarming Towers Quest
+|[[Elf]]
+|Upgrade ''Citadels'' to ''Arboreal Cities'', boosting their production based on Faction Coin find chance and unlocking more unique perks for the building.<br />Also allows access to the Faction Union.
+{{Formula|floor20 * (\log_{10}(1+x))^2)|FC chance}}
+|-
+![[File:Holy Site Upgrade.png]]
+!Holy Site
+|{{Number|1 Td|table}}
+|R100 + 2000K Mana Regeneration, Holy Site Quest
+|[[Angel]]
+|Upgrade ''Cathedrals'' to ''Holy Sites'', boosting their production based on time spent as good and unlocking more unique perks for the building.<br />Also allows access to the Faction Union.
+{{Formula|floor20 * (\log_{10}(1+x))^2)|is FC chance}}
+|-
+![[File:Slave Market Upgrade.png]]
+!Slave Market
+|{{Number|1 Td|table}}
+|R100 + 30K Neutral buildings, Slave Market Quest
+|[[Goblin]]
+|Upgrade ''Slave Pens'' to ''Slave Market'', boosting their production based on assistants and unlocking more unique perks for the building.<br />Also allows access to the Faction Union.
+{{Formula|floor(0.25 * x^{0.75})%|amount of assistants}}
+|-
+![[File:Flesh Workshop Upgrade.png]]
+!Flesh Workshop
+|{{Number|1 Td|table}}
+|R100 + {{Number|85M}}% offline production bonus, Flesh Workshop Quest
+|[[Undead]]
+|Upgrade ''Orcish Arenas'' to ''Flesh Workshops'', boosting their production based on your mana regeneration rate and unlocking more unique perks for the building.<br />Also allows access to the Faction Union.
+{{Formula|(2 * x^{0.6})|mana regen per second}}
+|-
+![[File:Burning Abyss Upgrade.png]]
+!Burning Abyss
+|{{Number|1 Td|table}}
+|R100 + 130 seconds long ''[[Call to Arms]]'', Burning Abyss Quest
+|[[Demon]]
+|Upgrade ''Hall of Legends'' to ''Burning Abyss'', boosting their production based on time spent as Evil and unlocking more unique perks for the building.<br />Also allows access to the Faction Union.
+''Formula: for each digit of floor(1.25 * x): sum(digit ^ (2 + (floor(log10(1 + 1.25 * x) + 1) / 10))%, where x is evil time this R
+|-
+![[File:Mountain Palace Upgrade.png]]
+!Mountain Palace
+|{{Number|1 Td|table}}
+|R100 + 3750 Royal Exchanges, Mountain Palace Quest
+|[[Titan]]
+|Upgrade ''Deep Mines'' to ''Mountain Palaces'', boosting their production based on buildings owned and unlocking more unique perks for the building.<br />Also allows access to the Faction Union.
+{{Formula|0.25 * x^{0.75}|buildings owned}}
+|-
+![[File:Ziggurat Upgrade.png]]
+!Ziggurat
+|{{Number|1 Td|table}}
+|R100 + 12K ''Stonehenges'', Ziggurat Quest
+|[[Druid]]
+|Upgrade ''Ancient Pyramids'' to ''Ziggurats'', boosting their production based on lineage levels and unlocking more unique perks for the building.<br />Also allows access to the Faction Union.
+{{Formula|floor(x^{1.1})%|total level of lineages}}
+|-
+![[File:Forbidden Library Upgrade.png]]
+!Forbidden Library
+|{{Number|1 Td|table}}
+|R100 + 5000 Excavations, Forbidden Library Quest
+|[[Faceless]]
+|Upgrade ''Monasteries'' to ''Forbidden Libraries'', boosting production based on spells cast and unlocking more unique perks for the building.<br />Also allows access to the Faction Union.
+{{Formula| (15 * (ln (1 + x) / ln(x % 10 + 2))^{1.5})%|buildings owned}}
+|-
+|}
+</table-progress-tracking>
+
+== Misc Upgrades ==
+This category also includes [[Reincarnation Power]], one time [[Faction]] and [[Research]] quests upgrades, temporary [[Event]] upgrades, and [[Premium Upgrades|Premium upgrades]].
+
+<table-progress-tracking table-id="5" unique-column-index="2">
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%;" id="Gem Upgrades" cellpadding="10"
+! colspan="6" |[[Gems|Gem]] Upgrades
+|-
+! colspan="2" |Name
+!Cost
+!Unlock Requirements
+!Alignment
+!Effect
+|-
+![[File:Gem-power.png|54x54px]]
+!Gem Power
+|1 Coin
+|1 Gem
+|Any
+|Unlocks [[Gem Power]], each of which will Increase your overall production by 2% and slightly improve your chance of obtaining faction coins.
+''Formula:'' <math>+(\lfloor (1.25+\frac{y}{4})*\ln(1+x)^{\frac{0.9}{\ln(10)}} \rfloor)%</math> where x is the number of gem in bank.
+|-
+![[File:Gem Potency.png|54x54px]]
+!Gem Potency
+|{{Number|10 Sp|table}}
+|{{Number|1 M}} Gems
+|Any
+|Gem production bonus is Increased by an additional 1%.
+|-
+![[File:Gem Supremacy.png|54x54px]]
+!Gem Supremacy
+|{{Number|10 Dvg|table}}
+|{{Number|1 Dd}} Gems
+|Any
+|Gem production bonus is Increased by an additional 1%.
+|-
+![[File:Gem Sovereignty.png|54x54px]]
+!Gem Sovereignty
+|{{Number|10 Qitg|table}}
+|{{Number|1 Vg}} Gems
+|Any
+|Gem production bonus is Increased by an additional 1%
+|}
+</table-progress-tracking>
+<table-progress-tracking table-id="6" unique-column-index="2">
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%;" id="Ruby Upgrades" cellpadding="10"
+! colspan="5" |[[Ruby]] Upgrades
+|-
+! colspan="2" |Name
+!Cost
+!Unlock
+!Effect
+|-
+![[File:Ruby-power-upgrade-button.png|54x54px]]
+!Ruby Power
+|0 Coins
+|Find 1 Ruby
+|Unlocks [[Ruby|Ruby upgrades]], increasing the production of all buildings by 100% and allowing you to purchase Ruby bonuses.<br />Ruby Power starts at 100% and increases based on the amount of rubies you have.
+Rubies are not affected by [[Soft reset|soft-resets]].
+|-
+!
+!Ruby Assistant
+|1 Ruby (+ 1 for every time this upgrade has been purchased)
+| style="font-style: italic; font-size:9pt;" |Unlocked by Ruby Power
+|Adds 1 [[assistant]]<br /><small>''Persists through Abdications and Reincarnations''</small>
+|-
+!
+!Ruby Mana Regeneration
+|1 Ruby (+ 1 for every time this upgrade has been purchased)
+| style="font-style: italic; font-size:9pt;" |Unlocked by Ruby Power
+|Adds 0.5 [[mana]] regen<br /><small>''Persists through Abdications and Reincarnations''</small>
+|-
+!
+!Ruby Max Mana
+|1 Ruby (+ 1 for every time this upgrade has been purchased)
+| style="font-style: italic; font-size:9pt;" |Unlocked by Ruby Power
+|Adds 25 mana<br /><small>''Persists through Abdications and Reincarnations''</small>
+|-
+!
+!Ruby Gem Bonus
+|1 Ruby (+ 1 for every time this upgrade has been purchased)
+| style="font-style: italic; font-size:9pt;" |Unlocked by Ruby Power
+|Adds 0.5% to the gem production bonus<br /><small>''Persists through Abdications and Reincarnations''</small>
+|-
+!
+!Ruby Royal Trading
+|1 Ruby (+ 1 for every time this upgrade has been purchased)
+| style="font-style: italic; font-size:9pt;" |Unlocked by Ruby Power
+|Adds 1.5% to the royal exchange production bonus<br /><small>''Persists through Abdications and Reincarnations''</small>
+|-
+!
+!Ruby Tier 1
+|1 Coin
+|50 Rubies
+|Increases ruby power by 100% to 200%.<br />''Note: 58 rubies can be purchased in the [[Shop]] for 100 kreds (100 kreds for $10 with 10 kreds extra).''
+|-
+![[File:Ruby-tier2.png|54x54px]]
+!Ruby Tier 2
+|1 Coin
+|100 Rubies
+|Increases ruby power by 100% to 300%.<br />''Note: 104 rubies can be purchased for 200 kreds (200 kreds for $20 with 25 kreds extra).''
+|-
+!
+!Ruby Tier 3
+|1 Coin
+|150 Rubies
+|Increases ruby power by 100% to 400%.
+|-
+!
+!Ruby Tier 4
+|1 Coin
+|250 Rubies
+|Increases ruby power by 200% to 600%.<br />''Note: 280 rubies can be purchased for 500 kreds (500 kreds for $50 with 65 kreds extra).''
+|-
+!
+!Ruby Tier 5
+|1 Coin
+|350 Rubies
+|Increases ruby power by 200% to 800%.
+|-
+!
+!Ruby Tier 6
+|1 Coin
+|450 Rubies
+|Increases ruby power by 200% to 1000%.
+|-
+!
+!Ruby Tier 7
+|1 Coin
+|550 Rubies
+|Increases ruby power by 200% to 1200%.
+|-
+!
+!Ruby Tier 8
+|1 Coin
+|650 Rubies
+|Increases ruby power by 200% to 1400%.
+|-
+!
+!Ruby Tier 9
+|1 Coin
+|800 Rubies
+|Increases ruby power by 300% to 1700%.
+|-
+!
+!Ruby Tier 10
+|1 Coin
+|950 Rubies
+|Increases ruby power by 300% to 2000%.
+|-
+!
+!Ruby Tier 11
+|1 Coin
+|1100 Rubies
+|Increases ruby power by 300% to 2300%.
+|-
+!
+!Ruby Tier 12
+|1 Coin
+|1250 Rubies
+|Increases ruby power by 300% to 2600%.
+|-
+!
+!Ruby Tier 13
+|1 Coin
+|1400 Rubies
+|Increases ruby power by 300% to 2900%.
+|-
+!
+!Ruby Tier 14
+|1 Coin
+|1600 Rubies
+|Increases ruby power by 400% to 3300%.
+|-
+!
+!Ruby Tier 15
+|1 Coin
+|1800 Rubies
+|Increases ruby power by 400% to 3700%.
+|-
+!
+!Ruby Tier 16
+|1 Coin
+|2000 Rubies
+|Increases ruby power by 400% to 4100%.
+|-
+!
+!Ruby Tier 17
+|1 Coin
+|2200 Rubies
+|Increases ruby power by 400% to 4500%.
+|-
+!
+!Ruby Tier 18
+|1 Coin
+|2400 Rubies
+|Increases ruby power by 400% to 4900%.
+|-
+!
+!Ruby Tier 19
+|1 Coin
+|2650 Rubies
+|Increases ruby power by 500% to 5400%.
+|-
+!
+!Ruby Tier 20
+|1 Coin
+|2900 Rubies
+|Increases ruby power by 500% to 5900%.
+|-
+!
+!Ruby Tier 21
+|1 Coin
+|3150 Rubies
+|Increases ruby power by 500% to 6400%.
+|-
+!
+!Ruby Tier 22
+|1 Coin
+|3400 Rubies
+|Increases ruby power by 500% to 6900%.
+|-
+!
+!Ruby Tier 23
+|1 Coin
+|3650 Rubies
+|Increases ruby power by 500% to 7400%.
+|-
+!
+!Ruby Tier 24
+|1 Coin
+|3900 Rubies
+|Increases ruby power by 600% to 8000%.
+|-
+!
+!Ruby Tier 25
+|1 Coin
+|4200 Rubies
+|Increases ruby power by 600% to 8600%.
+|-
+!
+!Ruby Tier 26
+|1 Coin
+|4500 Rubies
+|Increases ruby power by 600% to 9200%.
+|-
+!
+!Ruby Tier 27
+|1 Coin
+|4800 Rubies
+|Increases ruby power by 600% to 9800%.
+|-
+!
+!Ruby Tier 28
+|1 Coin
+|5150 Rubies
+|Increases ruby power by 600% to 10400%.
+|-
+!
+!Ruby Tier 29
+|1 Coin
+|5500 Rubies
+|Increases ruby power by 600% to 11000%.
+|-
+!
+!Ruby Tier 30
+|1 Coin
+|5850 Rubies
+|Increases ruby power by 700% to 11700%.
+|-
+!
+!Ruby Tier 31
+|1 Coin
+|6200 Rubies
+|Increases ruby power by 700% to 12400%.
+|-
+!
+!Ruby Tier 32
+|1 Coin
+|6550 Rubies
+|Increases ruby power by 700% to 13100%.
+|-
+!
+!Ruby Tier 33
+|1 Coin
+|6900 Rubies
+|Increases ruby power by 700% to 13800%.
+|-
+!
+!Ruby Tier 34
+|1 Coin
+|7300 Rubies
+|Increases ruby power by 700% to 14500%.
+|-
+!
+!Ruby Tier 35
+|1 Coin
+|7700 Rubies
+|Increases ruby power by 800% to 15300%.
+|-
+!
+!Ruby Tier 36
+|1 Coin
+|8100 Rubies
+|Increases ruby power by 800% to 16100%.
+|-
+!
+!Ruby Tier 37
+|1 Coin
+|8500 Rubies
+|Increases ruby power by 800% to 16900%.
+|-
+!
+!Ruby Tier 38
+|1 Coin
+|8900 Rubies
+|Increases ruby power by 800% to 17700%.
+|-
+!
+!Ruby Tier 39
+|1 Coin
+|9350 Rubies
+|Increases ruby power by 800% to 18500%.
+|-
+!
+!Ruby Tier 40
+|1 Coin
+|9800 Rubies
+|Increases ruby power by 900% to 19400%.
+|-
+!
+!Ruby Tier 41
+|1 Coin
+|10250 Rubies
+|Increases ruby power by 900% to 20300%.
+|-
+!
+!Ruby Tier 42
+|1 Coin
+|10700 Rubies
+|Increases ruby power by 900% to 21200%.
+|-
+!
+!Ruby Tier 43
+|1 Coin
+|11150 Rubies
+|Increases ruby power by 900% to 22100%.
+|-
+!
+!Ruby Tier 44
+|1 Coin
+|11650 Rubies
+|Increases ruby power by 900% to 23000%.
+|-
+!
+!Ruby Tier 45
+|1 Coin
+|12150 Rubies
+|Increases ruby power by 1000% to 24000%.
+|-
+!
+!Ruby Tier 46
+|1 Coin
+|12650 Rubies
+|Increases ruby power by 1000% to 25000%.
+|-
+!
+!Ruby Tier 47
+|1 Coin
+|13150 Rubies
+|Increases ruby power by 1000% to 26000%.
+|-
+!
+!Ruby Tier 48
+|1 Coin
+|13650 Rubies
+|Increases ruby power by 1000% to 27000%.
+|-
+!
+!Ruby Tier 49
+|1 Coin
+|14200 Rubies
+|Increases ruby power by 1000% to 28000%.
+|-
+!
+!Ruby Tier 50
+|1 Coin
+|14750 Rubies
+|Increases ruby power by 1100% to 29100%.
+|}
+</table-progress-tracking>
+
+<table-progress-tracking table-id="7" unique-column-index="2">
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%;" id="Click Upgrades" cellpadding="10"
+! colspan="6" |[[Click]] Upgrades
+|-
+! colspan="2" |Name
+!Cost
+! scope="col" |Unlock Requirements
+!Alignment
+!Effect
+|-
+![[File:Sturdy Treasure.png|54x54px]]
+!Sturdy Treasure
+|500
+|100 Clicks ([[Total (stats)|Total]])
+|Any
+|Increase base clicking reward by 4.
+While [[offline]], grants 1 click per second.
+|-
+![[File:Durable Treasure.png|54x54px]]
+!Durable Treasure
+|5,000
+|500 Clicks (Total)
+|Any
+|Increase base clicking reward by 45.
+While offline, grants 1 click per second.
+|-
+![[File:Reinforced Treasure.png|54x54px]]
+!Reinforced Treasure
+|{{Number|5 M|table}}
+|2,500 Clicks (Total)
+|Any
+|Increase base clicking reward by 4,950.
+While offline, grants 1 click per second.
+|-
+![[File:Resilient Treasure.png|54x54px]]
+!Resilient Treasure
+|{{Number|5 B|table}}
+|10,000 Clicks (Total)
+|Any
+|Increase base clicking reward by 500,000.
+While offline, grants 1 click per second.
+|-
+![[File:Unbreakable Treasure.png|54x54px]]
+!Unbreakable Treasure
+|{{Number|50 T|table}}
+|50,000 Clicks (Total)
+|Any
+|Increase base clicking reward by {{Number|50 M}}.
+While offline, grants 1 click per second.
+|-
+![[File:Eternal Treasure.png|54x54px]]
+!Eternal Treasure
+|{{Number|5 Qa|table}}
+|100,000 Clicks (Total)
+|Any
+|Increase base clicking reward by {{Number|50 B}}.
+While offline, grants 1 click per second.
+|-
+![[File:Filled Treasure.png|54x54px]]
+!Filled Treasure
+|10,000
+|5,000 Coins by clicking (This Game)
+|Any
+|Increase clicking reward by 25% and the production of all buildings by 25%.<br /><abbr title="post-ascension">PA</abbr>: 2.26%
+|-
+![[File:Rich Treasure.png|54x54px]]
+!Rich Treasure
+|{{Number|50 M|table}}
+|{{Number|5 M}} Coins by clicking
+(This Game)
+|Any
+|Increase clicking reward by 25% and the production of all buildings by 25%.<br /><abbr title="post-ascension">PA</abbr>: 2.26%
+|-
+![[File:Wealthy Treasure.png|54x54px]]
+!Wealthy Treasure
+|{{Number|100 B|table}}
+|{{Number|5 B}} Coins by clicking
+(This Game)
+|Any
+|Increase clicking reward by 25% and the production of all buildings by 25%.<br /><abbr title="post-ascension">PA</abbr>: 2.26%
+|-
+![[File:Opulent Treasure.png|54x54px]]
+!Opulent Treasure
+|{{Number|150 T|table}}
+|{{Number|5 T}} Coins by clicking (This Game)
+|Any
+|Increase clicking reward by 25% and the production of all buildings by 25%.<br /><abbr title="post-ascension">PA</abbr>: 2.26%
+|-
+![[File:Overflowing Treasure.png|54x54px]]
+!Overflowing Treasure
+|{{Number|200 Qa|table}}
+|{{Number|5 Qa}} Coins by clicking (This Game)
+|Any
+|Increase clicking reward by 25% and the production of all buildings by 25%.<br /><abbr title="post-ascension">PA</abbr>: 2.26%
+|-
+![[File:Precious Treasure.png|54x54px]]
+!Precious Treasure
+|50,000
+|100,000 Coins Earned (This Game)
+|Any
+|Increase base clicking reward by 1% of your total production.
+|-
+![[File:Ornate Treasure.png|54x54px]]
+!Ornate Treasure
+|{{Number|50 M|table}}
+|{{Number|100 M}} Coins Earned (This Game)
+|Any
+|Increase base clicking reward by 1% of your total production.
+|-
+![[File:Adorned Treasure.png|54x54px]]
+!Adorned Treasure
+|{{Number|50 B|table}}
+|{{Number|100 B}} Coins Earned (This Game)
+|Any
+|Increase base clicking reward by 1% of your total production.
+|-
+![[File:Embellished Treasure.png|54x54px]]
+!Embellished Treasure
+|{{Number|50 T|table}}
+|{{Number|100 T}} Coins Earned (This Game)
+|Any
+|Increase base clicking reward by 1% of your total production.
+|-
+![[File:Resplendent Treasure.png|54x54px]]
+!Resplendent Treasure
+|{{Number|5 Qa|table}}
+|{{Number|100 Qa}} Coins Earned (This Game)
+|Any
+|Increase base clicking reward by 1% of your total production.
+|}
+</table-progress-tracking>
+
+<table-progress-tracking table-id="8" unique-column-index="2">
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%;" id="Offline Upgrades" cellpadding="10"
+! colspan="6" |[[Offline]] Upgrades
+|-
+! colspan="2" |Name
+!Cost
+! scope="col" |Unlock Requirements
+!Alignment
+!Effect
+|-
+![[File:Absent Ruler.png|54x54px]]
+!Absent Ruler
+|{{Number| 1 B|table}}
+|12 consecutive hours offline
+|Any
+|Increases offline production by 200%..<br /><abbr title="post-ascension">PA</abbr>: 11.6%
+|-
+![[File:Missing Ruler.png|54x54px]]
+!Missing Ruler
+|{{Number| 1 Qi|table}}
+|24 consecutive hours offline
+|Any
+|Increases offline production by 500%.<br /><abbr title="post-ascension">PA</abbr>: 19.6%
+|-
+![[File:Nonexistent Ruler.png|54x54px]]
+!Nonexistent Ruler
+|{{Number| 10 Qig|table}}
+|36 consecutive hours offline
+|Any
+|Increases offline production by 1500%.<br /><abbr title="post-ascension">PA</abbr>: 32%
+|}
+</table-progress-tracking>
+
+<table-progress-tracking table-id="9" unique-column-index="2">
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%;" id="Assistant Upgrades" cellpadding="10"
+! colspan="6" |[[Assistant]] Upgrades
+|-
+! colspan="2" |Name
+!Cost
+! scope="col" |Unlock Requirements
+!Alignment
+!Effect
+|-
+![[File:Assistant-trade-union.PNG]]
+!Assistant Trade Union
+|{{Number|150 Qi|table}}
+|10 Assistants
+|Any
+|Increase production of all buildings by 1% per Assistant.<br /><abbr title="post-ascension">PA</abbr>: 48.5%
+|-
+![[File:Assistant-Syndicate.png]]
+!Assistant Syndicate
+|{{Number|300 Qivg|table}}
+|100 Assistants
+|Any
+|Increase production of all buildings by 1% per Assistant.<br /><abbr title="post-ascension">PA</abbr>: 48.5%
+|-
+![[File:Assistant-cartel.png]]
+!Assistant Cartel
+|{{Number|5 Qitg|table}}
+|300 Assistants
+|Any
+|Increase production of all buildings by 1% per Assistant.<br /><abbr title="post-ascension">PA</abbr>: 48.5%
+|}
+</table-progress-tracking>
+
+== Magic Upgrades ==
+This category also includes the [[Spells#Tier Spell Upgrades|Tiered Spell Upgrades]]. Faction Spell upgrades are categorized as [[#Allegiances Upgrades|Allegiances]].
+<table-progress-tracking table-id="10" unique-column-index="2">
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%;" id="Mana Upgrades" cellpadding="10"
+! colspan="5" |[[Mana]] Upgrades
+|-
+! colspan="2" |Name
+!Cost
+! scope="col" |Unlock Requirements
+!Effect
+|-
+![[File:Mana-1-Droplet.png]]
+!Mana Droplet
+|10,000
+|200 Mana Produced (Total)
+|Increase [[Mana]] regeneration by +0.50.
+|-
+![[File:Mana-upgrade2.png]]
+!Mana Rain
+|{{Number|20 M|table}}
+|2,000 Mana Produced (Total)
+|Increase Mana regeneration by +0.50.
+|-
+![[File:Mana-3-Surge.png]]
+!Mana Surge
+|{{Number|30 B|table}}
+|5,000 Mana Produced (Total)
+|Increase Mana regeneration by +0.50.
+|-
+![[File:Mana-3-Surge.png]]
+!Mana Fountain
+|{{Number|40 T|table}}
+|10,000 Mana Produced (Total)
+|Increase Mana regeneration by +0.50.
+|-
+![[File:Mana-upgrade6.png]]
+!Mana Shower
+|{{Number|50 Qa|table}}
+|20,000 Mana Produced (Total)
+|Increase Mana regeneration by +0.50.
+|-
+![[File:Mana-upgrade6.png]]
+!Mana Stream
+|{{Number|60 Qi|table}}
+|100,000 Mana Produced (Total)
+|Increase Mana regeneration by +0.50.
+|-
+![[File:Mana-upgrade7.png]]
+!Mana Flood
+|{{Number|70 Sx|table}}
+|200,000 Mana Produced (Total)
+|Increase Mana regeneration by +0.50.
+|-
+![[File:Manawave.png]]
+!Mana Wave<ref>''As of RG v2.4.0, the Mana Wave, River and Lake Trophies can be acquired from R0, but not the upgrades.''</ref><br />{{PA}}
+|{{Number|80 Sp|table}}
+|{{Number|20M}} Mana Produced (Total)
+|Increase Mana regeneration by +5.00
+|-
+![[File:Mana-river.png]]
+!Mana River<br />{{PA}}
+|{{Number|90 Oc|table}}
+|{{Number|1B}} Mana Produced (Total)
+|Increase Mana regeneration by +5.00
+|-
+![[File:Mana-lake.png]]
+!Mana Lake<br />{{PA}}
+|{{Number|100 No|table}}
+|{{Number|20B}} Mana Produced (Total)
+|Increase Mana regeneration by +5.00
+|-
+![[File:Manawave.png]]
+!Mana Sea<br />{{PA}}
+|{{Number|12.5Uqag|table}}
+|{{Number|1T}} Mana Produced (Total)
+|Increase Mana regeneration by +5.00
+|-
+![[File:Manawave.png]]
+!Mana Ocean<br />{{PA}}
+|{{Number|150 Noqag|table}}
+|{{Number|2T}} Mana Produced (Total)
+|Increase Mana regeneration by +5.00
+|-
+![[File:Manawave.png]]
+!Mana Spring<br />{{PA|2}}
+|Free
+|{{Number|100T}} Mana Produced (Total)
+|Increase Mana regeneration by +10.00
+|}
+</table-progress-tracking>
+
+<table-progress-tracking table-id="11" unique-column-index="2">
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%;" id="Automatic Casting Upgrades" cellpadding="10"
+! colspan="5" |[[Automatic casting|Automatic Casting]] Upgrades
+|-
+! colspan="2" |Name
+! scope="col" |Cost
+!Unlock Requirements
+!Effect
+|-
+![[File:Autocast1 upgrade.png]]
+!Automatic Casting
+|{{Number|100 B|table}}
+|60,000 Mana Produced (Total)
+|Allows [[autocasting]] of spells by CTRL+Clicking them.
+While [[offline]], spells are not cast, instead increases mana produced amount by 10% of your mana regen per second
+|-
+![[File:Autocast2 upgrade.png]]
+!Improved Autocasting
+|{{Number|200 Qi|table}}
+|{{Number|2 M}} Mana Produced (Total)
+|Increase mana regeneration to 5%.
+While offline, increases mana produced amount by an additional 15% of your mana regeneration per second.
+|-
+![[File:Autocast3 upgrade.png]]
+!Masterful Autocasting
+|{{Number|300 Oc|table}}
+|{{Number|6 M}} Mana Produced (Total)
+|Increase mana regeneration to 10%.
+While offline, increases mana produced amount by an additional 35% of your mana regeneration per second.
+|-
+![[File:Autocast4 upgrade.png]]
+!Priority Autocasting
+|{{Number|400 Ud|table}}
+|{{Number|12 M}} Mana Produced (Total)
+|Allows you to prioritize the order of spell casting.<br />Spells with lower priority will be cast only if the higher priority spells are already active.
+While offline, improves spell cast amount by 1 per minute.
+|-
+![[File:Autocast-5-Contingency.png]]
+!Contingency Autocasting
+|{{Number|500 Qad|table}}
+|{{Number|20 M}} Mana Produced (Total)
+|Allows you to set a minimum amount of mana before starting to Autocast. A slide bar will appear when you CTRL+Click on the mana bar. [[File:Contingency-slidebar.png]] By adjusting its height you will set a minimum amount of mana below which spells won't be cast. Once your mana reaches the threshold, spells will follow the priority rules. The contingency loop will break when you can't cast a spell, at which point the cycle will reset.
+While offline, improves spell cast amount by an additional 2 per minute.
+|-
+![[File:Autocast-6-Planned.png]]
+!Planned Autocasting
+|{{Number|600 Spd|table}}
+|{{Number|30 M}} Mana Produced (Total)
+|Allows you to set Primary and Secondary spells. Primary spells (Set with CTRL+Click) will fire when you have max mana with Contingency Autocasting. Secondary spells (Set with SHIFT+Click) will fire as soon as you have the mana, as long as the primary spells are ALL still active.
+While offline, increases [[mana]] produced by an additional 10% of your mana regeneration per second and your [[spells]] cast amount by an additional 2 per minute.
+|-
+![[File:Autocast-7-Efficient.png]]
+!Efficient Autocasting
+|{{Number|700 Vg|table}}
+|{{Number|50 M}} Mana Produced (Total)
+|Allows you to select Independent Spells, (a bronze icon set with CTRL+SHIFT+Click) to work outside of contingency settings. These spells disregard your contingency rules and are casted as soon as you have enough mana for them.
+While offline, increases mana produced amount by an additional 10% of your mana regen per second and spell cast amount by 2 per minute.
+|-
+![[File:Autocast8_upgrade.png]]
+!Tiered Autocasting {{PA}}
+|{{Number|800 Vg|table}}
+|{{Number|200M}} Mana Produced (Total)
+|Only for [[Spells#Tier Spell Upgrades .28R42.2B.29|Tier upgraded Spells]]. Allows you to set the maximum tier you wish to autocast each spell to.<br />In the spell tooltip, use the diamond icon to change its mode until you get to the desired maximum tier number. Spells will still follow their previous priority rules.
+Only while offline, increase mana produced by an additional 10% of your mana regeneration per second and your spells cast amount by an additional 3 per minute. (Caps at 90%)
+|}
+</table-progress-tracking>
+
+== Building Upgrades ==
+This category boast all the multitude of building upgrades that they require their own page: See [[Good building upgrades|Good]], [[Evil building upgrades|Evil]], [[Neutral building upgrades|Neutral]] building upgrades, and [[General Building Upgrades]] for cross-alignment building upgrade prices.
+<table-progress-tracking table-id="12" unique-column-index="2">
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%;" id="Alignment Upgrades" cellpadding="10"
+! colspan="6" |[[Buildings#Aligned Buildings|Aligned Building]] Upgrades
+|-
+! colspan="2" |Name
+!Cost
+! scope="col" |Unlock Requirements
+!Alignment
+!Effect
+|-
+![[File:Heroic Certificate.png]]
+!Heroic Certificate
+|{{Number|100 T|table}}
+|750 [[Upgrades: Good Buildings|Good Buildings]]
+|Good
+|Increase the production of all Good [[buildings]] by 100%.<br />{{PA|7.18%}}
+|-
+![[File:Heroic Validation.png]]
+!Heroic Validation
+|{{Number|100 Qi|table}}
+|1500 Good Buildings
+|Good
+|Increase the production of all Good buildings by 300%.<br />{{PA|7.18%}}
+|-
+![[File:Heroic-affirmation.PNG]]
+!Heroic Affirmation
+|{{Number|100 Qag|table}}
+|12,000 Good buildings
+|Good
+|Increase the production of all Good buildings by 700%.<br />{{PA|7.18%}}
+|-
+![[File:Heroic-affirmation.PNG]]
+!Heroic Proclamations
+|{{Number|10 No|table}}
+|20,000 Good Buildings
+|Good
+|Increase the production of all Good buildings by 100%.
+|-
+![[File:Villianous Certificate.png]]
+!Villainous Certificate
+|{{Number|100 T|table}}
+|750 [[Upgrades: Evil Buildings|Evil Buildings]]
+|Evil
+|Increase the production of all Evil buildings by 100%.<br />{{PA|7.18%}}
+|-
+![[File:Villianous Validation.png]]
+!Villainous Validation
+|{{Number|100 Qi|table}}
+|1500 Evil Buildings
+|Evil
+|Increase the production of all Evil buildings by 300%.<br />{{PA|7.18%}}
+|-
+![[File:Villianous Affirmination.png]]
+!Villainous Affirmation
+|{{Number|100 Qag|table}}
+|12,000 Evil buildings
+|Evil
+|Increase the production of all Evil buildings by 700%.<br />{{PA|7.18%}}
+|-
+![[File:Villianous Affirmination.png]]
+!Villainous Proclamations
+|{{Number|10 No|table}}
+|20,000 Evil Buildings
+|Evil
+|Increase the production of all Evil buildings by 100%.
+|-
+![[File:Neutral Certificate.png]]
+!Neutral Certificate
+|{{Number|2 No|table}}
+|3,500 [[Upgrades: Neutral Buildings|Neutral Buildings]]
+|Any
+|Increase the production of all Neutral buildings by 100%.<br />{{PA|7.18%}}
+|-
+![[File:Neutral Validation.png]]
+!Neutral Validation
+|{{Number|4 Dd|table}}
+|7,000 Neutral Buildings
+|Any
+|Increase the production of all Neutral buildings by 300%.<br />{{PA|7.18%}}
+|-
+![[File:Neutral-affirmation.PNG]]
+!Neutral Affirmation
+|{{Number|8 NoQag|table}}
+|20,000 Neutral Buildings
+|Any
+|Increase the production of all Neutral buildings by 700%.<br />{{PA|7.18%}}
+|-
+![[File:Neutral-proclamation.png]]
+!Neutral Proclamations
+|{{Number|16 Novg|table}}
+|50,000 Neutral Buildings
+|Any
+|Increase the production of all Neutral buildings by 100%.
+|-
+![[File:Grinding Dedication.png]]
+!Grinding Dedication
+|{{Number|500 T|table}}
+|7 Hours Playtime ([[Total (stats)|Total]])
+|Any
+|Increase the production of all Neutral buildings by 100%.<br />{{PA|7.18%}}
+|-
+![[File:True Neutrality.png]]
+!True Neutrality
+|{{Number|1 Sx|table}}
+|24 Hours Playtime as Neutral (Total)
+|Any
+|Increase the production of all Neutral buildings by 100%.<br />{{PA|7.18%}}
+|}
+</table-progress-tracking>
+<sup>*</sup> ''Certificates, Validations, Affirmations and Proclamations upgrade requirements need to be met each run. Grinding Dedication and True Neutrality requirements are only required once.''
+
+== Secret Upgrades ==
+Secret Upgrades show up as soon as you unlock their respective [[Trophies#Secret Trophies|Secret Trophy]] or [[Artifact]], and have an amount of coins approaching their cost. See the Trophy page for unlocking [[Trophies#Tips|tips]].<br />Pre-ascension upgrades are free post. Pre-ascension effects are the same post, unless otherwise noted.
+<table-progress-tracking table-id="13" unique-column-index="2">
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%;" id="Secret Upgrades" cellpadding="10"
+! colspan="6" |[[Secret Trophy]] Upgrades
+|-
+! colspan="2" |Name
+!Cost
+!Unlock Requirements
+!Alignment
+!Effect
+|-
+![[File:Leet.png]]
+!Leet
+|1337 coins
+|Have 1337 coins at any given time.
+|Any
+|Increase the production of all buildings by 13.37%
+|-
+![[File:Unitary.png]]
+!Unitary
+|1111 coins
+|Have exactly 1 of every [[building]] tier.
+|Any
+|Increase the production of all buildings by 11.11111111%
+|-
+![[File:Building Hater.png]]
+!Building Hater
+|1 coin
+|Reach 100,000 coins without building anything.
+|Any
+|Increase clicking reward by 25%<br />{{PA|2.26%}}
+|-
+![[File:Grand Diplomat.png]]
+!Grand Diplomat
+|10 coins
+|Ally with each Vanilla and Prestige [[faction]] at least once.
+|Any
+|Increase your chance to find faction coins by 2%
+|-
+![[File:Exchange Master.png]]
+!Exchange Master
+|{{Number|500 Dc|table}}
+|Purchase 500 [[Royal Exchanges]] in a single game.
+|Any
+|Increase Royal Exchange bonus by 5%
+|-
+![[File:Lucky Neutral.png]]
+!Lucky Neutral
+|{{Number|30 No|table}}
+|777 minutes being [[Neutral Faction|Neutral]] across all reincarnations (12 hours + 57 minutes)
+|Any
+|Increase the production of Neutral buildings by 50%<br />{{PA|4.14%}}
+|-
+![[File:Perfectly Good.png]]
+!Perfectly Good
+|{{Number|30 No|table}}
+|333 minutes being [[Good faction|good]] across all reincarnations (5 hours + 33 minutes)
+|Good
+|Increase the production of Good buildings by 50%.<br />{{PA|4.14%}}
+|-
+![[File:Diabolical Evil.png]]
+!Diabolical Evil
+|{{Number|30 No|table}}
+|666 minutes being [[Evil faction|Evil]] <span style="font-weight:normal;">across all reincarnations</span>
+(11 hours + 6 minutes)
+|Evil
+|Increase the production of Evil buildings by 50%.<br />{{PA|4.14%}}
+|-
+![[File:Assistant Squasher.png]]
+!Assistant Squasher
+|100 coins
+|Click 100 times on the little [[assistant]] above your realm. (in the background [[:File:Background-assistant.png|here]])
+|Any
+|Instantly add 1 additional assistant
+|-
+![[File:Rewind.png]]
+!Rewind
+|{{Number|1 Oc|table}}
+|[[Abdicate]] after producing at least {{Number|1 Oc}} Coins.
+|Any
+|Increase the production of all buildings by 8%<br />{{PA|0.77%}}
+|-
+![[File:Faction Grinder.png]]
+!Faction Grinder
+|{{Number|1 M|table}}
+|Purchase all the Faction [[Heritage]] upgrades in a single Game.
+|Any
+|Increase your chance (and chance cap) to find Faction Coins by additional 1%
+|-
+![[File:Master Archeologist.png]]
+!Master Archaeologist
+|{{Number|1 Ud|table}}
+|Discover and purchase all the relics of the [[Neutral Faction|Ancient Races]].
+|Neutral
+|Increase the production of all buildings by 5% when you are playing as Titan, Druid or Faceless.<br />{{PA|0.49%}}
+|-
+![[File:Spellfury.png]]
+!Spell Fury
+|4333 coins
+|Cast Tax Collection while having 3 other [[spells]] active.
+|Any
+|Increase Mana production by 5%
+|-
+![[File:Speed Run.png]]
+![[Speed Run]]
+|10 coins
+|Reach {{Number|1 M}} coins in less than 5 minutes, without using [[Gem Power]].
+|Any
+|Increase your base clicking reward by 1M
+|-
+![[File:Equality.png]]
+!Equality
+|{{Number|1 Qad|table}}
+|In this reincarnation, with no less than 3 days of playtime, have less than 1 minute of playtime difference for the 3 [[alignments]]. Can be completed while offline.
+|Any
+|Increase the production of all buildings by 100%.<br />{{PA|7.18%}}
+|-
+![[File:Beard Carpet.png]]
+!Beard Carpet
+|3000
+|Have at least 43m beards on your [[Bearded Assistants]]
+|Any
+|Increase assistants production by 10%<br />{{PA|0.96%}}
+|-
+![[File:Premeditation.png]]
+!Premeditation
+|{{Number|50 Ocd|table}}
+|Have at least 850 Dark Temples before affiliating with the [[Drow]].
+|Any
+|Increase maximum Mana by 250.<br />{{PA|Same}}
+|-
+![[File:Fast Forward.png]]
+!Fast Forward
+|{{Number|8 Oc|table}}
+|88 hours offline (in a single Reincarnation.)
+|Any
+|Increase offline production by 200%<br />{{PA|11.6%}}
+|-
+![[File:Need a Head Start.png]]
+!Need a Head Start?
+|Free
+|Don't do anything for 5 minutes after starting a new game. ''(See [[Trophies#Tips|Tips]])''
+|Any
+|Instantly adds 25 gold coins.<br />{{PA|Same}}
+|-
+![[File:Realm Digger.png]]
+!Realm Digger
+|{{Number|100 Nod|table}}
+|[[Excavate]] 400 times.
+|Any
+|Increases production of all buildings based on the amount of excavations.
+|-
+![[File:Harlequin.png]]
+!Harlequin
+|{{Number|5 Qivg|table}}
+|As a Mercenary, purchase one upgrade from all 11 different [[factions]].
+|Mercenary
+|Increases production of all buildings by x^{3}%, where x is the number of Faction upgrades you have bought. (This game)
+|-
+![[File:Lucifer.png]]
+!Lucifer
+|{{Number|5 Qivg|table}}
+|As a Good Mercenary, purchase only [[Evil faction]] upgrades or vice versa.
+|Mercenary
+|Increases production of all non-neutral buildings by 300%.
+|-
+![[File:Mathematician.png]]
+!Mathematician
+|{{Number|1 Td|table}}
+|From bottom to top, have building amounts exactly equal to 2^{tier} :
+2^{0 }= 1^{ }Halls of Legends, to 2^{10} = 1024 Farms
+|Any
+|Increases the production of all buildings based on their tier (+10% per tier from the bottom: 10% for Halls, the 20% for the next building up, etc).
+|-
+![[File:Mercenary Spirit.png]]
+!Mercenary Spirit
+|{{Number|1 Ocd|table}}
+|[[Reincarnate]] while playing as a Mercenary.
+|[[Mercenary]]
+|Increases production of all buildings by 15% per reincarnation.
+|-
+![[File:Bloodstream.png]]
+![[Bloodstream]]
+|{{Number|1 Tg|table}}
+|Unlock all [[Bloodlines]] (excluding the Dragon bloodline)
+|Any
+|Increases the production of all buildings based on the time spent with the Bloodline's Faction.<br />When playing as Mercenary: Your mercenary time is multiplied by the number of Bloodline's faction upgrades, divided by twelve, is added as time spent with the Bloodline's Faction.
+
+{{PA|Increases the production of all buildings based on the time spent with the Bloodline you are using. <br />When playing as Mercenary: a fraction of the total time spent as mercenary is added to your Bloodstream bonus based on the amount of mercenary upgrades purchased in this game from the faction of the bloodline you are using.}}
+
+{{Formula|0.1*x^{0.65}%|your (adjusted) time spent affiliated with the bloodline's faction in seconds}}
+|-
+![[File:Unlimited Mana.png]]
+!Unlimited Mana
+|{{Number|80 Vg|table}}
+|Have a mana regeneration rate of at least 300 per second.
+|Any
+|Increase mana regeneration by +2.
+|-
+![[File:ForScience.png]]
+!For Science!
+|{{Number|1 Qag|table}}
+|Purchase all the [[research]] facilities.
+|Any
+|Increase the overall production of Vanilla Factions by 100%.<br />{{PA|7.18%}}
+|-
+![[File:NoviceResearcher.png]]
+!Novice Researcher
+|{{Number|1 Tqag|table}}
+|Research 600 Times across all fields.
+|Vanilla
+|Increase the overall production of Vanilla Factions by 100%.<br />{{PA|7.18%}}
+|-
+![[File:Exchange Lord.png]]
+!Exchange Lord
+|{{Number|500 Qag|table}}
+|Purchase 1500 Royal Exchanges in a single game.
+|Any
+|Increase Royal Exchange bonus by 5%
+|-
+![[File:Magician.png]]
+!Magician
+|{{Number|250 Noqag|table}}
+|Discover at least 15 spellcraft researches.
+|Any
+|Increase Spellcraft upgrade slots by 1.
+|-
+![[File:Artisan.png]]
+!Artisan
+|{{Number|250 Noqag|table}}
+|Discover at least 15 craftsmanship researches.
+|Any
+|Increase Craftsmanship upgrade slots by 1.
+|-
+![[File:Demigod.png]]
+!Demigod
+|{{Number|250 Noqag|table}}
+|Discover at least 15 divine researches.
+|Any
+|Increase Divine upgrade slots by 1.
+|-
+![[File:Businessman.png]]
+!Businessman
+|{{Number|250 Noqag|table}}
+|Discover at least 15 Economics researches.
+|Any
+|Increase Economics upgrade slots by 1.
+|-
+![[File:Apothecary.png]]
+!Apothecary
+|{{Number|250 Noqag|table}}
+|Discover at least 15 Alchemy researches.
+|Any
+|Increase Alchemy upgrade slots by 1.
+|-
+![[File:Warlord.png]]
+!Warlord
+|{{Number|250 Noqag|table}}
+|Discover at least 15 Warfare researches.
+|Any
+|Increase Warfare upgrade slots by 1.
+|-
+![[File:VanillaResearcher.png]]
+!Vanilla Researcher
+|{{Number|1 Spqig|table}}
+|Discover all the Vanilla researches.
+|Any
+|Increase the production of all buildings based on research done.
+|-
+![[File:VanillaChallenger.png]]
+!Vanilla Challenger
+|10 Coins
+|Complete all the Vanilla [[Challenges]]
+|Vanilla
+|Increase the overall production of Vanilla Factions by 25%.<br />{{PA|2.26%}}
+|-
+![[File:Neutral Challenger .png]]
+!Neutral Challenger
+|10 Coins<br />{{PA|Free}}
+|Complete all the Neutral [[Challenges]]
+|Neutral
+|Increase the overall production of Neutral Factions by 25%<br />{{PA|2.26%}}
+|-
+![[File:PrestigeChallenger.png|54x54px]]
+!Prestige Challenger<br />{{PA}}
+|Free
+|Complete all the Prestige Challenges.
+|Prestige
+|Increse the overall production of Prestige factions by 25%. ''Note: the description incorrectly reduces the bonus.''
+|-
+![[File:Secret-trophy53-FactionRun.png]]
+![[Faction Run]]
+|10 Coins
+|Earn {{Number|1.5 M}} Faction Coins in less than 5 minutes, without using Gem Power, Excavations or any spell.
+|Any
+| +10% Faction Coin find chance
+|-
+![[File:Intermediatresearcher.png]]
+!Intermediate Researcher
+|{{Number|1 QiQig|table}}<br />{{PA|Free}}
+|Research 1800 times across all fields
+|Neutral
+|Increases production of all Neutral Factions by 100%<br />{{PA|7.18%}}
+|-
+![[File:Ancientresearcher.png]]
+!Ancient Researcher
+|{{Number|1 NoSxg|table}}
+|Discover all the Neutral researches
+|Any
+|Increases the production of all buildings based on research done.
+|-
+![[File:Norecruit.png]]
+!No Recruiting
+|{{Number|1 Tg|table}}
+|Reach {{Number|1 NoVg}} gems in a Reincarnation without ever affiliating with the Mercenaries
+|Mercenary
+|Increase Mercenary production by 1% per Reincarnation
+|-
+![[File:ThatExcavatedQuickly.png]]
+!That Excavated Quickly
+|{{Number|1 Qag|table}}<br />{{PA|Free}}
+|Excavate 1000 times in the first 30 seconds of playtime.
+|Any
+|Increase the chance to excavate Faction Coins by 5%.
+|-
+![[File:Glho kohhl snod.png]]
+!glho kohhl snod
+|1000
+|In the [[Save Tab|Save tab]], try to import this text: ''glho kohhl snod''
+|Any
+|Increase [[clicking reward]] by 50%.
+|-
+![[File:Mana Matrix.png]]
+!Mana Matrix
+|1000
+|Have exactly 4767 maximum mana.
+|Any
+|Increase maximum mana by 10%.
+|-
+![[File:Suggestion Master.png]]
+!Suggestion Master
+|1000
+|Have the [[changelog]] interface open for 3 minutes. (Click the version number in the [[Save Tab|Save tab]])
+|Any
+|Increase production by mysterious events.
+''Formula: hotfix.patch%, where hotfix and patch are the 4th and 3rd elements of the game's version number.''
+|-
+![[File:Rule 'dis.png]]
+!Rule 'dis
+|1000
+|[[Abdicate]] 10 times within 3 minutes. (Click abdicate ten times in a row)
+|Any
+|Increase mana regeneration by 1 m/s.
+|-
+![[File:Because I Like to Grind.png]]
+!Because I Like to Grind
+|1000
+|Spend at least 3 hours playing in this game.
+|Any
+|Increase Royal Exchange bonus by an additional 1%.
+|-
+![[File:TripleWeirdness.png|54x54px]]
+!Triple Weirdness<br />(PA)
+|{{Number|1E102}}
+|333 of each Royal Exchange
+|Any
+|Increase Faction Coins generation while offline based on your mana regeneration.
+{{Formula|300 * \log_{10}(1 + x)^3|base mana regen (no spells)}}
+|-
+![[File:ExpertResearcher.png]]
+!Expert Researcher
+|{{Number|1 QiQig|table}}
+|Research 2750 times across all fields.
+|Any
+|Increase the overall production of Prestige Factions by 100%.<br />{{PA|7.18%}}
+|-
+![[File:UnderworldResearcher.png]]
+!Underworld Researcher
+|{{Number|1 NoSxg|table}}
+|Discover all the Underworld researches.
+|Non-neutral
+|Increase the production of all buildings based on research done.
+{{Formula|0.3*x^{0.7}|total amount of research done}}
+|-
+![[File:StoicResistance.png]]
+!Stoic Resistance
+|10 Coins
+|Gather 1 Oc gems without abdicating. (1 Oc/1e27 = Cost of the 1st reincarnation)
+|Any
+|Increase base clicking reward by {{Number|1 T}}
+|-
+![[File:Van!shment.png]]
+!Van!shment
+|{{Number|10 Noqag|table}}
+|Reach on Offline Bonus of at least {{Number|1 Qa}}%<br />{{PA|1895%}}
+|Any
+|Increase the production of all buildings based on offline bonus
+{{Formula|1.25 * \log_{10}(1+x) ^{1.25}|the pre-A offline multiplier}}
+|-
+![[File:Iron Rush.png]]
+!Iron Rush
+|{{Number|3.8 SxSxg|table}}
+|Reach 725 Iron Strongholds in 5 minutes without use of Gem Power and Reincarnation Power.
+|Neutral
+|Iron strongholds count as 5% more for all purposes.
+|-
+![[File:Colorful Autocasting.png]]
+!Colorful Autocasting<br />{{PA}}
+|{{Number|5e51|table}}
+|Have each type of autocasting active simultaneously.
+|Any
+|Increases mana regeneration by 10%
+|-
+![[File:Cata.png]]
+!Spell Cataclysm<br />{{PA}}
+|{{Number|640Vg|table}}
+|Have at least 4 spells active on tier 5 or higher.
+|Any
+|Increase maximum mana by 75%.
+|-
+![[File:Advisor_Insight.png]]
+!Advisor Insight
+|Free
+{{PA|{{Number|1e32|table}}}}
+|Click the Hint button 100 times.
+|Any
+|Increase the production of all buildings by 10%.<br />{{PA|0.96%}}
+|-
+![[File:Dragon Tamer.png]]
+!Dragon Tamer<br />{{PA}}
+|{{Number|1e65|table}}
+|Fully develop your Spiky Egg into an Elder Dragon.
+|Any
+|Increase the production of all buildings by 200% and triples Faction Coin find chance.
+|-
+![[File:Helden Sterben Nicht.png]]
+!Helden sterben nicht
+|{{Number|5e75|table}}
+|Join Neutral Mercenaries, then Undead, then Angels within 15 minutes.
+|Any
+|Increase the mana regeneration and maximum mana by 10%.
+|-
+![[File:MasterResearcher.png]]
+!Master Researcher<br />{{PA}}
+|{{Number|1e75|table}}
+|Research 10,000 times across all fields
+|Dragon
+|Increase overall production of Dragons by 9.6%
+|-
+![[File:EternalResearcher.png]]
+!Eternal Researcher<br />{{PA}}
+|{{Number|1e90|table}}
+|Discover all the Dragon researches.
+|Any
+|Increase the production of all buildings based on research done.
+{{Formula|0.3*x^{0.7}|total amount of research done}}
+|-
+![[File:WarriorResearcher.png|54x54px]]
+!Warrior Researcher<br />{{PA}}
+|{{Number|1e219|table}}
+|Discover all the Mercenary researches.
+|Any
+|Increase the production of all buildings based on research done.
+{{Formula|0.3 * x^{0.7}|total amount of research done}}
+|-
+![[File:ManaWaste.png]]
+!Mana Waste
+|{{Number|1 Td|table}}
+|Have mana regeneration higher than max mana.
+|Any
+|Increase maximum mana based on spells cast in this game.
+{{Formula|127*\log_{10}(1+x)^{2.7}|spells cast (this game)}}
+|-
+![[File:Prismatic_mana_2.png]]
+!Prismatic Mana<br />{{PA}}
+|{{Number|100 No|table}}
+|R40+, Cast the same amount of Faction spells with all Vanilla and Neutral factions with a minimum of 100 each.
+|Any
+|Increase mana regeneration by 35%.
+|-
+![[File:SecretAutoclick.png]]
+!Autoclicker<br />{{PA}}
+|{{Number|100 Qag}}
+|R60+, Perform 40 automatic clicks in one second.
+|Any
+|Multiply Faction Coin Find Chance by x5 for automatic clicks only.
+|-
+![[File:Grandmaster Researcher.png|54x54px]]
+!Grandmaster Researcher<br />{{PA}}
+|{{Number|10 SpQig}}
+|Research 18500 times across all fields.
+|Mercenary
+|Increase the overall production of Mercenaries by 100%.
+|-
+![[File:Exchange High Lord.png|thumb|51x51px|centre]]
+!Exchange High Lord<br />{{PA}}
+|{{Number|10 DQig|table}}
+|Purchase 5,000 Royal Exchanges in a single game.
+|Any
+|Increase Royal Exchange bonus by 250%.
+|-
+![[File:Genealogist.png|54x54px]]
+!Genealogist<br />{{PA}}
+|{{Number|1 NoQig|table}}
+|Have a total of 300 Lineage levels across all Lineage.
+|Any
+|Increase the production of all buildings based on the total amount of lineage levels you have.
+{{Formula|2.5 * x^{1.25}|total amount of lineage levels}}
+|-
+![[File:Holy Frenzy.png|thumb|56x56px]]
+!Holy Frenzy<br />(PA2)
+|100 Dc
+1<sub>E</sub>35
+|Within a single reincarnation, have a combined activity time of at least 3 days from Blood Frenzy And Holy Light.
+|Good/Evil
+|While blood frenzy or holy light are active, increase the production of all buildings.
+{{Formula|2.5 * x^{2}|the active tier of Holy Light / Blood Frenzy}}
+|-
+!
+!Uniformity<br />(PA2)
+|100 Qid
+1<sub>E</sub>50
+|With no less than 3 days of playtime, have less than 1 minute of playtime difference for Order, Chaos and Balance alignments.
+|Any
+|Increase the production of all buildings based on time spent as the least used alignment.
+''Formula: 0.7 * min(a, b, c, d, e, f)<sup>0.7 </sup>Where a is good time, b is neutral time, c is evil time, d is balance time, e is chaos time, f is order time (All this R in seconds).''
+|-
+!
+!Art Of The Crow<br />(PA2)
+|1Qavg
+1<sub>E</sub>75
+|Excavate 6 full Artifact Faction Sets
+|Any
+|Multiplicatively increase Max mana, Mana regeneration, or Assistants for Order, Balance or Chaos alignments respectively.
+The formula is determined based on the alignment of both your Faction and Artifact Set.
+
+if both are:
+
+''Good,''
+
+''The formula is'' ''0.05 * x<sup>1.1</sup>''
+
+''Where x is excavation count.''
+
+''Evil,''
+
+''The formula is 4 * x<sup>0.44</sup>''
+
+''Where x is time spent this game (in seconds).''
+
+''Neutral,''
+
+''The formula is 0.8 * x<sup>0.8</sup>''
+
+''Where x royal exchanges made.''
+|}
+</table-progress-tracking>
+
+<table-progress-tracking table-id="14" unique-column-index="2">
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%;"
+! colspan="6" |Excavation [[Artifacts|Artifact]] Upgrades
+|-
+! colspan="2" |Names
+! width="75" |Cost
+!Unlock Requirements
+!Alignment
+! width="30%" |Effect
+|-
+![[File:Artifact-hornofkings.PNG]]
+!Legacy of the Kings
+|{{Number|10 SxSpg|table}},<br />{{Number|10m}} Dwarven Coins
+|R29, Have ''Dwarven Forges'', 3250+ Excavations (as Dwarf)
+Chance: 0.5%
+|Dwarf
+|Provides 3 additional [[research]] slots for Dwarven research:
++2 Craftsman slots, +1 to the Good faction's [[Research#The Facilities & Related Factions|facility]] you are playing.
+|-
+![[File:FlameOfBondelnarUPgrade.PNG]]
+!Dark Light of Bondelnar
+|{{Number|10 SxSpg|table}},<br />{{Number|10m}} Drow Coins
+|R29, Have ''Spider Sanctuaries'', Excavations: 3250+ (as Drow)
+Chance: 0.5%
+|Drow
+|Provides 3 additional research slots for Drow research:
++2 Warfare slots, +1 to the Evil faction's [[Research#The Facilities & Related Factions|facility]] you are playing.
+|-
+![[File:Artifact-ancientdevice.png]]
+!Ancient Device
+|{{Number|100 QiSxg|table}}
+|R23, Play a Neutral Faction and have over 2,000 excavations
+Chance: 0.2%
+|Neutral
+|Provides 2 additional research slots for Neutral researches:
+1 for each [[Research#The Facilities & Related Factions|related]] Neutral Faction Facility you are playing.
+|-
+![[File:LoreArtifact2-ScarabofFortune.png]]
+!Scarab of Fortune
+|{{Number|7e42|table}}
+|Chance: (#Ancient Pyramids / 1,000)%
+|Any
+|Increase the production of all buildings by 0.1% for each trophy you unlocked.
+|-
+![[File:LoreArtifactFossilizedRodent.png]]
+!Fossilized Rodent
+|{{Number|1e50|table}}
+|Chance: (# treasure clicks this R / 5,000,000)%
+|Any
+|Increase clicking reward based on the amount of discovered artifacts.
+|-
+![[File:LoreArtifact4-PowerOrb.png]]
+!Power Orb
+|{{Number|1e75|table}}
+|3000+ max mana
+Chance: (max mana / 15,000)%
+|Any
+| Increases mana regeneration by 2.5%
+|-
+![[File:VanillaFlavorJuice.png]]
+!Vanilla Flavor Juice
+|1 Coin
+|R16
+20% chance in the first 5m of a run
+|Vanilla
+|While online, increases the production of all buildings by 25,000% for the first 15 minutes of the run. (Effect canceled if you Prestige)
+|-
+![[File:Chocolate Flavored Smoothie.png|54x54px]]
+!Chocolate Flavored Smoothie
+|Free
+|''Ancient Cocoa Bean'' artifact.
+''(Excavation requires R22+, Neutral faction.- Chance: 10%)''
+|Neutral
+|Increase the production of all buildings by 25000% for the first 15 minutes of the game for all Neutral factions.<br />{{PA|5.68%}}
+|-
+![[File:KnowYourEnemyPart1.png]]
+!Know Your Enemy, Part I
+|{{Number|1e65|table}}
+|R12, Play as Mercenaries, have upgrades from 11 different factions.
+Chance: 10%
+|Mercenary
+|Increases the production of all buildings based on time spent as Non-Mercenary. ("''Time allied with..."'' in the stats)
+{{Formula|(0.5 * x^{0.75})%|amount of time spent as non-mercenary factions (in seconds)}}
+|-
+![[File:Voodoo_doll.png]]
+!Voodoo Doll
+|{{Number|2e154|table}}
+|Play as [[Evil]]
+Chance: (number of Witch Conclaves / 10,000)%)
+|Any
+|Increase the production of all buildings by 0.1% for each trophy you have unlocked.
+|-
+![[File:WallFragment.png]]
+!Wall Fragment<br />{{PA}}
+|{{Number|1e6|table}}
+|At least 1 Ascension
+|Any
+|Increase the production of all buildings based on their tier.
+{{Formula|100 * (x-1)^2%|the building tier, starting at 1 for Halls of Legends and increasing to 11 for Farms.}}
+|-
+![[File:SunForce.png]]
+![[Sun Force]]
+|{{Number|1 Notg|table}}
+|Find the ''Dawnstone'' and ''Duskstone'' artifacts
+|Any
+|Depending on the time, increases assistants, FC find chance, building production, or offline bonus. See [[Sun Force|details]].
+|-
+![[File:AncientHeirloom.png]]
+!Ancient Heirloom<br />{{PA}}
+|{{Number|10 Dtg|table}}
+|At least 1 Lineage level purchased.
+Chance: 10%
+|Any
+|Reduces the cost multiplier of Lineage by 10%, (Except for the highest one) (Instead of 10x more per level it is 9x more per level)
+{{Formula|(25 * 10^{(15+x)})^{0.9}|the Lineage upgrade level}}
+|-
+![[File:KnowYourEnemyPart2.png|54x54px]]
+!Know Your Enemy, Part II<br />{{PA}}
+|{{Number|100 Noqag|table}}
+|R76+, Play as Mercenary and have upgrades from all 12 Factions.
+Chance: 5%
+|Mercenary
+|Unlocks an upgrade of the same name that increases production of all buildings based on time spent as Non-Mercenary. Upgrade is only available to Mercenaries.
+{{Formula|0.065 * x^{0.65}|amount of time spent as non-mercenary factions (in seconds).}}
+|-
+![[File:Wall Chunk.png|54x54px]]
+!Wall Chunk<br />{{PA|2}}
+|{{Number|1 Sx|table}}
+|R100+
+Chance: 10%
+|Any
+|Increase the production of all buildings based on their tier.
+{{Formula|(100000 * (11-x)^3)%|the building tier}}
+|-
+![[File:Excavated Mirage.png|54x54px]]
+!Excavated Mirage<br />{{PA|2}}
+|{{Number|1 Sx|table}}
+|R100+
+Chance: (log10(assistants)/100)%
+|Any
+|Increase Faction Coin find chance by a multiplicative 1000%.
+|-
+!
+!Ancestral Hourglass
+|1<sub>E</sub>90
+|R100+
+Chance:
+
+(x / 10000000000000000)% Where x is faction coin find chance.
+|Any
+|decreases linage levels cost based on time spent this game (reset when upgrading lineage).
+''Formula: (floor(x ^ (1 - 0.01 * ((y ^ 1.1) - z / 5))) / 10), where x is hours this game (reset when upgrading lineage), y is lineage level and z is reincarnations.''
+|}
+</table-progress-tracking>
+
+== Other Perks ==
+*[[Faction Upgrades]] ([[Faction Upgrades by Effect|by Effect]])
+*[[Research Upgrades]]
+*[[Challenges#Final Challenge Rewards|Final Challenge Rewards]] and [[Challenge Rewards by Faction|Tier Challenge Rewards]]
+*[[Events|Event Bonus]]
+*[[Premium Upgrades]]
+
+== Notes ==
+* Nearly all pre-ascension upgrades become free after [[ascending]].
+* Prices and effects are indicated in pre-ascension values, except for the exclusive post-ascension upgrades.
+<references />
+{{Sitenav}}
+[[Category:Upgrades| ]]
+[[Category:Unlock Requirements]]
+[[Category:Reference]]
+[[Category:Realm Grinder Wiki]]

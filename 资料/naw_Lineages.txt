@@ -1,0 +1,624 @@
+R220+ Builds (Not updated for v4.2) 
+ Lineages
+ Requirement : R60+
+ At R60 you will unlock Lineages, which gives you access to powerful upgrades based on your chosen Bloodline in the form of perks, and will even allow you to use the spell of other Factions, provided you complete the respective lineage challenge.
+ Lineages need 400 Royal Exchanges of the respective Faction plus their Bloodline to be used (needs to be bought every Abdication).
+ Note : You can not use a Lineage if it matches your faction or its respective Prestige or Elite faction.
+ Note : Levels only need to be bought once and persist through Abdications and Reincarnations. When ascending, Lineages are set back to a certain level (if higher) - (see Ascension for more info).
+ There exist 15 different Lineages (1 for every faction except Mercenary, 12 before R130 and 3 more at R130+), with every Lineage having 5 perks plus a Faction Coin boost and in the process giving access to the Grand Champion Trophy.
+ Base Lineage : Lineage based boost.
+ Level 5 : Perk 1 - Bloodline based boost.
+ Level 10 : Faction specific FC boost.
+ Level 15 : Perk 2 - Unlocks Faction spell (adjusted for your alignment if necessary).
+ Note : Level 15 Lineage Challenge does not need its Lineage to complete.
+ Level 20 : Perk 3 - Unique Building based boost.
+ Note : Perk 3 also allows the unlock of Grand Champion trophy.
+ Level 30 (R105+) : Perk 4 - Faction Spell boost.
+ Level 40 (R139+) : Perk 5 - Faction specific boost.
+ Lineage Menu 
+ Fairy Lineage 
+ Base Effect : Farms, Inns and Blacksmiths count 18% more for every level.
+ Cost : 400 Fairy Royal Exchanges
+ Pointing to this ingame will tell you what level it is at.
+ " coords="10,10,64,64" shape="rect">
+ Elven Lineage 
+ Base Effect : Autoclicks 1 time per second for every level. Also increases clicks count by 5000% per level.
+ Cost : 400 Elven Royal Exchanges
+ Pointing to this ingame will tell you what level it is at.
+ " coords="70,10,124,64" shape="rect">
+ Angel Lineage 
+ Base Effect : Multiplicatively increase Mana regeneration by 7% for every level.
+ Cost : 400 Angel Royal Exchanges
+ Pointing to this ingame will tell you what level it is at.
+ " coords="130,10,184,64" shape="rect">
+ Goblin Lineage 
+ Base Effect : Increase Tax Collection worth in seconds by 25 for every level.
+ Cost : 400 Goblin Royal Exchanges
+ Pointing to this ingame will tell you what level it is at.
+ " coords="10,70,64,124" shape="rect">
+ Undead Lineage 
+ Base Effect : Multiplicatively increase assistants by 1% for per level.
+ Cost : 400 Undead Royal Exchanges
+ Pointing to this ingame will tell you what level it is at.
+ " coords="70,70,124,124" shape="rect">
+ Demon Lineage 
+ Base Effect : Increase Non-Unique Buildings production based on Lineage level. Does not suffer from Ascension penalties.
+ Formula : (100 * x ^ 2), where x is Lineage level.
+ Cost : 400 Demon Royal Exchanges
+ Pointing to this ingame will tell you what level it is at.
+ " coords="130,70,184,124" shape="rect">
+ Titan Lineage 
+ Base Effect : Increase Royal Exchange Bonus (additive) and Royal Exchange Count by 200% for every level.
+ Cost : 400 Angel and 400 Goblin Royal Exchanges
+ Pointing to this ingame will tell you what level it is at.
+ " coords="10,130,64,184" shape="rect">
+ Druid Lineage 
+ Base Effect : Each lineage level counts as 2 additional Reincarnations.
+ Cost : 400 Elven and 400 Demon Royal Exchanges
+ Pointing to this ingame will tell you what level it is at.
+ " coords="70,130,124,184" shape="rect">
+ Faceless Lineage 
+ Base Effect : Increase the duration of all spells based on lineage level.
+ Formula: (x ^ 2)%, where x is lineage level.
+ Cost : 400 Fairy and 400 Undead Royal Exchanges
+ Pointing to this ingame will tell you what level it is at.
+ " coords="130,130,184,184" shape="rect">
+ Dwarven Lineage 
+ Base Effect : Increase the base production of each building based on their tier (additively). The bonus is multiplied by the Lineage level.
+ Formula : +(x * 10 ^ (0.2 * T ^ 1.4)), where x is Lineage level and T is Building tier.
+ Cost : 400 Dwarven Royal Exchanges
+ Pointing to this ingame will tell you what level it is at.
+ " coords="10,190,64,244" shape="rect">
+ Drow Lineage 
+ Base Effect : Increase offline production bonus based on Lineage level.
+ Formula : (150 * x ^ 2.25)%, where x is Lineage level. Does not suffer from Ascension penalties.
+ Cost : 400 Drow Royal Exchanges
+ Pointing to this ingame will tell you what level it is at.
+ " coords="70,190,124,244" shape="rect">
+ Dragon Lineage 
+ Base Effect : Unique Buildings count as 12% more for every level.
+ Cost : 400 Dwarven and 400 Drow Royal Exchanges
+ Pointing to this ingame will tell you what level it is at.
+ " coords="130,190,184,244" shape="rect">
+ Archon Lineage 
+ Requirements : R130+
+ Base Effect : Multiplicatively increase Faction Coin find chance by 20% for every level.
+ Cost : 400 Angel and Undead Royal Exchanges
+ Pointing to this ingame will tell you what level it is at.
+ " coords="10,250,64,304" shape="rect">
+ Djinn Lineage 
+ Requirements : R130+
+ Base Effect : Increase production bonus from gems by a multiplicative 8% for every level.
+ Cost : 400 Fairy and Demon Royal Exchanges
+ Pointing to this ingame will tell you what level it is at.
+ " coords="70,250,124,304" shape="rect">
+ Makers Lineage 
+ Requirements : R130+
+ Base Effect : Increase Royal Exchange bonus by a multiplicative 8% for every level.
+ Cost : 400 Elven and Goblin Royal Exchanges
+ Pointing to this ingame will tell you what level it is at.
+ " coords="130,250,184,304" shape="rect">
+ Lineage Level Cost 
+ The cost to increase a Lineage level starts at 2.5 B (2.5e9) Faction Coins and each level will cost more than the previous one.
+ Lineage Cost Formula : 25 * 10 ^ (8 + L + (0.5 * max(0 ; L - 30)) + (0.5 * max(0 ; L - 60)) + (0.5 * max(0 ; L - 90)) + (0.5 * max(0 ; L - 120))) where L is current lineage level.
+ Lineage Cost Formula Simplified 
+ L0-30: 25 * 10 ^ (8 + L)
+ L31-60: 25 * 10 ^ (38 + 1.5 * (L - 30))
+ L61-90: 25 * 10 ^ (83 + 2 * (L - 60))
+ L91-120: 25 * 10 ^ (143 + 2.5 * (L - 90))
+ L121-150: 25 * 10 ^ (218 + 3 * (L - 120))
+ There are two artifacts that affect the Lineage level cost:
+ Ancient Heirloom (Lore Artifact)
+ Requirements : Have at least 1 Lineage level purchased.
+ Effect : Reduces the cost of Lineage levels
+ Note : Only applies if the level of your current Lineage is lower than the highest Lineage level across all Lineages.
+ Cost : 10 Dtg (1e100) Diamond Coins, free in A2+
+ Formula : (x ^ 0.9), where x is the Lineage level cost.
+ Ancestral Hourglass (Lore Artifact)
+ Requirement : R100+
+ Cost : 1 Novg (1e90) Emerald Coins, free in A3+
+ Effect : Lowers the Lineage cost exponent based on Reincarnations made.
+ Formula : -(0.01 * R), where R is the number of times you have reincarnated.
+ Note : Only counts actual Reincarnations , not any "count more" upgrades.
+ Lineage level
+ Heirloom Active
+ Hourglass Active
+ Reincarnation
+ Cost for current Lineage level
+ Fairy
+ Fairy Lineage 
+ Cost : 400 Fairy Royal Exchanges
+ Effect : Farms, Inns and Blacksmiths count 18% more for every level.
+ Level 5 
+ Fairy Perk 1 
+ Requirement : Reach Lineage Level 5
+ Effect : Makes Fairy Bloodline affect Hall of Legends.
+ Effect : Removes 1 Ascension penalty from Fairy Bloodline.
+ Level 10 
+ Effect : x100 Fairy Faction Coins find chance.
+ Level 15 
+ Fairy Perk 2 
+ Requirement : Reach Lineage Level 15
+ Effect : Unlocks Fairy Lineage Challenge.
+ Challenge : 2k Assistants in less than 10 minutes.
+ Effect : Unlocks Faction spell. (Fairy Chanting)
+ Level 20 
+ Fairy Perk 3 
+ Requirement : Reach Lineage Level 20.
+ Effect : Gain more assistants based on the amount of Unique Buildings you own (additively).
+ Formula : +(30 * x ^ 0.7), where x is the amount of Unique Buildings you own.
+ Level 30 
+ Fairy Perk 4 
+ Requirement : R105+, Reach Lineage Level 30.
+ Effect : While Fairy Chanting is active, further increase your temporary assistants based on its duration.
+ Formula : (2.5 * x ^ 0.25)%, where x is Fairy Chanting duration.
+ Level 40 
+ Fairy Perk 5 
+ Requirements : R139, Lineage Level 40
+ Effect : Assistants count 300% more.
+ Elven
+ Elven Lineage 
+ Cost : 400 Elven Royal Exchanges
+ Effect : Autoclicks 1 time per second for every level.
+ Effect : Also generates the same amount of clicks while offline.
+ Effect : Also increases clicks count by 5000% per level.
+ Level 5 
+ Elven Perk 1 
+ Requirement : Reach Lineage Level 5
+ Effect : Increase autoclicks provided by Elven Bloodlines to 9 per second and their multiplier to x10000.
+ Level 10 
+ Effect : x100 Elven Faction Coin find chance.
+ Level 15 
+ Elven Perk 2 
+ Requirement : Reach Lineage Level 15
+ Effect : Unlocks Elven Lineage Challenge.
+ Challenge : 7777 autoclicks in the first 5 minutes of a run.
+ Effect : Unlocks Faction spell. (Moon Blessing)
+ Level 20 
+ Elven Perk 3 
+ Requirement : Reach Lineage Level 20.
+ Effect : Increase base clicking reward based on the amount of Unique Buildings you own (additively).
+ Formula : +(85 * x ^ 0.85), where x is the amount of Unique Buildings you own.
+ Effect : Also increases clicking reward by a fraction of that amount.
+ Formula : (0.85 * x ^ 0.85)%, where x is the amount of Unique Buildings you own.
+ Level 30 
+ Elven Perk 4 
+ Requirement : R105+, Reach Lineage Level 30.
+ Effect : When Moon Blessing is active, multiply your fc chance by 1500%.
+ Level 40 
+ Elven Perk 5 
+ Requirements : R139, Lineage Level 40
+ Effect : Faction Coins count 1000% more.
+ Angel
+ Angel Lineage 
+ Cost : 400 Angel Royal Exchanges
+ Effect : Multiplicatively increase Mana Regeneration by 7% for every level.
+ Level 5 
+ Angel Perk 1 
+ Requirement : Reach Lineage Level 5
+ Effect : Angel Bloodline effect now counts total spells cast this Reincarnation.
+ Level 10 
+ Effect : x100 Angel Faction Coin find chance.
+ Level 15 
+ Angel Perk 2 
+ Requirement : Reach Lineage Level 15
+ Effect : Unlocks Angel Lineage Challenge.
+ Challenge : Play 2 hours straight with at least 1 spell active.
+ Note : This must be done within first 2 hours and 1 minute since start of run.
+ Effect : Unlocks Faction spell. (God's Hand)
+ Level 20 
+ Angel Perk 3 
+ Requirement : Reach Lineage Level 20
+ Effect : Increase God's Hand bonus based on Unique Buildings owned.
+ Formula : (3 * x ^ 0.9)%, where x is the amount of Unique Buildings you own.
+ Level 30 
+ Angel Perk 4 
+ Requirement : R105+, Reach Lineage Level 30.
+ Effect : When God's Hand is active, multiplicatively increase Maximum Mana by 50%.
+ Level 40 
+ Angel Perk 5 
+ Requirements : R139, Lineage Level 40
+ Effect : Spells cast count 1000% more.
+ Goblin
+ Goblin Lineage 
+ Cost : 400 Goblin Royal Exchanges
+ Effect : Increase Tax Collection worth in seconds by 25 for every level.
+ Level 5 
+ Goblin Perk 1 
+ Requirement : Reach Lineage Level 5
+ Effect : When using Goblin Bloodline, Tax Collections are worth more seconds based on the amount of assistants you own.
+ Formula : (0.75 * x ^ 0.25)%, where x is amount of assistants you own.
+ Level 10 
+ Effect : x100 Goblin Faction Coin find chance.
+ Level 15 
+ Goblin Perk 2 
+ Requirement : Reach Lineage Level 15
+ Effect : Unlocks Goblin Lineage Challenge.
+ Challenge : Cast 1 million TCs in a single game.
+ Effect : Unlocks Faction spell. (Goblin's Greed)
+ Level 20 
+ Goblin Perk 3 
+ Requirement : Reach Lineage Level 20.
+ Effect : Increase base production of Unique Buildings based on their amount (multiplicative).
+ Formula : (5 * x ^ 0.5)%, where x is the amount of Unique Buildings you own.
+ Level 30 
+ Goblin Perk 4 
+ Requirement : R105+, Reach Lineage Level 30.
+ Effect : Goblin's Greed stops producing Faction Coins instantly. Instead, multiplicatively increase your Faction Coin find chance based on the Gems required for your next Reincarnation.
+ Formula : (20 + ln(1 + x) ^ 1.85)%, where x is Gems required for your next Reincarnation.
+ Level 40 
+ Goblin Perk 5 
+ Requirements : R139, Lineage Level 40
+ Effect : Increase Faction Coin Find Chance by 1000%.
+ Undead
+ Undead Lineage 
+ Cost : 400 Undead Royal Exchanges
+ Effect : Multiplicatively increase assistants by 1% for per level.
+ Level 5 
+ Undead Perk 1 
+ Requirement : Reach Lineage Level 5
+ Effect : Undead Bloodline multiplies your assistants by 5% of the amount instead of adding them.
+ Formula : (5 * x)%, where x is the amount of assistants gained from Undead bloodline.
+ Level 10 
+ Effect : x100 Undead Faction Coin find chance.
+ Level 15 
+ Undead Perk 2 
+ Requirement : Reach Lineage Level 15
+ Effect : Unlocks Undead Lineage Challenge.
+ Challenge : Have Night Time's spell duration be 60 seconds.
+ Effect : Unlocks Faction spell. (Night Time)
+ Level 20 
+ Undead Perk 3 
+ Requirement : Reach Lineage Level 20.
+ Effect : Gain 10 assistants for every 500 Unique Buildings (additively).
+ Level 30 
+ Undead Perk 4 
+ Requirement : R105+, Reach Lineage Level 30.
+ Effect : Increase offline production based on Night Time activity time in this game.
+ Formula : (7 * x ^ 0.7)%, where x is Night Time activity time this game.
+ Level 40 
+ Undead Perk 5 
+ Requirements : R139, Lineage Level 40
+ Effect : Reincarnation Power Counts Reincarnations as 100% more.
+ Demon
+ Demon Lineage 
+ Cost : 400 Demon Royal Exchanges
+ Effect : Increase Non-Unique Buildings production based on Lineage level. Ascension penalty reduces based on time this Reincarnation.
+ Production Formula : (100 * x ^ 2)%, where x is Lineage level.
+ Ascension Penalty Reduction Formula : (floor(log3(x / 28800 + 1)), where x is time spent in this Reincarnation. (16 hours for -1, 2 days 16 hours for -2, 8 days 16 hours for -3)
+ Level 5 
+ Demon Perk 1 
+ Requirement : Reach Lineage Level 5
+ Effect : While using Demon Bloodline, increase Maximum Mana based on trophies unlocked.
+ Formula : +(20 * x), where x is trophies unlocked.
+ Level 10 
+ Effect : x100 Demon Faction Coin find chance.
+ Level 15 
+ Demon Perk 2 
+ Requirement : Reach Lineage Level 15
+ Effect : Unlocks Demon Lineage Challenge.
+ Challenge : 2 days of HFB activity time (This R).
+ Effect : Unlocks Faction spell. (Hellfire Blast)
+ Level 20 
+ Demon Perk 3 
+ Requirement : Reach Lineage Level 20.
+ Effect : Multiplicatively increase production bonus from Gems based on the amount of Unique Buildings you own.
+ Formula : (0.6 * x ^ 0.66)%, where x is the amount of Unique Buildings you own.
+ Level 30 
+ Demon Perk 4 
+ Requirement : R105+, Reach Lineage Level 30.
+ Effect : Non-Unique Buildings are also targeted by Hellfire Blast.
+ Level 40 
+ Demon Perk 5 
+ Requirements : R139, Lineage Level 40
+ Effect : Trophies count 1000% more.
+ Titan
+ Titan Lineage 
+ Cost : 400 Angel and 400 Goblin Royal Exchanges
+ Effect : Increase Royal Exchange Bonus and Royal Exchange Count by 200% for every level (Bonus additively, Count multiplicatively).
+ Level 5 
+ Titan Perk 1 
+ Requirement : Reach Lineage Level 5
+ Effect : Removes 1 Ascension penalty from Titan Bloodline.
+ Level 10 
+ Effect : x50 more Angel and Goblin Faction Coin find chance.
+ Level 15 
+ Titan Perk 2 
+ Requirement : Reach Lineage Level 15
+ Effect : Unlocks Titan Lineage Challenge.
+ Challenge : 25,000 mana per second as pure Titan (Do not buy Dragon Trade Treaty).
+ Effect : Unlocks Faction spell. (Lightning Strike)
+ Level 20 
+ Titan Perk 3 
+ Requirement : Reach Lineage Level 20.
+ Effect : Increase the base production of tier 4 and tier 7 buildings based on Unique Buildings owned.
+ Tier 4 Formula : +(2.5 * x ^ 0.5), where x is the amount of Unique Buildings you own.
+ Tier 7 Formula : +(25 * x ^ 0.5), where x is the amount of Unique Buildings you own.
+ Level 30 
+ Titan Perk 4 
+ Requirement : R105+, Reach Lineage Level 30.
+ Effect : Lightning Strike always hits Unique Buildings in addition to its random target. Unique Buildings are no longer random targets.
+ Level 40 
+ Titan Perk 5 
+ Requirements : R139, Lineage Level 40
+ Effect : Royal Exchanges count 500% more.
+ Druid
+ Druid Lineage 
+ Cost : 400 Elven and 400 Demon Royal Exchanges
+ Effect : Each lineage level counts as 2 additional Reincarnations.
+ Level 5 
+ Druid Perk 1 
+ Requirement : Reach Lineage Level 5
+ Effect : Increases Non-Unique building production based on time spent in this game.
+ Formula : (0.25 * x ^ 1.25)%, where x is time spent in this game.
+ Level 10 
+ Effect : x50 more Elven and Demon Faction Coin find chance.
+ Level 15 
+ Druid Perk 2 
+ Requirement : Reach Lineage Level 15
+ Effect : Unlocks Druid Lineage Challenge.
+ Challenge : Have a mana regeneration of at least double your max mana.
+ Effect : Unlocks Faction spell. (Grand Balance)
+ Level 20 
+ Druid Perk 3 
+ Requirement : Reach Lineage Level 20.
+ Effect : Activity time for all spells counts 3% more for every 1,000 Unique Buildings.
+ Formula : (3 * x / 1,000)%, where x is the amount of Unique Buildings you own.
+ Level 30 
+ Druid Perk 4 
+ Requirement : R105+, Reach Lineage Level 30.
+ Effect : Grand Balance lasts longer based on the amount of assistants you own.
+ Formula : (3 * ln(1 + x) ^ 3), where x is amount of assistants you own.
+ Effect : Also, while Grand Balance is active, increase the production of its targets based on Grand Balance duration.
+ Formula : ((x ^ 0.5) ^ (1 + 0.01 * y)), where x is Grand Balance spell duration and y is Grand Balance tier.
+ Level 40 
+ Druid Perk 5 
+ Requirements : R139, Lineage Level 40
+ Effect : Mana produced counts 1000% more.
+ Faceless
+ Faceless Lineage 
+ Cost : 400 Fairy and 400 Undead Royal Exchanges
+ Effect : Increase the duration of all spells based on lineage level.
+ Formula : (x ^ 2)%, where x is lineage level.
+ Level 5 
+ Faceless Perk 1 
+ Requirement : Reach Lineage Level 5
+ Effect : Faceless Bloodline counts total mana produced (This R) and increases mana per second based on the amount of assistants you own.
+ Formula : (0.95 * x ^ 0.95), where x is assistants you own.
+ Level 10 
+ Effect : x50 more Fairy and Undead Faction Coin find chance.
+ Level 15 
+ Faceless Perk 2 
+ Requirement : Reach Lineage Level 15
+ Effect : Unlocks Faceless Lineage Challenge.
+ Challenge : Cast 100 Brainwaves in a single game.
+ Effect : Unlocks Faction spell. (Brainwave)
+ Level 20 
+ Faceless Perk 3 
+ Requirement : Reach Lineage Level 20.
+ Effect : Increase assistants production based on the amount of Unique Buildings you own. Does not suffer from Ascension penalties.
+ Formula : (x ^ 0.5)%, where x is the amount of Unique Buildings you own.
+ Level 30 
+ Faceless Perk 4 
+ Requirement : R105+, Reach Lineage Level 30
+ Effect : Remove 1 Ascension penalty from Brainwave on Unique Buildings.
+ Level 40 
+ Faceless Perk 5 
+ Requirements : R139, Lineage Level 40
+ Effect : Time passed counts 100% more.
+ Dwarven
+ Dwarven Lineage 
+ Cost : 400 Dwarven Royal Exchanges
+ Effect : Increase the base production of each building based on their tier (additively).
+ Note : The bonus is multiplied by the Lineage level.
+ Formula : +(x * 10 ^ (0.2 * T ^ 1.4)), where x is Lineage level and T is Building tier.
+ Level 5 
+ Dwarven Perk 1 
+ Requirement : Reach Lineage Level 5
+ Effect : Dwarven Bloodline increases Faction Coin find chance based on total time spent as Good. (1 day of Good = 19,520%).
+ Formula : +(50 * x ^ 0.75)%, where x is time spent as Good in this Reincarnation.
+ Level 10 
+ Effect : x100 Dwarven Faction Coin find chance.
+ Level 15 
+ Dwarven Perk 2 
+ Requirement : Reach Lineage Level 15
+ Effect : Unlocks Dwarven Lineage Challenge.
+ Challenge : Have 10,000 Excavations.
+ Effect : Unlocks Faction spell. (Diamond Pickaxe)
+ Level 20 
+ Dwarven Perk 3 
+ Requirement : Reach Lineage Level 20
+ Effect : Excavations and Artifacts count more based on the amount of Unique Buildings you own.
+ Formula : (0.58 * x ^ 0.58)%, where x is the number of Unique Buildings you own.
+ Level 30 
+ Dwarven Perk 4 
+ Requirement : R105+, Reach Lineage Level 30
+ Effect : When Diamond Pickaxe is active, multiplicatively increase Mana Regneration based on Faction Coin find chance.
+ Formula : (log10(1 + x) ^ 2.5)%, where x is Faction Coin Find chance.
+ Level 40 
+ Dwarven Perk 5 
+ Requirements : R139, Lineage Level 40
+ Effect : Buildings count 75% more.
+ Drow
+ Drow Lineage 
+ Cost : 400 Drow Royal Exchanges
+ Effect : Increase offline production bonus based on Lineage level. Does not suffer from Ascension penalties.
+ Formula : (150 * x ^ 2.25), where x is Lineage level.
+ Level 5 
+ Drow Perk 1 
+ Requirement : Reach Lineage Level 5
+ Effect : Time counts more based on your all-time maximum Combo Strike counter.
+ Formula : (1.5 * ln(1 + x) ^ 1.5)%, where x is your all-time maximum Combo Strike counter.
+ Level 10 
+ Effect : x100 Drow Faction Coin find chance.
+ Level 15 
+ Drow Perk 2 
+ Requirement : Reach Lineage Level 15
+ Effect : Unlocks Drow Lineage Challenge.
+ Challenge : 30 days offline across all Reincarnations.
+ Effect : Unlocks Faction spell. (Combo Strike)
+ Level 20 
+ Drow Perk 3 
+ Requirement : Reach Lineage Level 20
+ Effect : Multiplicatively increase Faction Coin find chance based on the amount of Unique Buildings you own.
+ Formula : (0.5 * x ^ 0.5)%, where x is the amount of Unique Buildings you own.
+ Level 30 
+ Drow Perk 4 
+ Requirement : R105+, Reach Lineage Level 30
+ Effect : Combo Strike's combo bonus increases by 5% per 30 seconds spent this game.
+ Effect : While Combo Strike is active, increase the production of all buildings based on the current Combo Strike bonus.
+ Formula : (2 * log10((x ^ 0.9) ^ T) ^ 2)%, where x is Combo Strike counter, and T is spell tier.
+ Level 40 
+ Drow Perk 5 
+ Requirements : R139, Lineage Level 40
+ Effect : Maximum Mana counts 300% more.
+ Dragon
+ Dragon Lineage 
+ Cost : 400 Dwarven and 400 Drow Royal Exchanges
+ Effect : Unique Buildings count as 12% more for every level.
+ Level 5 
+ Dragon Perk 1 
+ Requirement : Reach Lineage Level 5
+ Effect : Dragon Bloodline increases the production of Unique Buildings by 1.75% per building of the same type.
+ Level 10 
+ Effect : x50 more Dwarven and Drow Faction Coin find chance.
+ Level 15 
+ Dragon Perk 2 
+ Requirement : Reach Lineage Level 15
+ Effect : Unlocks Dragon Lineage Challenge.
+ Challenge : Have 5 spells at Tier 5 in less than 10 minutes.
+ Effect : Unlocks Faction spell. (Dragons Breath)
+ Level 20 
+ Dragon Perk 3 
+ Requirement : Reach Lineage Level 20
+ Effect : Maximum Mana increased by +1.25 for every 2 Unique Buildings.
+ Level 30 
+ Dragon Perk 4 
+ Requirement : R105+, Reach Lineage Level 30
+ Effect : Activates two breaths per cast.
+ Level 40 
+ Dragon Perk 5 
+ Requirements : R139, Lineage Level 40
+ Effect : Lineage levels count 100% more.
+ Elite Lineages - R130+ 
+ Archon
+ Archon Lineage 
+ Requirements : R130+
+ Cost : 400 Angel, Undead Royal Exchanges
+ Effect : Multiplicatively increase Faction Coin find chance by 20% for every level.
+ Level 5 
+ Archon Perk 1 
+ Requirements : Reach Lineage Level 5
+ Effect : While using Archon Bloodline, increase production of Elite Unique Buildings based on maximum mana.
+ Formula : (0.8 * x ^ 0.8)%, where x is Maximum Mana.
+ Level 10 
+ Requirements : Reach Lineage Level 10
+ Effect : x50 more Angel and Undead Faction Coin find chance.
+ Level 15 
+ Archon Perk 2 
+ Requirements : Reach Lineage Level 15
+ Effect : Unlocks Archon Lineage Challenge.
+ Challenge : Have at least 30 billion (3e10) Mana Regeneration within 45 seconds of a new run.
+ Effect : Unlocks Faction spell (Precognition).
+ Level 20 
+ Archon Perk 3 
+ Requirements : Reach Lineage Level 20
+ Effect : Multiplicatively increase Mana Regneration based on the amount of Unique Buildings you own.
+ Formula : (0.5 * x ^ 0.5)%, where x is the amount of Unique Buildings you own.
+ Level 30 
+ Archon Perk 4 
+ Requirements : Reach Lineage Level 30
+ Effect : Precognition also affects trophies, Gems owned and Faction Coins found.
+ Level 40 
+ Archon Perk 5 
+ Requirements : R139, Lineage Level 40
+ Effect : Unique Buildings count 100% more.
+ Djinn
+ Djinn Lineage 
+ Requirements : R130+
+ Cost : 400 Fairy, Demon Royal Exchanges
+ Effect : Increase production bonus from Gems by a multiplicative 8% for every level.
+ Level 5 
+ Djinn Perk 1 
+ Requirements : Reach Lineage Level 5
+ Effect : Catalyst casts in this game also increase Limited Wish counter for the purpose of increasing its bonus.
+ Effect : All spells cost 25% less.
+ Level 10 
+ Requirements : Reach Lineage Level 10
+ Effect : x50 more Fairy and Demon Faction Coin find chance.
+ Level 15 
+ Djinn Perk 2 
+ Requirements : Reach Lineage Level 15
+ Effect : Unlocks Djinn Lineage Challenge.
+ Challenge : Have at least 1 billion (1e9) assistants within 45 seconds of a new run.
+ Effect : Unlocks Faction spell. (Limited Wish)
+ Level 20 
+ Djinn Perk 3 
+ Requirements : Reach Lineage Level 20
+ Effect : Tax Collection casts count 3% more for every 1000 Unique Buildings.
+ Level 30 
+ Djinn Perk 4 
+ Requirements : Reach Lineage Level 30
+ Effect : When Limited Wish is cast, gain +888 to automatic clicks stat.
+ Level 40 
+ Djinn Perk 5 
+ Requirements : R139, Lineage Level 40
+ Effect : Mana regeneration counts 200% more.
+ Makers
+ Makers Lineage 
+ Requirements : R130+
+ Cost : 400 Elven, Goblin Royal Exchanges
+ Effect : Increase Royal Exchange bonus by a multiplicative 8% for every level.
+ Level 5 
+ Makers Perk 1 
+ Requirements : Reach Lineage Level 5
+ Effect : While using Makers Bloodline, the requirement for Free Excavation Reset is reduced by 25%.
+ Level 10 
+ Requirements : Reach Lineage Level 10
+ Effect : x50 more Elven and Goblin Faction Coin find chance.
+ Level 15 
+ Makers Perk 2 
+ Requirements : Reach Lineage Level 15
+ Effect : Unlocks Makers Lineage Challenge.
+ Challenge : Have at least 300,000 buildings within 45 seconds of a new run.
+ Effect : Unlocks Faction spell. (Infinite Spiral)
+ Level 20 
+ Makers Perk 3 
+ Requirements : Reach Lineage Level 20
+ Effect : Increase Offline bonus by 10% per 500 Unique Buildings.
+ Level 30 
+ Makers Perk 4 
+ Requirements : Reach Lineage Level 30
+ Effect : While Infinite Spiral is active, the production of all buildings increases by 1% each second, up to its maximum duration.
+ Level 40 
+ Makers Perk 5 
+ Requirements : R139, Lineage Level 40
+ Effect : Excavations count 200% more.
+ | Resources | Soft Resets | Buildings | Heritages | Bloodlines 
+ | Spells | Excavations | Challenges | Upgrades | Trophies 
+ | Factions | Research |
+ | Merc Builds | Research Builds | Prestige Builds | Dragon Unlock | Neutral Prestige Builds | Research Tree |
+ | Good : Fairy, Elf , Angel Evil : Goblin , Undead , Demon Neutral : Titan , Druid , Faceless"> Vanilla Factions 
+ | Fairy Elf Angel "> Good Factions 
+ | Goblin Undead Demon"> Evil Factions 
+ | Titan Druid Faceless"> Neutral Factions 
+ | Dwarf Drow Dragon"> Prestige Factions 
+ | Archon Djinn Makers"> A2 Elite Factions |
+ | Events | Latest Major Patch | Changelog | Notation | Terminology | Tools | Kongregate Links |
+ | Fairy 
+ | Elven 
+ | Angel 
+ | Goblin 
+ | Undead 
+ | Demon 
+ | Titan 
+ | Druid 
+ | Faceless |
+ | Mercenary 
+ | Dwarf 
+ | Drow 
+ | Dragon 
+ | Archon 
+ | Djinn 
+ | Makers |
+ 

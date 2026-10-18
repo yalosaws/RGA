@@ -1,0 +1,1364 @@
+[[File:Gametab-challenges.png|centre|thumb]]
+'''In-game description: '''<br />''Prove your loyalty and dedication to the factions by completing their unique Challenges. You will be rewarded with new perks and upgrades to help in your Realm Grinder progress!''
+
+'''All challenges need that faction.'''
+
+'''All challenge 2 need that faction and that bloodline.'''
+
+'''All last challenge need that faction and their unique building.'''
+
+'''All Prestige challenges up to and including challenge 3 will tell you what base faction to use but it also needs that faction.'''
+
+'''All other Prestige challenges still need that faction to complete.'''
+
+[[File:ChallengesComplete.PNG|right|259x259px]]
+'''Challenges''' were first implemented in v1.4, [[Patch Notes|''The Secret of the Realms'']] expansion, bringing new perks to the [[Vanilla]] Factions. More challenges<ref>''The Neutral challenges were added in [[Patch Notes|patch]] v1.5.45;  the Prestige in v.1.6.52; and Dragon in v2.5.0.0''</ref> were added as new factions appeared. As of v2.5, there are now a total of 46 tier challenges, and 58 rewards<ref>''There are in total 46 tier challenges, and 58 rewards: 3x6 for Vanilla Factions; 4x3 Neutral; 16 Prestige; and the 12 final rewards.''</ref>.
+
+Upon reaching R2, a "Challenge" tab will appear, there you can see a list of all the available challenges with their [[#Requirements by Tier|unlock requirements]]. There are several Tier challenges for each faction. They can only be completed in order of tier, as each require the previous one be completed, but you can accomplish multiple tiers on a same run. - You just cannot get later Tiers before earlier Tiers.
+
+Each tier challenge rewards a perk, and completing all the tier challenges of a Faction will reward a [[Challenges#Final Challenge Rewards|spell upgrade]].
+
+All challenge rewards<ref>''Looking at the tier challenge rewards, you can notice patterns such as:<br />The first tier upgrades boost their own faction.<br>The last tier upgrades are always universal upgrades. <br />Tier 2 and 3 upgrades boost an other Faction of the same Vanilla, Neutral, or Prestige alignment.<br />Dwarf & Drow tier 2 and 3 boost a Vanilla faction of the same Good or Evil alignment.<br />All Prestige faction tiers boost their own faction. <br />Etc. - See [[Tier challenge rewards|sortable table of Tier Challenge rewards]].''</ref> are free, and after the [[Spells#Spell Upgrades|faction spell upgrade]] has been purchased, will be turned on by default. When they are active (!)<ref>''You must play the faction in question to get the perk active, and be able to turn it on and off again.''</ref>, they can be toggled on and off by clicking on their respective icons, and will remain through soft-resets until turned on again.
+
+Once a challenge has been completed, the perk will be available whenever you are playing as the faction corresponding to the ''background ''of that challenge. For example, Demons benefit from Demon Challenge 1, but also Goblin Challenge 2, and do not benefit from Demon Challenge 2 (which lacks the red/black background).
+
+== Challenge Clues ==
+These clues are visible in the icons tool-tips of the challenge tab, or as-is if the extended list [[option]] is enabled.
+
+{| class="mw-collapsible mw-collapsed wikitable" style="width: 100%;"
+! colspan="4" style="white-space: nowrap;" |  In-Game Challenge Names & Clues
+|-
+! Faction
+! Tier
+! Name
+! Clue
+|-
+! rowspan="3" |Fairy
+!1
+| style="text-align:center;" |'''Pixie Mischief'''
+|The Fairies are small and mighty, and they can turn little things into all you will ever need. Speed is paramount and they do not tolerate cheating!
+|-
+!2
+| style="text-align:center;" |'''Donations'''
+|Our farmers' crops are not growing. Perhaps a little quick magic can help change that.
+|-
+!3
+| style="text-align:center;" |'''Enchanted Lands'''
+|The Fairies have developed a taste for honey. Find out quickly if they have a queen!
+|-
+! rowspan="3" |Elf
+!1
+| style="text-align:center;" |'''Advanced Civilization'''
+|The elven council has asked you to provide proof of your loyalty to their cause. Hopefully you'll be quick and efficient enough to impress them.
+|-
+!2
+| style="text-align:center;" |'''Light Collector'''
+|The elven council has asked you to gather the light of countless stars. Time is of the essence!
+|-
+!3
+| style="text-align:center;" |'''Runic Conversion'''
+|The elven council intends to use the light you've gathered as a weapon against their corrupt cousins, as soon as they detect weakness.
+|-
+! rowspan="3" |Angel
+!1
+| style="text-align:center;" |'''Efficient Magic'''
+|The blazing seraphim have entrusted you with a sacred mission: Purify the denizens of the realm with the most holy of lights. Hurry up, corruption is spreading fast.
+|-
+!2
+| style="text-align:center;" |'''Mana Crypts'''
+|The archangel leaders have entrusted you with a sacred mission: quickly harvest enough magical power to become a beacon of magical selflessness. Extorting from the poor is forbidden.
+|-
+!3
+| style="text-align:center;" |'''Nephilim's Blessing'''
+|The fallen nephilim have noticed your abilities and have entrusted you with a secret mission: Spread false hope upon the legends of mortals.
+|-
+! rowspan="3" |Goblin
+!1
+| style="text-align:center;" |'''Discount Season'''
+|The goblin king has revealed the secrets of his race's success. Patience and persistence.
+|-
+!2
+| style="text-align:center;" |'''Elite Warriors'''
+|Goblin elites are used to unimaginable wealth. They will only work for you after you bribe them generously and show them your worth.
+|-
+!3
+| style="text-align:center;" |'''Smuggled Jewels'''
+|The goblin king wants a castle made of jewels all to himself.
+|-
+! rowspan="3" |Undead
+!1
+| style="text-align:center;" |'''Deadly Impatience'''
+|The walking dead aren't very fond of a living being among their kind. Fortunately for you, an army of shambling corpses is slow to both think and move.
+|-
+!2
+| style="text-align:center;" |'''Experienced Helpers'''
+|The walking dead, pleased with your newfound strength, send you on a mission to reap as many souls as possible under the cover of the Night to bolster their forces.
+|-
+!3
+| style="text-align:center;" |'''Death Knights'''
+|The walking dead are prepared for a zombie invasion. Their last task for you is to loot the local cemeteries for possible equipment.
+|-
+! rowspan="3" |Demon
+!1
+| style="text-align:center;" |'''Trophy Collectors'''
+|The Princes of Hell wish to test your skills at gathering coins without outside help.
+|-
+!2
+| style="text-align:center;" |'''Legendary Antics'''
+|The Princes of Hell demand a tribute, unleash the beast by extorting every other faction in this realm. You should perform this task with haste, for they are well known for their impatience.
+|-
+!3
+| style="text-align:center;" |'''Passage to Tartarus'''
+|The Demon King has ordered you to prove your might to the entire realm.
+|-
+! rowspan="4" |Titan
+!1
+| style="text-align:center;" |'''Rich Followers'''
+|The mighty titans have decided to give you and a dozen of you most loyal subjects a chance to prove that your kingdom's economy is as strong as theirs.
+|-
+!2
+| style="text-align:center;" |'''Harmony of Thought'''
+| The mighty titans wish for you to harness arcane powers through your fingertips.
+|-
+!3
+| style="text-align:center;" |'''Balanced Economy'''
+| The mighty titans are almost ready to accept you into their pantheon. They request that you gather enough offerings to mark your ascension.
+|-
+!4
+| style="text-align:center;" |'''Storm of Wealth'''
+| The mighty Titans wish to cement their legendary status for perpetuity. You must focus on this task and no other to be able to join them.
+|-
+! rowspan="4" |Druid
+!1
+| style="text-align:center;" |'''Silent Assistance'''
+| The ancient druids request evidence that you are a servant of balance before your inclusion to their ranks.
+|-
+!2
+| style="text-align:center;" |'''Balanced Current'''
+| Our sorcerers are desperately trying to stabilize the balance of the realm, this is your opportunity to gain their favor - and live another day.
+|-
+!3
+| style="text-align:center;" |'''Eldritch Architecture'''
+| Pleased with your efforts, the elder druids assigned you with an important task: empower our obelisks, sacred churches and sarcophaguses.
+|-
+!4
+| style="text-align:center;" |'''Overflowing Mana'''
+| The Druids need more spell power, but they are worried about outside influences throwing off their balance.
+|-
+! rowspan="4" |Faceless
+!1
+| style="text-align:center;" |'''Recruitment'''
+| You are always growing - but what to do when you can only start from a single cell with no means of survival?
+|-
+!2
+| style="text-align:center;" |'''Mystic Maze'''
+| Your hive superiors have ordered you to set up a base without alerting any nearby enemies.
+|-
+!3
+| style="text-align:center;" |'''Cyclopean Army'''
+| Our enemies, the Outer Gods, have returned. Use mind control to enhance our forces and repel this threat.
+|-
+!4
+| style="text-align:center;" |'''Omnipresence'''
+| We are suffering attacks from another Hive. It's time to remind them the power of our master.
+|-
+! rowspan="5" |Dwarf
+!1
+| style="text-align:center;" |'''Enchanted Crystals'''
+|The dwarven lords have asked you to enchant their pickaxes.
+|-
+!2
+| style="text-align:center;" |'''Biased Architecture'''
+|The dwarven lords have asked you to provide their people with ale. Hurry up, the dwarves are getting thirsty!
+|-
+!3
+| style="text-align:center;" |'''Rich Miners'''
+|The dwarven lords have asked you to help them collect trade supplies for all the factions of the realm.
+|-
+!4
+| style="text-align:center;" |'''Paladins'''
+|The dwarven lords are interested in training the troops into pious warriors. Begin the initiation as soon as possible.
+|-
+!5
+| style="text-align:center;" |'''Underground Foundations'''
+|The dwarven lords have asked you to create underground tunnels connecting the allied factions.
+|-
+! rowspan="5" |Drow
+!1
+| style="text-align:center;" |'''Organized Crime'''
+|The mysterious drow wish for you to prove your murderous honor to them.
+|-
+!2
+| style="text-align:center;" |'''Dark Elegance'''
+|The Spider Queen is not pleased with some of her worshippers. You must weed out the weak and sacrifice them at the temple altar.
+|-
+!3
+|'''Sorcerer's Pact'''
+|A legion of interlopers have invaded our sanctuaries. Work yourselves into a rage and tear them apart.
+|-
+!4
+| style="text-align:center;" |'''Trained Assassins'''
+|There is a civil war between 2 Spider Gods. Bolster our forces and wipe the weaklings off the face of the realm.
+|-
+!5
+| style="text-align:center;" |'''Shadow Mirage'''
+|It is time to emerge from the shadows. Our warriors will demonstrate their hard work and lead us to domination of the realm.
+|-
+! rowspan="6" |Dragon
+!1
+| style="text-align:center;" |'''Sky Monarch'''
+|The Titan leader has approches you with an offer you cannot refuse: Use the help of your Draconic allies to guard his domain and lighting itself will enchant you riches.
+|-
+!2
+| style="text-align:center;" |'''Barkscales'''
+|Unstable power flows through your workforce. Prove to the Dragon lords you can sustain and control every sip of it.
+|-
+!3
+| style="text-align:center;" |'''Serpent Queller'''
+|Legends tell of a terrible sea monster destroying ships and harbors. With your dragon and faceless allies you can finally form a powerful army to raid its underwater lair. Slaying the leviathan will not only earn your kingdom eternal glory, but will make the overseas emporium flourish once more.
+|-
+!4
+| style="text-align:center;" |'''Draconstellation'''
+|Centuries ago, the Dragon race managed to stockpile the absolute pinnacle of wealth. Scattered in the stars, help them establish a stronger connection with the void between the realms.
+|-
+!5
+| style="text-align:center;" |'''Ancient Incantation'''
+|You have affiliated with many magical races in the past, but none as potent as the dragons, whose very breath is among the strongest of forces. There might be some way for your wizards to exploit this...
+|-
+!6
+| style="text-align:center;" |'''Dracomet Vault'''
+|This backwater world has been conquered. The Dragonlords strive for greater riches. Follow the Dragon King, soar through the heavens and claim the energy of the cosmos.
+|}
+
+== Final Challenge Rewards ==
+Final Rewards are all Spell Upgrades, given on completion of all Tier challenges of a Faction. They will be available, and turned on by default, after buying the Faction [[Spells#Spell Upgrades|spell upgrade]].
+{| class="mw-collapsible mw-collapsed wikitable" style="width: 100%;"
+! colspan="4" |Final Reward: Spell Upgrades
+|-
+! colspan="2" |Name
+!Faction
+!Upgrade Effect
+|-
+![[File:Challenge-Fairy-Orchestra.png]]
+! Fairy Orchestra
+| style="text-align:center;" |Fairy
+| Each [[Assistants|assistant]] generates 3 times as many faction coins while Fairy Chanting is active.
+|-
+![[File:Challenge-Star-Blessing.png]]
+! Star Blessing
+| style="text-align:center;" |Elf
+| Automatic clicks from Sun Blessing have a 100% chance to trigger [[Elf#Tier 3 Upgrades|Elven Luck]], gaining coins equal to 250000% of your production and gathering 1000 random faction coins.
+|-
+![[File:Challenge-Gods-Throne.png]]
+! God's Throne
+| style="text-align:center;" |Angel
+| Mana regeneration is increased by 50% while God's Hand is active.
+Also increases spells cast amount multiplicatively based on your offline mana regeneration.
+
+''Formula: ???''
+|-
+![[File:Challenge-Avarice-Drive.png]]
+! Avarice Drive
+| style="text-align:center;" |Goblin
+| Goblin's Greed counts Faction Coins for in this Reincarnation.
+|-
+![[File:Challenge-Midnight-Time.png]]
+! Midnight Time
+| style="text-align:center;" |Undead
+|Increase Night Time assistant bonus based on total time spent offline.
+{{Formula|stat|0.2 * x^{0.7}%|Time Spent Offline (Total)|seconds}}
+|-
+![[File:Challenge-Hellfire-Burst.png]]
+! Hellfire Burst
+| style="text-align:center;" |Demon
+| Reduces Hellfire Blast mana cost based on of the amount of trophies you have unlocked.
+{{Formula|floor(0.25 * x)|the amount of trophies unlocked}}
+|-
+![[File:Challenge-Thunderstorm.png]]
+! Thunderstorm
+| style="text-align:center;" |Titan
+| Lightning Strike now grants more faction coins based on your faction coin find chance.
+{{Formula|round(x^{1.05})%|your current chance to find Faction Coins}}
+|-
+![[File:Challenge-Primal-Balance.png]]
+! Primal Balance
+| style="text-align:center;" |Druid
+| Grand Balance now affects extra buildings based on total mana produced.
+{{Formula|naked|(0.1 * x^{0.2})^{(1-A/8)}+1|where x is total mana produced this R and A is the number of time you Ascend}}
+{{PrimalB}}
+|-
+![[File:Challenge-Focused-Thoughts.png]]
+! Focused Thoughts
+| style="text-align:center;" |Faceless
+| Give Brainwave a headstart based on its activity time in this game, with a minimum of 1 minute, then grows up to maximum duration.<br />''+1 second per 5 minutes Active Time (This Game).''
+|-
+![[File:Challenge-Iron-Grip.png]]
+! Iron Grip
+| style="text-align:center;" |Dwarf
+| Increase Diamond Pickaxe duration by 8 seconds, and its bonus to Faction Coin find chance is passively applied as a multiplier to excavations Faction Coin rewards.
+|-
+![[File:Challenge-Versatile-Combo.png]]
+! Versatile Combo
+| style="text-align:center;" |Drow
+| Increase Combo Strike counter based on the amount of spells cast in this game, excluding Tax Collection.
+{{Formula|xy|10 * \log_{10}(1 + (y * 30)) + x|Combo Strike casts (This game)|every other spell's (except [[Tax Collection|TC]]) casts (This game)}}
+|-
+![[File:PrismaticBreath.png]]
+!Prismatic Breath
+|Dragon
+|While all 5 breaths are active, Reincarnations count 50% more for all purposes.
+|}
+
+== Requirements by Tier ==
+All challenges require to be played as the faction in question, to have all the previous tier challenges of that faction completed, and the additional requirements listed in the following table. Note that unlike artifacts, vanilla challenges can be completed with the prestige factions. Remember: the words "run" and "game" both mean "abdication".
+
+{| class="mw-collapsible mw-collapsed wikitable" style="width: 100%;"
+! colspan="5" id="Tier 1 Challenges" |Tier 1 Challenges (For R2, R4 and R6)
+|-
+! Faction !! Name !! Requirement !! Upgrade !! For
+|-
+! Fairy
+| style="text-align:center;" |'''Pixie Mischief'''
+| Only use ''Farms, Inns'' and ''Blacksmiths'' during a run where you buy all [[Fairy|Fairy upgrades]] within 1 minute of a new game.<br />Requires:
+* [[Reincarnations|Reincarnation]] 2
+* ''Fairy Choir'' upgrade
+| Gain assistants based on Fairy Chanting activity time in this Era.
+{{Formula|x^{1.75}|amount of Fairy afflicted upgrades}}(Not updated)
+| Fairy
+|-
+! Elf
+| style="text-align:center;" |'''Advanced Civilization'''
+| Get more than 400,000 Elven Coins in under 1 hour of a new game.<br />Requires:
+* Reincarnation 2
+* ''Sun Blessing'' upgrade
+| Reduces Elven Exchange cost multiplier. Clicks count more based on Elven Luck triggered in this Era.
+{{MultiplierReduction|0.025|1.075|1.1}}(Not updated)
+| Elf
+|-
+! Angel
+| style="text-align:center;" |'''Efficient Magic'''
+| Cast ''Holy Light'' 50 times during daytime within 20 minutes of a new run.<br />Requires:
+* Reincarnation 2
+* ''God's Rest'' upgrade
+| Reduces all spells cost by 10%. While Holy Light is active, increase the production of all buildings by 100%.
+''Calculated ''after'' Angel (2,3) Angelic Wisdom. (Not updated)''
+| Angel
+|-
+! Goblin
+| style="text-align:center;" |'''Discount Season'''
+| Have ''[[Goblin#Tier 3 Upgrades|Green Fingers Discount]]'' roll more than 1000 seconds worth of production. ''(Note that despite GFD's description saying it works offline, it does not work in the same way. Consequently this challenge cannot be completed offline. See [[#Tips|tips]].''<br />Requires:
+* Reincarnation 2
+* ''Greed Drive'' upgrade
+| Green Fingers Discount triggers every 30 seconds instead, and casts 10 Taxes Collection.
+| Goblin
+|-
+! Undead
+| style="text-align:center;" |'''Deadly Impatience'''
+| Get 6 undead assistants from Undead Heritage. ''(This takes 11 hours, 6 minutes, 40 seconds, and the heritage doesn't really have to be bought.)''<br />Requires:
+* Reincarnation 2
+* ''True Night'' upgrade
+| Increase Mana Regeneration additively based on assistants owned and multiplicatively by 10%.
+| Undead
+|-
+! Demon
+| style="text-align:center;" |'''Trophy Collectors'''
+| Collect 5000 Demon Coins without using [[Gems#Gem Power|Gem Power]], [[Reincarnation|Reincarnation Power]], [[Researches]] or [[Excavations]]. ''(Only scrying for Faction coins and challenges are permitted)''<br />Requires:
+* Reincarnation 2
+* ''Hell Rush'' upgrade
+| Increase the production of all Buildings and Faction Coin find chance based on upgrades purchased.
+''Formula:'' <math>x%</math>and <math>+x%</math> where x is the number of uprade purchased.(Not updated)
+| Demon
+|-
+! Titan
+| style="text-align:center;" |'''Rich Followers'''
+| Have royal exchanges exactly equal to 13 times your assistants. You need a minimum of 13 assistants. ''(For example: 15 assistants = 195 Royal Exchanges)''<br />Requires:
+* Reincarnation 4
+* ''Lightning Storm'' upgrade
+* Completion of Angel and Goblin Challenge 1
+| Gain assistants based on Royal Exchanges bought.
+| Titan
+|-
+! Druid
+| style="text-align:center;" |'''Silent Assistance'''
+| Make the building targeted by ''Grand Balance'' surpass 99.9% production.<br />Requires:
+* Reincarnation 4
+* ''Halls of Balance'' upgrade
+* Completion of Elf and Demon Challenge 1
+| Gain assistants based on time spent in this Era.
+| Druid
+|-
+! Faceless
+| style="text-align:center;" |'''Recruitment'''
+| Have at least 125 assistants within 5 minutes of a new game.<br />Requires:
+* Reincarnation 4
+* Faceless Overmind upgrade
+* Completion of Fairy and Undead Challenge 1
+| Gain 15 assistants every minute. Resets every hour.
+| Faceless
+|-
+! Dwarf
+| style="text-align:center;" |'''Enchanted Crystals'''
+| Cast 20 ''Tax Collections'' while having at least 4 spells active.<br />Requires:
+* Angel Faction
+* Reincarnation 6
+* ''Minedwarf'' upgrade
+* Completion of Elven, Angel and Fairy Challenge 1
+| Reduces all spells cost based on Gems owned.
+{{Formula|naked|\frac {\ln {(1 + G^{1 + {\frac A {10} } }) } } {20}%|where G is the number of gems you own and A is the number of times you ascended.}}(Not updated)
+| Angel-Dwarf
+|-
+! Drow
+| style="text-align:center;" |'''Organized Crime'''
+| Have ''[[Drow#Tier 1 Upgrades|Honor Among Killers]]'' with at least 500 trophies and 1000 Royal Exchanges bought.<br />Requires:
+* Demon Faction
+* Reincarnation 6
+* ''Perfect Combo'' upgrade
+* Completion of Goblin, Demon and Undead Challenge 1
+| Increase Royal Exchanges bonus based on Trophies unlocked.
+| Demon-Drow
+|}
+
+{| class="mw-collapsible mw-collapsed wikitable" style="width: 100%;"
+! colspan="5" id="Tier 2 Challenges" |Tier 2 Challenges (For R8, R9 and R11)
+|-
+!Faction !!Name !!Requirement !!Upgrade !!For
+|-
+! Fairy
+| style="text-align:center;" |'''Donations'''
+| Cast ''Fairy Chanting'' within 30 seconds of a new game with over 1000 ''Farms''.<br />Requires:
+* Reincarnation 8
+* Fairy [[Bloodline]]
+* Completion of Fairy Challenge 1
+| Increase Tax Collection worth by 10%.
+| Goblin
+|-
+! Elf
+| style="text-align:center;" |'''Light Collector'''
+| Gather 60,000 automatic clicks. Don't spend more than 2 hours.<br />Requires:
+* Reincarnation 8
+* Elven Bloodline
+* Completion of Elven Challenge 1
+| Multiplicatively increase Mana Regeneration based on clicks made in this Era. 
+| Angel
+|-
+! Angel
+| style="text-align:center;" |'''Mana Crypts'''
+| Generate 500,000 mana in less than 3 hours without casting a single ''Tax Collection''.<br />Requires:
+* Reincarnation 8
+* Angel Bloodline
+* Completion of Angel Challenge 1
+| Multiplicatively increase Maximum mana by 30%.
+| Undead
+|-
+! Goblin
+| style="text-align:center;" |'''Elite Warriors'''
+| Buy over 250 upgrades and 17,000 buildings.<br />Requires:
+* Reincarnation 8
+* Goblin Bloodline
+* Completion of Goblin Challenge 1
+| Multiplicatively increase production bonus from Gems based on Tax Collection casts this Era.
+| Demon
+|-
+! Undead
+| style="text-align:center;" |'''Experienced Helpers'''
+| Cast ''Night Time'' when you have over 100 assistants.<br />Requires:
+* Reincarnation 8
+* Undead Bloodline
+* Completion of Undead Challenge 1
+| Assistant production is increased 10%.
+| Elf
+|-
+! Demon
+| style="text-align:center;" |'''Legendary Antics'''
+| Have exactly 666 royal exchanges across all factions while having 0 Demon Exchanges in under 666 seconds current playtime.<br />Requires:
+* Reincarnation 8
+* Demon Bloodline
+* Completion of Demon Challenge 1
+| Increase Maximum Mana by 6.66% of your amount of Hall of Legends.
+| Fairy
+|-
+! Titan
+| style="text-align:center;" |'''Harmony of Thoughts'''
+| Click 80 times while having at least 3 active spells during the same session.<br />Requires:
+* Reincarnation 9
+* Titan Bloodline
+* Completion of Angel and Goblin Challenge 2
+* Completion of Titan Challenge 1
+| Increase the production of all buildings based on time spent not affiliated with the Faceless.
+| Faceless
+|-
+! Druid
+| style="text-align:center;" |'''Balanced Current'''
+| Keep each of your buildings at 1500 for 15 full ''Grand Balance'' casts. ''(The 15 casts only counts after you have all the 1500 buildings.)''<br />Requires:
+* Reincarnation 9
+* Druid Bloodline
+* Completion of Elf and Demon Challenge 2
+* Completion of Druid Challenge 1
+| Multiplicatively increase Mana regeneration by 1% for every 1000 buildings built.
+| Titan
+|-
+! Faceless
+| style="text-align:center;" |'''Mystic Maze'''
+| Get to 6500 Max Mana and 8000 buildings within 10 minutes of a new game.<br />Requires:
+* Reincarnation 9
+* Faceless Bloodline
+* Completion of Fairy and Undead Challenge 2
+* Completion of Faceless Challenge 1
+| Increase Max Mana based on the highest amount of buildings you had in this Reincarnation
+| Druid
+|-
+! Dwarf
+| style="text-align:center;" |'''Biased Architecture'''
+| Build 2750 Inns within 2 minutes of a new game.<br />Requires:
+* Fairy Faction
+* Reincarnation 11
+* Dwarven Bloodline
+* Completion of Elven, Angel and Fairy Challenge 2
+* Completion of Dwarven Challenge 1
+| Reduce Farm, Inns and Blacksmith cost multipliers.
+{{MultiplierReduction|0.01|1.14|1.15}}(Not updated)
+| Fairy-Dwarf
+|-
+! Drow
+| style="text-align:center;" |'''Dark Elegance'''
+| Build 2000 ''Dark Temples''.<br />Requires:
+* Goblin Faction
+* Reincarnation 11
+* Drow Bloodline
+* Completion of Goblin, Demon and Undead Challenge 2
+* Completion of Drow challenge 1
+| Increase the production of all buildings based on Faction Coins found in this Era.
+{{Formula|stat|log^2(1 + x)|Faction Coins Gained (This Game)}}(Not updated)
+| Goblin-Drow
+|}
+
+{| class="mw-collapsible mw-collapsed wikitable" style="width: 100%;"
+! colspan="5" id="Tier 3 Challenges" |Tier 3 Challenges (For R18, R19 and R21)
+|-
+! Faction !! Name !! Requirement !! Upgrade !! For
+|-
+! Fairy
+| style="text-align:center;" |'''Enchanted Lands'''
+| Have ''[[Fairy#Tier 3 Upgrades|Swarm of Fairies]]'' give 60 Fairy assistants in under a minute of a new game. ''(8190, total, of Farms, Inns, and Blacksmiths, and you don't have to buy the upgrade itself.)''<br />Requires:
+* Reincarnation 18
+* Fairy [[Research#Research Unlock Requirements|Unique Building]]
+* Completion of Fairy Challenge 2
+| Increase mana regeneration based on the amount of buildings you own.
+{{Formula|stat|(0.1 * x)^{0.225}|Buildings Owned (This Game)}}
+| All<ref name=":0">''All last tier challenge rewards are universal: They work with all the factions, including [[Mercenaries]].''</ref>
+|-
+! Elf
+| style="text-align:center;" |'''Runic Conversion'''
+| Buy 150 of each other royal exchange, having 0 Drow Exchanges. ''(~323,543,367 of each faction coin)''<br />Requires:
+* Reincarnation 18
+* Elven Unique Building
+* Completion of Elven Challenge 2
+| Increase your mana regeneration by +0.85 m/s for every 100 Royal exchanges you have purchased.
+| All
+|-
+! Angel
+| style="text-align:center;" |'''Nephilim's Blessing'''
+| Buy Demon Bloodline, 2,000 ''Halls of Legends'' and no good buildings.<br />Requires:
+* Reincarnation 18
+* Angel Unique Building
+* Completion of Angel Challenge 2
+| ''Halls of Legends'' benefit from any Certificate, Validation, Affirmation or Proclamation [[Upgrades#Alignment Upgrades|upgrade]]. Also reduces Ascension penalty for Angel Bloodline.
+| All
+|-
+! Goblin
+| style="text-align:center;" |'''Smuggled Jewels'''
+| Have at least {{Number|1 Qavg}} gems in the abdication treasury while using Goblin Bloodline.<br />Requires:
+* Reincarnation 18
+* Goblin Unique Building
+* Completion of Goblin Challenge 2
+| Increase production bonus from Gems by 0.005% for each upgrade purchased.
+| All
+|-
+! Undead
+| style="text-align:center;" |'''Death Knights'''
+| Collect {{Number|100 M}} Faction Coins.<br />Requires:
+* Reincarnation 18
+* Undead Unique Building
+* Completion of Undead Challenge 2
+| Increase your amount of assistants by 10%.
+| All
+|-
+! Demon
+| style="text-align:center;" |'''Passage To Tartarus'''
+| Own at least 2,000 ''Halls of Legends'' and 333 trophies.<br />Requires:
+* Reincarnation 18
+* Demon Unique Building
+* Completion of Demon Challenge 2
+| Increase the production of all buildings by 0.1% for each trophy you unlocked.
+| All
+|-
+! Titan
+| style="text-align:center;" |'''Balanced Economy'''
+| Generate {{Number|1 B}} Faction Coins from Lightning Strike alone. ''{{PA|{{Number|1 M}}}}''<br />Requires:
+* Reincarnation 19
+* Completion of Angel and Goblin Challenge 3
+* Completion of Titan Challenge 2
+* 1000 [[Excavations]]
+| Increase max mana based on the number of faction coins generated this game.
+{{Formula|stat|round(2.5 * \log_{10}(1 + x))%|Faction Coins Gained (This Game)}}
+| Druid
+|-
+! Druid
+| style="text-align:center;" |'''Eldritch Architecture'''
+| Have ''Grand Balance'' target ''Stone Pillars, Monasteries'' and ''Ancient Pyramids'', in that order.<br />Requires:
+* Reincarnation 19
+* Completion of Elf and Demon Challenge 3
+* Completion of Druid Challenge 2
+* 1000 Excavations
+| You gain 1.25 additional max mana for every 4 Labyrinths owned.
+| Faceless
+|-
+! Faceless
+| style="text-align:center;" |'''Cyclopean Army'''
+| Have ''Brainwave'' on until 20 or less seconds remaining and cast ''Call to Arms, Gem Grinder'' and ''Spiritual Surge''.<br />Requires:
+* Reincarnation 19
+* Completion of Fairy and Undead Challenge 3
+* Completion of Faceless Challenge 2
+* 1000 Excavations
+| Gain extra assistants based on your royal exchange bonus.
+{{Formula|floor(2 * x^{0.5})|your Royal Exchange Bonus}}
+| Titan
+|-
+! Dwarf
+| style="text-align:center;" |'''Rich Miners'''
+| Collect at least 100,000 Faction Coins with a single ''Tax Collection''.<br />Requires:
+* Elf Faction
+* Reincarnation 21
+* 1750 Excavations
+* Completion of Elven, Angel and Fairy Challenge 3
+* Completion of Dwarven Challenge 2
+| Increase your Faction Coin find chance by 100% for each active spell.
+| Elven-Dwarf
+|-
+! Drow
+| style="text-align:center;" |'''Sorcerer's Pact'''
+| Have a total of at least 2 hours of activity time of both ''Blood Frenzy'' and ''Combo Strike'' combined. (This game)<br />Requires:
+* Undead Faction
+* Reincarnation 21
+* 1750 Excavations
+* Completion of Goblin, Demon and Undead Challenge 3
+* Completion of Drow challenge 2
+| Online Time (This game) is added to Offline Time (This game).
+| Undead-Drow
+|}
+
+{| class="mw-collapsible mw-collapsed wikitable" style="width: 100%;"
+! colspan="5" id="Tier 4 Challenges" |Tier 4 Challenges (For R25 and R27)
+|-
+! Faction !! Name !! Requirement !! Upgrade !! For
+|-
+! Titan
+| style="text-align:center;" |'''Storm of Wealth'''
+| Hit ''Halls of Legends'' with ''Lightning Strike'' 2 times in a row without using any researches. You must have at least 1 of each building.<br />Requires:
+* Reincarnation 25
+* Titan [[Buildings#Unique Buildings|Unique Building]]
+* Completion of Titan Challenge 3
+| Every 5 minutes you automatically generate Faction Coins based on the amount of Gems you own.
+{{Formula|round(0.05 * x)|the number of Faction Coins generated by Lightning Strike}}
+| All
+|-
+! Druid
+| style="text-align:center;" |'''Overflowing Mana'''
+| Cast ''Grand Balance'' 13 times in the first 5 minutes of a run without using any non-Druid research.<br />Requires:
+* Reincarnation 25
+* Druid Unique Building
+* Completion of Druid Challenge 3
+| All spell durations increased by 1% for every 1500 max mana.
+| All
+|-
+! Faceless
+| style="text-align:center;" |'''Omnipresence'''
+| Get ''[[Hive Mind]]'' bonus to at least 1890%. ''(This requires 738812 seconds of Faceless playtime or 8 days, 13 hours, 13 minutes, and 32 seconds.)'' ''{{PA|34.9%}}''<br />Requires:
+* Reincarnation 25
+* Faceless Unique Building
+* Completion of Faceless Challenge 3
+| All factions receive a bonus based on your ''Hive Mind'' bonus.
+{{Formula|(0.01*5*0.1*x^{0.75})|current Hive Mind bonus}}
+| All
+|-
+! Dwarf
+| style="text-align:center;" |'''Paladins'''
+| Have at least 3000 ''Knights Jousts'' and as many ''Wizard Towers''.<br />Requires:
+* Reincarnation 27
+* 2000 Excavations
+* Completion of Dwarven Challenge 3
+| Increase ''Holy Light'' bonus based on the combined amount of ''Knights Jousts'' and ''Wizard Towers'' you own.
+{{Formula|build|50x^{0.35}%|Knight Jousts and Wizard Towers}}
+| Dwarf
+|-
+! Drow
+| style="text-align:center;" |'''Trained Assassin'''
+| Cast ''Call to Arms'' with at least 30,000 buildings.<br />Requires:
+* Reincarnation 27
+* 2000 Excavations
+* Completion of Drow Challenge 3
+| Increase your Offline Time (This Game) by 1 second every 10 spells cast in this game.
+| Drow
+|}
+
+{| class="mw-collapsible mw-collapsed wikitable" style="width: 100%;"
+! colspan="5" id="Tier 5 Challenges" |Tier 5 Challenges (R33)
+|-
+! Faction !! Name !! Requirement !! Upgrade !! For
+|-
+! Dwarf
+| style="text-align:center;" |'''Underground Foundation'''
+| Have 3250 Excavations. ''{{PA|2500}}''<br />Requires:
+* Reincarnation 33
+* Dwarven Unique Building
+* Completion of Dwarven Challenge 4
+| All buildings count 20% more for all purposes.
+'''''Note:''' As of 3.0, players have reported this appears to no longer work towards a number of challenges and upgrades.''
+| All
+|-
+! Drow
+| style="text-align:center;" |'''Shadow Mirage'''
+| Have at least 2 hours offline in this game and have at least 360 charges of ''Combo Strike''.<br />Requires:
+* Reincarnation 33
+* Drow Unique Building
+* Completion of Drow Challenge 4
+| A fraction of your alignment spell bonus is applied passively.<br />''Note: "Fraction" is equal to 5%.''
+| All
+|}
+
+== Requirements by Faction ==
+All challenges require to be played as the Faction in question, to have all the previous Tier challenges completed, and the followings in the below tables.
+
+{| class="mw-collapsible mw-collapsed wikitable" style="width: 100%;"
+! colspan="5" id="Fairy Challenges" |[[Fairy]] Challenges
+|-
+! Tier !! Name !! Requirement !! Upgrade !! For
+|-
+! 1
+| style="text-align:center;" |'''Pixel Mischief'''
+| Only use ''Farms, Inns'' and ''Blacksmiths'' during a run where you buy all [[Fairy|Fairy upgrades]] within 1 minute of a new game.<br />Requires:
+* [[Reincarnations|Reincarnation]] 2
+* ''Fairy Choir'' upgrade
+| You gain free assistants based on fairy upgrades you have.
+{{Formula|x^{1.75}|amount of Fairy afflicted upgrades}}
+| Fairy
+|-
+! 2
+| style="text-align:center;" |'''Donations'''
+| Cast ''Fairy Chanting'' within 30 seconds of a new game with over 1000 ''Farms''.<br />Requires:
+* Reincarnation 8
+* Fairy [[Bloodline]]
+* Completion of Fairy Challenge 1
+| ''Tax Collections'' gives 10 more seconds worth of coins and Faction Coins.
+| Goblin
+|-
+! 3
+| style="text-align:center;" |'''Enchanted Lands'''
+| Have ''[[Fairy#Tier 3 Upgrades|Swarm of Fairies]]'' give 60 Fairy assistants in under a minute of a new game. ''(8190, total, of Farms, Inns, and Blacksmiths, and you don't have to buy the upgrade itself.)''<br />Requires:
+* Reincarnation 18
+* Fairy [[Research#Research Unlock Requirements|Unique Building]]
+* Completion of Fairy Challenge 2
+| Increase mana regeneration based on the amount of buildings you own.
+{{Formula|stat|(0.1 * x)^{0.225}|Buildings Owned (This Game)}}
+| All<ref name=":0" />
+|}
+
+{| class="mw-collapsible mw-collapsed wikitable" style="width: 100%;"
+! colspan="5" id="Elf Challenges" |[[Elf]] Challenges
+|-
+! Tier !! Name !! Requirement !! Upgrade !! For
+|-
+! 1
+| style="text-align:center;" |'''Advanced Civilization'''
+| Get more than 400,000 Elven Coins in under 1 hour of a new game.<br />Requires:
+* Reincarnation 2
+* ''Sun Blessing'' upgrade
+| Reduces Elven Exchange cost multiplier.
+{{MultiplierReduction|0.025|1.075|1.1}}
+| Elf
+|-
+! 2
+| style="text-align:center;" |'''Light Collector'''
+| Gather 60,000 automatic clicks. Don't spend more than 2 hours.<br />Requires:
+* Reincarnation 8
+* Elven Bloodline
+* Completion of Elven Challenge 1
+| Increase Holy Light power by 10%.
+''{{PA|0.96}}%''
+| Angel
+|-
+! 3
+| style="text-align:center;" |'''Runic Conversion'''
+| Buy 150 of each other royal exchange, having 0 Drow Exchanges. ''(~323,543,367 of each faction coin)''<br />Requires:
+* Reincarnation 18
+* Elven Unique Building
+* Completion of Elven Challenge 2
+| Increase your mana regeneration by +0.85 m/s for every 100 Royal exchanges you have purchased.
+| All
+|}
+
+{| class="mw-collapsible mw-collapsed wikitable" style="width: 100%;"
+! colspan="5" id="Angel Challenges" |[[Angel]] Challenges
+|-
+! Tier !! Name !! Requirement !! Upgrade !! For
+|-
+! 1
+| style="text-align:center;" |'''Efficient Magic'''
+| Cast ''Holy Light'' 50 times during daytime within 20 minutes of a new run.<br />Requires:
+* Reincarnation 2
+* ''God's Rest'' upgrade
+| Reduce all spell costs by 10%. ''(Calculated ''after'' Angel (2,3) Angelic Wisdom.)''
+| Angel
+|-
+! 2
+| style="text-align:center;" |'''Mana Crypts'''
+| Generate 500,000 mana in less than 3 hours without casting a single ''Tax Collection''.<br />Requires:
+* Reincarnation 8
+* Angel Bloodline
+* Completion of Angel Challenge 1
+| Increases maximum mana by 30%.
+| Undead
+|-
+! 3
+| style="text-align:center;" |'''Nephilim's Blessing'''
+| Buy Demon Bloodline, 2,000 Halls of Legends and no good buildings.<br />Requires:
+* Reincarnation 18
+* Angel Unique Building
+* Completion of Angel Challenge 2
+| ''Halls of Legends'' benefit from any Certificate, Validation, Affirmation or Proclamation [[Upgrades#Alignment Upgrades|upgrade]]. Also reduces Ascension penalty for Angel Bloodline.
+| All
+|}
+
+{| class="mw-collapsible mw-collapsed wikitable" style="width: 100%;"
+! colspan="5" id="Goblin Challenges" |[[Goblin]] Challenges
+|-
+! Tier !! Name !! Requirement !! Upgrade !! For
+|-
+! 1
+| style="text-align:center;" |'''Discount Season'''
+| Have ''[[Goblin#Tier 3 Upgrades|Green Fingers Discount]]'' roll more than 1000 seconds worth of production. ''(Note that despite GFD's description saying it works offline, it does not work in the same way. Consequently this challenge cannot be completed offline. See [[#Tips|tips]].''<br />Requires:
+* Reincarnation 2
+* ''Greed Drive'' upgrade
+| ''Green Fingers Discount'' triggers every 2 minutes instead.
+| Goblin
+|-
+! 2
+| style="text-align:center;" |'''Elite Warriors'''
+| Buy over 250 upgrades and 17,000 buildings.<br />Requires:
+* Reincarnation 8
+* Goblin Bloodline
+* Completion of Goblin Challenge 1
+| 25% of your purchased upgrades are added to your total trophy count towards ''Hellfire Blast'' and ''Hall of Legends'' purposes.
+| Demon
+|-
+! 3
+| style="text-align:center;" |'''Smuggled Jewels'''
+| Have at least {{Number|1 Qavg}} gems in the abdication treasury while using Goblin Bloodline.<br />Requires:
+* Reincarnation 18
+* Goblin Unique Building
+* Completion of Goblin Challenge 2
+| Increase production bonus from Gems by 0.005% for each upgrade purchased.
+| All
+|}
+
+{| class="mw-collapsible mw-collapsed wikitable" style="width: 100%;"
+! colspan="5" id="Undead Challenges" |[[Undead]] Challenges
+|-
+! Tier !! Name !! Requirement !! Upgrade !! For
+|-
+! 1
+| style="text-align:center;" |'''Deadly Impatience'''
+| Get 6 undead assistants from Undead Heritage. ''(This takes 11 hours, 6 minutes, 40 seconds, and the heritage doesn't really have to be bought.)''<br />Requires:
+* Reincarnation 2
+* ''True Night'' upgrade
+| [[Heritages|Undead Heritage]] works 1000% faster.
+| Undead
+|-
+! 2
+| style="text-align:center;" |'''Experienced Helpers'''
+| Cast ''Night Time'' when you have over 100 assistants.<br />Requires:
+* Reincarnation 8
+* Undead Bloodline
+* Completion of Undead Challenge 1
+| Assistant production is increased by 10%. ''{{PA|0.96%}}''
+| Elf
+|-
+! 3
+| style="text-align:center;" |'''Death Knights'''
+| Collect {{Number|100 M}} Faction Coins.<br />Requires:
+* Reincarnation 18
+* Undead Unique Building
+* Completion of Undead Challenge 2
+| Increase your amount of assistants by 10%.
+| All
+|}
+
+{| class="mw-collapsible mw-collapsed wikitable" style="width: 100%;"
+! colspan="5" id="Demon Challenges" |[[Demon]] Challenges
+|-
+! Tier !! Name !! Requirement !! Upgrade !! For
+|-
+! 1
+| style="text-align:center;" |'''Trophy Collectors'''
+| Collect 5000 Demon Coins without using [[Gems#Gem Power|Gem Power]], [[Reincarnation|Reincarnation Power]], [[Researches]] or [[Excavations]]. ''(Only scrying for Faction coins and challenges are permitted)''<br />Requires:
+* Reincarnation 2
+* ''Hell Rush'' upgrade
+| Reduce all [[Heritages]] costs based on the percentage of trophies unlocked. ''(Except for the Mercenary badge.)''
+| Demon
+|-
+! 2
+| style="text-align:center;" |'''Legendary Antics'''
+| Have exactly 666 royal exchanges across all factions while having 0 Demon Exchanges in under 666 seconds current playtime.<br />Requires:
+* Reincarnation 8
+* Demon Bloodline
+* Completion of Demon Challenge 1
+| Increase max mana by 6.66% of your number of ''Halls of Legends''.
+| Fairy
+|-
+! 3
+| style="text-align:center;" |'''Passage To Tartarus'''
+| Own at least 2,000 ''Halls of Legends'' and 333 trophies.<br />Requires:
+* Reincarnation 18
+* Demon Unique Building
+* Completion of Demon Challenge 2
+| Increase the production of all buildings by 0.1% for each trophy you unlocked.
+| All
+|}
+
+{| class="mw-collapsible mw-collapsed wikitable" style="width: 100%;"
+! colspan="5" id="Titan Challenges" |[[Titan]] Challenges
+|-
+! Tier !! Name !! Requirement !! Upgrade !! For
+|-
+! 1
+| style="text-align:center;" |'''Rich Followers'''
+| Have royal exchanges exactly equal to 13 times your assistants. You need a minimum of 13 assistants. ''(For example: 15 assistants = 195 Royal Exchanges)''<br />Requires:
+* Reincarnation 4
+* ''Lightning Storm'' upgrade
+* Completion of Angel and Goblin Challenge 1
+| You gain a free assistant for every 80 royal exchanges bought.
+| Titan
+|-
+! 2
+| style="text-align:center;" |'''Harmony of Thoughts'''
+| Click 80 times while having at least 3 active spells during the same session.<br />Requires:
+* Reincarnation 9
+* Titan Bloodline
+* Completion of Angel and Goblin Challenge 2
+* Completion of Titan Challenge 1
+| Faceless' ''[[Hive Mind]]'' playtime is increased by 10% of the playtime of all the other factions.
+| Faceless
+|-
+! 3
+| style="text-align:center;" |'''Balanced Economy'''
+| Generate {{Number|1 B}} Faction Coins from Lightning Strike alone. ''{{PA|{{Number|1 M}}}}''<br />Requires:
+* Reincarnation 19
+* Completion of Angel and Goblin Challenge 3
+* Completion of Titan Challenge 2
+* 1000 [[Excavations]]
+| Increase max mana based on the number of faction coins generated this game.
+{{Formula|stat|round(2.5 * \log_{10}(1 + x))%|Faction Coins Gained (This Game)}}
+| Druid
+|-
+!4
+| style="text-align:center;" |'''Storm of Wealth'''
+| Hit ''Halls of Legends'' with ''Lightning Strike'' 2 times in a row without using any researches. You must have at least 1 of each building.<br />Requires:
+* Reincarnation 25
+* Titan [[Buildings#Unique Buildings|Unique Building]]
+* Completion of Titan Challenge 3
+| Every 5 minutes you automatically generate Faction Coins based on the amount of Gems you own.
+{{Formula|round(0.05 * x)|the number of Faction Coins generated by Lightning Strike}}
+| All
+|}
+
+{| class="mw-collapsible mw-collapsed wikitable" style="width: 100%;"
+! colspan="5" id="Druid Challenges" |[[Druid]] Challenges
+|-
+! Tier !! Name !! Requirement !! Upgrade !! For
+|-
+!1
+| style="text-align:center;" |'''Silent Assistance'''
+| Make the building targeted by ''Grand Balance'' surpass 99.9% production.<br />Requires:
+* Reincarnation 4
+* ''Halls of Balance'' upgrade
+* Completion of Elf and Demon Challenge 1
+| [[Druid#Tier 1 Upgrades|Animal Companions]] works faster.
+{{Formula|stat|floor((\sqrt{(1 + 16 * x)} - 1) / 2)|Playtime (This Game)|hours}}
+| Druid
+|-
+! 2
+| style="text-align:center;" |'''Balanced Current'''
+| Keep each of your buildings at 1500 for 15 full ''Grand Balance'' casts. ''(The 15 casts only counts after you have all the 1500 buildings.)''<br />Requires:
+* Reincarnation 9
+* Druid Bloodline
+* Completion of Elf and Demon Challenge 2
+* Completion of Druid Challenge 1
+| Mana regeneration is increased by 1% for every 200 ''Stone Pillars'' you own.
+| Titan
+|-
+! 3
+| style="text-align:center;" |'''Eldritch Architecture'''
+| Have ''Grand Balance'' target ''Stone Pillars, Monasteries'' and ''Ancient Pyramids'', in that order.<br />Requires:
+* Reincarnation 19
+* Completion of Elf and Demon Challenge 3
+* Completion of Druid Challenge 2
+* 1000 Excavations
+| You gain 1.25 additional max mana for every 4 Labyrinths owned.
+| Faceless
+|-
+! 4
+| style="text-align:center;" |'''Overflowing Mana'''
+| Cast ''Grand Balance'' 13 times in the first 5 minutes of a run without using any non-Druid research.<br />Requires:
+* Reincarnation 25
+* Druid Unique Building
+* Completion of Druid Challenge 3
+| All spell durations increased by 1% for every 1500 max mana.
+| All
+|}
+
+{| class="mw-collapsible mw-collapsed wikitable" style="width: 100%;"
+! colspan="5" id="Faceless Challenges" |[[Faceless]] Challenges
+|-
+! Tier !! Name !! Requirement !! Upgrade !! For
+|-
+! 1
+| style="text-align:center;" |'''Recruitment'''
+| Have at least 125 assistants within 5 minutes of a new game.<br />Requires:
+* Reincarnation 4
+* Faceless Overmind upgrade
+* Completion of Fairy and Undead Challenge 1
+| Gain an extra assistant every minute. Resets every hour.
+| Faceless
+|-
+! 2
+| style="text-align:center;" |'''Mystic Maze'''
+| Get to 6500 Max Mana and 8000 buildings within 10 minutes of a new game.<br />Requires:
+* Reincarnation 9
+* Faceless Bloodline
+* Completion of Fairy and Undead Challenge 2
+* Completion of Faceless Challenge 1
+| You gain +10 max mana for every 20 ''Labyrinths'' built.
+| Druid
+|-
+! 3
+| style="text-align:center;" |'''Cyclopean Army'''
+| Have ''Brainwave'' on until 20 or less seconds remaining and cast ''Call to Arms, Gem Grinder'' and ''Spiritual Surge''.<br />Requires:
+* Reincarnation 19
+* Completion of Fairy and Undead Challenge 3
+* Completion of Faceless Challenge 2
+* 1000 Excavations
+| Gain extra assistants based on your royal exchange bonus.
+{{Formula|floor(2 * x^{0.5})|your Royal Exchange Bonus}}
+| Titan
+|-
+! 4
+| style="text-align:center;" |'''Omnipresence'''
+| Get ''[[Hive Mind]]'' bonus to at least 1890%. ''(This requires 738812 seconds of Faceless playtime or 8 days, 13 hours, 13 minutes, and 32 seconds.)'' ''{{PA|34.9%}}''<br />Requires:
+* Reincarnation 25
+* Faceless Unique Building
+* Completion of Faceless Challenge 3
+| All factions receive a bonus based on your ''Hive Mind'' bonus.
+{{Formula|(0.01*5*0.1*x^{0.75})|current Hive Mind bonus}}
+| All
+|}
+
+{| class="mw-collapsible mw-collapsed wikitable" style="width: 100%;"
+! colspan="5" id="Dwarf Challenges" |[[Dwarf]] Challenges
+|-
+! Tier !! Name !! Requirement !! Upgrade !! For
+|-
+! 1
+| style="text-align:center;" |'''Enchanted Crystals'''
+| Cast 20 ''Tax Collections'' while having at least 4 spells active.<br />Requires:
+* Angel Faction
+* Reincarnation 6
+* ''Minedwarf'' upgrade
+* Completion of Elven, Angel and Fairy Challenge 1
+| Reduce all spells cost based on the amount of gems you own.
+{{Formula|naked|\frac {\ln {(1 + G^{1 + {\frac A {10} } }) } } {20}%|where G is the number of gems you own and A is the number of times you ascended.}}
+| Angel-Dwarf
+|-
+! 2
+| style="text-align:center;" |'''Biased Architecture'''
+| Build 2750 Inns within 2 minutes of a new game.<br />Requires:
+* Fairy Faction
+* Reincarnation 11
+* Dwarven Bloodline
+* Completion of Elven, Angel and Fairy Challenge 2
+* Completion of Dwarven Challenge 1
+| Reduce Inn and Blacksmith cost multipliers.
+{{MultiplierReduction|0.01|1.14|1.15}}
+| Fairy-Dwarf
+|-
+! 3
+| style="text-align:center;" |'''Rich Miners'''
+| Collect at least 100,000 Faction Coins with a single ''Tax Collection''.<br />Requires:
+* Elf Faction
+* Reincarnation 21
+* 1750 Excavations
+* Completion of Elven, Angel and Fairy Challenge 3
+* Completion of Dwarven Challenge 2
+| Increase your Faction Coin find chance by 100% for each active spell.
+| Elven-Dwarf
+|-
+! 4
+| style="text-align:center;" |'''Paladins'''
+| Have at least 3000 ''Knights Jousts'' and as many ''Wizard Towers''.<br />Requires:
+* Reincarnation 27
+* 2000 Excavations
+* Completion of Dwarven Challenge 3
+| Increase ''Holy Light'' bonus based on the combined amount of ''Knights Jousts'' and ''Wizard Towers'' you own.
+{{Formula|build|50x^{0.35}%|Knight Jousts and Wizard Towers}}
+| Dwarf
+|-
+! 5
+| style="text-align:center;" |'''Underground Foundation'''
+| Have 3250 Excavations. ''{{PA|2500}}''<br />Requires:
+* Reincarnation 33
+* Dwarven Unique Building
+* Completion of Dwarven Challenge 4
+| All buildings count 20% more for all purposes.
+'''''Note:''' As of 3.0, players have reported this appears to no longer work towards a number of challenges and upgrades.''
+| All
+|}
+
+{| class="mw-collapsible mw-collapsed wikitable" style="width: 100%;"
+! colspan="5" id="Drow Challenges" |[[Drow]] Challenges
+|-
+! Tier !! Name !! Requirement !! Upgrade !! For
+|-
+! 1
+| style="text-align:center;" |'''Organized Crime'''
+| Have ''[[Drow#Tier 1 Upgrades|Honor Among Killers]]'' with at least 500 trophies and 1000 Royal Exchanges bought.<br />Requires:
+* Demon Faction
+* Reincarnation 6
+* ''Perfect Combo'' upgrade
+* Completion of Goblin, Demon and Undead Challenge 1
+| Increase Royal Exchange bonus by 0.025% per trophy you own.
+| Demon-Drow
+|-
+! 2
+| style="text-align:center;" |'''Dark Elegance'''
+| Build 2000 ''Dark Temples''.<br />Requires:
+* Goblin Faction
+* Reincarnation 11
+* Drow Bloodline
+* Completion of Goblin, Demon and Undead Challenge 2
+* Completion of Drow challenge 1
+| Increase the production of all buildings based on faction coins earned this game.
+{{Formula|stat|log^2(1 + x)|Faction Coins Gained (This Game)}}
+| Goblin-Drow
+|-
+! 3
+| style="text-align:center;" |'''Sorcerer's Pact'''
+| Have a total of at least 2 hours of activity time of both ''Blood Frenzy'' and ''Combo Strike'' combined. (This game)<br />Requires:
+* Undead Faction
+* Reincarnation 21
+* 1750 Excavations
+* Completion of Goblin, Demon and Undead Challenge 3
+* Completion of Drow challenge 2
+| Online Time (This game) is added to Offline Time (This game).
+| Undead-Drow
+|-
+! 4
+| style="text-align:center;" |'''Trained Assassin'''
+| Cast ''Call to Arms'' with at least 30,000 buildings.<br />Requires:
+* Reincarnation 27
+* 2000 Excavations
+* Completion of Drow Challenge 3
+| Increase your Offline Time (This Game) by 1 second every 10 spells cast in this game.
+| Drow
+|-
+! 5
+| style="text-align:center;" |'''Shadow Mirage'''
+| Have at least 2 hours offline in this game and have at least 360 charges of ''Combo Strike''.<br />Requires:
+* Reincarnation 33
+* Drow Unique Building
+* Completion of Drow Challenge 4
+| A fraction of your alignment spell bonus is applied passively.<br />''Note: "Fraction" is equal to 5%.''
+| All
+|}
+{| class="mw-collapsible mw-collapsed wikitable" style="width: 100%;"
+! colspan="5" id="Dragon Challenges" |[[Dragon]] Challenges
+|-
+! Tier !! Name !! Requirement !! Upgrade !! For
+|-
+! 1
+| style="text-align:center;" |'''Sky Monarch'''
+|Have 7200 ''Halls of Legends''.<br />Requires:
+* Reincarnation 48
+* ''Dragon's Roar'' upgrade
+* Completion of Titan, Druid, Faceless, Dwarven and Drow Challenge 1
+| Multiplicatively increase faction coin chance by 12% per ''Lightning Strike'' tier bought. Also increase Post-Ascension bonuses for ''[[Titan#Tier 2 Upgrades|Titan Drill]]'' and ''[[Titan#Tier 3 Upgrades|Titan Sized Walls]]''.
+{{Formula|naked|(250000^{2.5})% and (25000^{2.5})}}
+| Titan-Dragon
+|-
+! 2
+| style="text-align:center;" |'''Barkscales'''
+| Have ''Grand Balance'' affect at least 7 buildings and generate at least 1e10 mana this game '''''prior''''' to purchasing the Dragon Trade Treaty.<br />Requires:
+* Reincarnation 51
+* Dragon Bloodline
+* Completion of Titan, Druid, Faceless, Dwarven and Drow Challenge 2
+* Completion of Dragon Challenge 1
+| Increase ''Stone Pillars'' production based on the amount of ''Grand Balance'' targets.
+{{Formula|(6000 * x^{1.75})|number of targets}}      Also reduces all Spell Tier upgrade costs based on ''Grand Balance'' activity time in this game.
+{{Formula|naked|max(0, (1-t/28)^9)|where t is GB activity time in days.}}
+| Druid-Dragon
+|-
+! 3
+| style="text-align:center;" |'''Serpent Queller'''
+|Have a combined total of 8 days as Faceless and Dragons, with a minimum of 2 days each.<br />Requires:
+* Reincarnation 54
+* Completion of Titan, Druid, Faceless, Dwarven and Drow Challenge 3
+* Completion of Dragon Challenge 2
+* Have 5500 Excavations
+| Ascension 1 penalty from ''[[Faceless#Tier 1 Upgrades|Deep Memory]]'' is removed and its bonus increased.<br />Faction Coin find chance from ''[[Faceless#Tier 1 Upgrades|Evolutive Mutation]]'' becomes multiplicative with increased effect.
+{{Formula|build|(3 * x^{0.65})%|Sunken Cities}}
+| Faceless-Dragon
+|-
+! 4
+| style="text-align:center;" |'''Draconstellation'''
+| Have 9,000 ''Iron Strongholds'' and at least 4 ''Dragon's Breath'' effects active at the same time.<br />Requires:
+* Reincarnation 57
+* 46 [[Artifacts]]
+* Completion of Titan, Druid, Faceless, Dwarven and Drow challenge 4
+* Completion of Dragon challenge 3
+| Faction coins from excavations are increased based on the amount of artifacts you own.
+{{Formula|x^6(%)|number of artifacts}}
+| Dragon
+|-
+! 5
+| style="text-align:center;" |'''Ancient Incantation'''
+| Have 5 spells active at tier 5.<br />Requires:
+* Reincarnation 60
+* Dragon Unique Building
+* Completion of Dwarven and Drow challenge 5
+* Completion of Dragon challenge 4
+| ''Tax Collections'' are 20% more powerful for every spell tier you have active
+| Any Prestige
+|-
+! 6
+| style="text-align:center;" |'''Dracomet Vault'''
+|Gather {{Number|2.5e18}} FCs,<br />{{Number|1e141}} Coins,<br />120
+120,000 buildings,<br />7500 excavations,<br />6000 assistants,<br />300,000 max mana,<br />200,000 mana regen, and<br />{{Number|2e10}} mana produced.<br />Requires:
+* Reincarnation 63
+* Completion of Dragon challenge 5
+* 12,000 research points spent across all facilities
+|Gem production is passively increased over time based on the amount of artifacts you own. Resets on Abdications.
+{{Formula|naked|0.0015 * t^{0.7} * a|where t is playtime this game in minutes, a is artifacts found.}}
+|All
+|}
+
+== Related Trophies & Upgrades ==
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%;" id="Secret Upgrades" cellpadding="10"
+! colspan="6" |Challenge Trophies & Upgrades
+|-
+! colspan="2" |Name
+!Type
+! style="width:10%;" |Cost
+!Requirement
+!Effect
+|-
+![[File:VanillaChallenger.png]]
+!Vanilla Challenger
+|[[Trophy]] & [[Upgrade]]
+|10 Coins<br />{{PA|Free}}
+|Complete all the Vanilla Challenges
+|Increase the overall production of Vanilla Factions by 25%.<br /><abbr title="post-ascension">PA</abbr>: 2.26%.
+|-
+![[File:Neutral Challenger .png]]
+!Neutral Challenger
+|Trophy & Upgrade
+|10 Coins<br />{{PA|Free}}
+|Complete all the Neutral Challenges
+|Increase the overall production of Neutral Factions by 25%<br /><abbr title="post-ascension">PA</abbr>: 2.26%.
+|-
+![[File:PrestigeChallenger.png|54x54px]]
+!Prestige Challenger<br />{{PA}}
+|Trophy & Upgrade
+|PA: Free
+|Complete all the Prestige Challenges.
+|Increase the overall production of Prestige Factions by 2.26%
+|}
+
+== Tips ==
+This section provides tips, hints and potentially spoilers on how to complete the various challenges.
+
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%;"
+!Tier 1 Hints
+|-
+|
+*'''Elf 1:''' You can use [[excavations]].
+*'''Fairy 1:''' Do excavations to quickly get the Fairy Heritage upgrade. Don't forget the Fairy Choir spell upgrade.
+*'''Angel 1''': Recommended +1 B (1<sub>E</sub>9) gems. <s>You will need a min mana regen of 60 m/s</s> to get enough Holy Light casts. Avoid purchasing Angelic Dominance (3,2). If you have [[bloodlines]] (R7), choose the Druid Bloodline. — "Daytime" is considered to be from 6 AM to 6 PM on your system clock. ([[Challenges#comm-9383|source]])
+*'''Undead 1:''' Requires at least 11h, 6m, 40s playtime, and there are no perks that could reduce it. You also need to have the True Night spell upgrade, but you do not need the Undead heritage, nor have it unlocked. It is easier to do this at R16 along with unlocking time-gated [[research]] D25.
+*'''Goblin 1:''' While Green Fingers Discount says it works offline, it does not work in the same way as online, and this challenge cannot be completed offline or when coming online based on the offline effect of GFD. The challenge can be attempted in multiple tabs simultaneously, but GFD randomness is decided when the upgrade is bought, and if you are using multiple tabs, be sure to import / load the save before buying the upgrade.
+*'''Demon 1:''' Ruby power, scrying, and challenge rewards are allowed. It is easier to do this at R7+ using the Elven [[bloodline]].
+*'''Titan 1:''' Since RG v2, this can be done solely with building assistants (You get 1 assistant for each 5th and 25th building upgrades). Avoid Reincarnation power, Undead & Drow bloodline, and Undead 3 challenge. By precaution, don't even get the other assistant upgrades. At lower Rs, it is easier to do it with the minimum required 13 assistants. Check your [[stats]] regularly and when you get close to the required 169 total [[RE]]s, switch to buying them one by one - careful to not over-buy! Remember you can have more than 13 assistants so long as you have the required multiple of 13*(#assistants) REs. (eg.: 26 assistants => 338 RE)
+**Note that it requires 13*(#assistants) total, not 13*(#assistants) for each faction. For example, if you had 13 assistants, you would need 169 exchanges total, not 169 Fairy exchanges + 169 Elven exchanges etc etc.
+**Using Ruby Power if you have bought bonus Assistants will cause the challenge to bug out and become impossible to complete.
+{| class="mw-collapsible mw-collapsed wikitable" style="width:80%;"
+! colspan="8" |Assistants to REs
+|-
+!13!!14!!15!!16!!17!!18!!19!!20
+|-
+|169||182||195||208||221||234||247||260
+|}
+*'''Druid 1:''' Make sure your least-producing building still makes up a large proportion of your production (2% and up). This will necessarily balance the production of each of your other buildings around 9.09% (= 1/11). Upgrade buildings only when you need to balance them. Building more Farms, Inns and Blacksmiths will increase the multiplier of the final Grand Balance cast.
+*'''Faceless 1:''' ?''
+|}
+
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%;"
+! Tier 2 Hints
+|-
+|
+*'''Fairy 2:''' Don't forget to purchase the Bloodline within the time limit.
+*'''Elf 2:''' Autocast Moon Blessing and pick Elven Bloodline and this will complete in ~55 minutes if you have the mana to sustain it (35/sec).
+*'''Angel 2:''' You have to use the Angel faction with the Angel bloodline (Merc won't work because of the requirements). Use bronze autocast for all spells. Dwarven Pickaxe is another spell, so make sure to get it. If you have R16 with Spiritual Surge, this will take ~55 minutes. Avoid buying Angelic Wisdom and Angelic Dominance: shorter and more costly spells mean more mana used and thus, more mana produced (Mana production only count when filling the mana bar, exceeding amount are not accounted).
+*'''Demon 2:''' High gem and low Excavations (relative). Work up enough coins to excavate 95 <abbr title="Royal Exchanges">REs</abbr>, and then buy 1 or 2 more to get exactly 666. Do not buy any Demon exchanges. Drow's blackmail upgrade helps the challenge, and the exchanges don't have to be spread evenly.
+*'''Titan 2:''' This challenge does not need to be done within one spell combo. In addition, due to a bug, it counts one click per second if you have at least one assistant. It's possible to meet the condition without clicking at all: while spells are active cast 3 spells that last 20 seconds together 4 times.
+*'''Dwarf 2: '''To complete this at the end of R11, you need a lot of Faction Coins. If you have already excavated a lot, wait for the end of the next reincarnate, keep excavations low this time. Get Dwarf bloodline, Fairy faction, then excavate, buy all heritages and exchanges. Alternate between maxing buildings and upgrades. Cast a Fairy Chanting + Call to Arms combo right before the two minute limit. Don't forget Dwarven trade treaty!
+**See [https://steamcommunity.com/app/610080/discussions/0/1474222595310117457/#c1474222595310251473 this post] on the Steam forums for a step-by-step guide
+*'''Dragon 2:''' As for the reward's spell tier reduction, the formula implemented in the game is: ''<code>max(0,(1 - (x / 28)<sup>9</sup>)), where x is GB time in days</code>. ''The cost of tiers are multiplied by it, so if it yields 0.1, that's a 90% reduction. Here's a [http://www.wolframalpha.com/input/?i=log+plot+(1+-+x%2F28)%5E9,+x+%3D+0+to+28 plot] of the function. It goes from 0% reduction to 100% reduction over the course of 28 days of GB time. (Source: [[Challenges#comm-9841|Comment reply by Pseudobyte]])
+|}
+
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%;"
+! Tier 3 Hints
+|-
+|
+*'''Tier 3:''' Except for the Fairy Challenge, they can easily be done with 1 Qivg (1e78) gems (or less for Demon).
+*'''Fairy 3:''' Use Goblin Bloodline.
+*'''Demon 3:''' Use Goblin Bloodline, can be easily done around Uvg gems.
+*'''Titan 3:''' Use Faceless Bloodline. For 80 TC and one LS, 80*200 + 600 = 16600 Mana are needed.
+*'''Druid 3:''' Now that Grand Balance affects 0 buildings, it will target the next building down the list:
+*#Buy Max Farms, Max Inns, Max Blacksmiths, and Max Deep Mines. > Cast Grand Balance
+*#Buy Max Stone Pillars and Max Alchy Labs > Cast Grand Balance
+*#Buy Max Monasteries, Max Labys, and Max Iron Strongholds > Cast Grand Balance.
+*'''Dwarf 3:''' Use the Elf bloodline and this is pretty much automatic.
+|}
+
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%;"
+! Tier 4+ Hints
+|-
+|
+*'''Neutral Tier 4:''' While it's ''possible'' to get the neutral unique buildings and complete the requirements for the tier 4 challenges, you need to be R25 for them to be awarded.
+*'''Druid 4:''' You need at least 50 m/s, and to start [[autocasting]] GB within approximately 59 seconds of game start, as you are only required to <u>start</u> the 13th cast within the time limit, not finish it. Take Druid bloodline, remember not to buy Halls of Balance, and it should be trivial. If you cast manually instead of autocasting, you can shave off a couple of seconds total, as autocasting takes a whole second to cast again after a spell runs out. Can also be done with Elven bloodline: Abdicate, Pick Elven Bloodline, Buy all, Neutral faction, Buy all, Pick druid faction. Cast first GB. Don't forget to buy buildings in between. Don't buy HoB, but purchase heritages and upgrades individually. With elven bloodline you can cast the first GB much faster and you can purchase druid upgrades and heritages faster, which gets you close to 50 m/s, which is enough.
+*'''Faceless 4:''' This is the equivalent of about 8.5 days of time spent allied with Faceless. Getting the Titan Tier 2 challenge ''Harmony of Thoughts'' will help increase your Faceless playtime.
+*'''Titan 4:''' Buy Olympian Halls, generate as much mana per second from non-Research methods (mostly Heritages), set Lightning Strike on bronze (Ctrl+Shift) - Then wait. On average, it takes 132** strikes to get the two-in-a-row strikes. The[[Tools| Realm Weather Service tool]] can help forecast strikes.<br /><nowiki>**</nowiki> <small>The theoretical average is 132, my experimental average was more like 135, which may be due to the small statespace of the PRNG used by Realm Grinder. It is true that the odds of any two particular strikes both being on Olympian Halls are 1/121. That does not imply that it takes 121 casts on average because the pairs of casts are not statistically independent. At 20 seconds per cast, using Druid bloodline to have LS cast immediately after finishing, and averaging 132 casts, this challenge may only take approximately 44 minutes.</small>
+*'''Dragon challenges''' : general [http://www.kongregate.com/forums/8945-realm-grinder/topics/696468-challenge-5-6-a-small-guide#posts-10944089 advice] by artcrow
+*'''Dragon 4:''' Suggested Faction to use is Faceless ([http://www.kongregate.com/forums/8945-realm-grinder/topics/691840-dragon-chal-4?page=3#posts-10915939 build] by artcrow: [http://www.kongregate.com/forums/8945-realm-grinder/topics/676749-dragon-builds?page=13#posts-10914734 build] by eatnsleep)
+|}
+
+== Links ==
+* [[Challenge Rewards by Faction|Tier Challenges sortable table]]
+* [http://www.kongregate.com/forums/8945-realm-grinder/topics/564368-challenges R2 - R25 Challenge Guide] at Kongregate Forums - by Endenligh
+* [https://www.kongregate.com/forums/8945-realm-grinder/topics/617432 Prestige Challenges] at Kongregate Forums - by Rahler
+
+== References ==
+<references />
+{{Sitenav}}
+[[Category:Challenges| ]]
+[[Category:Upgrades]]
+[[Category:Unlock Requirements]]
+[[Category:Tips]]
+[[Category:Realm Grinder Wiki]]

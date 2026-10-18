@@ -1,0 +1,1052 @@
+{{tocright}}The below tables list [[Faction]] upgrades, intended mostly for [[Merc Builds|Mercenary Builds]], and listed by Tier (as we are limited to 4 upgrades per tier). These tables are sortable by "'''What it does'''" and "'''What it is based on'''". The "type" and "based on" inputs are simplified, they do not differentiate between building types. Also, for better sort-ability, they have also been re-interpreted: there is no plural form and "Building production" is listed as "Production from Buildings <abbr title="Production">P</abbr>(<abbr title="Building">B</abbr>); "Click Reward" > "Production from the clicks" <abbr title="Production">P</abbr>(click), so they can be sorted under "P".
+
+"Based On Timings" are for upgrades that has some time element mixed into their scaling, being blank generally means that the number is calculated from something discrete to the run itself. Values suggest when they are 'reset' and you can work on their perks over multiple softer resets. (Era/Reincarnation/All Time)
+
+Most upgrades do not have individual pages, but a few especially important or historical ones may have additional notes.
+== Upgrade Table ==
+{| class="sortable mw-collapsible fandom-table mw-collasped wikitable" style="width:100%; text-align:center;"
+|-
+!Tier
+! style="white-space: nowrap;" data-sort-type="text" |Name
+! style="white-space: nowrap;" data-sort-type="text" |Faction
+! style="white-space: nowrap;" data-sort-type="text" |Type
+! style="white-space: nowrap;" data-sort-type="text" |Based On
+!Based On Timings
+! style="white-space: nowrap;" data-sort-type="number" |Effect
+|- style="background-color: #ebfafb;"
+|1
+|'''Pixie Dust Fertilizer'''
+|Fairy (1.1)
+|<abbr title="Production">P</abbr>+<abbr title="Cost Reduction">CR</abbr>(<abbr title="Building">B</abbr>)
+|
+|
+| style="padding:0 8px;text-align:left;" |<span style="display:none;">1</span>Increase the base production of Farms, Inns, and Blacksmiths by +600 and reduce their building cost multipliers by (-0.02).
+|- style="background-color: #ebfafb;"
+|1
+|'''Fairy Worker'''
+|Fairy (1.2)
+|<abbr title="Production">P</abbr>(<abbr title="Building">B</abbr>)
+|<abbr title="Assistants">A</abbr>
+|
+| style="padding:0 8px;text-align:left;" |Increase the production of Farms, Inns and Blacksmiths based on assistants owned.
+''Formula:'' <math>(5 * ln(1 +x) ^ {2.5})%</math>
+|- style="background-color: #ebfafb;"
+|1
+|'''Spellsmith'''
+|Fairy (1.3)
+|<abbr title="Mana Regen">MR</abbr>
+|<abbr title="Building">B</abbr>
+|
+| style="padding:0 8px;text-align:left;" |<span style="display:none;">3</span>Increase Mana Regeneration based on Farms, Inns, and Blacksmiths built.
+''Formula:'' <math>+(0.3 * x ^ {0.3})</math>
+|- style="background-color: #ebfafb;"
+|1
+|'''Elven Mint'''
+|Elf (1.1)
+|<abbr title="Faction Coins">FC(chance)</abbr>
+|
+|
+| style="padding:0 8px;text-align:left;" |Multiplicatively increase Faction Coin find chance by 100%.
+Also autoclick 3 times per second.
+|- style="background-color: #ebfafb;"
+|1
+|'''Sylvan Treasure Frills'''
+|Elf (1.2)
+|Click
+|<abbr title="Production">P</abbr>(<abbr title="Buildings">B</abbr>)
+|
+| style="padding:0 8px;text-align:left;" |50% of your total building production is added to base clicking reward.
+|- style="background-color: #ebfafb;"
+|1
+|'''Ancient Clicking Arts'''
+|Elf (1.3)
+|<abbr title="Mana Regen">MR</abbr>
+|Click
+|Rein.
+| style="padding:0 8px;text-align:left;" |Increase Mana Regeneration based on the amount of clicks made in this Reincarnation.
+''Formula:'' <math>2\times\log_{10}(1+x)^{1.25}</math>
+|- style="background-color: #ebfafb;"
+|1
+|'''Holy Bells'''
+|Angel (1.1)
+|<abbr title="Mana Regen">MR</abbr>
+|<abbr title="Building">B</abbr>
+|
+| style="padding:0 8px;text-align:left;" |Increase Mana Regeneration based on buildings built.
+''Formula:'' <math>1.6 \times x^{0.4}</math>
+|- style="background-color: #ebfafb;"
+|1
+|'''Angelic Determination'''
+|Angel (1.2)
+|<abbr title="Production">P</abbr>(<abbr title="Building">B</abbr>)
+|Spell(Casts)
+|Era
+| style="padding:0 8px;text-align:left;" |Increase the production of all buildings based on spells cast in this Era.
+''Formula:'' <math>(4 \times \ln(1+x)^{2})%</math>
+|- style="background-color: #ebfafb;"
+|1
+|'''Angel Feathers'''
+|Angel (1.3)
+|<abbr title="Faction Coins">FC(chance)</abbr>
+|Spell(Active)
+|
+| style="padding:0 8px;text-align:left;" |Increase Faction Coin find chance based on the amount of active spells.
+''Formula:'' <math>+(4 \times (1 + x))%</math>
+|- style="background-color: #ebfafb;"
+|1
+|'''Dwarven Ale'''
+|Dwarf (1.1)
+|<abbr title="Faction Coins">FC(chance)</abbr>
+|<abbr title="Building">B</abbr>
+|Era
+| style="padding:0 8px;text-align:left;" |Increase Faction Coin find chance based on the amount of ''Blacksmiths'' you own.
+''Formula:'' <math>+(2 \times \sqrt{x})%</math>
+|- style="background-color: #ebfafb;"
+|1
+|'''Expert Masonry'''
+|Dwarf (1.2)
+|<abbr title="Cost Reduction">CR</abbr>(<abbr title="Building">B</abbr>)
+|
+|
+| style="padding:0 8px;text-align:left;" |Reduce all building cost multipliers by (-0.01).
+|- style="background-color: #ebfafb;"
+|1
+|'''Mining Prodigies'''
+|Dwarf (1.3)
+|<abbr title="Production">P</abbr>(<abbr title="Building">B</abbr>)
+|<abbr title="Excavations">Ex</abbr>
+|Rein
+| style="padding:0 8px;text-align:left;" |Increase the production of all buildings based on the total amount of Excavations you made this Reincarnation including reset.
+''Formula:'' <math>(40 \times (x \times  (1 + 2 \times y))^{0.4})%</math>
+|- style="background-color: #fdeef0;"
+|1
+|'''Strong Currency'''
+|Goblin (1.1)
+|<abbr title="Assistants">A</abbr>
+|<abbr title="Faction Coins">FC</abbr>
+|Era
+| style="padding:0 8px;text-align:left;" |Gain assistants based on Faction Coins found in this Era.
+''Formula:'' <math>0.5\times \ln(1+x)^{2}</math>
+|- style="background-color: #fdeef0;"
+|1
+|'''Slave Trading'''
+|Goblin (1.2)
+|<abbr title="Production">P</abbr>(<abbr title="Building">B</abbr>)
+|<abbr title="Building">B</abbr>
+|
+| style="padding:0 8px;text-align:left;" |Increase the production of all buildings based on Evil buildings built.
+''Formula:'' <math>(2\times x^{0.7})%</math>
+|- style="background-color: #fdeef0;"
+|1
+|'''Cheap Materials'''
+|Goblin (1.3)
+|Spell(Tax)
+|<abbr title="Building">B</abbr>
+|
+| style="padding:0 8px;text-align:left;" |Tax collection is worth more seconds based on buildings built.
+''Formula:'' <math>x^{0.542}</math>
+|- style="background-color: #fdeef0;"
+|1
+|'''The Walking Dead'''
+|Undead (1.1)
+|<abbr title="Faction Coins">FC(chance)</abbr>
+|<abbr title="Assistants">A</abbr>
+|
+| style="padding:0 8px;text-align:left;" |Increase Faction Coin find chance based on assistants owned.
+''Formula:'' <math>(\ln(1+x)^{1.75})%</math>
+|- style="background-color: #fdeef0;"
+|1
+|'''Deadened Muscles'''
+|Undead (1.2)
+|<abbr title="Production">P</abbr>(<abbr title="Building">B</abbr>)
+|<abbr title="Building">B</abbr>
+|Rein.
+| style="padding:0 8px;text-align:left;" |Increase the production of all buildings based on the highest amount of ''Necropolises'' built in this Reincarnation.
+''Formula:'' <math>(4\times x^{0.8})%</math>
+|- style="background-color: #fdeef0;"
+|1
+|'''Death Temples'''
+|Undead (1.3)
+|<abbr title="Mana Regen">MR</abbr>
+|<abbr title="Building">B</abbr>
+|Rein.
+| style="padding:0 8px;text-align:left;" |Increase Mana Regeneration based on the highest amount of ''Necropolises'' build in this Reincarnation.
+''Formula:'' <math>+(x^{0.3})</math>
+|- style="background-color: #fdeef0;"
+|1
+|'''Torture Chambers'''
+|Demon (1.1)
+|<abbr title="Production">P</abbr>(<abbr title="Building">B</abbr>)
+|<abbr title="Assistants">A</abbr>
+|
+| style="padding:0 8px;text-align:left;" |Increase the production of ''Evil Fortresses'' based on assistants owned.
+''Formula:'' <math>(6 \times \ln(1+x)^{3})%</math>
+|- style="background-color: #fdeef0;"
+|1
+|'''Infernal Magic'''
+|Demon (1.2)
+|<abbr title="Mana Regen">MR</abbr>
+|<abbr title="Buildings">B</abbr>
+|
+| style="padding:0 8px;text-align:left;" |Increase Mana Regeneration based on ''Hell Portals'' owned.
+''Formula:'' <math>+(3.5 \times x^{0.35})</math>
+|- style="background-color: #fdeef0;"
+|1
+|'''Burning Legion'''
+|Demon (1.3)
+|<abbr title="Assistants">A</abbr>
+|<abbr title="Buildings">B</abbr>
+|Rein.
+| style="padding:0 8px;text-align:left;" |<span style="display:none;">20</span>Gain additional assistants based on the highest amount of ''Hell Portals'' build in this Reincarnation.
+''Formula:'' <math>\left\lfloor\sqrt{1 + 2.5x} - 1\right\rfloor</math>
+|- style="background-color: #fdeef0;"
+|1
+|'''Underworld Tyranny'''
+|Drow (1.1)
+|<abbr title="Production">P</abbr>(<abbr title="Building">B</abbr>)
+|Time(Evil)
+|Rein.
+| style="padding:0 8px;text-align:left;" |Increase the production of all buildings based on time spent as Evil in this Reincarnation.
+''Formula:'' <math>(0.7x)^{0.7}%</math>
+|- style="background-color: #fdeef0;"
+|1
+|'''Honor Among Killers'''
+|Drow (1.2)
+|<abbr title="Faction Coins">FC(chance)</abbr>
+|<abbr title="Assistants">A</abbr>
+|
+| style="padding:0 8px;text-align:left;" |Increase Faction Coin find chance based on assistants owned.
+''Formula:'' <math>+(100  + 0.5 \times \sqrt{x})%</math>
+|- style="background-color: #fdeef0;"
+|1
+|'''Shadow Advance'''
+|Drow (1.3)
+|<abbr title="Production">P</abbr>(<abbr title="Building">B</abbr>)
+|<abbr title="Max Mana">MM</abbr>
+|
+| style="padding:0 8px;text-align:left;" |Increase the production of all buildings based on Maximum Mana.
+''Formula:'' <math>(2 \times \log_{10}(1+x)^{2})%</math>
+|-
+|1
+|'''Colossal Forge'''
+|Titan (1.1)
+|<abbr title="Production">P</abbr>(<abbr title="Building">B</abbr>)
+|<abbr title="Building">B</abbr>
+|
+| style="padding:0 8px;text-align:left;" |Increase the production of all buildings based on buildings built.
+''Formula:'' <math>(6 \times x^{0.6})%</math>
+|-
+|1
+|'''Charged Clicks'''
+|Titan (1.2)
+|<abbr title="Mana Regen">MR</abbr>
+|Click
+|Era
+| style="padding:0 8px;text-align:left;" |Increase Mana Regeneration additively and multiplicatively based on clicks made in this Era.
+|-
+|1
+|'''Titan Obelisk'''
+|Titan (1.3)
+|<abbr title="Faction Coins">FC(chance)</abbr>
+|Time
+|Rein.
+| style="padding:0 8px;text-align:left;" |Increase Faction coin find chance additively based on time spent as Neutral in this Reincarnation.
+''Formula:'' <math>+(3 \times x^{0.7})%</math>
+|-
+|1
+|'''Druidic Vocabulary'''
+|Druid (1.1)
+|<abbr title="Production">P</abbr>(<abbr title="Building">B</abbr>)
+|<abbr title="Building">B</abbr>
+|
+| style="padding:0 8px;text-align:left;" |<span style="display:none;">28</span>Increase the production of all buildings based on their tier, giving the best bonus to the lowest.
+''Formula:'' <math>(4000 \times x)%</math> ''starting at 1 for Halls of Legends and increasing to 11 for Farms''
+|-
+|1
+|'''Animal Companions'''
+|Druid (1.2)
+|<abbr title="Assistants">A</abbr>
+|Time(This game)
+|Era
+| style="padding:0 8px;text-align:left;" |<span style="display:none;">29</span>You instantly attract 3 [[assistants]] and more will come based on the time spent in this Era.
+''Formula:'' <math>\left\lfloor\frac{\sqrt{1 + 12 * x} - 1} {2}\right\rfloor</math>
+|-
+|1
+|'''Natural Recycling'''
+|Druid (1.3)
+|<abbr title="Faction Coins">FC(chance)</abbr>
+|<abbr title="Production">P</abbr>(<abbr title="Building">B</abbr>)
+|Era
+| style="padding:0 8px;text-align:left;" |<span style="display:none;">30</span>Increase Faction Coin find chance additively and multiplicatively based on buildings built.
+''Formula: TBD''
+|-
+|1
+|'''Territorial Expanse'''
+|Faceless (1.1)
+|<abbr title="Building">B</abbr>
+|Click
+|Era
+| style="padding:0 8px;text-align:left;" |<span style="display:none;">31</span>Increase the production of Labyrinths based on assistants owned.
+''Formula: TBD''
+|-
+|1
+|'''Evolutive Mutation'''
+|Faceless (1.2)
+|<abbr title="Faction Coins">FC(chance)</abbr>
+|<abbr title="Building">B</abbr>
+|Rein.
+| style="padding:0 8px;text-align:left;" |<span style="display:none;">32</span>Increase Faction Coin find chance based on the highest amount of Labyrinths built in this Reincarnation.<br />''Formula: TBD''
+|-
+|1
+|'''Deep Memory'''
+|Faceless (1.3)
+|<abbr title="Assistants"><u>A</u></abbr>
+|Time(longest)
+|Rein.
+| style="padding:0 8px;text-align:left;" |<span style="display:none;">33</span>Mulitplicatively increase assistants based on the time spent on your [[Stats|longest game session]] in this reincarnation. 
+|-
+|1
+|'''Dragonscales'''
+|Dragon (1.1)
+|<abbr title="Production">P</abbr>(<abbr title="Building">B</abbr>)
+|Time (Neutral)
+|All Time
+| style="padding:0 8px;text-align:left;" |<span style="display:none;">34</span>Increase the production of Stone Pillars, Labyrinths, and Halls of Legends based on the total amount of time spent as Neutral.<br />''Formula:'' <math>({1.25x \over 60})^{0.55})%</math>
+|-
+|1
+|'''Iron Flight'''
+|Dragon (1.2)
+|<abbr title="Production">P</abbr>(<abbr title="Building">B</abbr>)
+|Spell
+|Era
+| style="padding:0 8px;text-align:left;" |<span style="display:none;">35</span>Increase the production of Iron Strongholds by 2000% when affected by any spell.
+|-
+|1
+|'''Eternal Wisdom'''
+|Dragon (1.3)
+|<abbr title="Production">P</abbr>(<abbr title="Building">B</abbr>)
+|<abbr title="Royal Exchanges">RE</abbr>
+|Era
+| style="padding:0 8px;text-align:left;" |<span style="display:none;">36</span>Increase the production of all buildings based on Royal Exchange bonus.<br />''Formula:'' <math>{2 \times x^{1.15}}%</math>
+|- style="background-color: #ebfafb;"
+|2
+|'''Starmetal Alloys'''
+|Fairy (2.1)
+|Click
+|Spell(Active)
+|
+| style="padding:0 8px;text-align:left;" |Autoclick based on active spells.
+''Formula:'' <math>+(x)</math>
+|- style="background-color: #ebfafb;"
+|2
+|'''Golden Pots'''
+|Fairy (2.2)
+|Click + <abbr title="Faction Coins">FC(chance)</abbr>
+|<abbr title="Production">P</abbr>(<abbr title="Building">B</abbr>)
+|
+| style="padding:0 8px;text-align:left;" |100% of the production of Farms, Inns and Blacksmiths is added to base clicking reward.
+Also increase Faction Coin find chance by +20%.
+|- style="background-color: #ebfafb;"
+|2
+|'''Swarm of Fairies'''
+|Fairy (2.3)
+|<abbr title="Assistants"><u>A</u></abbr>
+|<abbr title="Building">B</abbr>
+|
+| style="padding:0 8px;text-align:left;" |Gain [[assistants]] based on ''Farms'', ''Inns'' and ''Blacksmiths'' owned.
+''Formula:'' <math>+(0.3\times x^ {0.7})</math>
+|- style="background-color: #ebfafb;"
+|2
+|'''Elven Emissary'''
+|Elf (2.1)
+|Click + <abbr title="Faction Coins">FC(Offline)</abbr>
+|<abbr title="Building">B</abbr>
+|
+| style="padding:0 8px;text-align:left;" |Increase clicking reward based on Good buildings built, and increase offline gains of Faction Coins by 200%.
+''Formula:'' <math>x^{0.6}%</math>
+|- style="background-color: #ebfafb;"
+|2
+|'''Elven Efficiency'''
+|Elf (2.2)
+|<abbr title="Royal Exchange">RE</abbr>
+|<abbr title="Faction Coins">FC</abbr>
+|Era
+| style="padding:0 8px;text-align:left;" |Increase Royal Exchange bonus based on Faction coins found in this Era.
+''Formula:'' <math>(2\times \ln(1+x)^{2})%</math>
+|- style="background-color: #ebfafb;"
+|2
+|'''Secret Clicking Techniques'''
+|Elf (2.3)
+|<abbr title="Production">P</abbr>(<abbr title="Building">B</abbr>)
+|Click
+|Rein.
+| style="padding:0 8px;text-align:left;" |Increases the production of all buildings based on clicks made in this Reincarnation.
+''Formula:'' <math>(2 \times x^{0.4})%</math>
+|- style="background-color: #ebfafb;"
+|2
+|'''Guardian Angels'''
+|Angel (2.1)
+|<abbr title="Production">P</abbr>(<abbr title="Building">B</abbr>)
+|<abbr title="Building">B</abbr>
+|
+| style="padding:0 8px;text-align:left;" |<span style="display:none;">7</span>Increase the base production of Cathedrals by +98,000 and increase their production based on their quantity.<br />''Formula:'' <math>0.394+0.401x^{0.4}</math>
+|- style="background-color: #ebfafb;"
+|2
+|'''Angelic Wisdom'''
+|Angel (2.2)
+|<abbr title="Mana Regen">MR</abbr> + Spell(Offline)
+|<abbr title="Mana Regen">MR</abbr>
+|
+| style="text-align:left;" |<span style="display:none;">8</span>Increase spell durations and multiplicatively increase Mana Regeneration by 50%<br />Also increases offline spell cast amount by multiplicatively based on your offline mana regeneration.
+''Formula:'' <math>(11.5 \cdot \log_{10}(1 + x))</math>
+|- style="background-color: #ebfafb;"
+|2
+|'''Archangel Feathers'''
+|Angel (2.3)
+|<abbr title="Production">P</abbr>(<abbr title="Building">B</abbr>)
+|<abbr title="Mana Regen">MR</abbr>
+|
+| style="padding:0 8px;text-align:left;" |<span style="display:none;">9</span>Increase the production of all buildings based on Mana Regeneration.
+''Formula:'' <math>TBD</math>
+|- style="background-color: #ebfafb;"
+|2
+|'''Underground Citadels'''
+|Dwarf (2.1)
+|<abbr title="Mana Regen">MR</abbr>
+|Gem
+|
+| style="padding:0 8px;text-align:left;" |Multiplicatively increase Mana Regeneration based on Gems owned.
+''Formula:'' <math>(1.5 \times \log_{10}(1+x)^{1.5})%</math>
+|- style="background-color: #ebfafb;"
+|2
+|'''Indestructible Treasure'''
+|Dwarf (2.2)
+|Click
+|<abbr title="Building">B</abbr>
+|
+| style="padding:0 8px;text-align:left;" |Increase clicking reward based on buildings built.
+''Formula:'' <math>(0.5 \times x^{0.65})%</math>
+|- style="background-color: #ebfafb;"
+|2
+|'''[[Bearded Assistants]]'''
+|Dwarf (2.3)
+|<abbr title="Production">P</abbr>(<abbr title="Assistants">A</abbr>)
+|Time
+|Era
+| style="padding:0 8px;text-align:left;" |Increase the production of [[assistants]] based on how long their beard is (it grows over time!).
+''Formula:'' <math>(x^{0.7})%</math>
+|- style="background-color: #ebfafb"
+|2
+|'''Holy Crusaders'''
+|Mercenary<br />(2.Good)
+|<abbr title="Assistants">A</abbr>
+|Spell Casts
+|Era
+| style="padding:0 8px;text-align:left;" |Increase [[Assistants]] additively and multiplicatively based on [[spells]] cast in this Era.<br />''Formula:'' ''TBD''
+|- style="background-color: #fdeef0;"
+|2
+|'''Fool's Gold'''
+|Goblin (2.1)
+|<abbr title="Faction Coins">FC(chance)</abbr>
+|<abbr title="Building">B</abbr>
+|Rein.
+| style="padding:0 8px;text-align:left;" |Increase Faction Coin find chance based on the highest amount of ''Witch Conclaves'' built this Reincarnation.
+''Formula:'' <math>\lfloor2 \times x^{0.6}\rfloor%</math>
+|- style="background-color: #fdeef0;"
+|2
+|'''Goblin Economists'''
+|Goblin (2.2)
+|<abbr title="Mana Regen">MR</abbr>
+|Gold
+|
+| style="padding:0 8px;text-align:left;" |Multiplicatively increase Mana Regeneration based on your current amount of Coins.
+''Formula:'' <math>(0.75\times \log_{10}(1+x)^{1.25})%</math>
+|- style="background-color: #fdeef0;"
+|2
+|'''Hobgoblin Gladiators'''
+|Goblin (2.3)
+|<abbr title="Production">P</abbr>(<abbr title="Building">B</abbr>)
+|Spell(Tax)
+|
+| style="padding:0 8px;text-align:left;" |Increase the production of all building based on Tax Collection worth.
+''Formula:'' ''TBD''
+|- style="background-color: #fdeef0;"
+|2
+|'''Undead Resilience'''
+|Undead (2.1)
+|Spell(Night)
+|<abbr title="Faction Coins">FC</abbr>
+|Era
+| style="padding:0 8px;text-align:left;" |Increase ''Night Time'' duration based on Undead coins found in this Era.
+''Formula: TBD''
+|- style="background-color: #fdeef0;"
+|2
+|'''Corpse Supply'''
+|Undead (2.2)
+|<abbr title="Assistants">A</abbr>
+|Time
+|Era
+| style="padding:0 8px;text-align:left;" |Gain assistants based on time spent in this Era.
+''Formula:'' <math>+(0.4 \times x^{0.6})</math>
+|- style="background-color: #fdeef0;"
+|2
+|'''Plagued Buildings'''
+|Undead (2.3)
+|<abbr title="Production">P</abbr>(<abbr title="Building">B</abbr>) + Spell(Night)
+|Time(Spell)
+|Era
+| style="padding:0 8px;text-align:left;" |Increase the production of all buildings based on the activity time of your most used spell in this Era.
+Also adds offline time in this Era to ''Night Time'' activity time.
+
+''Formula: TBD''
+|- style="background-color: #fdeef0;"
+|2
+|'''Lava Pits'''
+|Demon (2.1)
+|<abbr title="Production">P</abbr>(<abbr title="Building">B</abbr>)
+|
+|
+| style="padding:0 8px;text-align:left;" |Increase the base production of ''Evil Fortresses''  by +900,000 and Hell Portals by +8,800,000.
+|- style="background-color: #fdeef0;"
+|2
+|'''Demon Overseers'''
+|Demon (2.2)
+|<abbr title="Production">P</abbr>(<abbr title="Building">B</abbr>)
+|Trophy
+|All Time
+| style="padding:0 8px;text-align:left;" |Increase the production of the three highest building tiers based on Trophies unlocked.
+''Formula:'' <math>(2 \times x^{0.8})%</math>
+|- style="background-color: #fdeef0;"
+|2
+|'''Demonic Presence'''
+|Demon (2.3)
+|<abbr title="Max Mana">MM</abbr>
+|Spell(Evil)
+|Rein.
+| style="padding:0 8px;text-align:left;" |Increase Max Mana additively based on Evil spells cast in this Reincarnation.
+''Formula:'' <math>+(6 \times x^{0.4})</math>
+|- style="background-color: #fdeef0;"
+|2
+|'''Mana Addicts'''
+|Drow (2.1)
+|<abbr title="Mana Regen">MR</abbr>
+|Time
+|Era
+| style="padding:0 8px;text-align:left;" |Increase Mana Regeneration based on time spent in this Era.
+''Formula:'' <math>+(2.5 + 0.25 \times x ^{0.5})</math>
+|- style="background-color: #fdeef0;"
+|2
+|'''Blood Sacrifices'''
+|Drow (2.2)
+|<abbr title="Production">P</abbr>(<abbr title="Building">B</abbr>)
+|<abbr title="Building">B</abbr>
+|Rein.
+| style="padding:0 8px;text-align:left;" |Increase the production of all buildings based on the highest amount of ''Dark Temples'' you built in this Reincarnation.
+''Formula:'' <math>(3 \times x)%</math>
+|- style="background-color: #fdeef0;"
+|2
+|'''Blackmail'''
+|Drow (2.3)
+|<abbr title="Cost Reduction">CR</abbr>(<abbr title="Royal Exchanges">RE</abbr>)
+|
+|Era
+| style="padding:0 8px;text-align:left;" |Reduce the cost multiplier for Royal Exchanges by (-0.02).
+|- style="background-color: #fdeef0"
+|2
+|'''Heresiarchs'''
+|Mercenary<br />(2.Evil)
+|<abbr title="Mana Regen">MR</abbr>
+|Spell(Evil)
+|Rein.
+| style="padding:0 8px;text-align:left;" |Multiplicatively increase Mana Regeneration based on the combined activity time of your Evil spells in this Reincarnation.
+''Formula: TBD''
+|-
+|2
+|'''Titan Drill'''
+|Titan (2.1)
+|<abbr title="Production">P</abbr>(<abbr title="Building">B</abbr>)
+|
+|
+| style="padding:0 8px;text-align:left;" |<span style="display:none;">25</span>Increase the base production of ''Deep Mines'' by +19,635.
+Also increase base production of ''Monasteries'' by +98,000.
+
+Also increase their production by 2500%.
+|-
+|2
+|'''Charged Structures'''
+|Titan (2.2)
+|<abbr title="Production">P</abbr>(<abbr title="Building">B</abbr>)
+|Spell(Lightning)
+|Era
+| style="padding:0 8px;text-align:left;" |Increase the production of all buildings based on ''Lightning Strike'' activity time in this Era.
+''Formula: TBD''
+|-
+|2
+|'''Titan Sized Walls'''
+|Titan (2.3)
+|<abbr title="Production">P</abbr>(<abbr title="Buildings">B</abbr>)
+|<abbr title="Assistants">A</abbr>
+|
+| style="padding:0 8px;text-align:left;" |Increase Halls of Legends production based on assistants owned.
+''Formula: TBD''
+|-
+|2
+|'''Earthly Bond'''
+|Druid (2.1)
+|<abbr title="Max Mana">MM</abbr>
+|<abbr title="Building">B</abbr>
+|Rein.
+| style="padding:0 8px;text-align:left;" |Increase Maximum [[Mana]] based on the highest amount of ''Stone Pillars'' built in this Reincarnation.
+''Formula:'' <math>+(2 \times x)</math>
+|-
+|2
+|'''Bardic Knowledge'''
+|Druid (2.2)
+|<abbr title="Production">P</abbr>(<abbr title="Building">B</abbr>)
+|<abbr title="Max Mana">MM</abbr>
+|
+| style="padding:0 8px;text-align:left;" |Increase the production of all buildings based on Maximum Mana.
+''Formula:'' <math>(16 \times \ln(1+x)^{2} )%</math>
+|-
+|2
+|'''Shapeshifting'''
+|Druid (2.3)
+|<abbr title="Mana Regen">MR</abbr>
+|<abbr title="Assistants">A</abbr>
+|
+| style="padding:0 8px;text-align:left;" |Increase Mana Regeneration based on assistants owned.
+''Formula:'' <math>+(.3 \times x^{0.7})</math>
+|-
+|2
+|'''Gold Synthesis'''
+|Faceless (2.1)
+|<abbr title="Production">P</abbr>(<abbr title="Building">B</abbr>)
+|Coins
+|
+| style="padding:0 8px;text-align:left;" |Increases the production of Neutral buildings based on your current amount of Coins.
+''Formula:'' <math>(0.2\times\ln(1+x)^2)%</math>
+|-
+|2
+|'''Mitosis'''
+|Faceless (2.2)
+|<abbr title="Assistants">A</abbr>
+|<abbr title="Building">B</abbr>
+|
+| style="padding:0 8px;text-align:left;" |Gain [[Assistants]] based on buildings built.
+''Formula:'' <math>\left\lfloor 0.5 \times x^{0.5}\right\rfloor</math>
+|-
+|2
+|'''Overgrowth'''
+|Faceless (2.3)
+|<abbr title="Production">P</abbr>(<abbr title="Building">B</abbr>)
+|<abbr title="Building">B</abbr>
+|Rein.
+| style="padding:0 8px;text-align:left;" |<span style="display:none;">33</span>Increase the production of all buildings based on the highest amount of buildings built in this Reincarnation.<br />''Formula: TBD''
+|-
+|2
+|'''Dragonborn'''
+|Dragon (2.1)
+|<abbr title="Production">P</abbr>(<abbr title="Assistants">A</abbr>)
+|Time(Dragon)
+|All Time
+| style="padding:0 8px;text-align:left;" |<span style="display:none;">34</span>Increase assistants production based on time spent affiliated with Dragons.<br />''Formula:'' <math>({0.75 \times (x^{0.55})}%)</math>
+|-
+|2
+|'''Bountiful Hoard'''
+|Dragon (2.2)
+|<abbr title="Production">P</abbr>(<abbr title="Building">B</abbr>)
+|Artifacts
+|All Time
+| style="padding:0 8px;text-align:left;" |<span style="display:none;">35</span>Increase the production of all buildings based on the amount of Artifacts you found.
+''Formula:'' <math>({5 \times (x^{1.25})}%)</math>
+|-
+|2
+|'''Sharp Claws'''
+|Dragon (2.3)
+|<abbr title="Assistants">A</abbr>
+|Click
+|Era
+| style="padding:0 8px;text-align:left;" |<span style="display:none;">36</span>Gain additional assistants based on clicks made in this game.<br />''Formula:'' <math>\left\lfloor0.1 \times ln(1 + x)^{2.75}\right\rfloor</math>
+|-
+|2
+|'''Trade Lords'''
+|Mercenary<br />(2.Neutral)
+|<abbr title="Mana Regen">MR</abbr> + <abbr title="Faction Coins">FC(chance)</abbr> 
+|Time(Offline)
+|Rein.
+| style="padding:0 8px;text-align:left;" |Increase Mana Regeneration and Faction Coin find chance based on time spent offline in this Reincarnation.
+''Formula: TBD''
+|- style="background-color: #ebfafb;"
+|3
+|'''Fairy Cuisine'''
+|Fairy (3.1)
+|<abbr title="Production">P</abbr>(Gems)
+|Spell(Fairy)
+|
+| style="padding:0 8px;text-align:left;" |Increase production bonus from Gems based on Fairy Chanting activity time in this Era.
+''Formula:'' <math>(0.35* x ^ {0.65})%</math>
+|- style="background-color: #ebfafb;"
+|3
+|'''Rainbow Link'''
+|Fairy (3.2)
+|<abbr title="Production">P</abbr>(<abbr title="Buildings">B</abbr>)
+|<abbr title="Buildings">B</abbr>
+|
+| style="padding:0 8px;text-align:left;" |Increase the production of all buildings based on the amount of ''Farms'', ''Inns'' and ''Blacksmiths'' owned.
+''Formula:'' <math>(1.25\times x^{0.75})%</math>
+|- style="background-color: #ebfafb;"
+|3
+|'''Kind Hearts'''
+|Fairy (3.3)
+|<abbr title="Max Mana">MM</abbr>
+|<abbr title="Buildings">B</abbr>
+|
+| style="padding:0 8px;text-align:left;" |Increase Maximum Mana based on Good Buildings built.
+''Formula:'' <math>+(1.3\times x^{0.7})</math>
+|- style="background-color: #ebfafb;"
+|3
+|'''Elven Diplomacy'''
+|Elf (3.1)
+|Click
+|<abbr title="Faction Coins">FC</abbr>
+|
+| style="padding:0 8px;text-align:left;" |Clicks count more based on Faction Coins found in this Era.
+''Formula: <math>(2\times \ln(1+x)^{2})%</math>''
+
+Note: This only affects the profits from the clicks. Productive Clicks in stats will only increase by 1 per click regardless of the bonus from this upgrade. Researches needing clicks such as C135 are not easier to unlock using this upgrade.
+|- style="background-color: #ebfafb;"
+|3
+|'''Elven Luck'''
+|Elf (3.2)
+|Click + <abbr title="Faction Coins">FC</abbr>
+|<abbr title="Production">P</abbr> + Rein.
+|
+| style="padding:0 8px;text-align:left;" |Each time you click you have a 1% chance to gain coins equal to 150,000% of your production, also generating Faction Coins based on reincarnations made.
+''Formula: TBD''
+|- style="background-color: #ebfafb;"
+|3
+|'''Elven Treasure Casing'''
+|Elf (3.3)
+|<abbr title="Faction Coins">FC(chance)</abbr>
+|Trophy
+|All Time
+| style="padding:0 8px;text-align:left;" |Increase Faction Coin find chance based on Trophies unlocked.
+''Formula:'' ''TBD''
+|- style="background-color: #ebfafb;"
+|3
+|'''Magical Gates'''
+|Angel (3.1)
+|<abbr title="Max Mana">MM</abbr>
+|Time(Good)
+|Rein.
+| style="padding:0 8px;text-align:left;" |Increase Max Mana based on time spent as Good in this Reincarnation.
+''Formula:'' <math>+ \left ( 3.5 \times x^{0.7}\right )</math>
+|- style="background-color: #ebfafb;"
+|3
+|'''Angelic Dominance'''
+|Angel (3.2)
+|<abbr title="Production">P</abbr>(Gems)
+|Spell(God's Hand)
+|Era
+| style="padding:0 8px;text-align:left;" |<span style="display:none;">8</span>Increase production bonus from Gems based on God's Hand activity time in this Era.
+''Formula: TBD''
+|- style="background-color: #ebfafb;"
+|3
+|'''Wings of Liberty'''
+|Angel (3.3)
+|<abbr title="Production">P</abbr>(<abbr title="Buildings">B</abbr>)
+|Spell(Duration)
+|
+| style="padding:0 8px;text-align:left;" |<span style="display:none;">9</span>Increase the production of all buildings based on the duration of your longest spell.
+''Formula: TBD''
+|- style="background-color: #ebfafb;"
+|3
+|'''Battlehammers'''
+|Dwarf (3.1)
+|<abbr title="Production">P</abbr>(<abbr title="Buildings">B</abbr>)
+|<abbr title="Faction Coins">FC</abbr>
+|Era
+| style="padding:0 8px;text-align:left;" |<span style="display:none;">10</span>Increase the production of all buildings based on the amount of Dwarven Coins found in this Era.<br />''Formula:'' <math>(ln(x)^3 \times 1.5)%</math>
+|- style="background-color: #ebfafb;"
+|3
+|'''Magic Resistance'''
+|Dwarf (3.2)
+|<abbr title="Cost Reduction">CR</abbr>(<abbr title="Excavation">Ex</abbr>)
+|
+|
+| style="padding:0 8px;text-align:left;" |Reduce Excavation cost multiplier by (-0.02).
+|- style="background-color: #ebfafb;"
+|3
+|'''Overwatch'''
+|Dwarf (3.3)
+|<abbr title="Max Mana">MM</abbr>
+|Spell(Duration)
+|
+| style="padding:0 8px;text-align:left;" |Increase Maximum Mana additively based on the duration of your longest spell.
+''Formula:'' <math>+(50 + 35 \times x^{0.7})</math>
+|- style="background-color: #fdeef0;"
+|3
+|'''Goblin Central Bank'''
+|Goblin (3.1)
+|Spell(Tax)
+|<abbr title="Max Mana">MM</abbr>
+|
+| style="padding:0 8px;text-align:left;" |Each time you cast a spell, you also cast a free [[Tax Collection]] based on your Maximum mana.
+''Formula: TBD''
+
+''<sub>This does not work offline.</sub>''
+|- style="background-color: #fdeef0;"
+|3
+|'''Black Market'''
+|Goblin (3.2)
+|<abbr title="Production">P</abbr>(Gem) + <abbr title="Production">P</abbr>(Offline)
+|Gems + Spell(Tax)
+|Era
+| style="padding:0 8px;text-align:left;" |Multiplicatively increase production bonus from Gems based on Gems owned.
+Also increase Offline production based on Tax Collection casts in this Era.
+
+''Formula: TBD''
+|- style="background-color: #fdeef0;"
+|3
+|'''Green Fingers Discount'''
+|Goblin (3.3)
+|<abbr title="Production">P</abbr>(Random)
+|<abbr title="Production">P</abbr> + Time
+|Rein.
+| style="padding:0 8px;text-align:left;" |<span style="display:none;">15</span>Gain coins randomly every 120 seconds based on your total production. Value increases over time spent in this Reincarnation. Also works while offline.
+''Formula: TBD''
+|- style="background-color: #fdeef0;"
+|3
+|'''Dead Fields'''
+|Undead (3.1)
+|<abbr title="Production">P</abbr>(<abbr title="Buildings">B</abbr>) + Spells
+|
+|
+| style="padding:0 8px;text-align:left;" |All buildings and all spell activity times count 75% more.
+|- style="background-color: #fdeef0;"
+|3
+|'''Tireless Workers'''
+|Undead (3.2) 
+|<abbr title="Production">P</abbr>(<abbr title="Assistants">A)</abbr>
+|<abbr title="Mana Regen">MR</abbr>
+|
+| style="padding:0 8px;text-align:left;" |<span style="display:none;">17</span>Increase the production of assistants based on your Mana Regeneration.
+''Formula: TBD''
+|- style="background-color: #fdeef0;"
+|3
+|'''Unholy Rituals'''
+|Undead (3.3)
+|<abbr title="Production">P</abbr>(Offline)
+|Time(Offline)
+|Era
+| style="padding:0 8px;text-align:left;" |Increase production and offline production based on time spent as offline in this Era. 
+''Formula: TBD (Starts at 50%)'' 
+|- style="background-color: #fdeef0;"
+|3
+|'''Devil Tyrant'''
+|Demon (3.1)
+|<abbr title="Production">P</abbr>(<abbr title="Building">B</abbr>)
+|Time(Evil)
+|Rein.
+| style="padding:0 8px;text-align:left;" |Increase the production of the three highest building tiers based on time spent as Evil in this Reincarnation.
+Also makes the three highest building tiers count more by 100%.
+
+''Formula:'' <math>(1.2 \times x^{0.4})%</math>
+|- style="background-color: #fdeef0;"
+|3
+|'''Evil Conquerors'''
+|Demon (3.2)
+|<abbr title="Production">P</abbr>(<abbr title="Building">B</abbr>)
+|<abbr title="Building">B</abbr>
+|Rein.
+| style="padding:0 8px;text-align:left;" |Increase the production of all buildings based on the highest amount of ''Hell Portals'' built in this Reincarnation.
+''Formula:'' <math>(4 \times x^{0.8})%</math>
+|- style="background-color: #fdeef0;"
+|3
+|'''Very Bad Guys'''
+|Demon (3.3)
+|<abbr title="Buildings">B</abbr>
+|Spell(Hellfire)
+|Rein.
+| style="padding:0 8px;text-align:left;" |<span style="display:none;">21</span>Increase the production of ''Hell Portals'' based on ''Hellfire Blast'' activity time in this Reincarnation.
+''Formula: TBD''
+|- style="background-color: #fdeef0;"
+|3
+|'''Spider Gods'''
+|Drow (3.1)
+|<abbr title="Assistants">A</abbr>
+|<abbr title="Buildings">B</abbr>
+|
+| style="padding:0 8px;text-align:left;" |<span style="display:none;">22</span>Multiplicatively increase assistants based on buildings built.
+''Formula: TBD''
+|- style="background-color: #fdeef0;"
+|3
+|'''Professional Assassins'''
+|Drow (3.2)
+|<abbr title="Production">P</abbr>(Gems)
+|<abbr title="Royal Exchanges">RE</abbr>
+|
+| style="padding:0 8px;text-align:left;" |Multiplicatively increase production bonus from Gems based on Royal Exchanges purchased.
+''Formula: TBD''
+|- style="background-color: #fdeef0;"
+|3
+|'''Blade Dance'''
+|Drow (3.3)
+|<abbr title="Production">P</abbr>(<abbr title="Buildings">B</abbr>)
+|Spell(Combo)
+|Era
+| style="padding:0 8px;text-align:left;" |<span style="display:none;">24</span>Increase the production of all buildings based on ''Combo Strike'' counter.<br />''Formula: TBD''
+|-
+|3
+|'''Cyclopean Strength'''
+|Titan (3.1)
+|<abbr title="Production">P(A)</abbr>
+|Time(Titans)
+|Rein.
+| style="padding:0 8px;text-align:left;" |<span style="display:none;">27</span>Assistants count 200% more. Increase their production based on time spent as Titans in this Reincarnation.
+|-
+|3
+|'''Heavy Coins'''
+|Titan (3.2)
+|<abbr title="Production">P(RE)</abbr>+<abbr title="Cost Reduction">CR</abbr>(<abbr title="Building">RE</abbr>)
+|
+|
+| style="padding:0 8px;text-align:left;" |<span style="display:none;">26</span>Increase Royal Exchanges production bonus by 100% each and reduces their cost multiplier by (-0.01).
+|-
+|3
+|'''Oversized Legends'''
+|Titan (3.3)
+|<abbr title="Production">P(A)</abbr>+<abbr title="Cost Reduction">CR</abbr>(<abbr title="Building">B</abbr>)
+|<abbr title="Building">B</abbr>
+|
+| style="padding:0 8px;text-align:left;" |<span style="display:none;">27</span>Reduce Hall of Legends building cost multiplier by (-0.02) and increase assistants production based on Hall of Legends owned.
+''Formula: TBD''
+|-
+|3
+|'''Mabinogion'''
+|Druid (3.1)
+|<abbr title="Production">P</abbr>(<abbr title="Buildings">B</abbr>)
+|<abbr title="Buildings">B</abbr>
+|
+| style="padding:0 8px;text-align:left;" |<span style="display:none;">28</span>Increase Non-Unique buildings production based on their tier, giving best bonus to the lowest. 
+''Formula:'' <math>(12\times1.8^{12-x})%</math>
+|-
+|3
+|'''Earthly Soul'''
+|Druid (3.2)
+|<abbr title="Mana Regen">MR</abbr>
+|<abbr title="Buildings">B</abbr>
+|Rein.
+| style="padding:0 8px;text-align:left;" |Increase Mana Regeneration based on the highest amount of ''Stone Pillars'' you built in this Reincarnation.
+''Formula:'' <math>+(x^{0.25})</math>
+|-
+|3
+|'''Building Jungle'''
+|Druid (3.3)
+|<abbr title="Production">P</abbr>(<abbr title="Buildings">B</abbr>)
+|<abbr title="Buildings">B</abbr>
+|
+| style="padding:0 8px;text-align:left;" |Increase the production of each building based on the amount of buildings of the same type.
+''Formula:'' <math>(1.5 \times x^{0.9})%</math>
+|-
+|3
+|'''Magical Treasure'''
+|Faceless (3.1)
+|<abbr title="Mana Regen">MR</abbr>
+|<abbr title="Assistants">A</abbr>
+|
+| style="padding:0 8px;text-align:left;" |<span style="display:none;">31</span>Increase Mana Regeneration based on assistants owned.
+''Formula:'' <math>+(0.75 \times x^{0.75})</math>
+|-
+|3
+|'''Abominations'''
+|Faceless (3.2)
+|<abbr title="Production">P</abbr>(<abbr title="Assistants">A</abbr>)
+|Spell(Active)
+|
+| style="padding:0 8px;text-align:left;" |Increase the production of assistants based on the amount of active spells.
+''Formula:'' <math>(20\times x^{0.9})%</math> where x is the amount of active spell.
+|-
+|3
+|'''[[Hive Mind]]'''
+|Faceless (3.3)
+|<abbr title="Production">P</abbr>(<abbr title="Buildings">B</abbr>)
+|Time(Faceless)
+|All Time
+| style="padding:0 8px;text-align:left;" |Increase the production of all buildings based on the amount of time spent affiliated with the Faceless. Persists through Reincarnations.
+''Formula:'' <math>(\sqrt{x})%</math> where x is the time spent as Facelless in second.
+|-
+|3
+|'''Ancient Hunger'''
+|Dragon (3.1)
+|<abbr title="Max Mana">MM</abbr>
+|<abbr title="Faction Coins">FC</abbr>
+|
+| style="padding:0 8px;text-align:left;" |<span style="display:none;">34</span>Increase maximum mana based on the amount of Faction Coins found in this game.
+''Formula:'' <math>\left\lfloor45 \times ln(1 + (x^{6.5}))\right\rfloor</math>
+|-
+|3
+|'''Imposing Presence'''
+|Dragon (3.2)
+|MR
+|<abbr title="Buildings">B</abbr>
+|
+| style="padding:0 8px;text-align:left;" |<span style="display:none;">35</span>Increase mana regeneration based on the amount of neutral buildings you own.
+''Formula:'' <math>\left\lfloor\frac{(x^{0.55})}{10}\right\rfloor</math>
+|-
+|3
+|'''Chromatic Scales'''
+|Dragon (3.3)
+|<abbr title="Production">P</abbr>(<abbr title="Buildings">B</abbr>)
+|Spell
+|
+| style="padding:0 8px;text-align:left;" |<span style="display:none;">36</span>Increase the production of all buildings based on the amount of active Dragon's Breath effects.
+''Formula:'' <math>({100 \times (x^2)}%)</math>
+|}
+
+== Abbreviations ==
+{| class="wikitable"
+| '''P'''
+| Production
+|-
+| '''B'''
+| [[Buildings|Building]]
+|-
+| '''A'''
+| [[Assistant]]
+|-
+| '''Ex'''
+| [[Excavation]]
+|-
+| '''MM'''
+| Max [[Mana]]
+|-
+| '''MR'''
+| Mana Regen
+|-
+| '''FC'''
+| [[Faction Coins]]
+|-
+| '''RE'''
+| [[Royal Exchange]]
+|-
+| '''CR'''
+| Cost Multiplier Reduction
+Base Multiplier Rates: Buildings= 1.15, Excavations= 1.2, Royal Exchange= 1.1 
+|}
+
+== See Also ==
+
+* [[Faction Upgrades by Effect]]
+
+== Notes ==
+
+* Upgrade data is copied from the individual Faction pages.
+* Building names are alignment dependent on Tiers 4-11, except for Reincarnation based upgrades. (ex: highest amount of ''Hell Portals'' this Reincarnation is '''NOT''' ''Heaven's Gates or Ancient Pyramids'')
+* NB@editors: All characters, including spaces, count towards the sorting order of the tables.
+* '''Formulas are currently not consistent''', refer to in game live numbers to confirm calculations.
+
+{{Sitenav}}
+[[Category:Factions|*]]
+[[Category:Upgrades]]
+[[Category:Reference]]

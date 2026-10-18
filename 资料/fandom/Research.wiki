@@ -1,0 +1,2378 @@
+[[File:Gametab-research.png|centre|thumb]][[File:Research-panel.png|right|237x237px]]
+{{description|Enter the Research Facilities to improve your grinding potential. There you will be able to advance your research progress, unlock and buy special upgrades which will boost all your abilities hugely. Your research points in each branch are limited by the amount of Reincarnations you have.<ref>''RG v1 in the game description seems to have disappeared in v2.''</ref>}}
+
+The '''Research''' progress system was implemented in the Secrets [[Updates#1.6 Secrets Of the Underworld|expansion]] series<ref>''Secret expansion series: [[Updates#1.4 Secrets Of The Realm|Secrets of the Realm]], [[Updates#1.5 Secrets Of The Ancients|Secrets of the Ancients]], [[Updates#1.6 Secrets Of the Underworld|Secrets of the Underworld]].''</ref> bringing "secret" powers to enhance each mythical faction. it is accessible from [[Reincarnation|R16]] for <abbr title="The Original Good & Evil Factions: Fairy, Elven, Angel, Goblin, Undead and Demon">Vanilla</abbr>, R23 for <abbr title="The Ancient Factions: Titan, Druid and Faceless">Neutral</abbr>, R29 for <abbr title="The Underworld: Dwarven and Drow">Prestige</abbr> Factions, R46 for the Dragons, and R75 for [[Mercenaries]].
+
+== The Facilities & Related Factions ==
+Research consists of several specialized facilities, each containing upgrades which, once unlocked, will require strategic selecting. Each Facility is related to several Factions: Vanilla factions are related to one facility, Neutral to two, and Prestige to three. Each is unlocked by its related Vanilla Faction (see [[Research#Research Unlock Requirements|unlock requirements]]).
+
+{| class="wikitable" style="width:100%;"
+! colspan="4" |The Research Facilities
+|-
+!Icon
+!Name
+!<abbr title="Related Factions">Factions</abbr>
+!In-game Description
+|-
+|
+[[File:Spellcraft_Facility_icon.png]]
+!Spellcraft
+|[[Fairy]]<br />[[Faceless]]<br />[[Drow]]
+|Delve into the arcane mysteries of Spellcraft, discovering new ways to produce and use your mana.
+|-
+|[[File:Craftsmanship_Facility_icon.png]]
+!Craftsmanship
+|[[Elven]]<br />[[Titan]]<br />[[Dwarven]]
+|Learn how to use tools and experience to improve your production by mastering Craftsmanship.
+|-
+|[[File:Divine_Facility_icon.png]]
+!Divine
+|[[Angel]]<br />[[Faceless]]<br />[[Dwarven]]
+|Harness the power of the eternals, increasing your spell affinity and bestowing Divine power on all your productivity.
+|-
+|[[File:Economics_Facility_icon.png]]
+!Economics
+|[[Goblin]]<br />[[Druid]]<br />[[Dwarven]]
+|Exploit your resources with Economics knowledge, taking maximum advantage of your properties and turning time into money.
+|-
+|[[File:Alchemy_Facility_icon.png]]
+!Alchemy
+|[[Undead]]<br />[[Druid]]<br />[[Drow]]
+|Tap the near-unlimited sources of Alchemy to improve your production and benefit from all your assets.
+|-
+|[[File:Warfare_Facility_icon.png]]
+!Warfare
+|[[Demon]]<br />[[Titan]]<br />[[Drow]]
+|Use strategical prowess and manpower to manipulate the production system in your favor.
+|}
+
+== Research Points & Slots ==
+<u>Research Points</u> ('''RPs'''): Facilities are leveled-up with <abbr title="Research Points">RPs</abbr>, which in turn increase the production of the related faction. Each [[reincarnation]], you will receive a defined, and increasing, amount of RPs to meet the increasing costs of the facilities.
+
+<u>Research Slots</u> ('''RSs'''): At specific RPs, the facilities will gain new upgrades. The amount of upgrades you can use is defined by the amount of RSs you have. At certain reincarnation levels, additional RS upgrades can be unlocked. See following table for details.
+
+{| class=article-table
+!Formulas
+|-
+| style="padding-left:2em;" |Facility RP Production:
+<math>350x350x^{0.75}%</math> or 0% if x is 0, where x is the number of corresponding Research Points}}<br />
+Facility cost: {{Number|10 Notg}} coins, {{Number|1M}} related Faction(s) coins, {{Number|1 Dvg}} gems
+ Facility RP Cost:
+
+<math>1e126 * 1.5^x</math> Coins and
+<math>(x + 1)^3</math> Faction Coins<br />{{PA}} Facility RP Cost<ref>{{PA}} ''RP cost formula from game source code - source [[User:Pseudobyte|Pseudobyte]] - see [[Research#comm-9588|comment]].''</ref>:
+<math>1e42 * 1.147 ^{(x-780)}</math> and
+<math>(x + 1)^3</math> Faction Coins<br /> RPs available per R
+{{Formula|(x + 1) * x / 2|Reincarnation}}
+
+
+
+
+
+As of 3.0, Research Points are capped at 5000 for each facility.
+|}
+
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%;text-align:center;"
+! colspan="5" |Research Points & Slots per R#
+|-
+!<abbr title="Reincarnation Level">R#</abbr>
+!<abbr title="Research Points">RP</abbr>
+!<abbr title="Research Slots (Total)">RS</abbr>
+!<abbr title="Research Pints">RP</abbr> Upgrades
+!<abbr title="Research Slots">RS</abbr> Upgrades
+|-
+!16
+|136 || 24
+| style="white-space: nowrap;" |1; 10; 25; 30; 50; 55; 80; 105; 120; 135
+| style="text-align:left;padding-left:10px" |4x6 Default Slots for each Facility
+|-
+!17
+|153 || 25 || 145; 150
+| style="text-align:left;padding-left:10px" | +1 slot for Alchemy, from the ''Apothecary'' [[secret trophy]] upgrade
+|-
+!18
+|171 || 25 || - || -
+|-
+!19
+|190
+|26
+| 175; 180
+| style="text-align:left;padding-left:10px" | +1 Craftsmanship slot from the ''Artisan'' secret trophy upgrade
+|-
+!20
+|210 || 30 || 200; 205
+| style="text-align:left;padding-left:10px" | +1 Spellcraft slot from the ''Magician'' secret trophy upgrade.<br />+1 Divine slot from the ''Demigod'' secret trophy upgrade.<br />+1 Economics slot from the ''Businessman'' secret trophy upgrade.<br />+1 Warfare slot from the ''Warlord'' secret trophy upgrade.
+|-
+!21
+|231 || 30 || 215; 225; 230 || -
+|-
+!22
+|253 || 30 || 245; 250; 251 || -
+|-
+!23
+|276 || 30/32 ||  260; 270; 275
+| style="text-align:left;padding-left:10px" |The ''Key to the Lost City'' [[Excavations#Artifacts|artifact]] unlocks Neutral Research:<br />+2 Neutral slots obtainable starting from R23 from the ''Ancient Device'' upgrade.
+|-
+!24
+|300 || 30/32 || 290; 300 || -
+|-
+!25
+|325 || 30/32 || 305; 320 || -
+|-
+!26
+|351 || 30/32 || 330; 350 || -
+|-
+!27
+|378 || 30/32 || 375 || -
+|-
+!28
+|406 || 30/32 || 400; 405 || -
+|-
+!29
+|435 || 30/32/33 || 410; 435
+| style="text-align:left;padding-left:10px" |[[Dwarf#Dwarven Research|Secrets of the Underworld]] unlocks Vanilla Prestige Research:
++3 Vanilla Prestige slots obtainable starting from R29:
+* For Dwarf: +2 Craftsman slots, +1 slot to the facility related to the faction you are playing, obtained from the ''Legacy of The Dwarven Kings'' archeology upgrade.
+* For Drow: +2 Warfare slots, +1 slot to the facility related to the faction you are playing, obtained from ''Dark Light of Bondelnar'' archaeology upgrade.
+|-
+!30
+|465 || 30/32/33 || 460 || -
+|-
+!31
+|496 || 30/32/33 || 480; 495 || -
+|-
+!32
+|528 || 30/32/33
+| style="white-space: nowrap;" |500; 520; 525
+| -
+|-
+!33
+|561 || 30/32/33 || 545; 560 || -
+|-
+!34
+|595 || 30/32/33 || 590 || -
+|-
+!35
+|630
+|30/32/33
+| -
+| -
+|-
+!36
+|666
+|30/32/33
+| -
+| -
+|-
+!37
+|703
+|30/32/33
+| -
+| -
+|-
+!38
+|741
+|30/32/33
+| -
+| -
+|-
+!39
+|780
+|30/32/33
+| -
+| -
+|-
+!40
+|820
+|30/32/33
+| -
+| -
+|-
+!41
+|861
+|30/32/33
+| -
+| -
+|-
+!42
+|903
+|30/32/33
+| -
+| -
+|-
+!43
+|946
+|30/32/33
+| -
+| -
+|-
+!44
+|990
+|30/32/33
+| -
+| -
+|-
+!45
+| 1035||  30/32/33||  -||-
+|-
+!46
+|1081 || 30/32/33 || -
+| style="text-align:left;padding-left:10px" |''Spiky Rough Egg'' [[Excavations#Artifacts|artifact]] leads to unlocking [[Dragon|Neutral Prestige]] Research.
+|-
+!47
+|1128 || 30/32/33 || 1125 || -
+|-
+!48
+|1176 || 30/32/33 || - || -
+|-
+!49
+|1225 || 30/32/33 || 1200; 1225 || -
+|-
+!50
+|1275 || 30/32/33 || 1275 || -
+|-
+!51
+|1326 || 30/32/33 || 1300; 1325 || -
+|-
+!52
+|1378 || 30/32/33 || 1375 || -
+|-
+!53
+|1431 || 30/32/33 || 1400; 1425 || -
+|-
+!54
+|1485 || 30/32/33 || 1450 || -
+|-
+!55
+|1540 || 30/32/33 || 1500 || -
+|-
+! !! !! !! !!
+|-
+!70
+|2485 || <s>36/38/39</s> || - || <s>+1 Slot for each facility</s> Changed to R90 [http://musicfamily.org/realm/4.0Patch/]
+|-
+! !! !! !! !!
+|-
+!75
+|2850 || 36/38/39 || 2775
+| style="text-align:left;padding-left:10px" |''Obsidian Shard'' [[Excavations#Artifacts|artifact]] leads to unlocking [[Mercenary]] Research.
+|-
+!76
+|2926 || 30/32/33 || 2875 || -
+|-
+!77
+|3003 || 30/32/33 || 2950; 3000 || -
+|-
+!78
+|3081 || 30/32/33 || 3050 || -
+|-
+!79
+|3160 || 30/32/33 || 3100; 3150 || -
+|-
+!80
+|3240 || 30/32/33 || 3200 || -
+|-
+!81
+|3321 || 30/32/33 || 3250; 3300 || -
+|-
+!82
+|3403 || 30/32/33 || 3350; 3400 || -
+|-
+! !! !! !! !!
+|-
+!90
+||| 36/38/39 || - || +1 Slot for each facility
+|}
+
+{| class="mw-collapsible mw-collapsed sortable wikitable" style="width:100%;"
+! colspan="6" |Additional RS Requirements
+|-
+! class="unsortable" |Icon
+! data-sort-type="text" |Name
+! style="white-space: nowrap;" |R#
+! class="unsortable" |Unlock Requirements
+! class="unsortable" |Cost
+! class="unsortable" |Effect
+|-
+![[File:Magician.png]]
+!Magician
+|R20
+|Discover at least 10 Spellcraft Researches
+|{{Number|2.5e152|table}}
+|Increase Spellcraft upgrade slot by 1
+|-
+![[File:Artisan.png]]
+!Artisan
+|R19
+|Discover at least 10 Craftsmanship Researches
+|{{Number|2.5e152|table}}
+|Increase Craftsmanship upgrade slot by 1
+|-
+![[File:Demigod.png]]
+!Demigod
+|R20
+|Discover at least 10 Divine Researches
+|{{Number|2.5e152|table}}
+|Increase Divine upgrade slot by 1
+|-
+![[File:Businessman.png]]
+!Businessman
+|R20
+|Discover at least 10 Economics Researches
+|{{Number|2.5e152|table}}
+|Increase Economics upgrade slot by 1
+|-
+![[File:Apothecary.png]]
+!Apothecary
+|R17
+|Discover at least 10 Alchemy Researches
+|{{Number|2.5e152|table}}
+|Increase Alchemy upgrade slot by 1
+|-
+![[File:Warlord.png]]
+!Warlord
+|R20
+|Discover at least 10 Warfare Researches
+|{{Number|2.5e152|table}}
+|Increase Warfare upgrade slot by 1
+|-
+![[File:Artifact-ancientdevice.png]]
+!Ancient Device
+|R23
+|Find the Ancient Device [[artifact]]
+''(Play a Neutral Faction, 2000+ Excavations)''
+|{{Number|100 QiSxg|table}}
+|Provides 2 additional slots for Neutral researches:
+1 for each related Neutral Faction Facility you are playing.
+|-
+![[File:Artifact-hornofkings.PNG]]
+!Legacy of the Dwarven Kings
+|R29
+|Find the ''Horn of the Kings'' [[artifact]]
+''(Have Dwarven Forges, 3250+ Excavations)''
+|{{Number|10 SxSpg}},
+{{Number|100m}} Dwarven Coins
+|Provides 3 additional slots for Dwarven research:
++2 Craftsman slots, +1 to the Good faction's facility you are playing.
+|-
+![[File:FlameOfBondelnarUPgrade.PNG]]
+!Dark Light of Bondelnar
+|R29
+|Find the ''Flame of Bondelnar'' [[artifact]]
+''(Have Spider Sanctuaries, 3250+ Excavations)''
+|{{Number|10 SxSpg}},
+{{Number|100m}} Drow Coins
+|Provides 3 additional slots for Drow research:
++2 Warfare slots, +1 to the Evil faction's facility you are playing.
+|-
+| colspan="6" |''Note: The Vanilla RS upgrades only need to be purchased once, Neutral and Prestige upgrades purchased each run.''
+|}
+Upon [[Abdications|abdication]], your gained <abbr title="Research Points">RPs</abbr> will persist, and your <abbr title="Research Slot">RSs</abbr> will get reset, enabling the player to make different [[Research Builds|research builds]] each run.
+
+== Research Unlock Requirements ==
+All the [[upgrades]] below, except the [[Buildings#Unique Buildings|Unique building]] upgrades, only need to be bought once and do not count the bought-upgrade [[stats]].
+
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%;"
+! colspan="6" |Quests & Requirements
+|-
+!Faction!!Icon!!Name!!In-game Description!!Requirements!!Cost
+|-
+! rowspan="3" |[[Fairy]]
+|
+[[File:Fairy-research-quest.png]]
+|'''Enchanted Field Quest'''
+|''Hey! Listen! A True Fairy has never enough Farms! We will offer you the chance to improve them!''
+|R16 + 2250 Farms
+|{{Number|10 Dtg}}
+|-
+|
+[[File:Enchanted_Fields_icon.png]]
+|'''Enchanted Field'''
+|Upgrade ''Farms'' to ''Enchanted Fields'', boosting their production based on the amount of assistants you own and unlocking more unique perks for the building.
+{{Formula|stat|47 * (750 * x)^{0.7}|Assistants}}<br />+Access to the Research Facilities.
+|Buy ''Enchanted Field Quest''
+|{{Number|10 Ttg}}
+|-
+|[[File:Spellcraft Facility icon.png]]
+|'''Spellweavery'''
+|Unlocks the ''Spellcraft'' research facility and increases Fairy production by 100000%, plus an additional bonus based on ''Spellcraft'' research points.
+|All Fairy faction upgrades bought, ''Enchanted Field''
+|{{Number|1e121}} coins, {{Number|1e6}} Fairy coins
+|-
+! rowspan="3" |[[Elf]]
+|[[File:Elf-research-quest.png]]
+|'''Elven Training Grounds Quest'''
+|''Hello, mellonamin. We require a new place to train our soldiers. Build enough Warrior Barracks, and we'll make them worthy of you.''
+|R16 + 1750 Warrior Barracks
+|{{Number|10 Dtg}}
+|-
+|[[File:Elven_Training_Grounds_icon.png]]
+|'''Elven Training Grounds'''
+|Upgrade ''Warrior Barracks'' To ''Elven Training Grounds'', boosting their production based on the total amount of clicks you made and unlocking more unique perks for the building.
+{{Formula|naked|((50 * x^{0.85}) + 50 * \ln^6(1 + x))%|<br />where x is your Treasure Clicks (Total) stat.}}<br />+Access to the Research Facilities.
+|Buy ''Elven Training Grounds Quest''
+|{{Number|10 Ttg}}
+|-
+|[[File:Craftsmanship Facility icon.png]]
+|'''Carpentry'''
+|Unlocks the ''Craftsmanship'' research facility and increases Elven production by 100000%, plus an additional bonus based on ''Craftsmanship'' research points.
+|All Elven faction upgrades bought, ''Elven Training Grounds''
+|{{Number|1e121}} coins, {{Number|1e6}} Elven coins
+|-
+! rowspan="3" |[[Angel]]
+|[[File:Angel-research-quest.png]]
+|'''Heaven's Domain Quest'''
+|''Bless you, dear friend. The Lands of the sky are expanding as more good souls are joining our ranks. Would you be so kind to provide them a place to stay in the Heavens?''
+|R16 + 1500 ''Heaven's Gates''
+|{{Number|10 Dtg}}
+|-
+|[[File:Heaven's_Domain_icon.png]]
+|'''Heaven's Domain'''
+|Upgrade ''Heaven's Gate'' To ''Heaven's Domains'', boosting their production by x250 per spell affecting them and unlocking more unique perks for the building.
++Access to the Research Facilities.
+|Buy ''Heaven's Domain Quest''
+|{{Number|10 Ttg}}
+|-
+|[[File:Divine Facility icon.png]]
+|'''Pantheon'''
+|Unlocks the Divine research facility and increases Angel production by 100000%, plus an additional bonus based on Divine research points.
+|All Angel faction upgrades bought, Heaven's Domain
+|{{Number|1e121}} coins, {{Number|1e6}} Angel coins
+|-
+! rowspan="3" |[[Goblin]]
+|[[File:G-research-quest.png]]
+|'''Goblin Banks Quest'''
+|''Hey There! We need a safe place to keep our honestly earned savings. We'll turn those Witch Conclaves into something more... useful, if you build enough of them.''
+|R16 + 1750 ''Witch Conclaves''
+|{{Number|10 Dtg}}
+|-
+|[[File:Goblin_Bank_icon.png]]
+|'''Goblin Banks'''
+|Upgrade ''Witch Conclaves'' To ''Goblin Banks'', boosting their production based on the amount of gold you own and unlocking more unique perks for the building.
+{{Formula|nakedT|650+10000*(\log_{10}(1+x))^{(3.1/(1+0.1*(y+1)))}/30))|<br />where x is your current amount of Coins and y is ascension.}}<br />+Access to the Research Facilities.
+|Buy ''Goblin Banks Quest''
+|{{Number|10 Ttg}}
+|-
+|[[File:Economics Facility icon.png]]
+|'''Exchequer'''
+|Unlocks the ''Economics'' research facility and increases Goblin production by 100000%, plus an additional bonus based on ''Economics'' research points.
+|All Goblin faction upgrades bought, ''Goblin Banks''
+|{{Number|1e121}} coins, {{Number|1e6}} Goblin coins
+|-
+! rowspan="3" |[[Undead]]
+|[[File:U-research-quest.png]]
+|'''Undercities Quest'''
+|''Hello there. The dead stand ready. Give them a place to rise and live again... Build enough Necropolises, we'll take care of the rest.''
+|R16 + 1750 ''Necropolises''
+|{{Number|10 Dtg}}
+|-
+|[[File:Undercity_icon.png]]
+|'''Undercities'''
+|Upgrade ''Necropolises'' To ''Undercities'', boosting their production bases on time spent in this game and unlocking more unique perks for the building.
+{{Formula|stat|(10 * (2x)^{0.75})%|Playtime (This Game)}}<br />+Access to the Research Facilities.
+|Buy ''Undercities Quest''
+|{{Number|10 Ttg}}
+|-
+|[[File:Alchemy Facility icon.png]]
+|'''Laboratory'''
+|Unlocks the ''Alchemy'' research facility and increases Undead production by 100000%, plus an additional bonus based on ''Alchemy'' research points.
+|Undercities and all Undead faction upgrades bought
+|{{Number|1e121}} coins, {{Number|1e6}} Undead coins
+|-
+! rowspan="3" |[[Demon]]
+|[[File:D-research-quest.png]]
+|'''Infernal Realm Quest'''
+|''Useless underling, be warned! The Demons are going to invade your world with all their might. If you know which side you want to be on when that happens, build those Hell Portals!''
+|R16 + 1500 ''Hell Portals''
+|{{Number|10 Dtg}}
+|-
+|[[File:Infernal_Realm_icon.png]]
+|'''Infernal Realm'''
+|Upgrade ''Hell Portals'' To ''Infernal Realms'', boosting their production by 100% per Trophy you unlocked and unlocking more unique perks for the building.
++Access to the Research Facilities.
+|Buy ''Infernal Realm Quest''
+|{{Number|10 Ttg}}
+|-
+|[[File:Warfare Facility icon.png]]
+|'''Strategy Room'''
+|Unlocks the ''Warfare'' research facility and increases Demon production by 100000%, plus an additional bonus based on ''Warfare'' research points.
+|All Demon faction upgrades bought, Infernal Realm
+|{{Number|1e121}} coins, {{Number|1e6}} Demon coins
+|-
+!Neutral Factions
+|[[File:Secrets of the Ancients.png]]
+|'''Secrets of the Ancients'''
+|Unlocks research for Titan, Druids and Faceless and increases production by 100,000%, plus an additional bonus based on Economics research points.
+|[[Archaeology#Rewards .26 Unlocks|Key To The Lost City]] artifact (R23+), Neutral Unique Building
+|{{Number|1e151}} Coins,
+{{Number|1E6}} of each Vanilla FCs
+|-
+! rowspan="2" |[[Titan]]
+|[[File:Titan-research-quest.png]]
+|'''Olympian Halls Quest'''
+|''Khaire, ruler. More of our people will join your cause if you build enough Hall of Legends. Our architects will take care of expanding them to accommodate the almighty Titans.''
+|R22 + 2000 ''Halls of Legends''
+|{{Number|10 Dtg}}
+|-
+|[[File:Olympian_Hall_icon.png]]
+|'''Olympian Halls'''
+|Upgrade Halls of Legend to Olympian Halls, boosting their production by 15% per Royal Exchange you've purchased and unlocking more unique perks for the building.
+|''Olympian Halls Quest''
+|{{Number|10 Ttg}}
+|-
+! rowspan="2" |[[Druid]]
+|[[File:Druid-research-quest.png]]
+|'''Stonehenge Circles Quest'''
+|''Hello, friend. The balance of nature requires more magic to sustain it. Build enough Stone Pillars, we'll gather our elders to improve them.''
+|R22 + 2000 ''Stone Pillars''
+|{{Number|10 Dtg}}
+|-
+|[[File:Stonehenge_Circle_icon.png]]
+|'''Stonehenge Circles'''
+|Upgrade Stone Pillars to Stonehenge Circles, boosting their production by 25% per point of Maximum Mana and unlocking more unique perks for the building.<br />
+''Note: The bonus is not a multiple of 25; this may be due to max. mana appearing as a floating point number instead of an integer.''
+|''Stonehenge Circles Quest''
+|{{Number|10 Ttg}}
+|-
+! rowspan="2" |[[Faceless]]
+|[[File:Faceless-research-quest.png]]
+|'''Sunken Cities Quest'''
+|''C-uh'e sll'ha hrii nog nwyar. Kn'a wgah'n ph'sgn'wahl. (Those unpronounceable words with no apparent meaning have spoken directly to your mind: you have to build enough Labyrinths).''
+|R22 + 2000 ''Labyrinths''
+|{{Number|10 Dtg}}
+|-
+|[[File:Sunken_City_icon.png]]
+|'''Sunken Cities'''
+|Upgrade ''Labyrinths'' to ''Sunken Cities'', boosting their production based on time spent in your longest game session and unlocking more unique perks for the building.
+{{Formula|Stat|75 * x^{0.9}%|Playtime (Longest Session)}}
+|''Sunken Cities Quest''
+|{{Number|10 Ttg}}
+|-
+! rowspan="2" |Prestige Factions
+|[[File:Artifact-earthcore.png]]
+|'''Earth Core [[Artifact]]'''
+|''Your Magesty, our miners report to have found an unstable substance, throbbing with magical power. The Dwarves and Drow are ready to share the Secrets of the Underworld!''
+|R29 + 2750th Excavation
+|
+|-
+|[[File:Secrets Of the Underworld.png]]
+|'''Secrets of the Underworld'''
+|Unlocks Researches for Dwarves and Drow and provides a bonus for individual research branches.
+<small>See [[Dwarf]] Faction Page for more details</small>
+|Prestige Unique Building, ''Earth Core'' [[Artifact]]
+|{{Number|100 QiSxg}}, {{Number|10 M}} FC of each
+|-
+! rowspan="2" |[[Dwarf]]
+|[[File:DwarfResearchQuest.PNG]]
+|'''Dwarven Forge Quest'''
+|''Aye again lad! Don't ye want a better place to forge yer weapons? With Enough Blacksmiths me people can help ye!''
+|R28 + 5000 ''Blacksmiths''
+|{{Number|10 Sxg}}
+|-
+|[[File:Dwarven_Forge_icon.png]]
+|'''Dwarven Forges'''
+|Upgrade ''Blacksmiths'' to ''Dwarven Forges'', boosting their production based on mana regen and unlocking more unique perks for the building.
+{{Formula|Stat|100 * x^{0.9}%|Mana per Second}}<br />+Access to the Dwarf Research.
+|''Dwarven Forge Quest''
+|{{Number|10 USxg}}
+|-
+! rowspan="2" |[[Drow]]
+|[[File:DrowResearchQuest.PNG]]
+|'''Spider Sanctuary Quest'''
+|''Kivvil. Our Valsharess requires more places to worship the almighty Spider Queen. Build enough Dark Temples, and our priestesses will consecrate them.''
+|R28 + 3333 ''Dark Temples''
+|{{Number|10 Sxg}}
+|-
+|[[File:Spider_Sanctuary_icon.png]]
+|'''Spider Sanctuary'''
+|Upgrade ''Dark Temples'' to ''Spider Sanctuaries'', boosting their production based on time spent offline and unlocking more unique perks for the building.
+{{Formula|Stat|30 * x^{0.8}|Time Spent Offline (Total)}}<br />+Access to the Drow Research.
+|''Spider Sanctuary Quest''
+|{{Number|10 USxg}}
+|-
+! rowspan="2" |[[Dragon]]
+|[[File:WyrmsDenQuest.png|54x54px]]
+|'''Wyrm's Den Quest'''
+|''Ava'yorn thurirl. Our kind needs large spaces and a place to take flight. Build enough Iron Strongholds to make room for us.''
+|R46+, 4500 Iron Strongholds
+|{{Number|1e74}}
+|-
+|[[File:WyrmsDen.png|54x54px]]
+|'''Wyrm's Den'''
+|Upgrade ''Iron Strongholds'' to ''Wyrm's Dens'', boosting their production based on the total amount of Faction Coins you collected and unlocking more unique perks for the building.
+{{Formula|naked|(0.065 * (ln(1 + x/ 2 + y))^{3.65})|<br />where x is Faction Coins (This Game) and y is Faction Coins (This R).}}<br />+Access to the Dragon Research.
+|''Wyrm's Den Quest'' + Dragon's Trade Treaty
+|{{Number|1e71}}
+|-
+! rowspan="7" |[[Mercenary]]
+|-
+|[[File:Obsidian shard.png]]
+|'''Obsidian Shard'''
+|''Extremely hard and black as darkness itself, this material cannot apparently be carved or melted. It is a mystery how you can make this thing into a sword.''
+|Found on the 8000th [[excavation]] at R75
+|
+|-
+|[[File:Secrets of the Warriors.png]]
+|'''Secrets of the Warriors'''
+|Unlocks research for Mercenaries and increases their production by 1000%.
+|Mercenary Unique Building, Obsidian Shard Artifact
+|{{Number|100 Qiqag}} Coins,
+{{Number|10 Qa}} FCs of each
+|-
+|[[File:MercResearchQuest.png]]
+|'''Mercenary Encampment Quest'''
+|''We salute you, commander. Your strategical skills had not gone unnoticed within our ranks. We have decided to offer you a chance to establish a formal encampment within your boundaries... Build more structures to strengthen our city.''
+Unlocks Unique Building upgrades
+|R75 + 125K buildings
+|{{Number|10 Notg}}
+|-
+|[[File:Mercenary Camp icon.png]]
+|'''Mercenary Camp'''<br />(Good)
+|Upgrade Knights Jousts to Mercenary Camps, boosting their production based on the amount of Non-Unique buildings you own and unlocking more unique perks for the building.
+{{Formula|build|1.5 * (1 + x)|Non-Unique Buildings}}<br />+Access to the Mercenary Research.
+|''Mercenary Encampment Quest''
+|{{Number|10 Dqag}}
+|-
+|[[File:Tyrant Garrison icon.png]]
+|'''Tyrant Garrison'''<br />(Evil)
+|Upgrade ''Evil Fortresses'' to ''Tyrant Garrisons'', boosting their production based on Offline Production Bonus and unlocking more unique perks for the building.
+{{Formula|0.5 * \log_{10}(1+x)^{4.5}|the Offline Production Bonus}}<br />+Access to the Mercenary Research.
+|''Mercenary Encampment Quest''
+|{{Number|1 Tqag}}
+|-
+|[[File:Freemason's Hall icon.png]]
+|'''Freemason's Hall'''<br />(Neutral)
+|Upgrade ''Alchemist Labs'' to ''Freemason's Hall'', Boosting their production based on the highest amount of assistants you had in a single game (This R) and unlocking more unique perks for the building.
+{{Formula|2.5 * x^{2.5}|assistants you had in a single game (This R)}}<br />+Access to the Mercenary Research.
+|''Mercenary Encampment Quest''
+|{{Number|1 Tqag}}
+|}
+
+== Research Upgrades by Facility ==
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%;" id="Spellcraft"
+! style="width:70px" |[[File:Spellcraft_Facility_icon.png|30px]]
+! Spellcraft Facility
+|-
+| colspan="2" |
+
+{| class="mw-collapsible mw-collapsed wikitable sortable" style="width:100%;" id="Spellcraft-R16-R22"
+! style="color:gray;background:silver;width:11%" |R16 - R22
+! colspan="5" style="background:silver;" |S1 - S251
+|-
+! style="white-space: nowrap;" |Lvl
+! style="white-space: nowrap;" data-sort-type="text" |Name
+! style="white-space: nowrap;" data-sort-type="text" |<abbr title="For which faction the upgrade is available">For</abbr>
+! class="unsortable" |Requirement
+! class="unsortable" |Cost
+! class="unsortable" |Effect
+|-
+!S1
+!Enchanting
+|Fairy
+| -
+|{{Number|750Qag}}
+|Increase the production of Enchanted Fields based on mana produced.
+{{Formula|stat|round(0.75 * x^{0.6})%|Mana Produced (This Game)}}
+|-
+!S10
+!Channeling
+|Angel
+|2000 Heaven's Gate
+|{{Number|28.83Uqag}}
+|Increase the production of all other buildings by 110% per Heaven's Domain you own.
+|-
+!S30
+!Vacuumancy
+|Any
+|Have 4000 Mana
+|{{Number|95.88Dqag}}
+|Increase maximum mana and mana regeneration rate based on time spent in this game. ''Formula:'' Maximum Mana:
+<math>floor(45 * x)</math><br />Mana Regeneration:
+<math>\frac {floor(75x^{0.4})} {10}</math><br />where x is your Playtime (This Game) stat in hours
+|-
+!S50
+!Conjuration
+|Goblin
+|Have 6000 mana
+(as Fairy)
+|{{Number|318.8Tqag}}
+|Each time you cast a spell you also cast free Tax Collections based on the amount of Goblin Banks you own.<br />Also increases offline spell cast amount multiplicatively by 150%.
+{{Formula|build|floor(x /650)|Goblin Banks}}
+|-
+!S105
+!Mysticism
+|Any
+|600 Researches
+|{{Number|1.544Spqag}}
+|Increase mana regeneration based on the amount of research made.
+{{Formula|floor(x^{0.5})|number of researches made}}
+|-
+!S135
+!Augmentation
+|Any
+|4000 Unique Buildings
+(as Fairy)
+|{{Number|296Ocqag}}
+|Increase the production of Unique Buildings based on maximum mana.
+{{Formula|round(2 * x^{0.8})%|your maximum mana}}
+|-
+!S150
+!Pyromancy
+|Any
+|Research
+Inflame (D10) &<br />Fusion (A105)
+|{{Number|129.6Noqag}}
+|Increase the production of the two highest building tiers based on your mana regeneration.
+{{Formula|stat|round(4 * x^{1.3})%|Mana per Second}}
+|-
+!S175
+!Empowered Luck
+|Elf
+|Research<br />Blessing (D1) & Augmentation (S135)
+|{{Number|3.273UQig}}
+|Increase production of all buildings by 36,000% for 20 seconds each time you trigger Elven Luck and increase the chance to trigger it by an additional 24%.
+|-
+!S180
+!Incantation
+|Fairy
+|Research<br />Enchanting (S1) & Mysticism (S105)
+|{{Number|3.273UQig}}
+|Increase mana regeneration based on the number of assistants you own.
+{{Formula|floor(16 * x^{0.6}) / 10|the number of assistants you have}}
+|-
+!S200
+!Cryomancy
+|Any
+|Research<br />Conjuration (S50) & Refraction (A55)
+|{{Number|82.65DQig}}
+|Increase the production of all buildings based on your current mana (the less mana, the better bonus).
+{{Formula|round((100-x)^{1.75})%|percentage of current missing mana.(at 0 mana x is 100)}}
+|-
+!S215
+!Projection
+|Any
+|300 Spiritual Surge Casts (Total), Research<br />Channeling (S10) & Incantation (S180)
+|{{Number|36.16TQig}}
+|Increase Spiritual Surge effect based on the amount of active spells.
+{{Formula|xy|15 *((15 * x) ^Y)|active spell|ascension.}}     (does not include Spiritual Surge)
+|-
+!S225
+!Necromancy
+|Undead
+|Research<br />Resurrection (D175) & Cryomancy (S200)
+|{{Number|2.087QaQig}}
+|Increase the production of assistants based on the amount of Necropolises you own.
+{{Formula|build|round(5 * x^{0.75})%|Necropolises}}
+|-
+!S250
+!Aeromancy
+|Any
+|Research Weather Control (D225) & Explosives (A150)
+|{{Number|52.7QiQig}}
+|Increase the production of Unique Buildings based on mana produced in this game.
+{{Formula|stat|round(0.5 * x^{0.58})%|Mana Produced (This Game)}}
+|-
+!S251
+!Assimilation
+|Faceless
+|Play as Faceless
+|{{Number|79.05QiQig}}
+|Increase the production of Sunken Cities based on time spent affiliated with factions different than the Faceless.
+{{Formula|round(0.3 * x^{0.7})%|total time spent as non-Faceless factions}}
+|}
+
+{| class="mw-collapsible mw-collapsed wikitable sortable" style="width:100%;" id="Spellcraft-R23-R39"
+! style="color:gray;background:silver;width:11%" |R23 - R39
+! colspan="5" style="background:silver;" |S270 - S590
+|-
+! style="white-space: nowrap;" |Lvl
+! style="white-space: nowrap;" data-sort-type="text" |Name
+! style="white-space: nowrap;" data-sort-type="text" |<abbr title="For which faction the upgrade is available">For</abbr>
+! class="unsortable" |Requirement
+! class="unsortable" |Cost
+! class="unsortable" |Effect
+|-
+!S270
+!Runecarving
+|Any
+|500,000 clicks<br />(This game)
+|{{Number|175.2SxQig}}
+|Increase the production of all buildings based on your bonus from Gems.
+{{Formula|round(1.15 * x^{0.75})%|your gem bonus}}
+|-
+!S300
+!Chain Lightning
+|Titan
+|25 Brainwave Casts (Total)
+|{{Number|33.6OcQig}}
+|While Lightning Strike is active, all non-target buildings have their production increased based on the amount of Lightning Strikes cast in this game.
+{{Formula|stat|250 * (x / 20)^{0.9}%|Lightning Strikes Active Time (This Game)}}
+|-
+!S305
+!Mesmerization
+|Faceless
+|2 days as Faceless
+(Total across all R)
+|{{Number|225.2 OcQig}}
+|Increase the production of all buildings by a fraction of your offline production bonus.
+{{Formula|2.5 * \log(1+x)^{2.5}|your pre-Ascension offline multiplier}}
+|-
+!S330
+!Reverberation
+|Any
+|Research Cryomancy (S200) & Weather Control (D225)
+|{{Number|6.443 Sxg}}
+|Increase the production of all buildings based on the number of active spells you have. You must have at least 3 active spells to generate a bonus.
+{{Formula|375 * 2^x%|the number of spells currently active}}
+|-
+!S375
+!Illusion
+|Faceless
+|Research Reverberation (S330) & Mesmerization (S305)<br />(as Faceless)
+|{{Number|541 DSxg}}
+|Brainwave also provides progressively more assistants over its duration.
+{{Formula|xy|Floor(1.15 * (x + y) ^ 2)|brainwave runtime in minutes|headstart in minutes}}
+|-
+!S400
+!Capacity
+|Any
+|Research<br />Projection (S215) & Domination (W275)
+|{{Number|13.66 QaSxg}}
+|Increase maximum mana based on the highest amount of spells cast in a single game.
+{{Formula|stat|floor(35* x^{0.35})|Spell Cast (Max)}}
+|-
+!S435
+!Spellbinding
+|Drow
+|4h Combo Strike Cast Time (This game)
+|{{Number|1.989 Spg}}
+|Passively grants the effects from Call to Arms while offline.
+|-
+!S460
+!Focus
+|Any
+|25000 spells cast (This game)
+|{{Number|5.023 SpSxg}}
+|Increase the production of all buildings based on the times you cast your faction spell in this game.
+{{Formula|15 * x^{0.8}%|Faction Spells' Cast This Game (Vanilla + Prestige spell count)}}
+|-
+!S500
+!Heirlooms
+|Any
+|40 Artifacts (as Drow)
+|{{Number|5.554 Spg}}
+|Increases maximum mana based on the number of owned artifacts.
+{{Formula|100 * x^{1.1}|artifacts}}
+|-
+!S545
+!Hierarchy
+|Any
+|{{Number|10 M}} mana produced (this game)
+|{{Number|466.3 DSpg}}
+|Increase the production of buildings based on mana produced in this game, depending on their tiers. Gives better bonuses for lower tiers.
+{{Formula|naked|(0.1 * x^{0.45} * T^2)%|where x is Mana Produced (This Game) stat, and T is the building tier, starting at 11 for Farms and decreasing to 1 for Halls of Legends.}}
+|-
+!S590
+!Trickery
+|Fairy
+Dwarf
+|200 Dwarf Exchanges as Dwarf/Fairy, Research<br />S105 and S375
+|{{Number|39.16 QiSpg}}
+|Increase the production of Neutral buildings based on maximum Mana.
+{{Formula|0.5 * x^{1.05}%|Maximum Mana}}
+|}
+
+{| class="mw-collapsible mw-collapsed wikitable sortable" style="width:100%;" id="Spellcraft-A"
+! style="color:gray;background:silver;width:11%" |Post-A
+! colspan="5" style="background:silver;" |S1275 and up
+|-
+! style="white-space: nowrap;" |Lvl
+! style="white-space: nowrap;" data-sort-type="text" |Name
+! style="white-space: nowrap;" data-sort-type="text" |<abbr title="For which faction the upgrade is available">For</abbr>
+! class="unsortable" |Requirement
+! class="unsortable" |Cost
+! class="unsortable" |Effect
+|-
+!S1275
+!Sequence
+|Any
+|60,000 Spells cast
+|{{Number|5.551e71}}
+|Reduce spell cost for higher spell tiers.
+{{MultiplierReduction|0.5|1.5|2}}
+|-
+!S1450
+!Spellstorm
+|Dragon
+|Spellbinding (S435) & Plasmation (C1325)
+|{{Number|2.326e82}}
+|Increase the production of Unique Buildings based on the amount of active spells.
+{{Formula|50 *  x^{1.5}%|number of active spells, counting tiers}}
+|-
+!S1500
+!Psionics
+|Faceless
+Dragon
+|1000 Base Assistants<br />Hierarchy (S545) & Intimidation (E1325)
+|{{Number|2.52e85}}
+|Increase the production of Unique Buildings based on the amount of assistants you own.
+{{Formula|8.5* x ^{0.85}%|the amount of assistants}}
+|-
+!S2875
+!Scholarship
+|Merc
+|11000 Merc Unique Buildings
+|{{Number|7.26 QiQig}}
+|Increase the production of Non-Unique buildings by 40% per Unique building.
+|-
+!S3200
+!Manipulation
+|Any
+|1B Tax Collection casts, Calefaction (A1325) & Psionics (S1500).
+|{{Number|387 USxg}}
+|Each active spell increases mana regen by an additional 8% (Share Benefits tiers also count).<br />Also increases offline spell cast amount by multiplicatively by 1200%.
+|}
+|}
+
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%;" id="Craftsmanship"
+! style="width:70px" |[[File:Craftsmanship_Facility_icon.png|30px]]
+! Craftsmanship Facility
+|-
+| colspan="2" |
+
+{| class="mw-collapsible mw-collapsed wikitable sortable" style="width:100%;" id="Craftsmanship-R16-R22"
+! style="color:gray;background:silver;width:11%" |R16 - R22
+! colspan="5" style="background:silver;" |C1 - C251
+|-
+! style="white-space: nowrap;" |Lvl
+! style="white-space: nowrap;" data-sort-type="text" |Name
+! style="white-space: nowrap;" data-sort-type="text" |<abbr title="For which faction the upgrade is available">For</abbr>
+! class="unsortable" |Requirement
+! class="unsortable" |Cost
+! class="unsortable" |Effect
+|-
+!C1
+!Dummy Targets
+|Elf
+|
+|{{Number|750 Qag}}
+|Increase Elven Training Grounds production based on the amount of Faction Coins you found.
+{{Formula|stat|round(1.3 * ln^3(1+ x))%|Faction Coins Gained (This Game)}}
+|-
+!C10
+!Cultivation
+|Fairy
+|2500 Enchanted fields
+|{{Number|28.83 Uqag}}
+|Increases production of Blacksmith and Inn by 60% per Enchanted field that you have.
+|-
+!C25
+!Light Condenser
+|Angel
+|12,000 Spells cast
+(This R)
+|{{Number|12.63 Dqag}}
+|Increase mana regeneration based on the amount of spells cast.
+{{Formula|stat|floor(10 * x^{0.3}) / 10|Spells Cast (This Game)}}
+|-
+!C50
+!Refining
+|Demon
+|{{Number|1 B}} Faction Coins<br />(as Elf)
+|{{Number|318.8 Tqag}}
+|Increase the production of Infernal Realms based on the amount of Demon Coins you found in this Game.
+{{Formula|stat|round(0.8 * ln^{3}(1 + x))%|Demon Coins Gained (This Game)}}
+|-
+!C80
+!Apprenticeship
+|Any
+|16,000 Good and Evil buildings
+|{{Number|61.13 Qiqag}}
+|Increase the production of Neutral buildings based on the amount of Good and Evil buildings.
+{{Formula|build|round(x^{0.8})%|Good and Evil Buildings}}
+|-
+!C105
+!Woodcraft
+|Any
+|25,000 clicks<br />(This Game)
+|{{Number|1.544 Spqag}}
+|Increase the chance to find Faction Coins based on the amount of Unique Buildings you own.
+{{Formula|build|floor({1.5}x^{1.05})%|Unique Buildings}}
+|-
+!C120
+!Socketing
+|Any
+|200,000 clicks<br />(This Game)
+|{{Number|676 Spqag}}
+|Increase clicking reward based on the amount of gems you own.
+{{Formula|round(20 * log(1 + x))%|your current number of gems}}
+|-
+!C135
+!Reinforcing
+|Any
+|250,000 clicks<br />(This Game, as Elf)
+|{{Number|296 Ocqag}}
+|Increase the production of all buildings based on your total number of clicks.
+{{Formula|stat|(ln(1 + x))^{2.75}%|Treasure Clicks (Total)}}
+|-
+!C150
+!Tinkering
+|Any
+|Research<br />Recycling (E10) & Reinforcing (C135)
+|{{Number|129.6 Noqag}}
+|Increase the production of all buildings based on the amount of research made.
+{{Formula|round(125 * x^{0.38})%|number of researches made}}
+|-
+!C175
+!Gemcutting
+|Goblin
+|Research<br />Refining (C50) & Socketing (C120)
+|{{Number|3.273 Uqig}}
+|Increase the production bonus from gems based on the number of buildings you own.
+{{Formula|stat|floor(x / 2000)%|Buildings Owned (This Game)}}
+|-
+!C200
+!Journeymen
+|Any
+|Research<br />Apprenticeship (C80) & Bartering (E50).
+|{{Number|82.65 Dqig}}
+|Increase the production of Unique Buildings based on total time spent as that faction.
+{{Formula|stat|round(0.125 * x^{0.7})%|Time Spent as that faction}}
+|-
+!C225
+!Automatons
+|Elf
+|Research<br />Dummy Targets (C1) & Vivification (A120).
+|{{Number|2.087 Qaqig}}
+|Each Elven Training Grounds counts as 200 buildings for Call to Arms purposes.
+|-
+!C250
+!Magnetism
+|Any
+|Research<br />Tinkering (C150) & Critical Strike (W225).
+|{{Number|52.7 Qiqig}}
+|Increase the chance to find Faction Coins by a multiplicative 50%.<br />Increase the chance to find faction coins based on total time spent offline. (in minutes)
+{{Formula|stat|2.5 * x ^{0.75}|Time Spent Offline (Total)|minutes}}
+|-
+!C251
+!Architecture
+|Titan
+|Play as Titan
+|{{Number|79.05 QiQig}}
+|Increase the production of Olympian Halls based on the amount of buildings you own.
+{{Formula|stat|round(0.5 * x ^{0.8})%|Buildings Owned (This Game)}}
+|}
+
+{| class="mw-collapsible mw-collapsed wikitable sortable" style="width:100%;" id="Craftsmanship-R23-R39"
+! style="color:gray;background:silver;width:11%" |R23 - R39
+! colspan="5" style="background:silver;" |C300 - C590
+|-
+! style="white-space: nowrap;" |Lvl
+! style="white-space: nowrap;" data-sort-type="text" |Name
+! style="white-space: nowrap;" data-sort-type="text" |<abbr title="For which faction the upgrade is available">For</abbr>
+! class="unsortable" |Requirement
+! class="unsortable" |Cost
+! class="unsortable" |Effect
+|-
+!C300
+!Weighting
+|Druid
+|650 Lightning Strike Casts (Total)
+|{{Number|33.6 OcQig}}
+|While Grand Balance hits Stone Pillars, increase its production by 3.09%.<br />Also increase the production of every Grand Balance target based on maximum mana.
+{{Formula|xy|round(0.12*ln(1+x))^2)^y)|your maximum mana|spell tier}}
+|-
+!C305
+!Golemcraft
+|Titan
+|2d Time Spent affiliated with Titans
+(Total across all R)
+|{{Number|255.2 OcQig}}
+|Gain additional assistants based on your total time spent offline (in hours).
+{{Formula|stat|floor(2 * x^{0.5})|Time Spent Offline (Total)}}
+|-
+!C330
+!Overload
+|Any
+|Research<br />Aeromancy (S250) & Critical Strike (W225)
+|{{Number|6.443 Sxg}}
+|Increase clicking reward based on the amount of research made.
+{{Formula|round(145 * x ^{0.38})%|researches made}}
+|-
+!C340
+!Gem Duster
+|Any
+|800 Gem Grinder Casts (Total),
+Research<br />Sifting (E260) & Surveyorship (E290)
+|{{Number|371.5 Sxg}}
+|Increase production bonus from gems based on the amount of Rubies you collected.
+{{Formula|stat|10 * x%|Rubies Gained (All Time)}}
+|-
+!C375
+!Lightning Rod
+|Titan
+|Research<br />Chain Lightning (S300) & Overload (C330)<br />(as Titans)
+|{{Number|541 DSxg}}
+|Olympian Halls are always hit by Lightning Strike in addition to the primary target. Olympian Halls can no longer be a primary target.
+|-
+!C400
+!Gravitation
+|Any
+|Research<br />Magnetism (C250) & Weighting (C300)
+|{{Number|13.66 QaSxg}}
+|Increase the chance to find Faction Coins based on the amount of Faction Coins found in this game.
+{{Formula|stat|floor(3.5 * ln^3(x + 1))|Faction Coins Gained (This Game)}}
+|-
+!C405
+!Metallurgy
+|Dwarf
+|Secrets of the Underworld upgrade<br />(as Dwarf)
+|{{Number|103.7 QaSxg}}
+|Increase Dwarven Forges based on the Dwarven Forges you own.
+{{Formula|build|45 * x^{0.825}%|Dwarven Forges}}
+|-
+!C460
+!Distribution
+|Any
+|{{Number|1M}} Clicks (this game)
+|{{Number|502.3 SpSxg}}
+|Increase the production of non-unique buildings based on the amount of clicks you made in this game.
+{{Formula|stat|35 * x^{0.5}%|Treasure Clicks (This Game)}}
+|-
+!C500
+!Minecrafting
+|Any
+|3250 Excavations as Dwarf
+|{{Number|5.554Spg}}
+|Increases production bonus from gems based on the amount of excavations you made.
+{{Formula|3 * x^{0.35}%|the amount of Excavations you made}}
+|-
+!C520
+!Blacksmithing
+|Dwarf
+|Research C135 and C405
+|{{Number|18.47 USpg}}
+|Increase clicking reward for Diamond Pickaxe based on the amount of Dwarven Forges you own.<br />Also increase Faction Coin find chance bonus of Diamond Pickaxe based on the amount of Dwarven Forges you own.
+{{Formula|nakedT|Clicking Reward: <math>2.5 * x^{0.3}%</math><br />Diamond Pickaxe: <math>20 * x^{0.4}%</math><br />where x is the number of Dwarven Forges you own.}}
+|-
+!C590
+!Alloys
+|Elf
+Dwarf
+|200 Dwarf Exchanges as Dwarf/Elf, Research A105 and C520
+|{{Number|39.16 QiSpg}}
+|Increase clicking reward based on your chance to find Faction Coins, (if your FC chance is 10k%, this will be 10k%).<br />Autoclicks the treasure 10 times per second.
+|}
+
+{| class="mw-collapsible mw-collapsed wikitable sortable" style="width:100%;" id="Craftsmanship-A"
+! style="color:gray;background:silver;width:11%" |Post-A
+! colspan="5" style="background:silver;" |C1300 and up
+|-
+! style="white-space: nowrap;" |Lvl
+! style="white-space: nowrap;" data-sort-type="text" |Name
+! style="white-space: nowrap;" data-sort-type="text" |<abbr title="For which faction the upgrade is available">For</abbr>
+! class="unsortable" |Requirement
+! class="unsortable" |Cost
+! class="unsortable" |Effect
+|-
+!C1300
+!Scintillation
+|Dragon
+|30,000 max mana
+|{{Number|1.827e73}}
+|Increases the production of all buildings based on maximum mana and production bonus from Gems. Higher boost for lower Gem bonus.
+|-
+!C1325
+!Plasmation
+|Any
+|{{Number|5e7}} mana produced (this game)
+|{{Number|6.016e74}}
+|Gain assistants based on mana produced in this game.
+{{Formula|floor(1.25 * ln(1 + x)^2)|mana produced (this game)}}
+|-
+!C1500
+!Gargantuaness
+|Titan
+Dragon
+|2500 Royal Exchanges, Inflation (E460) & Solemnity (D1275)<br />(As Titans)
+|{{Number|2.52e85}}
+|Increase production for all buildings based on total time spent as Neutral.
+{{Formula|stat|(1.5 * x)^{0.7}%|Neutral time (this R)|minutes}}
+|-
+!C3000
+!Customizing
+|Neutral Merc
+|9000 Excavations<br />(as Mercenary)
+|{{Number|280.7 SpQig}}
+|Increase the production of all buildings based on the amount of artifacts you own.
+{{Formula|1.65 * x^{1.65}|artifacts}}
+|-
+!C3100
+!Engineering
+|Any
+|15d Total Mercenary Time
+|{{Number|329.6 NoQig}}
+|Increase maximum mana based on the total amount of clicks made that Reincarnation.
+{{Formula|stat|7.5 * \log_{10}^{2.15}(1 + x)|Clicks (this R)}}
+|}
+|}
+
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%;" id="Divine Facility"
+! style="width:70px" |[[File:Divine_Facility_icon.png|30px]]
+! Divine Facility
+|-
+| colspan="2" |
+{| class="mw-collapsible mw-collapsed wikitable sortable" style="width:100%;" id="Divine-R16-R22"
+! style="color:gray;background:silver;width:11%" |R16 - R22
+! colspan="5" style="background:silver;" |D1 - D250
+|-
+! style="white-space: nowrap;" |Lvl
+! style="white-space: nowrap;" data-sort-type="text" |Name
+! style="white-space: nowrap;" data-sort-type="text" |<abbr title="For which faction the upgrade is available">For</abbr>
+! class="unsortable" |Requirement
+! class="unsortable" |Cost
+! class="unsortable" |Effect
+|-
+!D1
+!Blessing
+|Angel
+|
+|{{Number|750 Qag}}
+|Increase the production of Heaven's Domains based on total time spent with at least one active spell.
+{{Formula|round(2.5 * x^{0.8})%|total time spent with at least one active spell}}
+|-
+!D10
+!Inflame
+|Demon
+|2000 Infernal Realms
+|{{Number|28.83 Uqag}}
+|Increase the production of all other buildings by 110% per Infernal Realm you own.
+|-
+!D25
+!Cursing
+|Undead
+|Play 5 hours Offline<br />(This Game, as Undead)
+|{{Number|12.63 Dqag}}
+|Increase the production of all buildings based on your offline production bonus.
+{{Formula|2.75 * log(1 + x)^{2.75}|your offline production bonus}}
+|-
+!D50
+!Hallowing
+|Elf
+|15,000 Good Buildings<br />(as Angel)
+|{{Number|318.8 Tqag}}
+|Increase your chance to find Faction Coins based on the amount of Elven Training Grounds you own.
+{{Formula|build|floor(5 * x^{0.85})%|Elven Training Grounds}}
+|-
+!D55
+!Transfixion
+|Any
+|Produce {{Number|3 M}} Mana<br />(This Game)
+|{{Number|2.421 Qaqag}}
+|Increase clicking reward based on spell cast in this game.
+{{Formula|stat|round(3.5 * x^{0.8})%|Spells Cast (This Game)}}
+|-
+!D135
+!Illumination
+|Any
+|250 m/s Mana Regen<br />(as Angel)
+|{{Number|296 Ocqag}}
+|Increases mana regeneration based on the amount of gems you own.
+{{Formula|floor(1.25 * ln(1 + x)) / 10|amount of gems you own}}
+|-
+!D150
+!Retribution
+|Any
+|Research<br />Betrayal (W120) & Transfixion (D55).
+|{{Number|129.6 Noqag}}
+|Increase the chance to find Faction Coins based on the amount of research made.
+{{Formula|floor(0.05 * x^{1.25}|the amount of research made}}
+|-
+!D175
+!Resurrection
+|Angel
+|Research<br />Blessing (D1) & Refraction (A55)
+|{{Number|3.273 Uqig}}
+|You gain additional assistants based on God's Hands activity time.
+{{Formula|floor(0.45 * (0.15 * x)^{0.6})|God's Hands' Active Time (This Game)}}
+|-
+!D200
+!Transcendence
+|Any
+|Research Resurrection (D175) & Illumination (D135)
+|{{Number|82.65 Dqig}}
+|Decrease the cost of all spells by 20% and increase their duration by 20%.
+|-
+!D205
+!Communion
+|Any Good
+|777 Holy Light Casts (This R),<br />Research<br />Gemcutting (C175) & Illumination (D135)
+|{{Number|627.6 Dqig}}
+|Increase Holy Light duration by 110 seconds.
+|-
+!D225
+!Weather Control
+|Fairy
+|Research<br />Light Condenser (C25) & Vacuumancy (S30)
+|{{Number|2.087 Qaqig}}
+|Increase the production of Enchanted Fields based on maximum mana.
+{{Formula|floor(2.25 * x^{0.8})%|your maximum mana}}
+|-
+!D245
+!<s>Soulrending</s><br>Sanctification
+|Any
+|500 Spiritual Surge Casts (Total),<br />Research<br />Soulweaving (A175) & Necromancy (S225)
+|{{Number|6.9 4Qiqig}}
+|<s>Reincarnations count twice for Spiritual Surge</s>.Increase the production of Unique Buildings based on the amount of Non-Unique buildings you own.
+{{Formula|build|2.5 * x^{0.55}%|Non-Unique buildings}}
+|-
+!D250
+!Demonology
+|Any
+|Research Transcendence (D200) & Pyromancy (S150)
+|{{Number|52.7 Qiqig}}
+|Gain additional assistants based on the amount of Faction Coins found in this game.
+{{Formula|stat|floor(ln^{1.3}(1 + x))|Faction Coins Gained (This Game)}}
+|}
+
+{| class="mw-collapsible mw-collapsed wikitable sortable" style="width:100%;" id="Divine-R23-R39"
+! style="color:gray;background:silver;width:11%" |R23 - R39
+! colspan="5" style="background:silver;" |D260 - D590
+|-
+! style="white-space: nowrap;" |Lvl
+! style="white-space: nowrap;" data-sort-type="text" |Name
+! style="white-space: nowrap;" data-sort-type="text" |<abbr title="For which faction the upgrade is available">For</abbr>
+! class="unsortable" |Requirement
+! class="unsortable" |Cost
+! class="unsortable" |Effect
+|-
+!D260
+!Mutation
+|Faceless
+|3,000 Sunken Cities
+|{{Number| 3.039 SxQig}}
+|Increase the production of all other buildings by 95% per Sunken Cities you own.
+|-
+!D275
+!Meditation
+|Druid
+|Have 10,000 Mana (as Druid)
+|{{Number| 1.331 SpQig}}
+|Increase mana regeneration based on your current mana.<br />Also increases offline spell cast amount by multiplicatively by 300%.
+{{Formula|0.5 * (100 - x)%|percent of max mana}}
+|-
+!D290
+!Transubstantiation
+|Any
+|1 Rough Stone Artifact
+|{{Number|582.7 SpQig}}
+|Each artifact you discover increases mana regeneration by 1.5 m/s.
+{{Formula|floor(1.5 * x))|the number of artifacts found}}
+|-
+!D320
+!Deliverance
+|Any
+|350 m/s Mana Regen
+|{{Number| 1.117 NoQig}}
+|Increase assistants production based on mana regeneration.
+{{Formula|stat|round(20 * x^{0.85})%|Mana per Second}}
+|-
+!D330
+!Eternity
+|Any
+|Research<br />Offering (E275) & Deliverance (D320)
+|{{Number|6.443 Sxg}}
+|Double the duration of all faction spells.
+|-
+!D350
+!Descent
+|Titan
+|Research<br />Swarming (W250) & Heroism (W330) (as Titan)
+|{{Number| 21.42 USxg}}
+|Gain additional assistants based on the amount of Olympian Halls you own.
+{{Formula|build|floor(x^{0.5})|Olympian Halls}}
+|-
+!D400
+!Miracle
+|Any
+|Research<br />Communion (D205) & Transubstantiation (D290)
+|{{Number|13.66 QaSxg}}
+|Increase the Production of a random building by x250. Target changes every 2 minutes. While offline, increase the production of all buildings by x75.
+|-
+!D435
+!Devotion
+|Dwarf
+|4h Diamond Pickaxe Cast Time (This Game)
+|{{Number|19.89 SxSxg}}
+|Increase the production of Good buildings based on spells cast in this game.
+{{Formula|stat|2.5 * x^{0.85}%|Spells Cast (This Game)}}
+|-
+!D480
+!Mercy
+|Any
+|12h Time Spent as each Good, Evil and Neutral alignment, (This R, 1d12 in total)
+|{{Number|1.67 NoSxg}}
+|Increase the production of all buildings based on the difference in time spent with the three alignments. A smaller difference produces a higher bonus. ''Despite the effect text, this upgrade will increase production by 0% so long as there is an alignment you have not spent any time as, no matter how small the difference.''
+{{Formula|naked|100000 * (tmin / tmax)^{1.5}%|where tmin and tmax are the shortest and longest Time Spent Being Alignment (Total) Stat.}}
+|-
+!D525
+!Purity
+|Good
+|1d12h as Good, Research Communion (D205) & Devotion (D435)<br />(This R, as any good faction)
+|{{Number|140.2 USpg}}
+|Increase Holy Light multiplier based on the amount of times you cast your faction spell in this game.
+{{Formula|stat|300 * x^{0.3}%|Faction Spells' Cast This Game (Vanilla + Prestige spell count)}}
+|-
+!D560
+!Ritualism
+|Drow
+|Research Necromancy (S225) and Heirlooms (S500) (as Drow)
+|{{Number|204.2 TSpg}}
+|Increase mana regeneration based on the amount of trophies you unlocked.
+{{Formula|floor(0.7x) / 10|the amount of Trophies Unlocked}}
+|-
+!D590
+!Dispelling
+|Angel
+Dwarf
+|200 Dwarf Royal Exchanges
+Research 
+Shattering (W320) & Waste (A480)
+(as Dwarf/Angel)
+|{{Number|39.16 QiSpg}}
+|Increase the production of Unique buildings based on mana regeneration.
+{{Formula|stat|2.5 * x^{1.25}%|Mana per Second}}
+|}
+
+{| class="mw-collapsible mw-collapsed wikitable sortable" style="width:100%;" id="Divine-A"
+! style="color:gray;background:silver;width:11%" |Post-A
+! colspan="5" style="background:silver;" |D1125 and up
+|-
+! style="white-space: nowrap;" |Lvl
+! style="white-space: nowrap;" data-sort-type="text" |Name
+! style="white-space: nowrap;" data-sort-type="text" |<abbr title="For which faction the upgrade is available">For</abbr>
+! class="unsortable" |Requirement
+! class="unsortable" |Cost
+! class="unsortable" |Effect
+|-
+!D1125
+!Oblation
+|Dragon
+|Buy Wyrm's Den.
+|{{Number|4.362e62}}
+|Increase the production of Wyrm's Den based on Faction Coin find chance.
+{{Formula|1.55 * x^{0.55}%|the Faction Coin find chance (in percentage)}}
+|-
+!D1275
+!Solemnity
+|Any
+|80K Total buildings ''(unaffected by W400, Iron Rush and Dwarf challenge)''
+|{{Number|5.551e71}}
+|Increase the production of each building by 0.3% per building of the same type.
+|-
+!D1375
+!Sanctification
+|Any
+|7 days Good Time Spent (Total)
+|{{Number|6.519e77}}
+|Increase the production of Unique Buildings based on the amount of Non-Unique buildings you own.
+{{Formula|build|2.5 * x^{0.55}%|Non-Unique buildings}}
+|-
+!D2775
+!Intervention
+|Merc
+|Secrets of the Warriors upgrade
+|{{Number|6.182 TQig}}
+|Increase the production of Unique Building based on time spent with Mercenaries.
+{{Formula|0.1 * x^{0.7}|time spent with Mercenary}}
+|-
+!D3350
+!Vampirism
+|Any
+|{{Number|1e24}} Offline Bonus, D2775 (Intervention) & W3150 (Upheaval)
+|{{Number|492.5 QaSxg}}
+|Increase offline production based on the amount of Reincarnations you made.
+{{Formula|1.7 * x^{1.7}|Reincarnation count}}
+|}
+|}
+
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%;" id="Economics"
+! style="width:70px" |[[File:Economics_Facility_icon.png|30px]]
+! Economics Facility
+|-
+| colspan="2" |
+{| class="mw-collapsible mw-collapsed wikitable sortable" style="width:100%;" id="Economics-R16-R22"
+! style="color:gray;background:silver;width:11%" |R16 - R22
+! colspan="5" style="background:silver;" |E1 - E250
+|-
+! style="white-space: nowrap;" |Lvl
+! style="white-space: nowrap;" data-sort-type="text" |Name
+! style="white-space: nowrap;" data-sort-type="text" |<abbr title="For which faction the upgrade is available">For</abbr>
+! class="unsortable" |Requirement
+! class="unsortable" |Cost
+! class="unsortable" |Effect
+|-
+!E1
+!Coinage
+|Goblin
+|
+|{{Number|750 Qag}}
+|Increase the production of Goblin Banks based on the amount of buildings you own.
+{{Formula|stat|round(0.8*x^{0.8}))% |Buildings Owned (This Game)}}
+|-
+!E10
+!Recycling
+|Undead
+|2,000 Undercities
+|{{Number|28.83 Uqag}}
+|Increase the production of all other buildings by 95% per Undercity you own.
+|-
+!E25
+!Commerce
+|Elf
+|{{Number|100 M}} FCs
+|{{Number|12.63 Dqag}}
+|Gain additional assistants based on the amount of Royal Exchanges you purchased.
+{{Formula|stat|floor((1 + 6x)^{0.5} - 1)|Royal Exchanges Made}}
+|-
+!E30
+!Diplomacy
+|Any
+|1000 Exchanges
+|{{Number|95.88 Dqag}}
+|Increases Faction Coin find chance and Royal Exchange bonus based on time spent in this game.
+''Formula:''<br />
+ ''Faction Coin Chance:''
+
+<math>floor(1.5 * x^{1.05})%</math><br />''Royal Exchange bonus:''
+<math>floor(x^{0.6})%</math><br />where x is Playtime (This Game) in minutes.
+|-
+!E50
+!Bartering
+|Fairy
+|1,000 Exchanges<br />(as Goblin)
+|{{Number|318.8 Tqag}}
+|Reduce Enchanted Field cost multiplier.
+{{MultiplierReduction|0.035|1.115|1.15}}
+|-
+!E80
+!Common Business
+|Any
+|9,000 Neutral Buildings
+|{{Number|61.13 Qiqag}}
+|Increase the production of Good and Evil buildings based on the amount of neutral buildings.
+{{Formula|build|round((1.75 * x)^{0.8})%|neutral buildings}}
+|-
+!E135
+!Bribing
+|Any
+|28,000 Total Buildings<br />(as Goblin)
+|{{Number|296 Ocqag}}
+|Reduce the building cost multiplier for Unique Buildings.
+{{MultiplierReduction|0.02|1.13|1.15}}
+|-
+!E145
+!Royal Demand
+|Any
+|50,000 Tax Collection Casts (Total), Research<br />Cultivation (C10) & Woodcraft (C105)
+|{{Number|17.07 Noqag}}
+|Increase Tax Collection reward by 30 seconds of production.
+|-
+!E150
+!Investment
+|Any
+|Research<br />Bribing (E135) & Commerce (E25)
+|{{Number|129.6 Noqag}}
+|Increase the production of all buildings based on the amount of gold you own.
+{{Formula|round( (ln(1 + x)) ^{1.25} )%|the amount of gold you own}}
+|-
+!E200
+!Acquisition
+|Any
+|Research<br />Investment (E150) & Common Business (E80)
+|{{Number|82.65 Dqig}}
+|Increase the production of all buildings based on your percentage of trophies unlocked.
+{{Formula|round(0.0003 * (100 * x)^{3.35})|trophies<sub>unlocked</sub> / trophies<sub>max</sub>}}
+|-
+!E225
+!Forgery
+|Goblin
+|Research<br />Coinage (E1) &<br />Gilding (A50)
+|{{Number|2.087 Qaqig}}
+|Increase the production of Evil Buildings based on the amount of Goblin Banks you own.
+{{Formula|build|round(10 * x^{0.85})%|Goblin Banks}}
+|-
+!E230
+!Coercion
+|Demon
+|Research<br />Exertion (W50) & Diplomacy (E30)
+|{{Number|2.087 Qaqig}}
+|Increase the production of Infernal Realms based on total time spent being Evil.
+{{Formula|stat|round(0.2 * x^{0.7})%|Time Spent Being Evil (Total)}}
+|-
+!E250
+!Trade Routes
+|Any
+|Research<br />Forgery (E225) &<br />Royal Demand (E145)
+|{{Number|52.7 Qiqig}}
+|Increase mana regeneration based on the amount of Royal Exchanges you purchased.
+{{Formula|stat|floor(10 * x^{0.55}) / 10|Royal Exchanges Made}}
+|}
+
+{| class="mw-collapsible mw-collapsed wikitable sortable" style="width:100%;" id="Economics-R23-R39"
+! style="color:gray;background:silver;width:11%" |R23 - R39
+! colspan="5" style="background:silver;" |E260 - E590
+|-
+! style="white-space: nowrap;" |Lvl
+! style="white-space: nowrap;" data-sort-type="text" |Name
+! style="white-space: nowrap;" data-sort-type="text" |<abbr title="For which faction the upgrade is available">For</abbr>
+! class="unsortable" |Requirement
+! class="unsortable" |Cost
+! class="unsortable" |Effect
+|-
+!E260
+!Sifting
+|Druid
+|3000 Stonehenge Circles
+|{{Number| 3.039 SxQig}}
+|Increase the production of all other buildings based on the amount of Stone Pillars you own.
+{{Formula|build|(100*x)|Stone Pillars}}
+|-
+!E275
+!Offering
+|Titan
+|1,250 Royal Exchanges<br />(as Titans)
+|{{Number| 175.2 SxQig}}
+|Increase mana regeneration based on your Royal Exchange Bonus.
+{{Formula|floor(0.9 * x^{0.95}) / 10|your Royal Exchange Bonus}}
+|-
+!E290
+!Surveyorship
+|Any
+|7 Artifacts
+|{{Number|582.7 SpQig}}
+|Reduce Excavation cost multiplier.
+{{MultiplierReduction|0.025|1.175|1.2}}
+|-
+!E320
+!Smuggling
+|Any
+|Have 2x Gems in Abdication Treasury
+|{{Number| 1.117 NoQig}}
+|Increase production bonus from gems based on the gems you have in your abdication treasury.
+{{Formula|floor(0.45 * log(1+ x))%|the amount of gems you will gain upon abdication}}
+|-
+!E330
+!Collection
+|Any
+|Research<br />Acquisition (E200) & Forgery (E225a)
+|{{Number| 6.443 Sxg}}
+|Increase the production of all buildings based on the amount of artifacts you found.
+{{Formula|round(50 * x^{1.1})%|the amount of artifacts found}}
+|-
+!E350
+!Repurpose
+|Faceless
+|Research<br />Journeymen (C200) & Adaptation (A330)<br />(as Faceless)
+|{{Number| 21.42 USxg}}
+|Increase the production of all buildings based on the amount of Reincarnations you made.
+{{Formula|round(2.5 * x^{2.25})%|the amount of times you reincarnated}}
+|-
+!E400
+!Conversion
+|Any
+|Research Philosopher's Stone (A250) & Repurpose (E350)
+|{{Number|13.66 QaSxg}}
+|Increase production bonus from Gems based on your Royal Exchange bonus.
+{{Formula|floor(x^{0.95})%|your Royal Exchange Bonus}}
+|-
+!E410
+!Marketing
+|Dwarf
+|5000 Blacksmiths
+|{{Number|787.7 QaSxg}}
+|Increase production of all other buildings by 85% per Dwarven Forge you own.
+|-
+!E460
+!Inflation
+|Any
+|{{Number|100 B}} Faction Coins
+|{{Number|502.3 SpSxg}}
+|Increase Royal Exchange Bonus based on the amount of Faction Coins found in this game.
+{{Formula|stat|floor(3.5 * log(1 + x))%|Faction Coins Gained (This Game)}}
+|-
+!E480
+!Undercutting
+|Any
+|15,000 Max mana
+|{{Number|1.67 NoSxg}}
+|Increase the production of non-unique buildings based on total spells cast.
+{{Formula|stat|0.65 * x^{0.65}%|Spells Cast (Total)}}
+|-
+!E495
+!Jewellery
+|Drow
+|12,000 Unique Buildings<br />(as Dwarf)
+|{{Number|731.4 NoSxg}}
+|Increase the production bonus from gems based on the amount of Spider Sanctuaries you own.
+{{Formula|build|(1.2 * x^{0.8} / 20)%|Spider Sanctuaries}}
+|-
+!E590
+!Slavery
+|Goblin
+Drow
+|200 Drow Exchanges as Drow/Goblin, Research Automatons (C225) and Undercutting (E480)
+|{{Number|39.16 QiSpg}}
+|Gain additional assistants based on the amount of Non-Unique buildings you own.
+{{Formula|build|floor(0.1 * x^{0.8})|Non-Unique Buildings}}
+|}
+
+{| class="mw-collapsible mw-collapsed wikitable sortable" style="width:100%;" id="Economics-A"
+! style="color:gray;background:silver;width:11%" |Post-A
+! colspan="5" style="background:silver;" |E1225 and up
+|-
+! style="white-space: nowrap;" |Lvl
+! style="white-space: nowrap;" data-sort-type="text" |Name
+! style="white-space: nowrap;" data-sort-type="text" |<abbr title="For which faction the upgrade is available">For</abbr>
+! class="unsortable" |Requirement
+! class="unsortable" |Cost
+! class="unsortable" |Effect
+|-
+!E1225
+!Hoarding
+|Dragon
+|{{Number|1T}} Faction coins
+|{{Number|5.123e68}}
+|Reduce Ascension 1 penalty for Royal Exchanges.
+{{Formula|nakedT|((((((bonus per RE as %)^0.2(if E1225)) * #REs)/100)+1)^0.1(if not E1225).}}
+|-
+!E1325
+!Intimidation
+|Any
+|18,000 unique buildings
+|{{Number|6.016e74}}
+|Reduce Royal Exchange cost modifier.
+{{MultiplierReduction|0.025|1.075|1.1}}
+|-
+!E1425
+!Rarity
+|Neutral
+|15d Time Spent (5 days each with Titan, Druid, and Faceless), Research<br />Mineralogy (A545) &<br />Scintillation (C1300)
+|{{Number|7.064e80}}
+|Increase Gem Grinder bonus based on the amount of artifacts you found.
+{{Formula|1.75 * x^{1.75}%|the amount of artifacts you found}}     (multiplicative)
+|-
+!E3300
+!Estates
+|Merc
+|45,000 Unique Buildings, Research<br />Hoarding (E1225) &<br />Combination (A2950)
+|{{Number|419.4 DSxg}}
+|Gives you all the Unique Buildings of your alignment.
+|-
+!E3250
+!Hirelings
+|Any
+|Research<br />Intimidation (E1325) &<br />Scholarship (S2875)
+|{{Number|454.5 TSxg}}
+|Gives assistants based on the gold you have.
+{{Formula|2 * \log_{10}(x + 1) additive|gold you have}}
+|}
+|}
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%;" id="Alchemy"
+! style="width:70px" |[[File:Alchemy_Facility_icon.png|30px]]
+! Alchemy Facility
+|-
+| colspan="2" |
+{| class="mw-collapsible mw-collapsed wikitable sortable" style="width:100%;" id="Alchemy-R16-R22"
+! style="color:gray;background:silver;width:11%" |R16 - R22
+! colspan="5" style="background:silver;" |A1 - A251
+|-
+! style="white-space: nowrap;" |Lvl
+! style="white-space: nowrap;" data-sort-type="text" |Name
+! style="white-space: nowrap;" data-sort-type="text" |<abbr title="For which faction the upgrade is available">For</abbr>
+! class="unsortable" |Requirement
+! class="unsortable" |Cost
+! class="unsortable" |Effect
+|-
+!A1
+!Plague
+|Undead
+|
+|{{Number|750 Qag}}
+|Increase the production of Undercities by 8% per assistant you own.
+|-
+!A10
+!Transmutation
+|Goblin
+|2250 Goblin Banks
+|{{Number|28.83 Uqag}}
+|Increase the production of all other buildings by 85% per Goblin Bank you own.
+|-
+!A25
+!Deflagration
+|Demon
+|666 Hellfire Blast Casts (Total)
+|{{Number|12.63 Dqag}}
+|Reduces Hellfire Blast duration by 16 seconds, reduces its mana cost by 200 and multiplies its effect by 1000%.
+|-
+!A30
+!Delayed Reaction
+|Fairy
+|750 Fairy Chanting Casts (Total)
+|{{Number|12.63 Dqag}}
+|Increases duration of Fairy Chanting based on the amount of Enchanted Fields, Inns and Blacksmiths you own and provides a progressively increasing bonus to the spell. ''Formula:<br />Additive Production increase:''
+<math>floor(1000 * t^{1.5})</math><br />''Duration increase:''
+<math>floor(x / 800)^{0.8})</math> seconds<br />''where t is how long FC has been active in seconds, and x is the number of Farms, Inns, and Blacksmiths you own.''
+|-
+!A50
+!Gilding
+|Angel
+|120 m/s Mana Regen<br />(as Undead)
+|{{Number|318.8 Tqag}}
+|Heaven's Domains further increase your mana regeneration rate.
+{{Formula|build|1.45 * x^{0.45}|Heaven's Domains}}
+|-
+!A55
+!Refraction
+|Any
+|Cast 25000 spells (This Game)
+|{{Number|2.421 Qaqag}}
+|Improve offline production based on spells cast.
+{{Formula|stat|round 5 * x^{0.85}%|Spells Cast (Total)}}
+|-
+!A105
+!Fusion
+|Any
+|2750 Blacksmiths
+|{{Number|1.544 Spqag}}
+|Increases the production of buildings based on the amount of Faction Coins found this game.
+{{Formula|stat|round(0.7 * ln^3(1 + x))%|Faction Coins Gained (This Game)}}
+|-
+!A120
+!Vivification
+|Any
+|Have 6500 mana
+|{{Number|676 Spqag}}
+|Gain additional assistants based on max mana.
+{{Formula|floor(x/15)^{0.825})|your maximum mana}}
+|-
+!A135
+!Decay
+|Any
+|1 Day Play Time in current Reincarnation (Across all Factions, but must be Undead to unlock)
+|{{Number|296 OcQag}}
+|Increase the production on all buildings based on total time spent.
+{{Formula|naked|round(c * x^{0.7})%|where x is your Playtime (Total) in seconds stat and c is 0.03(2^{0.7}), which is approximately 0.049.}}
+|-
+!A150
+!Explosives
+|Any
+|Research<br />Deflagration (A25) & Delayed Reaction (A30)
+|{{Number|129.6 Noqag}}
+|Whenever you cast a spell, increase the production of your most productive building based on the amount of mana produced in this game for 20 seconds. If another spell is cast while this effect is active, it is restored to full duration.
+{{Formula|stat|round(0.7 * x^{0.6})%|Mana Produced (This Game)}}
+|-
+!A175
+!Soulweaving
+|Undead
+|Research<br />Cursing (D25) & Reinforcing (C135)
+|{{Number|3.273 Uqig}}
+|Increase the production of all buildings based on the amount of times you Reincarnated.
+{{Formula|round(2.5 * x^{2.25})%|the number of times you reincarnated}}
+|-
+!A200
+!Corrosion
+|Any
+|Research<br />Plague (A1) &<br />Decay (A135)
+|{{Number|82.65 Dqig}}
+|Increase clicking reward based on time spent in this game. ''Formula:''
+<math>round(c * x^{0.75})%</math> where x is your Playtime (Total) in seconds stat and c is
+<math>0.07(2^{0.75})</math> which is approximately 0.118.
+|-
+!A250
+!Philosopher's Stone
+|Any
+|Research Transmutation (A10) & Empowered Luck (S175)
+|{{Number|52.7 Qiqig}}
+|Increase production bonus from gems based on the amount of research made.
+{{Formula|floor(x^{0.9} / 25)%|the amount of research made}}
+|-
+!A251
+!Infusion
+|Druid
+|Play as Druid
+|{{Number| 79.05 QiQig}}
+|Increase the production of Stonehenge Circles based on mana produced in this game.
+{{Formula|stat|round(0.75 * x ^{0.6})%|Mana Produced (This Game)}}
+|}
+
+{| class="mw-collapsible mw-collapsed wikitable sortable" style="width:100%;" id="Alchemy-R23-R39"
+! style="color:gray;background:silver;width:11%" |R23 - R39
+! colspan="5" style="background:silver;" |A270 - A590
+|-
+! style="white-space: nowrap;" |Lvl
+! style="white-space: nowrap;" data-sort-type="text" |Name
+! style="white-space: nowrap;" data-sort-type="text" |<abbr title="For which faction the upgrade is available">For</abbr>
+! class="unsortable" |Requirement
+! class="unsortable" |Cost
+! class="unsortable" |Effect
+|-
+!A270
+!Synthesis
+|Any
+|{{Number|20 B}} Faction Coins<br />(This game)
+|{{Number|175.2 SxQig}}
+|Increase mana regeneration based on the amount of Faction Coins found in this game.
+{{Formula|stat|floor(12 * \ln(1 + x)) / 10|Faction Coins Gained (This Game)}}
+|-
+!A300
+!Creeping
+|Faceless
+|Produce {{number|5M}} mana<br />(This game, as Druid)
+|{{Number| 33.6 OcQig}}
+|Increase mana regeneration based on mana produced in this game.
+{{Formula|stat|floor(30 * \ln^{1.2}(1 + x)) / 10|Mana Produced (This Game)}}
+|-
+!A305
+!Engraving
+|Druid
+|2 days as Druids<br />(Total across all R)
+|{{Number|255.2 OcQig}}
+|Increase your chance to find Faction Coins based on the amount of spells cast in this game.<br />Also increase Faction Coins find chance by a multiplicative 100%.
+{{Formula|stat|floor(3.5 * \log_E(1+x)^{3.5})%|Spells Cast (This Game)}}, or approximately
+{{Formula|stat|floor((\ln(x) + 0.69)^{2.75})%|Spells Cast (This Game)}}
+|-
+!A330
+!Adaptation
+|Any
+|Research<br />Mutation (D260) & Meditation (D275)
+|{{Number|6.443 Sxg}}
+|Increase the production of all buildings based on time spent playing as other factions.
+{{Formula|round(0.05 * x^{0.7})%|time spent as other factions}}
+|-
+!A375
+!Transfusion
+|Druid
+|Research<br />Infusion (A251) & Engraving (A305)<br />(as Druid)
+|{{Number|541 DSxg}}
+|Gain additional assistants based on mana produced this game.
+{{Formula|stat|floor(4.5 * ln(1 + x))|Mana Produced (This Game)}}
+|-
+!A400
+!Bloodspring
+|Any
+|Research Assimilation (S251) & Transfusion (A375).
+|{{Number|13.66 QaSxg}}
+|You get your faction's Bloodline effect for free. Bloodstream counts time spent with both factions.
+''NOTE: Does not work with two Bloodlines of the same type. ''<br />''If you buy a prestige faction upgrade, bloodspring will switch to the prestige bloodline.''
+|-
+!A410
+!Poisons
+|Drow
+|4000 Sanctuaries
+|{{Number|787.7 QaSxg}}
+|Increase the production of all other buildings by 95% per Spider Sanctuary you own.
+|-
+!A480
+!Waste
+|Any
+|2000 Royal Exchanges
+|{{Number|1.67 NoSxg}}
+|Increase offline production based on the amount of Royal Exchanges you purchased.
+{{Formula|stat|120 * x^{0.85}%|Royal Exchanges Made}}
+|-
+!A495
+!Elixirs
+|Dwarf
+|500 Base Assistants<br />(as Drow)
+|{{Number|731.4 NoSxg}}
+|Increase assistants production based on the amount of research made.
+{{Formula|120 * x^{0.42}%|the Amount of Researches made}}
+|-
+!A545
+!Mineralogy
+|Any
+|700 Trophies
+|{{Number|466.3 DSpg}}
+|Increase mana regeneration based on the amount of Gems you own.
+{{Formula|log10(x) / 2|Gems you own}}
+|-
+!A590
+!Hexing
+|Undead
+Drow
+|200 Drow Royal Exchanges<br />Research<br />D25 and A410<br />(as Drow or Undead)
+|{{Number|39.16 QiSpg}}
+|Increase the production of all buildings based on mana produced and the percentage of offline time spent in this game.
+{{Formula|naked|(0.045 * x^{0.45} * P)%|where x is your Mana Produced (This Game) stat and P is the percentage of your Time Spent Offline for this game.}}
+|}
+
+{| class="mw-collapsible mw-collapsed wikitable sortable" style="width:100%;" id="Alchemy-A"
+! style="color:gray;background:silver;width:11%" |Post-A
+! colspan="5" style="background:silver;" |A1200 and up
+|-
+! style="white-space: nowrap;" |Lvl
+! style="white-space: nowrap;" data-sort-type="text" |Name
+! style="white-space: nowrap;" data-sort-type="text" |<abbr title="For which faction the upgrade is available">For</abbr>
+! class="unsortable" |Requirement
+! class="unsortable" |Cost
+! class="unsortable" |Effect
+|-
+!A1200
+!Melting
+|Dragon
+|5000 Iron Stronghold, Any Neutral Dragon
+|{{Number|15.56 Uvg}}
+|Increase the production of all other buildings by 0.35% per Iron Strongholds.
+|-
+!A1325
+!Calefaction
+|Any
+|4,500 excavations
+|{{Number|144.9 Tvg}}
+|Increase mana regeneration based on the amount of excavations made.
+{{Formula|floor(0.02 * x)|current excavations}}
+|-
+!A1500
+!Sublimation
+|Druid Dragon
+|style="white-space:nowrap;"|6h Grand Balance<br />Cast Time<br />(This game)<br />Research<br />Dispelling (D590) &<br />Calefaction (A1325)
+|{{Number|25.2 Spvg}}
+|Increases Max Mana based on the amount of Unique Buildings you own.
+{{Formula|build|8 * x^{0.8}|Unique Buildings}}
+|-
+!A2950
+!Combination
+|Merc
+|All [[Lineage]]s level at 15.
+|{{Number|259 SxQig}}
+|Select an additional Bloodline. You also gain all the base effect of its respective Lineage.
+|-
+!A3400
+!Chemistry
+|Any
+|{{Number|1e30}} FC, Research<br />Customizing (C3000) &<br />Manipulation (S3200)
+|{{Number|533.7 QiSxg}}
+|Increases Faction Coin find chance based on the total amount of Lineage levels you have.<br />Also increases Faction Coin find chance by a multiplicative 350%.
+{{Formula|3 * x^{2.25}|total Lineage levels.}}
+|}
+|}
+
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%;" id="Warfare"
+! style="width:70px" |[[File:Warfare_Facility_icon.png|30px]]
+! Warfare Facility
+|-
+| colspan="2" |
+
+{| class="mw-collapsible mw-collapsed wikitable sortable" style="width:100%;" id="Warfare-R16-R22"
+! style="color:gray;background:silver;width:11%" |R16 - R22
+! colspan="5" style="background:silver;" |W1 - W250
+|-
+! style="white-space: nowrap;" |Lvl
+! style="white-space: nowrap;" data-sort-type="text" |Name
+! style="white-space: nowrap;" data-sort-type="text" |<abbr title="For which faction the upgrade is available">For</abbr>
+! class="unsortable" |Requirement
+! class="unsortable" |Cost
+! class="unsortable" |Effect
+|-
+!W1
+!Assault
+|Demon
+|
+|{{Number|750 Qag}}
+|Increase the production of Infernal Realms based on the amount of Hellfire Blasts cast in this game.
+{{Formula|round(70 * x^{0.55})%|Hellfire Blasts Cast (This Game)}}
+|-
+!W10
+!Dueling
+|Elf
+|2000 Training Grounds
+|{{Number|28.83 Uqag}}
+|Increase the production of all other buildings by 90% per Elven Training Grounds you own.
+|-
+!W25
+!War Funds
+|Goblin
+|{{Number|1 Tqag}} Coins<br />(This Game, as Goblin)
+|{{Number|12.63 Dqag}}
+|Increase the production of all buildings based on the amount of Tax Collections cast in this game.
+{{Formula|round(5 * x^{0.6})%|Tax Collections Cast (This Game)}}
+|-
+!W50
+!Exertion
+|Undead
+|12 hours of Evil Play Time,<br />(This Reincarnation, as Demon)<br />Play any Evil faction, but you must be Demon to unlock this.
+|{{Number|318.8 Tqag}}
+|Increase Faction Coin find chance based on the amount of Undercities you own.
+{{Formula|build|(floor(6.5x^{0.65}))%|Undercities}}
+|-
+!W120
+!Betrayal
+|Any
+|250 base assistants
+|{{Number|676 Spqag}}
+|Increase the production of non-unique buildings based on the amount of assistants you own.
+{{Formula|round(1.5 * x^{1.5})%|the amount of assistants you own}}
+|-
+!W135
+!Rampage
+|Any
+|580 Trophies<br />(as Demon)
+|{{Number|296 Ocqag}}
+|Increase maximum mana based on the number of trophies you have unlocked.
+{{Formula|floor(1.25x)|the amount of trophies unlocked}}
+|-
+!W150
+!Invasion
+|Any
+|Research War Funds (W25) & Rampage (W135)
+|{{Number|129.6 Noqag}}
+|Increase the production of all buildings based on the amount of assistants you own.
+{{Formula|round(32 * x^{0.75})%|the amount of assistants you own}}
+|-
+!W175
+!Overwhelm
+|Demon
+|Research<br />Assault (W1) & Invasion (W150)
+|{{Number|3.273 Uqig}}
+|You gain additional assistants based on total amount of evil spells cast.
+{{Formula|floor(0.75 * x^{0.6})|the amount of evil spells cast}}
+|-
+!W180
+!Formation
+|Any
+|1000 Call to Arms Casts (This R)
+Research<br />Dueling (W10) & Exertion (W50)
+|{{Number|24.85 Uqig}}
+|Each building counts 15 times for Call to Arms purposes.
+|-
+!W200
+!Crusade
+|Any
+|Research<br />Hallowing (D50) & Formation (W180)
+|{{Number|82.65 Dqig}}
+|Gain additional assistants based on total time spent as Good.
+{{Formula|stat|floor(0.065 * x^{0.5})|Time Spent Being Good (Total)}}
+|-
+!W205
+!Berserking
+|Any Evil
+|850 Blood Frenzy Casts (Total), Research<br />Rampage (W135) & Retribution (D150)
+|{{Number|627.6 Dqig}}
+|While Blood Frenzy is active, increase mana regeneration based on the amount of assistants you own.
+{{Formula|stat|floor(0.25 * x^{0.9}) / 10|Assistants}}
+|-
+!W225
+!Critical Strike
+|Angel
+|Research<br />Dueling (W10) & Transfixion (D55)
+|{{Number|2.087 Qaqig}}
+|Holy Light empowers Heaven’s Domains based on Holy Light activity time in this game.
+{{Formula|stat|5 * x^{0.65}%|Holy Light Active Time (This Game)|seconds}}
+|-
+!W250
+!Swarming
+|Any
+|Research<br />Overwhelm (W175) & Berserking (W205)
+|{{Number|52.7 Qiqig}}
+|Gain additional assistants based on the amount of trophies you unlocked.
+{{Formula|floor(x / 8)|the amount of trophies unlocked}}
+|}
+
+{| class="mw-collapsible mw-collapsed wikitable sortable" style="width:100%;" id="Warfare-R23-R39"
+! style="color:gray;background:silver;width:11%" |R23 - R39
+! colspan="5" style="background:silver;" |W260 - W590
+|-
+! style="white-space: nowrap;" |Lvl
+! style="white-space: nowrap;" data-sort-type="text" |Name
+! style="white-space: nowrap;" data-sort-type="text" |<abbr title="For which faction the upgrade is available">For</abbr>
+! class="unsortable" |Requirement
+! class="unsortable" |Cost
+! class="unsortable" |Effect
+|-
+!W260
+!Athletics
+|Titan
+|3000 Olympian Halls
+|{{Number| 3.039 SxQig}}
+|Increase the production of all other buildings by 100% per Olympian Hall you own.
+|-
+!W275
+!Domination
+|Faceless
+|300 Base Assistants (as Faceless)
+|{{Number|1.331 SpQig}}
+|Gain additional Faction Coins per second based on the highest amount of assistants you had in a single game.<br />Also a 50% multiplicative Faction Coin find chance.
+{{Formula|stat|floor(125 * x^{0.75})|Assistants (Max)}}
+|-
+!W290
+!Entrench
+|Any
+|2000 Excavations
+|{{Number|582.7 SpQig}}
+|Increase the production of Unique buildings based on the amount of Excavations you made.
+{{Formula|round(15 * x^{0.8})%|the amount of excavations made}}
+|-
+!W320
+!Shattering
+|Any
+|2650 Excavations
+|{{Number|1.117 NoQig}}
+|Increase your clicking reward based on the amount of Excavations you made.
+{{Formula|round(10 * x^{0.75})%|the amount of excavations made}}
+|-
+!W330
+!Heroism
+|Any
+|Research<br />Crusade (W200) & Athletics (W260)
+|{{Number|6.443 Sxg}}
+|Increase your click reward based on the amount of trophies you unlocked.
+{{Formula|round(2.5 * x)%|the amount of trophies unlocked}}
+|-
+!W350
+!Survival
+|Druid
+|Research<br />Creeping (A300) & Synthesis (A270) (As Druid)
+|{{Number|21.42 USxg}}
+|Increase the production of all other buildings based on the production of your Stonehenge Circles.
+{{Formula|75*(\log_{10}(1+x))^{1.3})%|the production of your Stonehenge Circles}}
+|-
+!W400
+!Siege
+|Any
+|Research<br />Architecture (C251) & Entrench (W290)
+|{{Number|13.66 QaSxg}}
+|Each building in the three highest building tiers count as 2 buildings for all purposes. (All purposes in the build. Does not work for Trophies.)
+|-
+!W405
+!Ambush
+|Drow
+|Secrets of the Underworld upgrade<br />(as Drow)
+|{{Number|103.7 QaSxg}}
+|Increase the production of Spider Sanctuaries based on offline Bonus
+{{Formula|3.25 * log(1+x)^{3.25}|Offline Production Bonus}}
+|-
+!W520
+!Stalking
+|Drow
+|Research<br />Exertion (W50) & Ambush (W405)<br />(as Drow)
+|{{Number|18.47 USpg}}
+|Gain 1 assistant for every 100 seconds of Combo Strike activity time. (This Game)
+|-
+!W525
+!Bloodlust
+|Any
+|1d12h as Evil (This R), Research<br />Berserking (W205) & Focus (S460)
+|{{Number|140.2 USpg}}
+|Increase Blood Frenzy multiplier additionally based on the amount of times you cast faction spell in this game.
+{{Formula|300 * floor(x^{0.3})%|Faction Spells' Cast This Game (Vanilla + Prestige spell count)}}
+|-
+!W560
+!Resilience
+|Dwarf
+|Research<br />Divine Eternity (D330) & Mercy (D480) (as dwarf)
+|{{Number|204.2 TSpg}}
+|Increase clicking reward based on the amount of clicks made in this game.
+{{Formula|stat|5 * x^{0.45}%|Treasure Clicks (This Game)}}
+|-
+!W590
+!Torture
+|Demon<br />Drow
+|200 Drow Exchanges, Research<br />Soulrending (D245) & Stalking (W520)
+(as Drow or Demon)
+|{{Number|39.16 QiSpg}}
+|Increase assistants production based on total time spent being Evil.
+{{Formula|stat|8 * x^{0.8}%|Time Spent Being Evil}}
+|}
+
+{| class="mw-collapsible mw-collapsed wikitable sortable" style="width:100%;" id="Warfare-A"
+! style="color:gray;background:silver;width:11%" |Post-A
+! colspan="5" style="background:silver;" |W1275 and up
+|-
+! style="white-space: nowrap;" |Lvl
+! style="white-space: nowrap;" data-sort-type="text" |Name
+! style="white-space: nowrap;" data-sort-type="text" |<abbr title="For which faction the upgrade is available">For</abbr>
+! class="unsortable" |Requirement
+! class="unsortable" |Cost
+! class="unsortable" |Effect
+|-
+!W1275
+!Authority
+|Any
+|12h Call to Arms cast time<br />(This game)
+|{{Number|555.1 Dvg}}
+|Increases the duration of all spells based on the activity time of Call to Arms in the current reincarnation.
+{{Formula|(x^{0.5})%|Call to Arms active time This Reincarnation in seconds}}
+|-
+!W1375
+!Scavenging
+|Any
+|7 days spent as Evil (Across all Rs)
+|{{Number|651.9 Qavg}}
+|Increases Faction coin chance based on the amount of assistants you own.<br />Also increase Faction Coin find chance by a multiplicative 275%.
+{{Formula|(2500 * x^{0.425})|assistants}}
+|-
+!W1400
+!Cataclysm
+|Neutral, Dragon
+|Research<br />Siege (W400) & Melting (A1200)
+|{{Number|21.46 Qivg}}
+|Increase maximum mana based on the amount of clicks made in this game.
+{{Formula|stat|floor 25 * \log(1+x) ^{2.5}|Clicks (this R)}}
+|-
+!W3050
+!Flanking
+|Merc
+|50,000 Base Assistants, Research<br />Authority (W1275) & Intimidation (E1325)
+|{{Number|304.1 OcQig}}
+|Increase the production of building tiers directly above or below Unique Buildings based on the amount of assistants you own.
+{{Formula|0.15 * x^{0.8}|assistants}}
+|-
+!W3150
+!Upheaval
+|Any
+|60,000 Farms, Inns, and Blacksmiths
+|{{Number|357.2 Sxg}}
+|Increase the production of all buildings based on their tier, giving the best bonus to the lowest.
+{{Formula|150 * (12-x)^{2.15}|building tier}}
+|}
+|}
+* [[Research Upgrades|Sortable Research Table]]: Similar as the above tables, all together and sortable by "Facility", "RP#", "Faction", "What it does", and "What it's based on".
+
+== Notes & Tips ==
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%;"
+!Notes & Tips
+|-
+|
+* E150 and S200 may cause income per second to appear going down when purchasing Royal exchanges.([http://www.kongregate.com/forums/8945-realm-grinder/topics/617116 source])
+* 1-135RP [http://www.kongregate.com/forums/8945-realm-grinder/topics/562011#posts-9862807 unlock order and tips] by why_amihere
+* W320 [http://realm-grinder.wikia.com/wiki/Research_Builds#Titans_R27.2B build]
+* Flame of Bondelnar: There are 2 [http://realm-grinder.wikia.com/wiki/Research_Builds#Flame_Chance builds] by artcrow for this
+* 590RPs: 200 dwarf or drow Royal Exchanges. A full mana+assistant build seems to be fastest. Druidline outweights Elfline. [http://www.kongregate.com/forums/8945-realm-grinder/topics/612789-build-suggestions-for-the-good-590s source]
+
+* S300 can be done faster just by repeatedly casting Brainwave and abdicating, without waiting for the end of the spell.
+|}
+
+== Links & Reference ==
+'''Guides'''
+* [[Research: Step by step|Research: Step by Step]] (A very simple step by step guide, by Wikia editors!)
+* [http://www.kongregate.com/forums/8945-realm-grinder/topics/562011-guide-fastest-route-through-r16-researches Fastest Route Through R16 Researches] (A more complete guide by why_amihere)
+
+'''Reference & Tools'''
+* [[Research Builds]]
+* [[Research Upgrades|Sortable Research Table]] - by wikieditors!
+* [[Research By Faction|Purchasable Research Upgrades by Faction]]
+* [[Research Upgrades By Effect|Research Upgrades by Effect]]
+* [https://docs.google.com/spreadsheets/d/1R0Wdkjg8yL3rz9jIr2ORUJnRL4z3WKCnaU_bvOIoaDE/pubhtml Research spreadsheet] (up to 400 RP) - by naabu
+* [https://docs.google.com/spreadsheets/d/1JcHD0z1E7yl4DahkEpyO9Vy7qWy8dSAuAoH9Y7zezCo/edit#gid=0 Research build maker spreadsheet] (up to 590 RP) - by Rahler
+* [https://docs.google.com/spreadsheets/d/e/2PACX-1vQT__XGYTOgL_ZSSzXSN9ggXNFKotDLIE2CsWFu8gIy4NzkRQUF8PCua4mYUeX8rnzrnAu_Fq6YBlgs/pub?output=ods Research Checklist] google ods file to download (updated to Post-A by Lycentia) - by vailsixclaw <sup>[https://docs.google.com/spreadsheets/d/16It8wWCWr1Yek0hhAw5raKTxl0h6sdgdQNzY5hNm_0E/pub?output=ods Original]</sup>
+
+== References ==
+* ''Most Vanilla and Neutral research information and formulas come from [http://www.kongregate.com/forums/8945-realm-grinder/topics/557091-unique-building-info-sheet-research-guide Berkrooster's post].''
+* ''Some Prestige research information comes from [http://www.kongregate.com/forums/8945-realm-grinder/topics/611146-spoiler-underground-researches Curunur's post]. (As for the formulas, they are scattered all over the forum, hence no source link. Credit goes to many players, including [[User:Naidsipo|Naidsipo]], all the anonymous 'formula discoverers', also big thanks to those who have found them and taken the time to copy them here.)''
+
+<references />
+{{Sitenav}}
+[[Category:Research| ]]
+[[Category:Unlock Requirements]]
+[[Category:Realm Grinder Wiki]]

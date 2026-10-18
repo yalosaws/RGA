@@ -1,0 +1,327 @@
+{{tocright}}
+{|
+|[[File:Druid_Faction_Building.png|thumb|left]]
+|{{Description|The wise druids of old were a group of people from all races who strove to maintain world balance with mystical discipline and powerful magic. Affiliating yourself with the Druids faction will boost your magic capabilities and reward balancing of all things.}}
+|}
+
+== The Druid Faction ==
+[[File:Druid champion trophy.png|left|Druid Champion Trophy]]
+[[File:Halls_Of_Balance.png|right|Halls of Balance]]
+'''The Druids''' are part of the Neutral Factions that was implemented during the [[Updates#1.1 The Ancient Races|Ancient Races]] expansion. They feature a powerful [[Heritage]] that increases maximum [[mana]], and their final Challenge reward extends their spell to affect more buildings, and can even be made to affect all buildings!
+* '''[[Alignment]]''': '''''Neutral'''''
+* '''[[Alignment#Leges|Leges]]''': '''''Balance'''''
+* '''[[Spells|Faction Spell]]''': '''''Grand Balance''''' - Increase the production of your least productive building based on the amount of the three most built ones for 20 seconds.<br />{{Formula|naked|round \left(0.25 \times \left(\frac{xyz}{729}\right) ^{0.9}\right)|where x, y, and z are the number of your three most-built buildings.}}
+* '''[[Spells#Spell Upgrades|Spell Upgrade]]''': '''''Halls of Balance''''' - Increases ''Grand Balance'' duration to 24 seconds and lower its cost by 200 mana.  
+** Unlock requirement: Have ''Grand Balance'' affect Hall of Legends.  
+* '''[[Heritage]]''':  Increase maximum Mana by 1 every 15 buildings you own.
+* '''[[Bloodline]]''': Increase mana regeneration based on maximum mana.<br />{{Formula|0.03 \times x^{0.9}|your maximum mana (non-linear value)}}  
+* '''[[Challenge|Challenge Reward]]''': '''''Primal Balance''''' - Grand Balance now affects extra buildings based on total mana spent, starting from the least to most productive building. To affect all 11 building tiers, you will need 10B mana produced (total).<br />{{Formula|naked|\left(0.1 \times x^{0.2}\right)^{1-\frac{A}{8} }|where x is mana produced and A is Ascension (Total) stat}}<br />{{PrimalB}}
+* '''[[Unique Buildings|Research Building]]''': '''Stonehenge Circle''' (from Stone Pillars)
+* '''[[Research|Research Facilities]]''':  '''''Economics, Alchemy'''''
+* '''[[Buildings#Leges Unique Buildings|Leges Building]]''':  '''''Ziggurats''''' (from Ancient Pyramids)
+* '''Faction Unlock Requirements''': See [[Druid#Unlock Requirements|below]]
+
+== Tier 1 Upgrades ==
+{| class="wikitable" style="width:100%"
+|-
+! colspan="2" |Name
+! width="95px" |Cost
+! Effect
+|-
+![[File:Druid.png]]
+!  width="110px" |''Druid Trade Treaty''
+| style="padding:0 8px;" | ''500 Elven + 500 Demon Coins''
+| style="padding:0 8px;" | ''Unlocks Tier 1 Druid Upgrades.''
+|-
+![[File:Druid-faction-upgrade-11.png]]
+! Druidic Vocabulary
+| style="padding:0 8px;" | {{Number|500 Qi|table}}
+| style="padding:0 8px;" | Increase the production of all buildings based on their tier, giving the best bonus to the lowest.
+{{Formula|4000 \times \left(12 - x\right)%|the building tier, starting at 1 for Farms and increasing to 11 for Halls of Legend}}(Not updated)
+|-
+![[File:Druid-faction-upgrade-12.png]]
+! Animal Companions
+| style="padding:0 8px;" | {{Number|5 Sx|table}}
+| style="padding:0 8px;" | You instantly attract 3 [[assistants]] and more will come based on time spent in this Era.
+{{Formula|\left\lfloor\frac{\sqrt{\left(1 + 12 \times x\right)} - 1} {2}\right\rfloor|your Playtime (This Game) stat in hours}}(Not updated)
+{| class="article-table mw-collapsible mw-collapsed wikitable" align="center"
+!Hours Playtime
+!Assistants
+|-
+|0||3
+|-
+|1||4
+|-
+|2||5
+|-
+|3||5
+|-
+|4||6
+|-
+|5||6
+|-
+|6||6
+|-
+|12||8
+|-
+|18||9
+|-
+|24||11
+|-
+|36||12
+|-
+|48||14
+|-
+|60||15
+|-
+|72||17
+|}
+|-
+![[File:Druid-faction-upgrade-13.png]]
+! Natural Recycling
+| style="padding:0 8px;" | {{Number|50 Sx|table}}
+| style="padding:0 8px;" | Increase Faction Coin find chance additively and multiplicatively based on buildings built.
+''Formula:'' <math>(0.4 \times x^{0.4})%</math> where x is the total buildings built.(Not updated)
+|}
+
+==Tier 2 Upgrades==
+{| class="wikitable" style="width:100%"
+|-
+! colspan="2" |Name
+! width="95px" |Cost
+! Effect
+|-
+![[File:Druid-Friendship-Pact druid-Faction upgrade.png]]
+!  width="110px" |''Druids Friendship Pact''
+| style="padding:0 8px; white-space:nowrap;" | ''2,500 Elven +<br />2,500 Demon<br />Coins''
+| style="padding:0 8px;" | ''Unlocks Tier 2 Druid Upgrades.''
+|-
+![[File:Druid-faction-upgrade-21.png]]
+! Earthly Bond
+| style="padding:0 8px;" | {{Number|5 Sp|table}}
+| style="padding:0 8px;" | Increase Maximum Mana based on the highest amount of Stone Pillars built in this Reincarnation.
+''Formula:'' <math>+(2 \times x)</math> where x is the highest amount of ''Stone Pillars'' you built in this Reincarnation.(Not updated)
+|-
+![[File:Druid-faction-upgrade-22.png]]
+! Bardic Knowledge
+| style="padding:0 8px;" | {{Number|50 Sp|table}}
+| style="padding:0 8px;" | Increase the production of all buildings based on your Maximum Mana.
+{{Formula|(16 \times \ln(1+x)^{2} )%|your maximum mana}}(Not updated)
+|-
+![[File:Druid-faction-upgrade-23.png]]
+! Shapeshifting
+| style="padding:0 8px;" | {{Number|500 Sp|table}}
+| style="padding:0 8px;" | Increase Mana Regeneration based on assistants owned.
+{{Formula|1.3 \times x^{0.7}|the number of assistants you own}}(Not updated)
+|}
+
+==Tier 3 Upgrades==
+{| class="wikitable" style="width:100%"
+|-
+! colspan="2" |Name
+! width="98px" |Cost
+! Effect
+|-
+![[File:Druid-alliance druid-Faction upgrade.png]]
+!  width="110px" |''Druids Alliance''
+| style="padding:0 8px;" | ''10,000 Elven + 10,000 Demon Coins''
+| style="padding:0 8px;" | ''Unlocks Tier 3 Druid Upgrades.''
+|-
+![[File:Druid-faction-upgrade-31.png]]
+! Mabinogion
+| style="padding:0 8px;" | {{Number|50 Oc|table}}
+| style="padding:0 8px;" | Increase the production of all buildings based on their tier, giving the best bonus to the lowest.
+''Formula:'' <math>(12 \times 1.8^{12-x})%</math> where x is building tier.(Not updated) 
+|-
+![[File:Druid-faction-upgrade-32.png]]
+! Earthly Soul
+| style="padding:0 8px;" | {{Number|500 Oc|table}}
+| style="padding:0 8px;" | Increase Mana Regeneration based on the highest amount of Stone Pillars you built in this Reincarnation.
+{{Formula|build|x^{0.25}|Stone Pillars}}(Not updated)
+|-
+![[File:Druid-faction-upgrade-33.png]]
+! Building Jungle
+| style="padding:0 8px;" | {{Number|5 No|table}}
+| style="padding:0 8px;" | Increase the production of each building based on buildings of the same type.
+''Formula:'' <math>(1.5 \times x^{0.9})%</math> where x is the amount of buildings of the same type.(Not updated)
+|}
+
+== Unlock Requirements ==
+To affiliate with a Neutral Faction, like for Vanilla Factions, you first need to choose the alignment. The alignment upgrade for Neutral Factions is called the '''[[Alignments|Proof of Neutrality]]'''. It will automatically appear in your next run, once all the 3 Faction quest items have been collected.<br />These requirements can be done in different game plays.
+{| class="wikitable" style="width:100%;"
+! colspan="5" |Druid Faction Unlock Requirements
+|-
+! colspan="2" |Name
+!Type
+!Unlock
+!Notes
+|-
+![[File:Druid-Bark1.png]]
+!'''Fossilized Piece of Bark''' 1
+|Quest [[Artifact]]
+|Have at least {{Number|1B}} gems in the abdication treasury, 10 Excavations
+|''1st clue required to unlock the Druid Faction.''
+|-
+![[File:Druid-Bark2.png]]
+!'''Fossilized Piece of Bark '''2
+|Quest Artifact
+|Have at least {{Number|1B}} gems in the abdication treasury, 25 Excavations
+|''2nd clue required to unlock the Druid Faction.''
+|-
+![[File:Druidic-RuneStone.png]]
+!Druidic Runestone
+|[[Upgrade]]
+|2 ''Fossilized Pieces of Bark'',<br />{{Number|1 M}} Faction Coins (This Game)
+|''Unlocks the Druid Faction.''<br />Price: {{Number|1 No}},<br />25,000 Elf Coins,<br />25,000 Demon Coins
+|-
+![[File:Neutral.png]]
+!Proof Of Neutrality
+|[[Alignment]] Upgrade
+|Collect the 3 quest artifacts of any Neutral Faction.
+|{{Number|10Qa|table}}
+|}
+To get the {{Number|1 M}} Faction Coins for the ''Druidic Runestone'':<br />Use the [[Elf]] faction for their ''Elven Luck'' upgrade (up to 100% chance of faction coins), or the [[Goblin]] for their ''Goblin Greed'' upgrade, or the [[Titan]] for their ''Lightning Strike'' spell.
+
+== Unique Building ==
+[[File:Druid_Unique_Building_Design.png|thumb|left]] 
+[[File:SCbuilding.png|right|190x190px]]
+[[File:Ziggurat.png|right]]
+At R22, Druid's ''Stone Pillars'' can be upgraded to a [[Buildings#Unique Buildings|Unique Building]]: '''''Stonehenge Circles,''''' which is required for some [[challenges]] and [[research]] quests. 
+
+At R100, the Druid's ''Ancient Pyramids'' can be upgraded to a Unique Building: '''''Ziggurat''''', which when bought will grant access to the [[Faction Union]] upgrade.{{Clr}}
+
+== Druid Research ==
+[[File:Neutral-research-unlock.png|right|250px]]
+Upon reaching R23, the game advisor tells us we have unearthed some ruins of the Ancient Races which might enable us to discover their research technology. The requirements can be done in different game plays.
+
+To gain access to Druid [[research]], you will need the "Secrets of the Ancients" upgrade. This upgrade will appear when you have both the Neutral Unique building and the Key to the Lost city artifact. The Key to the Lost city can be [[Excavate|excavated]] in a separate run, and with any faction.
+{| class="wikitable" style="width:100%;"
+! colspan="6" |Druid Research Unlock Requirements & Upgrades
+|-
+! colspan="2" |Name
+!Type
+!Description
+!width="110px" |Requirement
+!style="width:13%;" |Cost
+|-
+![[File:Druid-research-quest.png]]
+!width="90px" |Stonehenge Circles Quest
+|Quest [[Upgrade]]
+|''Hello, friend. The balance of nature requires more magic to sustain it. Build enough Stone Pillars, we'll gather our elders to improve them.''
+<small>''Required once throughout the entire game play and does not count towards the bought upgrade stat.''</small>
+|R22<ref>''Neutral unique buildings can be acquired at R22, but Neutral research cannot be accessed without the Key to the Lost City, which is only available from R23.''</ref> + 2000 Stone Pillars
+|{{Number|10 Dtg|table}}
+|-
+![[File:Stonehenge_Circle_icon.png]]
+!Stonehenge Circles
+|[[Upgrades#Allegiances Upgrades|Allegiances Upgrades]]
+|Upgrade ''Stone Pillars'' to ''Stonehenge Circles'', boosting their production by 25% per point of Maximum Mana and unlocking more unique perks for the building.
+''Note: The bonus is not a multiple of 25; this may be due to max. mana appearing as a floating point number instead of an integer.''
+|''Stonehenge Circles Quest''
+|{{Number|10 Ttg|table}}
+|-
+![[File:Artifact-lostcity.png]]
+!Key to the Lost City
+|[[Quest Artifact]]
+|Unlocks the ''Secrets of the Ancients'' upgrade
+|Found on the 1500th [[excavation]] at R23
+|
+|-
+![[File:Secrets of the Ancients.png]]
+!Secrets of the Ancients
+|Upgrade
+|Unlocks [[research]] for Titan, Druids and Faceless and increases production by 100,000%, plus an additional bonus based on Economics research points.
+<small>''Required once throughout the entire game play and does not count towards the bought upgrade stat.''</small>
+|''Key To The Lost City'' artifact, Neutral Unique Building
+|{{Number|1E151}} Coins,
+{{Number|1E6}} of each Vanilla FCs
+|-
+! colspan="6" |Neutral Research Upgrade
+|-
+![[File:Artifact-ancientdevice.png]]
+!Ancient Device
+|Quest Artifact and Upgrade
+|Adds 2 extra slots to the Neutral faction you are playing.
+Druids are related to the ''Economics'' and ''Alchemy'' Facilities.
+<br /><small>''Requires being purchased for each Neutral research run.''</small>
+|Neutral Faction + 2,000 excavations.<br />''Chance: 0.2% per excavation''
+|{{Number|100 QiSxg|table}}
+|}
+
+== Druid Leges ==
+Upon reaching R100, the ''[[Alignments|Proof of Balance]]'' will become available, which provides a quest for an additional unique building, which when bought will grant access to the its Union upgrade.
+{| class="wikitable" style="width:100%;"
+! colspan="6" |Druid Leges Requirements
+|-
+! colspan="2" |Name
+!Type
+!Description
+! width="110px" |Requirement
+! width="75px" |Cost
+|-
+![[File:Druid-research-quest.png]]
+! width="90px"|Ziggurat Quest
+|Quest [[Upgrade]]
+|Grants access to Unique Building.
+|12K ''Stonehenges''
+|{{Number|1 Ud|table}}
+|-
+![[File:Ziggurat Upgrade.png]]
+!Ziggurat
+|[[Buildings#Unique Buildings|Unique Building]]
+|Upgrade ''Ancient Pyramids'' to ''Ziggurats'', boosting their production based on lineage levels and unlocking more unique perks for the building.
+{{Formula|\left\lfloor x^{1.1}\right\rfloor %|total level of lineages}}<br />+Access to the Faction Union.
+|''Ziggurat Quest''
+|{{Number|1 Td|table}}
+|-
+![[File:DruidsUnion.png]]
+!Druids Union
+|Faction Union
+|Grants access to Union Upgrade.
+After R110 : Increase the production of Non-Unique buildings based on your total 
+Lineage level and the maximum amount of Grand Balance targets.
+
+{{Formula|xy| \frac{x y} {2.5}|total Lineage levels | amount of buildings targeted by Grand Balance}}
+|''Ziggurat'' Unique Building
+|{{Number|1 Qi}} Elven and Demon Coins
+|-
+![[File:BuildingVines.png]]
+!Building Vines
+|Union Upgrade
+|Increase Non-Unique building count based on the amount of ''Ziggurats'' you own.
+{{Formula|build|1.5x^{0.5}|Ziggurat}}
+|Druids Union
+|{{Number|1 Nod|table}}
+|-
+!
+!
+'''Lunar '''
+
+'''Cycle'''
+|Union 
+Upgrade
+|Increase the production of all buildings based on the difference between
+<nowiki> </nowiki>time spent online and offline in this game. Maximum bonus is granted 
+for the smallest difference.
+
+{{Formula|\left (x + y \right) ^ {0.65} \times \left (\frac{1}{1 + \left \vert x - 2y \right \vert} \right) ^ {0.25}|time this game in seconds| offline time this game in seconds}}.
+|Druids Union
+|100Qivg
+1E80
+|-
+!
+!Grove Farming
+|Union Upgrade
+|Increase the production of all buildings based on their tier. Middle tiers get better bonuses.
+{{Formula|naked| 0.75 \times \left( \left (6 - \left \vert 6 - T \right \vert \right ) ^ 5 \right )|where T is the building tier}}.
+|Druids Union
+|100Tg
+1E95
+|}
+
+
+<references />
+{{Sitenav}}
+[[Category:Druid| ]]
+[[Category:Factions]]
+[[Category:Unlock Requirements]]

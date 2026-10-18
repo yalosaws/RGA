@@ -1,0 +1,229 @@
+{{Tocright}}[[File:Fairy_Faction_Building.png|thumb|left]]
+{{Description|"Fairies focus on the small and common things and make them magically powerful. Affiliating yourself with the Fairy faction will hugely improve the output of lower tier buildings."}}
+
+== The Fairy Faction ==
+[[File:Fairychampion.png|left|54x54px|Fairy Champion Trophy]]
+[[File:Fairy Choir.png|right|54x54px|Fairy Choir]]
+The '''Fairies''' are one of the original [[Alignments|Good Vanilla Factions]] that was implemented since the beginning of the game. They can cheaply build the first 3 Tier [[buildings]], thus boosting perks based on amount of buildings, and help get some of the [[Trophies#Buildings|building trophy series]]. With their spell upgrade Fairy Choir, they can magically multiply the amount of [[assistants]], which combined with other perks can become a very strong asset.
+* '''[[Alignment]]''': '''''Good'''''
+* '''[[Alignment#Leges|Leges]]''': '''''Chaos'''''
+* '''[[Spells|Faction Spell]]''': '''''Fairy Chanting''''' - Increase the production of Farms, Inns and Blacksmiths by x500 for 10 seconds.
+* '''[[Spells#Spell Upgrades|Spell Upgrade]]''': '''''Fairy Choir''''' - Triples your assistants while Fairy Chanting is active.
+** Unlock requirement: Cast the Fairy Chanting spell while having 45 or more assistants.
+* '''[[Heritage]]''': Increase the production of all buildings by 0.075% per Farm, Inn and Blacksmith you own.
+* '''[[Bloodline]]''': Increase the production of Farm, Inn and Blacksmith based on the assistants you own.
+** {{Formula|build|250 \times x^{0.9}%|assistants}}
+* '''[[Challenge|Challenge Reward]]''': '''''Fairy Orchestra''''' - Each assistant generates 3 times as many Faction Coins while Fairy Chanting is active.
+* '''[[Unique Buildings|Research Building]]''': '''''Enchanted Fields''''' (from Farms)
+* '''[[Research#The Facilities & Related Factions|Research Facility]]''': '''''Spellcraft'''''
+* '''[[Unique Buildings|Leges Building]]''': '''''Swarming Towers''''' (from Wizard Towers)
+* '''Faction Unlock Requirements''': None (All Vanilla Factions are unlocked by default)
+
+== Tier 1 Upgrades ==
+{| class="wikitable" style="width:100%"
+|-
+! colspan="2" |Name
+! width="75px" |Cost
+! Effect
+|-
+![[File:fairytradetreaty.png]]
+! width="110px"|''Fairy Trade Treaty''
+| style="padding:0 8px;" |''20 Fairy Coins''
+| style="padding:0 8px;" |''Unlocks Fairy Upgrades.''
+|-
+![[File:fairyupgrade1,1.png]]
+!Pixie Dust Fertilizer
+| style="padding:0 8px;" |{{Number|50 M|table}}
+| style="padding:0 8px;" |Increase the base production of Farms, Inns and Blacksmith by +600 and reduce their building cost multiplier.
+|-
+![[File:fairyupgrade1,2.png]]
+!Fairy Worker
+| style="padding:0 8px;" |{{Number|500 M|table}}
+| style="padding:0 8px;" |Increase the base production of Farms, Inns and Blacksmith based on assistants owned.
+''Formula:'' <math>(5 * ln(1 +x) ^ {2.5})%</math>, where x is assistants owned. 
+|-
+![[File:fairyupgrade1,3.png]]
+!Spellsmith
+| style="padding:0 8px;" |{{Number|50 T|table}}
+| style="padding:0 8px;" |Increase Mana Regeneration based on Farms, Inns and Blacksmith owned.
+{{Formula|build|+(0.3 * x ^ {0.3})|Farms, Inns, and Blacksmiths}}
+|}
+
+== Tier 2 Upgrades ==
+{| class="wikitable" style="width:100%"
+|-
+! colspan="2" |Name
+! Cost
+! Effect
+|-
+![[File:fairyfriendship.png]]
+! width="110px" |''Fairy Friendship Pact''
+| style="padding:0 8px;" |''100 Fairy Coins''
+| style="padding:0 8px;" |''Unlocks more Fairy Upgrades''
+|-
+![[File:fairyupgrade2,1.png]]
+!Starmetal Alloys
+| style="padding:0 8px;" |{{Number|5 Qa|table}}
+| style="padding:0 8px;" |Autoclick based on active spells.<br />
+''Formula:''  +(x), where x is active spells.
+|-
+![[File:fairyupgrade2,2.png]]
+!Golden Pots
+| style="padding:0 8px;" |{{Number|5 T|table}}
+| style="padding:0 8px;" |100% of production of Farms, Inns and Blacksmith is added to base clicking reward. Also increase Faction Coin find chance + 20%.
+|-
+![[File:fairyupgrade2,3.png]]
+!Swarm of Fairies
+| style="padding:0 8px;" |{{Number|500 Qa|table}}
+| style="padding:0 8px;" |Gain [[assistants]] based on Farms, Inns and Blacksmith owned.
+{{Formula|build|+(0.3\times x^ {0.7})|Farms, Inns, and Blacksmiths}}
+|}
+
+== Tier 3 Upgrades ==
+{| class="wikitable" style="width:100%"
+|-
+! colspan="2" |Name
+! Cost
+! Effect
+|-
+![[File:fairyalliance.png]]
+! width="110px" |''Fairy Alliance''
+| style="padding:0 8px;" |''500 Fairy Coins''
+| style="padding:0 8px;" |''Unlocks more Fairy Upgrades''
+|-
+![[File:fairyupgrade3,1.png]]
+!Fairy Cuisine
+| style="padding:0 8px;" |{{Number|500 B|table}}
+| style="padding:0 8px;" |Increase production bonus from Gems based on Fairy Chanting activity time on this era.<br />
+''Formula:'' <math>(0.35* x ^ {0.65})%</math>, where x is Fairy Chanting activity time this Era.
+|-
+![[File:fairyupgrade3,2.png]]
+!Rainbow Link
+| style="padding:0 8px;" |{{Number|50 Qa|table}}
+| style="padding:0 8px;" |Increase the production of all buildings based on Farms, Inns and Blacksmith owned.
+''Formula:'' <math>(1.25\times x^{0.75})%</math>where x is the amount of Farms, Inns and Blacksmiths you own.
+|-
+![[File:fairyupgrade3,3.png]]
+!Kind Hearts
+| style="padding:0 8px;" |{{Number|5 B|table}}
+| style="padding:0 8px;" |Increase Maximum Mana based on Good buildings built.
+''Formula:'' <math>1.3\times x^{0.7}</math> where x is the amount of Good buildings you own.
+|}
+
+== Unique Buildings ==
+[[File:Fairy Unique Building Design.png|left]]
+[[File:Special-building-fairy.png|right|190x190px]][[File:Swarming Tower.png|right|190x190px]]
+At R16, the Fairies' ''Farms'' can be upgraded to a [[Buildings#Unique Buildings|Unique Building]]: '''''Enchanted Fields''''', which is required for some [[challenges]] and [[research]] quests.
+
+At R100, the Fairies' ''Wizard Towers'' can be upgraded to a [[Buildings#Unique Buildings|Unique Building]]: '''''Swarming Towers''''', which when bought will grant access to the [[Faction Union]] upgrade.
+
+{{Clr}}
+
+== Fairy Research ==
+[[File:Research-new-progress-system-msg.PNG|right|250px]]
+Upon reaching R16, the game advisor tells us that the Vanilla factions have gained tremendous power. Their power can be ours if we get ready and seek them again.
+
+To unlock Fairy research, play the Fairy faction and simply follow the appearing quests (Do not [[prestige]]). These can be done in separate game plays.
+{| class="wikitable" style="width:100%;"
+! colspan="5" |Fairy Research Requirements
+|-
+! colspan=2 |Name
+!Description
+!Requirements
+!Cost
+|-
+![[File:Fairy-research-quest.png]]
+! width="90px"|Enchanted Field Quest
+|''Hey! Listen! A True Fairy has never enough Farms! We will offer you the chance to improve them! ''
+<small>''Required once throughout the entire game play and does not count towards the bought upgrade stat.''</small>
+|R16 + 2250 ''Farms''
+|{{Number|10 Dtg|table}}
+|-
+![[File:Enchanted_Fields_icon.png]]
+!Enchanted Field
+|Upgrade ''Farms'' to ''Enchanted Fields'', boosting their production based on the amount of assistants you own and unlocking more unique perks for the building.
+{{Formula|stat|47 \times (750 \times x)^{0.7}|Assistants }}<br />+Access to the Research Facilities.
+|Buy ''Enchanted Field Quest''
+|{{Number|10 Ttg|table}}
+|-
+![[File:Spellcraft Facility icon.png]]
+!Spellweavery
+|Unlocks the ''Spellcraft'' research facility and increases Fairy production by 100000%, plus an additional bonus based on ''Spellcraft'' research points.
+
+<small>''Required once throughout the entire game play and does not count towards the bought upgrade stat.''</small>
+|All Fairy faction upgrades bought, ''Enchanted Field''
+|{{Number|1e121}} coins, {{Number|1e6}} Fairy coins
+|-
+! colspan="5" |Trophy & Upgrade
+|-
+![[File:Magician.png]]
+!Magician
+|Add 1 additional slot to the Spellcraft facility.
+|Discover at least 10 Spellcraft Researches
+|{{Number|2.5e152|table}}
+|}
+
+== Fairy Leges ==
+Upon reaching R100, the ''[[Alignments|Proof of Chaos]]'' will become available, which provides a quest for an additional unique building, which when bought will grant access to the its Union upgrade.
+{| class="wikitable" style="width:100%;"
+! colspan="6" |Fairy Leges Requirements
+|-
+! colspan="2" |Name
+!Type
+!Description
+! width="110px" |Requirement
+! style="width:13%;" |Cost
+|-Grants access to Unique Building.
+![[File:Fairy-research-quest.png]]
+! width="90px"|Swarming Towers Quest
+|Quest [[Upgrade]]
+|Grants access to Unique Building.
+|200K Assistants
+|{{Number|1 Ud|table}}
+|-
+![[File:Swarming Tower Upgrade.png]]
+!Swarming Tower
+|Allegiances Upgrades
+|Upgrade ''Wizard Towers'' to ''Swarming Towers'', boosting their production based on the amount of active spells and unlocking more unique perks for the building.
+{{Formula|\left(0.35\times x^{2.35}\right)%|active spells}}<br />+Access to the Faction Union.
+|''Swarming Towers Quest''
+|{{Number|1 Td|table}}
+|-
+![[File:FairiesUnion.png]]
+!Fairies Union
+|Faction Union
+|Grants access to Union Upgrade.
+|''Swarming Tower'' Unique Building
+|{{Number|1 Qi}} Fairy Coins
+|-
+!
+[[File:BubbleSwarm.png]]
+!Bubble Swarm
+|Union Upgrade
+|Increase maximum mana based on the amount of ''Swarming Towers'' you own.
+{{Formula|build|\sum {x}\times100\times x^{0.45}|Swarming Towers}}
+|Faction Union
+|{{Number|1 Nod|table}}
+|-
+! style="text-align:right;"|[[File:Pheromones.png]]
+!Pheromones
+|Union Upgrade
+|Gain assistants based on time spent affiliated with Fairies. (This R)
+{{Formula|(1.5\times x^{0.75})|time spent affiliated with Fairies. (This R)}}
+|Faction Union
+|{{Number|100 Qivg|table}}
+|-
+![[File:DreamCatchers.png]]
+!Dream
+Catchers
+|Union Upgrade
+|Multiplicatively increase mana regen by a random amount. Grows additively every 30 minutes (starts at 0% on upgrade bought)
+|Faction Union
+|{{Number|100 Tg|table}}
+|}
+
+
+
+{{Sitenav}}
+[[Category:Fairy| ]]
+[[Category:Factions]]

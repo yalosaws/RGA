@@ -1,0 +1,261 @@
+{{tocright}}[[File:Titan_Faction_Building.png|thumb|left]]
+{{Description|"Titans were an ancient race of giant creatures with godlike powers and millennial knowledge. Affiliating yourself with the Titans faction means big numbers: they will boost every aspect of your economy to unimaginable values."}}
+
+== The Titan Faction ==
+[[File:Titan champion trophy.png|left|Titan Champion Trophy]][[File:Lightning_Storm.png|right|Lightning Storm|1x1px]]
+
+* '''[[Alignment]]''': '''''Neutral'''''
+* '''[[Alignment#Leges|Leges]]''': '''''Order'''''
+* '''[[Spells|Faction Spell]]''': '''''Lightning Strike''''' - The production of a random building is multiplied by 400% for each Iron Stronghold. Also grants Faction Coins depending on your current amount of gems.{{Formula|round(1.75 \times \ln(1 + x)^3)|your current gems}}
+* '''[[Spells#Spell Upgrades|Spell Upgrade]]''': '''''Lightning Storm''''' - Increase Lightning Strike multiplier to 5x Iron Strongholds.
+** Unlock requirement: Cast Lightning Strike 100 times in a single game.
+* '''[[Heritage]]''': Increase [[Royal Exchanges]] production bonus by an additional 15% each.
+* '''[[Bloodline]]''': Increase the production of all buildings based on the amount of Royal Exchanges you purchased.{{Formula|15 \times x^{0.85}%|the amount of Royal Exchanges you own}}
+* '''[[Challenges|Challenge Reward]]''': '''''Thunderstorm''''' - Lightning Strike now grants more faction coins based on your faction coin find chance.{{Formula|round\left(x^{1.05}\right)%|your current chance to find Faction Coins}}
+* '''[[Unique Buildings|Research Building]]''': '''''Olympian Halls''''' (from Hall Of Legends)
+* '''[[Research|Research Facility]]''': '''''Craftsmanship, Warfare'''''
+* '''[[Buildings#Leges Unique Buildings|Leges Building]]''': '''''Mountain Palaces''''' (from Deep Mines)
+* '''Faction Unlock Requirements''': See [[#Unlock Requirements|below]]
+
+== Tier 1 Upgrades ==
+{| class="wikitable" style="width:100%"
+|-
+! colspan="2" |Name
+! width="95px" |Cost
+! Effect
+|-
+![[File:Titan.png]]
+! width="110px" |''Titans Trade Treaty''
+| style="padding:0 8px;" | ''500 Angel + 500 Goblin Coins''
+| style="padding:0 8px;" | ''Unlocks Tier 1 Titan Upgrades.''
+|-
+![[File:Titan-faction-upgrade-11.png]]
+! Colossal Forge
+| style="padding:0 8px;" | {{Number|500 Qi|table}}
+| style="padding:0 8px;" | Increase the production of all buildings based on buildings built.
+''Formula:'' <math>(6 \times x^{0.6})%</math> where x is the amount of buildings you own.
+|-
+![[File:Titan-faction-upgrade-12.png]]
+! Charged Clicks
+| style="padding:0 8px;" | {{Number|5 Sx|table}}
+| style="padding:0 8px;" | Increases Mana Regeneration additively and multiplatively based on clicks made in this Era.
+''Formula:'' <math>(25 +2.5 \times \log_{10}(1+x)^{2.5} + x^{0.25})%</math> where x is the amount of clicks made this game.(Not updated)
+|-
+![[File:Titan-faction-upgrade-13.png]]
+! Titan Obelisk
+| style="padding:0 8px;" | {{Number|50 Sx|table}}
+| style="padding:0 8px;" | Increase Faction Coin find chance based on time spent as Neutral in this Reincarnation.
+''Formula:'' <math>+(3 \times x^{0.7})%</math> where x is the time spent as Neutral in this Reincarnation.(Not updated)
+|}
+
+==Tier 2 Upgrades==
+{| class="wikitable" style="width:100%"
+|-
+! colspan="2" |Name
+! width="95px" |Cost
+! Effect
+|-
+![[File:Titan-Friendship-Pact Titan-Faction upgrade.png]]
+! width="110px" |''Titan Friendship Pact''
+| style="padding:0 8px;" | ''2,500 Angel + 2,500 Goblin Coins''
+| style="padding:0 8px;" | ''Unlocks Tier 2 Titan Upgrades.''
+|-
+![[File:Titan-faction-upgrade-21.png]]
+! Titan Drill
+| style="padding:0 8px;" | {{Number|5 Sp|table}}
+| style="padding:0 8px;" | Increase the production of Warrior Barracks / Slave Pens / Deep Mines by +19635 and Cathedrals / Dark Temples / Monasteries by +98000 (based on your Alignment).
+Also increase their production by 2500%.
+|-
+![[File:Titan-faction-upgrade-22.png]]
+! Charged Structures
+| style="padding:0 8px;" | {{Number|50 Sp|table}}
+| style="padding:0 8px;" | Increased the production of all buildings based on Lighting Strike activity time in this Era.
+''Formula:'' <math>(15*x)%</math> where x is the amount of active spells (Not updated).
+|-
+![[File:Titan-faction-upgrade-23.png]]
+! Titan sized Walls
+| style="padding:0 8px;" | {{Number|500 Sp|table}}
+| style="padding:0 8px;" | Increase Hall of Legends production based on assistant owned.
+''Formula:'' <math>(20 + 2.15 \times ln(1+x)^{2.15})%</math> where x is the amount of assistants you own (Not updated).
+|}
+==Tier 3 Upgrades==
+{| class="wikitable" style="width:100%"
+|-
+! colspan="2" |Name
+! width="95px" |Cost
+! Effect
+|-
+![[File:Titan-Alliance Titan-Faction upgrade.png]]
+! width="110px" |''Titan Alliance''
+| style="padding:0 8px;" | ''10,000 Angel + 10,000 Goblin Coins''
+| style="padding:0 8px;" | ''Unlocks Tier 3 Titan Upgrades.''
+|-
+![[File:Titan-faction-upgrade-31.png]]
+! Cyclopean Strength
+| style="padding:0 8px;" | {{Number|50 Oc|table}}
+| style="padding:0 8px;" | Assistants count 200% more. Increase their production based on time spent as Titan in this Reincarnation.
+|-
+![[File:Titan-faction-upgrade-32.png]]
+! Heavy Coins
+| style="padding:0 8px;" | {{Number|500 Oc|table}}
+| style="padding:0 8px;" | Increase Royal Exchanges production bonus by 100% each and reduces their cost multiplier by 0.01.
+|-
+![[File:Titan-faction-upgrade-33.png]]
+! Oversized Legends
+| style="padding:0 8px;" | {{Number|5 No|table}}
+| style="padding:0 8px;" | Reduce Halls of Legends building cost multiplier, and increase assistants production based on Halls of Legends owned.
+''Formula:'' <math>(6 \times x^{0.6})%</math> where x is the amount of ''Hall of Legends'' built (Not updated).
+|}
+
+== Unlock Requirements ==
+To affiliate with a Neutral Faction, like for Vanilla Factions, you first need to choose the alignment. The alignment upgrade for Neutral Factions is called the '''[[Alignments|Proof of Neutrality]]'''. It will automatically appear in your next run, once all the 3 Faction quest items have been collected.<br />These requirements can be done in different game plays.
+{| class="wikitable" style="width:100%;"
+! colspan="5" |Titan Faction Unlock Requirements
+|-
+! colspan="2" |Name
+!Type
+!Unlock
+!Notes
+|-
+![[File:StoneSlab1.png]]
+!Ancient Stone Slab 1
+|Quest [[Artifact]]
+|Have at least {{Number|1B}} gems in the abdication treasury, 5 [[Excavations]]
+|''1st clue required to unlock the Titan Faction.''
+|-
+![[File:StoneSlab2.png]]
+!Ancient Stone Slab 2
+|Quest Artifact
+|Have at least {{Number|1B}} gems in the abdication treasury, 20 Excavations
+|''2nd clue required to unlock the Titan Faction.''
+|-
+![[File:FragmentOfATitanStatue.png]]
+!Fragment of a Titan Statue
+|[[Upgrade]]
+|2 ''Ancient Stone Slabs'', 300 ''Halls of Legends''
+|''Unlocks the Titan Faction, and The Proof of Neutrality''.<ref>''The Proof of Neutrality is automatically unlocked by the first Neutral Faction to be unlocked.''</ref><br />Price: {{Number|1 No}}, 25,000 Angel Coins, 25,000 Goblin Coins
+|-
+![[File:Neutral.png]]
+!Proof of Neutrality
+|[[Alignment]] Upgrade
+|Collect the 3 quest artifacts of any Neutral Faction.
+|{{Number|10Qa}} Coins
+|}
+To reach 300 Halls of Legends: Play any faction which has good production.
+
+== Unique Buildings ==
+[[File:Titan_Unique_Building_Design.png|thumb|left]]
+[[File:OHbuilding.png|right]]
+[[File:Mountain Palace.png|right]]
+At R22, the Titan's ''Hall Of Legends'' building can be upgraded to a [[Buildings#Unique Buildings|Unique Building]]: '''''Olympian Halls,''''' which is required for some [[challenges]] and [[research]] quests.
+
+At R100, the Titan's ''Deep Mines'' can be upgraded to a Unique Building: '''''Mountain Palaces''''', which when bought will grant access to the [[Faction Union]] upgrade.
+
+{{Clr}}
+
+== Titan Research ==
+[[File:Neutral-research-unlock.png|right|250px]]
+Upon reaching R23, the game advisor tells us we have unearthed some ruins of the Ancient Races which might enable us to discover their research technology.
+
+To gain access to Titan [[research]], you will need the Secrets of the Ancients upgrade. This upgrade will appear once you have bought Olympian Halls and found the Key to the Lost city artifact.
+{| class="wikitable" style="width:100%;"
+! colspan="6" |Titan Research Unlock Requirements & Upgrades
+|-
+! colspan="2" |Name
+!Type
+!Description
+! width="110px" |Requirement
+! style="width:13%;" |Cost
+|-
+![[File:Titan-research-quest.png]]
+! width="90px" |Olympian Halls Quest
+|Quest [[Upgrade]]
+|''Khaire, ruler. More of our people will join your cause if you build enough Hall of Legends. Our architects will take care of expanding them to accommodate the almighty Titans.''
+<small>''Required once throughout the entire game play and does not count towards the bought upgrade stat.''</small>
+|R22<ref>''The Titan unique building can be acquired at R22, but Titan research cannot be accessed without the Key to the Lost City, which is only available from R23.''</ref> + 2000 ''Halls of Legends''
+|{{Number|10 Dtg|table}}
+|-
+![[File:Olympian Hall icon.png]]
+!Olympian Halls
+|[[Upgrades#Allegiances Upgrades|Allegiances Upgrades]]
+|Upgrade ''Halls of Legend'' to ''Olympian Halls'', boosting their production by 15% per Royal Exchange you've purchased and unlocking more unique perks for the building.
+|''Olympian Halls Quest''
+|{{Number|10 Ttg|table}}
+|-
+![[File:Artifact-lostcity.png]]
+!Key to the Lost City
+|Quest [[Artifact]]
+|Unlocks the ''Secrets of the Ancients'' upgrade
+|Found on the 1500th [[excavation]] at R23
+|
+|-
+![[File:Secrets of the Ancients.png]]
+!Secrets of the Ancients
+|Upgrade
+|Unlocks [[research]] for Titan, Druids and Faceless and increases production by 100,000%, plus an additional bonus based on Economics research points.
+<small>''Required once throughout the entire game play and does not count towards the bought upgrade stat.''</small>
+|''Key To The Lost City'' artifact, Neutral Unique Building
+|{{Number|1e151}} Coins,
+{{Number|1E6}} of each Vanilla FCs
+|-
+! colspan="6" |Neutral Research Upgrade
+|-
+![[File:Artifact-ancientdevice.png]]
+!Ancient Device
+|Quest Artifact and Upgrade
+|Adds 2 extra slots to the Neutral faction you are playing.
+Titans are related to the ''Craftsmanship'' and ''Warfare'' Facilities.
+<br /><small>''Requires being purchased for each Neutral research run.''</small>
+|Neutral Faction + 2,000 excavations.<br />''Chance: 0.2% per excavation''
+|{{Number|100 QiSxg|table}}
+|}
+
+== Titan Leges ==
+Upon reaching R100, the ''[[Alignments|Proof of Order]]'' will become available, which provides a quest for an additional unique building, which when bought will grant access to the its Union upgrade.
+{| class="wikitable" style="width:100%;"
+! colspan="6" |Titan Leges Requirements
+|-
+! colspan="2" |Name
+!Type
+!Description
+! width="110px" |Requirement
+! width="75px" |Cost
+|-
+![[File:Titan-research-quest.png]]
+! width="90px"|Mountain Palace Quest
+|Quest Upgrade
+|Grants access to Unique Building.
+|3750 Royal Exchanges
+|{{Number|1 Ud|table}}
+|-
+![[File:Mountain Palace Upgrade.png]]
+!Mountain Palace
+|Allegiances Upgrades
+|Upgrade ''Deep Mines'' to ''Mountain Palaces'', boosting their production based on buildings owned and unlocking more unique perks for the building.
+{{Formula|0.25 \times x^{0.75}|buildings owned}}<br />+Access to the Faction Union.
+|''Mountain Palace Quest''
+|{{Number|1 Td|table}}
+|-
+![[File:TitansUnion.png]]
+!Titans Union
+|Faction Union
+|Grants access to Union Upgrade.
+|''Mountain Palace'' Unique Building
+|{{Number|1 Qi}} Angel and Goblin Coins
+|-
+![[File:GiantMarket.png]]
+!Giant Market
+|Union Upgrade
+|Increase Royal Exchanges count based on the amount of ''Mountain Palace'' you own.
+{{Formula|build|1.25x^{0.725}|Mountain Palaces}}
+|Titans Union
+|{{Number|1 Nod|table}}
+|}
+
+
+
+<references />
+{{Sitenav}}
+[[Category:Titan| ]]
+[[Category:Factions]]
+[[Category:Unlock Requirements]]

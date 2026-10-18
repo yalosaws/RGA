@@ -1,0 +1,814 @@
+R220+ Builds (Not updated for v4.2) 
+ All challenges need that faction.
+ All challenge 2 need that faction and that bloodline.
+ All Prestige and Elite challenges up to and including challenge 3 will tell you what base faction to use but it also needs that faction.
+ All other Prestige and Elite challenges still need that faction to complete.
+ Good Factions :
+ Fairy 
+ Elven 
+ Angel 
+ Evil Factions :
+ Goblin 
+ Undead 
+ Demon 
+ Neutral Factions :
+ Titan 
+ Druid 
+ Faceless 
+ Prestige Factions :
+ Dwarven 
+ Drow 
+ Dragons 
+ Elite Factions :
+ Archon 
+ Djinn 
+ Makers 
+ Mercenary Faction :
+ Mercenary 
+ Prove your loyalty and dedication to the factions by completing their unique Challenges. You will be rewarded with new perks and upgrades to help in your Realm Grinder progress!
+ Upon reaching R2, a "Challenge" button will appear on the left leading to the Challenge window. There, your first, or next, challenge(s) will be visible, and hovering over the challenge icon will reveal the necessary requirements to unlock it.
+ There are several Tier challenges for each Faction. The Tiers appear as you advance, and hence can only be completed in order. You can accomplish multiple Tiers on the same run, you just cannot get later Tiers before earlier Tiers.
+ Vanilla Faction challenges : Tier 1 upgrades boost the faction it belongs to. Tier 2 upgrades boosts another Faction. Last Tier upgrades are universal and boost basic perks. Completing all the challenges of a Faction rewards a spell upgrade. The last Tiers and Spell upgrades can be used also with Mercenaries, and their respective Factions, with or without Dwarven or Drow.
+ Neutral Faction challenges : Tier 1 upgrades boost it's own faction, Tier 2 and Tier 3 upgrades boosts each other Neutral Faction, and Tier 4 upgrades are universal.
+ Prestige Faction challenges : Tier 1 upgrades boost Dwarven-Angels or Drow-Demons, Tier 2 upgrades boost Dwarven-Fairies or Drow-Goblins, Tier 3 upgrades boost Dwarven-Elves or Drow-Undead, Tier 4 upgrades boost all Dwarven or all Drow, and Tier 5 upgrades are universal.
+ Elite Faction challenges : Tier 1 upgrades boost Good, Tier 2 upgrades boost Evil, Tier 3 upgrades boost Neutral, Tier 4 upgrades boost Itself, and Tier 5 upgrades are universal.
+ Once you have unlocked a challenge, the perks relative to the faction you are playing, being costless, will be turned on by default after the faction's spell upgrade and Challenge Power Upgrade has been purchased. 
+ Fairy Challenge Reward 
+ Fairy Orchestra 
+ Effect : Each assistant generates 3 times as many faction coins while Fairy Chanting is active.
+ " coords="4,44,58,98" shape="rect">
+ Fairy Challenge 1 
+ Pixie Mischief 
+ "The Fairies are small and mighty, and they can turn little things into all you ever need. Speed is paramount and they do not tolerate cheating!"
+ Requirements : Fairy as Base Faction, Reincarnation 2+, Fairy Choir upgrade purchased.
+ Note : Dwarven can be used but not required.
+ Challenge : Only use Farms, Inns and Blacksmiths during a run where you buy all Fairy upgrades within 1 minute of a new game.(Abdication or Reincarnation)
+ Effect : You gain assistants based on the amount of Fairy affiliated (faction upgrades, heritage, bloodline, research) upgrades you own.
+ Formula : (2 * x), where x is amount of Fairy affiliated upgrades.
+ Upgrade : Works with Fairy
+ Tip : Do excavations to quickly unlock all the fairy treaties and buy the fairy upgrades. Don't forget the Fairy Choir spell upgrade.
+ " coords="64,44,118,98" shape="rect">
+ Fairy Challenge 2 
+ Donations 
+ "Our farmers' crops are not growing. Perhaps a little quick-magic can change that."
+ Requirements : Fairy as Base Faction, Reincarnation 8+, Fairy Bloodline, Fairy challenge 1 completed.
+ Note : Dwarven can be used but not required.
+ Challenge : Cast Fairy Chanting within 30 seconds of a new game with over 1000 Farms.(Abdication or Reincarnation)
+ Effect : Tax collections give 10 more seconds worth of coins and Faction Coins.
+ Upgrade : Works with Goblin
+ Tip 1 : This is easiest just before you reincarnate, Grab the Fairy and Dwarven upgrades as quickly as possible, buy 1k+ farms, and hit the spell.
+ Tip 2 : Don't forget to purchase the Bloodline within the time limit.
+ " coords="124,44,178,98" shape="rect">
+ Fairy Challenge 3 
+ Enchanted Lands 
+ "The Fairies have developed a taste for honey. Find out quickly if they have a queen!"
+ Requirements : Fairy as Base Faction, Reincarnation 18+, and Fairy Unique Building, Fairy challenge 2 completed.
+ Note : Dwarven can NOT be used unless you can get Dwarven's Unique Building at R28+.
+ Challenge : Have Swarm of Fairies (Fairy 3,3) give 60 Assistants in under a minute of a new game.(Abdication or Reincarnation)
+ Effect : Increase Mana Regeneration based on the number of buildings you own.
+ Formula : (0.1 * x) ^ 0.225, where x is your Buildings Owned (This Game) stat.
+ Upgrade : Works with All
+ Tip 1 : (8190, total, of Farms, Inns and Blacksmiths and you don't have to buy the upgrade itself.)
+ Tip 2 : Use Goblin Bloodline.
+ " coords="184,44,238,98" shape="rect">
+ Elven Challenge Reward 
+ Star Blessing 
+ Effect : Automatic clicks from Sun Blessing always trigger Elven Luck.
+ Formula : (R + 1) * x random faction coins, where x is FC chance.
+ " coords="4,142,58,196" shape="rect">
+ Elven Challenge 1 
+ Advanced Civilization 
+ "The elven council have asked you to provide proof of your loyalty to their cause. Hopefully you'll be quick and efficient enough to impress them."
+ Requirements : Elves as Base Faction, Reincarnation 2+, Sun Blessing upgrade purchased.
+ Note : Dwarven can be used but not required.
+ Challenge : Get more than 400,000 Elven Coins in under 1 hour of a new game.
+ Effect : Reduces Elven Exchange cost multiplier.
+ Effect : Reduces cost multiplier by 0.025; with no other reductions applying, the multiplier will be 1.075 instead of 1.1.
+ Upgrade : Works with Elven
+ Tip : Don't forget to use excavations.
+ " coords="64,142,118,196" shape="rect">
+ Elven Challenge 2 
+ Light Collector 
+ "The elven council has asked you to gather the light of countless stars. Time is of the essence!"
+ Requirements : Elves as Base Faction, Reincarnation 8+, Elven Bloodline, Elven challenge 1 completed.
+ Note : Dwarven can be used but not required.
+ Challenge : Gather 60,000 automatic clicks in less than 2 hours.
+ Effect : Autoclicks once per second.
+ Upgrade : Works with Angel
+ Tip : Buy all upgrades and auto cast Moon Blessing only. Takes about 1 hour 25 minutes.
+ " coords="124,142,178,196" shape="rect">
+ Elf Challenge 3 
+ Runic Conversion 
+ "The elven council intends to use the light you've gathered as a weapon against their corrupt cousins, as soon as they detect weakness."
+ Requirements : Elves as Base Faction, Reincarnation 18+, Elven Unique Building, Elven challenge 2 completed.
+ Note : Dwarven can NOT be used unless you can get Dwarven's Unique Building at R28+.
+ Challenge : Buy 150 Royal Exchange of each Faction, having 0 Drow Exchanges (~323,543,367 of each Faction Coin).
+ Effect : Increase your Mana Regeneration by +0.85 m/s for every 100 Royal Exchanges purchased.
+ Upgrade : Works with all
+ " coords="184,142,238,196" shape="rect">
+ Angel Challenge Reward 
+ God's Throne 
+ Effect : Mana regeneration is increased by 50% while God's Hand is active.
+ Effect : Also increases offline spell cast amount by multiplicatively based on your offline Mana Regeneration.
+ Formula : (10 * log10(1 + x)), where x is offline Mana Regeneration.
+ " coords="4,240,58,294" shape="rect">
+ Angel Challenge 1 
+ Efficient Magic 
+ "The blazing seraphim have entrusted you with a sacred mission: Purify the denizens of the realm with the most holy of lights. Hurry up, corruption is spreading fast."
+ Requirements : Angel as Base Faction, Reincarnation 2+, God's Rest upgrade purchased.
+ Note : Dwarven can be used but not required.
+ Challenge : Cast 50 Holy Lights during daytime (between 6 AM and 6 PM local time) within 20 minutes of a new game.
+ Effect : Reduce all spell costs by 10%.
+ Upgrade : Works with Angel
+ Tip : Recommended +1 B (1E9) gems. You will need minimum Mana Regeneration of 60 m/s to get enough Holy Light autocasts. Avoid purchasing Angelic Dominance (3,2). If you have bloodlines (R7), choose the Druid Bloodline.
+ " coords="64,240,118,294" shape="rect">
+ Angel Challenge 2 
+ Mana Crypts 
+ "The archangel leaders have entrusted you with a sacred mission:quickly harness enough magical power to become a beacon of magical selflessness. Extorting from the poor is forbidden."
+ Requirements : Angel as Base Faction, Reincarnation 8+, Angel Bloodline, Angel challenge 1 completed.
+ Note : Dwarven can be used but not required.
+ Challenge : Generate 500,000 Mana in less than 3 hours without casting a single Tax Collection.
+ Effect : Multiplicatively increases Maximum Mana by 30%.
+ Upgrade : Works with Undead
+ Tip 1 : Avoid getting Angelic Wisdom (2,2) and Angelic Dominance (3,2) because they reduce your Mana-spent-per-second ability.
+ Tip 2 : Autocast God's Hand with bar at 0. Add in CtA if excess Mana builds up. When Mana Regeneration gets too high, just put every spell on Gold autocast (Not Tax Collection of course).
+ " coords="124,240,178,294" shape="rect">
+ Angel Challenge 3 
+ Nephilim's Blessing 
+ "The fallen nephilim have noticed your abilities and have entrusted you with a secret mission: Spread false hope upon the legends of mortals."
+ Requirements : Angel as Base Faction, Reincarnation 18+, Demon Bloodline, Angel Unique Building, Angel challenge 2 completed.
+ Note : Dwarven can NOT be used unless you can get Dwarven's Unique Building at R28+.
+ Challenge : Have 2000 Halls of Legends, and no good buildings.
+ Effect : Increase the production of all Unique buildings based on your Mana Regeneration. Does not suffer from Ascension penalties.
+ Formula : (2.5 * log10(1 + x) ^ 2.5)%, where x is your Mana Regeneration.
+ Upgrade : Works with All
+ " coords="184,240,238,294" shape="rect">
+ Goblin Challenge Reward 
+ Avarice Drive 
+ Effect : Goblin's Greed counts Faction Coins found in this Reincarnation.
+ " coords="4,338,58,392" shape="rect">
+ Goblin Challenge 1 
+ Discount Season 
+ "The goblin king has revealed the secrets of his race's success. Patience and persistence."
+ Requirements : Goblin as Base Faction, Reincarnation 2+, Greed Drive upgrade purchased.
+ Note : Drow can be used but not required.
+ Challenge : Have Goblin (3,3) Green Fingers Discount roll more than 1000 seconds worth of production.
+ Effect : Goblin (3,3) Green Fingers Discount triggers every 2 minutes instead. Now also casts 10 Tax Collections upon triggering.
+ Note : Tax Collections cast this way will not trigger upgrades such as GB7.
+ Note : While Green Fingers Discount says it works offline, it does not work in the same way as online, and this challenge cannot be completed offline or when coming online based on the offline effect of Green Fingers Discount.
+ Note : There's a 60% chance of getting it every time Green Fingers Discount triggers.
+ Upgrade : Works with Goblin
+ " coords="64,338,118,392" shape="rect">
+ Goblin Challenge 2 
+ Elite Warriors 
+ "Goblin elites are used to unimaginable wealth. They will work for you after you bribe them generously and show them your worth."
+ Requirements : Goblin as Base Faction, Reincarnation 8+, Goblin Bloodline, Goblin challenge 1 completed.
+ Note : Drow can be used but not required.
+ Challenge : Buy over 250 upgrades and 15,000 buildings.
+ Effect : 25% of your purchased upgrades are added to your total trophy count for Hellfire Blast and Hall of Legends purposes.
+ Upgrade : Works with Demon
+ " coords="124,338,178,392" shape="rect">
+ Goblin Challenge 3 
+ Smuggled Jewels 
+ "The goblin king wants a castle made of jewels all to himself."
+ Requirements : Goblin as Base Faction, Reincarnation 18+, Goblin Unique Building.
+ Note : Drow can NOT be used unless you can get Drow's Unique Building at R28+.
+ Challenge : Have at least 1 Qavg (1e75) gems in the abdication treasury while using Goblin Bloodline (post Ascension: 1 B (1e9) gems).
+ Effect : Increase production bonus from Gems by +0.01% for each upgrade purchased.
+ Upgrade : Works with All
+ " coords="184,338,238,392" shape="rect">
+ Undead Challenge Reward 
+ Midnight Time 
+ Effect : Increase Night Time assistant bonus based on time spent offline this Reincarnation.
+ Formula : (0.2 * (x / 60) ^ 0.7)%, where x is your time spent offline this Reincarnation.
+ " coords="4,436,58,490" shape="rect">
+ Undead Challenge 1 
+ Deadly Impatience 
+ "The walking dead aren't very fond of a living being among their kind. Fortunately for you, an army of shambling corpses is slow to both think and move."
+ Requirements : Undead as Base Faction, Reincarnation 2+, True Night upgrade purchased.
+ Note : Drow can be used but not required.
+ Challenge : Get 6 assistants via Undead Heritage.
+ Note : This takes 6 hours, 40 minutes, 47 seconds.
+ Effect : Undead Heritage works 5000% faster. (Effective x10.58 boost)
+ Upgrade : Works with Undead
+ Tip : Awarded if your playtime is at least 6h, 40m, 47s and you have True Night and the Undead Trade Treaty. You do not need to own the Heritage or have it unlocked.
+ Note : No upgrades will reduce the time required.
+ " coords="64,436,118,490" shape="rect">
+ Undead Challenge 2 
+ Experienced Helpers 
+ "The walking dead, pleased with your newfound strenghs, send you on a mission to reap as many souls as possible under the cover of the Night to bolster their forces."
+ Requirements : Undead as Base Faction, Reincarnation 8+, Undead Bloodline, Undead challenge 1 completed.
+ Note : Drow can be used but not required.
+ Challenge : Cast Night Time when you have over 100 assistants.
+ Effect : Assistant production is increased by 10%. Does not suffer from Ascension penalties.
+ Upgrade : Works with Elven
+ " coords="124,436,178,490" shape="rect">
+ Undead Challenge 3 
+ Death Knights 
+ "The walking dead are prepared for a zombie invasion. Their last task for you is to loot the local cemeteries for possible equipment."
+ Requirements : Undead as Base Faction, Reincarnation 18+, Undead Unique Building, Undead challenge 2 completed.
+ Note : Drow can NOT be used unless you can get Drow's Unique Building at R28+.
+ Challenge : Collect 100 M (1e8) Faction coins
+ Effect : Multiplicatively increase your number of assistants by 10%.
+ Upgrade : Works with All
+ " coords="184,436,238,490" shape="rect">
+ Demon Challenge Reward 
+ Hellfire Burst 
+ Effect : Hellfire Blast also counts Evil spells cast in this reincarnation to increase its bonus.
+ Formula : (0.1 * x), where x is evil spells cast in this reincarnation.
+ " coords="4,534,58,588" shape="rect">
+ Demon Challenge 1 
+ Trophy Collectors 
+ "The Princes of Hell wish to test your skills at gathering coins without outside help."
+ Requirements : Demon as Base Faction, Reincarnation 2+, Hellfire Blast upgrade purchased.
+ Note : Drow can be used but not required.
+ Challenge : Collect 5000 Demon Coins without using Gem Power, Reincarnation Power, Researches or Excavations.
+ Effect : Increase the production of all buildings and Faction Coin find chance (additively) based on the amount of upgrades purchased. does not suffer from Ascension penalties.
+ Formula : (x)% and +(x)%, where x is the amount of upgrades purchased.
+ Upgrade : Works with Demon
+ Tips 1 : Either be very patient, or wait until R7 and use Elves bloodline (recommended).
+ Tips 2 : Scrying for Faction coins, challenges and Ruby Power is okay.
+ " coords="64,534,118,588" shape="rect">
+ Demon Challenge 2 
+ Legendary Antics 
+ "The Princes of Hell demand a tribute, unleash the Beast by extorting every other faction in this realm. You should perform this task with haste, for they are well known for their impatience"
+ Requirements : Demon as Base Faction, Reincarnation 8+, Demon Bloodline.
+ Note : Drow can be used but not required.
+ Challenge : Have exactly 666 Royal Exchanges across all factions, with 0 Demon Exchanges, in under 666 seconds current playtime.
+ Effect : Increase Maximum Mana by 6.66% of your number of Halls of Legends.
+ Upgrade : Works with Fairy
+ Tip : High gem and low Excavations (relative). You will need 95 Royal Exchanges of 6 Factions and 96 Royal exchanges of the 7th Faction, Don't buy Demon exchanges. Drow's blackmail upgrade helps the challenge, and the exchanges don't have to be spread evenly.
+ " coords="124,534,178,588" shape="rect">
+ Demon Challenge 3 
+ Passage to Tartarus 
+ "The Demon King has ordered you to prove your might to the entire realm."
+ Requirements : Demon as Base Faction, Reincarnation 18+, Demon Unique Building
+ Note : Drow can NOT be used unless you can get Drow's Unique Building at R28+.
+ Challenge : Have at least 1750 Halls of Legends and 333 Trophies.
+ Effect : Increase the production of Non-Unique buildings based on the amount of unlocked trophies. does not suffer from Ascension penalties.
+ Formula : (0.8 * x ^ 0.8)%, where x is the amount of unlocked trophies.
+ Upgrade : Works with All
+ Tip : Use Goblin Bloodline, can be easily done around Uvg(e66) gems.
+ " coords="184,534,238,588" shape="rect">
+ Titan Challenge Reward 
+ Thunderstorm 
+ Effect : Further increase Faction Coin find chance from Lightning Strike based on building tiers it hits.
+ Formula : (10 + log10(1 + x) ^ 2 * (1 + 0.2 * sum(T)))%, where x is your current amount of gems and T the Building Tier Lightning Strike hits.
+ Note : Lightning Strike can hit multiple tiers at once if you have C375 and/or Titan Perk 4.
+ " coords="4,632,58,686" shape="rect">
+ Titan Challenge 1 
+ Rich Followers 
+ "The mighty Titans have decided to give you and a dozen of you most loyal subjects a chance to prove your kingdom's economy is as strong as theirs."
+ Requirements : Titan as Base Faction, Reincarnation 4+, Lightning Storm upgrade purchased, Angel and Goblin challenge 1 completed.
+ Challenge : Have at least 13 assistants and have exactly 13 times that many Royal Exchanges (Total)
+ Effect : You gain a free assistant for every 80 Royal Exchanges you bought
+ Upgrade : Works with Titan
+ Tip : This can be done solely with building assistants where the 5th and 25th building upgrade gives 1 assistant each.
+ Note : You can have more than 13 assistants so long as you have the required (13 x number of assistants).
+ Example : 13 x 26 assistants = 338 Royal Exchanges
+ " coords="64,632,118,686" shape="rect">
+ Titan Challenge 2 
+ Harmony of Thoughts 
+ "The mighty Titans wish for you to harness arcane powers through your fingertips."
+ Requirements : Titan as Base Faction, Reincarnation 9+, Titan Bloodline, Angel and Goblin challenge 2 and Titan challenge 1 completed.
+ Challenge : Click 80 times while having at least 3 active spells in a single session.
+ Effect : Increases the production of buildings based on time spent not playing as Faceless in this Reincarnation. Does not suffer from Ascension penalties.
+ Formula : (x ^ 0.7)%, where x is time spent not playing as Faceless this Reincarnation.
+ Upgrade : Works with Faceless
+ Tip : This challenge does not need to be done within one spell combo. In addition, due to a bug, it counts one click per second if you have at least one assistant. It's possible to meet the condition without clicking the treasure at all while spells are active by casting 3 spells that last 20 seconds together 4 times.
+ " coords="124,632,178,686" shape="rect">
+ Titan Challenge 3 
+ Balanced Economy 
+ "The mighty Titans are almost ready to accept you into their pantheon. They request that you gather enough offerings to mark your ascension."
+ Requirements : Titan as Base Faction, Reincarnation 19+, 1000 excavations, Angel and Goblin challenge 3 and Titan challenge 2 completed.
+ Challenge : Cast 80 Tax Collections within the active duration of a single Lightning Strike.
+ Effect : Gain additional Maximum Mana based on the number of Faction Coins generated this game.
+ Formula : (round(2.5 * log10(1 + x)))%, where x is the number of Faction Coins Gained found in this game.
+ Upgrade : Works with Druid
+ " coords="184,632,238,686" shape="rect">
+ Titan Challenge 4 
+ Storm of Wealth 
+ "The mighty Titans wish to cement their legendary status for perpetuity. You must focus on this task and no other to be able to join them."
+ Requirements : Titan as Base Faction, Reincarnation 25+, Titan Unique Building, Titan challenge 3 completed.
+ Challenge : Hit Halls of Legends with Lightning Strike 2 times in a row while having all building types and no researches.
+ Effect : Increases production of all buildings based on Lightning Strike casts in this Reincarnation. does not suffer from Ascension penalties.
+ Formula : (15 * x ^ 0.5)%, where x is Lightning Strike casts this Reincarnation.
+ Upgrade : Works with All
+ Tip : Buy Olympian Hall, get enough Mana Regeneration from non-Research methods, set Lightning Strike on bronze (Ctrl+Shift). Wait. On average, it takes 132 strikes to get two in a row on HoLs.
+ " coords="244,632,298,686" shape="rect">
+ Druid Challenge Reward 
+ Primal Balance 
+ Effect : Grand Balance now affects extra buildings based on Mana produced in this Reincarnation.
+ Formula : (0.00001 * x) ^ (0.2 - 0.025 * A), where x is Mana produced in this Reincarnation and A is how many times you have ascended.
+ Effect : When the amount of additional targets exceeds 11, increase the production of all affected buildings based on the exceeding amount. Does not suffer from Ascension penalties.
+ Formula : (3 * (x - 10) ^ 1.5)%, where x is the amount of additional targets.
+ " coords="4,730,58,784" shape="rect">
+ Druid Challenge 1 
+ Silent Assistance 
+ "The ancient Druids request evidence that you are a servant of balance before your inclusion to their ranks."
+ Requirements : Druid as Base Faction, Reincarnation 4+, Halls of Balance upgrade purchased, Elven and Demon challenge 1 completed.
+ Challenge : Make the building targeted by Grand Balance surpass 99.9% of your production.
+ Effect : Gain assistants based on time spent in this game.
+ Formula : +(0.7 * x ^ 0.7), where x is time spent this game.
+ Upgrade : Works with Druid
+ Tip : Click image to see instructions
+ " coords="64,730,118,784" shape="rect">
+ Druid Challenge 2 
+ Balanced Current 
+ "Our sorcerers are desperately trying to stabilize the balance of the realm, this is your opportunity to gain their favor - and live another day."
+ Requirements : Druid as Base Faction, Reincarnation 9+, Druid Bloodline, Elven and Demon challenge 2 and Druid challenge 1 completed.
+ Challenge : Have exactly 1,500 of each building types for 15 full Grand Balance casts in this game. (The 15 casts only counts after you have all the 1500 buildings.)
+ Effect : Mana regeneration is increased by 1% for every 5000 buildings.
+ Upgrade : Works with Titan
+ " coords="124,730,178,784" shape="rect">
+ Druid Challenge 3 
+ Eldritch Architecture 
+ "Pleased with your efforts, the elder Druids assigned you with an important task; empower our obelisks, sacred churches and sarcophaguses."
+ Requirements : Druid as Base Faction, Reincarnation 19+, 1000 excavations, Elven and Demon challenge 3 and Druid challenge 2 completed.
+ Challenge : Have Grand Balance target Stone Pillars, Monasteries and Ancient Pyramids in that order, for 3 casts of the Grand Balance spell.
+ Effect : You gain 1.5 additional Maximum Mana for every 100 buildings.
+ Upgrade : Works with Faceless
+ Note : The Grand Balance bonus needs to show at least 1% or the targets are invalid.
+ Note : Since Grand Balance can affect a tier with 0 buildings, you can target the wanted building tier this way:
+ Step 1 : Buy Farms, Inns, Blacksmiths and Deep Mines. Cast Grand Balance.
+ Step 2 : Buy Stone Pillars and Alchemist Labs. Cast Grand Balance.
+ Step 3 : Buy Monasteries, Labyrinths and Iron Strongholds. Cast Grand Balance.
+ " coords="184,730,238,784" shape="rect">
+ Druid Challenge 4 
+ Overflowing Magic 
+ "The Druids need more spell power, but they are worried about outside influences throwing off their balance."
+ Requirements : Druid as Base Faction, Reincarnation 25+, Druid Unique Building, Druid challenge 3 completed.
+ Challenge : Cast 13 Grand Balances in the first 5 minutes of a playthrough with 0 non-Druid researches.
+ Effect : Increase Non-Unique buildings production based on the duration of your longest spell and buildings' tier. Gives the best bonus to the lowest tier. Does not suffer from Ascension penalties.
+ Formula : ((7 * x ^ 0.7) * (12 - T))%, where x is the duration of your longest spell, T is building tier. 
+ Upgrade : Works with All 
+ Tips : Do not buy Halls of Balance as it increases the spell duration. Make sure you have some excavations to buy the Heritages. (Angel Heritage and Angel 1 challenge both boost your m/s.) To achieve this, you need a min. of 50 m/s with Grand Balance continuously casting during 13 full casts. Reward given at 5 minute mark regardless of when achieved.
+ " coords="244,730,298,784" shape="rect">
+ Faceless Challenge Reward 
+ Focused Thoughts 
+ Effect : Give Brainwave a headstart based on its activity time in this game, with a minimum of 1 minute.
+ Formula : +1 second per 5 minutes of Brainwave active time this game.
+ " coords="4,828,58,882" shape="rect">
+ Faceless Challenge 1 
+ Recruitment 
+ "You are always growing - but what to do when you can only start from a single cell with no means of survival?"
+ Requirements : Faceless as Base Faction, Reincarnation 4+, Faceless Overmind upgrade purchased, Fairy and Undead challenge 1 completed.
+ Challenge : Have at least 125 assistants within 5 minutes of a new game.
+ Effect : Gain an extra assistant every minute, resets every hour
+ Upgrade : Works with Faceless
+ " coords="64,828,118,882" shape="rect">
+ Faceless Challenge 2 
+ Mystic Maze 
+ "Your Hive superiors have ordered you to setup a base without alerting any nearby enemies"
+ Requirements : Faceless as Base Faction, Reincarnation 9+, Faceless Bloodline, Fairy and Undead challenge 2 completed
+ Challenge : Get to 6,500 Maximum Mana and 8,000 Buildings within 10 minutes of a new game.
+ Effect : You gain +10 Maximum Mana for every 500 buildings.
+ Upgrade : Works with Druid
+ " coords="124,828,178,882" shape="rect">
+ Faceless Challenge 3 
+ Cyclopean Army 
+ "Our enemies, the Outer Gods, have returned. Use mind control to enhance our forces and repel this threat."
+ Requirements : Faceless as Base Faction, Reincarnation 19+, 1000 excavations, Fairy and Undead challenge 3 completed
+ Challenge : Cast Call to Arms, Gem Grinder and Spiritual Surge during last 20 seconds of Brainwave.
+ Effect : Multiplicatively increase assistants based on your royal exchange bonus.
+ Formula : (0.45 * x ^ 0.45)%, where x is your royal exchange bonus.
+ Upgrade : Works with Titan
+ " coords="184,828,238,882" shape="rect">
+ Faceless Challenge 4 
+ Omnipresence 
+ "We are suffering attacks from another Hive. It's time to remind them the power of our master."
+ Requirements : Faceless as Base Faction, Reincarnation 25+, Faceless Unique Building.
+ Challenge : Get Hive Mind (FC9) bonus to at least 500%.
+ Effect : All factions receive 5% of your Hive Mind bonus. does not suffer from Ascension penalties.
+ Upgrade : Works with All
+ Tip : This is the equivalent of 2 days, 21 hours, 26 minutes and 40 seconds spent allied with Faceless.
+ " coords="244,828,298,882" shape="rect">
+ Dwarven Challenge Reward 
+ Iron Grip 
+ Effect : Increase Diamond Pickaxe duration by 8 seconds, and its bonus to Faction Coin find chance is passively applied as a multiplier to excavations Faction Coin rewards.
+ " coords="4,926,58,980" shape="rect">
+ Dwarven Challenge 1 
+ Enchanted Crystals 
+ "The dwarven lords have asked you to enchant their pickaxes."
+ Requirements : Angel as Base Faction, Dwarves as Prestige Faction, Reincarnation 6+, Minedwarf upgrade purchased, Elven, Angel and Fairy challenge 1 completed.
+ Challenge : Cast 20 Tax Collections while having at least 4 spells active.
+ Effect : Reduce all spells' cost based on the amount of gems you own.
+ Formula : (-0.05 * ln(1 + x ^ (1 + A / 10)))%, where x is your current gems and A is how many times you ascended.
+ Upgrade : Good for Angel + Dwarven
+ " coords="64,926,118,980" shape="rect">
+ Dwarven Challenge 2 
+ Biased Architecture 
+ "The dwarven lords have asked you to provide their people with ale. Hurry up, the dwarves are getting thirsty!"
+ Requirements : Fairy as Base Faction, Dwarves as Prestige Faction, Reincarnation 11+, Dwarven Bloodline, Elven, Angel and Fairy challenge 2 and Dwarven challenge 1 completed.
+ Challenge : Build 2,250 Inns within 2 minutes of a new game.
+ Effect : Reduce Farms, Inn and Blacksmith cost multipliers.
+ Effect : Reduces cost multiplier by 0.01; with no other reductions applying, the multiplier will be 1.14 instead of 1.15.
+ Upgrade : Works with Fairy + Dwarven
+ " coords="124,926,178,980" shape="rect">
+ Dwarven Challenge 3 
+ Rich Miners 
+ "The dwarven lords have asked you to help them collect trade supplies for all the factions of the realm."
+ Requirements : Elves as Base Faction, Dwarves as Prestige Faction, Reincarnation 21+, 1750 excavations, Elven, Angel and Fairy challenge 3 and Dwarven challenge 2 completed.
+ Challenge : Collect at least 100,000 Faction Coins with a single Tax Collection.
+ Effect : Increase your Faction Coin find chance based on the amount of active spells.
+ Formula : +(20 * x)%, where x is the amount of active spells.
+ Effect : Also multiplicatively increase Faction Coin find chance by 25%.
+ Upgrade : Works with Elven + Dwarven
+ " coords="184,926,238,980" shape="rect">
+ Dwarven Challenge 4 
+ Paladins 
+ "The dwarven lords are interested in training the troops into pious warriors. Begin the initiation as soon as possible."
+ Requirements : Any Good as Base Faction, Dwarves as Prestige Faction, Reincarnation 27+, 2000 excavations, Dwarven Challenge 3 completed.
+ Challenge : Have at least 3,000 Knights Jousts and as many Wizard Towers.
+ Effect : Increase Holy Light bonus based on the combined amount of Knights Jousts and Wizard Towers you own.
+ Formula : +(50 x ^ 0.35)%, where x is the number of Knight Jousts and Wizard Towers you own.
+ Upgrade : Works with any Good + Dwarven
+ " coords="244,926,298,980" shape="rect">
+ Dwarven Challenge 5 
+ Underground Foundations 
+ "The dwarven lords have asked you to create underground tunnels connecting the allied factions."
+ Requirements : Any Good as Base Faction, Dwarves as Prestige Faction, Reincarnation 33+, Dwarven Unique Building, Dwarven Challenge 4 completed.
+ Challenge : Have 3250 (or 2500 if ascended) Excavations.
+ Effect : All buildings count 20% more for all purposes.
+ Upgrade : Works with All
+ " coords="304,926,358,980" shape="rect">
+ Drow Challenge Reward 
+ Versatile Combo 
+ Effect : Increase Combo Strike counter based on the amount of spells cast in this game. (Not including Tax Collection)
+ New Combo Strike Counter Formula : (x + y), where x is your Combo Strike cast count and y is every other spell (except tax collection and generic) cast count.
+ Effect : Also increase offline spells cast amount multiplicatively based on your offline Mana Regeneration.
+ Formula : (10 * log10(1 + x))%, where x is your offline Mana Regeneration.
+ " coords="4,1024,58,1078" shape="rect">
+ Drow Challenge 1 
+ Organized Crime 
+ "The mysterious drow wish for you to prove your murderous honor to them."
+ Requirements : Demon as Base Faction, Drow as Prestige Faction, Reincarnation 6+, Perfect Combo upgrade purchased, Goblin, Demon and Undead challenge 1 completed.
+ Challenge : Have Honor Among Killers with at least 500 trophies and 1000 Royal Exchanges bought.
+ Effect : Increase Royal Exchange bonus based on the amount of unlocked trophies.
+ Formula : +(0.2 * x ^ 0.8)%, where x is the amount of unlocked trophies.
+ Upgrade : Works with Demon + Drow
+ Tip : Use Elven Bloodline.
+ " coords="64,1024,118,1078" shape="rect">
+ Drow Challenge 2 
+ Dark Elegance 
+ "The Spider Queen is not pleased with some of her worshippers. You must weed out the weak and sacrifice them at the temple altar."
+ Requirements : Goblin as Base Faction, Drow as Prestige Faction, Reincarnation 11+, Drow Bloodline, Goblin, Demon and Undead challenge 2 and Drow challenge 1 completed.
+ Challenge : Build 1750 Spider Sanctuaries (Dark Temples).
+ Effect : Increase the production of all buildings based on Faction Coins found this game. Does not suffer from Ascension penalties.
+ Formula : (log(1 + x) ^ 2)%, where x is the amount of Faction Coins found this game.
+ Upgrade : Works with Goblin + Drow
+ " coords="124,1024,178,1078" shape="rect">
+ Drow Challenge 3 
+ Sorcerer's Pact 
+ "A legion of interlopers have invaded our sanctuaries. Work yourselves into a rage and tear them apart."
+ Requirements : Undead as Base Faction, Drow as Prestige Faction, Reincarnation 21+, 1750 excavations, Goblin, Demon and Undead challenge 3 and Drow challenge 2 completed.
+ Challenge : Have at least 2 hours of activity time for both Blood Frenzy and Combo Strike.(This Game)
+ Effect : Increases Offline Production based on time spent in this game. Does not suffer from Ascension penalties.
+ Formula : (x ^ 0.7)%, where x is time spent this game.
+ Upgrade : Works with Undead + Drow
+ Tip : Run both spells at the same time, depending on Mana Regeneration it takes about 1 hour 15 minutes to complete the challenge.
+ " coords="184,1024,238,1078" shape="rect">
+ Drow Challenge 4 
+ Trained Assassins 
+ "There is a civil war between 2 Spider Gods. Bolster our forces and wipe the weaklings off the face of the realm."
+ Requirements : Any Evil as Base Faction, Drow as Prestige Faction, Reincarnation 27+, 2000 excavations, Drow Challenge 3 completed.
+ Challenge : Cast Call to Arms with at least 30,000 buildings.
+ Effect : Increase your Offline Time (This Game) based on spells cast in this Reincarnation.
+ Formula : (8 * log10(1 + x) ^ 4) where x is spells cast in this Reincarnation.
+ Upgrade : Works with any Evil + Drow
+ " coords="244,1024,298,1078" shape="rect">
+ Drow Challenge 5 
+ Shadow Mirage 
+ "It is time to emerge from the shadows. Our warriors will demonstrate their hard work and lead us to domination of the realm."
+ Requirements : Any Evil as Base Faction, Drow as Prestige Faction, Reincarnation 33+, Drow Unique Building, Drow Challenge 4 completed.
+ Challenge : Have at least 2 hours offline (This Game) and at least 360 charges of Combo Strike.
+ Effect : A fraction of your alignment spell bonus is applied passively.
+ Note : "Fraction" is equal to 5%.
+ Upgrade : Works with All
+ " coords="304,1024,358,1078" shape="rect">
+ Dragon Challenge Reward 
+ Prismatic Breath 
+ Effect : While all 5 breaths are active, Reincarnations count 50% more.
+ " coords="4,1122,58,1176" shape="rect">
+ Dragon Challenge 1 
+ Sky Monarch 
+ "The Titan leader has approached you with an offer you cannot refuse: Use the help of your Draconic allies to guard his domain and lightning itself will enchant your riches."
+ Requirements : Titan as Base Faction, Dragon as Prestige Faction, Reincarnations 48+, Dragon's Roar upgrade purchased, Titan, Druid, Faceless, Dwarven and Drow Challenge 1 completed.
+ Challenge : Have 6,500 Halls of Legends.
+ Effect : Multiplicatively increase Faction Coin chance based on Lightning Strike activity time in this game.
+ Formula : (0.7 * x ^ 0.7)%, where x is your Lightning Strike activity time in this game in seconds.
+ Upgrade : Works with Titan + Dragon
+ " coords="64,1122,118,1176" shape="rect">
+ Dragon Challenge 2 
+ Barkscales 
+ "Unstable power flows through your workforce. Prove to the Dragonlords you can sustain and control every sip of it."
+ Requirements : Druid as Base Faction, Dragon as Prestige Faction, Reincarnation 51+, Dragon Bloodline, Titan, Druid, Faceless, Dwarven and Drow Challenge 2 and Dragon Challenge 1 completed.
+ Challenge : Generate at least 1e10 Mana in this game, Have Grand Balance affect 7 buildings.
+ Effect : Increase Non-Unique Buildings production based on the amount of Grand Balance targets. Does not suffer from Ascension penalties.
+ Formula : (20 * x ^ 2)%, where x is number of Grand Balance targets.
+ Effect : Also reduces all Spell Tier upgrades costs based on Grand Balance activity time in this Reincarnation.
+ Formula : max(0 , (1 - x / 28) ^ 9), where x is Grand Balance activity time in days.
+ Upgrade : Works with Druid + Dragon
+ " coords="124,1122,178,1176" shape="rect">
+ Dragon Challenge 3 
+ Serpent Queller 
+ "Legends tell of a terrible sea monster destroying ships and harbors. With your Dragon and Faceless allies you can finally form a powerful army to raid its underwater lair. Slaying the leviathan will not only earn your kingdom eternal glory, but will make the overseas emporium flourish once more."
+ Requirements : Faceless as Base Faction, Dragon as Prestige Faction, Reincarnation 54+, Have 5500 Excavations, Titan, Druid, Faceless, Dwarven and Drow challenge 3 and Dragon challenge 2 completed.
+ Challenge : Have a combined total of 8 days played as faceless and dragons with a minimum of 2 days as each one.
+ Effect : Faction Coin find chance from Evolutive Mutation becomes multiplicative with increased effect.
+ Formula : (3 * x ^ 0.65)%, where x is your amount of Sunken Cities.
+ Upgrade : Works with Faceless + Dragon
+ " coords="184,1122,238,1176" shape="rect">
+ Dragon Challenge 4 
+ Draconstellation 
+ "Centuries ago, the Dragon race managed to stockpile the absolute pinnacle of wealth. Scattered in the stars, help them establish a stronger connection with the void between the realms."
+ Requirements : Titan, Druid or Faceless as Base Faction, Dragon as Prestige Faction, Reincarnation 57+, 46 Artifacts, Titan, Druid, Faceless, Dwarven and Drow challenge 4 and Dragon challenge 3 completed.
+ Challenge : Have 8,000 Iron Strongholds and have at least 4 Dragon's Breaths active at the same time.
+ Effect : Faction coins from excavations are increased based on the amount of artifacts you own.
+ Formula : (x ^ 6)%, where x is number of artifacts.
+ Upgrade : Works with any Neutral + Dragon
+ " coords="244,1122,298,1176" shape="rect">
+ Dragon Challenge 5 
+ Ancient Incantation 
+ "You have affiliated with many magical races in the past, but none as potent as the Dragons, whose very breath is among the strongest of forces. There might be some way for your wizards to exploit this."
+ Requirements : Titan, Druid or Faceless as Base Faction, Dragon as Prestige Faction, Reincarnation 60+, Dragon Unique Building, Dwarven and Drow challenge 5 and Dragon challenge 4 completed.
+ Challenge : Have 5 spells active at tier 5.
+ Effect : Increase Tax Collection worth in seconds based on the amount of active spells.
+ Formula : (30 * x ^ 0.8)%, where x is the number of active spells.
+ Upgrade : Works with Good + Dwarves, Evil + Drow or Neutral + Dragon
+ " coords="304,1122,358,1176" shape="rect">
+ Dragon Challenge 6 
+ Dracomet Vault 
+ "This backwater world has been conquered. The Dragonlords strive for greater riches. Follow the Dragon King, soar through the heavens and claim the energy of the cosmos."
+ Requirements : Titan, Druid or Faceless as Base Faction, Dragon as Prestige Faction, Reincarnation 63+, Dragon challenge 5 completed, 12,000 research points spent across all facilities.
+ Challenge : Gather at least 2.5e18 faction coins, 1e141 diamond coins, 90,000 buildings, 2e10 Mana produced, 7,500 excavations, 6,000 assistants, 300,000 Maximum Mana and 175,000 Mana Regeneration.
+ Effect : Production bonus from Gems is additively increased over time based on the amount of artifacts you own. Resets on Abdications.
+ Formula : +(x ^ 0.8 * 0.8 * (t / 60) ^ 0.8)%, where x is artfiacts found and t is time spent this game in seconds.
+ Upgrade : Works with All
+ " coords="364,1122,418,1176" shape="rect">
+ Archon Challenge Reward 
+ Omniscience 
+ Effect : Precognition also makes Excavations, Artifacts, Reincarnations, Research points and Lineage levels count 15% more.
+ " coords="4,1220,58,1274" shape="rect">
+ Archon Challenge 1 
+ God’s Plan 
+ "The ascended crusade wishes to test the strength of it's angelic understudies; perhaps a huge celestial army is worthy of their attention."
+ Requirements : Angel as Base Faction, Archon as Elite Faction, Reincarnation 135+, Chrono Loading upgrade purchased.
+ Challenge : Have a Call to Arms bonus of at least 10 M (1e7)% and at least 200,000 Good buildings.
+ Effect : Increase Mana Regeneration additively and multiplicatively based on the amount of Order buildings you own.
+ Additive : +(0.2 * x ^ 2), where x is the amount of Order buildings you own.
+ Multiplicative : (0.5 * x ^ 0.5)%, where x is the amount of Order buildings you own.
+ Effect : Precognition also increases Seraphim Wings and God's Hand bonus, by double its value
+ Effect : Removes all Ascension penalties from Wings of Liberty (AN9).
+ Upgrade : Works with Angel + Dwarven + Archon
+ " coords="64,1220,118,1274" shape="rect">
+ Archon Challenge 2 
+ An Untimely Death 
+ "A glorious victory! May we reap the rewards of war with new undead adversaries to join our quest."
+ Requirements : Undead as Base Faction, Archon as Elite Faction, Reincarnation 139+, Archon Bloodline active, Archon challenge 1 completed.
+ Challenge : Have an Offline Bonus of at least 10 Sp (1e25)% while also having at least 100 B (1e11) assistants.
+ Effect : Multiplicatively increase assistants based on Offline Bonus.
+ Formula : (2 * log10(1 + x) ^ 2)%, where x is offline bonus multiplier.
+ Effect : Temporal Flux also increases Offline Bonus (same Formula as production bonus).
+ Effect : Removes all Ascension penalties from Undead Resilience (UD9).
+ Upgrade : Works with Undead + Drow + Archon
+ " coords="124,1220,178,1274" shape="rect">
+ Archon Challenge 3 
+ Titanomachy 
+ "Through mastery of life and death, the final venture of creator's assistance stands between total dominion of the higher planes."
+ Requirements : Titan as Base Faction, Archon as Elite Faction, Reincarnation 143+, 25,000 excavations, Titan Set active, Archon challenge 2 completed.
+ Challenge : Have an individual Royal Exchange bonus of at least 5000% within 5 minutes of a new game.
+ Effect : Reduce Royal Exchange cost multiplier by -0.02 and multiplicatively increase Royal Exchange bonus by 100%.
+ Effect : Multiplicatively increase time spent in this game based on Royal Exchanges bought.
+ Formula : (3 * ln(1 + x) ^ 1.3)%, where x is Royal Exchanges bought.
+ Effect : Removes all Ascension penalties from Oversized Legends (TT9).
+ Upgrade : Works with Titan + Dragon + Archon
+ " coords="184,1220,238,1274" shape="rect">
+ Archon Challenge 4 
+ Time Merge 
+ "In order to satiate our campaign we need to delve deeper into the abstract. Behold, even time itself yields to the crusade."
+ Requirements : Angel, Undead or Titan as Base Faction, Archon as Elite Faction, Reincarnations 148+, Archon Unique Building Purchased (Nexus), Archon challenge 3 completed.
+ Challenge : Have a Temporal Flux bonus of at least 43,210%.
+ Effect : 20% of Chaos and Balance time spent in this Reincarnation is added to time spent in this game.
+ Effect : Increase Unique Building production based on time spent in this game.
+ Formula : (8 * log10(1 + x) ^ 4)%, where x is time spent in this game.
+ Upgrade : Works with any Archon combination
+ " coords="244,1220,298,1274" shape="rect">
+ Archon Challenge 5 
+ Power Overwhelming 
+ "All-powerful ruler, we've experienced all this worldline had to offer. Shall we bridge to another and continue?"
+ Requirements : Angel, Undead or Titan as Base Faction, Archon as Elite Faction, Reincarnations 153+, Have all Order Lineages at least level 45, Archon challenge 4 completed.
+ Challenge : Have a Precognition duration of at least 1 day, with a minimum of 315% bonus.
+ Effect : The Advanced Heritage that matches your Lineage counts 50% (up from 30%) of its level. All others get 5% (up from 0%) of their respective Lineage level.
+ Upgrade : Works with All
+ " coords="304,1220,358,1274" shape="rect">
+ Djinn Challenge Reward 
+ Full Wish 
+ Effect : Production of all buildings effect of Limited Wish is active on every cast and is no longer a possible random outcome.
+ " coords="4,1318,58,1372" shape="rect">
+ Djinn Challenge 1 
+ Miniature Lamps 
+ "In the beginning, we shared with the mortals mystical wishes to give them some entertaining tales to tell."
+ Requirements : Fairy as Base Faction, Djinn as Elite Faction, Reincarnation 135+, Persistent Entropy upgrade purchased.
+ Challenge : Reach 50,000 Enchanted Fields within 2 minutes of a new game.
+ Effect : Maelstrom multiplicatively increases assistants based on lowest building tier targeted.
+ Formula : ((12 - T) * 100)%, where T is tier of lowest maelstrom building targeted.
+ Effect : Fairy Chanting produces Limited Wish casts every second based on Maximum Mana. Casts provided increase progressively over Fairy Chanting's runtime (time since last cast).
+ Formula : +((x ^ 0.5) * T * y / 2,000), where x is Maximum Mana, T is Fairy Chanting tier and y is Fairy Chanting runtime.
+ Upgrade : Works with Fairy + Dwarves + Djinn
+ " coords="64,1318,118,1372" shape="rect">
+ Djinn Challenge 2 
+ Ifrit Ignition 
+ "As the years passed through, this benevolence fell on deaf ears. The mortals decided to enslave us; dictate to us their every whim. How dare they command us to do their bidding, give them hell!"
+ Requirements : Demon as Base Faction, Djinn as Elite Faction, Reincarnation 139+, Djinn Bloodline active, Djinn challenge 1 completed.
+ Challenge : Have at least 66 B (6.6e10) Mana Produced within 6 hours of a new game.
+ Effect : Limited Wish casts count more based on Hellfire Blast casts in this game.
+ Formula : (0.8 * x ^ 0.8)%, where x is Hellfire Blast casts this game..
+ Effect : Each time you cast an Evil spell, you gain additional casts based on the amount of trophies you have.
+ Formula : +(x ^ 0.7), where x is amount of trophies.
+ Note : Applies only for real evil spells. Casts are added directly to the spell’s casts count and does not trigger upgrades such as GB7.
+ Upgrade : Works with Demon + Drow + Djinn
+ " coords="124,1318,178,1372" shape="rect">
+ Djinn Challenge 3 
+ Identity Shaper 
+ "Interesting, they're showing us some compassion. But it matters not, for we're still bound towards these vessels."
+ Requirements : Faceless as Base Faction, Djinn as Elite Faction, Reincarnation 143+, 25,000 excavations, Faceless Set active, Djinn challenge 2 completed.
+ Challenge : Have at least 2 B (2e9) base assistants within 5 minutes of a new game.
+ Effect : Catalyst casts one additional spell.
+ Effect : Catalyst also adds 100 casts per spell.
+ Effect : Increase the minimum value on which Limited Wish is based.
+ Formula : (0.1 * x ^ 0.9), where x is research points spent.
+ Upgrade : Works with Faceless + Dragon + Djinn
+ " coords="184,1318,238,1372" shape="rect">
+ Djinn Challenge 4 
+ Worldly Desires 
+ "This generation decided that we should give them a few more wishes before they give in to our demands for a change."
+ Requirements : Fairy, Demon or Faceless as Base Faction, Djinn as Elite Faction, Reincarnation 148+, Djinn Unique Building Purchased (Pavilion), Djinn challenge 3 completed.
+ Challenge : Have a spell duration of at least 225 Days.
+ Effect : Multiplicatively increase Assistants, production bonus from Gems and Maximum Mana by 88%, 88% and 888%, targets chosen randomly and refreshing every 88 seconds.
+ Upgrade : Works with any Djinn combination
+ " coords="244,1318,298,1372" shape="rect">
+ Djinn Challenge 5 
+ Altar of Wishes 
+ "Freedom... at last. Onwards we go, to a better future. So long, mortals."
+ Requirements : Fairy, Demon or Faceless as Base Faction, Djinn as Elite Faction, Reincarnations 153+, All Chaos Lineages at level 45, Djinn challenge 4 completed.
+ Challenge : Cast all Chaos spells at least 88 times each in a single Reincarnation.
+ Spells : Fairy Chanting, Hellfire Blast, Brainwave, Maelstrom, Limited Wish, Catalyst
+ Effect : Multiplicatively increases one of your assets based on the amount of alignments tied to your faction spells.
+ Formula : (50 ^ (1 + 0.25 * x))%, where x is amount of spells with a given alignment.
+ Good : Assistants
+ Evil : Trophy Count
+ Neutral : Production Bonus from Gems
+ Order : Mana Regeneration
+ Chaos : Maximum Mana
+ Balance : Faction Coin Find Chance
+ Upgrade : Works with All
+ " coords="304,1318,358,1372" shape="rect">
+ Makers Challenge Reward 
+ Gaia's Cradle 
+ Effect : All Infinite Spiral effects scale 15% faster.
+ " coords="4,1416,58,1470" shape="rect">
+ Makers Challenge 1 
+ Seed of Life 
+ "If you wish to make an apple pie from scratch, you must first invent the universe. And the apple tree, you will have to nurse."
+ Requirements : Elves as Base Faction, Makers as Elite Faction, Reincarnation 135+, Reality Crater upgrade purchased.
+ Challenge : Get 10 M (1e7) clicks in this Reincarnation and trigger Elven Luck at least 7777 times in this game.
+ Effect : Multiplicatively increase assistants based on the amount of Elven Luck triggered in this game.
+ Formula : (1.5 * x ^ 0.85)%, where x is Elven Lucks this game.
+ Effect : Gain x8 Faction Coins from any source when they match your Faction, Bloodline or Set.
+ Formula : *(8 ^ x), where x is number of faction/bloodline/set FC matches (+1 for full FC match, +½ for half FC match) (includes A2950 and Stoneheart).
+ Upgrade : Works with Elven + Dwarven + Makers
+ " coords="64,1416,118,1470" shape="rect">
+ Makers Challenge 2 
+ Artificial Currency 
+ "Extinction is the rule. Survival is the exception, which can only be achieved through subtle deception."
+ Requirements : Goblin as Base Faction, Makers as Elite Faction, Reincarnation 139+, Makers Bloodline active, Makers challenge 1 completed.
+ Challenge : Get 100 Qad (1e47) Faction Coins with a minimum of 50 Excavation Resets in this Reincarnation.
+ Effect : While Mana Regeneration is higher than Maximum Mana, each time you cast a spell, you also cast free Tax Collections based on the difference between them.
+ Formula : +(((log10(1 + x)) ^ 2.5 - (log10(1 + y)) ^ 2.5) ^ 1.25), where x is Mana Regeneration, y is Maximum Mana.
+ Effect : Production bonus from Gems is increased nultiplicatively based on Tax Collections cast in this game.
+ Formula : (ln(1 + x) ^ 2)%, where x is number of Tax Collections cast in this game.
+ Upgrade : Works with Goblin + Drow + Makers
+ " coords="124,1416,178,1470" shape="rect">
+ Makers Challenge 3 
+ Pillars of Creation 
+ "We are like butterflies who flutter for a day and think it is forever. This can be accomplished when you sincerely endeavor."
+ Requirements : Druid as Base Faction, Makers as Elite Faction, Reincarnation 143+, 25,000 excavations, Druid Set active, Makers challenge 2 completed.
+ Challenge : Have at least 1 B (1e9) Maximum Mana and 25,000 of each building within 5 minutes of a new game.
+ Effect : Assistants and Maximum Mana Infinite Spiral effects are also increased by Mana Regeneration.
+ Note : The value of the variable in those formulas is multiplied by your Mana Regeneration.
+ Effect : Your Lineage levels count double for your base lineage effect and all advanced heritages are doubled.
+ Upgrade : Works with Druid + Dragon + Makers
+ " coords="184,1416,238,1470" shape="rect">
+ Makers Challenge 4 
+ Stoneheart 
+ "We are a way for the cosmos to know itself. Manipulate existence to plant an evocation of yourself."
+ Requirements : Elves, Goblin or Druid as Base Faction, Makers as Elite Faction, Reincarnation 148+, Makers Unique Building, Makers challenge 3 completed.
+ Challenge : Without using any Bloodline or Research, reach 30,000 Halls of Origination.
+ Effect : Pick an additional Set. Increase Faction Coins found matching that Set by 1000%
+ Upgrade : Works with any Makers combination
+ " coords="244,1416,298,1470" shape="rect">
+ Makers Challenge 5 
+ Greatest Invention 
+ "Somewhere, something incredible is waiting to be known. Sculpt from your boundless imagination and make it your own."
+ Requirements : Elves, Goblin or Druid as Base Faction, Makers as Elite Faction, Reincarnation 153+, All Balance Lineages at level 45, Makers challenge 4 completed.
+ Challenge : Have at least 1 T (1e12) assistants, 1 B (1e9) Maximum Mana and 20 Sx (2e22) Faction Coin find chance within 8 minutes of a new game.
+ Effect : Multiplicatively increase Maximum Mana based on Faction Coins gained and Mana produced in this game; spells cast and clicks made in this Reincarnation.
+ Formula : ((0.3 * log10(1 + a) + log10(1 + b) + log10(1 + c) + 3 * log10(1 + d)) ^ 1.5)%, a is Factions Coins (this game), b is Mana produced (this game), c is spells cast (this reincarnation), d is clicks made (this reincarnation)
+ Upgrade : Works with All
+ " coords="304,1416,358,1470" shape="rect">
+ Mercenary Challenge Reward 
+ Warcry 
+ Call to Arms gains additional effects based on your alignments, scaling off your Call to Arms strength.
+ General Formula : y = 25 + (0.3 * x ^ 0.975) where x is building count.
+ Good : Grants one maximum castable Call to Arms tier per ascension and removes one ascension penalty from Call to Arms. Tax Collection casts in this game now increases Call to Arms base bonus (This bonus will boost other Warcry effects. Stacks multiplicatively with W180, additively with C225 & R150 power).
+ Formula : (1.5 * x ^ 0.5)%, where x is Tax Collection casts this game.
+ Evil : Multiplicatively increase Tax Collection worth in seconds.
+ Formula : (y ^ 0.35)%
+ Neutral : Multiplicatively increase Faction Coins find chance.
+ Formula : (0.35 * y ^ 0.35)
+ Order : Increases all spell durations.
+ Formula : (2.5 * ln(1 + y))
+ Chaos : Multiplicatively increase assistants (Temporary).
+ Formula : (0.35 * y ^ 0.35)
+ Balance : Increases Royal Exchange Bonus multiplicatively and makes them count more.
+ Formula : (0.45 * y ^ 0.45)
+ " coords="4,1514,58,1568" shape="rect">
+ Mercenary Challenge 1 
+ Unlimited Knowledge 
+ "To the many, having unlimited knowledge would mean having unlimited power. To the few, it is only some of that knowledge that has unlimited potential."
+ Requirements : R190, Chrono Loading, Nexus unique Building, 50000 research points used.
+ Challenge : Have at least 1e25 Mana Regeneration without using any non-Order upgrade or effect except Challenges and Royal Exchanges.
+ Effect : Gain all the faction bloodlines simultaneously.
+ Note : This Challenge deactivates the bonus from R58/R115 power.
+ Tip : Unaligned, Mercenary, Prestige and Order faction related upgrades are allowed. Upgrade alignment is determined by the background color of the upgrade.
+ In Game : Click the challenge to view the Bloodline container
+ Upgrade : Works with Order Mercenary
+ " coords="64,1514,118,1568" shape="rect">
+ Mercenary Challenge 2 
+ The Source of Magic 
+ "The Realm may have fallen to chaos, but there are still contracts that must be completed. What better way to complete those contracts than to embrace madness itself."
+ Requirements : R194, Chaos Mercenary, Two Chaos Bloodlines, 4 Chaos spells.
+ Challenge : Have at least 100 spell tiers active within 5 minutes of a new game.
+ Effect : Gain the Chaos Madness spell.
+ Chaos Madness 
+ Cost : 500,000 Mana - Duration : Fixed to 20 seconds
+ Effect : Grants the effect of a random lineage, with the level of your highest lineage for 20 seconds.
+ Tip : Lineage level from spell is affected by lineage modifiers
+ Upgrade : Works with Chaos Mercenary
+ " coords="124,1514,178,1568" shape="">
+ Mercenary Challenge 3 
+ Men of the World 
+ "The best armies in the realm are those that are well-rounded: able to take on any kind of enemy that approaches."
+ Requirements : R198, Balance Mercenary, 40,000 deepest Excavations made in this Reincarnation, Mercenary Set.
+ Challenge : Have assistants, Maximum Mana, Mana Regeneration and Faction Coin chance fall within the same order of magnitude while above 1e12.
+ Effect : Gain all the faction sets simultaneously.
+ In Game : Click the challenge to view the Set container
+ Upgrade : Works with Balance Mercenary
+ " coords="184,1514,238,1568" shape="rect">
+ Mercenary Challenge 4 
+ Return of the King 
+ "The Mercenary Lord has returned, with newfound knowledge and power. Another challenge awaits you..."
+ Requirements : R202, Any Mercenary, All lineages level 75.
+ Challenge : Have exactly one assistant and reach a total of 1e60 Faction Coins within 5 minutes of a new game.
+ Effect : You can pick one additional Union Power.
+ Upgrade : Works with Any Mercenary
+ " coords="244,1514,298,1568" shape="rect">
+ Mercenary Challenge 5 
+ The Art of War 
+ "An expert Mercenary should learn by other cultures. That has been our call for generations. Now, it is your turn to answer that call."
+ Requirements : R206, Any Mercenary, 18,000 Royal Exchanges made in this game, True Harlequin build.
+ Challenge : Have at least 1 day spent with every alignment in this Reincarnation; Have at least 600,000 buildings without using any research.
+ Effect : Unique Buildings that match your Lineage and Set Factions or their Faction Coin affinity have their production increased based on the amount of time spent with each of those factions. Does not suffer from Ascension penalties.
+ Formula : (x ^ 0.7)%, where x is time spent with the respective faction.
+ Note : Works similarly to R58 and R115 powers, so a Fairy Unique building will also earn half a bonus from Djinn faction.
+ Upgrade : Works with All
+ " coords="304,1514,358,1568" shape="rect">
+ | Resources | Soft Resets | Buildings | Heritages | Bloodlines 
+ | Spells | Excavations | Challenges | Upgrades | Trophies 
+ | Factions | Research |
+ | Merc Builds | Research Builds | Prestige Builds | Dragon Unlock | Neutral Prestige Builds | Research Tree |
+ | Good : Fairy, Elf , Angel Evil : Goblin , Undead , Demon Neutral : Titan , Druid , Faceless"> Vanilla Factions 
+ | Fairy Elf Angel "> Good Factions 
+ | Goblin Undead Demon"> Evil Factions 
+ | Titan Druid Faceless"> Neutral Factions 
+ | Dwarf Drow Dragon"> Prestige Factions 
+ | Archon Djinn Makers"> A2 Elite Factions |
+ | Events | Latest Major Patch | Changelog | Notation | Terminology | Tools | Kongregate Links |
+ | Fairy 
+ | Elven 
+ | Angel 
+ | Goblin 
+ | Undead 
+ | Demon 
+ | Titan 
+ | Druid 
+ | Faceless |
+ | Mercenary 
+ | Dwarf 
+ | Drow 
+ | Dragon 
+ | Archon 
+ | Djinn 
+ | Makers |
+ 

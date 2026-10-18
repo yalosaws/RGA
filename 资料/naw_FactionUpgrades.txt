@@ -1,0 +1,1047 @@
+R220+ Builds (Not updated for v4.2) 
+ This page was put together for Mercenary builds. 
+ Tier 1 Upgrades 
+ Fairy
+ Pixie Dust Fertilizer 
+ Mercenary Template : FR1
+ Cost : 50 M (5e7)
+ Effect : Increase the base production of Farms by +98 and reduce the building cost multiplier.
+ Effect : Reduces cost multiplier by 0.02; with no other reductions applying, the multiplier will be 1.13 instead of 1.15.
+ Fairy Workers 
+ Mercenary Template : FR2
+ Cost : 500 M (5e8)
+ Effect : Increase the production of Farms, Inns and Blacksmiths by 10,000%.
+ Kind Hearts 
+ Mercenary Template : FR3
+ Cost : 5 B (5e9)
+ Effect : Increases maximum mana based on the amount of good buildings you own.
+ Formula : +(1.3 * x ^ 0.7), where x is the amount of good buildings you own.
+ Elven
+ Elven Mint 
+ Mercenary Template : EL1
+ Cost : 50 M (5e7)
+ Effect : The base chance to find Faction Coins is increased by a multiplicative 150%.
+ Elven Treasure Casing 
+ Mercenary Template : EL2
+ Cost : 500 M (5e8)
+ Effect : Increase base clicking reward by +25,000 per trophy, and increase chance to find faction coins based on the amount of trophies you unlocked.
+ Formula : +((1 + 0.1 * x) ^ 0.95)%, where x is the amount of Trophies unlocked.
+ Ancient Clicking Arts 
+ Mercenary Template : EL3
+ Cost : 5 B (5e9)
+ Effect : Increase Mana Regeneration based on the amount of clicks made in this Reincarnation.
+ Formula : +(2 * log10(1 + x) ^ 1.25), where x is the amount of clicks made in this Reincarnation.
+ Angel
+ Holy Bells 
+ Mercenary Template : AN1
+ Cost : 50 M (5e7)
+ Effect : Increase Mana Regeneration based on the amount of buildings you own.
+ Formula : +(1.6 * x ^ 0.4), where x is the amount of buildings you own.
+ Angelic Determination 
+ Mercenary Template : AN2
+ Cost : 500 M (5e8)
+ Effect : Increase the production of all buildings based on spells cast in this game.
+ Formula : (4 * ln(1 + x) ^ 2)%, where x is Spells Cast (This Game) stat.
+ Effect : Also increase Angel Coins found (from all sources) by 500%.
+ Angel Feathers 
+ Mercenary Template : AN3
+ Cost : 5 B (5e9)
+ Effect : Increase Faction Coin find chance based on the amount of active spells (additive).
+ Formula : +(10 * x)%, where x is the amount of active spells.
+ Goblin
+ Strong Currency 
+ Mercenary Template : GB1
+ Cost : 50 M (5e7)
+ Effect : Increase assistants based on Faction Coins found in this game.
+ Formula : +(0.5 * ln(1 + x) ^ 2), where x is Faction Coins found this game.
+ Slave Trading 
+ Mercenary Template : GB2
+ Cost : 500 M (5e8)
+ Effect : Increase the production of all buildings based on the amount of Evil buildings you own.
+ Formula : (2 * x ^ 0.7)%, where x is the amount of Evil buildings you own.
+ Cheap Materials 
+ Mercenary Template : GB3
+ Cost : 5 B (5e9)
+ Effect : Tax Collection is worth more seconds based on the amount of Buildings you own (additive).
+ Formula : +(x ^ 0.5), where x is the amount of Buildings you own.
+ Undead
+ The Walking Dead 
+ Mercenary Template : UD1
+ Cost : 50 M (5e7)
+ Effect : Increase Faction Coin find chance based on assistants owned (Additive).
+ Formula : +(ln(1 + x) ^ 1.75)%, where x is assistants owned.
+ Deadened Muscles 
+ Mercenary Template : UD2
+ Cost : 500 M (5e8)
+ Effect : Increase the production of all buildings based on the highest amount of Necropolises you built in this Reincarnation.
+ Formula : (4 * x ^ 0.8)%, where x is the the highest amount of Necropolises you built in this Reincarnation.
+ Death Temples 
+ Mercenary Template : UD3
+ Cost : 5 B (5e9)
+ Effect : Increase Mana Regeneration based on the highest amount of Necropolises you built in this Reincarnation.
+ Formula : (x ^ 0.3), where x is the highest amount of Necropolises you built in this Reincarnation.
+ Demon
+ Torture Chambers 
+ Mercenary Template : DM1
+ Cost : 50 M (5e7)
+ Effect : Increase the production of Royal Castles / Evil Fortresses / Iron Strongholds (based on your Alignment) based on the amount of assistants you own.
+ Formula : (6 * ln(1 + x) ^ 3)%, where x is the amount of assistants you own.
+ Devil Tyrant 
+ Mercenary Template : DM2
+ Cost : 500 M (5e8)
+ Effect : The three highest building tiers count more based on time spent as Evil in this Reincarnation.
+ Formula : (1.2 * x ^ 0.4)%, where x is time spent as Evil this Reincarnation.
+ Evil Conquerors 
+ Mercenary Template : DM3
+ Cost : 5 B (5e9)
+ Effect : Increase the production of all buildings based on the highest amount of Hell Portals you built in this Reincarnation.
+ Formula : (4 * x ^ 0.8)%, where x is the highest amount of Hell Portals you built in this Reincarnation.
+ Titan
+ Colossal Forge 
+ Mercenary Template : TT1
+ Cost : 500 Qi (5e20)
+ Effect : Increase the production of all buildings based on the amount of buildings you own.
+ Formula : (6 * x ^ 0.6)%, where x is the amount of buildings you own.
+ Charged Clicks 
+ Mercenary Template : TT2
+ Cost : 5 Sx (5e21)
+ Effect : Multiplicatively increase Mana Regeneration based on clicks made in this game.
+ Formula : (25 + 2.5 * log10(1 + x) ^ 2.5 + x ^ 0.25)%, where x is clicks made this game.
+ Titan Obelisk 
+ Mercenary Template : TT3
+ Cost : 50 Sx (5e22)
+ Effect : Increase Faction Coin find chance additively based on time spent as Neutral in this Reincarnation.
+ Formula : +(3 * x ^ 0.7)%, where x is time spent as Neutral in this Reincarnation.
+ Druid
+ Druidic Vocabulary 
+ Mercenary Template : DD1
+ Cost : 500 Qi (5e20)
+ Effect : Increase the production of all buildings based on their tier, giving the best bonus to the lowest.
+ Formula : (4000 * (12 - T))%, where T is building tier.
+ Animal Companions 
+ Mercenary Template : DD2
+ Cost : 5 Sx (5e21)
+ Effect : You instantly attract 3 Animal assistants and more will come based on the time spent in this game.
+ Formula : +(3 + 1.75 * x ^ 0.5), where x is time spent in this game.
+ Natural Recycling 
+ Mercenary Template : DD3
+ Cost : 50 Sx (5e22)
+ Effect : Increase Faction Coin find chance additively and multiplicatively based on the amount of the total buildings you own.
+ Formula : (0.4 x ^ 0.4), where x is total buildings you own.
+ Faceless
+ Territorial Expanse 
+ Mercenary Template : FC1
+ Cost : 500 Qi (5e20)
+ Effect : Increase the production of Citadels / Necropolises / Labyrinths (based on your Alignment) based on the amount of assistants you own.
+ Formula : (50 * ln(1 + x) ^ 2.5)%, where x is the amount of assistants you own.
+ Evolutive Mutation 
+ Mercenary Template : FC2
+ Cost : 5 Sx (5e21)
+ Effect : Increase Faction Coin find chance based on the highest amount of Labyrinths you built in this Reincarnation.
+ Formula : +floor(3 * x ^ 0.6)%, where x is the highest amount of Labyrinths you built in this Reincarnation.
+ Deep Memory 
+ Mercenary Template : FC3
+ Cost : 50 Sx (5e22)
+ Effect : Multiplicatively increase assistants based on the time spent on your longest game session in this Reincarnation.
+ Formula : (0.3 * x ^ 0.7)%, where x is your Playtime (Longest Session) stat this Reincarnation.
+ Dwarven
+ Dwarven Ale 
+ Mercenary Template : DN1
+ Cost : 5 Qad (5e45)
+ Effect : Increase Faction Coin find chance based on the amount of Blacksmiths you own (Additive).
+ Formula : +(2 * x ^ 0.5)%, where x is the amount of Blacksmiths you own.
+ Expert Masonry 
+ Mercenary Template : DN2
+ Cost : 50 Qad (5e46)
+ Effect : Reduce all building cost multipliers.
+ Effect : Reduces cost multiplier by 0.01; with no other reductions applying, the multiplier will be 1.14 instead of 1.15.
+ Mining Prodigies 
+ Mercenary Template : DN3
+ Cost : 500 Qad (5e47)
+ Effect : Increase the production of all buildings based on the amount of Excavations you made, including resets, in this Reincarnation.
+ Formula : (40 * (x * (1 + 2 * y)) ^ 0.4)%, where x is the number of excavations made this Reincarnation, y is the number of excavation resets in this Reincarnation.
+ Drow
+ Underworld Tyranny 
+ Mercenary Template : DW1
+ Cost : 5 Qad (5e45)
+ Effect : Increase the production of all buildings based on your total time spent being Evil in this Reincarnation.
+ Formula : (0.7 * x ^ 0.7), where x is time spent being Evil in this Reincarnation.
+ Honor Among Killers 
+ Mercenary Template : DW2
+ Cost : 50 Qad (5e46)
+ Effect : Increase Faction Coin find chance based on the amount of assistants you own.
+ Formula : +(100 + 0.5 * x ^ 0.5)%, where x is the amount of assistants you own.
+ Shadow Advance 
+ Mercenary Template : DW3
+ Cost : 500 Qad (5e47)
+ Effect : Increase the production of all buildings based on Maximum Mana.
+ Formula : (2 * log10(1 + x) ^ 2))%, where x is your Maximum Mana.
+ Dragon
+ Note : Only 1 Dragon Upgrade per Mercenary tier.
+ Dragonscales 
+ Mercenary Template : DG1
+ Cost : 5 Uvg (5.0e66)
+ Effect : Increase the production of all buildings based on the amount of time spent as Neutral in this Reincarnation. Effect is increased on Stone Pillars, Labyrinths and Hall Of Legends.
+ Formula : ((x / 60) ^ 0.5)%, where x is time spent as Neutral this Reincarnation. This is multiplied by 10 on Stone Pillars, Labyrinths and Hall of Legends.
+ Iron Flight 
+ Mercenary Template : DG2
+ Cost : 50 Uvg (5.0e67)
+ Effect : Increase the production of Iron Stronghold by 200% per spell affecting it.
+ Note : Each instance of spell effects count as one spell (represented by the spell effect icons on the building icons). This includes Red, Green & Black Breath, A150 and D400.
+ Imposing Presence 
+ Mercenary Template : DG3
+ Cost : 500 Uvg (5.0e68)
+ Effect : Increase Mana Regeneration based on the amount of Neutral buildings you own.
+ Formula : +(0.5 * x ^ 0.5), where x is the number of Neutral buildings owned.
+ Archon
+ Star Trading 
+ Mercenary Template : AR1
+ Cost : 1 NoQag (1e150)
+ Effect : Increase the production of all buildings based on the maximum amount of Royal Exchanges you made in this Reincarnation.
+ Formula : (0.9 * x)%, where x is the maximum amount of Royal Exchanges you made in this Reincarnation.
+ Energy Recharge 
+ Mercenary Template : AR2
+ Cost : 10 NoQag (1e151)
+ Effect : Maximum Mana counts more based on the amount of time spent as Order in this Reincarnation.
+ Formula : (0.25 * x ^ 0.5)%, where x is time spent as Order in this Reincarnation.
+ Effect : Also increase Precognition base, scaling, and changes its starting duration to 5 minutes.
+ Precognition Formula : (1.25 * ln(1 + x) ^ 1.5)%, where x is Mana produced in this game.
+ Cosmic Resonance 
+ Mercenary Template : AR3
+ Cost : 100 NoQag (1e152)
+ Effect : Increase Royal Exchange bonus based on clicks made in this Reincarnation.
+ Formula : +(0.5 * x ^ 0.5)%, where x is clicks made this Reincarnation.
+ Djinn
+ The Desire Within 
+ Mercenary Template : DJ1
+ Cost : 1 NoQag (1e150)
+ Effect : Increase the production of all buildings based on spells of your current alignments cast in this game.
+ Formula : (25 * ln(1 + x) ^ 2.5)%, where x is alignments spells cast in this game.
+ Forbidden Will 
+ Mercenary Template : DJ2
+ Cost : 10 NoQag (1e151)
+ Effect : Multiplicatively increase Faction Coin find chance based on the highest amount of Faction Coins found in this Reincarnation.
+ Formula : (0.2 * log10(1 + x) ^ 2)%, where x is highest amount of Faction Coins found in this Reincarnation.
+ Magical Circuit 
+ Mercenary Template : DJ3
+ Cost : 100 NoQag (1e152)
+ Effect : Multiplicatively increase Maximum Mana based on researches selected.
+ Formula : (sum(sumOfDigits(x)) ^ 1.15)%, where x is any single selected research upgrade.
+ Makers
+ Hand of the Makers 
+ Mercenary Template : MK1
+ Cost : 1 NoQag (1e150)
+ Effect : Multiplicatively increase Faction Coin find chance based on the amount of clicks made in this Reincarnation.
+ Formula : (0.5 * x ^ 0.5)%, where x is clicks made in this Reincarnation.
+ Everlasting Materials 
+ Mercenary Template : MK2
+ Cost : 10 NoQag (1e151)
+ Effect : Increase the production of all buildings based on the highest amount of buildings built in this Reincarnation.
+ Formula : (0.25 * x ^ 0.85)%, where x is highest amount of buildings built in this Reincarnation.
+ Infinite Improvements 
+ Mercenary Template : MK3
+ Cost : 100 NoQag (1e152)
+ Effect : Increase the production of All Buildings based on time spent as Balance.
+ Formula : (0.3 * x ^ 0.7)%, where x is time spent as Balance in this Reincarnation.
+ Tier 2 Upgrades 
+ Fairy
+ Fairy Cuisine 
+ Mercenary Template : FR4
+ Cost : 500 B (5e11)
+ Effect : Increase the base production of Inns by +234 and reduce the building cost multiplier.
+ Effect : Reduces cost multiplier by 0.02; with no other reductions applying, the multiplier will be 1.13 instead of 1.15.
+ Golden Pots 
+ Mercenary Template : FR5
+ Cost : 5 T (5e12)
+ Effect : Additively increase base clicking reward by 20% of the building production of Farms, Inns and Blacksmiths combined.
+ Spellsmith 
+ Mercenary Template : FR6
+ Cost : 50 T (5e13)
+ Effect : Blacksmiths also increase your Mana Regeneration.
+ Formula : +(2.75 * x ^ 0.275), where x is the number of Blacksmiths you own.
+ Elven
+ Elven Emissary 
+ Mercenary Template : EL4
+ Cost : 500 B (5e11)
+ Effect : Increase clicking reward based on the amount of Good buildings you own, and assistants find 3 times as many Faction Coins.
+ Formula : (x ^ 0.6)%, where x is the number of Good Buildings you own.
+ Elven Efficiency 
+ Mercenary Template : EL5
+ Cost : 5 T (5e12)
+ Effect : Increase Royal Exchange bonus based on Faction Coins found this game.
+ Formula : +(2 * ln(1 + x) ^ 2)%, where x is Faction Coins found this game.
+ Secret Clicking Techniques 
+ Mercenary Template : EL6
+ Cost : 50 T (5e13)
+ Effect : Increases the production of all buildings based on your total of clicks.
+ Formula : (2 * x ^ 0.4)%, where x is your Treasure Clicks (Total) stat.
+ Angel
+ Guardian Angels 
+ Mercenary Template : AN4
+ Cost : 500 B (5e11)
+ Effect : Spell casts count 100% more.
+ Angelic Wisdom 
+ Mercenary Template : AN5
+ Cost : 5 T (5e12)
+ Effect : Decrease the cost of all spells by 50%.
+ Effect : Also increases offline spell cast amount by multiplicatively based on your offline Mana Regeneration.
+ Formula : (10 * log10(1 + x))%, where x is your offline Mana Regeneration.
+ Archangel Feathers 
+ Mercenary Template : AN6
+ Cost : 50 T (5e13)
+ Effect : Increase Mana production by 50%.
+ Goblin
+ Black Market 
+ Mercenary Template : GB4
+ Cost : 500 B (5e11)
+ Effect : Production bonus from gems is increased by a multiplicative 150%.
+ Effect : Also increase Offline production based on the amount of Tax Collection casts in this game.
+ Formula : (log10(1 + x) ^ 2)%, where x is Tax Collection casts this game.
+ Goblin Economists 
+ Mercenary Template : GB5
+ Cost : 5 T (5e12)
+ Effect : Mutiplicatively increase Mana Regeneration based on Gold owned.
+ Formula : (0.75 * log10(1 + x) ^ 1.25)%, where x is Gold owned.
+ Hobgoblin Gladiators 
+ Mercenary Template : GB6
+ Cost : 50 T (5e13)
+ Effect : Increase the production of all buildings based on the worth in seconds of your Tax Collection spell.
+ Formula : (12 * ln(1 + x) ^ 3)%, where x is the seconds of your Tax Collection.
+ Undead
+ Unholy Rituals 
+ Mercenary Template : UD4
+ Cost : 500 B (5e11)
+ Effect : Increase offline production based on time spent being offline in this Reincarnation.
+ Formula : (0.4 * x ^ 0.8)%, where x is your offline time this Reincarnation.
+ Corpse Supply 
+ Mercenary Template : UD5
+ Cost : 5 T (5e12)
+ Effect : Gain additional assistants based on time spent being offline in this Reincarnation.
+ Formula : +(0.4 * x ^ 0.6), where x is the time spent offline in this Reincarnation.
+ Plagued Buildings 
+ Mercenary Template : UD6
+ Cost : 50 T (5e13)
+ Effect : Increase the production of all buildings based on time spent in this game.
+ Formula : (0.75 * x ^ 0.75)%, where x is time spent this game.
+ Demon
+ Lava Pits 
+ Mercenary Template : DM4
+ Cost : 500 B (5e11)
+ Effect : Increase the base production of Evil Fortresses by +200,000 and Hell Portals by +2,000,000.
+ Effect : Your playtime in this game counts more by 6 additional hours.
+ Demon Overseers 
+ Mercenary Template : DM5
+ Cost : 5 T (5e12)
+ Effect : Increase the production of the three highest building tiers based on the amount of trophies you unlocked.
+ Formula : (2 * x ^ 0.8)%, where x is the amount of trophies unlocked.
+ Demonic Presence 
+ Mercenary Template : DM6
+ Cost : 50 T (5e13)
+ Effect : Increase Max Mana based on Evil spells cast in this game (Additve).
+ Formula : +(6 * x ^ 0.4), where x is Evil spells cast this game.
+ Titan
+ Titan Drill 
+ Mercenary Template : TT4
+ Cost : 5 Sp (5e24)
+ Effect : Increase the base production of Warrior Barracks / Slave Pens / Deep Mines by +9635 and Cathedrals / Dark Temples / Monasteries by +98000 (based on your Alignment). Also increases building production of these tiers by 1000%.
+ Charged Structures 
+ Mercenary Template : TT5
+ Cost : 50 Sp (5e25)
+ Effect : Increase the production of all buildings based on the amount of active spells.
+ Formula : (15 * x)%, where x is the amount of active spells.
+ Titan Sized Walls 
+ Mercenary Template : TT6
+ Cost : 500 Sp (5e26)
+ Effect : Increase Hall of Legends production based on the amount of assistants you own.
+ Formula : (20 + 2.15 * ln(1 + x) ^ 2.15)%, where x is the amount of assistants you own.
+ Druid
+ Earthly Bond 
+ Mercenary Template : DD4
+ Cost : 5 Sp (5e24)
+ Effect : Increase maximum mana based on the highest amount of Stone Pillars you built in this Reincarnation.
+ Formula : +(2 * x), where x is the highest amount of Stone Pillars you built in this Reincarnation.
+ Bardic Knowledge 
+ Mercenary Template : DD5
+ Cost : 50 Sp (5e25)
+ Effect : Increase the production of all buildings based on your Maximum Mana.
+ Formula : (16 * ln(1 + x) ^ 2)%, where x is your Maximum mana.
+ Shapeshifting 
+ Mercenary Template : DD6
+ Cost : 500 Sp (5e26)
+ Effect : Increase mana regeneration based on the amount of assistants you own.
+ Formula : (1.3 * x ^ 0.7), where x is the amount of assistants you own.
+ Faceless
+ Gold Synthesis 
+ Mercenary Template : FC4
+ Cost : 5 Sp (5e24)
+ Effect : Increase the production of Neutral buildings based on the amount of coins owned.
+ Formula : (0.2 * ln(1 + x) ^ 2)%, where x is the amount of coins owned.
+ Mitosis 
+ Mercenary Template : FC5
+ Cost : 50 Sp (5e25)
+ Effect : Gain additional Faceless Assistants based on the amount of buildings you own.
+ Formula : +floor(0.5 * x ^ 0.5), where x is the amount of buildings you own.
+ Overgrowth 
+ Mercenary Template : FC6
+ Cost : 500 Sp (5e26)
+ Effect : Increases production based on the highest amount of buildings purchased in a single game in this Reincarnation.
+ Formula : (0.8 * x ^ 0.8)%, where x is the highest amount of buildings purchased in a single game in this Reincarnation.
+ Dwarven
+ Underground Citadels 
+ Mercenary Template : DN4
+ Cost : 50 Qid (5e49)
+ Effect : Multiplicatively increase Mana Regeneration based on the amount of Gems you own.
+ Formula : (1.5 * log10(1 + x) ^ 1.5)%, where x is the amount of Gems you own.
+ Indestructible Treasure 
+ Mercenary Template : DN5
+ Cost : 500 Qid (5e50)
+ Effect : Increase clicking reward based on the amount of buildings you own.
+ Formula : (0.5 * x ^ 0.65)%, where x is the amount of buildings you own.
+ Bearded Assistants 
+ Mercenary Template : DN6
+ Cost : 5 Sxd (5e51)
+ Effect : Increase the production of assistants based on how long their beard is (it grows over time!).
+ Formula : (x ^ 0.7)%, where x is time spent in this game.
+ Drow
+ Mana Addicts 
+ Mercenary Template : DW4
+ Cost : 50 Qid (5e49)
+ Effect : Mana Regeneration increases over time.
+ Formula : +(2.5 + 0.25 * x ^ 0.5), where x is time spent in this game.
+ Blood Sacrifices 
+ Mercenary Template : DW5
+ Cost : 500 Qid (5e50)
+ Effect : Increase the production of all buildings based on the highest amount of Dark Temples you built in this Reincarnation.
+ Formula : (3 * x)%, where x is the highest amount of Dark Temples you built in this Reincarnation.
+ Blackmail 
+ Mercenary Template : DW6
+ Cost : 5 Sxd (5e51)
+ Effect : Reduces Royal Exchange cost multiplier by 0.02; with no other reductions applying, the multiplier will be 1.08 instead of 1.1.
+ Dragon
+ Dragonborn 
+ Mercenary Template : DG4
+ Cost : 50 Dvg (5.0e70)
+ Effect : Increase assistants additively and multiplicatively, and their production, based on time spent affiliated with Dragons.
+ Formula (Additive) : +(50 * x ^ 0.5), where x is time spent as Dragons (All Time).
+ Formula (Multiplicative) : (0.5 * x ^ 0.25)%, where x is time spent as Dragons (All Time).
+ Formula (Production) : (0.7 * x ^ 0.3)%, where x is time spent as Dragons (All Time).
+ Bountiful Hoard 
+ Mercenary Template : DG5
+ Cost : 500 Dvg (5e71 DC)
+ Effect : Increase the production of all buildings based on the amount of Artifacts you found.
+ Formula : (5 * (x ^ 1.25))%, where x is amount of artifacts you found.
+ Sharp Claws 
+ Mercenary Template : DG6
+ Cost : 5 Tvg (5e72 DC)
+ Effect : Multiplicatively increase Royal Exchange Bonus and Faction Coin find chance based on Clicks made in this game.
+ Formula : (0.8 * x ^ 0.35)%, where x is the number of Clicks this game.
+ Archon
+ Constellation 
+ Mercenary Template : AR4
+ Cost : 100 UQig (1e158)
+ Effect : Multiplicatively increase Mana Regeneration based on the amount of Unique Buildings owned.
+ Formula : (0.5 * x ^ 0.5)%, where x is the amount of Unique Buildings owned.
+ Archon Pride 
+ Mercenary Template : AR5
+ Cost : 1 DQig (1e159)
+ Effect : Multiplicatively increase assistants based on your current Lineage level.
+ Formula : (x)%, where x is your current Lineage level.
+ Absent-mindedness 
+ Mercenary Template : AR6
+ Cost : 10 DQig (1e160)
+ Effect : Increase Offline bonus based on Excavation Resets made in this Reincarnation.
+ Formula : (30 + 3 * (x + y) ^ 3)%, where x and y are free and ruby excavation resets done in this Reincarnation.
+ Djinn
+ Aura of Magic 
+ Mercenary Template : DJ4
+ Cost : 100 UQig (1e158)
+ Effect : Increase non-unique building production based on Mana produced this game.
+ Formula : (0.325 * x ^ 0.325)%, where x is Mana produced this game.
+ Spiritual Bindings 
+ Mercenary Template : DJ5
+ Cost : 1 DQig (1e159)
+ Effect : Multiplicatively increase assistants based on time spent offline.
+ Formula : (0.65 * x ^ 0.5)%, where x is time spent offline this game.
+ Wild Surge 
+ Mercenary Template : DJ6
+ Cost : 10 DQig (1e160)
+ Effect : Increase the production of all buildings based on the duration of your longest spell.
+ Formula : (0.75 * x ^ 0.75)%, where x is the duration of your longest spell.
+ Makers
+ Magical Shards 
+ Mercenary Template : MK4
+ Cost : 100 UQig (1e158)
+ Effect : Multiplicatively increase mana regeneration based on artifacts found.
+ Formula : (x ^ 0.95)%, where x is artifacts found.
+ Treasure Mosaic 
+ Mercenary Template : MK5
+ Cost : 1 DQig (1e159)
+ Effect : Additionally increase Maximum Mana based on Faction Coins found in this game.
+ Formula : +(27.5 * log10(1 + x) ^ 2.75), where x is Faction Coins found in this game.
+ Art of Commerce 
+ Mercenary Template : MK6
+ Cost : 10 DQig (1e160)
+ Effect : Multiplicatively increase Royal Exchange bonus based on their quantity.
+ Formula : (0.2 * x ^ 0.6)%, where x is Royal Exchanges made.
+ Tier 3 Upgrades 
+ Fairy
+ Starmetal Alloys 
+ Mercenary Template : FR7
+ Cost : 5 Qa (5e15)
+ Effect : Increase the base production of Blacksmiths by +580 and reduce the building cost multiplier.
+ Effect : Reduces cost multiplier by 0.02; with no other reductions applying, the multiplier will be 1.13 instead of 1.15.
+ Rainbow Link 
+ Mercenary Template : FR8
+ Cost : 50 Qa (5e16)
+ Effect : Increase the production of all buildings based on the amount of Farms, Inns and Blacksmiths you own.
+ Formula : (0.75 * x ^ 0.75)%, where x is the amount of Farms, Inns and Blacksmiths you own.
+ Swarm of Fairies 
+ Mercenary Template : FR9
+ Cost : 500 Qa (5e17)
+ Effect : You gain additional assistants based on the amount of Farms, Inns and Blacksmiths you own.
+ Formula : +(1.2 * x ^ 0.6), where x is the number of Farms, Inns, and Blacksmiths you own.
+ Elven
+ Elven Diplomacy 
+ Mercenary Template : EL7
+ Cost : 5 Qa (5e15)
+ Effect : Increase click count based on Faction Coins found in this game.
+ Formula : (2 * ln(1 + x) ^ 2), where x is Faction Coins found in this game.
+ Elven Luck 
+ Mercenary Template : EL8
+ Cost : 50 Qa (5e16)
+ Effect : Each time you click for money you have 1% chance to gain coins equal to 250000% of your production, also generating Faction Coins based on Reincarnation made.
+ Formula (Production) : (2500 * (x + y)), where x is the production of all buildings, and y is the production of one assistant.
+ Formula (Faction Coins) : (x * (R + 1)) of a random type, where x is Faction Coin chance and R is the number of times you have reincarnated.
+ Effect : Assistants have the same chance to trigger Elven Luck once every second. Elven Lucks triggered this way have their coin reward multiplied by the amount of assistants you have.
+ Sylvan Treasure Frills 
+ Mercenary Template : EL9
+ Cost : 500 Qa (5e17)
+ Effect : Additively increase base clicking reward by 50% of your building production.
+ Angel
+ Magical Gates 
+ Mercenary Template : AN7
+ Cost : 5 Qa (5e15)
+ Effect : Increase Maximum Mana based on time spent as Good in this Reincarnation.
+ Formula : +(3.5 * x ^ 0.7), where x is time spent as Good in this Reincarnation.
+ Angelic Dominance 
+ Mercenary Template : AN8
+ Cost : 50 Qa (5e16)
+ Effect : Spell durations are increased by 50%.
+ Wings of Liberty 
+ Mercenary Template : AN9
+ Cost : 500 Qa (5e17)
+ Effect : Increase the production of all buildings based on mana regeneration.
+ Formula : (4 * ln(1 + x) ^ 2)%, where x is your Mana Regeneration.
+ Goblin
+ Goblin Central Bank 
+ Mercenary Template : GB7
+ Cost : 5 Qa (5e15)
+ Effect : Whenever you cast a spell, also cast Tax Collection for free.
+ Fool's Gold 
+ Mercenary Template : GB8
+ Cost : 50 Qa (5e16)
+ Effect : Increase Faction Coin find chance based on the highest amount of Witch Conclaves you own in this Reincarnation.
+ Formula : (2 * x ^ 0.6)%, where x is the number of Witch Conclaves you own.
+ Green Fingers Discount 
+ Mercenary Template : GB9
+ Cost : 500 Qa (5e17)
+ Effect : Gain coins randomly every 10 minutes. Also works while being offline.
+ Formula : (randRange(1 , 2500) * x), where x is your total (buildings + assistants) coin production per second, including spells .
+ Undead
+ Dead Fields 
+ Mercenary Template : UD7
+ Cost : 5 Qa (5e15)
+ Effect : Buildings count 75% more.
+ Tireless Workers 
+ Mercenary Template : UD8
+ Cost : 50 Qa (5e16)
+ Effect : Increase the production of assistants by 1500%.
+ Undead Resilience 
+ Mercenary Template : UD9
+ Cost : 500 Qa (5e17)
+ Effect : Increase offline production based on your Mana Regeneration.
+ Formula : (125 * ln(1 + x) ^ 2.5)%, where x is your Mana Regeneration.
+ Demon
+ Infernal Magic 
+ Mercenary Template : DM7
+ Cost : 5 Qa (5e15)
+ Effect : Hell Portals also increase your Mana Regeneration rate.
+ Formula : +(3.5 * x ^ 0.35), where x is the amount of Hell Portals you own.
+ Burning Legion 
+ Mercenary Template : DM8
+ Cost : 50 Qa (5e16)
+ Effect : You gain assistants based on the amount of Hell Portals you own.
+ Formula : +(1.5 * x ^ 0.65), where x is the number of Hell Portals you own.
+ Very Bad Guys 
+ Mercenary Template : DM9
+ Cost : 500 Qa (5e17)
+ Effect : Increase the production of Heaven's Gate / Hell Portals / Ancient Pyramid (based on your Alignment) based on the highest amount of Hell Portals you built in this Reincarnation.
+ Formula : (4 * x ^ 0.8)%, where x is the highest amount of Hell Portals you built in this Reincarnation.
+ Titan
+ Cyclopean Strength 
+ Mercenary Template : TT7
+ Cost : 50 Oc (5e28)
+ Effect : Assistants count 200% more and increase their production by 200%.
+ Heavy Coins 
+ Mercenary Template : TT8
+ Cost : 500 Oc (5e29)
+ Effect : Increases Royal Exchanges production bonus by an additional 100% each.
+ Effect : Also reduces Royal Exchange cost multiplier by 0.01; with no other reductions applying, the multiplier will be 1.09 instead of 1.1.
+ Oversized Legends 
+ Mercenary Template : TT9
+ Cost : 5 No (5e30)
+ Effect : Reduce Hall of Legends building cost multiplier by 0.01; with no other reductions applying, the multiplier will be 1.14 instead of 1.15.
+ Effect : Also increases assistants production based on the amount of Hall of Legends you own. 
+ Formula : (6 * x ^ 0.6)%, where x is the amount of Hall of Legends you own.
+ Druid
+ Mabinogion 
+ Mercenary Template : DD7
+ Cost : 50 Oc (5e28)
+ Effect : Increase Non-Unique buildings production based on their tier, giving the best bonus to the lowest.
+ Formula : (12 * 1.8 ^ (12 - T))%, where T is building tier.
+ Earthly Soul 
+ Mercenary Template : DD8
+ Cost : 500 Oc (5e29)
+ Effect : Increase mana regeneration based on the highest amount of Stone Pillars you built in this Reincarnation.
+ Formula : +(x ^ 0.25), where x is the highest amount of Stone Pillars you built in this Reincarnation.
+ Building Jungle 
+ Mercenary Template : DD9
+ Cost : 5 No (5e30)
+ Effect : Increase the production of each building based on the amount of buildings of the same type.
+ Formula : (1.5 * x ^ 0.9)%, where x is the amount of buildings of the same type.
+ Faceless
+ Magical Treasure 
+ Mercenary Template : FC7
+ Cost : 50 Oc (5e28)
+ Effect : Increase mana regeneration based on the amount of assistants you own.
+ Formula : +(2.5 * x ^ 0.5), where x is the amount of assistants you own.
+ Abominations 
+ Mercenary Template : FC8
+ Cost : 500 Oc (5e29)
+ Effect : Increase the production of assistants based on the amount of active spells.
+ Formula : (20 * x ^ 0.9)%, where x is the amount of active spells.
+ Hive Mind 
+ Mercenary Template : FC9
+ Cost : 5 No (5e30)
+ Effect : Increases production based on total time spent affiliated with Faceless. Persists through Reincarnations.
+ Formula : (x ^ 0.5)%, where x is time spent as Faceless (All Time).
+ Dwarven
+ Battlehammers 
+ Mercenary Template : DN7
+ Cost : 500 Sxd (5e53)
+ Effect : Increase the production of all buildings based on the amount of Dwarven Coins found in this game.
+ Formula : (2 * ln(1 + x) ^ 2))%, where x is the amount of Dwarven Coins found in this game.
+ Magic Resistance 
+ Mercenary Template : DN8
+ Cost : 5 Spd (5e54)
+ Effect : Reduce Excavation cost multiplier.
+ Formula : Reduces cost multiplier by 0.02; with no other reductions applying, the multiplier will be 1.18 instead of 1.2.
+ Overwatch 
+ Mercenary Template : DN9
+ Cost : 50 Spd (5e55)
+ Effect : Increase Maximum Mana based on the duration of your longest spell.
+ Formula : +(50 + 35 * x ^ 0.7), where x is the duration of your longest spell.
+ Drow
+ Spider Gods 
+ Mercenary Template : DW7
+ Cost : 500 Sxd (5e53)
+ Effect : Mutiplicatively increase assistants based on the amount of buildings you own.
+ Formula : (0.5 * x ^ 0.5)%, where x is the amount of buildings you own.
+ Professional Assassins 
+ Mercenary Template : DW8
+ Cost : 5 Spd (5e54)
+ Effect : Multiplicatively increase production bonus from Gems based on the amount of Royal Exchanges you made.
+ Formula : (0.6 * x ^ 0.6)%, where x is Royal Exchanges made.
+ Blade Dance 
+ Mercenary Template : DW9
+ Cost : 50 Spd (5e55)
+ Effect : Increase the production of all buildings based on Combo Strike counter in this game.
+ Formula : (100 + 80 * x ^ 0.4)%, where x is your Combo Strike counter.
+ Dragon
+ Ancient Hunger 
+ Mercenary Template : DG7
+ Cost : 500 Tvg (5.0e74)
+ Effect : Increase Maximum Mana additively and multiplicatively based on the amount of Faction Coins found in this game.
+ Formula (Additive) : +(20 * ln(1 + x) ^ 2), where x is Faction Coins found this game.
+ Formula (Multiplicative) : (0.75 * ln(1 + x) ^ 1.25)%, where x is Faction Coins found this game.
+ Eternal Wisdom 
+ Mercenary Template : DG8
+ Cost : 5 Qavg (5.0e75)
+ Effect : Increase the production of all buildings based on Royal Exchange bonus.
+ Formula : (1.5 * x ^ 0.9)%, where x is individual Royal Exchange bonus.
+ Chromatic Scales 
+ Mercenary Template : DG9
+ Cost : 50 Qavg (5.0e76)
+ Effect : Increase the production of all buildings based on the amount of active Dragon's Breath effects.
+ Formula : ({100 * ((x) ^ 2)}%) where x is amount of active Dragon's Breath effects.
+ Archon
+ Superior Consciousness 
+ Mercenary Template : AR7
+ Cost : 10 TQig (1e163)
+ Effect : Increase the production of Unique buildings based on their quantity.
+ Formula : (x)%, where x is Unique Buildings.
+ Strange Attraction 
+ Mercenary Template : AR8
+ Cost : 100 TQig (1e164)
+ Effect : Multiplicatively increase Faction Coin find chance based on the activity time of your least used spell.
+ Formula : (100 + 0.8 * x ^ 0.8)%, where x is spell with least activity time in this Reincarnation.
+ Arcane Core 
+ Mercenary Template : AR9
+ Cost : 1 QaQig (1e165)
+ Effect : Increase the production of all buildings based on mana produced in this Reincarnation.
+ Formula : (2.5 * log10(1 + x) ^ 2.5)%, where x is mana produced in this Reincarnation.
+ Djinn
+ Wishing Well 
+ Mercenary Template : DJ7
+ Cost : 10 TQig (1e163)
+ Effect : Multiplicatively increase production bonus from Gems based on the amount of assistants you own.
+ Formula : (0.03 * x ^ 0.3)%, where x is the amount of assistants you own.
+ Flashy Storm 
+ Mercenary Template : DJ8
+ Cost : 100 TQig (1e164)
+ Effect : Increase the production of even-tier buildings on odd days of the month, odd-tier buildings on even days.
+ Note : The bonus is based on assistants owned.
+ Formula : (ln(1 + x) ^ 2.5), where x is assistants owned.
+ Mana Creatures 
+ Mercenary Template : DJ9
+ Cost : 1 QaQig (1e165)
+ Effect : Multiplicatively increase assistants based on the highest Mana produced in this Reincarnation.
+ Formula : (1.8 * log10(1 + x) ^ 1.8)%, where x is highest Mana produced in a single game this reincarnation.
+ Makers
+ Stonecarving 
+ Mercenary Template : MK7
+ Cost : 10 TQig (1e163)
+ Effect : Increase the production of all buildings based on excavations made in this Reincarnation, including resets.
+ Formula : (250 + 0.5 * (x * (y + z)) ^ 0.5)%, where x is excavations done this Reincarnation (NOT current excavation count) and y & z are free and ruby excavation resets done in this Reincarnation.
+ Past Trade 
+ Mercenary Template : MK8
+ Cost : 100 TQig (1e164)
+ Effect : Multiplicatively increase production bonus from Gems based on the time spent on your longest game session in this Reincarnation.
+ Formula : (0.65 * x ^ 0.65)%, where x is your longest game session this Reincarnation.
+ Structural Stability 
+ Mercenary Template : MK9
+ Cost : 1 QaQig (1e165)
+ Effect : Increase the production of building tiers directly above or below Unique Buildings based on spells cast in this game.
+ Formula : (0.2 * x ^ 0.4)%, where x spells cast in this game.
+ Note : MK9 now works like W3150 ( ^ 2 bonus when able).
+ Tier 4 Upgrades (R100+) 
+ Fairy
+ Bubble Swarm 
+ Mercenary Template : FR10
+ Requirement : A2+, Fairies Union
+ Cost : 1 Nod (1e60) Emerald Coins
+ Effect : Increase maximum mana based on the highest amount of Swarming Towers you own in this Reincarnation.
+ Formula : +(x ^ 1.05), where x is the highest amount of Swarming Towers you own in this Reincarnation.
+ Pheromones 
+ Mercenary Template : FR11
+ Requirement : A2+, Fairies Union
+ Cost : 100 Qivg (1e80) Emerald Coins
+ Effect : Gain assistants based on time spent as Chaos in this Reincarnation (Additive).
+ Formula : +(80 * x ^ 0.8), where x is time spent as Chaos in this Reincarnation.
+ Dream Catchers 
+ Mercenary Template : FR12
+ Requirement : A2+, Fairies Union
+ Cost : 100 Tg (1e95) Emerald Coins
+ Effect : Multiplicatively increase Mana Regeneration based on the amount of Chaos spells cast in this Reincarnation.
+ Formula : (1.2 * x ^ 0.8)%, where x is Chaos spells cast this in this Reincarnation.
+ Elven
+ Wooden Dice 
+ Mercenary Template : EL10
+ Requirement : A2+, Elven Union
+ Cost : 1 Nod (1e60) Emerald Coins
+ Effect : Increase Elven Luck chance to activate and its effects based on the highest amount of Arboreal Cities you own in this Reincarnation.
+ Elven Luck Formula : +(x ^ 0.4)%, where x is highest amount of Arboreal Cities this Reincarnation.
+ Production Formula : (40 * x ^ 0.8)%, where x is highest amount of Arboreal Cities this Reincarnation.
+ Faction Coin Formula : +(7.5 * x ^ 0.75)%, where x is highest amount of Arboreal Cities this Reincarnation.
+ Effect : When Elven Luck triggers, 100000 automatic Tax Collections are cast.
+ Effect : Also removes 2 ascension penalties from Elven Luck.
+ Camouflage 
+ Mercenary Template : EL11
+ Requirement : A2+, Elven Union
+ Cost : 100 Qivg (1e80) Emerald Coins
+ Effect : Assistants and Clicks count 1,000% more for all purposes and increase assistant production based on assistant amount.
+ Formula : (2 * ln(1 + x) ^ 2)%, where x is assistant count.
+ Elven Discipline 
+ Mercenary Template : EL12
+ Requirement : A2+, Elven Union
+ Cost : 100 Tg (1e95) Emerald Coins
+ Effect : Increase assistants additively and multiplicatively based on the amount of Faction Coins found in this game.
+ Additive Formula : +(50 * ln(1 + x) ^ 1.5), where x is Faction Coins found this game.
+ Multiplicative Formula : (1.5 * log10(1 + x) ^ 1.5)%, where x is Faction Coins found this game.
+ Angel
+ Heaven's Brilliance 
+ Mercenary Template : AN10
+ Requirement : A2+, Angels Union
+ Cost : 1 Nod (1e60) Emerald Coins
+ Effect : Increase the bonus multiplier for all spells at tier 7 and above based on the highest amount of Holy Sites you own in this Reincarnation. Gem Grinder and all Dragon's Breath effects are increased based on the highest amount of Holy Sites you own in this Reincarnation.
+ Formula : +(0.025 * ln(1 + x)), where x is highest amount of Holy Sites owned in this Reincarnation.
+ Gem Grinder and Dragon's Breath Formula : (0.65 * x ^ 0.65)%, where x is highest amount of Holy Sites owned in this Reincarnation.
+ Angelic Fortitude 
+ Mercenary Template : AN11
+ Requirement : A2+, Angels Union
+ Cost : 100 Qivg (1e80) Emerald Coins
+ Effect : Multiplicatively increase Faction Coin find chance based on the sum of all your spells' activity time (this Reincarnation).
+ Formula : (x ^ 0.7)%, where x is the sum of all your spells' activity time in this Reincarnation.
+ Note : Counts only the activity time of the spells you have in this game available.
+ Seraphim Wings 
+ Mercenary Template : AN12
+ Requirement : A2+, Angels Union
+ Cost : 100 Tg (1e95) Emerald Coins
+ Effect : Multiplicatively increase Maximum Mana, Mana Regeneration, Faction Coin find chance and assistants by 200%.
+ Goblin
+ Fools Gems 
+ Mercenary Template : GB10
+ Requirement : A2+, Goblins Union
+ Cost : 1 Nod (1e60) Emerald Coins
+ Effect : Multiplicatively increase production bonus from Gems based on the highest amount of Slave Markets you own in this Reincarnation.
+ Formula : (0.5 * x ^ 0.5)%, where x is the highest amount of Slave Markets you own in this Reincarnation.
+ Money is Magic 
+ Mercenary Template : GB11
+ Requirement : A2+, Goblins Union
+ Cost : 100 Qivg (1e80) Emerald Coins
+ Effect : Increase mana regeneration based on the amount of Tax Collections cast in this game.
+ Formula : (2 * ln(1 + x) ^ 2)%, where x is Tax Collections cast this game.
+ Lousy Architecture 
+ Mercenary Template : GB12
+ Requirement : A2+, Goblins Union
+ Cost : 100 Tg (1e95) Emerald Coins
+ Effect : Reduces cost multiplier by 0.01; with no other reductions applying, the multiplier will be 1.14 instead of 1.15.
+ Effect : Increase Non-Unique buildings production based on the amount of buildings of the same tier.
+ Formula : (x ^ 0.65)%, where x is the amount of buildings of the same tier. 
+ Undead
+ Flesh Servants 
+ Mercenary Template : UD10
+ Requirement : A2+, Undead Union
+ Cost : 1 Nod (1e60) Emerald Coins
+ Effect : Mutiplicatively increase assistants based on the highest amount of Flesh Workshops you built in this Reincarnation.
+ Formula : (1.3 * x ^ 0.7)%, where x is the highest amount of Flesh Workshops you built in this Reincarnation.
+ Eternal Servitude 
+ Mercenary Template : UD11
+ Requirement : A2+, Undead Union
+ Cost : 100 Qivg (1e80) Emerald Coins
+ Effect : Increase Unique buildings production based on time spent in this game.
+ Formula : (x ^ 0.7)%, where x is time spent this game.
+ Zombie Apocalypse 
+ Mercenary Template : UD12
+ Requirement : A2+, Undead Union
+ Cost : 100 Tg (1e95) Emerald Coins
+ Effect : Gain assistants based on the total amount of time spent offline in this Reincarnation (Additive).
+ Formula : +(21 * x ^ 0.7), where x is offline time this Reincarnation.
+ Demon
+ Abyssal Furnace 
+ Mercenary Template : DM10
+ Requirement : A2+, Demons Union
+ Cost : 1 Nod (1e60) Emerald Coins
+ Effect : Increase the production of all buildings based on the highest amount of Burning Abysses you built in this Reincarnation. Higher tiers get better bonuses.
+ Formula : (0.5 * (T ^ 1.5) * (x ^ 0.5)%, where x is the highest amount of Burning Abysses you built in this Reincarnation, T is building tier.
+ Demonic Fury 
+ Mercenary Template : DM11
+ Requirement : A2+, Demons Union
+ Cost : 100 Qivg (1e80) Emerald Coins
+ Effect : Multiplicatively increase Faction Coin find chance based on least time spent between Evil and Chaos this Reincarnation.
+ Formula : (0.25 * min(x , y) ^ 0.75)%, where x is evil time and y is chaos time spent in this Reincarnation.
+ Devastation 
+ Mercenary Template : DM12
+ Requirement : A2+, Demons Union
+ Cost : 100 Tg (1e95) Emerald Coins
+ Effect : Increase production of three highest building tiers based on your Mana Regeneration.
+ Formula : (2.5 * ln(1 + x) ^ 2.5)%, where x is your Mana Regeneration.
+ Titan
+ Giant Market 
+ Mercenary Template : TT10
+ Requirement : A2+, Titan Union
+ Cost : 1 Nod (1e60) Emerald Coins
+ Effect : Increase Royal Exchange count based on the highest amount of Mountain Palaces you built in this Reincarnation.
+ Formula : (x ^ 0.7)%, where x is the highest amount of Mountain Palaces you built in this Reincarnation.
+ Titanic Authority 
+ Mercenary Template : TT11
+ Requirement : A2+, Titan Union
+ Cost : 100 Qivg (1e80) Emerald Coins
+ Effect : Increase the production of Unique Buildings based on the amount of Royal Exchanges you made.
+ Formula : (x ^ 0.6)%, where x is amount of Royal Exchanges you made.
+ Colossus Kingdom 
+ Mercenary Template : TT12
+ Requirement : A2+, Titan Union
+ Cost : 100 Tg (1e95) Emerald Coins
+ Effect : Gain assistants based on time spent as Order in this Reincarnation.
+ Formula : +(25 * x ^ 0.7), where x time spent as Order in this Reincarnation.
+ Druid
+ Building Vines 
+ Mercenary Template : DD10
+ Requirement : A2+, Druids Union
+ Cost : 1 Nod (1e60) Emerald Coins
+ Effect : Increase spell duration based on the highest amount of Ziggurats you built in this Reincarnation.
+ Formula : (0.5 * x ^ 0.5)%, where x is the highest amount of Ziggurats you built in this Reincarnation.
+ Lunar Cycle 
+ Mercenary Template : DD11
+ Requirement : A2+, Druids Union
+ Cost : 100 Qivg (1e80) Emerald Coins
+ Effect : Increase Maximum Mana additively based on time spent online in this game.
+ Online Formula : +(50 * x ^ 0.85), where x is time spent online in this game.
+ Effect : Increase Maximum Mana multiplicatively based on time spent offline in this game.
+ Offline Formula : (0.5 * x ^ 0.5)%, where x is time spent offline in this game.
+ Grove Farming 
+ Mercenary Template : DD12
+ Requirement : A2+, Druids Union
+ Cost : 100 Tg (1e95) Emerald Coins
+ Effect : Increase the production of all buildings based on their tier. Middle tiers get better bonuses.
+ Formula : (0.8 * ((6 - abs(6 - T)) ^ 4))%, where T is building tier.
+ Faceless
+ Primal Knowledge 
+ Mercenary Template : FC10
+ Requirement : A2+, Faceless Union
+ Cost : 1 Nod (1e60) Emerald Coins
+ Effect : Multiplicatively increase Faction Coin find chance based on the highest amount of Forbidden Libraries you own in this Reincarnation. Grows over time and resets every 15 minutes.
+ Formula : ((t % 900) / 75 * x ^ 0.4)%, where t is time spent this game, x is the highest amount of Forbidden Libraries owned this Reincarnation.
+ Forbidden Language 
+ Mercenary Template : FC11
+ Requirement : A2+, Faceless Union
+ Cost : 100 Qivg (1e80) Emerald Coins
+ Effect : Increase spell durations based on the amount of Reincarnations made.
+ Formula : (0.8 * x ^ 0.8)%, where x is the number of times you have reincarnated.
+ Dimension Door 
+ Mercenary Template : FC12
+ Requirement : A2+, Faceless Union
+ Cost : 100 Tg (1e95) Emerald Coins
+ Effect : Increase the production of all buildings based on the highest amount of Maximum Mana you had in this Reincarnation.
+ Formula : (2 * ln(1 + x) ^ 2)%, where x is highest Maximum Mana you had in this Reincarnation.
+ Dwarven
+ Solidity 
+ Mercenary Template : DN10
+ Requirement : R116+, Dwarven Union
+ Cost : 10 Dtg (1e100)
+ Effect : Multiplicatively increase production bonus from Gems based on the highest amount of High Bastions you built in this Reincarnation.
+ Formula : (1.6 * x ^ 0.6), where x is the highest amount of High Bastions you built in this Reincarnation.
+ Stonetalking 
+ Mercenary Template : DN11
+ Requirement : R116+, Dwarven Union
+ Cost : 100 Qitg (1e110)
+ Effect : Increase the production of all buildings based on the highest between Maximum Mana and Mana Regeneration.
+ Formula : (2 * ln(1 + max(x , y)) ^ 2)%, where x is Maximum Mana and y is Mana Regeneration.
+ Refined Minerals 
+ Mercenary Template : DN12
+ Requirement : R116+, Dwarven Union
+ Cost : 1 Notg (1e120)
+ Effect : Multiplicatively increase Mana Regeneration and Maximum Mana based on highest time spent as Order, Balance or Chaos.
+ Formula : (0.03 * max(x, y, z) ^ 0.7)%, where x, y & z is time spent as Order, Balance and Chaos in this Reincarnation respectively.
+ Drow
+ Spider Clerics 
+ Mercenary Template : DW10
+ Requirement : R116+, Drow Union
+ Cost : 10 Dtg (1e100)
+ Effect : Increase Royal Exchange bonus based on the highest amount of Brothels you built in this Reincarnation (Additive).
+ Formula : +(1.75 * x ^ 0.75)%, where x is the highest amount of Brothels you built in this Reincarnation.
+ Ancillae Obscure 
+ Mercenary Template : DW11
+ Requirement : R116+, Drow Union
+ Cost : 100 Qitg (1e110)
+ Effect : Increase Non-Unique building production based on amount of Unique Buildings.
+ Formula : (50 * x ^ 0.5)%, where x is amount of Unique Buildings.
+ Crystal Servants 
+ Mercenary Template : DW12
+ Requirement : R116+, Drow Union
+ Cost : 1 Notg (1e120)
+ Effect : Multiplicatively gain assistants based on current gem amount.
+ Formula : (1.75 * log10(1 + x) ^ 1.75)%, where x is your current amount of gems.
+ Dragon
+ Fang Food 
+ Mercenary Template : DG10
+ Requirement : R116+, Dragon Union
+ Cost : 10 Dtg (1e100)
+ Effect : Multiplicatively increase Mana Regeneration and Assistants based on the highest amount of Dragon Pastures you built in this Reincarnation.
+ Formula : (0.5 * x ^ 0.5)%, where x is the highest amount of Dragon Pastures owned in this Reincarnation.
+ Wyrm's Rest 
+ Mercenary Template : DG11
+ Requirement : R116+, Dragon Union
+ Cost : 100 Qitg (1e110)
+ Effect : Remove 1 Ascension penalty from Royal Exchange bonus. Also gives Dragon's Breath White Breath a multiplicative effect on Assistants based on time spent as Dragons.
+ Formula : (1.25 * ln(1 + x) ^ 1.25)%, where x is time spent as Dragon this Reincarnation.
+ Note : The multiplicative White Breath effect stacks multiplicatively with extra White Breaths.
+ Draconic Supremacy 
+ Mercenary Template : DG12
+ Requirement : R116+, Dragon Union
+ Cost : 1 Notg (1e120)
+ Effect : Increase the production of all buildings based on your Maximum Mana.
+ Formula : (20 * ln(1 + x) ^ 2)%, where x is your Maximum Mana.
+ Archon
+ Purity of Form 
+ Mercenary Template : AR10
+ Requirement : R130+, Archon Union
+ Cost : 100 QiQig (1e170)
+ Effect : Lineage levels count 200% more for all purposes.
+ Absolute Hierarchy 
+ Mercenary Template : AR11
+ Requirement : R130+, Archon Union
+ Cost : 1 SxQig (1e171)
+ Effect : Remove 1 Ascension Penalty from Call to Arms.
+ Essence Extractor 
+ Mercenary Template : AR12
+ Requirement : R130+, Archon Union
+ Cost : 10 SxQig (1e172)
+ Effect : Multiplicatively increase production bonus from Gems based on the duration of your longest spell.
+ Formula : (0.15 * x ^ 0.7)%, where x is the duration of your longest spell.
+ Djinn
+ Wishes Come True 
+ Mercenary Template : DJ10
+ Requirement : R130+, Djinn Union
+ Cost : 100 QiQig (1e170)
+ Effect : Increase the production of all buildings based on Limited Wish activity time in this Reincarnation.
+ Formula : (0.3 * x ^ 0.7)%, where x is Limited Wish activity time in this Reincarnation.
+ Blue Powder 
+ Mercenary Template : DJ11
+ Requirement : R130+, Djinn Union
+ Cost : 1 SxQig (1e171)
+ Effect : Multiplicatively increase Mana Regeneration based on Royal Exchanges made.
+ Formula : (0.3 * x ^ 0.8)%, where x is Royal Exchanges made.
+ Academic Prodigy 
+ Mercenary Template : DJ12
+ Requirement : R130+, Djinn Union
+ Cost : 10 SxQig (1e172)
+ Effect : Tax Collections are worth more seconds based on trophies unlocked.
+ Formula : (5 * x ^ 0.5)%, where x is trophies unlocked.
+ Makers
+ Valuable Antiquity 
+ Mercenary Template : MK10
+ Requirement : R130+, Makers Union
+ Cost : 100 QiQig (1e170)
+ Effect : Artifacts count more based on time spent in this Reincarnation.
+ Formula : (0.4 * x ^ 0.4)%, where x is time spent in this Reincarnation.
+ Bedrock Foundations 
+ Mercenary Template : MK11
+ Requirement : R130+, Makers Union
+ Cost : 1 SxQig (1e171)
+ Effect : Increase the base production of all buildings by +1000 per building tier.
+ Reality Marble 
+ Mercenary Template : MK12
+ Requirement : R130+, Makers Union
+ Cost : 10 SxQig (1e172)
+ Effect : Gain assistants based on clicks made in this Reincarnation.
+ Formula : +(2.5 * x ^ 0.5), where x is clicks made this Reincarnation.
+ | Resources | Soft Resets | Buildings | Heritages | Bloodlines 
+ | Spells | Excavations | Challenges | Upgrades | Trophies 
+ | Factions | Research |
+ | Merc Builds | Research Builds | Prestige Builds | Dragon Unlock | Neutral Prestige Builds | Research Tree |
+ | Good : Fairy, Elf , Angel Evil : Goblin , Undead , Demon Neutral : Titan , Druid , Faceless"> Vanilla Factions 
+ | Fairy Elf Angel "> Good Factions 
+ | Goblin Undead Demon"> Evil Factions 
+ | Titan Druid Faceless"> Neutral Factions 
+ | Dwarf Drow Dragon"> Prestige Factions 
+ | Archon Djinn Makers"> A2 Elite Factions |
+ | Events | Latest Major Patch | Changelog | Notation | Terminology | Tools | Kongregate Links |
+ | Fairy 
+ | Elven 
+ | Angel 
+ | Goblin 
+ | Undead 
+ | Demon 
+ | Titan 
+ | Druid 
+ | Faceless |
+ | Mercenary 
+ | Dwarf 
+ | Drow 
+ | Dragon 
+ | Archon 
+ | Djinn 
+ | Makers |
+ 

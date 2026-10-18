@@ -1,0 +1,994 @@
+R220+ Builds (Not updated for v4.2) 
+ Spells are an active component of the game mechanics that boost production. They require mana to be cast and only work while playing online .
+ Their duration, mana cost and effect bonus can be altered by getting specific Faction, Heritage, Challenge, or Research upgrades. Different aspects of the spells can also be used in other upgrades (while a spell is active, the number of spell casts, based on mana produced, etc.).
+ The trick to use spells efficiently relies on finding the best setting: Which spell combination to cast, at what timing, with which automatic-casting tool, and where to set the contingency arrow. Like for upgrades, these choices can make a crucial difference for your game progress.
+ In later stages of the game you unlock more spells and spells can also have additional tiers. More information on Spell Tiers can be found here .
+ While offline : Spells set on autocasting will gain "Active Time", but no spell will actually be cast. Instead, a generic non-specific spell will increase your "Spell Casts" entry in the stats.
+ Offline Activity Time Gain Formula :
+(Requires Masterful Autocast)
+ (t * min(1, m * d / (n * c ^ 1.5))) , where t is offline time, m is offline Mana Regeneration, d is spell duration, c is the spell's base mana cost (of tier 1), and n is number of spells set to autocast (not counting Tax Collection).
+ Spells Menu 
+ Spell Trophies and Challenge Rewards 
+ Spell Trophy Menu 
+ Challenge Reward Menu 
+ God's Hand 
+ Spell Type : (Good/Order) Angel Faction Spell
+ Cost : 900 Mana - Duration : 20 seconds
+ Effect : Increase the production of all buildings based on your Mana Regeneration rate.
+ Formula : (120 * x)%, where x is your Mana Regeneration.
+ " coords="10,10,64,64" shape="rect">
+ Fairy Chanting 
+ Spell Type : (Good/Chaos) Fairy Faction Spell
+ Cost : 1,000 Mana - Duration : 10 seconds
+ Effect : Increase the production of Farms, Inns and Blacksmiths by 50,000%.
+ " coords="70,10,124,64" shape="rect">
+ Moon Blessing 
+ Spell Type : (Good/Balance) Elven Faction Spell
+ Cost : 700 Mana - Duration : 20 seconds
+ Effect : Increases the production of all buildings based on on the amount of clicks made in this Reincarnation.
+ Formula : (0.7 * x ^ 0.7)%, where x is the amount of clicks made in this Reincarnation.
+ " coords="130,10,184,64" shape="rect">
+ Holy Light 
+ Spell Type : Good Alignment Spell
+ Cost : 900 Mana - Duration : 10 seconds
+ Effect : Increase clicking reward by 1750%.
+ " coords="190,10,244,64" shape="rect">
+ Diamond Pickaxe 
+ Spell Type : (Good) Dwarven Faction Spell
+ Cost : 1,000 Mana - Duration : 12 seconds
+ Effect : Increase clicking reward based on amount of Excavation you made and increase your Faction Coin find chance by +200%.
+ Formula : (25 * x)%, where x is the amount of Excavations you made.
+ " coords="250,10,304,64" shape="rect">
+ Share Benefits 
+ Spell Type : (Good) Mercenary Faction Spell (R75+)
+ Cost : 200 Mana - Duration : Fixed to 20 seconds
+ Effect : Alters Tax Collection with new name and effect (still counts as Tax Collection for all purposes).
+ Effect : Increases the production of all buildings and Faction Coin find chance based on this spell tier level.
+ Effect : Also produce Tax Collection casts per second based on your Maximum Mana.
+ Formula (Production bonus) : ((((1 + 0.01 * (120 + 1.25 * ln(1 + 90 + x) ^ 1.25)) ^ T) - 1) * 100)%, where x is Tax Collection worth in seconds and T the Share Benefits tier.
+ Formula (Faction Coin find chance multiplier) : 120 ^ (0.25 * T)%, where T is Share Benefits.
+ Formula (Additional Tax Collection) : +(0.01 * x * T), where x is Maximum Mana and T Share Benefits tier.
+ " coords="310,10,364,64" shape="rect">
+ Night Time 
+ Spell Type : (Evil/Order) Undead Faction Spell
+ Cost : 1,000 Mana - Duration : 20 seconds 
+ Effect : The production of assistants is increased by 30% per Necropolis you own.
+ " coords="10,70,64,124" shape="rect">
+ Hellfire Blast 
+ Spell Type : (Evil/Chaos) Demon Faction Spell
+ Cost : 1,000 Mana - Duration : 20 seconds
+ Effect : Increase the production of Evil Fortresses and Hell Portals based on your amount of trophies.
+ Formula : (round(200 * x ^ 0.8))%, where x is your amount of trophies.
+ " coords="70,70,124,124" shape="rect">
+ Goblin's Greed 
+ Spell Type : (Evil/Balance) Goblin Faction Spell
+ Cost : 800 Mana - Duration : 5 seconds
+ Effect : Instantly produces Faction Coins based on gems you own. Also increases production of all buildings based on the number of Faction Coins found in this game.
+ Faction Coin Formula : +(20 + ln(1 + x) ^ 3), where x is your current amount of gems.
+ Production Formula : (0.75 * ln(1 + x) ^ 3.15)%, where x is the number of Faction Coins found in this game.
+ " coords="130,70,184,124" shape="rect">
+ Blood Frenzy 
+ Spell Type : Evil Alignment Spell
+ Cost : 600 Mana - Duration : 20 seconds
+ Effect : Increases the production of all Evil buildings by 1250%.
+ " coords="190,70,244,124" shape="rect">
+ Combo Strike 
+ Spell Type : (Evil) Drow Faction Spell
+ Cost : 800 Mana - Duration : Fixed to 16 seconds
+ Effect : Increase the production of all buildings by a progressively higher value as you continue casting this spell (This game).
+ Formula : (30 * (x ^ 0.9))%, where x is the number of times you have cast Combo Strike (This game).
+ " coords="250,70,304,124" shape="rect">
+ Reap Interests 
+ Spell Type : (Evil) Mercenary Faction Spell (R75+)
+ Cost : 200 Mana - Duration : None
+ Effect : Alters Tax Collection with new name and effect (still counts as Tax Collection for all purposes).
+ Effect : Additional casts of Reap Interests increase its seconds worth of production.
+ Formula : *(50000 * log10(8 + 0.1 * x)), where x is amount of Reap Interests casts.
+ Note : Upgrades that cast free Tax Collection are treated as Reap Interests casts.
+ " coords="310,70,364,124" shape="rect">
+ Lightning Strike 
+ Spell Type : (Neutral/Order) Titan Faction Spell
+ Cost : 600 Mana - Duration : 10 seconds 
+ Effect : The production of a random building is multiplied by 500% for each Iron Stronghold. Also multiplicatively increase Faction Coins find chance based on your current amount of gems.
+ Formula : (10 + log10(1 + x) ^ 2)%, where x is your current amount of gems.
+ " coords="10,130,64,184" shape="rect">
+ Brainwave 
+ Spell Type : (Neutral/Chaos) Faceless Faction Spell
+ Cost : 600 Mana - Duration : 600 seconds 
+ Effect : Increase production of all buildings by a cumulative 2% per second.
+ " coords="70,130,124,184" shape="rect">
+ Grand Balance 
+ Spell Type : (Neutral/Balance) Druid Faction Spell
+ Cost : 1,000 Mana - Duration : 20 seconds
+ Effect : Increase the production of your least productive building based on the amount of the three most built ones.
+ Formula : (25 * (x * y * z / (A + 3) ^ 6) ^ 0.9)%, where x, y and z are the number of your three most-built buildings and A is how many times you have ascended.
+ " coords="130,130,184,184" shape="rect">
+ Gem Grinder 
+ Spell Type : Neutral Alignment Spell
+ Cost : 1,000 Mana - Duration : 20 seconds 
+ Effect : Multiplicatively increase production bonus from Gems based on the amount of times you reincarnated and ascended.
+ Formula : ((5000 * (1 + 0.1 * R)) ^ (0.8 ^ A))%, where R is the number of times you have reincarnated and A is how many times you have ascended.
+ " coords="190,130,244,184" shape="rect">
+ Dragon's Breath 
+ Spell Type : (Neutral) Dragon Faction Spell (R46+)
+ Cost : 1,500 Mana - Duration : 20 seconds
+ Effect : Activates one of the following effects at random for 20 seconds.
+ Red : Increase the production of unique buildings based on the amount of Faction Coins found in this game.
+ Formula : (2 * (ln(1 + x) ^ 2)%, where x is the amount of Faction Coins found in this game.
+ Green : Increase the production of all buildings based on the amount of spells cast in this game. Higher bonuses are provided to lower building tiers.
+ Formula : (0.01 * x ^ 0.625 * (11 - T) ^ 5)%, where x is spells cast (this game) and T is the building tier. (1 for Farms, 11 for Hall of Legends).
+ Blue : Multiplicatively increase your Mana Regeneration by 200%.
+ White : Temporarily increase the amount of assistants based on time spent being Neutral in this Reincarnation.
+ Formula : +(30 * x ^ 0.65), where x is time spent as Neutral this Reincarnation.
+ Black : Increase the production of all buildings based on Dragon's Breath activity time in this game.
+ Formula : (0.5 * x ^ 0.75)%, where x is Dragon's Breath activity time in this game.
+ " coords="250,130,304,184" shape="rect">
+ Appraisal Vantage 
+ Spell Type : (Neutral) Mercenary Faction Spell (R75+)
+ Cost : 200 Mana - Duration : None
+ Effect : Alters Tax Collection with new name and effect (still counts as Tax Collection for all purposes).
+ Effect : Generates additional Faction Coins based on the amount of assistants you own.
+ Formula : +(x * y ^ 1.275), where x is assistants owned and y is Faction Coin find chance.
+ Note : Upgrades that cast free Tax Collection are treated as Appraisal Vantage casts.
+ " coords="310,130,364,184" shape="rect">
+ Temporal Flux 
+ Spell Type : Order Alignment Spell (R100+)
+ Cost : 5,000 Mana - Duration : 20 seconds
+ Effect : Increase Unique building production based on time spent this game.
+ Effect : Also multiplicatively increase Mana Regeneration based on time spent in this game.
+ Formula : (3.75 * (x / 60) ^ 0.825)%, where x is time spent in this game.
+ " coords="10,190,64,244" shape="rect">
+ Maelstrom 
+ Spell Type : Chaos Alignment Spell (R100+)
+ Cost : 3,500 Mana - Duration : 20 seconds
+ Effect : Increase the production of three random buildings based on one of these stats in this game, chosen at random: Mana produced, trophies unlocked, Faction Coins found or amount of assistants
+ Formula (Mana) : (0.02 * (log10(1 + x)) ^ 5)%, where x is Mana produced this game.
+ Formula (Trophies) : (2.5 * x ^ 0.9)%, where x is trophies unlocked.
+ Formula (Faction Coins) : (0.01 * (log10(1 + x)) ^ 4)%, where x is faction coins found this game.
+ Formula (Assistants) : (0.25 * (log10(1 + x)) ^ 5)%, where x is amount of assistants.
+ " coords="70,190,124,244" shape="rect">
+ All Creation 
+ Spell Type : Balance Alignment Spell (R100+)
+ Cost : 6,000 Mana - Duration : 20 seconds
+ Effect : Increase production of all buildings based on your Mana Regeneration rate.
+ Formula : (0.15 * ln(1 + x) ^ 3 + 0.75 * x ^ 0.25)%, where x is your Mana Regeneration.
+ Effect : Also multiplicatively increase Faction Coin find chance based on your Mana Regeneration rate.
+ Formula : (4.5 * ln(1 + x) ^ 2.25 + 12.5 * x ^ 0.125)%, where x is your Mana Regeneration.
+ " coords="130,190,184,244" shape="rect">
+ Precognition 
+ Spell Type : (Order) Archon Faction Spell (R125+)
+ Cost : 123,456 Mana - Duration : 60 seconds
+ Effect : Buildings, Assistants, Royal Exchanges, Spells cast and Clicks count more based on Mana produced in this game.
+ Formula : (ln(1 + x) ^ 1.25)%, where x is Mana produced in this game.
+ Note : Formula Improved to (1.25 * ln(1 + x) ^ 1.5)% with AR2.
+ " coords="10,250,64,304" shape="rect">
+ Limited Wish 
+ Spell Type : (Chaos) Djinn Faction Spell (R125+)
+ Cost : 888,888 mana - Duration : Fixed to 12 seconds
+ Effect : Provide a random effect based on your chosen base alignment, for 12 seconds. The duration of the spell cannot be modified. Its power increases as you continue casting this spell.
+ Formula : (2.25 * (ln(1 + x) ^ 1.35) * y ^ 0.45)%, where x is Limited Wish activity time in this game and y is a random number between 1 and Limited Wish casts this game rolled on cast.
+ Possible Effects 
+ 1 : Increase the production of all buildings.
+ Good Alignment 
+ 2 : Temporarily increase Assistants (multiplicatively).
+ 3 : All spells durations count more.
+ 4 : Multiplicatively increase Mana Regeneration.
+ Evil Alignment 
+ 2 : Multiplicatively increase Trophy count and Offline Bonus.
+ 3 : Multiplicatively increase Mana Regeneration.
+ 4 : Multiplicatively increase Faction Coin find chance.
+ Neutral Alignment 
+ 2 : Multiplicatively increase Maximum Mana.
+ 3 : All spells durations count more.
+ 4 : Multiplicatively increase Faction Coin find chance.
+ " coords="70,250,124,304" shape="rect">
+ Infinite Spiral 
+ Spell Type : (Balance) Makers Faction Spell (R125+)
+ Cost : 505,000 mana - Duration : 10 seconds
+ Effect : Temporarily increase assistants based on Maximum Mana (multiplicatively).
+ Formula : (10 * ln(1 + x) ^ 1.25)%, where x is Maximum Mana.
+ Effect : Multiplicatively increase Maximum Mana based on Faction Coin find chance.
+ Formula : (1.5 * log10(1 + x) ^ 1.5)%, where x is Faction Coin find chance.
+ Effect : Multiplicatively increase Faction Coin find chance based on Excavations made, including resets, in this Reincarnation.
+ Formula : (10 + 0.05 * (x * y) ^ 0.75)%, where x is excavations done this Reincarnation ( not current excavation count), y is free and ruby Excavation Resets this Reincarnation.
+ " coords="130,250,184,304" shape="rect">
+ Catalyst 
+ Spell Type : (Chaos) Djinn Faction Spell (R130+)
+ Cost : 500,000 Mana - Duration : Fixed to 60 seconds
+ Effect : Imitates a random vanilla or base alignment spell at tier 7 for 60 seconds. This spell's duration cannot be modified.
+ Note : Having access to this spell also enables the spell trophies and the challenge rewards of those spells.
+ Note : Cannot cast a spell that is already available.
+ " coords="40,310,94,364" shape="rect">
+ Chaos Madness 
+ Spell Type : (Chaos) Mercenary Faction Spell (R194+)
+ Cost : 500,000 Mana - Duration : Fixed to 20 seconds
+ Effect : Grants the effect of a random lineage, with the level of your highest lineage for 20 seconds.
+ Note : Does not select a lineage that is already available.
+ " coords="100,310,154,364" shape="rect">
+ Tax Collection 
+ Spell Type : Default Spell
+ Cost : 200 Mana - Duration : None
+ Effect : Instantly gain 30 seconds worth of coin production from buildings and assistants.
+ " coords="220,220,274,274" shape="rect">
+ Call to Arms 
+ Spell Type : Default Spell 
+ Cost : 400 Mana - Duration : 20 seconds 
+ Effect : Increase the production of all buildings based on the amount of buildings you own.
+ Formula : ((25 + 0.3 * x) ^ 0.975)%, where x is your Buildings Owned (This Game) stat.
+ " coords="280,220,334,274" shape="rect">
+ Spiritual Surge 
+ Spell Type : Default Spell (R14+)
+ Cost : 2,500 Mana - Duration : 20 seconds 
+ Effect : Increase the production of all buildings based on the amount of times you reincarnated and ascended.
+ Formula : (2500 * (R ^ 1.05)) ^ (1 + A * 0.5)%, where R is the number of times you have reincarnated and A is how many times you have ascended.
+ " coords="220,280,274,334" shape="rect">
+ Twisting Nether 
+ Spell Type : Faction Spell (R220+)
+ Cost : 1,000,000 Mana - Duration : 20 seconds
+ Effect : Lineage Levels count +1 more per Tier.
+ Note : Twisting Nether counts as a faction spell, but has no alignments for upgrades such as Djinn Challenge 5.
+ " coords="280,280,334,334" shape="rect">
+ Fairy Choir 
+ Requirement : Cast Fairy Chanting while having 45 or more assistants.
+ Cost : 1 M (1e6), A1+ Free
+ Effect : Triples your assistants while Fairy Chanting is active.
+ " coords="10,10,64,64" shape="rect">
+ Sun Blessing 
+ Requirement : Cast Moon Blessing between 6 AM and 1 PM (local time).
+ Cost : 1 M (1e6), A1+ Free
+ Effect : Autoclicks 15 times per second while Moon Blessing is active.
+ " coords="70,10,124,64" shape="rect">
+ God's Rest 
+ Requirement : Cast God's Hand on any Sunday (check on weekday is based on UTC time).
+ Cost : 1 M (1e6), A1+ Free
+ Effect : Gives random Faction Coins based on your Faction Coin find chance for each other spell you cast while God's Hand is active.
+ Formula : (floor(x ^ 1.1), where x is Faction Coin find chance.
+ " coords="130,10,184,64" shape="rect">
+ Minedwarf 
+ Requirement : Find 30,000 Faction Coins using Diamond Pickaxe in a single game.
+ Cost : 100 Sxd (1e53), A1+ Free
+ Effect : Increases Diamond Pickaxe bonus to Faction Coin find chance to +300%.
+ " coords="190,10,244,64" shape="rect">
+ Greed Drive 
+ Requirement : Cast Goblin's Greed 100 times in a row and do not cast any other spell.
+ Note : The Goblin Central Bank upgrade does not interfere with getting this trophy.
+ Cost : 1 M (1e6), A1+ Free
+ Effect : Goblin's Greed costs 150 less mana.
+ " coords="10,70,64,124" shape="rect">
+ True Night 
+ Requirement : Cast Night Time between 11 PM and 6 AM (local time).
+ Cost : 1 M (1e6), A1+ Free
+ Effect : Increases Night Time's production of assistants to 40% per Necropolis.
+ " coords="70,70,124,124" shape="rect">
+ Hell Rush 
+ Requirement : Cast the Demon spell Hellfire Blast in the first 60 seconds of a playtime.
+ Cost : 1 M (1e6), A1+ Free
+ Effect : Hellfire Blast also boosts Halls of Legends.
+ " coords="130,70,184,124" shape="rect">
+ Perfect Combo 
+ Requirement : Cast Combo Strike 100 times in a single game. The chain is interrupted by casting different spells.
+ Cost : 100 Sxd (1e53), A1+ Free
+ Effect : Increases Combo Strike bonus.
+ Formula : (40 * (x ^ 0.9))%, where x is the number of times you have cast Combo Strike.
+ " coords="190,70,244,124" shape="rect">
+ Lightning Storm 
+ Requirement : Cast Lightning Strike 100 times in a single game.
+ Cost : 10 Dd (1e40), A1+ Free
+ Effect : Increase Lightning Strike bonus to 750% for each Iron Stronghold.
+ " coords="10,130,64,184" shape="rect">
+ Halls of Balance 
+ Requirement : Have Grand Balance affect Hall of Legends.
+ Cost : 10 Dd (1e40), A1+ Free
+ Effect : Increases Grand Balance duration to 24 seconds and lower its cost by 200 mana.
+ " coords="70,130,124,184" shape="rect">
+ Faceless Overmind 
+ Requirement : Affiliate with the Faceless 5 times in a row.
+ Cost : 10 Dd (1e40), A1+ Free
+ Effect : Increases Brainwave ticks to 3% per second.
+ " coords="130,130,184,184" shape="rect">
+ Dragon's Roar 
+ Requirement : Cast Dragon's Breath while having at least 4 other active spells.
+ Cost : 10 Dd (1e40), A2+ Free
+ Effect : Dragon's Breath multiplicatively increases Faction Coin find chance based on its duration.
+ Formula : (6 * x ^ 0.6)%, where x is its duration.
+ " coords="190,130,244,184" shape="rect">
+ Chrono Loading 
+ Requirement : Cast Precognition with at least 100 Qa (1e17) Mana Regeneration.
+ Note : Precognition raises regen itself. Make sure that you have 100 Qa (1e17) before being cast.
+ Cost : 10 Octg (1e118), A3+ Free
+ Effect : A fraction of Precognition's duration is added to time spent in this game.
+ Formula : (100 * ln(1 + x / 60) ^ 2.5), where x is its duration.
+ " coords="10,190,64,244" shape="rect">
+ Persistent Entropy 
+ Requirement : Cast Limited Wish 100 times within 30 minutes of a new game.
+ Cost : 10 Octg (1e118), A3+ Free
+ Effect : Adds 150 casts to Limited Wish's formula.
+ " coords="70,190,124,244" shape="rect">
+ Reality Crater 
+ Requirement : R125+, Cast Infinite Spiral with at least 10 excavation resets this game.
+ Cost : 10 Octg (1e118), A3+ Free
+ Effect : Infinite Spiral also reduces excavation cost multiplier based on assistants owned.
+ Formula : -(0.001 * log(1 + x)), where x is assistants owned.
+ " coords="130,190,184,244" shape="rect">
+ Coin Pillage 
+ Requirement : Cast 150 Tax Collections in less than 5 seconds.
+ Cost : 1 Dc (1e33), A1+ Free
+ Effect : Tax Collection also finds 30 seconds worth of Faction Coins.
+ " coords="190,190,244,244" shape="rect">
+ Fairy Orchestra 
+ Effect : Each assistant generates 3 times as many faction coins while Fairy Chanting is active.
+ " coords="10,10,64,64" shape="rect">
+ Star Blessing 
+ Effect : Automatic clicks from Sun Blessing always trigger Elven Luck (1 per second).
+ " coords="70,10,124,64" shape="rect">
+ God's Throne 
+ Effect : Mana Regeneration is multiplicatively increased by 50% while God's Hand is active.
+ Effect : Also increase offline spells cast amount multiplicatively based on your offline Mana Regeneration.
+ Formula : (10 * log10(1 + x)), where x is offline mana regeneration.
+ " coords="130,10,184,64" shape="rect">
+ Iron Grip 
+ Effect : Increase Diamond Pickaxe duration by 8 seconds, and its bonus to Faction Coin find chance is passively applied as a multiplier to excavations Faction Coin rewards.
+ " coords="190,10,244,64" shape="rect">
+ Avarice Drive 
+ Effect : Goblin's Greed counts Faction Coins found in this Reincarnation.
+ " coords="10,70,64,124" shape="rect">
+ Midnight Time 
+ Effect : Increase Night Time assistant bonus based on time spent offline in this Reincarnation.
+ Formula : (0.2 * (x / 60) ^ 0.7)%, where x is time spent offline in this Reincarnation.
+ " coords="70,70,124,124" shape="rect">
+ Hellfire Burst 
+ Effect : Hellfire Blast also counts Evil spells cast in this reincarnation to increase its bonus.
+ Formula : (0.1 * x), where x is Evil spells cast in this reincarnation.
+ " coords="130,70,184,124" shape="rect">
+ Versatile Combo 
+ Effect : Increase Combo Strike counter based on the amount of spells cast in this game, not including Tax Collection.
+ New Combo Strike Counter Formula : (x + y), where x is your Combo Strike cast count and y is every other spell (except tax collection and generic) cast count.
+ Effect : Also increase offline spells cast amount multiplicatively based on your offline Mana Regeneration.
+ Formula : (10 * log10(1 + x))%, where x is your offline Mana Regeneration.
+ " coords="190,70,244,124" shape="rect">
+ Thunderstorm 
+ Effect : Further increase Faction Coin find chance from Lightning Strike based on building tiers it hits.
+ Formula : (10 + log10(1 + x) ^ 2 * (1 + 0.2 * sum(T)))%, where x is your current amount of gems and T the Building Tier Lightning Strike hits.
+ Note : Lightning Strike can hit multiple tiers at once if you have C375 and/or Titan Perk 4.
+ " coords="10,130,64,184" shape="rect">
+ Primal Balance 
+ Effect : Grand Balance now affects extra buildings based on Mana produced in this Reincarnation.
+ Formula : (0.00001 * x) ^ (0.2 - 0.025 * A), where x is Mana produced in this Reincarnation and A is how many times you have ascended.
+ Effect : When the amount of additional targets exceeds 11, increase the production of all affected buildings based on the exceeding amount. Does not suffer from Ascension penalties.
+ Formula : (3 * (x - 10) ^ 1.5)%, where x is the amount of additional targets.
+ " coords="70,130,124,184" shape="rect">
+ Focused Thoughts 
+ Effect : Give Brainwave a headstart based on its activity time in this game, with a minimum of 1 minute.
+ Formula : +1 second per 5 minutes of Brainwave active time this game.
+ " coords="130,130,184,184" shape="rect">
+ Prismatic Breath 
+ Effect : While all 5 breaths are active, Reincarnations count 50% more.
+ " coords="190,130,244,184" shape="rect">
+ Omniscience 
+ Effect : Precognition also makes Excavations, Artifacts, Reincarnations, Research points and Lineage levels count 15% more.
+ " coords="10,190,64,244" shape="rect">
+ Full Wish 
+ Effect : Production of all buildings effect of Limited Wish is active on every cast and is no longer a possible random outcome.
+ " coords="70,190,124,244" shape="rect">
+ Gaia's Cradle 
+ Effect : All Infinite Spiral effects scale 15% faster.
+ " coords="130,190,184,244" shape="rect">
+ Warcry 
+ Call to Arms gains additional effects based on your alignments, scaling off your Call to Arms strength.
+ Good : Grants one maximum castable Call to Arms tier per ascension and removes one ascension penalty from Call to Arms. Tax Collection casts in this game now increases Call to Arms base bonus (this bonus will boost the other Warcry effect).
+ Evil : Multiplicatively increase Tax Collection worth in seconds.
+ Neutral : Multiplicatively increase Faction Coins find chance.
+ Order : Increases all spell durations.
+ Chaos : Multiplicatively increase assistants (Temporary).
+ Balance : Increases Royal Exchange Bonus multiplicatively and makes them count more.
+ " coords="190,190,244,244" shape="rect">
+ All Faction Default Spells 
+ Tax Collection (All Factions)
+ Cost : 200 Mana - Duration : 0 seconds 
+ Effect : Instantly gain 30 seconds worth of coin production from buildings and assistants.
+ Coin Pillage 
+ Requirement : Cast 150 Tax Collections in less than 5 seconds.
+ Effect : Tax Collection also finds 30 seconds worth of Faction Coins.
+ Cost : 1 Dc (1e33), A1+ Free
+ Call to Arms (All Factions)
+ Cost : 400 Mana - Duration : 20 seconds 
+ Effect : Increase the production of all buildings based on the amount of buildings you own.
+ Formula : ((25 + 0.3 * x) ^ 0.975)%, where x is your Buildings Owned (This Game) stat.
+ Warcry (R206+)
+ Call to Arms gains additional effects based on your alignments, scaling off your Call to Arms strength.
+ Good : Grants one maximum castable Call to Arms tier per ascension and removes one ascension penalty from Call to Arms. Tax Collection casts in this game now increases Call to Arms base bonus (This bonus will boost the other Warcry effect. Stacks multiplicatively with W180, additively with C225 & R150 power).
+ Formula : (1.5 * x ^ 0.5)%, where x is Tax Collection casts this game.
+ Evil : Multiplicatively increase Tax Collection worth in seconds.
+ Formula : (y ^ 0.35)%
+ Neutral : Multiplicatively increase Faction Coins find chance.
+ Formula : (0.35 * y ^ 0.35)%
+ Order : Increases all spell durations.
+ Formula : (2.5 * ln(1 + y))
+ Chaos : Multiplicatively increase assistants (Temporary).
+ Formula : (0.35 * y ^ 0.35)
+ Balance : Increases Royal Exchange Bonus multiplicatively and makes them count more.
+ Formula : (0.45 * y ^ 0.45)
+ Call to Arms Tier 2-7 (R42+)
+ Tier : 2
+ Cost 51 Sxd (5.1e52) - FC 0 
+ Tier : 3
+ Cost 766.4 Vg (7.664e65) - FC 0
+ Tier : 4
+ Cost 11.52 Qivg (1.152e79) - FC 0
+ Tier : 5
+ Cost 173.1 Novg (1.731e92) - FC 0
+ Tier : 6
+ Cost 2.601 Qatg (2.601e105) - FC 0
+ Tier : 7
+ Cost Free - FC 0
+ Spiritual Surge (All Factions, R14+)
+ Cost : 2500 Mana - Duration : 20 seconds 
+ Effect : Increase the production of all buildings based on the amount of times you reincarnated and ascended.
+ Formula : (2500 * (R ^ 1.05)) ^ (1 + A * 0.5)%, where R is the number of times you have reincarnated and A is how many times you ascended.
+ Reincarnation
+ Tier
+ Active Druid Lineage Level
+ PB
+ Production bonus
+ D1375 production bonus
+ without D1375
+ with D1375
+ Spiritual Surge Tier 2-7 (R42+)
+ Faction Coins Needed Fairy, Elven, Angel, Goblin, Undead, Demon, Dwarven, Drow
+ Tier : 2
+ Cost 66 Uvg (6.6e67) - FC 10 T (1e13) each
+ Tier : 3
+ Cost 5.949 Spvg (5.949e84) - FC 891.3 T (8.913e14) each
+ Tier : 4
+ Cost 53.61 Utg (5.361e97) - FC 79.43 Qa (7.943e16) each
+ Tier : 5
+ Cost 48.33 Octg (4.833e118) - FC 7.079 Qi (7.079e18) each
+ Tier : 6
+ Cost 4.356 Qaqag (4.356e135) - FC 631 Qi (6.31e20) each
+ Tier : 7
+ Cost Free - FC 56.23 Sx (5.623e22) each
+ Alignment Spells 
+ Holy Light (Proof of Good Deed)
+ Cost : 900 Mana - Duration : 10 seconds
+ Effect : Increase clicking reward by 1750%
+ Holy Light Tier 2-7 (R42+)
+ Faction Coins Needed Fairy, Elven, Angel, Dwarf
+ Tier : 2
+ Cost 54 Spd (5.4e55) - FC 1 B (1e9)
+ Tier : 3
+ Cost 4.629 Dvg (4.629e69) - FC 22.39 B (2.239e10)
+ Tier : 4
+ Cost 396.8 Sxvg (3.968e83) - FC 501.2 B (5.012e11)
+ Tier : 5
+ Cost 34.02 Utg (3.402e97) - FC 5 T (1.122e13)
+ Tier : 6
+ Cost 251.2 Sxtg (2.916e111) - FC 10 T (2.514e14)
+ Tier : 7
+ Cost Free - FC 5.623 Qa (5.623e15)
+ Blood Frenzy (Proof of Evil Deed)
+ Cost : 600 Mana - Duration : 20 seconds 
+ Effect : Increases the production of all Evil buildings by 1250%.
+ Blood Frenzy Tier 2-7 (R42+)
+ Faction Coins Needed Goblin, Undead, Demon, Drow
+ Tier : 2
+ Cost 54 Spd (5.4e55) - FC 1 B (1e9)
+ Tier : 3
+ Cost 4.629 Dvg (4.629e69) - FC 22.39 B (2.239e10)
+ Tier : 4
+ Cost 396.8 Sxvg (3.968e83) - FC 501.2 B (5.012e11)
+ Tier : 5
+ Cost 34.02 Utg (3.402e97) - FC 11.22 T (1.122e13)
+ Tier : 6
+ Cost 2.916 Sxtg (2.916e111) - FC 251.2 T (2.512e14)
+ Tier : 7
+ Cost Free - FC 5.623 Qa (5.623e15)
+ Gem Grinder (Proof of Neutrality)
+ Cost : 1000 Mana - Duration : 20 seconds 
+ Effect : Increase production bonus from Gems
+ Note : Gem Grinder formula changed to work with Reincarnations and Ascensions.
+ Tier Formula : ((5000 * (1 + 0.1 * R)) ^ (0.8 ^ A)), where R is Reincarnation and A is Ascension
+ Gem Grinder Tier 2-7 (R42+)
+ Faction Coins Needed Fairy, Elven, Angel, Goblin, Undead, Demon, Dwarven, Drow
+ Tier : 2
+ Cost 60 Nod (6E61) - FC 5 B (5e9)
+ Tier : 3
+ Cost 166.9 Qavg (1.669E77) - FC 142.5 B (1.425e11)
+ Tier : 4
+ Cost 464.7 Novg (4.647E92) - FC 4.0161 T (4.061e12)
+ Tier : 5
+ Cost 1.293 Qitg (1.293E108) - FC 115.7 T (1.157e14)
+ Tier : 6
+ Cost 3.6 Qag (3.6e123) - FC 3.299 Qa (3.299e15)
+ Tier : 7
+ Cost Free - FC 94.02 Qa (9.402e16)
+ Faction Spells 
+ Fairy Chanting (Fairy)
+ Cost : 1000 Mana - Duration : 10 seconds 
+ Effect : Increase the production of Farms, Inns and Blacksmiths by 50,000%
+ Spell Trophy & Upgrade : Fairy Choir 
+ Requirement : Cast Fairy Chanting while having 45 or more assistants.
+ Effect : Triples your assistants while Fairy Chanting is active.
+ Cost : 1 M (1e6), A1+ Free
+ Challenge Upgrade : Fairy Orchestra (R18+)
+ Effect : Each assistant generates 3 times as many faction coins while Fairy Chanting is active.
+ Fairy Chanting Tier 2-7 (R42+)
+ Faction Coins Needed Fairy
+ Effect : Increases the duration of the spell by 10 seconds per tier.
+ Tier : 2
+ Cost 54 Spd (5.4e55) - FC 10 B (1e10)
+ Tier : 3
+ Cost 4.629 Dvg (4.629e69) - FC 316.2 B (3.162e11)
+ Tier : 4
+ Cost 396.8 Sxvg (3.968e83) - FC 10 T (1e13)
+ Tier : 5
+ Cost 34.02 Utg (3.402e97) - FC 316.2 T (3.162e14)
+ Tier : 6
+ Cost 2.916 Sxtg (2.916e111) - FC 10 Qa (1e16)
+ Tier : 7
+ Cost Free - FC 316.2 Qa (3.162e17)
+ Moon Blessing (Elven)
+ Cost : 700 Mana - Duration : 20 seconds 
+ Effect : Increases the production of all buildings based on on the amount of clicks made in this Reincarnation for 20 seconds.
+ Formula : (0.7 * x ^ 0.7)%, where x is the amount of clicks made in this Reincarnation.
+ Spell Trophy & Upgrade : Sun Blessing 
+ Requirement : Activate Moon Blessing between 6 AM and 1 PM (local time).
+ Effect : Autoclicks 15 times per second while Moon Blessing is active.
+ Cost : 1 M (1e6), A1+ Free
+ Challenge Upgrade : Star Blessing (R18+)
+ Effect : Automatic clicks from Sun Blessing always trigger Elven Luck.
+ Moon Blessing Tier 2-7 (R42+)
+ Faction Coins Needed Elven
+ Effect : Increase click reward by an additional 35.6% per tier.
+ Tier : 2
+ Cost 54 Spd (5.4e55) - FC 10 B (1e10)
+ Tier : 3
+ Cost 4.629 Dvg (4.629e69) - FC 316.2 B (3.162e11)
+ Tier : 4
+ Cost 396.8 Sxvg (3.968e83) - FC 10 T (1e13)
+ Tier : 5
+ Cost 34.02 Utg (3.402e97) - FC 316.2 T (3.162e14)
+ Tier : 6
+ Cost 2.916 Sxtg (2.916e111) - FC 10 Qa (1e16)
+ Tier : 7
+ Cost Free - FC 316.2 Qa (3.162e17)
+ God's Hand (Angel)
+ Cost : 900 Mana - Duration : 20 seconds 
+ Effect : Increase the production of all buildings by 120 times your Mana Regeneration rate.
+ Spell Trophy & Upgrade : God's Rest 
+ Requirement : Cast God's Hand on any Sunday.
+ Effect : Gives random Faction Coins based on your Faction Coin find chance for each other spell you cast while God's Hand is active.
+ Formula : (floor(x ^ 1.1), where x is Faction Coin find chance.
+ Cost : 1 M (1e6), A1+ Free
+ Challenge Upgrade : God's Throne (R18+)
+ Effect : Mana Regeneration is multiplicatively increased by 50% while God's Hand is active.
+ Effect : Also increase offline spells cast amount multiplicatively based on your offline Mana Regeneration.
+ Formula : (10 * log10(1 + x)), where x is offline mana regeneration.
+ God's Hand Tier 2-7 (R42+)
+ Faction Coins Needed Angel
+ Tier : 2
+ Cost 54 Spd (5.4e55) - FC 10 B (1e10)
+ Tier : 3
+ Cost 4.629 Dvg (4.629e69) - FC 316.2 B (3.162e11)
+ Tier : 4
+ Cost 396.8 Sxvg (3.968e83) - FC 10 T (1e13)
+ Tier : 5
+ Cost 34.02 Utg (3.402e97) - FC 316 Qa (3.162e14)
+ Tier : 6
+ Cost 2.916 Sxtg (2.916e111) - FC 10 Qa (1e16)
+ Tier : 7
+ Cost Free - FC 316.2 Qa (3.162e17)
+ Diamond Pickaxe (Dwarven)
+ Cost : 1000 Mana - Duration : 12 seconds 
+ Effect : Increase clicking reward by 25% per Excavation you made and increase your Faction Coin find chance by 200%.
+ Spell Trophy & Upgrade : Minedwarf 
+ Requirement : Find 30,000 Faction Coins using Diamond Pickaxe in a single game.
+ Effect : Increases Diamond Pickaxe bonus to "Faction Coin Find Chance" to +300%.
+ Cost : 100 Sxd (1e53), A1+ Free
+ Challenge Upgrade : Iron Grip (R33+)
+ Effect : Increase Diamond Pickaxe duration by 8 seconds, and its bonus to Faction Coin find chance is passively applied as a multiplier to excavations Faction Coin rewards.
+ Diamond Pickaxe Tier 2-7 (R42+)
+ Faction Coins Needed Dwarf
+ Effect : Increases FC find chance per tier.
+ Tier : 2
+ Cost 63 Vg (6.3e64) - FC 1 T (1e12)
+ Tier : 3
+ Cost 998.1 Qivg (9.981e80) - FC 63.1 T (6.31e13)
+ Tier : 4
+ Cost 15.81 Utg (1.581e97) - FC 3.981 Qa (3.981e15)
+ Tier : 5
+ Cost 250.5 Sxtg (2.505e113) - FC 251.2 Qa (2.512e17)
+ Tier : 6
+ Cost 3.969 Dqag (3.969e120) - FC 15.85 Qi (1.585e19)
+ Tier : 7
+ Cost Free - FC 1 Sx (1e21)
+ Goblin's Greed (Goblin)
+ Cost : 800 Mana - Duration : 5 seconds 
+ Effect : Instantly produces Faction Coins based on gems you own. Also increases production of all buildings based on the number of Faction Coins found in this game.
+ Faction Coin Formula : +(20 + ln(1 + x) ^ 3), where x is your current amount of gems.
+ Production Formula : (0.75 * ln(1 + x) ^ 3.15)%, where x is the number of Faction Coins found in this game.
+ Spell Trophy & Upgrade : Greed Drive 
+ Requirement : Cast Goblin's Greed 100 times in a row and do not cast any other spell.
+ Note : The Goblin Central Bank upgrade does not interfere with getting this trophy.
+ Effect : Goblin's Greed costs 150 less mana.
+ Cost : 1 M (1e6), A1+ Free
+ Challenge Upgrade : Avarice Drive (R18+)
+ Effect : Goblin's Greed counts Faction Coins found in this Reincarnation.
+ Goblin's Greed Tier 2-7 (R42+)
+ Faction Coins Needed Goblin
+ Tier : 2
+ Cost 54 Spd (5.4e55) - FC 10 B (1e10)
+ Tier : 3
+ Cost 4.629 Dvg (4.629e69) - FC 316.2 B (3.162e11)
+ Tier : 4
+ Cost 396.8 Sxvg (3.968e83) - FC 10 T (1e13)
+ Tier : 5
+ Cost 34.02 Utg (3.402e97) - FC 316.2 (3.162e14)
+ Tier : 6
+ Cost 2.916 Sxtg (2.916e111) - FC 10 Qa (1e16)
+ Tier : 7
+ Cost Free - FC 316.2 Qa (3.162e17)
+ Night Time (Undead)
+ Cost : 1000 Mana - Duration : 20 seconds 
+ Effect : The production of assistants is increased by 30% per Necropolis you own.
+ Spell Trophy & Upgrade : True Night 
+ Requirement : Cast Night Time between 11 pm and 6 am.
+ Effect : Increases Night Time's production of assistants to 40% per Necropolis.
+ Cost : 1 M (1e6), A1+ Free
+ Challenge Upgrade : Midnight Time (R18+)
+ Effect : Increase Night Time assistant bonus based on time spent offline in this Reincarnation.
+ Formula : (0.2 * (x / 60) ^ 0.7)%, where x is time spent offline in this Reincarnation.
+ Night Time Tier 2-7 (R42+)
+ Faction Coins Needed Undead
+ Tier : 2
+ Cost 54 Spd (5.4e55) - FC 10 B (1e10)
+ Tier : 3
+ Cost 4.629 Dvg (4.629e69) - FC 316.2 B (3.162e11)
+ Tier : 4
+ Cost 396.8 Sxvg (3.968e83) - FC 10 T (1e13)
+ Tier : 5
+ Cost 34.02 Utg (3.402e97) - FC 316.2 T (3.162e14)
+ Tier : 6
+ Cost 2.916 Sxtg (2.916e111) - FC 10 Qa (1e16)
+ Tier : 7
+ Cost Free - FC 316.2 Qa (3.162e17)
+ Hellfire Blast (Demon)
+ Cost : 1000 Mana - Duration : 20 seconds
+ Effect : Increase the production of Evil Fortresses and Hell Portals based on your amount of trophies.
+ Formula : (round(200 * x ^ 0.8))%, where x is your Trophies Unlocked stat.
+ Spell Trophy & Upgrade : Hell Rush 
+ Requirement : Cast the Demon spell Hellfire Blast in the first 60 seconds of a playtime.
+ Effect : Hellfire Blast also boosts Halls of Legends.
+ Cost : 1 M (1e6), A1+ Free
+ Challenge Upgrade : Hellfire Burst (R18+)
+ Effect : Hellfire Blast also counts Evil spells cast in this reincarnation to increase its bonus.
+ Formula : (0.1 * x), where x is evil spells cast in this reincarnation.
+ Hellfire Blast Tier 2-7 (R42+)
+ Faction Coins Needed Demon
+ Effect : Evils spells count more per Tier. 
+ Formula : (50 * (T - 1))%, where T is the Hellfire Blast Tier.
+ Tier : 2
+ Cost 54 Spd (5.4e55) - FC 10 B (1e10)
+ Tier : 3
+ Cost 4.629 Dvg (4.629e69) - FC 316.2 B (3.162e11)
+ Tier : 4
+ Cost 396.8 Sxvg (3.968e83) - FC 10 T (1e13)
+ Tier : 5
+ Cost 34.02 Utg (3.402e97) - FC 316.2 T (3.162e14)
+ Tier : 6
+ Cost 2.916 Sxtg (2.916e111) - FC 10 Qa (1e16)
+ Tier : 7
+ Cost Free - FC 316.2 Qa (3.162e17)
+ Combo Strike (Drow)
+ Cost : 800 Mana - Duration : Fixed to 16 seconds
+ Effect : Increase the production of all buildings by a progressively higher value as you continue casting this spell (This game).
+ Formula : (30 * (x ^ 0.9))%, where x is the number of times you have cast Combo Strike (This game).
+ Spell Trophy & Upgrade : Perfect Combo 
+ Requirement : Cast Combo Strike 100 times in a single game,The chain is interrupted by casting different spells.
+ Effect : Increases Combo Strike bonus.
+ Formula : (40 * (x ^ 0.9))%, where x is the number of times you have cast Combo Strike.
+ Cost : 100 Sxd (1e53), A1+ Free
+ Challenge Upgrade : Versatile Combo (R33+)
+ Effect : Increase Combo Strike counter based on the amount of spells cast in this game, not including Tax Collection.
+ New Combo Strike Counter Formula : (x + y), where x is your Combo Strike cast count and y is every other spell (except tax collection and generic) cast count.
+ Effect : Also increase offline spells cast amount multiplicatively based on your offline Mana Regeneration.
+ Formula : (10 * log10(1 + x))%, where x is your offline Mana Regeneration.
+ Combo Strike Tier 2-7 (R42+)
+ Faction Coins Needed Drow
+ Effect : Combo strike cast stat increases more when you cast higher tiers.
+ Tier : 2
+ Cost 63 Vg (6.3e64) - FC 1 T (1e12)
+ Tier : 3
+ Cost 998.1 Qivg (9.981e80) - FC 63.1 T (6.31e13)
+ Tier : 4
+ Cost 15.81 Uvg (1.581e97) - FC 3.981 Qa (3.981e15)
+ Tier : 5
+ Cost 250.5 Sxtg (2.505e113) - FC 251.2 Qa (2.512e17)
+ Tier : 6
+ Cost 3.969 Dqag (3.969e120) - FC 15.85 Qi (1.585e19)
+ Tier : 7
+ Cost Free - FC 1 Sx (1e21)
+ Lightning Strike (Titan)
+ Cost : 600 Mana - Duration : 10 seconds 
+ Effect : The production of a random building is multiplied by 500% for each Iron Stronghold. Also multiplicatively increase Faction Coins find chance based on your current amount of gems.
+ Formula : (10 + log10(1 + x) ^ 2)%, where x is your current amount of gems.
+ Spell Trophy & Upgrade : Lightning Storm 
+ Requirement : Cast Lightning Strike 100 times in a single game.
+ Effect : Increase Lightning Strike bonus to 750% for each Iron Strongholds.
+ Cost : 10 Dd (1e40), A1+ Free
+ Challenge Upgrade : Thunderstorm (R25+)
+ Effect : Further increase Faction Coin find chance from Lightning Strike based on building tiers it hits.
+ Formula : (10 + log10(1 + x) ^ 2 * (1 + 0.2 * sum(T)))%, where x is your current amount of gems and T the Building Tier Lightning Strike hits.
+ Note : Lightning Strike can hit multiple tiers at once if you have C375 and/or Titan Perk 4.
+ Lightning Strike Tier 2-7 (R42+)
+ Faction Coins Needed Angel, Goblin
+ Effect : Iron Strongholds count for 75% more per tier for the spell bonus.
+ Tier : 2
+ Cost 57 Ocd (5.7e58) - FC 50 B (5e10)
+ Tier : 3
+ Cost 27.85 Tvg (2.785e73) - FC 2.013 T (2.013e12)
+ Tier : 4
+ Cost 13.61 Ocvg (1.361e88) - FC 81.03 T (8.103e13)
+ Tier : 5
+ Cost 6.649 Ttg (6.649e102) - FC 3.262 Qa (3.262e15)
+ Tier : 6
+ Cost 3.249 Octg (3.249e117) - FC 131.3 Qa (1.313e17)
+ Tier : 7
+ Cost Free - FC 5.287 Qi (5.287e18)
+ Brainwave (Faceless)
+ Cost : 600 Mana - Duration : 600 seconds 
+ Effect : Increase production of all buildings by a cumulative 2% per second.
+ Spell Trophy & Upgrade : Faceless Overmind 
+ Requirement : Affiliate with the Faceless 5 times in a row.
+ Effect : Increases Brainwave ticks to 3% per second.
+ Cost : 10 Dd (1e40), A1+ Free
+ Challenge Upgrade : Focused Thoughts (R25+)
+ Effect : Give Brainwave a headstart based on its activity time in this game, with a minimum of 1 minute.
+ Formula : +1 second per 5 minutes of Brainwave active time (This Game).
+ Tier Upgrade : +10 minutes per tier of Brainwave past tier 1.
+ Brainwave Tier 2-7 (R42+)
+ Faction Coins Needed Fairy, Undead
+ Effect : Brainwave headstarts for an additional 10 minutes per tier.
+ Tier : 2
+ Cost 57 Ocd (5.7e58) - FC 50 B (5E10)
+ Tier : 3
+ Cost 27.85 Tvg (2.785e73) - FC 2.013 T (2.013e12)
+ Tier : 4
+ Cost 13.61 Ocvg (1.360e88) - FC 81.03 T (8.103e13)
+ Tier : 5
+ Cost 6.649 Ttg (6.649e102) - FC 3.262 Qa (3.262e15)
+ Tier : 6
+ Cost 3.249 Octg (3.249e117) - FC 131.3 Qa (1.313e17)
+ Tier : 7
+ Cost Free - FC 5.287 Qi (5.287e18)
+ Grand Balance (Druid)
+ Cost : 1000 Mana - Duration : 20 seconds
+ Effect : Increase the production of your least productive building based on the amount of the three most built ones.
+ Formula : (25 * (x * y * z / (A + 3) ^ 6) ^ 0.9) where x, y and z are the number of your three most-built buildings and A is Ascension.
+ Spell Trophy & Upgrade : Halls of Balance (R25+)
+ Requirement : Have Grand Balance affect Hall of Legends.
+ Effect : Increases Grand Balance duration to 24 seconds and lower its cost by 200 mana.
+ Cost : 10 Dd (1e40), A1+ Free
+ Challenge Upgrade : Primal Balance 
+ Effect : Grand Balance now affects extra buildings based on Mana produced in this Reincarnation.
+ Formula : (0.00001 * x) ^ (0.2 - 0.025 * A), where x is Mana produced in this Reincarnation and A is how many times you have ascended.
+ Effect : When the amount of additional targets exceeds 11, increase the production of all affected buildings based on the exceeding amount. Does not suffer from Ascension penalties.
+ Formula : (3 * (x - 10) ^ 1.5)%, where x is the amount of additional targets.
+ Note : A table for the amount of Mana needed can be found here .
+ Grand Balance Tier 2-7 (R42+)
+ Faction Coins Needed Elven, Demon
+ Tier : 2
+ Cost 57 Ocd (5.7e58) - FC 50 B (5E10)
+ Tier : 3
+ Cost 27.85 Tvg (2.785e73) - FC 2.013 T (2.013e12)
+ Tier : 4
+ Cost 13.61 Ocvg (1.360e88) - FC 81.03 T (8.103e13)
+ Tier : 5
+ Cost 6.649 Ttg (6.649e102) - FC 3.262 Qa (3.262e15)
+ Tier : 6
+ Cost 3.249 Octg (3.249e117) - FC 131.3 Qa (1.313e17)
+ Tier : 7
+ Cost Free - FC 5.287 Qi (5.287e18)
+ Ascension 1 Spells (R40+) 
+ Dragon's Breath (Dragon, R46+)
+ Cost : 1500 Mana - Duration : 20 seconds
+ Effect : Activates one of the following effects at random for 20 seconds.
+ Red : Increase the production of unique buildings based on the amount of Faction Coins found in this game.
+ Formula : (2 * (ln(1 + x) ^ 2)%, where x is the amount of Faction Coins found in this game.
+ Green : Increase the production of all buildings based on the amount of spells cast in this game. Higher bonuses are provided to lower building tiers.
+ Formula : (0.01 * x ^ 0.625 * (11 - T) ^ 5)%, where x is spells cast (this game) and T is the building tier. (1 for Farms, 11 for Hall of Legends).
+ Blue : Multiplicatively increase your Mana Regeneration by 200%.
+ White : Temporarily increase the amount of assistants based on total time spent being Neutral.
+ Formula : +(30 * x ^ 0.65), where x is time spent as Neutral this Reincarnation
+ Black : Increase the production of all buildings based on Dragon's Breath activity time.
+ Formula : (0.5 * x ^ 0.75)%, where x is Dragon's Breath activity time.
+ Spell Trophy & Upgrade : Dragon's Roar 
+ Requirement : Cast Dragon's Breath while having at least 4 other active spells.
+ Effect : Dragon's Breath multiplicatively increases Faction Coin find chance based on its duration.
+ Formula : (6 * x ^ 0.6)%, where x is its duration.
+ Cost : 10 Dd (1e40), A2+ Free
+ Challenge Upgrade : Prismatic Breath (R63+)
+ Effect : While all 5 breaths are active, Reincarnations count 50% more.
+ Dragons Breath Tier 2-7 (R46+)
+ Faction Coins Needed Dwarf, Drow
+ Effect : Each tier gives another random effect per cast. Tier 5 will trigger all the effects simultaneously.
+ Effect : Each tier also increase offline production based on mana statistics
+ Formula 
+ Note : No 1 spell will be casted twice in the same cast.
+ Tier : 2
+ Cost 69 Dvg (6.9e70) - FC 1 Qa (1e15) Dwarven, Drow
+ Tier : 3
+ Cost 35.36 Ocvg (3.536e88) - FC 177.8 Qa (1.778e17) Dwarven, Drow
+ Tier : 4
+ Cost 18.12 Qatg (1.812e106) - FC 31.62 Qi (3.162e19) Dwarven, Drow
+ Tier : 5
+ Cost 9.289 Qaq (9.289e123) - FC 5.623 Sx (5.623e21) Dwarven, Drow
+ Tier : 6
+ Cost 4.751 Sxqag (4.761e141) - FC 1 Sp (1e24) Dwarven, Drow
+ Tier : 7
+ Cost Free - FC 177.8 Sp (1.778e26) Dwarven, Drow
+ Note : Dragon's Breath will cast a random Dragon's Breath spell for the 6th tier.
+ Note : Dragon's Breath will cast 2 random Dragon's Breath spell for the 7th tier.
+ Mercenary : Modified Tax Collection (R75+)
+ Share Benefits (Good Mercenary)
+ Cost : 200 Mana - Duration : Fixed to 20 seconds
+ Requirement : Round Table
+ Effect : Alters Tax Collection with new name and effect (still counts as Tax Collection for all purposes).
+ Effect : Increases the production of all buildings and Faction Coin find chance based on this spell tier level.
+ Effect : Also produce Tax Collection casts per second based on your Maximum Mana.
+ Formula (Production bonus) : ((((1 + 0.01 * (120 + 1.25 * ln(1 + 90 + x) ^ 1.25)) ^ T) - 1) * 100)%, where x is Tax Collection worth in seconds and T the Share Benefits tier.
+ Formula (Faction Coin find chance multiplier) : 120 ^ (0.25 * T)%, where T is Share Benefits.
+ Formula (Additional Tax Collection) : +(0.01 * x * T), where x is Maximum Mana and T Share Benefits tier.
+ Note : Can be cast up to 36 tiers (Ascension 1) / 99 tiers (Ascension 3).
+ Note : Each tier costs x2/1.5 (with S1275) more mana than the previous one until Tier 40 - above x4/x2.25 than the previous one. 
+ Note : Drains every second Mana equal to its current cost.
+ Note : Upgrades that cast free Tax Collection are disabled.
+ Reap Interests (Evil Mercenary)
+ Cost : 200 Mana - Duration : 0 seconds
+ Requirement : Dark Covenant
+ Effect : Additional casts of Reap Interests increase its seconds worth of production.
+ Formula : *(50000 * log10(8 + 0.1 * x)), where x is amount of Reap Interests casts.
+ Note : Upgrades that cast free Tax Collection are treated as Reap Interests casts.
+ Appraisal Vantage (Neutral Mercenary)
+ Cost : 200 Mana - Duration : 0 seconds
+ Requirement : Secret Exchange
+ Effect : Generates additional Faction Coins based on the amount of assistants you own.
+ Formula : (x * y ^ 1.275), where x is assistants owned, y is Faction coin chance.
+ Note : Upgrades that cast free Tax Collection are treated as Appraisal Vantage casts.
+ Ascension 2 (R100+) 
+ Secondary Alignment Spells 
+ Temporal Flux (Proof of Order)
+ Requirement : Ascension 2
+ Cost : 5000 Mana - Duration : 20 seconds
+ Effect : Increase Unique building production by time spent this game.
+ Effect : Also multiplicatively increase Mana Regeneration based on time spent in this game.
+ Formula : (3.75 * (x / 60) ^ 0.825)%, where x is time in seconds this game.
+ Tier 2 (R120+)
+ Requirement : Lantern of Guidance (Artifact)
+ Coin Cost : 120 Notg (1.2e122) Emerald coins
+ FC Cost : 1 Sp (1e24) Angel, Undead, Dwarven and Drow Coins.
+ Maelstrom (Proof of Chaos)
+ Requirement : Ascension 2
+ Cost : 3500 Mana - Duration : 20 seconds
+ Effect : Increase the production of three random buildings based on one of these stats in this game, chosen at random: Mana produced, trophies unlocked, Faction Coins found or amount of assistants
+ Formula (Mana) : (0.02 * (log10(1 + x)) ^ 5)%, where x is Mana produced this game.
+ Formula (Trophies) : (2.5 * x ^ 0.9)%, where x is trophies unlocked.
+ Formula (Faction Coins) : (0.01 * (log10(1 + x)) ^ 4)%, where x is Faction Coins found this game.
+ Formula (Assistants) : (0.25 * (log10(1 + x)) ^ 5)%, where x is amount of assistants.
+ Tier 2 (R120+)
+ Requirement : Oil Lamp (Artifact)
+ Coin Cost : 120 Notg (1.2e122) Emerald coins
+ FC Cost : 1 Sp (1e24) Fairy, Demon, Dwarven and Drow Coins.
+ All Creation (Proof Of Balance) 
+ Requirement : Ascension 2
+ Cost : 6000 Mana - Duration : 20 seconds
+ Effect : Increase production of all buildings based on your Mana Regeneration rate.
+ Formula : (0.15 * ln(1 + x) ^ 3 + 0.75 * x ^ 0.25)%, where x is your Mana Regeneration.
+ Effect : Also multiplicatively increase Faction Coin find chance based on your Mana Regeneration rate.
+ Formula : (4.5 * ln(1 + x) ^ 2.25 + 12.5 * x ^ 0.125)%, where x is your Mana Regeneration.
+ Tier 2 (R120+)
+ Requirement : Spark of Life (Artifact)
+ Coin Cost : 120 Notg (1.2e122) Emerald coins
+ FC Cost : 1 Sp (1e24) Elven, Goblin, Dwarven and Drow Coins.
+ Ascension 2 (R125+) 
+ Elite Faction Spells 
+ Precognition (Archon)
+ Cost : 123456 Mana - Duration : 60 seconds
+ Effect : Buildings, Assistants, Royal Exchanges, Spells cast and Clicks count more based on Mana produced in this game.
+ Formula : (ln(1 + x) ^ 1.25)%, where x is Mana produced in this game.
+ Note : Formula Improved to (1.25 * ln(1 + x) ^ 1.5)% with AR2.
+ Spell Trophy & Upgrade : Chrono Loading 
+ Requirement : R125+, Cast Precognition with at least 100 Qa (1e17) mana regeneration.
+ Note : Precognition raises regen itself. Make sure that you have 100 Qa (1e17) with it not active
+ Effect : A fraction of Precognition duration is added to time spent in this game.
+ Formula : (100 * ln(1 + x / 60) ^ 2.5), where x is its duration.
+ Effect : Also scale off invisible spell duration modifiers.
+ Cost : 10 Octg (1e118), A3+ Free
+ Challenge Upgrade : Omniscience (R153+)
+ Effect : Precognition also makes Excavations, Artifacts, Reincarnations, Research points and Lineage levels count 15% more.
+ Limited Wish (Djinn)
+ Cost : 888888 mana - Duration : Fixed to 12 seconds
+ Effect : Provide a random effect based on your chosen base alignment, for 12 seconds. The duration of the spell cannot be modified. Its power increases as you continue casting this spell.
+ Formula : (2.25 * (ln(1 + x) ^ 1.35) * y ^ 0.45)%, where x is Limited Wish activity time in this game and y is a random number between 1 and Limited Wish casts this game rolled on cast.
+ Possible Effects 
+ 1 : Increase the production of all buildings.
+ Good Alignment 
+ 2 : Temporarily increase Assistants.
+ 3 : All spells durations count more.
+ 4 : Multiplicatively increase Mana Regeneration.
+ Evil Alignment 
+ 2 : Multiplicatively increase Trophy count and Offline Bonus.
+ 3 : Multiplicatively increase Mana Regeneration.
+ 4 : Multiplicatively increase Faction Coin find chance.
+ Neutral Alignment 
+ 2 : Multiplicatively increase Maximum Mana.
+ 3 : All spells durations count more.
+ 4 : Multiplicatively increase Faction Coin find chance.
+ Spell Trophy & Upgrade : Persistent Entropy 
+ Requirement : R125+, Cast Limited Wish 100 times within 30 minutes of a new game.
+ Effect : Adds 150 casts to Limited wish formula.
+ Cost : 10 Octg (1e118), A3+ Free
+ Challenge Upgrade : Full Wish (R153+)
+ Effect : Production of all buildings effect of Limited Wish is active on every cast and is no longer a possible random outcome.
+ Infinite Spiral (Makers)
+ Cost : 505000 mana - Duration : 10 seconds
+ Effect : Temporarily increase assistants based on Maximum Mana (multiplicative).
+ Formula : (10 * ln(1 + x) ^ 1.25)%, where x is your Maximum Mana.
+ Effect : Multiplicatively increase Maximum Mana based on Faction Coin find chance.
+ Formula : (1.5 * log10(1 + x) ^ 1.5)%, where x is your Faction Coin find chance.
+ Effect : Multiplicatively increase Faction Coin find chance based on Excavations made, including resets, in this Reincarnation.
+ Formula : (10 + 0.05 * (x * y) ^ 0.75)%, where x is excavations done this Reincarnation (NOT current excavation count), y is free and ruby Excavation Resets this Reincarnation
+ Spell Trophy & Upgrade : Reality Crater 
+ Requirement : R125+, Cast Infinite Spiral with at least 10 excavation resets this game.
+ Effect : Infinite Spiral also reduces excavation cost multiplier based on assistants owned.
+ Formula : -(0.001 * log(1 + x)), where x is assistants owned.
+ Cost : 10 Octg (1e118), A3+ Free
+ Challenge Upgrade : Gaia's Cradle (R153+)
+ Effect : All Infinite Spiral effects scale 15% faster.
+ Catalyst 
+ Spell Type : (Chaos) Djinn Faction Spell (R130+)
+ Cost : 500,000 Mana - Duration : Fixed to 60 seconds
+ Requirement : R130+, Djinn Bloodline
+ Effect : Imitates a random vanilla or base alignment spell at tier 7 for 60 seconds. This spell's duration cannot be modified.
+ Note : Having access to this spell also enables the spell trophies and the challenge rewards of those spells.
+ Note : Can not cast a spell that is already available.
+ Note : Does not give access to Holy Frenzy for Neutral alignment.
+ Chaos Madness (Chaos Mercenary)
+ Spell Type : (Chaos) Mercenary Faction Spell (R194+)
+ Cost : 500,000 Mana - Duration : Fixed to 20 seconds
+ Requirement : Mercenary Challenge 2 active
+ Effect : Grants the effect of a random lineage, with the level of your highest lineage for 20 seconds.
+ Note : Does not select a lineage that is already available.
+ Twisting Nether 
+ Spell Type : Faction Spell (R220+)
+ Cost : 1,000,000 Mana - Duration : 20 seconds
+ Requirement : Twisting Nether (Fairy/Undead) Legacy Combo
+ Effect : Lineage Levels count +1 more per Tier.
+ Note : Twisting Nether counts as a faction spell, but has no alignments for upgrades such as Djinn Challenge 5.
+ | Resources | Soft Resets | Buildings | Heritages | Bloodlines 
+ | Spells | Excavations | Challenges | Upgrades | Trophies 
+ | Factions | Research |
+ | Merc Builds | Research Builds | Prestige Builds | Dragon Unlock | Neutral Prestige Builds | Research Tree |
+ | Good : Fairy, Elf , Angel Evil : Goblin , Undead , Demon Neutral : Titan , Druid , Faceless"> Vanilla Factions 
+ | Fairy Elf Angel "> Good Factions 
+ | Goblin Undead Demon"> Evil Factions 
+ | Titan Druid Faceless"> Neutral Factions 
+ | Dwarf Drow Dragon"> Prestige Factions 
+ | Archon Djinn Makers"> A2 Elite Factions |
+ | Events | Latest Major Patch | Changelog | Notation | Terminology | Tools | Kongregate Links |
+ | Fairy 
+ | Elven 
+ | Angel 
+ | Goblin 
+ | Undead 
+ | Demon 
+ | Titan 
+ | Druid 
+ | Faceless |
+ | Mercenary 
+ | Dwarf 
+ | Drow 
+ | Dragon 
+ | Archon 
+ | Djinn 
+ | Makers |
+ 

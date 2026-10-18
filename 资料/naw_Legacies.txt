@@ -1,0 +1,784 @@
+R220+ Builds (Not updated for v4.2) 
+ Legacies
+ Requirement : Ascension 4 (R220+)
+ This set of upgrade appears with no other unlock requirement.
+ With each Legacy Container you can choose a Legacy (equal to the set of 3 faction upgrades of the same tier) that doesn't match your current faction.
+ This unlocks those 3 faction upgrades for purchase for their normal coin cost (see faction upgrade costs at Ascension 4 ).
+ You can purchase more Legacies for a progressively increasing cost.
+ The current limit is 9 Legacy Container - not including the special one granted by the Research Relativity (F11750).
+ Note : While the Container from Relativity is free to purchase, the granted upgrades still have their normal coin cost. It also does not influence the cost of the other container.
+ Base Faction Legacies :
+ Coin Cost : (1e72 * (1,000 ^ (x ^ 2 - x))), where x is your current Legacy container.
+ Faction Coin Cost : (1e33 * (1,000 ^ ( 0.5 * ( x ^ 2 - x)))), where x is your current Legacy container.
+ Prestige Faction Legacies :
+ Coin Cost : (1e135 * (1,000 ^ (x ^ 2 - x))), where x is your current Legacy container.
+ Faction Coin Cost : (1e45 * (1,000 ^ ( 0.5 * ( x ^ 2 - x)))), where x is your current Legacy container.
+ Base Faction
+ Prestige Faction
+ Legacy
+ Sapphire
+ Faction Coin
+ Sapphire
+ Faction Coin
+ 1
+ 1 Tvg (1e72)
+ 1 Dc (1e33)
+ 1 Qatg (1e105)
+ 1 Qad (1e45)
+ 2
+ 1 Qivg (1e78)
+ 1 Ud (1e36)
+ 1 Sxtg (1e111)
+ 1 Qid (1e48)
+ 3
+ 1 Novg (1e90)
+ 1 Td (1e42)
+ 1 Qag (1e123)
+ 1 Spd (1e54)
+ 4
+ 1 Qitg (1e108)
+ 1 Sxd (1e51)
+ 1 Sxqag (1e141)
+ 1 Vg (1e63)
+ 5
+ 1 Tqag (1e132)
+ 1 Vg (1e63)
+ 1 QaSxg (1e195)
+ 1 Qavg (1e75)
+ 6
+ 1 TQig (1e162)
+ 1 Qivg (1e78)
+ 1 QaSpg (1e225)
+ 1 Novg (1e90)
+ 7
+ 1 QiSxg (1e198)
+ 1 Utg (1e96)
+ 1 SxOcg (1e261)
+ 1 Qitg (1e108)
+ 8
+ 1 NoSpg (1e240)
+ 1 Octg (1e117)
+ 1 C (1e303)
+ 1 Dqag (1e129)
+ 9
+ 1 QiNog (1e288)
+ 1 Sxqag (1e141)
+ INF
+ 1 Qig (1e153)
+ Legacy Combos 
+ Once you purchased 2 different Vanilla Legacies, you will be able to select their specific Legacy Combo upgrade.
+ The current limit is one Legacy Combo - not including the additional one granted by the Research Revelation (F12000).
+ Coin Cost : 1 Tvg (1e72).
+ Faction Coin Cost : 1 Dc (1e33) of both Factions.
+ Legacy Menu 
+ Legacy Combo Menu 
+ Fairy Bronze Legacy 
+ Pixie Dust Fertilizer 
+ Effect : Increase the base production of Farms by +98.
+ Effect : Reduces cost multiplier by 0.02; with no other reductions applying, the multiplier will be 1.13 instead of 1.15.
+ Fairy Workers 
+ Effect : Increase the production of Farms, Inns and Blacksmiths by 10,000%.
+ Kind Hearts 
+ Effect : Increases maximum Mana additively based on Good buildings you own.
+ Formula : +(1.3 * x ^ 0.7), where x is the amount of Good buildings you own.
+ " coords="10,10,64,64" shape="rect">
+ Fairy Silver Legacy 
+ Fairy Cuisine 
+ Effect : Increase the base production of Inns by +234 and reduce the building cost multiplier.
+ Effect : Reduces cost multiplier by 0.02; with no other reductions applying, the multiplier will be 1.13 instead of 1.15.
+ Golden Pots 
+ Effect : Additively increase base clicking reward by 20% of the building production of Farms, Inns and Blacksmiths combined.
+ Spellsmith 
+ Effect : Blacksmiths also increase your Mana Regeneration.
+ Formula : +(2.75 * x ^ 0.275), where x is the number of Blacksmiths you own.
+ " coords="70,10,124,64" shape="rect">
+ Fairy Gold Legacy 
+ Starmetal Alloys 
+ Effect : Increase the base production of Blacksmiths by +580.
+ Effect : Reduces cost multiplier by 0.02; with no other reductions applying, the multiplier will be 1.13 instead of 1.15.
+ Rainbow Link 
+ Effect : Increase the production of all buildings based on the amount of Farms, Inns and Blacksmiths you own.
+ Formula : (0.75 * x ^ 0.75)%, where x is the amount of Farms, Inns and Blacksmiths you own.
+ Swarm of Fairies 
+ Effect : You gain additional assistants based on the amount of Farms, Inns and Blacksmiths you own.
+ Formula : +(1.2 * x ^ 0.6), where x is the number of Farms, Inns, and Blacksmiths you own.
+ " coords="130,10,184,64" shape="rect">
+ Fairy Diamond Legacy 
+ Bubble Swarm 
+ Effect : Increase maximum mana based on the highest amount of Swarming Towers you made this Reincarnation.
+ Formula : +(x ^ 1.05), where x is highest amount of Swarming Towers made this Reincarnation.
+ Pheromones 
+ Effect : Gain assistants additively based on time spent as Chaos this Reincarnation.
+ Formula : +(80 * x ^ 0.8), where x is time spent as Chaos this Reincarnation.
+ Dream Catchers 
+ Effect : Multiplicatively increase Mana Regeneration based on the amount of Chaos spells cast this Reincarnation.
+ Formula : (1.2 * x ^ 0.8)%, where x is Chaos spells cast this Reincarnation.
+ " coords="190,10,244,64" shape="rect">
+ Elven Bronze Legacy 
+ Elven Mint 
+ Effect : The base chance to find Faction Coins is increased by a multiplicative 150%.
+ Elven Treasure Casing 
+ Effect : Increase base clicking reward by +25,000 per Trophy unlocked, and increase chance to find Faction Coins based on the amount of Trophies you unlocked.
+ Formula : +((1 + 0.1 * x) ^ 0.95)%, where x is the amount of Trophies unlocked.
+ Ancient Clicking Arts 
+ Effect : Increase Mana Regeneration based on the amount of clicks made in this Reincarnation.
+ Formula : +(2 * log10(1 + x) ^ 1.25), where x is the amount of clicks made in this Reincarnation.
+ " coords="10,70,64,124" shape="rect">
+ Elven Silver Legacy 
+ Elven Emissary 
+ Effect : Increase clicking reward based on the amount of Good buildings you own, and assistants find 3 times as many Faction Coins.
+ Formula : (x ^ 0.6)%, where x is the number of Good Buildings you own.
+ Elven Efficiency 
+ Effect : Increase Royal Exchange bonus based on Faction Coins found this game.
+ Formula : +(2 * ln(1 + x) ^ 2)%, where x is Faction Coins found this game.
+ Secret Clicking Techniques 
+ Effect : Increase the production of all buildings based on Clicks total.
+ Formula : (2 * x ^ 0.4)%, where x is your Treasure Clicks all time.
+ " coords="70,70,124,124" shape="rect">
+ Elven Gold Legacy 
+ Elven Diplomacy 
+ Effect : Clicks count more based on Faction Coins found this game.
+ Formula : (2 * ln(1 + x) ^ 2)%, where x is Faction Coins found this game.
+ Elven Luck 
+ Effect : Each time you click for money you have 1% chance to gain coins equal to 250000% of your production, also generating Faction Coins based on Reincarnation made.
+ Formula (Production) : (2500 * (x + y)), where x is the production of all buildings, and y is the production of one assistant.
+ Formula (Faction Coins) : (x * (R + 1)) of a random type, where x is Faction Coin chance and R is the number of times you have reincarnated.
+ Effect : Assistants have the same chance to trigger Elven Luck once every second. Elven Lucks triggered this way have their coin reward multiplied by the amount of assistants you have.
+ Sylvan Treasure Frills 
+ Effect : Additively increase base clicking reward by 50% of your building production.
+ " coords="130,70,184,124" shape="rect">
+ Elven Diamond Legacy 
+ Wooden Dice 
+ Effect : Increase Elven Luck chance to activate and its effects based on the highest amount of Arboreal Cities you own in this Reincarnation.
+ Elven Luck Formula : +(x ^ 0.4)%, where x is highest amount of Arboreal Cities this Reincarnation.
+ Production Formula : (40 * x ^ 0.8)%, where x is highest amount of Arboreal Cities this Reincarnation.
+ Faction Coin Formula : +(7.5 * x ^ 0.75)%, where x is highest amount of Arboreal Cities this Reincarnation.
+ Effect : When Elven Luck triggers, 100000 automatic Tax Collections are cast.
+ Effect : Also removes 2 ascension penalties from Elven Luck.
+ Camouflage 
+ Effect : Assistants and Clicks count 1,000% more for all purposes and increase assistant production based on amount of assistants.
+ Formula : (2 * ln(1 + x) ^ 2)%, where x is assistants owned.
+ Elven Discipline 
+ Effect : Increase assistants additively and multiplicatively based on the amount of Faction Coins found in this game.
+ Formula : +(50 * ln(1 + x) ^ 1.5), where x is Faction Coins found this game (additively).
+ Formula : (1.5 * log10(1 + x) ^ 1.5)%, where x is Faction Coins found this game (multiplicatively).
+ " coords="190,70,244,124" shape="rect">
+ Angel Bronze Legacy 
+ Holy Bells 
+ Effect : Increase Mana Regeneration based on the amount of buildings you own.
+ Formula : +(1.6 * x ^ 0.4), where x is the amount of buildings you own.
+ Angelic Determination 
+ Effect : Increase the production of all buildings based on spells cast this game.
+ Formula : (4 * ln(1 + x) ^ 2)%, where x is spells cast this game.
+ Effect : Also increase Angel Coins found (from all sources) by 500%.
+ Angel Feathers 
+ Effect : Increase Faction Coin find chance additively based on the amount of active spells.
+ Formula : +(10 * x)%, where x is the amount of active spells.
+ " coords="10,130,64,184" shape="rect">
+ Angel Silver Legacy 
+ Guardian Angels 
+ Effect : Spell casts count 100% more.
+ Angelic Wisdom 
+ Effect : Decrease the cost of all spells by 50%.
+ Effect : Also increases offline spell cast amount by multiplicatively based on your offline Mana Regeneration.
+ Formula : (10 * log10(1 + x))%, where x is your offline Mana Regeneration.
+ Archangel Feathers 
+ Effect : Increase Mana Regeneration multiplicatively by 50%.
+ " coords="70,130,124,184" shape="rect">
+ Angel Gold Legacy 
+ Magical Gates 
+ Effect : Increase Maximum Mana based on time spent as Good in this Reincarnation.
+ Formula : +(3.5 * x ^ 0.7), where x is time spent as Good this Reincarnation.
+ Angelic Dominance 
+ Effect : Spell durations are increased by 50%.
+ Wings of Liberty 
+ Effect : Increase the production of all buildings based on Mana Regeneration.
+ Formula : (4 * ln(1 + x) ^ 2)%, where x is your Mana Regeneration.
+ " coords="130,130,184,184" shape="rect">
+ Angel Diamond Legacy 
+ Heaven's Brilliance 
+ Effect : Increase the bonus multiplier for all spells at tier 7 and above based on the highest amount of Holy Sites you own in this Reincarnation. Gem Grinder and all Dragon's Breath effects are increased based on the highest amount of Holy Sites you own in this Reincarnation.
+ Formula : +(0.025 * ln(1 + x)), where x is highest amount of Holy Sites owned in this Reincarnation.
+ Gem Grinder and Dragon's Breath Formula : (0.65 * x ^ 0.65)%, where x is highest amount of Holy Sites owned in this Reincarnation.
+ Angelic Fortitude 
+ Effect : Multiplicatively increase Faction Coin find chance based on the sum of all your spells' activity time (this Reincarnation).
+ Formula : (x ^ 0.7)%, where x is the sum of all your spells' activity time in this Reincarnation.
+ Note : Counts only the activity time of the spells you have in this game available.
+ Seraphim Wings 
+ Effect : Multiplicatively increase Maximum Mana, Mana Regeneration, Faction Coin find chance and assistants by 200%.
+ " coords="190,130,244,184" shape="rect">
+ Goblin Bronze Legacy 
+ Strong Currency 
+ Effect : Gain assistants additively based on the amount of Faction Coins found in this game.
+ Formula : +(0.5 * ln(1 + x) ^ 2), where x is Faction Coins found this game.
+ Slave Trading 
+ Effect : Increase the production of all buildings based on the amount of Evil buildings you own.
+ Formula : (2 * x ^ 0.7)%, where x is the amount of Evil buildings you own.
+ Cheap Materials 
+ Effect : Tax Collection is worth more seconds additively based on the amount of buildings you own.
+ Formula : +(x ^ 0.5), where x is the amount of buildings you own.
+ " coords="10,190,64,244" shape="rect">
+ Goblin Silver Legacy 
+ Black Market 
+ Effect : Production bonus from gems is increased by a multiplicative 150%.
+ Effect : Also increase offline production bonus based on the amount of Tax Collections cast this game.
+ Formula : (log10(1 + x) ^ 2)%, where x is Tax Collection casts this game.
+ Goblin Economists 
+ Effect : Mutiplicatively increase Mana Regeneration based on based on Gold owned.
+ Formula : (0.75 * log10(1 + x) ^ 1.25)%, where x is Gold owned.
+ Hobgoblin Gladiators 
+ Effect : Increase the production of all buildings based on the worth in seconds of your Tax Collection spell.
+ Formula : (12 * ln(1 + x) ^ 3)%, where x is the seconds of your Tax Collection.
+ " coords="70,190,124,244" shape="rect">
+ Goblin Gold Legacy 
+ Goblin Central Bank 
+ Effect : Whenever you cast a spell, also cast a Tax Collection for free.
+ Fools's Gold 
+ Effect : Increase Faction Coin find chance based on the highest amount of Witch Conclaves you own this Reincarnation.
+ Formula : floor(2 * x^0.6)%, where x is the highest amount of Witch Conclaves you own this Reincarnation.
+ Green Fingers Discount 
+ Effect : Gain coins randomly every 10 minutes. Also works while being offline.
+ Formula : (randRange(1 , 2500) * x), where x is your total (buildings + assistants) coin production per second, including spells .
+ " coords="130,190,184,244" shape="rect">
+ Goblin Diamond Legacy 
+ Fool's Gems 
+ Effect : Multiplicatively increase production bonus from Gems based on the highest amount of Slave Markets you own in this Reincarnation.
+ Formula : (0.5 * x ^ 0.5)%, where x is the highest amount of Slave Markets you own this Reincarnation.
+ Money is Magic 
+ Effect : Increase mana regeneration based on the amount of Tax Collections cast in this game.
+ Formula : (2 * ln(1 + x) ^ 2)%, where x is the amount of Tax Collections cast this game.
+ Lousy Architecture 
+ Effect : Reduce Non-Unique buildings cost multiplier by 0.01; with no other reductions applying, the multiplier will be 1.14 instead of 1.15.
+ Effect : Increase Non-Unique buildings production based on the amount of buildings of the same tier.
+ Formula : (x ^ 0.65)%, where x is the amount of buildings of the same tier. 
+ " coords="190,190,244,244" shape="rect">
+ Undead Bronze Legacy 
+ The Walking Dead 
+ Effect : Increase Faction Coin find chance additively based on assistants owned.
+ Formula : +(ln(1 + x) ^ 1.75)%, where x is assistants owned.
+ Deadened Muscles 
+ Effect : Increase the production of all buildings based on the highest amount of Necropolises you built in this Reincarnation.
+ Formula : (4 * x ^ 0.8)%, where x is the the highest amount of Necropolises you built in this Reincarnation.
+ Death Temples 
+ Effect : Increase Mana Regeneration additively based on the highest amount of Necropolises you built in this Reincarnation.
+ Formula : +(x ^ 0.3), where x is the highest amount of Necropolises you built in this Reincarnation.
+ " coords="10,250,64,304" shape="rect">
+ Undead Silver Legacy 
+ Unholy Rituals 
+ Effect : Increase offline production based on time spent being offline in this Reincarnation.
+ Formula : (0.4 * x ^ 0.8)%, where x is your offline time this Reincarnation.
+ Corpse Supply 
+ Effect : Gain additional assistants based on time spent being offline in this Reincarnation.
+ Formula : +(0.4 * x ^ 0.6), where x is the time spent offline in this Reincarnation.
+ Plagued Buildings 
+ Effect : Increase the production of all buildings based on time spent in this game.
+ Formula : (0.75 * x ^ 0.75)%, where x is time spent this game.
+ " coords="70,250,124,304" shape="rect">
+ Undead Gold Legacy 
+ Dead Fields 
+ Effect : Buildings count 75% more.
+ Tireless Workers 
+ Effect : Increase the production of assistants by 1500%.
+ Undead Resilience 
+ Effect : Increases offline production based on Mana Regeneration.
+ Formula : (125 * ln(1 + x) ^ 2.5)%, where x is your Mana Regeneration.
+ " coords="130,250,184,304" shape="rect">
+ Undead Diamond Legacy 
+ Flesh Servants 
+ Effect : Mutiplicatively increase assistants based on the highest amount of Flesh Workshops you built in this Reincarnation.
+ Formula : (1.3 * x ^ 0.7)%, where x is the highest amount of Flesh Workshops you built in this Reincarnation.
+ Eternal Servitude 
+ Effect : Increase the production of Unique buildings based on time spent in this game.
+ Formula : (x ^ 0.7)%, where x is time spent this game.
+ Zombie Apocalypse 
+ Effect : Gain assistants additively based on the total amount of time spent offline in this Reincarnation.
+ Formula : +(21 * x ^ 0.7), where x is offline time in this Reincarnation.
+ " coords="190,250,244,304" shape="rect">
+ Demon Bronze Legacy 
+ Torture Chambers 
+ Effect : Increase the production of Royal Castles / Evil Fortresses / Iron Strongholds (based on your Alignment) based on the amount of assistants you own.
+ Formula : (6 * ln(1 + x) ^ 3)%, where x is the amount of assistants you own.
+ Devil Tyrant 
+ Effect : The three highest building tiers count more based on time spent as Evil in this Reincarnation.
+ Formula : (0.4 * x ^ 0.6)%, where x is time spent as Evil this Reincarnation.
+ Evil Conquerors 
+ Effect : Increase the production of all buildings based on the highest amount of Hell Portals you built in this Reincarnation.
+ Formula : (4 * x ^ 0.8)%, where x is the highest amount of Hell Portals you built in this Reincarnation.
+ " coords="10,310,64,364" shape="rect">
+ Demon Silver Legacy 
+ Lava Pits 
+ Effect : Increase the base production of Evil Fortresses by +200,000 and Hell Portals by +2,000,000.
+ Effect : Your playtime in this game counts more by 6 additional hours.
+ Demon Overseers 
+ Effect : Increase the production of the three highest building tiers based on the amount of Trophies you unlocked.
+ Formula : (2 * x ^ 0.8)%, where x is the amount of trophies unlocked.
+ Demonic Presence 
+ Effect : Increase the maximum Mana additively based on Evil spells cast in this game (additive).
+ Formula : +(6 * x ^ 0.4), where x is Evil spells cast this game.
+ " coords="70,310,124,364" shape="rect">
+ Demon Gold Legacy 
+ Infernal Magic 
+ Effect : Hell Portals also increase your Mana Regeneration rate.
+ Formula : +(3.5 * x ^ 0.35), where x is the amount of Hell Portals you own.
+ Burning Legion 
+ Effect : You gain assistants based on the amount of Hell Portals you own.
+ Formula : +(1.5 * x ^ 0.65), where x is the number of Hell Portals you own.
+ Very Bad Guys 
+ Effect : Increase the production of Heaven's Gate / Hell Portals / Ancient Pyramid (based on your Alignment) based on the highest amount of Hell Portals you built in this Reincarnation.
+ Formula : (4 * x ^ 0.8)%, where x is the highest amount of Hell Portals you built in this Reincarnation.
+ " coords="130,310,184,364" shape="rect">
+ Demon Diamond Legacy 
+ Abyssal Furnance 
+ Effect : Increase the production of all buildings based on the highest amount of Burning Abysses you built in this Reincarnation. Higher tiers get better bonuses.
+ Formula : (0.5 * (T ^ 1.5) * (x ^ 0.5)%, where x is the highest amount of Burning Abysses built in this Reincarnation, T is building tier.
+ Demonic Fury 
+ Effect : Multiplicatively increase Faction Coin find chance based on least time spent between Evil and Chaos this Reincarnation.
+ Formula : (0.25 * min(x , y) ^ 0.75)%, where x is evil time and y is chaos time spent in this Reincarnation.
+ Devastation 
+ Effect : Increase production of three highest building tiers based on your Mana Regeneration.
+ Formula : (2.5 * ln(1 + x) ^ 2.5)%, where x is your Mana Regeneration.
+ " coords="190,310,244,364" shape="rect">
+ Titan Bronze Legacy 
+ Colossal Forge 
+ Effect : Increase the production of all buildings based on the amount of buildings you own.
+ Formula : (6 * x ^ 0.6)%, where x is the amount of buildings built.
+ Charged Clicks 
+ Effect : Multiplicatively increase Mana Regeneration based on clicks made in this game.
+ Formula : (25 + 2.5 * log10(1 + x) ^ 2.5 + x ^ 0.25)%, where x is clicks made this game.
+ Titan Obelisk 
+ Effect : Increase Faction Coin find chance additively based on time spent as Neutral in this Reincarnation.
+ Formula : +(3 * x ^ 0.7)%, where x is time spent as Neutral in this Reincarnation.
+ " coords="10,370,64,424" shape="rect">
+ Titan Silver Legacy 
+ Titan Drill 
+ Effect : Increase the base production of Warrior Barracks / Slave Pens / Deep Mines by +9635, and Cathedrals / Dark Temples / Monasteries by +98000 (based on your Alignment). Also increase production of those building tiers by 1000%.
+ Charged Structures 
+ Effect : Increase the production of all buildings based on the amount of active spells.
+ Formula : (15 * x)%, where x is the amount of active spells.
+ Titan Sized Walls 
+ Effect : Increase Hall of Legends production based on the amount of assistants you own.
+ Formula : (20 + 2.15 * ln(1 + x) ^ 2.15)%, where x is the amount of assistants you own.
+ " coords="70,370,124,424" shape="rect">
+ Titan Gold Legacy 
+ Cyclopean Strength 
+ Effect : Assistants count 200% more, and increase their production by 200%.
+ Heavy Coins 
+ Effect : Increases Royal Exchanges production bonus by an additional 100% each, and reduces Royal Exchange cost multiplier by 0.01; with no other reductions applying, the multiplier will be 1.09 instead of 1.1.
+ Oversized Legends 
+ Effect : Reduce Hall of Legends building cost multiplier by 0.01; with no other reductions applying, the multiplier will be 1.14 instead of 1.15.
+ Effect : Also increase the production of assistants based on the amount of Halls of Legends built.
+ Formula : (6 * x ^ 0.6)%, where x is the amount of Hall of Legends built.
+ " coords="130,370,184,424" shape="rect">
+ Titan Diamond Legacy 
+ Giant Market 
+ Effect : Makes Royal Exchanges count more based on the highest amount of Mountain Palaces you built in this Reincarnation.
+ Formula : (x ^ 0.7)%, where x is the highest amount of Mountain Palaces you built in this Reincarnation.
+ Titanic Authority 
+ Effect : Increase the production of Unique Buildings based on the amount of Royal Exchanges you made.
+ Formula : (x ^ 0.6)%, where x is amount of Royal Exchanges bought.
+ Colossus Kingdom 
+ Effect : Gain assistants based on time spent as Order in this Reincarnation.
+ Formula : +(25 * x ^ 0.7), where x time spent as Order in this Reincarnation.
+ " coords="190,370,244,424" shape="rect">
+ Druid Bronze Legacy 
+ Druidic Vocubulary 
+ Effect : Increase the production of all buildings based on their tier, giving the best bonus to the lowest.
+ Formula : (4000 * (12 - T))%, where T is building tier.
+ Animal Companions 
+ Effect : You instantly attract 3 Animal assistants and more will come based on the time spent in this game.
+ Formula : (3 + 1.75 * x ^ 0.5), where x is time spent in this game.
+ Natural Recycling 
+ Effect : Increase Faction Coin find chance additively and multiplicatively based on the amount of the total buildings you own.
+ Formula : (0.4 x ^ 0.4), where x is total buildings built. (additively and multiplicatively)
+ " coords="10,430,64,484" shape="rect">
+ Druid Silver Legacy 
+ Earthly Bond 
+ Effect : Increase maximum Mana additively based on the highest amount of Stone Pillars built in this Reincarnation.
+ Formula : +(2 * x), where x is the highest amount of Stone Pillars built in this Reincarnation.
+ Bardic Knowledge 
+ Effect : Increase the production of all buildings based on your Maximum Mana.
+ Formula : (16 * ln(1 + x) ^ 2)%, where x is your Maximum Mana.
+ Shapeshifting 
+ Effect : Increase Mana Regeneration additively based on the amount of assistants you own.
+ Formula : +(1.3 * x ^ 0.7), where x is the amount of assistants you own.
+ " coords="70,430,124,484" shape="rect">
+ Druid Gold Legacy 
+ Mabinogion 
+ Effect : Increase the production of Non-Unique buildings based on their tier, giving the best bonus to the lowest.
+ Formula : (12 * 1.8 ^ (12 - T))%, where T is building tier.
+ Earthly Soul 
+ Effect : Increase Mana Regeneration additively based on the highest amount of Stone Pillars you built in this Reincarnation.
+ Formula : +(x ^ 0.25), where x is the highest amount of Stone Pillars you built in this Reincarnation.
+ Building Jungle 
+ Effect : Increase the production of each building based on the amount of buildings of the same type. 
+ Formula : (1.5 * x ^ 0.9)%, where x is the amount of buildings of the same type.
+ " coords="130,430,184,484" shape="rect">
+ Druid Diamond Legacy 
+ Building Vines 
+ Effect : Increase spell duration based on the highest amount of Ziggurats you built in this Reincarnation.
+ Formula : (0.5 * x ^ 0.5)%, where x is the highest amount of Ziggurats built in this Reincarnation.
+ Lunar Cycle 
+ Effect : Increase Maximum Mana additively based on time spent online in this game.
+ Formula : +(50 * x ^ 0.85), where x is time spent online in this game.
+ Effect : Increase Maximum Mana multiplicatively based on time spent offline in this game.
+ Formula : (0.5 * x ^ 0.5)%, where x is time spent offline in this game.
+ Grove Farming 
+ Effect : Increase the production of all buildings based on their tier. Middle tiers get better bonuses.
+ Formula : (0.8 * ((6 - abs(6 - T)) ^ 4))%, where T is building tier.
+ " coords="190,430,244,484" shape="rect">
+ Faceless Bronze Legacy 
+ Territorial Expanse 
+ Effect : Increase the production of Citadels / Necropolises / Labyrinths (based on your Alignment) based on the amount of assistants you own.
+ Formula : (50 * ln(1 + x) ^ 2.5)%, where x is the amount of assistants you own.
+ Evolutive Mutation 
+ Effect : Increase Faction Coin find chance based on the highest amount of Labyrinths you built in this Reincarnation.
+ Formula : +floor(3 * x ^ 0.6)%, where x is the highest amount of Labyrinths you built in this Reincarnation.
+ Deep Memory 
+ Effect : Multiplicatively increase assistants based on the time spent on your longest game session in this Reincarnation.
+ Formula : (0.3 * x ^ 0.7)%, where x is your Playtime (Longest Session) stat this Reincarnation.
+ " coords="10,490,64,544" shape="rect">
+ Faceless Silver Legacy 
+ Gold Synthesis 
+ Effect : Increase the production of Neutral buildings based on the amount of coins owned.
+ Formula : (0.2 * ln(1 + x) ^ 2)%, where x is the amount of coins owned.
+ Mitosis 
+ Effect : Gain additional Faceless Assistants based on the amount of buildings you own.
+ Formula : +floor(0.5 * x ^ 0.5), where x is the amount of buildings you own.
+ Overgrowth 
+ Effect : Increases production based on the highest amount of buildings purchased in a single game in this Reincarnation.
+ Formula : (0.8 * x ^ 0.8)%, where x is your Buildings Owned (Max) stat.
+ " coords="70,490,124,544" shape="rect">
+ Faceless Gold Legacy 
+ Magical Treasure 
+ Effect : Increase mana regeneration based on the amount of assistants you own.
+ Formula : +(2.5 * x ^ 0.5), where x is the amount of assistants you own.
+ Abominations 
+ Effect : Increase the production of assistants based on the amount of active spells.
+ Formula : (20 * x ^ 0.9)%, where x is the amount of active spells.
+ Hive Mind 
+ Effect : Increases production based on total time spent affiliated with Faceless. Persists through Reincarnations.
+ Formula : (x ^ 0.5)%, where x is total time spent as Faceless (all time).
+ " coords="130,490,184,544" shape="rect">
+ Faceless Diamond Legacy 
+ Primal Knowledge 
+ Effect : Multiplicatively increase Faction Coin find chance based on the highest amount of Forbidden Libraries you built in this Reincarnation. Grows over time and resets every 15 minutes.
+ Formula : ((t % 900) / 75 * x ^ 0.4)%, where t is time spent this game, x is the highest amount of Forbidden Libraries you built in this Reincarnation.
+ Forbidden Language 
+ Effect : Increase spell durations based on the amount of Reincarnations made.
+ Formula : (0.8 * x ^ 0.8)%, where x is the number of times you have reincarnated.
+ Dimension Door 
+ Effect : Increase the production of all buildings based on the highest amount of Maximum Mana you had in this Reincarnation.
+ Formula : (2 * ln(1 + x) ^ 2)%, where x is highest Maximum Mana this Reincarnation.
+ " coords="190,490,244,544" shape="rect">
+ Dwarven Bronze Legacy 
+ Dwarven Ale 
+ Effect :Increase Faction Coin find chance based on the amount of Blacksmiths you own (Additive).
+ Formula : +(2 * x ^ 0.5)%, where x is the amount of Blacksmiths you own.
+ Expert Masonry 
+ Effect : Reduce all building cost multipliers.
+ Effect : Reduces cost multiplier by 0.01; with no other reductions applying, the multiplier will be 1.14 instead of 1.15.
+ Mining Prodigies 
+ Effect : Increase the production of all buildings based on the amount of Excavations you made, including resets, in this Reincarnation.
+ Formula : (40 * (x * (1 + 2 * y)) ^ 0.4)%, where x is the number of excavations made this Reincarnation, y is the number of excavation resets in this Reincarnation.
+ " coords="10,550,64,604" shape="rect">
+ Dwarven Silver Legacy 
+ Underground Citadels 
+ Effect : Multiplicatively increase Mana Regeneration based on the amount of Gems you own.
+ Formula : (1.5 * log10(1 + x) ^ 1.5)%, where x is the amount of Gems you own.
+ Indestructible Treasure 
+ Effect : Increase clicking reward based on the amount of buildings you own.
+ Formula : (0.5 * x ^ 0.65)%, where x is the amount of buildings you own.
+ Bearded Assistants 
+ Effect : Increase the production of assistants based on how long their beard is (it grows over time!).
+ Formula : (x ^ 0.7)%, where x is time spent in this game.
+ " coords="70,550,124,604" shape="rect">
+ Dwarven Gold Legacy 
+ Battlehammers 
+ Effect : Increase the production of all buildings based on the amount of Dwarven Coins found in this game.
+ Formula : (2 * ln(1 + x) ^ 2))%, where x is the amount of Dwarven Coins found in this game.
+ Magic Resistance 
+ Effect : Reduce Excavation cost multiplier.
+ Formula : Reduces cost multiplier by 0.02; with no other reductions applying, the multiplier will be 1.18 instead of 1.2.
+ Overwatch 
+ Effect : Increase Maximum Mana based on the duration of your longest spell.
+ Formula : +(50 + 35 * x ^ 0.7), where x is the duration of your longest spell.
+ " coords="130,550,184,604" shape="rect">
+ Dwarven Diamond Legacy 
+ Solidity 
+ Effect : Multiplicatively increase production bonus from Gems based on the highest amount of High Bastions you built in this Reincarnation.
+ Formula : (1.6 * x ^ 0.6), where x is the highest amount of High Bastions you built in this Reincarnation.
+ Stonetalking 
+ Effect : Increase the production of all buildings based on the highest between Maximum Mana and Mana Regeneration.
+ Formula : (2 * ln(1 + max(x , y)) ^ 2)%, where x is Maximum Mana and y is Mana Regeneration.
+ Refined Minerals 
+ Effect : Multiplicatively increase Mana Regeneration and Maximum Mana based on highest time spent as Order, Balance or Chaos.
+ Formula : (0.03 * max(x, y, z) ^ 0.7)%, where x, y & z is time spent as Order, Balance and Chaos in this Reincarnation respectively.
+ " coords="190,550,244,604" shape="rect">
+ Drow Bronze Legacy 
+ Underworld Tyranny 
+ Effect : Increase the production of all buildings based on your total time spent being Evil in this Reincarnation.
+ Formula : (0.7 * x ^ 0.7), where x is time spent being Evil in this Reincarnation.
+ Honor Among Killers 
+ Effect : Increase Faction Coin find chance based on the amount of assistants you own.
+ Formula : +(100 + 0.5 * x ^ 0.5)%, where x is the amount of assistants you own.
+ Shadow Advance 
+ Effect : Increase the production of all buildings based on Maximum Mana.
+ Formula : (2 * log10(1 + x) ^ 2))%, where x is your Maximum Mana.
+ " coords="10,610,64,664" shape="rect">
+ Drow Silver Legacy 
+ Mana Addicts 
+ Effect : Mana Regeneration increases over time.
+ Formula : +(2.5 + 0.25 * x ^ 0.5), where x is time spent in this game.
+ Blood Sacrifices 
+ Effect : Increase the production of all buildings based on the highest amount of Dark Temples you built in this Reincarnation.
+ Formula : (3 * x)%, where x is the highest amount of Dark Temples you built in this Reincarnation.
+ Blackmail 
+ Effect : Reduces Royal Exchange cost multiplier by 0.02; with no other reductions applying, the multiplier will be 1.08 instead of 1.1.
+ " coords="70,610,124,664" shape="rect">
+ Drow Gold Legacy 
+ Spider Gods 
+ Effect : Mutiplicatively increase assistants based on the amount of buildings you own.
+ Formula : (0.5 * x ^ 0.5)%, where x is the amount of buildings you own.
+ Professional Assassins 
+ Effect : Multiplicatively increase production bonus from Gems based on the amount of Royal Exchanges you made.
+ Formula : (0.6 * x ^ 0.6)%, where x is Royal Exchanges made.
+ Blade Dance 
+ Effect : Increase the production of all buildings based on Combo Strike counter in this game.
+ Formula : (100 + 80 * x ^ 0.4)%, where x is your Combo Strike counter.
+ " coords="130,610,184,664" shape="rect">
+ Drow Diamond Legacy 
+ Spider Clerics 
+ Effect : Increase Royal Exchange bonus based on the highest amount of Brothels you built in this Reincarnation (Additive).
+ Formula : +(1.75 * x ^ 0.75)%, where x is the highest amount of Brothels you built in this Reincarnation.
+ Ancillae Obscure 
+ Effect : Increase Non-Unique building production based on amount of Unique Buildings.
+ Formula : (50 * x ^ 0.5)%, where x is amount of Unique Buildings.
+ Crystal Servants 
+ Effect : Multiplicatively gain assistants based on current gem amount.
+ Formula : (1.75 * log10(1 + x) ^ 1.75)%, where x is your current amount of gems.
+ " coords="190,610,244,664" shape="rect">
+ Dragon Bronze Legacy 
+ Dragon Scales 
+ Effect : Increase the production of all buildings based on the amount of time spent as Neutral in this Reincarnation. Effect is increased on Stone Pillars, Labyrinths and Hall Of Legends.
+ Formula : ((x / 60) ^ 0.5)%, where x is time spent as Neutral this Reincarnation. This is multiplied by 10 on Stone Pillars, Labyrinths and Hall of Legends.
+ Iron Flight 
+ Effect : Increase the production of Iron Stronghold by 200% per spell affecting it.
+ Note : Each instance of spell effects count as one spell (represented by the spell effect icons on the building icons). This includes Red, Green & Black Breath, A150 and D400.
+ Imposing Presence 
+ Effect : Increase Mana Regeneration additively based on the amount of Neutral buildings you own.
+ Formula : +(0.5 * x ^ 0.5), where x is the number of Neutral buildings owned.
+ " coords="10,670,64,724" shape="rect">
+ Dragon Silver Legacy 
+ Dragonborn 
+ Effect : Increase assistants additively and multiplicatively, and their production, based on time spent affiliated with Dragons.
+ Formula (Additive) : +(50 * x ^ 0.5), where x is time spent as Dragons (All Time).
+ Formula (Multiplicative) : (0.5 * x ^ 0.25)%, where x is time spent as Dragons (All Time).
+ Formula (Production) : (0.7 * x ^ 0.3)%, where x is time spent as Dragons (All Time).
+ Bountiful Hoard 
+ Effect : Increase the production of all buildings based on the amount of Artifacts you found.
+ Formula : (5 * (x ^ 1.25))%, where x is amount of artifacts you found.
+ Sharp Claws 
+ Effect : Multiplicatively increase Royal Exchange Bonus and Faction Coin find chance based on clicks made in this game.
+ Formula : (0.8 * x ^ 0.35)%, where x is the number of clicks this game.
+ " coords="70,670,124,724" shape="rect">
+ Dragon Gold Legacy 
+ Ancient Hunger 
+ Effect : Increase Maximum Mana additively and multiplicatively based on the amount of Faction Coins found in this game.
+ Formula (Additive) : +(20 * ln(1 + x) ^ 2), where x is Faction Coins found this game.
+ Formula (Multiplicative) : (0.75 * ln(1 + x) ^ 1.25)%, where x is Faction Coins found this game.
+ Eternal Wisdom 
+ Effect : Increase the production of all buildings based on Royal Exchange bonus.
+ Formula : (1.5 * x ^ 0.95)%, where x is individual Royal Exchange bonus.
+ Chromatic Scales 
+ Effect : Increase the production of all buildings based on the amount of active Dragon's Breath effects.
+ Formula : (100 * (x ^ 2))%, where x is amount of active Dragon's Breath effects.
+ " coords="130,670,184,724" shape="rect">
+ Dragon Diamond Legacy 
+ Fang Food 
+ Effect : Multiplicatively increase Mana Regeneration and Assistants based on the highest amount of Dragon Pastures you built in this Reincarnation.
+ Formula : (0.5 * x ^ 0.5)%, where x is the highest amount of Dragon Pastures owned in this Reincarnation.
+ Wyrm's Rest 
+ Effect : Remove 1 Ascension penalty from Royal Exchange bonus. Also gives Dragon's Breath White Breath a multiplicative effect on Assistants based on time spent as Dragons.
+ Formula : (1.25 * ln(1 + x) ^ 1.25)%, where x is time spent as Dragon this Reincarnation.
+ Note : The multiplicative White Breath effect stacks multiplicatively with extra White Breaths.
+ Draconic Supremacy 
+ Effect : Increase the production of all buildings based on Maximum Mana.
+ Formula : (20 * ln(1 + x) ^ 2)%, where x is your Maximum Mana.
+ " coords="190,670,244,724" shape="rect">
+ Mystic Forest 
+ Requirement : Fairy Legacy, Elf Legacy
+ Effect : Increase the production of all buildings based on the amount of assistants you own.
+ Formula : (2 * ln(1 + x) ^ 2)%, where x is the amount of assistants you own.
+ " coords="10,10,64,64" shape="rect">
+ Sacred Glade 
+ Requirement : Elf Legacy, Angel Legacy
+ Effect : Increase all spells duration based on clicks made in this game.
+ Formula : (2.4 * x ^ 0.4)%, where x is the amount of clicks made in this game.
+ " coords="70,10,124,64" shape="rect">
+ Golden Heaven 
+ Requirement : Angel Legacy, Goblin Legacy
+ Effect : Increase the production of all buildings based on Gold owned.
+ Formula : (log10(1 + x) ^ 2)%, where x is the current amount of Gold you own.
+ " coords="130,10,184,64" shape="rect">
+ Dream Realm 
+ Requirement : Fairy Legacy, Angel Legacy
+ Effect : Increase Mana Regeneration based on time spent as Good in this Reincarnation.
+ Formula : (0.7 * x ^ 0.7)%, where x is time spent as Good in this Reincarnation.
+ " coords="10,70,64,124" shape="rect">
+ Swamp of Sorrows 
+ Requirement : Elf Legacy, Undead Legacy
+ Effect : Activity time of all spells counts more based on Maximum Mana.
+ Formula : (2 * ln(1 + x) ^ 2.25)%, where x is your Maximum Mana.
+ " coords="70,70,124,124" shape="rect">
+ Dark Sanctum 
+ Requirement : Angel Legacy, Undead Legacy
+ Effect : Multiplicatively increase Maximum Mana based on time spent as Order in this Reincarnation.
+ Formula : (0.7 * x ^ 0.7)%, where x is time spent as Order in this Reincarnation.
+ " coords="130,70,184,124" shape="rect">
+ Artifact Caveau 
+ Requirement : Fairy Legacy, Goblin Legacy
+ Effect : Increase the production of all buildings based on artifacts found.
+ Formula : (x ^ 0.95)%, where x is the number of artifacts found.
+ " coords="10,130,64,184" shape="rect">
+ Forbidden Grove 
+ Requirement : Elf Legacy, Demon Legacy
+ Effect : Autoclicks per second based on the amount of Unique Buildings you own.
+ Formula : +(1 + 1.5 * x ^ 0.2)%, where x is the amount of Unique Buildings you own.
+ Effect : Also increases production of Unique Buildings based on Autoclicks this game.
+ Formula : (2 * log10(1 + x) ^ 2)%, where x is Autoclicks made this game.
+ Note : 'Clicks count more' effects are not affecting this upgrade.
+ " coords="70,130,124,184" shape="rect">
+ Eternal Battlefield 
+ Requirement : Angel Legacy, Demon Legacy
+ Effect : Increase the production of Evil Buildings based on time spent as Good in this Reincarnation, and vice-versa. Does not affect Neutral Buildings
+ Formula : (0.7 * x ^ 0.7)%, where x is time spent as Good/Evil in this Reincarnation.
+ " coords="130,130,184,184" shape="rect">
+ Greed Factory 
+ Requirement : Elf Legacy, Goblin Legacy
+ Effect : Multiplicatively increase Faction Coin find chance based on Tax Collections casts in this game.
+ Formula : (2.5 * ln(1 + x) ^ 2.5)%, where x is the amount of Tax Collection casts in this game.
+ " coords="10,190,64,244" shape="rect">
+ Twisting Nether 
+ Requirement : Fairy Legacy, Undead Legacy
+ Effect : Gain a new spell with the same name (20 seconds duration, 1 M (1e6) Mana Cost, can be cast up to Tier 99). While active, increases Lineage Level by +1 per Tier.
+ Note : The Lineage Level increase is only a 'count more' effect and does not affect base lineage in any way.
+ Note : Twisting Nether counts as a faction spell, but has no alignments for upgrades such as Djinn Challenge 5.
+ " coords="70,190,124,244" shape="rect">
+ Brooding Abyss 
+ Requirement : Fairy Legacy, Demon Legacy
+ Effect : Chaotically increase assistants based on amount of alignments among the active spells you have.
+ Formula : ((a ^ 1.3 + b ^ 1.3 + c ^ 1.3 + d ^ 1.3 + e ^ 1.3 + f ^ 1.3) ^ (1 + 0.3 * (a + b + c + d + e + f)))%, where a - f are the amount of spells in the respective alignment.
+ Examples : Fairy Chanting (both good & chaos), Combo Strike (evil), Temporal Flux (order).
+ " coords="130,190,184,244" shape="rect">
+ Homunculus Lab 
+ Requirement : Goblin Legacy, Undead Legacy
+ Effect : Increase Research Budget based on the least time spent between Order and Balance in this Reincarnation.
+ Formula : +(75 + ln(1 + min(x , y)) ^ 3.25), where x and y is time spent as Order and Balance respectively in this Reincarnation.
+ Effect : Also increase the production of all buildings based on unspent research budget.
+ Formula : (1.3 * x ^ 0.7)%, where x is the sum of your unspent research budget across all branches.
+ " coords="10,250,64,304" shape="rect">
+ Frozen Wastes 
+ Requirement : Undead Legacy, Demon Legacy
+ Effect : Increase Offline Production based on time spent offline in this Reincarnation.
+ Formula : (0.7 * x ^ 0.7)%, where x is time spent offline in this Reincarnation.
+ " coords="70,250,124,304" shape="rect">
+ Corruption Zone 
+ Requirement : Goblin Legacy, Demon Legacy
+ Effect : Increase the production of Non-Unique buildings based on the duration of your longest spell.
+ Formula : (0.8 * x ^ 0.8)%, where x is the duration of your longest spell.
+ " coords="130,250,184,304" shape="rect">
+ Mystic Forest 
+ Requirement : Fairy Legacy, Elf Legacy
+ Effect : Increase the production of all buildings based on the amount of assistants you own.
+ Formula : (2 * ln(1 + x) ^ 2)%, where x is the amount of assistants you own.
+ Dream Realm 
+ Requirement : Fairy Legacy, Angel Legacy
+ Effect : Increase Mana Regeneration based on time spent as Good in this Reincarnation.
+ Formula : (0.7 * x ^ 0.7)%, where x is time spent as Good in this Reincarnation.
+ Artifact Caveau 
+ Requirement : Fairy Legacy, Goblin Legacy
+ Effect : Increase the production of all buildings based on artifacts found.
+ Formula : (x ^ 0.95)%, where x is the number of artifacts found.
+ Twisting Nether 
+ Requirement : Fairy Legacy, Undead Legacy
+ Effect : Gain a new spell with the same name (20 seconds duration, 1 M (1e6) Mana Cost, can be cast up to Tier 99). While active, increases Lineage Level by +1 per Tier.
+ Note : The Lineage Level increase is only a "count more" effect and does not affect base lineage in any way.
+ Note : Twisting Nether counts as a faction spell, but has no alignments for upgrades such as Djinn Challenge 5.
+ Brooding Abyss 
+ Requirement : Fairy Legacy, Demon Legacy
+ Effect : Chaotically increase assistants based on amount of alignments among the active spells you have.
+ Formula : ((a ^ 1.3 + b ^ 1.3 + c ^ 1.3 + d ^ 1.3 + e ^ 1.3 + f ^ 1.3) ^ (1 + 0.3 * (a + b + c + d + e + f)))%, where a - f are the amount of spells in the respective alignment.
+ Examples : Fairy Chanting (good & chaos), Combo Strike (evil), Temporal Flux (order).
+ Sacred Glade 
+ Requirement : Elf Legacy, Angel Legacy
+ Effect : Increase all spells duration based on clicks made in this game.
+ Formula : (2.4 * x ^ 0.4)%, where x is the amount of clicks made in this game.
+ Greed Factory 
+ Requirement : Elf Legacy, Goblin Legacy
+ Effect : Multiplicatively increase Faction Coin find chance based on Tax Collections casts in this game.
+ Formula : (2.5 * ln(1 + x) ^ 2.5)%, where x is the amount of Tax Collection casts in this game.
+ Swamp of Sorrows 
+ Requirement : Elf Legacy, Undead Legacy
+ Effect : Activity time of all spells counts more based on Maximum Mana.
+ Formula : (2 * ln(1 + x) ^ 2.25)%, where x is your Maximum Mana.
+ Forbidden Grove 
+ Requirement : Elf Legacy, Demon Legacy
+ Effect : Autoclicks per second based on the amount of Unique Buildings you own.
+ Formula : +(1 + 1.5 * x ^ 0.2)%, where x is the amount of Unique Buildings you own.
+ Effect : Also increases production of Unique Buildings based on Autoclicks this game.
+ Formula : (2 * log10(1 + x) ^ 2)%, where x is Autoclicks made this game.
+ Note : 'Clicks count more' effects are not affecting this upgrade.
+ Golden Heaven 
+ Requirement : Angel Legacy, Goblin Legacy
+ Effect : Increase the production of all buildings based on Gold owned.
+ Formula : (log10(1 + x) ^ 2)%, where x is the current amount of Gold you own.
+ Dark Sanctum 
+ Requirement : Angel Legacy, Undead Legacy
+ Effect : Multiplicatively increase Maximum Mana based on time spent as Order in this Reincarnation.
+ Formula : (0.7 * x ^ 0.7)%, where x is time spent as Order in this Reincarnation.
+ Eternal Battlefield 
+ Requirement : Angel Legacy, Demon Legacy
+ Effect : Increase the production of Evil Buildings based on time spent as Good in this Reincarnation, and vice-versa. Does not affect Neutral Buildings
+ Formula : (0.7 * x ^ 0.7)%, where x is time spent as Good/Evil in this Reincarnation.
+ Homunculus Lab 
+ Requirement : Goblin Legacy, Undead Legacy
+ Effect : Increase Research Budget based on the least time spent between Order and Balance in this Reincarnation.
+ Formula : +(75 + ln(1 + min(x , y)) ^ 3.25)%, where x and y is time spent as Order and Balance respectively in this Reincarnation.
+ Effect : Also increase the production of all buildings based on unspent research budget.
+ Formula : (1.3 * x ^ 0.7)%, where x is the sum of your unspent research budget across all branches.
+ Corruption Zone 
+ Requirement : Goblin Legacy, Demon Legacy
+ Effect : Increase the production of Non-Unique buildings based on the duration of your longest spell.
+ Formula : (0.8 * x ^ 0.8)%, where x is the duration of your longest spell.
+ Frozen Wastes 
+ Requirement : Undead Legacy, Demon Legacy
+ Effect : Increase Offline Production based on time spent offline in this Reincarnation.
+ Formula : (0.7 * x ^ 0.7)%, where x is time spent offline in this Reincarnation.
+ | Resources | Soft Resets | Buildings | Heritages | Bloodlines 
+ | Spells | Excavations | Challenges | Upgrades | Trophies 
+ | Factions | Research |
+ | Merc Builds | Research Builds | Prestige Builds | Dragon Unlock | Neutral Prestige Builds | Research Tree |
+ | Good : Fairy, Elf , Angel Evil : Goblin , Undead , Demon Neutral : Titan , Druid , Faceless"> Vanilla Factions 
+ | Fairy Elf Angel "> Good Factions 
+ | Goblin Undead Demon"> Evil Factions 
+ | Titan Druid Faceless"> Neutral Factions 
+ | Dwarf Drow Dragon"> Prestige Factions 
+ | Archon Djinn Makers"> A2 Elite Factions |
+ | Events | Latest Major Patch | Changelog | Notation | Terminology | Tools | Kongregate Links |
+ | Fairy 
+ | Elven 
+ | Angel 
+ | Goblin 
+ | Undead 
+ | Demon 
+ | Titan 
+ | Druid 
+ | Faceless |
+ | Mercenary 
+ | Dwarf 
+ | Drow 
+ | Dragon 
+ | Archon 
+ | Djinn 
+ | Makers |
+ 

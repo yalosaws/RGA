@@ -1,0 +1,2378 @@
+[
+{
+"col": "C",
+"row": 4,
+"code": "S1",
+"name": "Enchanting\n附魔",
+"fac": "妖精",
+"req": "买下S分支第1个研究点数",
+"eff": "根据本局魔产量提升Enchanted Field产能"
+},
+{
+"col": "D",
+"row": 4,
+"code": "S10",
+"name": "Channeling\n指引",
+"fac": "天使",
+"req": "使用天使\n本局拥有2000个Heaven's Domain",
+"eff": "根据Heaven’s Domain数量提升其余建筑产能（线性，每个Heaven's Domain增加固定比例）"
+},
+{
+"col": "F",
+"row": 4,
+"code": "S30",
+"name": "Vacuumancy\n空灵",
+"fac": "",
+"req": "本局拥有4000点魔上限",
+"eff": "根据本局时间增加魔上限和回魔（魔上限部分线性，+1/10秒）"
+},
+{
+"col": "G",
+"row": 4,
+"code": "S50",
+"name": "Conjuration\n咒法",
+"fac": "哥布林",
+"req": "使用妖精\n本局拥有6000魔上限",
+"eff": "每次施放法术时附加施放免费TC，免费TC施放次数由Goblin Bank数量决定；离线施法次数*2.5"
+},
+{
+"col": "J",
+"row": 4,
+"code": "S105",
+"name": "Mysticism\n密契主义",
+"fac": "",
+"req": "各研究分支研究点数总和达到600",
+"eff": "根据各研究分支已获得研究点数总和增加回魔"
+},
+{
+"col": "L",
+"row": 4,
+"code": "S135",
+"name": "Augmentation\n扩充",
+"fac": "",
+"req": "使用妖精\n本局拥有4000个Enchanted Field",
+"eff": "根据魔上限提升UB产能"
+},
+{
+"col": "N",
+"row": 4,
+"code": "S150",
+"name": "Pyromancy\n火卜术",
+"fac": "",
+"req": "D10+A105",
+"eff": "根据回魔提升建筑层级最高的两个建筑产能"
+},
+{
+"col": "P",
+"row": 4,
+"code": "S175",
+"name": "Empowered Luck\n幸运之力",
+"fac": "精灵",
+"req": "D1+S135",
+"eff": "每触发1次Elven Luck，所有建筑在20秒内产能提升固定比例；Elven Luck触发率+24%"
+},
+{
+"col": "Q",
+"row": 4,
+"code": "S180",
+"name": "Incantation\n符咒",
+"fac": "妖精",
+"req": "S1+S105",
+"eff": "根据助手数量提升回魔"
+},
+{
+"col": "R",
+"row": 4,
+"code": "S200",
+"name": "Cryomancy\n冰冻术",
+"fac": "",
+"req": "S50+A55",
+"eff": "根据本局魔产量提升所有法术持续时间"
+},
+{
+"col": "T",
+"row": 4,
+"code": "S215",
+"name": "Projection\n投影",
+"fac": "",
+"req": "本R施放300次Spiritual Surge\nS10+S180",
+"eff": "Spiritual Surge活跃时，根据当前活跃法术数量（包括法术层级）和Spiritual Surge法术层级数提升所有建筑产能"
+},
+{
+"col": "U",
+"row": 4,
+"code": "S225",
+"name": "Necromancy\n通灵术",
+"fac": "不死族",
+"req": "D175+S200",
+"eff": "根据Undercity数量提升助手产能"
+},
+{
+"col": "X",
+"row": 4,
+"code": "S250",
+"name": "Aeromancy\n天气占卜",
+"fac": "",
+"req": "D225+A150",
+"eff": "根据本局魔产量提升UB产能"
+},
+{
+"col": "Y",
+"row": 4,
+"code": "S251",
+"name": "Assimilation\n同化",
+"fac": "无面者",
+"req": "解锁无面者的研究使用权",
+"eff": "根据本R内除无面者外其他种族使用时间提升Sunken City产能"
+},
+{
+"col": "AA",
+"row": 4,
+"code": "S270",
+"name": "Runecarving\n符文雕刻",
+"fac": "",
+"req": "本局点击500000次",
+"eff": "根据当前拥有gem数量提升所有建筑产能"
+},
+{
+"col": "AD",
+"row": 4,
+"code": "S300",
+"name": "Chain Lightning\n链状闪电",
+"fac": "泰坦",
+"req": "本R施放25次Brainwave",
+"eff": "Lightning Strike持续时间不再受任何延长/缩短法术持续时间加成影响；Lightning Strike活跃时，根据本局Lightning Strike活跃时间提升非该法术目标建筑产能"
+},
+{
+"col": "AE",
+"row": 4,
+"code": "S305",
+"name": "Mesmerization\n催眠",
+"fac": "",
+"req": "无面者使用时间达到2天（所有R合计）",
+"eff": "根据未计入Ascension产能惩罚时的离线产能加成提升所有建筑产能"
+},
+{
+"col": "AG",
+"row": 4,
+"code": "S330",
+"name": "Reverberation\n回响",
+"fac": "",
+"req": "S200+D225",
+"eff": "至少3个法术活跃时，根据当前活跃法术数量（包括法术层级，数量上限为300）提升所有建筑产能"
+},
+{
+"col": "AJ",
+"row": 4,
+"code": "S375",
+"name": "Illusion\n幻象",
+"fac": "无面者",
+"req": "S330+S305",
+"eff": "Brainwave活跃时，根据本次施放Brainwave活跃时间（分钟）和Brainwave起步时间（headstart，分钟）增加助手"
+},
+{
+"col": "AK",
+"row": 4,
+"code": "S400",
+"name": "Capacity\n容量",
+"fac": "",
+"req": "S215+W275",
+"eff": "根据本R内单局施法次数最大值增加魔上限"
+},
+{
+"col": "AN",
+"row": 4,
+"code": "S435",
+"name": "Spellbinding\n诱惑",
+"fac": "卓尔",
+"req": "本局Combo Strike活跃时间达到4小时",
+"eff": "离线时Call To Arms加成效果持续生效"
+},
+{
+"col": "AO",
+"row": 4,
+"code": "S460",
+"name": "Focus\n聚焦",
+"fac": "",
+"req": "本局施放25000次法术",
+"eff": "根据本局所有种族法术施法次数总和提升所有建筑产能"
+},
+{
+"col": "AR",
+"row": 4,
+"code": "S500",
+"name": "Heirlooms\n传家宝",
+"fac": "",
+"req": "使用邪恶阵营+卓尔\n拥有40个遗物",
+"eff": "根据已获得遗物数量提升魔上限和回魔"
+},
+{
+"col": "AU",
+"row": 4,
+"code": "S545",
+"name": "Hierarchy\n阵列",
+"fac": "卓尔",
+"req": "本局魔产量达到1e7",
+"eff": "根据本局魔产量和各建筑自身建筑层级提升各自产能，层级越低加成越高"
+},
+{
+"col": "AW",
+"row": 4,
+"code": "S590",
+"name": "Trickery\n欺诈术",
+"fac": "妖精+矮人",
+"req": "使用妖精+矮人\n本局拥有200个矮人RE\nS105+S375",
+"eff": "根据当前魔上限提升中立阵营建筑产能"
+},
+{
+"col": "BD",
+"row": 4,
+"code": "S1275",
+"name": "Sequence\n阵列",
+"fac": "",
+"req": "本局施放60000次法术",
+"eff": "降低法术层级提高时的施法成本上涨倍率"
+},
+{
+"col": "BJ",
+"row": 4,
+"code": "S1450",
+"name": "Spellstorm\n法术风暴",
+"fac": "龙族",
+"req": "使用中立阵营+龙族\nS435+C1325",
+"eff": "根据当前活跃法术数量（包括法术层级）提升UB产能"
+},
+{
+"col": "BK",
+"row": 4,
+"code": "S1500",
+"name": "Psionics\n灵能",
+"fac": "无面者+龙族",
+"req": "使用无面者+龙族\n本局拥有1000个基础助手\nS545+E1325",
+"eff": "根据助手数量提升UB产能"
+},
+{
+"col": "BO",
+"row": 4,
+"code": "S2875",
+"name": "Scholarship\n奖学金",
+"fac": "佣兵",
+"req": "本局拥有11000个佣兵UB",
+"eff": "根据UB数量提升非UB建筑产能（线性，每个UB提升固定比例）"
+},
+{
+"col": "BU",
+"row": 4,
+"code": "S3200",
+"name": "Manipulation\n操纵",
+"fac": "",
+"req": "本R施放1e9次Tax Collection\nA1325+S1500",
+"eff": "根据活跃法术数量（包括法术层级）提升回魔（线性，每个活跃法术+8%），离线施法次数结算值*13"
+},
+{
+"col": "CC",
+"row": 4,
+"code": "S5125",
+"name": "Spilling\n溢出",
+"fac": "",
+"req": "",
+"eff": "根据本局魔产量提升受到至少3种法术影响的建筑产能"
+},
+{
+"col": "CE",
+"row": 4,
+"code": "S5375",
+"name": "Invocation\n祈祷",
+"fac": "混乱",
+"req": "",
+"eff": "根据本R单个法术活跃时间最小值提升魔上限"
+},
+{
+"col": "CG",
+"row": 4,
+"code": "S5625",
+"name": "Leylines\n地脉",
+"fac": "",
+"req": "",
+"eff": "根据助手数量提升回魔"
+},
+{
+"col": "CI",
+"row": 4,
+"code": "S5875",
+"name": "Mirror\n镜像",
+"fac": "",
+"req": "",
+"eff": "根据本局施法次数提升助手数量"
+},
+{
+"col": "CM",
+"row": 4,
+"code": "S10875",
+"name": "Encompass\n萦绕",
+"fac": "",
+"req": "",
+"eff": "根据本R内单局魔上限最大值增加魔上限"
+},
+{
+"col": "CO",
+"row": 4,
+"code": "S11125",
+"name": "Multiplication\n倍增",
+"fac": "",
+"req": "",
+"eff": "根据本局魔产量提升施法次数结算值"
+},
+{
+"col": "CQ",
+"row": 4,
+"code": "S11375",
+"name": "Concentration\n专注",
+"fac": "",
+"req": "",
+"eff": "根据本局施法次数提升UB产能"
+},
+{
+"col": "CS",
+"row": 4,
+"code": "S11625",
+"name": "Completeness\n终术之仪",
+"fac": "",
+"req": "",
+"eff": "根据已获得成就数提升fc获得率"
+},
+{
+"col": "CU",
+"row": 4,
+"code": "S11875",
+"name": "Arcane Efficiency\n奥术效能",
+"fac": "",
+"req": "",
+"eff": "Holy Light和Fairy Chanting同时活跃时所有法术施法成本-85%"
+},
+{
+"col": "CX",
+"row": 4,
+"code": "S12250",
+"name": "Necrodoomancy\n死灭术",
+"fac": "",
+"req": "",
+"eff": "根据本R不死族使用时间增加R次数结算值"
+},
+{
+"col": "DB",
+"row": 4,
+"code": "S13125",
+"name": "Fantasia\r幻想曲",
+"fac": "",
+"req": "",
+"eff": "根据本局魔产量提升助手数量"
+},
+{
+"col": "DE",
+"row": 4,
+"code": "S13500",
+"name": "Legerdemain\r戏法",
+"fac": "",
+"req": "",
+"eff": "根据本局fc获得量提升魔产量结算值"
+},
+{
+"col": "C",
+"row": 9,
+"code": "C1",
+"name": "Dummy Targets\n人形靶子",
+"fac": "精灵",
+"req": "买下C分支第1个研究点数",
+"eff": "根据本局fc获得量提升Training Ground产能"
+},
+{
+"col": "D",
+"row": 9,
+"code": "C10",
+"name": "Cultivation\n农耕技术",
+"fac": "妖精",
+"req": "本局拥有2500个Enchated Field",
+"eff": "根据Enchanted Field数量提升inn和blacksmith产能（线性，每个Enchanted Field提升固定比例）"
+},
+{
+"col": "E",
+"row": 9,
+"code": "C25",
+"name": "Light Condenser\n聚光器",
+"fac": "天使",
+"req": "本R施法12000次",
+"eff": "根据本局施法次数提升回魔"
+},
+{
+"col": "G",
+"row": 9,
+"code": "C50",
+"name": "Refining\n精炼",
+"fac": "恶魔",
+"req": "使用精灵\n本局fc获得量达到1e9",
+"eff": "根据本局恶魔fc获得量提升Infernal Realm产能"
+},
+{
+"col": "I",
+"row": 9,
+"code": "C80",
+"name": "Apprenticeship\n学徒制",
+"fac": "",
+"req": "本局善良阵营或邪恶阵营建筑总数达到16000",
+"eff": "根据本局善良或邪恶阵营建筑总数提升中立阵营建筑产能"
+},
+{
+"col": "J",
+"row": 9,
+"code": "C105",
+"name": "Woodcraft\n木工技术",
+"fac": "",
+"req": "本局点击25000次",
+"eff": "根据UB数量提升fc获得率"
+},
+{
+"col": "K",
+"row": 9,
+"code": "C120",
+"name": "Socketing\n镶嵌",
+"fac": "",
+"req": "本局点击200000次",
+"eff": "根据当前拥有gem数量提升点击收益"
+},
+{
+"col": "L",
+"row": 9,
+"code": "C135",
+"name": "Reinforcing\n强化",
+"fac": "",
+"req": "使用精灵\n本局点击250000次",
+"eff": "根据本R内点击次数提升所有建筑产能"
+},
+{
+"col": "N",
+"row": 9,
+"code": "C150",
+"name": "Tinkering\n修补",
+"fac": "",
+"req": "E10+C135",
+"eff": "根据各分支研究点数总和提升所有建筑产能"
+},
+{
+"col": "P",
+"row": 9,
+"code": "C175",
+"name": "Gemcutting\n宝石切割",
+"fac": "哥布林",
+"req": "C50+C120",
+"eff": "根据当前建筑总数提升gem产能加成"
+},
+{
+"col": "R",
+"row": 9,
+"code": "C200",
+"name": "Journeymen\n熟练工",
+"fac": "",
+"req": "C80+E50",
+"eff": "根据本R内当前使用种族的使用时间提升UB产能"
+},
+{
+"col": "U",
+"row": 9,
+"code": "C225",
+"name": "Automatons\n机器人",
+"fac": "精灵",
+"req": "C1+A120",
+"eff": "Call To Arms计算建筑数量时Training Ground数量结算值*200"
+},
+{
+"col": "X",
+"row": 9,
+"code": "C250",
+"name": "Magnetism\n磁力",
+"fac": "",
+"req": "C150+W225",
+"eff": "根据本R离线时间（分钟）增加fc获得率；fc获得率*1.5"
+},
+{
+"col": "Y",
+"row": 9,
+"code": "C251",
+"name": "Architecture\n建筑学",
+"fac": "泰坦",
+"req": "解锁泰坦的研究使用权",
+"eff": "根据当前建筑总数提升Olympian Hall产能"
+},
+{
+"col": "AD",
+"row": 9,
+"code": "C300",
+"name": "Weighting\n加权",
+"fac": "德鲁伊",
+"req": "本R施放650次Lightning Strike",
+"eff": "Grand Balance命中Stonehenge Circle时该建筑额外获得固定比例产能加成，根据魔上限提升Grand Balance所有目标建筑产能"
+},
+{
+"col": "AE",
+"row": 9,
+"code": "C305",
+"name": "Golemcraft\n傀儡制造技术",
+"fac": "",
+"req": "泰坦使用时间达到2天（所有R合计）",
+"eff": "根据本R离线时间（小时）增加助手数量"
+},
+{
+"col": "AG",
+"row": 9,
+"code": "C330",
+"name": "Overload\n过载",
+"fac": "",
+"req": "S250+W225",
+"eff": "根据当前启用研究数量提升回魔"
+},
+{
+"col": "AH",
+"row": 9,
+"code": "C340",
+"name": "Gem Duster\n宝石拂尘",
+"fac": "",
+"req": "本R施放800次Gem Grinder\nE260+E290",
+"eff": "根据已获得ruby数量提升gem产能加成（线性，每个+10%，该加成不受Ascension产能惩罚）"
+},
+{
+"col": "AJ",
+"row": 9,
+"code": "C375",
+"name": "Lightning Rod\n闪电杖",
+"fac": "泰坦",
+"req": "S300+C330",
+"eff": "每次施放lightning strike必定额外命中Olympian Hall"
+},
+{
+"col": "AK",
+"row": 9,
+"code": "C400",
+"name": "Gravitation\n万有引力",
+"fac": "",
+"req": "C250+C300",
+"eff": "根据本局fc获得量增加fc获得率；fc获得率*2"
+},
+{
+"col": "AL",
+"row": 9,
+"code": "C405",
+"name": "Metallurgy\n冶金术",
+"fac": "矮人",
+"req": "使用善良阵营+矮人\n解锁矮人的研究使用权",
+"eff": "根据Dwarven Forge的数量提升该建筑自身产能"
+},
+{
+"col": "AO",
+"row": 9,
+"code": "C460",
+"name": "Distribution\n配送",
+"fac": "",
+"req": "本局点击1e6次",
+"eff": "根据本局点击次数提升非UB建筑产能"
+},
+{
+"col": "AR",
+"row": 9,
+"code": "C500",
+"name": "Minecrafting\n采矿",
+"fac": "",
+"req": "使用善良阵营+矮人\n本R考古3250次",
+"eff": "根据当前考古次数（不包括考古重置部分）提升gem产能加成"
+},
+{
+"col": "AS",
+"row": 9,
+"code": "C520",
+"name": "Blacksmithing\n铁匠铺",
+"fac": "矮人",
+"req": "C135+C405",
+"eff": "根据Dwarven Forge数量提升Diamond Pickaxe对点击产能收益和点击fc获得率加成"
+},
+{
+"col": "AW",
+"row": 9,
+"code": "C590",
+"name": "Alloys\n合金",
+"fac": "精灵+矮人",
+"req": "使用精灵+矮人\n本局拥有200个矮人RE\nA105+C520",
+"eff": "根据当前fc获得率提升点击收益；赋予10次/秒的自动点击"
+},
+{
+"col": "BE",
+"row": 9,
+"code": "C1300",
+"name": "Scintillation\n闪光",
+"fac": "龙族",
+"req": "使用中立阵营+龙族\n本局拥有30000魔上限",
+"eff": "根据魔上限和gem产能加成提升所有建筑的产能，gem产能加成越少，该研究加成越高"
+},
+{
+"col": "BF",
+"row": 9,
+"code": "C1325",
+"name": "Plasmation\n等离子体",
+"fac": "",
+"req": "本局魔产量达到5e7",
+"eff": "根据本局魔产量增加助手数量"
+},
+{
+"col": "BK",
+"row": 9,
+"code": "C1500",
+"name": "Gargantuaness\n巨大化",
+"fac": "泰坦+龙族",
+"req": "使用泰坦+龙族\n本局拥有2500个RE\nE460+D1275",
+"eff": "根据本R中立阵营使用时间提升所有建筑产能"
+},
+{
+"col": "BQ",
+"row": 9,
+"code": "C3000",
+"name": "Customizing\n订制",
+"fac": "佣兵",
+"req": "使用佣兵\n本R考古次数达到9000",
+"eff": "根据已获得遗物数量提升所有建筑产能"
+},
+{
+"col": "BS",
+"row": 9,
+"code": "C3100",
+"name": "Engineering\n工程学",
+"fac": "",
+"req": "佣兵使用时间达到12天（所有R合计）",
+"eff": "根据本R内点击总数增加魔上限"
+},
+{
+"col": "CC",
+"row": 9,
+"code": "C5125",
+"name": "Restauration\n修缮",
+"fac": "",
+"req": "",
+"eff": "根据助手数量提升所有建筑产能"
+},
+{
+"col": "CE",
+"row": 9,
+"code": "C5375",
+"name": "Manufacture\n批量生产",
+"fac": "中立",
+"req": "",
+"eff": "根据本局点击次数提升fc获得率"
+},
+{
+"col": "CG",
+"row": 9,
+"code": "C5625",
+"name": "Discorvey\n发现",
+"fac": "",
+"req": "",
+"eff": "根据本局考古挖掘和重置次数增加已获得成就和遗物数量结算值"
+},
+{
+"col": "CI",
+"row": 9,
+"code": "C5875",
+"name": "Genuineness\n纯正",
+"fac": "",
+"req": "",
+"eff": "根据所有种族Lineage等级中最小值提升魔上限"
+},
+{
+"col": "CM",
+"row": 9,
+"code": "C10875",
+"name": "Masterpiece\n杰作",
+"fac": "",
+"req": "",
+"eff": "根据本R考古重置次数提升fc获得率"
+},
+{
+"col": "CO",
+"row": 9,
+"code": "C11125",
+"name": "Installation\n设备",
+"fac": "",
+"req": "",
+"eff": "根据各建筑自身数量提升自身产能"
+},
+{
+"col": "CQ",
+"row": 9,
+"code": "C11375",
+"name": "Exhibition\n博览会",
+"fac": "",
+"req": "",
+"eff": "根据本局建筑总数提升已获得成就数量结算值"
+},
+{
+"col": "CS",
+"row": 9,
+"code": "C11625",
+"name": "Motus Perpetuum\n永动机",
+"fac": "",
+"req": "",
+"eff": "赋予自动点击，每秒自动点击次数根据本R点击次数计算"
+},
+{
+"col": "CU",
+"row": 9,
+"code": "C11875",
+"name": "Plating\n电镀",
+"fac": "",
+"req": "",
+"eff": "Call To Arms计算加成时，根据本R内Moon Blessing活跃时间增加所有UB数量结算值"
+},
+{
+"col": "CX",
+"row": 9,
+"code": "C12250",
+"name": "Compression\n压缩",
+"fac": "",
+"req": "",
+"eff": "Brainwave活跃时随本次施法时间（包括headstart）增长增加fc获得率"
+},
+{
+"col": "DB",
+"row": 9,
+"code": "C13125",
+"name": "Pottery\r陶艺",
+"fac": "",
+"req": "",
+"eff": "根据当前活跃法术数量提升fc获得率"
+},
+{
+"col": "DE",
+"row": 9,
+"code": "C13500",
+"name": "Assembly Line\r流水线",
+"fac": "",
+"req": "",
+"eff": "根据当前助手数量提升非UB建筑产能"
+},
+{
+"col": "C",
+"row": 14,
+"code": "D1",
+"name": "Blessing\n祈福",
+"fac": "天使",
+"req": "买下D分支第1个研究点数",
+"eff": "根据本R内至少1个法术活跃的时间段提升Heaven's Domain产能"
+},
+{
+"col": "D",
+"row": 14,
+"code": "D10",
+"name": "Inflame\n怒火",
+"fac": "恶魔",
+"req": "本局拥有2000个Infernal Realm",
+"eff": "根据Infernal Realm数量提升其余建筑产能（线性，每个Infernal Realm提升固定比例）"
+},
+{
+"col": "E",
+"row": 14,
+"code": "D25",
+"name": "Cursing\n诅咒",
+"fac": "不死族",
+"req": "使用不死族\n本局离线时间达到8小时",
+"eff": "根据离线产能加成提升所有建筑产能"
+},
+{
+"col": "G",
+"row": 14,
+"code": "D50",
+"name": "Hallowing\n神圣化",
+"fac": "精灵",
+"req": "使用天使\n本局拥有15000个善良阵营建筑",
+"eff": "根据Training Ground数量提升fc获得率"
+},
+{
+"col": "H",
+"row": 14,
+"code": "D55",
+"name": "Transfixion\n贯通",
+"fac": "",
+"req": "本局魔产量达到3e6",
+"eff": "根据本局施法次数提升点击收益"
+},
+{
+"col": "L",
+"row": 14,
+"code": "D135",
+"name": "Illumination\n启示",
+"fac": "",
+"req": "使用天使\n本局回魔达到250/秒",
+"eff": "根据当前gem数量提升回魔"
+},
+{
+"col": "N",
+"row": 14,
+"code": "D150",
+"name": "Retribution\n报应",
+"fac": "",
+"req": "W120+D55",
+"eff": "根据各研究分支研究点数总和提升fc获得率"
+},
+{
+"col": "P",
+"row": 14,
+"code": "D175",
+"name": "Resurrection\n复兴",
+"fac": "天使",
+"req": "D1+A55",
+"eff": "根据本R内God's Hand活跃时间增加助手数量"
+},
+{
+"col": "R",
+"row": 14,
+"code": "D200",
+"name": "Transcendence\n超凡",
+"fac": "",
+"req": "D175+D135",
+"eff": "所有法术施法成本-20%，持续时间+20%"
+},
+{
+"col": "S",
+"row": 14,
+"code": "D205",
+"name": "Communion\n圣餐仪式",
+"fac": "善良",
+"req": "本R施放777次Holy Light\nC175+D135",
+"eff": "Holy Light持续时间+300秒"
+},
+{
+"col": "U",
+"row": 14,
+"code": "D225",
+"name": "Weather Control\n气象控制",
+"fac": "妖精",
+"req": "C25+S30",
+"eff": "根据魔上限提升Enchanted Field的产能"
+},
+{
+"col": "W",
+"row": 14,
+"code": "D245",
+"name": "Sanctification\n灵化",
+"fac": "",
+"req": "本R施放500次Spiritual Surge\nA175+S225",
+"eff": "根据非UB建筑数量提升UB产能"
+},
+{
+"col": "X",
+"row": 14,
+"code": "D250",
+"name": "Demonology\n鬼神学",
+"fac": "",
+"req": "D200+S150",
+"eff": "根据本局内fc获得量增加助手数量"
+},
+{
+"col": "Z",
+"row": 14,
+"code": "D260",
+"name": "Mutation\n突变",
+"fac": "无面者",
+"req": "使用无面者\n本局拥有3000个Sunken City",
+"eff": "根据Sunken City数量提升其余建筑产能（线性，每个Sunken City提升固定比例）"
+},
+{
+"col": "AB",
+"row": 14,
+"code": "D275",
+"name": "Meditation\n冥想",
+"fac": "德鲁伊",
+"req": "使用德鲁伊\n本局拥有10000魔上限",
+"eff": "根据魔上限提升回魔，离线施法次数结算值*4"
+},
+{
+"col": "AC",
+"row": 14,
+"code": "D290",
+"name": "Transubstantiation\n化质",
+"fac": "",
+"req": "拥有遗物Rough Stone",
+"eff": "根据拥有遗物数量提升魔上限"
+},
+{
+"col": "AF",
+"row": 14,
+"code": "D320",
+"name": "Deliverance\n解脱",
+"fac": "",
+"req": "本局回魔达到350/秒",
+"eff": "根据回魔提升助手产能"
+},
+{
+"col": "AG",
+"row": 14,
+"code": "D330",
+"name": "Eternity\n永恒",
+"fac": "",
+"req": "E275+D320",
+"eff": "所有种族法术持续时间*2"
+},
+{
+"col": "AI",
+"row": 14,
+"code": "D350",
+"name": "Descent\n降临",
+"fac": "泰坦",
+"req": "W250+W330",
+"eff": "根据Olympian Hall数量增加助手数量"
+},
+{
+"col": "AK",
+"row": 14,
+"code": "D400",
+"name": "Miracle\n神迹",
+"fac": "",
+"req": "D205+D290",
+"eff": "每2分钟随机选择1个建筑按固定比例提升其产能，离线时所有建筑产能提升固定比例（低于前者）"
+},
+{
+"col": "AN",
+"row": 14,
+"code": "D435",
+"name": "Devotion\n忠诚",
+"fac": "矮人",
+"req": "本局Diamond Pickaxe活跃时间达到4小时",
+"eff": "根据本局施法次数提升善良阵营建筑产能"
+},
+{
+"col": "AP",
+"row": 14,
+"code": "D480",
+"name": "Mercy\n仁慈",
+"fac": "",
+"req": "本R内善良、邪恶、中立3个阵营各使用至少12小时",
+"eff": "根据本R内善良、中立、邪恶三阵营使用时间最大值与最小值提升所有建筑产能，两值差距越小加成越高"
+},
+{
+"col": "AT",
+"row": 14,
+"code": "D525",
+"name": "Purity\n纯洁",
+"fac": "善良",
+"req": "本R善良阵营使用时间达到36小时\nD205+D435",
+"eff": "根据本局内所有种族法术施法次数总和提升Holy Light加成效果"
+},
+{
+"col": "AV",
+"row": 14,
+"code": "D560",
+"name": "Ritualism\n仪礼主义",
+"fac": "",
+"req": "使用卓尔\nS225+S500",
+"eff": "根据已获得成就数量提升回魔"
+},
+{
+"col": "AW",
+"row": 14,
+"code": "D590",
+"name": "Dispelling\n驱魔",
+"fac": "天使+矮人",
+"req": "使用天使+矮人\n本局拥有200个矮人RE\nW320+A480",
+"eff": "根据当前回魔提升UB产能"
+},
+{
+"col": "AZ",
+"row": 14,
+"code": "D1125",
+"name": "Oblation\n献祭",
+"fac": "龙族",
+"req": "使用中立阵营+龙族\n本局买下Wyrm's Den",
+"eff": "根据当前fc获得率提升Wyrm's Den产能"
+},
+{
+"col": "BD",
+"row": 14,
+"code": "D1275",
+"name": "Solemnity\n庄严",
+"fac": "",
+"req": "本局建筑总数达到80000",
+"eff": "根据各建筑自身数量提升各自产能（线性，每个建筑提升固定比例）"
+},
+{
+"col": "BG",
+"row": 14,
+"code": "D1375",
+"name": "Soulrending\n灵魂撕裂",
+"fac": "",
+"req": "善良阵营使用时间达到7天（所有R合计）",
+"eff": "Spiritual Surge计算Ascension次数时该次数结算值+50%"
+},
+{
+"col": "BM",
+"row": 14,
+"code": "D2775",
+"name": "Intervention\n干涉",
+"fac": "佣兵",
+"req": "解锁佣兵研究使用权",
+"eff": "根据所有R合计佣兵使用时间提升UB产能"
+},
+{
+"col": "BX",
+"row": 14,
+"code": "D3350",
+"name": "Vampirism\n吸血鬼",
+"fac": "",
+"req": "本局离线产能加成达到1e26%\nD2775+W3150",
+"eff": "根据当前离线产能加成提升助手数量"
+},
+{
+"col": "CC",
+"row": 14,
+"code": "D5125",
+"name": "Selection\n抉择",
+"fac": "",
+"req": "",
+"eff": "根据本局点击次数提升所有UB产能"
+},
+{
+"col": "CE",
+"row": 14,
+"code": "D5375",
+"name": "Zealotry\n狂热",
+"fac": "善良",
+"req": "",
+"eff": "根据当前拥有RE数量提升回魔"
+},
+{
+"col": "CG",
+"row": 14,
+"code": "D5625",
+"name": "Prophecy\n预言",
+"fac": "",
+"req": "",
+"eff": "根据本R所有种族使用时间最小值提升当前所用种族对应set、高级遗产效果以及当前所用Lineage等级"
+},
+{
+"col": "CI",
+"row": 14,
+"code": "D5875",
+"name": "Birthright\n继承",
+"fac": "",
+"req": "",
+"eff": "给予与当前使用种族完全对立的种族的血统效果"
+},
+{
+"col": "CM",
+"row": 14,
+"code": "D10875",
+"name": "Scriptures\n圣典",
+"fac": "",
+"req": "",
+"eff": "根据本R各法术对应阵营/种族使用时间延长各自持续时间，Call To Arms和Spiritual Surge根据本R时间计算该加成"
+},
+{
+"col": "CO",
+"row": 14,
+"code": "D11125",
+"name": "Viriditas\n绿愈之力",
+"fac": "",
+"req": "",
+"eff": "根据拥有遗物数量提升lineage等级结算值"
+},
+{
+"col": "CQ",
+"row": 14,
+"code": "D11375",
+"name": "Rigor\n清规戒律",
+"fac": "",
+"req": "",
+"eff": "R次数结算值*2"
+},
+{
+"col": "CS",
+"row": 14,
+"code": "D11625",
+"name": "Compassion\n怜悯",
+"fac": "",
+"req": "",
+"eff": "根据本R内单个阵营使用时间最小值提升非UB建筑产能"
+},
+{
+"col": "CU",
+"row": 14,
+"code": "D11875",
+"name": "Virtues\n美德",
+"fac": "",
+"req": "",
+"eff": "根据本R内Mountain Palace数量最大值提升Tax Collection作用时间范围"
+},
+{
+"col": "CX",
+"row": 14,
+"code": "D12250",
+"name": "Enochian\n以诺基语（天使语）",
+"fac": "",
+"req": "",
+"eff": "根据本R内God's Hand活跃时间提升天使fc获得量"
+},
+{
+"col": "DB",
+"row": 14,
+"code": "D13125",
+"name": "Asceticism\r禁欲主义",
+"fac": "",
+"req": "",
+"eff": "计算建筑数量时，farm、inn、blacksmith、hall of legend亦视为善良/邪恶阵营建筑，非UB建筑亦视为UB（只影响数量结算值，不改变建筑属性）"
+},
+{
+"col": "DE",
+"row": 14,
+"code": "D13500",
+"name": "Afterlife\r来世",
+"fac": "",
+"req": "",
+"eff": "根据本R内回魔最大值提升回魔"
+},
+{
+"col": "C",
+"row": 19,
+"code": "E1",
+"name": "Coinage\n货币制度",
+"fac": "哥布林",
+"req": "买下E分支第1个研究点数",
+"eff": "根据当前建筑总数提升Goblin Bank产能"
+},
+{
+"col": "D",
+"row": 19,
+"code": "E10",
+"name": "Recycling\n回收",
+"fac": "不死族",
+"req": "本局拥有2000个Undercity",
+"eff": "根据Undercity数量提升其余建筑产能（线性，每个Undercity提升固定比例）"
+},
+{
+"col": "E",
+"row": 19,
+"code": "E25",
+"name": "Commerce\n贸易",
+"fac": "精灵",
+"req": "本局获得1e8个fc",
+"eff": "根据当前拥有RE数量增加助手数量"
+},
+{
+"col": "F",
+"row": 19,
+"code": "E30",
+"name": "Diplomacy\n外交策略",
+"fac": "",
+"req": "本局拥有1000个RE",
+"eff": "根据本局时间（分钟）提升RE产能加成和fc获得率"
+},
+{
+"col": "G",
+"row": 19,
+"code": "E50",
+"name": "Bartering\n以物易物",
+"fac": "妖精",
+"req": "使用哥布林\n本局拥有1000个RE",
+"eff": "降低Enchanted Field价格上涨倍率"
+},
+{
+"col": "I",
+"row": 19,
+"code": "E80",
+"name": "Common Business\n公共事业",
+"fac": "",
+"req": "本局拥有9000个中立阵营建筑",
+"eff": "根据中立阵营建筑数量提升善良/邪恶阵营建筑产能"
+},
+{
+"col": "L",
+"row": 19,
+"code": "E135",
+"name": "Bribing\n贿赂",
+"fac": "",
+"req": "使用哥布林\n本局拥有28000个建筑",
+"eff": "降低UB价格上涨倍率"
+},
+{
+"col": "M",
+"row": 19,
+"code": "E145",
+"name": "Royal Demand\n王室需求",
+"fac": "",
+"req": "本R施放50000次Tax Collection \nC10+C105",
+"eff": "TC作用时间范围增加30秒"
+},
+{
+"col": "N",
+"row": 19,
+"code": "E150",
+"name": "Investment\n投资",
+"fac": "",
+"req": "E135+E25",
+"eff": "根据当前拥有钱币数量提升所有建筑产能"
+},
+{
+"col": "R",
+"row": 19,
+"code": "E200",
+"name": "Acquisition\n并购",
+"fac": "",
+"req": "E150+E80",
+"eff": "根据已解锁成就数量占所有成就数量的百分比提升所有建筑产能"
+},
+{
+"col": "U",
+"row": 19,
+"code": "E225",
+"name": "Forgery\n伪造",
+"fac": "哥布林",
+"req": "E1+A50",
+"eff": "根据Goblin Bank数量提升邪恶阵营建筑产能"
+},
+{
+"col": "V",
+"row": 19,
+"code": "E230",
+"name": "Coercion\n胁迫",
+"fac": "恶魔",
+"req": "W50+E30",
+"eff": "根据本R内邪恶阵营使用时间增加已获得成就数量结算值"
+},
+{
+"col": "X",
+"row": 19,
+"code": "E250",
+"name": "Trade Routes\n商路",
+"fac": "",
+"req": "E225+E145",
+"eff": "根据当前拥有RE数量增加回魔"
+},
+{
+"col": "Z",
+"row": 19,
+"code": "E260",
+"name": "Sifting\n筛选",
+"fac": "德鲁伊",
+"req": "使用德鲁伊\n本局拥有3000个Stonehenge Circle",
+"eff": "根据当前Stonehenge Circle数量增加其余建筑产能"
+},
+{
+"col": "AB",
+"row": 19,
+"code": "E275",
+"name": "Offering\n供给",
+"fac": "泰坦",
+"req": "使用泰坦\n本局拥有1250个RE",
+"eff": "根据RE产能加成增加回魔"
+},
+{
+"col": "AC",
+"row": 19,
+"code": "E290",
+"name": "Surveyorship\n测量",
+"fac": "",
+"req": "拥有7个遗物",
+"eff": "降低考古价格上涨倍率"
+},
+{
+"col": "AF",
+"row": 19,
+"code": "E320",
+"name": "Smuggling\n走私",
+"fac": "",
+"req": "abdication后的gem数量至少是abdication前的2倍",
+"eff": "根据UB数量提升fc获得率，FC获得率*2"
+},
+{
+"col": "AG",
+"row": 19,
+"code": "E330",
+"name": "Collection\n收藏",
+"fac": "",
+"req": "E200+E225",
+"eff": "根据已获得遗物数量提升所有建筑产能"
+},
+{
+"col": "AI",
+"row": 19,
+"code": "E350",
+"name": "Repurpose\n再利用",
+"fac": "无面者",
+"req": "使用无面者\nC200+A330",
+"eff": "根据R次数提升所有建筑产能"
+},
+{
+"col": "AK",
+"row": 19,
+"code": "E400",
+"name": "Conversion\n兑换",
+"fac": "",
+"req": "A250+E350",
+"eff": "根据当前拥有RE产能加成增加gem产能加成"
+},
+{
+"col": "AM",
+"row": 19,
+"code": "E410",
+"name": "Marketing\n市场营销",
+"fac": "矮人",
+"req": "本局拥有5000个Dwarven Forge",
+"eff": "根据当前Dwarven Forge数量提升其余建筑产能（线性，每个Dwarven Forge提升固定比例）"
+},
+{
+"col": "AO",
+"row": 19,
+"code": "E460",
+"name": "Inflation\n通货膨胀",
+"fac": "",
+"req": "本局fc获得量达到1e11",
+"eff": "根据本局fc获得量提升RE产能加成"
+},
+{
+"col": "AP",
+"row": 19,
+"code": "E480",
+"name": "Undercutting\n贱卖",
+"fac": "",
+"req": "本局魔上限达到15000",
+"eff": "根据本R内施法次数提升非UB建筑产能"
+},
+{
+"col": "AQ",
+"row": 19,
+"code": "E495",
+"name": "Jewellery\n首饰",
+"fac": "卓尔",
+"req": "使用善良阵营+矮人\n本局拥有12000个UB",
+"eff": "根据Spider Sanctuary数量提升gem产能加成"
+},
+{
+"col": "AW",
+"row": 19,
+"code": "E590",
+"name": "Slavery\n奴役",
+"fac": "哥布林+卓尔",
+"req": "使用哥布林+卓尔\n本局拥有200个卓尔RE\nC225+E480",
+"eff": "根据非UB建筑总数增加助手数量"
+},
+{
+"col": "BC",
+"row": 19,
+"code": "E1225",
+"name": "Hoarding\n贮藏",
+"fac": "龙族",
+"req": "本局获得1e12个fc",
+"eff": "解除1次Ascension对RE的产能惩罚"
+},
+{
+"col": "BF",
+"row": 19,
+"code": "E1325",
+"name": "Intimidation\n恐吓",
+"fac": "",
+"req": "本局拥有18000个UB",
+"eff": "降低RE价格上涨倍率"
+},
+{
+"col": "BI",
+"row": 19,
+"code": "E1425",
+"name": "Rarity\n珍品",
+"fac": "中立",
+"req": "所有R泰坦、德鲁伊、无面者各自使用时间达到5天\nA545+C1300",
+"eff": "根据拥有遗物数量提升Gem Grinder加成效果"
+},
+{
+"col": "BV",
+"row": 19,
+"code": "E3250",
+"name": "Hirelings\n雇员",
+"fac": "",
+"req": "E1325+S2875",
+"eff": "根据当前拥有钱币数增加助手数量"
+},
+{
+"col": "BW",
+"row": 19,
+"code": "E3300",
+"name": "Estates\n不动产",
+"fac": "佣兵",
+"req": "本局拥有45000个UB\nE1225+A2950",
+"eff": "获得使用阵营所有种族的UB"
+},
+{
+"col": "CC",
+"row": 19,
+"code": "E5125",
+"name": "Decentralization\n地方分权",
+"fac": "",
+"req": "",
+"eff": "根据各建筑自身数量和建筑层级提升各自产能，建筑层级越低加成越高"
+},
+{
+"col": "CE",
+"row": 19,
+"code": "E5375",
+"name": "Whipround\n众筹",
+"fac": "平衡",
+"req": "",
+"eff": "根据本局TC施法次数提升RE产能加成"
+},
+{
+"col": "CG",
+"row": 19,
+"code": "E5625",
+"name": "Loan Sharking\n高利贷",
+"fac": "",
+"req": "",
+"eff": "根据当前拥有钱币数量增加TC作用时间范围"
+},
+{
+"col": "CI",
+"row": 19,
+"code": "E5875",
+"name": "Prosperity\n丰裕",
+"fac": "",
+"req": "",
+"eff": "根据本局内单个种族法术活跃时间最小值提升fc获得率"
+},
+{
+"col": "CM",
+"row": 19,
+"code": "E10875",
+"name": "Rigmarole\n冗余手续",
+"fac": "",
+"req": "",
+"eff": "根据本R单局助手数量最大值增加RE产能加成"
+},
+{
+"col": "CO",
+"row": 19,
+"code": "E11125",
+"name": "Grey Friday\n灰色星期五",
+"fac": "",
+"req": "",
+"eff": "降低所有建筑价格上涨倍率"
+},
+{
+"col": "CQ",
+"row": 19,
+"code": "E11375",
+"name": "Heist\n抢劫",
+"fac": "",
+"req": "",
+"eff": "根据当前助手数量增加gem产能加成"
+},
+{
+"col": "CS",
+"row": 19,
+"code": "E11625",
+"name": "Surplus\n盈余",
+"fac": "",
+"req": "",
+"eff": "根据当前拥有gem数量提升助手数量"
+},
+{
+"col": "CU",
+"row": 19,
+"code": "E11875",
+"name": "Overworking\n过度劳动",
+"fac": "",
+"req": "",
+"eff": "Goblin's Greed活跃时每秒额外施放Tax Collection，施放次数由助手数量决定"
+},
+{
+"col": "CX",
+"row": 19,
+"code": "E12250",
+"name": "Oilery\n榨油厂",
+"fac": "",
+"req": "",
+"eff": "Lightning Strike和Gem Grinder同时活跃时，根据本局单个法术持续时间最大值提升gem产能加成"
+},
+{
+"col": "DB",
+"row": 19,
+"code": "E13125",
+"name": "Discount\r折扣",
+"fac": "",
+"req": "",
+"eff": "降低建筑、RE、考古价格上涨倍率，所有法术施法成本-50%"
+},
+{
+"col": "DE",
+"row": 19,
+"code": "E13500",
+"name": "Recession\r衰退",
+"fac": "",
+"req": "",
+"eff": "赋予与当前使用种族同阵营（善良邪恶中立秩序混乱平衡，单个阵营相同即生效）所有种族lineage基础效果，但除自主选用lineage外其余所有lineage等级降至25，相应lineage基础效果同步下调"
+},
+{
+"col": "C",
+"row": 24,
+"code": "A1",
+"name": "Plague\n瘟疫",
+"fac": "不死族",
+"req": "买下A分支第1个研究点数",
+"eff": "根据助手数量提升Undercity产能（线性，每个助手增加固定比例）"
+},
+{
+"col": "D",
+"row": 24,
+"code": "A10",
+"name": "Transmutation\n变换",
+"fac": "哥布林",
+"req": "本局拥有2250个Goblin Bank",
+"eff": "根据Goblin Bank数量提升其余建筑产能"
+},
+{
+"col": "E",
+"row": 24,
+"code": "A25",
+"name": "Deflagration\n爆燃",
+"fac": "恶魔",
+"req": "本R施放666次Hellfire Blast",
+"eff": "Hellfire Blast持续时间-16秒，其施法成本-200，其加成效果提升固定比例"
+},
+{
+"col": "F",
+"row": 24,
+"code": "A30",
+"name": "Delayed Reaction\n滞后反应",
+"fac": "",
+"req": "本R施放750次Fairy Chanting",
+"eff": "根据Enchanted Field、inn、blacksmith数量总和提升Fairy Chanting持续时间；根据本局Fairy Chanting活跃时间提升自身加成效果"
+},
+{
+"col": "G",
+"row": 24,
+"code": "A50",
+"name": "Gilding\n镀金",
+"fac": "天使",
+"req": "使用不死族\n本局回魔达到120点/秒",
+"eff": "根据Heaven's Domain数量增加回魔"
+},
+{
+"col": "H",
+"row": 24,
+"code": "A55",
+"name": "Refraction\n折射",
+"fac": "",
+"req": "本局施法25000次",
+"eff": "根据本R施法总次数提升离线产能加成"
+},
+{
+"col": "J",
+"row": 24,
+"code": "A105",
+"name": "Fusion\n熔合",
+"fac": "",
+"req": "本局拥有2750个Blacksmith",
+"eff": "根据本局fc获得量提升所有建筑产能"
+},
+{
+"col": "K",
+"row": 24,
+"code": "A120",
+"name": "Vivification\n活化",
+"fac": "",
+"req": "本局魔上限达到6500",
+"eff": "根据魔上限增加助手数量"
+},
+{
+"col": "L",
+"row": 24,
+"code": "A135",
+"name": "Decay\n朽坏",
+"fac": "",
+"req": "使用不死族\n本R时间达到1天",
+"eff": "根据本R时间提升所有建筑产能"
+},
+{
+"col": "N",
+"row": 24,
+"code": "A150",
+"name": "Explosives\n爆炸物",
+"fac": "",
+"req": "A25+A30",
+"eff": "施放任意法术时，所有建筑中产能最高者获得固定比例产能加成持续20s，在此期间若施放其他法术，则持续时间重置"
+},
+{
+"col": "P",
+"row": 24,
+"code": "A175",
+"name": "Soulweaving\n编织灵魂",
+"fac": "不死族",
+"req": "D25+C135",
+"eff": "根据R次数提升所有建筑产能"
+},
+{
+"col": "R",
+"row": 24,
+"code": "A200",
+"name": "Corrosion\n腐蚀",
+"fac": "",
+"req": "A1+A135",
+"eff": "根据本局时间提升点击收益"
+},
+{
+"col": "X",
+"row": 24,
+"code": "A250",
+"name": "Philosopher's Stone\n贤者之石",
+"fac": "",
+"req": "A10+S175",
+"eff": "根据启用研究数量提升gem产能加成"
+},
+{
+"col": "Y",
+"row": 24,
+"code": "A251",
+"name": "Infusion\n灌注",
+"fac": "德鲁伊·",
+"req": "解锁德鲁伊的研究使用权",
+"eff": "根据本局魔产量增加Stonehenge Circle产能"
+},
+{
+"col": "AA",
+"row": 24,
+"code": "A270",
+"name": "Synthesis\n合成",
+"fac": "",
+"req": "本局获得2e10个fc",
+"eff": "根据本局fc获得量延长所有法术持续时间"
+},
+{
+"col": "AD",
+"row": 24,
+"code": "A300",
+"name": "Creeping\n缓慢反应",
+"fac": "无面者",
+"req": "使用德鲁伊\n本局魔产量达到5e6",
+"eff": "根据本局魔产量增加回魔"
+},
+{
+"col": "AE",
+"row": 24,
+"code": "A305",
+"name": "Engraving\n刻蚀",
+"fac": "",
+"req": "德鲁伊使用时间达到2天（所有R合计）",
+"eff": "根据本局施法次数提升fc获得率，fc获得率*2"
+},
+{
+"col": "AG",
+"row": 24,
+"code": "A330",
+"name": "Adaptation\n适应",
+"fac": "",
+"req": "D260+D275",
+"eff": "根据所有R合计除当前使用基础种族外其他基础种族的使用时间提升所有建筑产能"
+},
+{
+"col": "AJ",
+"row": 24,
+"code": "A375",
+"name": "Transfusion\n渗透",
+"fac": "德鲁伊",
+"req": "A251+A305",
+"eff": "根据本局魔产量增加助手数量"
+},
+{
+"col": "AK",
+"row": 24,
+"code": "A400",
+"name": "Bloodspring\n血泉",
+"fac": "任意非佣兵种族",
+"req": "S251+A375",
+"eff": "获得当前使用种族对应血统效果，Bloodstream计算血统使用时间时加入该血统的部分"
+},
+{
+"col": "AM",
+"row": 24,
+"code": "A410",
+"name": "Poisons\n毒药",
+"fac": "卓尔",
+"req": "本局拥有4000个Spider Sanctuary",
+"eff": "根据Spider Sanctuary数量提升其余建筑产能"
+},
+{
+"col": "AP",
+"row": 24,
+"code": "A480",
+"name": "Waste\n废料",
+"fac": "",
+"req": "本局拥有2000个RE",
+"eff": "根据当前拥有RE数量增加离线产能加成"
+},
+{
+"col": "AQ",
+"row": 24,
+"code": "A495",
+"name": "Elixirs\n长生药",
+"fac": "矮人",
+"req": "使用邪恶阵营+卓尔\n本局拥有500个基础助手",
+"eff": "根据启用研究数量提升助手产能"
+},
+{
+"col": "AU",
+"row": 24,
+"code": "A545",
+"name": "Mineralogy\n矿物学",
+"fac": "矮人",
+"req": "获得700个成就",
+"eff": "根据gem数量提升回魔"
+},
+{
+"col": "AW",
+"row": 24,
+"code": "A590",
+"name": "Hexing\n施法",
+"fac": "不死族+卓尔",
+"req": "使用不死族+卓尔\n本局拥有200个卓尔RE\nD25+A410",
+"eff": "根据本局离线时间占本局总时间的百分比和本局魔产量提升所有建筑产能"
+},
+{
+"col": "BB",
+"row": 24,
+"code": "A1200",
+"name": "Melting\n融化",
+"fac": "龙族",
+"req": "使用中立阵营+龙族\n本局拥有5000个Wyrm’s Den",
+"eff": "根据Wyem's Den数量提升其余建筑产能（线性，每个Wyem's Den提升固定比例）"
+},
+{
+"col": "BF",
+"row": 24,
+"code": "A1325",
+"name": "Calefaction\n地热",
+"fac": "",
+"req": "本R考古4500次",
+"eff": "根据考古次数（不包括考古重置部分）提升回魔"
+},
+{
+"col": "BK",
+"row": 24,
+"code": "A1500",
+"name": "Sublimation\n升华",
+"fac": "德鲁伊+龙族",
+"req": "使用德鲁伊+龙族\n本局Grand Balance活跃时间达到6小时\nD590+A1325",
+"eff": "根据UB数量提升fc获得率，fc获得率*3.5"
+},
+{
+"col": "BP",
+"row": 24,
+"code": "A2950",
+"name": "Combination\n聚合物",
+"fac": "佣兵",
+"req": "所有Lineage等级达到15级",
+"eff": "额外获得1个血统及其Lineage的基础效果"
+},
+{
+"col": "BY",
+"row": 24,
+"code": "A3400",
+"name": "Chemistry\n化学",
+"fac": "",
+"req": "本局获得1e30个fc\nC3000+S3200",
+"eff": "根据所有种族Lineage等级总和提升fc获得率，fc获得率*4"
+},
+{
+"col": "CC",
+"row": 24,
+"code": "A5125",
+"name": "Putrefaction\n腐化",
+"fac": "",
+"req": "",
+"eff": "根据本R内单局游戏时间最大值（不包括本局）提升所有非UB建筑产能"
+},
+{
+"col": "CE",
+"row": 24,
+"code": "A5375",
+"name": "Albedo\n反射",
+"fac": "秩序",
+"req": "",
+"eff": "根据本局施法次数提升所有法术持续时间"
+},
+{
+"col": "CG",
+"row": 24,
+"code": "A5625",
+"name": "Reduction\n折扣",
+"fac": "",
+"req": "",
+"eff": "根据各法术自身持续时间和初始持续时间降低各自施法成本"
+},
+{
+"col": "CI",
+"row": 24,
+"code": "A5875",
+"name": "Equivalence\n等价",
+"fac": "",
+"req": "",
+"eff": "根据本局fc获得量提升RE产能加成"
+},
+{
+"col": "CM",
+"row": 24,
+"code": "A10875",
+"name": "Toxicity\n毒性",
+"fac": "",
+"req": "",
+"eff": "根据本R内与开局种族完全对立种族的使用时间提升回魔"
+},
+{
+"col": "CO",
+"row": 24,
+"code": "A11125",
+"name": "Alkahest\n万能溶剂",
+"fac": "",
+"req": "",
+"eff": "根据当前活跃法术数量提升点击次数结算值"
+},
+{
+"col": "CQ",
+"row": 24,
+"code": "A11375",
+"name": "Azoth\n水银剑",
+"fac": "",
+"req": "",
+"eff": "根据当前回魔提升点击收益"
+},
+{
+"col": "CS",
+"row": 24,
+"code": "A11625",
+"name": "Anima Mundi\n世界之理",
+"fac": "",
+"req": "",
+"eff": "根据本Rfc获得量提升魔上限"
+},
+{
+"col": "CU",
+"row": 24,
+"code": "A11875",
+"name": "Liquefaction\n液化",
+"fac": "",
+"req": "",
+"eff": "根据本R内Hellfire Blast活跃时间提升建筑层级9～11的建筑产能"
+},
+{
+"col": "CX",
+"row": 24,
+"code": "A12250",
+"name": "Folgoration\n电化学",
+"fac": "",
+"req": "",
+"eff": "Diamond Pickaxe和God's Hand同时活跃时，根据本R考古次数（包括重置部分）提升回魔和fc获得率"
+},
+{
+"col": "DB",
+"row": 24,
+"code": "E13125",
+"name": "Cinnabar\r辰砂",
+"fac": "",
+"req": "",
+"eff": "根据本局TC施法次数提升所有法术活跃时间结算值"
+},
+{
+"col": "DE",
+"row": 24,
+"code": "E13500",
+"name": "Lunafaction\r月银",
+"fac": "",
+"req": "",
+"eff": "所有平衡法术（All Creation、Moon Blessing、Goblin's Greed、Grand Balance、Infinite Spiral）法术层级上限+3，根据本R内单局平衡阵营使用时间最大值提升离线产能加成"
+},
+{
+"col": "C",
+"row": 29,
+"code": "W1",
+"name": "Assault\n侵袭",
+"fac": "恶魔",
+"req": "买下W分支第1个研究点数",
+"eff": "根据本局Hellfire Blast施法次数提升Infernal Realm产能"
+},
+{
+"col": "D",
+"row": 29,
+"code": "W10",
+"name": "Dueling\n决斗",
+"fac": "精灵",
+"req": "本局拥有2000个Training Ground",
+"eff": "根据Training Ground数量提升其余建筑产能"
+},
+{
+"col": "E",
+"row": 29,
+"code": "W25",
+"name": "War Funds\n军费",
+"fac": "哥布林",
+"req": "使用哥布林\n本局拥有1e132个钱币",
+"eff": "根据本局TC施法次数提升所有建筑产能"
+},
+{
+"col": "G",
+"row": 29,
+"code": "W50",
+"name": "Exertion\n竭力",
+"fac": "不死族",
+"req": "使用恶魔\n本R邪恶阵营使用时间达到24小时",
+"eff": "根据Undercity数量提升fc获得率"
+},
+{
+"col": "K",
+"row": 29,
+"code": "W120",
+"name": "Betrayal\n叛变",
+"fac": "",
+"req": "本局获得250个基础助手",
+"eff": "根据助手数量提升非UB建筑产能"
+},
+{
+"col": "L",
+"row": 29,
+"code": "W135",
+"name": "Rampage\n冲撞",
+"fac": "",
+"req": "使用恶魔\n获得580个成就",
+"eff": "根据已获得成就数量增加魔上限"
+},
+{
+"col": "N",
+"row": 29,
+"code": "W150",
+"name": "Invasion\n侵略",
+"fac": "",
+"req": "W25+W135",
+"eff": "根据助手数量提升所有建筑产能"
+},
+{
+"col": "P",
+"row": 29,
+"code": "W175",
+"name": "Overwhelm\n压制",
+"fac": "恶魔",
+"req": "W1+W150",
+"eff": "根据本R邪恶阵营/种族法术施法次数增加助手数量"
+},
+{
+"col": "Q",
+"row": 29,
+"code": "W180",
+"name": "Formation\n编队",
+"fac": "",
+"req": "本R施放1000次Call to Arm\nW10+W50",
+"eff": "Call to Arms计算加成时各建筑自身数量结算值*16"
+},
+{
+"col": "R",
+"row": 29,
+"code": "W200",
+"name": "Crusade\n圣战",
+"fac": "",
+"req": "D50+W180",
+"eff": "根据本R善良阵营使用时间增加助手数量"
+},
+{
+"col": "S",
+"row": 29,
+"code": "W205",
+"name": "Berserking\n狂暴",
+"fac": "邪恶",
+"req": "本R施放850次Blood Frenzy\nW135+D150",
+"eff": "Blood Frenzy活跃时，根据助手数量增加回魔；离线施法次数结算值*4"
+},
+{
+"col": "U",
+"row": 29,
+"code": "W225",
+"name": "Critical Strike\n暴击",
+"fac": "天使",
+"req": "W10+D55",
+"eff": "根据本R内Holy Light活跃时间提升Heaven's Domain产能"
+},
+{
+"col": "X",
+"row": 29,
+"code": "W250",
+"name": "Swarming\n蜂拥",
+"fac": "",
+"req": "W175+W205",
+"eff": "根据已获得成就数量增加助手数量"
+},
+{
+"col": "Z",
+"row": 29,
+"code": "W260",
+"name": "Athletics\n军事竞技",
+"fac": "泰坦",
+"req": "使用泰坦\n本局拥有3000个Olympian Hall",
+"eff": "根据当前Olympian Hall数量提升其余建筑产能（线性，每个Olympian Hall提升固定比例）"
+},
+{
+"col": "AB",
+"row": 29,
+"code": "W275",
+"name": "Domination\n统治",
+"fac": "无面者",
+"req": "使用无面者\n本局拥有300个基础助手",
+"eff": "根据本R内单局助手数量最大值增加fc获得率，fc获得率*1.5"
+},
+{
+"col": "AC",
+"row": 29,
+"code": "W290",
+"name": "Entrench\n战壕",
+"fac": "",
+"req": "本R考古2000次",
+"eff": "根据当前考古次数（不包括考古重置部分）提升UB产能"
+},
+{
+"col": "AF",
+"row": 29,
+"code": "W320",
+"name": "Shattering\n粉碎",
+"fac": "",
+"req": "本R考古2650次",
+"eff": "根据当前考古次数（不包括考古重置部分）提升点击收益"
+},
+{
+"col": "AG",
+"row": 29,
+"code": "W330",
+"name": "Heroism\n英雄主义",
+"fac": "",
+"req": "W200+W260",
+"eff": "根据已获得成就数量提升点击收益"
+},
+{
+"col": "AI",
+"row": 29,
+"code": "W350",
+"name": "Survival\n生存",
+"fac": "德鲁伊",
+"req": "A300+A270",
+"eff": "根据Stonehenge Circle数量增加其余建筑产能"
+},
+{
+"col": "AK",
+"row": 29,
+"code": "W400",
+"name": "Siege\n围攻",
+"fac": "",
+"req": "C251+W290",
+"eff": "建筑层级最高的3种建筑各自数量结算值*2"
+},
+{
+"col": "AL",
+"row": 29,
+"code": "W405",
+"name": "Ambush\n伏击",
+"fac": "卓尔",
+"req": "使用邪恶阵营+卓尔\n解锁卓尔的研究使用权",
+"eff": "根据当前离线产能加成提升Spider Sanctuary产能"
+},
+{
+"col": "AS",
+"row": 29,
+"code": "W520",
+"name": "Stalking\n潜行",
+"fac": "卓尔",
+"req": "W50+W405",
+"eff": "根据本局Combo Strike活跃时间增加助手（线性，每100秒+1）"
+},
+{
+"col": "AT",
+"row": 29,
+"code": "W525",
+"name": "Bloodlust\n嗜血",
+"fac": "邪恶",
+"req": "本R邪恶阵营使用时间达到36小时\nW205+S460",
+"eff": "W205+S460"
+},
+{
+"col": "AV",
+"row": 29,
+"code": "W560",
+"name": "Resilience\n坚韧",
+"fac": "",
+"req": "D330+D480",
+"eff": "根据本局点击次数提升点击收益"
+},
+{
+"col": "AW",
+"row": 29,
+"code": "W590",
+"name": "Torture\n拷打",
+"fac": "恶魔+卓尔",
+"req": "使用恶魔+卓尔\n本局拥有200个卓尔RE\nD245+W520",
+"eff": "根据本R邪恶阵营使用时间提升助手产能"
+},
+{
+"col": "BD",
+"row": 29,
+"code": "W1275",
+"name": "Authority\n权威",
+"fac": "",
+"req": "本局Call To Arms活跃时间达到12小时",
+"eff": "根据本R内Call To Arms活跃时间提升所有法术持续时间"
+},
+{
+"col": "BG",
+"row": 29,
+"code": "W1375",
+"name": "Scavenging\n拾荒",
+"fac": "",
+"req": "邪恶阵营使用时间达到7天（所有R合计）",
+"eff": "根据助手数量增加fc获得率，fc获得率*3"
+},
+{
+"col": "BH",
+"row": 29,
+"code": "W1400",
+"name": "Cataclysm\n大灾变",
+"fac": "龙族",
+"req": "使用中立阵营+龙族\nW400+A1200",
+"eff": "根据本局点击次数提升魔上限"
+},
+{
+"col": "BR",
+"row": 29,
+"code": "W3050",
+"name": "Flanking\n侧翼战术",
+"fac": "",
+"req": "本局拥有50000个基础助手\nW1275+E1325",
+"eff": "根据助手数量提升与UB建筑层级相邻的建筑产能"
+},
+{
+"col": "BT",
+"row": 29,
+"code": "W3150",
+"name": "Upheaval\n动乱",
+"fac": "",
+"req": "本局拥有60000个farm、inn和blacksmith",
+"eff": "根据所有建筑各自建筑层级提升各自产能，层级越低加成越高"
+},
+{
+"col": "CC",
+"row": 29,
+"code": "W5125",
+"name": "Sovereignty\n主权",
+"fac": "",
+"req": "",
+"eff": "根据当前助手数量提升建筑层级最高的的两种建筑产能"
+},
+{
+"col": "CE",
+"row": 29,
+"code": "W5375",
+"name": "Officers\n军官",
+"fac": "邪恶",
+"req": "",
+"eff": "根据已获得成就数量提升助手数量"
+},
+{
+"col": "CG",
+"row": 29,
+"code": "W5625",
+"name": "Concealment\n隐匿",
+"fac": "",
+"req": "",
+"eff": "根据本局魔产量提升离线时间结算值"
+},
+{
+"col": "CI",
+"row": 29,
+"code": "W5875",
+"name": "Patience\n忍耐",
+"fac": "",
+"req": "",
+"eff": "声望种族使用时间*6，精英种族使用时间*11"
+},
+{
+"col": "CM",
+"row": 29,
+"code": "W10875",
+"name": "Revolution\n革命",
+"fac": "",
+"req": "",
+"eff": "根据当前RE数量增加助手数量"
+},
+{
+"col": "CO",
+"row": 29,
+"code": "W11125",
+"name": "Vengeance\n复仇",
+"fac": "",
+"req": "",
+"eff": "根据本局单个法术持续时间最大值提升离线产能加成"
+},
+{
+"col": "CQ",
+"row": 29,
+"code": "W11375",
+"name": "Pacifism\n和平主义",
+"fac": "",
+"req": "",
+"eff": "根据本局时间提升所有法术持续时间"
+},
+{
+"col": "CS",
+"row": 29,
+"code": "W11625",
+"name": "Genocide\n大屠杀",
+"fac": "",
+"req": "",
+"eff": "根据本R单个种族使用时间最小值提升所有建筑产能"
+},
+{
+"col": "CU",
+"row": 29,
+"code": "W11875",
+"name": "Scouting\n侦察",
+"fac": "",
+"req": "",
+"eff": "根据本R内Grand Balance目标数量最大值提升所有建筑数量结算值"
+},
+{
+"col": "CX",
+"row": 29,
+"code": "W12250",
+"name": "Raiding\n突袭",
+"fac": "",
+"req": "",
+"eff": "根据本R内单局Combo Strike施法次数提升所有建筑产能"
+},
+{
+"col": "DB",
+"row": 29,
+"code": "W13125",
+"name": "Artillery\r炮击",
+"fac": "",
+"req": "",
+"eff": "根据本R内单局施法次数最大值提升所有法术持续时间"
+},
+{
+"col": "DE",
+"row": 29,
+"code": "W13500",
+"name": "Backfire\r逆火",
+"fac": "",
+"req": "",
+"eff": "根据本R善良（邪恶）阵营使用时间提升邪恶（善良）阵营建筑产能，根据本R秩序（混乱）阵营使用时间提升混乱（秩序）阵营建筑产能，若一个建筑同时拥有两种属性则对应加成叠加"
+},
+{
+"col": "CD",
+"row": 34,
+"code": "F5250",
+"name": "Dreamwalking\n梦游",
+"fac": "",
+"req": "",
+"eff": "根据本R离线时间提升离线产能加成"
+},
+{
+"col": "CF",
+"row": 34,
+"code": "F5500",
+"name": "Gathering\n聚会",
+"fac": "",
+"req": "",
+"eff": "根据fc获得率增加gem产能加成"
+},
+{
+"col": "CH",
+"row": 34,
+"code": "F5750",
+"name": "Corruption\n腐败",
+"fac": "",
+"req": "",
+"eff": "给予与当前使用种族完全对立的种族union效果"
+},
+{
+"col": "CJ",
+"row": 34,
+"code": "F6000",
+"name": "Inevitability\n必然",
+"fac": "",
+"req": "",
+"eff": "将本局游戏时间折算为少量时间，作为下局游戏的起步时间"
+},
+{
+"col": "CN",
+"row": 34,
+"code": "F11000",
+"name": "Godslaying\n弑神",
+"fac": "",
+"req": "",
+"eff": "根据本局所有种族法术在本R的活跃时间总和提升活跃法术数量结算值"
+},
+{
+"col": "CP",
+"row": 34,
+"code": "F11250",
+"name": "Inanity\n虚无",
+"fac": "",
+"req": "",
+"eff": "根据本局离线时间提升考古次数结算值"
+},
+{
+"col": "CR",
+"row": 34,
+"code": "F11500",
+"name": "Paradox\n悖论",
+"fac": "",
+"req": "",
+"eff": "给予与当前使用种族完全对立的种族set效果"
+},
+{
+"col": "CT",
+"row": 34,
+"code": "F11750",
+"name": "Relativity\n相对论",
+"fac": "",
+"req": "",
+"eff": "额外选取1个Legacy，该Legacy不影响普通Legacy价格"
+},
+{
+"col": "CV",
+"row": 34,
+"code": "F12000",
+"name": "Revelation\n揭露",
+"fac": "",
+"req": "",
+"eff": "额外选取1个Legacy Combo"
+},
+{
+"col": "CZ",
+"row": 34,
+"code": "F12500",
+"name": "Avatars\n化身",
+"fac": "",
+"req": "",
+"eff": "根据本局选用LE种族数量提升助手数量"
+},
+{
+"col": "DC",
+"row": 34,
+"code": "F13250",
+"name": "Taboo\r禁忌",
+"fac": "",
+"req": "",
+"eff": "根据LE选取种族升级对应种族数量提升所有建筑产能"
+},
+{
+"col": "DG",
+"row": 34,
+"code": "F13750",
+"name": "The Unseen\r无形之物",
+"fac": "",
+"req": "",
+"eff": "根据本R内单局助手数量最大值提升离线产能加成"
+}
+]

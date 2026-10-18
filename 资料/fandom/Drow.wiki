@@ -1,0 +1,219 @@
+{{tocright}}
+[[File:Drow_Faction_Building.png|thumb|left]]
+{{Description|"The Drows believe that any crime can go unpunished if nobody notices you did it. They value and praise perfect executions, and will reward those who plan accordingly."}}  
+
+== The Drow Faction ==
+[[File:Drow champion trophy.png|left|Drow Champion Trophy]]
+[[File:Perfect Combo.png|right|Perfect Combo]]
+'''Drow''' were implemented during the [[Updates#1.2 The Underworld|Underworld]] expansion (v1.2). It is the Evil [[Prestige Factions|Prestige Faction]], and will only appear when playing an Evil [[Vanilla faction]]. The Drow player will be able to combine the 2 faction spells and all the 18 upgrades and from both the Evil Vanilla and Drow factions. Several of their upgrades rely on [[Royal Exchanges]] and it is suggested to combine with the faction-coin-heavy [[Goblin Faction]] (forming something popularly referred to as "Droblins").
+
+* '''[[Alignment]]''': '''''Prestige''''' (Evil)
+* '''[[Spells|Faction Spell]]''': '''''Combo Strike''''' - Increase the production of all buildings. The more spell casts, the more production is increased. See [[Spells#The Spells|table of increase/casts]].<br />{{Formula|stat|30\times x^{0.9}%|Combo Strike casts (This game)}}  
+* '''[[Spells#Spell Upgrades|Spell Upgrade]]''': '''''Perfect Combo''''' - Increases ''Combo Strike'' bonus.<br />{{Formula|stat|40\times x^{0.9}%|Combo Strike casts (This game)}}  
+** Unlock requirement: Cast ''Combo Strike'' 100 times in a row.  
+* '''[[Heritage]]''':  Increase the production of assistants based on the amount of Royal Exchanges you purchased in this game.<br />{{Formula|stat|2 \times x^{0.8}|your Royal Exchanges made (This Game)}}
+* '''[[Bloodline]]''': Multiplicatively increase the chance to find Faction Coins based on time spent in this game.<br />{{Formula|stat|1.6 \times x^{0.6}|time spent (this game)}}
+* '''[[Challenge|Challenge Reward]]''': '''''Versatile Combo''''' - Increase Combo Strike counter based on the amount of spells cast in this game, excluding Tax Collection.<br />{{Formula|xy|10 \times \log_{10}(1 + (y \times 30)) + x|Combo Strike casts (This game)|every other spell's (except [[Tax Collection|TC]]) casts (This game)}}
+* '''[[Unique Building]]''':  '''''Spider Sanctuary''''' (from Dark Temples)  
+* '''[[Research|Research Facilities]]''': '''''Spellcraft, Alchemy, Warfare'''''
+* '''Faction Unlock Requirements''': See [[Drow#Faction Unlock Requirements|below]]
+
+== Tier 1 Upgrades ==
+{| class="wikitable" style="width:100%"
+|-
+! colspan="2" |Name
+! width="75px" |Cost
+! Effect
+|-
+![[File:Drow.png]]
+! width="110px" |''Drow Trade Treaty''
+| style="padding:0 0 0 8px;" |''3000 Drow Coins''
+| style="padding:0 0 0 8px;" |''Unlocks Drow Upgrades.''
+|-
+![[File:Underworld-Tyranny-drow-faction-upgrade.png]]
+!Underworld Tyranny
+| style="padding:0 0 0 8px;" |{{Number|5 Qad|table}}
+| style="padding:0 0 0 8px;" |Increase the production of all buildings based on time spent as Evil in this Reincarnation.
+{{Formula|stat|(0.7 \times x)^{0.7}%|Time Spent Being Evil this Reincarnation|second}}(Not updated)
+|-
+![[File:Honor-Among-Killers-drow-faction-upgrade.png]]
+!Honor Among Killers
+| style="padding:0 0 0 8px;" |{{Number|50 Qad|table}}
+| style="padding:0 0 0 8px;" |Increase Faction Coin find chance based on assistants owned.
+{{Formula|stat|+(100  + 0.5 \times \sqrt{x})%|Assistants}}(Not updated)
+|-
+![[File:Shadow-Advance-drow-faction-upgrade.png]]
+!Shadow Advance
+| style="padding:0 0 0 8px;" |{{Number|500 Qad|table}}
+| style="padding:0 0 0 8px;" |Increase the production of all buildings based on Maximum Mana.
+''Formula:'' <math>(2 \times \log_{10}(1+x)^{2})%</math> where x is your Max Mana.(Not updated)
+|}
+
+== Tier 2 Upgrades ==
+{| class="wikitable" style="width:100%"
+|-
+! colspan="2" |Name
+! width="75px" |Cost
+! Effect
+|-
+![[File:Drow-Friendship-Pact drow-Faction upgrade.png]]
+! width="110px" |''Drow Friendship Pact''
+| style="padding:0 0 0 8px;" |''12000 Drow Coins''
+| style="padding:0 0 0 8px;" |''Unlocks more Drow Upgrades.''
+|-
+![[File:Drow-faction-upgrade-21.png]]
+!Mana Addicts
+| style="padding:0 0 0 8px;" |{{Number|50 Qid|table}}
+| style="padding:0 0 0 8px;" |Increase Mana Regeneration based on time spent in this Era.
+{{Formula|stat|+(2.5 + 0.25 \times x ^{0.5})|Play Time (This Game)|seconds}}(Not updated)
+|-
+![[File:Drow-faction-upgrade-22.png]]
+!Blood Sacrifices
+| style="padding:0 0 0 8px;" |{{Number|500 Qid|table}}
+| style="padding:0 0 0 8px;" |Increase the production of all buildings based on the highest amount of Dark Temples built in this Reincarnation.
+''Formula:'' <math>(3 \times x)%</math> where x is the highest amount of ''Dark Temples'' you built in this Reincarnation.(Not updated)
+|-
+![[File:Drow-faction-upgrade-23.png]]
+!Blackmail
+| style="padding:0 0 0 8px;" |{{Number|5 Sxd|table}}
+| style="padding:0 0 0 8px;" |Reduce the cost multiplier for Royal Exchanges.
+{{MultiplierReduction|0.02|1.08|1.1}}(Not updated)
+|}
+
+==Tier 3 Upgrades==
+{| class="wikitable" style="width:100%"
+|-
+! colspan="2" |Name
+! width="75px" |Cost
+! Effect
+|-
+![[File:Drow Alliance.png]]
+! width="110px" |''Drow Alliance''
+| style="padding:0 0 0 8px;" |''30000 Drow Coins''
+| style="padding:0 0 0 8px;" |''Unlocks more Drow Upgrades.''
+|-
+![[File:Spider gods-drow-faction-upgrade.png]]
+!Spider Gods
+| style="padding:0 0 0 8px;" |{{Number|500 Sxd|table}}
+| style="padding:0 0 0 8px;" |Multiplicatively increase assistants based on buildings built.
+''Formula:'' <math>(0.5 \times \sqrt{x})%</math> where x is the amount of buildings you own.(Not updated)
+|-
+![[File:Professional assasins-drow-faction-upgrade.png]]
+!Professional Assassins
+| style="padding:0 0 0 8px;" |{{Number|5 Spd|table}}
+| style="padding:0 0 0 8px;" |Multiplicatively increase production bonus from Gems based on Royal Exchanges purchased.
+''Formula:'' <math>(0.6 \times x^{0.6})%</math> where x is the amount of royal exchange made.(Not updated)
+|-
+![[File:Blade dance-drow-faction-upgrade.png]]
+!Blade Dance
+| style="padding:0 0 0 8px;" |{{Number|50 Spd|table}}
+| style="padding:0 0 0 8px;" |Increase the production of all buildings based on Combo Strike counter.
+{{Formula|(100 + 80 \times x^{0.4})%|your current Combo Strike bonus}}(Not updated)
+|}
+
+== Faction Unlock Requirements ==
+Below requirements can be done in separate game plays.
+{| class="wikitable" style="width:100%"
+|-
+! colspan="5" |Drow Faction Unlock Requirements
+|-
+! colspan="2" |Name
+! width="75px" |Cost
+!Description
+! width="135px" |Requirement
+|-
+![[File:PassageToTheUnderWorld.PNG]]
+! width="110px" |Passage to the Underworld
+|{{Number|50 Qid|table}}
+|Unlocks Prestige Quests
+<small>''Required once throughout the entire game play and does not count towards the bought upgrade stat.''</small>
+|200 [[Excavations]]
+|-
+![[File:CloakyShadyFigure.png]]
+!Cloaked Shady Figure's Quest
+|{{Number|10 Qad}},<br />10K Goblin, Undead and Demon Coins
+|Unlocks ''Underworld Diplomacy''
+<small>''Required once throughout the entire game play and does not count towards the bought upgrade stat.''</small>
+|Evil [[Alignment]], Build 650 Dark Temples, Have 325 [[trophies]], 10,000 [[Spells]] cast ([[Stats|Total]])
+|-
+![[File:UnderworldDiplomacy-upgrade.PNG]]
+!Underworld Diplomacy
+|{{Number|1Qad|table}}
+|Unlocks Prestige [[Faction Coins]], [[Trade Treaty]], [[Royal Exchanges]] and [[Heritage]]
+''Required each run until R3''
+|''Cloaked Shady Figure's'' Quest
+|}
+
+== Drow Unique Building ==
+[[File:Drow_Unique_Building_Design.png|thumb|left]] At R28, Drow's ''Dark Temples'' can be upgraded to a [[Buildings#Unique Buildings|Unique Building]]: '''''Spider Sanctuary''''', which is required for some [[challenges]] and research quests. [[File:Uniquebuilding-drow.PNG|right]]{{Clr}}
+
+== Drow Research  ==
+[[File:R29-Prestige-research-msg.png|right|300px]]
+Upon reaching R29, the game advisor tells us that the Prestige factions have discovered an almost infinite source of magical power: Prestige Research.
+
+Drow [[Research]] enables you to combine both unique buildings and researches from both the Vanilla and Drow factions.
+
+Each item below can be unlocked in separate game plays, and most only need to be bought once throughout the entire game play. The Unique building upgrade and the ''Dark Light of Bondelnar'' are the only ones that need to be bought each run and count towards the 'Bought Upgrades' [[stats]].{{clr}}
+{| class="wikitable" style="width:100%"
+! colspan="6" |Drow Research Unlock Requirements
+|-
+! colspan="2" |Name
+!Type
+!Description
+! width="110px" |Requirement
+! style="width:13%;" |Cost
+|-
+![[File:DrowResearchQuest.PNG]]
+! width="90px" |Spider Sanctuary Quest
+|Quest [[Upgrade]]
+|''Kivvil. Our Valsharess requires more places to worship the almighty Spider Queen. Build enough Dark Temples, and our priestesses will consecrate them.''
+|R28+, 2000 Dark Temples
+|{{Number|1e184|table}}
+|-
+![[File:Spider Sanctuary icon.png]]
+!Spider Sanctuary
+|[[Upgrades#Allegiances Upgrades|Allegiances Upgrades]]
+|Upgrade ''Dark Temples'' to ''Spider Sanctuaries'', boosting their production based on time spent offline and unlocking more unique perks for the building.
+{{Formula|stat|30 \times x^{0.8}|your Time Spent Offline (Total)}}
+|''Spider Sanctuary Quest''
+|{{Number|10 USxg|table}}
+|-
+![[File:Artifact-earthcore.png]]
+!Earth Core [[Artifacts|Artifact]]
+|Quest [[Artifact]]
+|Unlocks ''The Secrets of the Underworld'' upgrade
+|Requirements: R29 + 2750th [[Excavation]]
+|
+|-
+![[File:Secrets Of the Underworld.png]]
+!Secrets of the Underworld
+|Quest Upgrade
+|Unlocks Researches for Dwarves and Drow and provides a bonus for individual research branches.
+<small>''Required once throughout the entire game play and does not count towards the bought upgrade stat.''</small>
+|Prestige Unique Building, ''Earth Core'' Artifact
+|{{Number|1e200}},<br />{{Number|1e7}} of every FC
+|-
+! colspan="6" |Drow Research Upgrade
+|-
+! colspan="2" |Name
+! colspan="2" |Description
+!Requirement
+!Cost
+|-
+![[File:FlameOfBondelnarUPgrade.PNG]]
+!Dark Light of Bondelnar
+| colspan="2" |Adds 3 extra Drow research slots: 2 for ''Warfare'' and 1 to the faction's facility you are playing.<br />''Required to be bought each Drow run.''
+|''Flame of Bondelnar'' [[artifact]] (Requires ''Spider Sanctuaries'' and 3250 Excavations)
+|{{Number|10 SxSpg|table}}, {{Number|100M}} Drow Coins
+|}
+<u>To Unlock Prestige Research:</u>
+# Uncover the [[Artifacts|''Earth Core'' Artifact]] with any Faction, and gather enough gems to be able to buy the Secrets of the Underworld ({{Number|1e200}} coins and {{Number|1e7}} FCs)
+# When ready, play a [[Vanilla faction]] (Good Faction for Dwarf, Evil for Drow). Choose one that will be able to afford the Secrets of the Underworld. Do not buy the Vanilla faction's Unique building upgrade until you have bought the prestige [[Trade Treaty]].
+# Once affiliated with the prestige faction, buy their Unique building quest, Unique Building upgrade, and then the Secrets of the Underworld. With the latter, the research button and prestige research will show up.
+After you have unlocked Prestige research, the Vanilla unique building and Vanilla researches can be acquired before purchasing the prestige trade treaty. Plan in advance to not use up all your RUS on Vanilla researches, as prestige researches only show up after you affiliate with a prestige faction.
+
+
+{{Sitenav}}
+[[Category:Drow| ]]
+[[Category:Factions]]
+[[Category:Unlock Requirements]]

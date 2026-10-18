@@ -1,0 +1,559 @@
+[[File:Lineage icon.png|left|thumb|58x58px]]
+'''Lineages '''give you the ability to unlock and choose new upgrades related to the [[bloodline|Bloodline]] you're using, and will even give access to the faction [[spells|spell]] of the bloodlines origin at later stages. They also bring with them a whole set of allegiance trophies for all 12 factions.
+{{clr}}
+[[File:Lineages.png|border|thumb|266x266px|Lineage menu]]
+'''Requirements'''
+* R60+
+* Lineage can't match current faction
+* 400 royal exchanges of the respective faction(s) (two FC types for neutrals)
+* Bloodline of the respective faction
+* You have to also take a prestige faction
+The requirements need to be fulfilled each abdication.
+
+If you purchase research A2950 prior to selecting your bloodline's lineage, you will be able to choose which of the two bloodlines is the primary lineage and gain access to their spell (if unlocked).
+
+e.g. Mercenary faction with dragon bloodline purchases A2950 and selects the druid bloodline. The player can choose between the two bloodline's lineages (dragon or druid) if they have not already done so.
+
+== Progression ==
+'''Level 5: '''Perk 1<br />
+'''Level 10: '''100x FC gain for the lineages respective faction (50x for each of the two neutral FC types)<br />
+'''Level 15: '''Perk 2 - Unlocks Faction spell. (adjusted for your alignment if necessary)<br />
+'''Level 20: '''Perk 3 + Grand Champion Trophy<br />
+'''Level 30 (PA2):''' Perk 4 - boosts faction spell
+
+== Costs ==
+The base cost for upgrading lineages is {{Number|2.5e16}} Faction Coins, and it increases by 10x per level (7.94x with [[Excavations#Ancient Heirloom|Ancient Heirloom]] lore artifact). Note that the heirloom bonus will only apply to lineages below your highest level lineage
+
+<blockquote style="font-size:99%">{{Formula|naked|2.5e(15+level)}}<br />{{Formula|naked|(2.5e(15+level))^{0.9} }} (with heirloom)
+</blockquote>
+'''NOTE:''' Levels only have to be purchased once, and are retained between reincarnations
+{| class="wikitable" id="faction bloodlines" style="width:100%;"
+! colspan="7" | Costs per level
+|-
+!width=40px|Level
+!Normal
+!Heirloom
+| rowspan="11" style="width:1px" |
+!width=40px|Level
+!Normal
+!Heirloom
+|-
+!1
+|{{number|2.5e16}}||{{number|5.73e14}}
+!11
+|{{number|2.5e26}}|||{{number|5.73e23}}
+|-
+!2
+|{{number|2.5e17}}|||{{number|4.55e15}}
+!12
+|{{number|2.5e27}}|||{{number|4.55e24}}
+|-
+!3
+|{{number|2.5e18}}|||{{number|3.62e16}}
+!13
+|{{number|2.5e28}}|||{{number|3.62e25}}
+|-
+!4
+|{{number|2.5e19}}|||{{number|2.87e17}}
+!14
+|{{number|2.5e29}}|||{{number|2.87e26}}
+|-
+!5
+|{{number|2.5e20}}|||{{number|2.28e18}}
+!15
+|{{number|2.5e30}}|||{{number|2.28e27}}
+|-
+!6
+|{{number|2.5e21}}|||{{number|1.81e19}}
+!16
+|{{number|2.5e31}}|||{{number|1.81e28}}
+|-
+!7
+|{{number|2.5e22}}|||{{number|1.44e20}}
+!17
+|{{number|2.5e32}}|||{{number|1.44e29}}
+|-
+!8
+|{{number|2.5e23}}|||{{number|1.14e21}}
+!18
+|{{number|2.5e33}}|||{{number|1.14e30}}
+|-
+!9
+|{{number|2.5e24}}|||{{number|9.08e21}}
+!19
+|{{number|2.5e34}}|||{{number|9.08e30}}
+|-
+!10
+|{{number|2.5e25}}|||{{number|7.21e22}}
+!20
+|{{number|2.5e35}}|||{{number|7.21e31}}
+|-
+|}
+
+== Perks ==
+{| class="mw-collapsible mw-collapsed wikitable" id="faction bloodlines" style="width:100%;"
+! colspan="3" | Fairy
+|-
+|[[File:FairyLineage.png]]
+|'''Fairy Lineage'''
+|Farms, Inns and Blacksmiths count 18% more for every level.
+|-
+! colspan="2" | Perk
+! Effect
+|-
+|[[File:FairyPerk1.png]]
+|'''Fairy Perk 1'''
+|'''Requirement:''' Reach lineage level 5
+* Makes Fairy Bloodline affect Hall of Legends.
+* Reduces Fairy Bloodline Post Ascension nerf.
+|-
+|[[File:FairyPerk2.png]]
+|'''Fairy Perk 2'''
+|'''Requirement:''' Reach lineage level 15 + complete Fairy Lineage Challenge
+'''Challenge:''' Reach 2000 assistants in less than 10 minutes
+* Unlocks faction spell (Fairy Chanting)
+|-
+|[[File:FairyPerk3.png]]
+|'''Fairy Perk 3'''
+|'''Requirement:''' Reach lineage level 20
+* Fairy Grand Champion Trophy
+* Assistants count 1% more per 1000 Unique Buildings
+|-
+|
+|'''Fairy Perk 4'''
+|'''Requirement:''' Reach lineage level 30, R100+
+* When Fairy Chanting is active, increase assistant amount by 10% every 5 minutes of its duration
+''Formula: 10 * floor(x/300)''
+
+''where x is Fairy Chanting duration in seconds.''
+|}
+
+{| class="mw-collapsible mw-collapsed wikitable" id="faction bloodlines" style="width:100%;"
+! colspan="3" | Elven
+|-
+|[[File:ElvenLineage.png]]
+|'''Elven Lineage'''
+|Autoclicks 1 time per second for every level.
+Also increase Clicks count by an additional 5000% for every level.
+|-
+! colspan="2" | Perk
+! Effect
+|-
+|[[File:ElvenPerk1.png]]
+|'''Elven Perk 1'''
+|'''Requirement:''' Reach lineage level 5
+* Increases autoclicks provided by Elf Bloodline to 9 (up from 3) per second and their multiplier to 10000x.
+|-
+|[[File:ElvenPerk2.png]]
+|'''Elven Perk 2'''
+|'''Requirement:''' Reach lineage level 15 + complete Elven Lineage Challenge
+'''Challenge:''' 7777 autoclicks in the first 5 minutes of a run.
+* Unlocks faction spell (Moon Blessing)
+|-
+|[[File:ElvenPerk3.png]]
+|'''Elven Perk 3'''
+|'''Requirement:''' Reach lineage level 20
+* Elven Grand Champion Trophy
+* 5% per 777 Unique Buildings production added to base click reward
+|-
+|
+|'''Elven Perk 4'''
+|'''Requirement:''' Reach lineage level 30, R100+
+* When Moon Blessing is active, multiply your Faction Coin find chance by 500%
+|}
+
+{| class="mw-collapsible mw-collapsed wikitable" id="faction bloodlines" style="width:100%;"
+! colspan="3" | Angel
+|-
+|[[File:AngelLineage.png]]
+|'''Angel Lineage'''
+|Increase Mana Regeneration by 7% for every level.
+|-
+! colspan="2" | Perk
+! Effect
+|-
+|[[File:AngelPerk1.png]]
+|'''Angel Perk 1'''
+|'''Requirement:''' Reach lineage level 5
+* Angel Bloodline effect now counts total spells cast.
+|-
+|[[File:AngelPerk2.png]]
+|'''Angel Perk 2'''
+|'''Requirement:''' Reach lineage level 15 + complete Angel Lineage Challenge
+'''Challenge:'''  Play 2 hours straight with at least 1 spell active at all time. You need to start within one minute of a fresh abdication.
+* Unlocks faction spell (God's Hand)
+|-
+|[[File:AngelPerk3.png]]
+|'''Angel Perk 3'''
+|'''Requirement:''' Reach lineage level 20
+* Angel Grand Champion Trophy
+* Increase God's Hand bonus by an additional 500000.0% for every 1000 Unique Buildings.
+|-
+|
+|'''Angel Perk 4'''
+|'''Requirement:''' Reach lineage level 30, R100+
+* When God's Hand is active, increase max mana by 100%
+|}
+
+{| class="mw-collapsible mw-collapsed wikitable" id="faction bloodlines" style="width:100%;"
+! colspan="3" | Goblin
+|-
+|[[File:GoblinLineage.png]]
+|'''Goblin Lineage'''
+|Increase Tax Collection worth in seconds by 25 for every level.
+|-
+! colspan="2" | Perk
+! Effect
+|-
+|[[File:GoblinPerk1.png]]
+|'''Goblin Perk 1'''
+|'''Requirement:''' Reach lineage level 5
+* +120 seconds of production for tax collection
+|-
+|[[File:DruidPerk2.png]]
+|'''Goblin Perk 2'''
+|'''Requirement:''' Reach lineage level 15 + complete Goblin Lineage Challenge
+'''Challenge:''' Cast 1 million TCs in a single game
+* Unlocks faction spell (Goblin's Greed)
+|-
+|[[File:GoblinPerk3.png]]
+|'''Goblin Perk 3'''
+|'''Requirement:''' Reach lineage level 20
+* Goblin Grand Champion Trophy
+* Unique Building's base production increased by 2% for every 650 Unique Buildings
+|-
+|
+|'''Goblin Perk 4'''
+|'''Requirement:''' Reach lineage level 30, R100+
+* When Goblin's Greed is active, increase seconds worth of Tax Collections based on assistants owned.
+|}
+
+{| class="mw-collapsible mw-collapsed wikitable" id="faction bloodlines" style="width:100%;"
+! colspan="3" | Undead
+|-
+|[[File:UndeadLineage.png]]
+|'''Undead Lineage'''
+|Increase assistants by 1% for every level.
+|-
+! colspan="2" | Perk
+! Effect
+|-
+|[[File:UndeadPerk1.png]]
+|'''Undead Perk 1'''
+|'''Requirement:''' Reach lineage level 5
+* 8% of Undead Bloodline Assistants get turned into an Assistant multiplier. (8% more assistants per undeadline assistant)
+|-
+|[[File:UndeadPerk2.png]]
+|'''Undead Perk 2'''
+|'''Requirement:''' Reach lineage level 15 + complete Undead Lineage Challenge
+'''Challenge:''' Have Night Time's spell duration be 60 seconds.
+* Unlocks faction spell (Night Time)
+* Night Time's bonus scales with the number of 8th tier buildings depending on your alignment (necropolises, labyrinths, citadels or their unique building equivalents)
+|-
+|[[File:UndeadPerk3.png]]
+|'''Undead Perk 3'''
+|'''Requirement:''' Reach lineage level 20
+* Undead Grand Champion Trophy
+* 10 Assistants for every 500 Unique Buildings
+|-
+|
+|'''Undead Perk 4'''
+|'''Requirement:''' Reach lineage level 30, R100+
+* When offline, Night Time production is added to offline bonus. Night Time activity time counts 100% more for all purposes.
+|}
+
+{| class="mw-collapsible mw-collapsed wikitable" id="faction bloodlines" style="width:100%;"
+! colspan="3" | Demon
+|-
+|[[File:DemonLineage.png]]
+|'''Demon Lineage'''
+|Increase Non-Unique Buildings production based on Lineage level. More Ascension penalties are removed as time passes in this Reincarnation.
+|-
+! colspan="2" | Perk
+! Effect
+|-
+|[[File:DemonPerk1.png]]
+|'''Demon Perk 1'''
+|'''Requirement:''' Reach lineage level 5
+* 25 max mana per 6 trophies unlocked
+|-
+|[[File:DemonPerk2.png]]
+|'''Demon Perk 2'''
+|'''Requirement:''' Reach lineage level 15 + complete Demon Lineage Challenge
+'''Challenge:''' 5 days of HFB activity time (This R).
+* Unlocks faction spell (Hellfire Blast)
+|-
+|[[File:DemonPerk3.png]]
+|'''Demon Perk 3'''
+|'''Requirement:''' Reach lineage level 20
+* Demon Grand Champion Trophy
+* 50% more gem production per 666 Unique Buildings, (additive)
+|-
+|
+|'''Demon Perk 4'''
+|'''Requirement:''' Reach lineage level 30, R100+
+* Non-Unique Buildings are also targeted by Hellfire Blast.
+|}
+
+{| class="mw-collapsible mw-collapsed wikitable" id="faction bloodlines" style="width:100%;"
+! colspan="3" | Titan
+|-
+|[[File:TitanLineage.png]]
+|'''Titan Lineage'''
+|Increase Royal Exchange bonus and Royal Exchange count by 200% for every level.
+|-
+! colspan="2" | Perk
+! Effect
+|-
+|[[File:TitanPerk1.png]]
+|'''Titan Perk 1'''
+|'''Requirement:''' Reach lineage level 5
+* Remove 1 Ascension penalty from Titan Bloodline.
+|-
+|[[File:TitanPerk2.png]]
+|'''Titan Perk 2'''
+|'''Requirement:''' Reach lineage level 15 + complete Titan Lineage Challenge
+'''Challenge:''' 25K mana per second as pure Titan (no dragons, BL doesn't matter)
+* Unlocks faction spell (Lightning Strike)
+|-
+|[[File:TitanPerk3.png]]
+|'''Titan Perk 3'''
+|'''Requirement:''' Reach lineage level 20
+* Titan Grand Champion Trophy
+* All tier 4 buildings are boosted by 100M% (1e8%) and all tier 7 buildings are boosted by 1M% (1e6%) for every 765 Unique Buildings.
+|-
+|
+|'''Titan Perk 4'''
+|'''Requirement:''' Reach lineage level 30, R100+
+* Lightning Strike always hits Unique Buildings in addition to its random target. Unique Buildings are no longer random targets
+|}
+
+{| class="mw-collapsible mw-collapsed wikitable" id="faction bloodlines" style="width:100%;"
+! colspan="3" | Druid
+|-
+|[[File:DruidLineage.png]]
+|'''Druid Lineage'''
+|Each lineage level counts as 2 additional Reincarnations.
+|-
+! colspan="2" | Perk
+! Effect
+|-
+|[[File:DruidPerk1.png]]
+|'''Druid Perk 1'''
+|'''Requirement:''' Reach lineage level 5
+* Druid Bloodline increases the production of Non-Unique buildings based on time spent in this game.
+|-
+|[[File:DruidPerk2.png]]
+|'''Druid Perk 2'''
+|'''Requirement:''' Reach lineage level 15 + complete Druid Lineage Challenge
+'''Challenge:''' Have a mana regeneration of at least double your max mana
+* Unlocks faction spell (Grand Balance)
+|-
+|[[File:DruidPerk3.png]]
+|'''Druid Perk 3'''
+|'''Requirement:''' Reach lineage level 20
+* Druid Grand Champion Trophy
+* While Grand Balance is active, increase the production of its targets based on the amount of Unique Buildings you own.
+*{{Formula|xy|(0.5 * floor(x/750))^y)|Unique Buildings|spell tier}}
+|-
+|
+|'''Druid Perk 4'''
+|'''Requirement:''' Reach lineage level 30, R100+
+* Increase Grand Balance duration based on assistants owned.
+''Formula: (0.5 * x ^ 0.5).''
+
+''where x is assistants owned''
+* Also increase the production of all buildings while Grand Balance is active by 10% every 5 minutes of its duration.
+''Formula: ((5 * floor(x / 300)) ^ t).''
+
+where x is Grand Balance duration in seconds, and t is Grand Balance tier
+|}
+
+{| class="mw-collapsible mw-collapsed wikitable" id="faction bloodlines" style="width:100%;"
+! colspan="3" | Faceless
+|-
+|[[File:FacelessLineage.png]]
+|'''Faceless Lineage'''
+|Increase the duration of all spells based on lineage level.
+|-
+! colspan="2" | Perk
+! Effect
+|-
+|[[File:FacelessPerk1.png]]
+|'''Faceless Perk 1'''
+|'''Requirement:''' Reach lineage level 5
+* Faceless Bloodline counts mana generated this R instead of this game
+* Adds 0.95*x<sup>0.95</sup> mana per second, where x is assistants you own
+|-
+|[[File:DwarfPerk2.png]]
+|'''Faceless Perk 2'''
+|'''Requirement:''' Reach lineage level 15 + complete Faceless Lineage Challenge
+'''Challenge:''' Cast 100 Brainwaves in a single game
+* Unlocks faction spell (Brainwave)
+|-
+|[[File:FacelessPerk3.png]]
+|'''Faceless Perk 3'''
+|'''Requirement:''' Reach lineage level 20
+* Faceless Grand Champion Trophy
+* 5% more assistant production per 1000 unique buildings
+|-
+|
+|'''Faceless Perk 4'''
+|'''Requirement:''' Reach lineage level 30, R100+
+* Brainwave headstart time is increased by 1000%
+|}
+
+{| class="mw-collapsible mw-collapsed wikitable" id="faction bloodlines" style="width:100%;"
+! colspan="3" | Dwarven
+|-
+|[[File:DwarfLineage.png]]
+|'''Dwarven Lineage'''
+|Increase the base production of each building based on their tier. The bonus is multiplied by the Lineage level.
+|-
+! colspan="2" | Perk
+! Effect
+|-
+|[[File:DwarfPerk1.png]]
+|'''Dwarven Perk 1'''
+|'''Requirement:''' Reach lineage level 5
+* Dwarven Bloodline increases faction coin find chance based on total time spent as Good. (1 day of Good = 19,520%)
+|-
+|[[File:DwarfPerk2.png]]
+|'''Dwarven Perk 2'''
+|'''Requirement:''' Reach lineage level 15 + complete Dwarven Lineage Challenge
+'''Challenge:''' Have 10k Excavations
+* Unlocks faction spell (Diamond Pickaxe)
+|-
+|[[File:DwarfPerk3.png]]
+|'''Dwarven Perk 3'''
+|'''Requirement:''' Reach lineage level 20
+* Dwarven Grand Champion Trophy
+* 250% more Faction Coins from Excavations per 500 Unique Buildings
+|-
+|
+|'''Dwarven Perk 4'''
+|'''Requirement:''' Reach lineage level 30, R100+
+* When Diamond Pickaxe is active, increase mana regen based on Faction Coin chance
+''Formula: (0 .5 * log(x + 1) ^ 2.5)''
+
+''where x is Faction Coin chance.''
+|}
+
+{| class="mw-collapsible mw-collapsed wikitable" id="faction bloodlines" style="width:100%;"
+! colspan="3" | Drow
+|-
+|[[File:DrowLineage.png]]
+|'''Drow Lineage'''
+|Increases offline production based on Lineage level. Does not suffer from Ascension penalties.
+|-
+! colspan="2" | Perk
+! Effect
+|-
+|[[File:DrowPerk1.png]]
+|'''Drow Perk 1'''
+|'''Requirement:''' Reach lineage level 5
+* While using Drow Bloodline, all time spent counts 100% more for all purposes.
+* Online time counts for Bloodline
+|-
+|[[File:DrowPerk2.png]]
+|'''Drow Perk 2'''
+|'''Requirement:''' Reach lineage level 15 + complete Drow Lineage Challenge
+'''Challenge:''' 30 days offline across all Reincarnations
+* Unlocks faction spell (Combo Strike)
+|-
+|[[File:DrowPerk3.png]]
+|'''Drow Perk 3'''
+|'''Requirement:''' Reach lineage level 20
+* Drow Grand Champion Trophy
+* Every 850 Unique Buildings increase offline production by 5%
+|-
+|
+|'''Drow Perk 4'''
+|'''Requirement:''' Reach lineage level 30, R100+
+* Combo Strike's combo bonus increases by 5% per 30 seconds spent this game
+* While Combo Strike is active, increase the production of all buildings based on the current Combo Strike bonus.
+''Formula: (2 * log((x ^ 0.9) ^ T) ^ 2)% where x is combo count, and T is spell tier.''
+|}
+
+{| class="mw-collapsible mw-collapsed wikitable" id="faction bloodlines" style="width:100%;"
+! colspan="3" | Dragon
+|-
+|[[File:DragonLineage.png]]
+|'''Dragon Lineage'''
+|Unique Buildings count as 12% more for every level.
+|-
+! colspan="2" | Perk
+! Effect
+|-
+|[[File:DragonPerk1.png]]
+|'''Dragon Perk 1'''
+|'''Requirement:''' Reach lineage level 5
+* Dragon Bloodline increases the production of Unique Buildings by 1.75 % per building of the same type
+|-
+|[[File:DragonPerk2.png]]
+|'''Dragon Perk 2'''
+|'''Requirement:''' Reach lineage level 15 + complete Dragon Lineage Challenge
+'''Challenge:''' 5 spells at Tier 5 in less than 10 minutes
+* Unlocks faction spell (Dragon's Breath)
+|-
+|[[File:DragonPerk3.png]]
+|'''Dragon Perk 3'''
+|'''Requirement:''' Reach lineage level 20
+* Dragon Grand Champion Trophy
+* Maximum mana increased by 1.25 for every 2 Unique Buildings
+|-
+|
+|'''Dragon Perk 4'''
+|'''Requirement:''' Reach lineage level 30, R100+
+* Activates two breaths per cast
+|}
+
+
+{| class="mw-collapsible mw-collapsed wikitable" id="challenges" style="width:100%;"
+! colspan=2 |Perk 2 Challenges List
+|-
+!Fairy
+| style="padding:5px 8px"| Reach 2000 assistants in less than 10 minutes
+|-
+!Elf
+| style="padding:5px 8px"| 7777 autoclicks in the first 5 minutes of a run.
+|-
+!Angel 
+| style="padding:5px 8px" | Have at least 2 hours of time with at least one spell active this game and at most 2 hours 1 minute of playtime this game. Spell time does not need to be continuous.
+|-
+!Goblin
+| style="padding:5px 8px"| Cast 1 million Tax Collections in a single game
+|-
+!Undead
+| style="padding:5px 8px"| Have Night Time's spell duration be 60 seconds.
+|-
+!Demon
+| style="padding:5px 8px" | 2 days of Hellfire Blast activity time (This R).
+|-
+!Titan
+| style="padding:5px 8px"| 25,000 mana per second as pure Titan (no dragons, BL doesn't matter)
+|-
+!Druid
+| style="padding:5px 8px"| Have a mana regeneration of at least double your max mana
+|-
+! style="padding:5px 5px"| Faceless
+| style="padding:5px 8px"| Cast 100 Brainwaves in a single game
+|-
+!Dwarven 
+| style="padding:5px 8px"| Have 10,000 Excavations
+|-
+!Drow
+| style="padding:5px 8px"| 30 days offline across all Reincarnations
+|-
+!Dragon
+| style="padding:5px 8px"| Cast 5 spells at Tier 5 in less than 10 minutes
+|}
+
+== Unlock Builds ==
+''Main page: [[Merc_Builds#Lineage Builds - Level 20/25, R75+/R82+|Merc Builds]]''
+
+Credit to G00FBALL for finding and formulating the info. Original source can be found [http://musicfamily.org/realm/Lineages/ here]
+{{Sitenav}}
+[[Category:Realm Grinder Wiki]]
+[[Category:Upgrades]]
+[[Category:Unlock Requirements]]

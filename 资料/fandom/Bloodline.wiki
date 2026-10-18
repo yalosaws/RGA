@@ -1,0 +1,107 @@
+[[File:Bloodline choice.PNG|right|318x318px]][[File:Bloodline upgrade.PNG|left|]]'''Bloodline''' gives you the ability to choose a '''Faction Bloodline''', which is a kind of cross-faction perk that resets at [[abdications]].
+
+<br />
+* '''Cost:''' Free<ref>[[Updates#1.6 Secrets Of the Underworld|''Update 1.6.52.0'']]'': Bloodlines are now free to purchase once you unlock them.''</ref>
+* '''Unlock Requirements''': R7 + For each faction bloodline: to have bought 100 upgrades related to the faction in question, total, across all reincarnations. This includes [[Faction Upgrades]], Trade Treaties, Friendship Pacts, Alliances, [[Heritages]], and [[Spells#Spell Upgrades|Faction Spell Upgrades]].
+* '''Trophy & Upgrade:''' [[Bloodline#Bloodstream |Bloodstream]]''' '''
+* '''Upgrade Category:''' [[Upgrades#Allegiances Upgrades|Allegiances]]
+{{Clr}}
+
+== Faction Bloodlines ==
+{| class="wikitable" id="faction bloodlines" style="width:100%;"
+! colspan="3" | Faction Bloodlines
+|-
+! colspan="2" |Faction
+! Effect
+|-
+| [[File:Bloodline fairy.png]]
+! Fairy
+| style="padding: 3px 5px 3px 10px" |Increase the production of ''Farms'', ''Inns'' and ''Blacksmiths'' based on assistants owned.
+{{Formula|250 * x^{0.9}%|the number of assistants you have}}
+|-
+|[[File:Bloodline elven.png]]
+! Elven
+| style="padding: 3px 5px 3px 10px" |Increase the chance to find Faction Coins based on Faction Coins found in this game and auto click 3 times per second. Also multiplicatively increase Faction Coin find chance based on clicks made in this Era.
+{{Formula|floor(15 * ln(1 + x)^{1.75})|number of Faction Coins found in this game}}
+|-
+|[[File:Bloodline-angel.png]]
+! Angel
+| style="padding: 3px 5px 3px 10px" |Increase the duration of all spells based on spells cast in this Era.
+Also provides the ability to cast ''Holy Light'' regardless of alignment. If your alignment is Good, ''Holy Light'' bonus increases over its duration.
+
+''Formula: TBD''
+|-
+![[File:Bloodline goblin.png]]
+!Goblin
+| style="padding: 3px 5px 3px 10px" |Reduce all building cost multipliers.
+{{MultiplierReduction|0.02|1.13|1.15}}
+|-
+![[File:Bloodline-undead.png]]
+!Undead
+| style="padding: 3px 5px 3px 10px" |Multiplicatively increase assistants based on times you reincarnated.
+{{Formula|floor(8 * x^{0.8})|the number of times you have reincarnated}}
+|-
+![[File:Bloodline-demon.png]]
+!Demon
+| style="padding: 3px 5px 3px 10px" |Spells cast count more based on the maximum amount of Hell Portals you had in this Reincarnation.
+Also provides the ability to cast ''Blood Frenzy'' regardless of alignment. If your alignment is Evil, ''Blood Frenzy'' bonus increases based on time spent as Evil across all Reincarnations.
+
+{{Formula|stat|floor(0.04 * x^{0.8})%|Time Spent Being Evil (Total)|seconds}}
+|-
+![[File:Bloodline titan.png]]
+!Titan
+| style="padding: 3px 5px 3px 10px" |Increase the production of all buildings based on the amount of Royal Exchanges purchased.
+{{Formula|15 * x^{0.85}%|the amount of Royal Exchanges made}}
+|-
+![[File:Bloodline-druid.png]]
+!Druid
+| style="padding: 3px 5px 3px 10px" |Increase mana regeneration based on maximum mana.
+{{Formula|+(0.03 * x^{0.9})%|your maximum mana. (non-linear value)}}
+|-
+![[File:Bloodline-faceless.png]]
+!Faceless
+| style="padding: 3px 5px 3px 10px" |Increase maximum mana based on mana produced in this Era.
+Also provides the ability to cast ''Gem Grinder'' regardless of alignment. If your alignment is Neutral, ''Gem Grinder'' bonus increases chaotically based on assistants.
+
+{{Formula|stat|floor(30 * \log_{10}(1 + x)^{3.5})|your Mana Produced (This Game)}}
+|-
+![[File:Bloodline-dwarf.png]]
+!Dwarven
+| style="padding: 3px 5px 3px 10px" |Increase the base production of each building based on Excavation depth. Bonus increases with building tier.
+{{Formula|10 * x^{0.8}%|your number of excavations purchased}}
+|-
+![[File:Bloodline-drow.png]]
+!Drow
+| style="padding: 3px 5px 3px 10px" |Increase the production of all buildings based on mana produced in this Reincarnation.
+{{Formula|1.6 * x^{0.6}|time spent in this game}}
+|-
+![[File:DragonBloodline.png]]
+!Dragon
+| style="padding: 3px 5px 3px 10px" |Increase the production of all buildings based on Faction Coin find chance.
+{{Formula|4 * (x^{0.4})|your Faction Coin find chance}}
+|}
+
+== Bloodstream ==
+[[File:Bloodstream.png|left]]'''In-game description:''' ''Increase the production of all buildings based on the time spent as faction of the bloodline you are using. While you are Mercenary, a fraction of the total time spent as mercenary is added to your Bloodstream bonus based on the amount of mercenary upgrades purchased in this game from the faction of the bloodline you are using.''
+
+Unlocking all Faction Bloodlines (besides Dragon Faction) grants the Bloodstream [[Trophies#Secret|Secret Trophy]], which in turn grants the Bloodstream [[Upgrades|upgrade]].
+* '''Effect:''' Increases the production of all buildings based on the total time allied with the faction bloodline you are playing. ("''Time Spent Allied''" with at the bottom of the [[stats]].)
+* '''Cost:''' 1Tg (1e93 coins)
+* '''Formula:''' <math>0.1*x^{0.65}%</math> where x is your (adjusted) time spent affiliated with the bloodline's faction in seconds.
+<br />
+For '''[[Mercenary|Mercenaries]]''', Bloodstream works slightly differently, and a fraction of your "''Time Spent Allied with Mercenary''" is used in addition to the time spent allied with the faction your current bloodline belongs to. This fraction depends on the amount of upgrades that "match" the bloodline faction used in a build.<br />Mercenaries have 12 upgrades, so each upgrade represents 1/12 of the total Mercenary time. As Factions have 9 upgrades, the maximum fraction possible is 9/12.
+
+These "Matches" are indicated in [[Mercenary builds]]. Example: A build using Titan bloodline and 3 Titan upgrades will be said to have "3 matches" = 3/12th of your total time allied with Mercenaries will be used in the Bloodstream upgrade.
+
+Hovering over the Bloodstream upgrade, the tool-tip will show the Adjusted time spent.
+
+== Related ==
+* '''A400 ''Bloodspring'' [[Research]] Upgrade''' (R28): grants the <u>effect</u> of the bloodline of the faction you're currently playing, in addition to the bloodline that you have chosen. In the case of combinations with Prestige factions, the Prestige faction's bloodline will get selected. If you have already selected your (Prestige) faction's bloodline, the Bloodspring upgrade will have no effect.
+* '''A2950 ''Combination'' [[Research]] Upgrade''' (R77): Allows [[Mercenary|Mercenaries]] to select a 2nd Bloodine while also gaining all the base effect of its respective Lineage.
+
+== References ==
+<references />
+{{Sitenav}}
+[[Category:Upgrades]]
+[[Category:Unlock Requirements]]
+[[Category:Realm Grinder Wiki]]

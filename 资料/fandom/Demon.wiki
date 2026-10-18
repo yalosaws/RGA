@@ -1,0 +1,202 @@
+{{tocright}}
+[[File:Demon_Faction_Building.png|thumb|left]]
+{{Description|"The mighty and fearless Demons cannot bother with petty trifles, they only care for greatness and power. Affiliating yourself with the Demons faction will hugely improve the output of higher tier buildings." }}  
+
+== The Demon Faction ==
+[[File:Demon champion trophy.png|left|54x54px|Demon Champion Trophy]]
+[[File:Hell-rush-spell-upgrade.png|right|Hell Rush]]
+Part of the Evil Vanilla Factions, the '''Demons''' have upgrades increasing production of highest tier [[buildings]] and perks based on the amount of [[trophies]] you have. <br />Their [[Bloodline]], more used in late games, can become powerful for long reincarnations as it increases production based on total time spent being Evil. 
+* '''[[Alignment]]''': '''''Evil'''''
+* '''[[Alignment#Leges|Leges]]''': '''''Chaos'''''
+* '''[[Spells|Faction Spell]]''': '''''Hellfire Blast''''' - Increases the production of Evil Fortresses and Hell Portals.  
+* '''[[Spells#Spell Upgrades|Spell Upgrade]]''': '''''Hell Rush''''' - ''Hellfire Blast'' also boosts Halls of Legends.   
+** Unlock requirement: Cast ''Hellfire Blast'' in the first 60 seconds of a playtime.  
+* '''[[Heritage]]''': Increase the production of all buildings by 0.3% per Hall of Legends you own.
+* '''[[Bloodline]]''': Increase production bonus from gems based on total time spent being Evil.<br />{{Formula|floor(0.04 * x^{0.8})%|your Time Spent Being Evil (Total) in seconds stat}}  
+* '''[[Challenge|Challenge Reward]]''': '''''Hellfire Burst''''' - Reduces Hellfire Blast mana cost based on of the amount of trophies you have unlocked.<br />{{Formula|floor(0.25 * x)|the amount of trophies unlocked}}  
+* '''[[Unique Buildings|Research Building]]''':  '''''Infernal Realms''''' (from Hell Portals)
+* '''[[Research#Research#The Facilities & Related Factions|Research Facility]]''': '''''Warfare'''''
+* '''[[Buildings#Unique Buildings|Leges Building]]''':  '''''Burning Abyss''''' (from Hall of Legends)
+* '''Faction Unlock Requirements''': None (All Vanilla Factions are enabled by default)
+
+== Tier 1 Upgrades ==
+{| class="wikitable" style="width:100%"
+|-
+! colspan="2" |Name
+! width="75px" |Cost
+! Effect
+|-
+![[File:Demon.png]]
+! width="110px" |''Demon Trade Treaty''
+| style="padding:0 8px;" |''20 Demon Coins''
+| style="padding:0 8px;" |''Unlocks Demon Upgrades.''
+|-
+![[File:Demon-faction-upgrade-11.png]]
+!Torture Chambers
+| style="padding:0 8px;" |{{Number|50 M|table}}
+| style="padding:0 8px;" |Increase the production of Evil Fortresses based on assistants owned.
+''Formula:'' <math>(6 \times \ln(1+x)^{3})%</math> where x is the amount of assistants you own.
+|-
+![[File:Demon-faction-upgrade-12.png]]
+!Infernal Magic
+| style="padding:0 8px;" |{{Number|500 M|table}}
+| style="padding:0 8px;" |Increase Mana Regeneration based on Hell Portals owned.
+|-
+![[File:Demon-faction-upgrade-13.png]]
+!Burning Legion
+| style="padding:0 8px;" |{{Number|5 B|table}}
+| style="padding:0 8px;" |Gain additional assistants based on the highest amount of Hell Portals built in this Reincarnation.
+|}
+
+== Tier 2 Upgrades ==
+{| class="wikitable" style="width:100%"
+|-
+! colspan="2" |Name
+! width="75px" |Cost
+! Effect
+|-
+![[File:Demon-Friendship-Pact demon-Faction upgrade.png]]
+! width="110px" |''Demon Friendship Pact''
+| style="padding:0 8px;" |''100 Demon Coins''
+| style="padding:0 8px;" |''Unlocks more Demon Upgrades.''
+|-
+![[File:Demon-faction-upgrade-21.png]]
+!Lava Pits
+| style="padding:0 8px;" |{{Number|500 B|table}}
+| style="padding:0 8px;" |Increase the base production of Evil Fortresses by +900000 and Hell Portals by +8.8e6.
+|-
+![[File:Demon-faction-upgrade-22.png]]
+!Demon Overseers
+| style="padding:0 8px;" |{{Number|5 T|table}}
+| style="padding:0 8px;" |Increase the production of the three highest building tiers based on the Trophies unlocked.
+|-
+![[File:Demon-faction-upgrade-23.png]]
+!Demonic Presence
+| style="padding:0 8px;" |{{Number|50 T|table}}
+| style="padding:0 8px;" |Increase Maximum Mana based on Evil spells cast in this Reincarnation.
+|}
+
+== Tier 3 Upgrades ==
+{| class="wikitable" style="width:100%"
+|-
+! colspan="2" |Name
+! width="75px" |Cost
+! Effect
+|-
+![[File:Demon-Alliance demon-Faction upgrade.png]]
+! width="110px" |''Demon Alliance''
+| style="padding:0 8px;" |''500 Demon Coins''
+| style="padding:0 8px;" |''Unlocks more Demon Upgrades.''
+|-
+![[File:Demon-faction-upgrade-31.png]]
+!Devil Tyrant
+| style="padding:0 8px;" |{{Number|5 Qa|table}}
+| style="padding:0 8px;" |Increase the production of the three highest building tiers based on time spent as Evil in this Reincarnation. Also makes the three highest building tiers count more by 100%.
+|-
+![[File:Demon-faction-upgrade-32.png]]
+!Evil Conquerors
+| style="padding:0 8px;" |{{Number|50 Qa|table}}
+| style="padding:0 8px;" |Increase of production of all buildings based on the highest amount of Hell Portals built in this Reincarnation.
+|-
+![[File:Demon-faction-upgrade-33.png]]
+!Very Bad Guys
+| style="padding:0 8px;" |{{Number|500 Qa|table}}
+| style="padding:0 8px;" |Increase the production of Hell Portals based on Hellfire Blast activity time in this Reincarnation.
+|}
+
+== Unique Buildings ==
+[[File:Demon_Unique_Building_Design.png|thumb|left]]
+[[File:Special-building-demon.png|right|190x190px]]
+[[File:Burning Abyss.png|right]]
+At R16, the Demon's ''Hell Portals'' can be upgraded to a [[Buildings#Unique Buildings|Unique Building]]: '''''Infernal Realm''''', which is required for some [[challenges]] and [[research]] quests. 
+
+At R100, the Demon's ''Hall of Legends'' can be upgraded to a [[Buildings#Unique Buildings|Unique Building]]: '''''Burning Abyss''''', which when bought will grant access to the [[Faction Union]] upgrade.{{Clr}}
+
+== Demon Research ==
+[[File:Research-new-progress-system-msg.PNG|right|250px]]
+Upon reaching R16, the game advisor tells us that the Vanilla factions have gained tremendous power. Their power can be ours if we get ready and seek them again. 
+
+To unlock Demon research, play the Demon faction and simply follow the appearing quests (Do not [[prestige]]). These can be done in separate game plays.
+{| class="wikitable" style="width:100%;"
+! colspan="5" |Demon Research Requirements
+|-
+! colspan="2" |Name
+!In-game Description
+!Requirements
+!Cost
+|-
+![[File:D-research-quest.png]]
+! width="90px" |Infernal Realm Quest
+|''Useless underling, be warned! The Demons are going to invade your world with all their might. If you know which side you want to be on when that happens, build those Hell Portals!''
+<small>''Required once throughout the entire game play and does not count towards the bought upgrade stat.''</small>
+|R16 + 1500 ''Hell Portals''
+|{{Number|10 Dtg|table}}
+|-
+![[File:Infernal_Realm_icon.png]]
+!Infernal Realm
+|Upgrade Hell Portals To Infernal Realms, boosting their production by 100% per Trophy you unlocked and unlocking more unique perks for the building.<br />+Access to the Research Facilities.
+|Buy ''Infernal Realm Quest''
+|{{Number|10 Ttg|table}}
+|-
+![[File:Warfare Facility icon.png]]
+!Strategy Room
+|Unlocks the ''Warfare'' research facility and increases Demon production by 100000%, plus an additional bonus based on ''Warfare'' research points.
+<small>''Required once throughout the entire game play and does not count towards the bought upgrade stat.''</small>
+|All Demon faction upgrades bought, ''Infernal Realm''
+|{{Number|1e121}} coins, {{Number|1e6}} Demon coins
+|-
+! colspan="5" |Trophy & Upgrade
+|-
+![[File:Warlord.png]]
+!Warlord
+|Increase ''Warfare'' upgrade slot by 1
+|R20+, Discover at least 10 ''Warfare'' Researches
+|{{Number|2.5e152|table}}
+|-
+|}
+
+== Demon Leges ==
+Upon reaching R100, the ''[[Alignments|Proof of Chaos]]'' will become available, which provides a quest for an additional unique building, which when bought will grant access to the its Union upgrade.
+{| class="wikitable" style="width:100%;"
+! colspan="6" |Demon Leges Requirements
+|-
+! colspan="2" |Name
+!Type
+!Description
+! width="110px" |Requirement
+! width="75px" |Cost
+|-
+![[File:D-research-quest.png]]
+! width="90px"|Burning Abyss Quest
+|Quest [[Upgrade]]
+|Grants access to Unique Building.
+|More than 10 Minutes ''[[Call to Arms]]''
+|{{Number|1 Ud|table}}
+|-
+![[File:Burning Abyss Upgrade.png]]
+!Burning Abyss
+|[[Buildings#Unique Buildings|Unique Building]]
+|Upgrade ''Hall of Legends'' to ''Burning Abyss'', boosting their production based on time spent as Evil and unlocking more unique perks for the building.<br />''{{Formula| \sum_{i \in \{ \text{digits of } \left\lfloor 1.25 \times x \right\rfloor\} }{\left(i ^ {\frac{2 + \left\lfloor\log_{10}(1 + 1.25 \times x) + 1\right\rfloor}{10} }\right)}% | evil time this R}}<br />+Access to the Faction Union.
+|''Burning Abyss Quest''
+|{{Number|1 Td|table}}
+|-
+![[File:DemonsUnion.png]]
+!Demons Union
+|Faction Union
+|Grants access to Union Upgrade.
+|''Burning Abyss'' Unique Building
+|{{Number|1 Qi}} Demon Coins
+|-
+![[File:AbyssalFurnace.png]]
+!Abyssal Furnace
+|Union Upgrade
+|Increase the production of all buildings based on the amount of ''Burning Abysses'' you own. Higher tiers get better bonuses.
+{{Formula|naked|t^2\times x^{0.5}|where x is Hall of legends count, T is building tier.}}
+|Demons Union
+|{{Number|1 Nod|table}}
+|}
+
+
+{{Sitenav}}
+[[Category:Demon| ]]
+[[Category:Factions]]

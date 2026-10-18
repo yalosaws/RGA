@@ -1,0 +1,342 @@
+R220+ Builds (Not updated for v4.2) 
+ Each Faction has its own unique and universal Heritage that you can unlock and buy in each subsequent abdication.
+ To unlock them, you need to unlock the Champion Trophy of the respective faction, which requires buying the 9 faction upgrades in this game as well as the Trade Treaty, Friendship Pact and Alliance)
+ Once unlocked, the upgrades cost the following amount of Faction Coins (of the matching type):
+ Vanilla : 5,000 of that faction.
+ Neutral : 25,000 of the two matching factions.
+ Prestige : 75,000 of that faction.
+ Mercenary (R3+) : 100,000 of every faction coin type.
+ Neutral Prestige (R46+) : 400 B (4e11) of the two matching factions.
+ Elite (R125+) : 1 Ud (1e36) each of the two matching factions.
+ Heritages Menu 
+ Advanced Heritages Menu 
+ Fairy Heritage 
+ Cost : 5,000 Fairy Coins
+ Requirements : Fairy Champion Trophy
+ Effect : Increase the production of all buildings by 0.075% per Farm, Inn and Blacksmith you own.
+ " coords="10,10,64,64" shape="rect">
+ Elven Heritage 
+ Cost : 5,000 Elven Coins
+ Requirements : Elven Champion Trophy
+ Effect : Increase your chance to find Faction Coins by +5% and increase your click reward based on your chance to find Faction Coins.
+ Formula : (2 * ln(1 + x) ^ 2)%, where x is your chance to find faction coins.
+ " coords="70,10,124,64" shape="rect">
+ Angelic Heritage 
+ Cost : 5,000 Angel Coins
+ Requirements : Angel Champion Trophy
+ Effect : Multiplicatively increase Mana Regeneration by 10%.
+ " coords="130,10,184,64" shape="rect">
+ Goblin Heritage 
+ Cost : 5,000 Goblin Coins
+ Requirements : Goblin Champion Trophy
+ Effect : Increase the production of all buildings based on the amount of gems you own.
+ Formula : floor(7.5 * log10(1 + x))%, where x is the amount of gems you have.
+ " coords="10,70,64,124" shape="rect">
+ Undead Heritage 
+ Cost : 5,000 Undead Coins
+ Requirements : Undead Champion Trophy
+ Effect : You gain additional assistants based on the time spent in this game.
+ Formula : +(floor(1 + 1.6 * (x / 3600) ^ 0.6)), where x is time spent this game.
+ " coords="70,70,124,124" shape="rect">
+ Demonic Heritage 
+ Cost : 5,000 Demon Coins
+ Requirements : Demon Champion Trophy
+ Effect : Increase the production of all buildings by 0.3% per Hall of Legends you own.
+ " coords="130,70,184,124" shape="rect">
+ Titan Heritage 
+ Cost : 25,000 Angel Coins, 25,000 Goblin Coins
+ Requirements : Titan Champion Trophy
+ Effect : Increase Royal Exchanges production bonus by an additional 15% each.
+ " coords="10,130,64,184" shape="rect">
+ Druid Heritage 
+ Cost : 25,000 Elven Coins, 25,000 Demon Coins
+ Requirements : Druid Champion Trophy
+ Effect : Increase maximum Mana by +1 every 15 buildings you own.
+ " coords="70,130,124,184" shape="rect">
+ Faceless Heritage 
+ Cost : 25,000 Fairy Coins, 25,000 Undead Coins
+ Requirements : Faceless Champion Trophy
+ Effect : Your production is increased based on the highest amount of buildings purchased in a single game.
+ Formula : (0.25 * x ^ 0.75)%, where x is your Buildings Owned (Max) stat.
+ " coords="130,130,184,184" shape="rect">
+ Dwarven Heritage 
+ Cost : 75,000 Dwarven Coins
+ Requirements : Dwarven Champion Trophy
+ Effect : Increase the production of all buildings based on the total amount of Excavations you made.
+ Formula : (2 * (x ^ 0.9))%, where x is the number of excavations you've purchased.
+ " coords="10,190,64,244" shape="rect">
+ Drow Heritage 
+ Cost : 75,000 Drow Coins
+ Requirements : Drow Champion Trophy
+ Effect : Increase the production of assistants based on the amount of Royal Exchanges you purchased in this game.
+ Formula : (2 * x ^ 0.8)%, where x is the amount of Royal Exchanges purchased in this game.
+ " coords="70,190,124,244" shape="rect">
+ Dragon Heritage 
+ Cost : 400 B (4e11) Dwarven and Drow coins
+ Requirements : Dragons Champion Trophy
+ Effect : Increase assistants production based on time spent affiliated with Dragons in this Reincarnation.
+ Formula : (0.3 * x ^ 0.7)%, x is time in seconds affiliated with Dragons (This Reincarnation).
+ " coords="130,190,184,244" shape="rect">
+ Archon Heritage 
+ Cost : 1 Ud (1e36) Angel and Undead Coins
+ Requirements : Archon Champion Trophy 
+ Effect : Buildings, Assistants, Royal Exchanges, Spells cast and Clicks count more, by 10%.
+ " coords="10,250,64,304" shape="rect">
+ Djinn Heritage 
+ Cost : 1 Ud (1e36) Fairy and Demon Coins
+ Requirements : Djinn Champion Trophy 
+ Effect : Increase the production of Unique Buildings based on Limited Wish activity time in this Reincarnation.
+ Formula : (0.3 * x ^ 0.65)%, where x is Limited Wish activity time in this Reincarnation in seconds.
+ " coords="70,250,124,304" shape="rect">
+ Makers Heritage 
+ Cost : 1 Ud (1e36) Elven and Goblin Coins
+ Requirements : Makers Champion Trophy 
+ Effect : Multiplicatively increase maximum mana based on Tax Collections cast in this game.
+ Formula : (2 * log10(1 + x) ^ 1.75)%, where x is Tax Collections cast this game.
+ " coords="130,250,184,304" shape="rect">
+ Mercenary Badge 
+ Cost : 100,000 (of each) Faction Coins
+ Unlock Requirements : Mercenary Champion Trophy
+ Effect : Increase the production of all buildings based on the highest amount of coins you gained in a single game.
+ Formula : floor(5 * log10(1 + x))%, where x is your Coins Gained (Max) stat.
+ " coords="10,310,64,364" shape="rect">
+ Advanced Fairy Heritage 
+ Cost : 1 Sp (1e24) Fairy Coins
+ Requirements : Fairy Master trophy and 6 hours activity time (This Game) of Fairy Chanting. 
+ Effect : Gain assistants based on amount of Farms, Inns and Blacksmiths (additive).
+ Formula : +(2 * x ^ 0.8), where x is amount of Farms, Inns and Blacksmiths you own.
+ " coords="10,10,64,64" shape="rect">
+ Advanced Elven Heritage 
+ Cost : 1 Sp (1e24) Elven Coins
+ Requirements : Elven Master trophy and 6 hours activity time (This Game) of Moon Blessing. 
+ Effect : Multiplicatively increase Faction Coin find chance based on the amount of clicks made in this Reincarnation.
+ Formula : (0.25 * ln(1 + x) ^ 2)%, where x is amount of clicks this reincarnation.
+ " coords="70,10,124,64" shape="rect">
+ Advanced Angelic Heritage 
+ Cost : 1 Sp (1e24) Angel Coins
+ Requirements : Angel Master trophy and 6 hours activity time (This Game) of God's Hand. 
+ Effect : Increase mana regeneration based on the amount of spells cast in this game.
+ Formula : +(5 * x ^ 0.25), where x is spells cast this game.
+ " coords="130,10,184,64" shape="rect">
+ Advanced Goblin Heritage 
+ Cost : 1 Sp (1e24) Goblin Coins
+ Requirements : Goblin Master trophy and 6 hours activity time (This Game) of Goblin's Greed. 
+ Effect : Tax Collections are worth more seconds of production based on Gems owned. (multiplicative).
+ Formula : (0.25 * log10(1 + x) ^ 0.95)%, where x is gems owned.
+ " coords="10,70,64,124" shape="rect">
+ Advanced Undead Heritage 
+ Cost : 1 Sp (1e24) Undead Coins
+ Requirements : Undead Master trophy and 6 hours activity time (This Game) of Night Time. 
+ Effect : Assistants count more based on your Offline Bonus.
+ Formula : (0.025 * ln(1 + x) ^ 2)%, where x is offline bonus multiplier.
+ " coords="70,70,124,124" shape="rect">
+ Advanced Demonic Heritage 
+ Cost : 1 Sp (1e24) Demon Coins
+ Requirements : Demon Master trophy and 6 hours activity time (This Game) of Hellfire Blast. 
+ Effect : Increase the production of all buildings based on trophies unlocked.
+ Formula : (0.25 * x ^ 0.75)%, where x is amount of trophies unlocked.
+ " coords="130,70,184,124" shape="rect">
+ Advanced Titan Heritage 
+ Cost : 1 Sp (1e24) Angel and Goblin Coins
+ Requirements : Titan Master trophy and 6 hours activity time (This Game) of Lightning Strike. 
+ Effect : Increase maximum mana based on the amount of Royal Exchanges purchased.
+ Formula : (0.85 * ln(1 + x) ^ 1.15)%, where x is Royal Exchanges purchased.
+ " coords="10,130,64,184" shape="rect">
+ Advanced Druid Heritage 
+ Cost : 1 Sp (1e24) Elven and Demon Coins
+ Requirements : Druid Master trophy and 6 hours activity time (This Game) of Grand Balance. 
+ Effect : Multiplicatively increase Faction Coin find chance based on the sum of all your spells durations.
+ Formula : (9 * x ^ 0.3)%, where x is the sum of all your spell durations.
+ " coords="70,130,124,184" shape="rect">
+ Advanced Faceless Heritage 
+ Cost : 1 Sp (1e24) Fairy and Undead Coins
+ Requirements : Faceless Master trophy and 6 hours activity time (This Game) of Brainwave. 
+ Effect : Gain assistants based on the amount of Unique Buildings owned (additive).
+ Formula : +(2.5 * x ^ 0.8), where x is Unique Buildings owned.
+ " coords="130,130,184,184" shape="rect">
+ Advanced Dwarven Heritage 
+ Cost : 1 Sp (1e24) Dwarven Coins
+ Requirements : Dwarf Master Trophy and 6 hours activity time (This Game) of Diamond Pickaxe. 
+ Effect : Increase the production of all buildings based on the amount of current excavations and excavation resets. (This Reincarnation).
+ Formula : (0.025 * (x * (1 + y + z)) ^ 0.65)%, where x is current excavations and y & z are free and ruby excavation resets done in this Reincarnation.
+ " coords="10,190,64,244" shape="rect">
+ Advanced Drow Heritage 
+ Cost : 1 Sp (1e24) Drow Coins
+ Requirements : Drow Master trophy and 6 hours activity time (This Game) of Combo Strike. 
+ Effect : Increase the production of all buildings based on offline bonus and time spent in this game.
+ Formula : (0.0008 * log10(1 + x) * y ^ 0.8)%, where x offline bonus and y is time spent this game.
+ " coords="70,190,124,244" shape="rect">
+ Advanced Dragon Heritage 
+ Cost : 1 Sp (1e24) Dwarven and Drow Coins
+ Requirements : Dragon Master trophy and 6 hours activity time (This Game) of Dragon's Breath. 
+ Effect : The amount of active spells counts 5% more for all purposes.
+ " coords="130,190,184,244" shape="rect">
+ Heritages
+ Fairy Heritage 
+ Cost : 5,000 Fairy Coins
+ Requirements : Fairy Champion Trophy
+ Effect : Increase the production of all buildings by 0.075% per Farm, Inn and Blacksmith you own.
+ Elven Heritage 
+ Cost : 5,000 Elven Coins
+ Requirements : Elven Champion Trophy
+ Effect : Increase your chance to find Faction Coins by +5% and increase your click reward based on your chance to find Faction Coins.
+ Formula : (2 * ln(1 + x) ^ 2)%, where x is your chance to find faction coins.
+ Angelic Heritage 
+ Cost : 5,000 Angel Coins
+ Requirements : Angel Champion Trophy
+ Effect : Multiplicatively increase Mana Regeneration by 10%.
+ Goblin Heritage 
+ Cost : 5,000 Goblin Coins
+ Requirements : Goblin Champion Trophy
+ Effect : Increase the production of all buildings based on the amount of gems you own.
+ Formula : floor(7.5 * log10(1 + x))%, where x is the amount of gems you have.
+ Undead Heritage 
+ Cost : 5,000 Undead Coins
+ Requirements : Undead Champion Trophy
+ Effect : You gain additional assistants based on the time spent in this game.
+ Formula : +(floor(1 + 1.6 * (x / 3600) ^ 0.6)), where x is time spent this game.
+ Demonic Heritage 
+ Cost : 5,000 Demon Coins
+ Requirements : Demon Champion Trophy
+ Effect : Increase the production of all buildings by 0.3% per Hall of Legends you own.
+ Titan Heritage 
+ Cost : 25,000 Angel Coins, 25,000 Goblin Coins
+ Requirements : Titan Champion Trophy
+ Effect : Increase Royal Exchanges production bonus by an additional 15% each.
+ Druid Heritage 
+ Cost : 25,000 Elven Coins, 25,000 Demon Coins
+ Requirements : Druid Champion Trophy
+ Effect : Increase maximum Mana by +1 every 15 buildings you own.
+ Faceless Heritage 
+ Cost : 25,000 Fairy Coins, 25,000 Undead Coins
+ Requirements : Faceless Champion Trophy
+ Effect : Your production is increased based on the highest amount of buildings purchased in a single game.
+ Formula : (0.25 * x ^ 0.75)%, where x is your Buildings Owned (Max) stat.
+ Dwarven Heritage 
+ Cost : 75,000 Dwarven Coins
+ Requirements : Dwarven Champion Trophy
+ Effect : Increase the production of all buildings based on the total amount of Excavations you made.
+ Formula : (2 * (x ^ 0.9))%, where x is the number of excavations you've purchased.
+ Drow Heritage 
+ Cost : 75,000 Drow Coins
+ Requirements : Drow Champion Trophy
+ Effect : Increase the production of assistants based on the amount of Royal Exchanges you purchased in this game.
+ Formula : (2 * x ^ 0.8)%, where x is the amount of Royal Exchanges purchased in this game.
+ Mercenary Badge 
+ Cost : 100,000 (of each) Faction Coins
+ Unlock Requirements : Mercenary Champion Trophy
+ Effect : Increase the production of all buildings based on the highest amount of coins you gained in a single game.
+ Formula : floor(5 * log10(1 + x))%, where x is your Coins Gained (Max) stat.
+ Dragon Heritage 
+ Cost : 400 B (4e11) Dwarven and Drow coins
+ Requirements : Dragons Champion Trophy
+ Effect : Increase assistants production based on time spent affiliated with Dragons in this Reincarnation.
+ Formula : (0.3 * x ^ 0.7)%, x is time in seconds affiliated with Dragons (This Reincarnation).
+ Archon Heritage 
+ Cost : 1 Ud (1e36) Angel and Undead Coins
+ Requirements : Archon Champion Trophy
+ Effect : Buildings, Assistants, Royal Exchanges, Spells cast and Clicks count more, by 10%.
+ Djinn Heritage 
+ Cost : 1 Ud (1e36) Fairy and Demon Coins
+ Requirements : Djinn Champion Trophy
+ Effect : Increase the production of Unique Buildings based on Limited Wish activity time in this Reincarnation.
+ Formula : (0.3 * x ^ 0.65)%, where x is Limited Wish activity time in this Reincarnation in seconds.
+ Makers Heritage 
+ Cost : 1 Ud (1e36) Elven and Goblin Coins
+ Requirements : Makers Champion Trophy
+ Effect : Multiplicatively increase maximum mana based on Tax Collections cast in this game.
+ Formula : (2 * log10(1 + x) ^ 1.75)%, where x is Tax Collections cast this game.
+ Advanced Heritages
+ Advanced Heritages appear in R116+, and can be unlocked for all but the Elite Prestige and Mercenary factions.
+ To unlock them, you need to unlock the Master Trophy of that faction, which requires buying the 16 faction upgrades in this game (this includes Trade Treaty, Friendship Pact, Alliance and Union), while having Level 30 in their respective lineage, and then get 6 hours of spell activity time this game in their respective spell.
+ Once unlocked, the upgrades cost 1 Sp (1e24) Faction Coins of the matching type.
+ Note : When using their lineage, Advanced Heritage powers are multiplied by the level of the lineage.
+ Formula : *(1 + 0.3 * level)
+ Note : Faction Ruler doubles the power of an individual Advanced Heritage if it matches the current alignment (quadruples the power if both alignments match).
+ Advanced Fairy Heritage 
+ Cost : 1 Sp (1e24) Fairy Coins
+ Requirements : Fairy Master trophy and 6 hours activity time (This Game) of Fairy Chanting.
+ Effect : Gain assistants based on amount of Farms, Inns and Blacksmiths (additive).
+ Formula : +(2 * x ^ 0.8), where x is amount of Farms, Inns and Blacksmiths you own.
+ Advanced Elven Heritage 
+ Cost : 1 Sp (1e24) Elven Coins
+ Requirements : Elven Master trophy and 6 hours activity time (This Game) of Moon Blessing.
+ Effect : Multiplicatively increase Faction Coin find chance based on the amount of clicks made in this Reincarnation.
+ Formula : (0.25 * ln(1 + x) ^ 2)%, where x is amount of clicks this reincarnation.
+ Advanced Angelic Heritage 
+ Cost : 1 Sp (1e24) Angel Coins
+ Requirements : Angel Master trophy and 6 hours activity time (This Game) of God's Hand.
+ Effect : Increase mana regeneration based on the amount of spells cast in this game.
+ Formula : +(5 * x ^ 0.25), where x is spells cast this game.
+ Advanced Goblin Heritage 
+ Cost : 1 Sp (1e24) Goblin Coins
+ Requirements : Goblin Master trophy and 6 hours activity time (This Game) of Goblin's Greed.
+ Effect : Tax Collections are worth more seconds of production based on Gems owned. (multiplicative).
+ Formula : (0.25 * log10(1 + x) ^ 0.95)%, where x is gems owned.
+ Advanced Undead Heritage 
+ Cost : 1 Sp (1e24) Undead Coins
+ Requirements : Undead Master trophy and 6 hours activity time (This Game) of Night Time.
+ Effect : Assistants count more based on your Offline Bonus.
+ Formula : (0.025 * ln(1 + x) ^ 2)%, where x is offline bonus multiplier.
+ Advanced Demonic Heritage 
+ Cost : 1 Sp (1e24) Demon Coins
+ Requirements : Demon Master trophy and 6 hours activity time (This Game) of Hellfire Blast.
+ Effect : Increase the production of all buildings based on trophies unlocked.
+ Formula : (0.25 * x ^ 0.75)%, where x is amount of trophies unlocked.
+ Advanced Titan Heritage 
+ Cost : 1 Sp (1e24) Angel and Goblin Coins
+ Requirements : Titan Master trophy and 6 hours activity time (This Game) of Lightning Strike.
+ Effect : Increase maximum mana based on the amount of Royal Exchanges purchased.
+ Formula : (0.85 * ln(1 + x) ^ 1.15)%, where x is Royal Exchanges purchased.
+ Advanced Druid Heritage 
+ Cost : 1 Sp (1e24) Elven and Demon Coins
+ Requirements : Druid Master trophy and 6 hours activity time (This Game) of Grand Balance.
+ Effect : Multiplicatively increase Faction Coin find chance based on the sum of all your spells durations.
+ Formula : (9 * x ^ 0.3)%, where x is the sum of all your spell durations.
+ Advanced Faceless Heritage 
+ Cost : 1 Sp (1e24) Fairy and Undead Coins
+ Requirements : Faceless Master trophy and 6 hours activity time (This Game) of Brainwave.
+ Effect : Gain assistants based on the amount of Unique Buildings owned (additive).
+ Formula : +(2.5 * x ^ 0.8), where x is Unique Buildings owned.
+ Advanced Dwarven Heritage 
+ Cost : 1 Sp (1e24) Dwarven Coins
+ Requirements : Dwarf Master Trophy and 6 hours activity time (This Game) of Diamond Pickaxe.
+ Effect : Increase the production of all buildings based on the amount of current excavations and excavation resets. (This Reincarnation).
+ Formula : (0.025 * (x * (1 + y + z)) ^ 0.65)%, where x is current excavations and y & z are free and ruby excavation resets done in this Reincarnation.
+ Advanced Drow Heritage 
+ Cost : 1 Sp (1e24) Drow Coins
+ Requirements : Drow Master trophy and 6 hours activity time (This Game) of Combo Strike.
+ Effect : Increase the production of all buildings based on offline bonus and time spent in this game.
+ Formula : (0.0008 * log10(1 + x) * y ^ 0.8)%, where x offline bonus and y is time spent this game.
+ Advanced Dragon Heritage 
+ Cost : 1 Sp (1e24) Dwarven and Drow Coins
+ Requirements : Dragon Master trophy and 6 hours activity time (This Game) of Dragon's Breath.
+ Effect : The amount of active spells counts 5% more for all purposes.
+ | Resources | Soft Resets | Buildings | Heritages | Bloodlines 
+ | Spells | Excavations | Challenges | Upgrades | Trophies 
+ | Factions | Research |
+ | Merc Builds | Research Builds | Prestige Builds | Dragon Unlock | Neutral Prestige Builds | Research Tree |
+ | Good : Fairy, Elf , Angel Evil : Goblin , Undead , Demon Neutral : Titan , Druid , Faceless"> Vanilla Factions 
+ | Fairy Elf Angel "> Good Factions 
+ | Goblin Undead Demon"> Evil Factions 
+ | Titan Druid Faceless"> Neutral Factions 
+ | Dwarf Drow Dragon"> Prestige Factions 
+ | Archon Djinn Makers"> A2 Elite Factions |
+ | Events | Latest Major Patch | Changelog | Notation | Terminology | Tools | Kongregate Links |
+ | Fairy 
+ | Elven 
+ | Angel 
+ | Goblin 
+ | Undead 
+ | Demon 
+ | Titan 
+ | Druid 
+ | Faceless |
+ | Mercenary 
+ | Dwarf 
+ | Drow 
+ | Dragon 
+ | Archon 
+ | Djinn 
+ | Makers |
+ 

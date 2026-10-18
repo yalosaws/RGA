@@ -1,0 +1,756 @@
+R220+ Builds (Not updated for v4.2) 
+ There are two kinds of artifacts 
+ Quest Artifacts and Lore Artifacts 
+ For Artifact Sets, go to Artifact Sets 
+ In-game description 
+ Enter the Archeology Association to control the progress of your Excavations. There you will be able to fund more excavations to find Faction Coins, the rare Rubies and ancient Artifacts from the civilizations of the old.
+ Archaeology was first implemented in the "Ancient Races" expansion for introducing the Neutral Factions.
+ Excavating enables to find Rubies (See the Ruby page), with luck: Faction Coins, and at certain thresholds or under certain conditions: Artifacts. Specific artifacts are required to unlock the Neutral & Prestige Factions.
+ Some artifacts will reward direct bonuses and the amount of discovered artifacts take part in some Research upgrades.
+ Requirements 
+ Archaeology is unlocked once you have over 1 B (1e9) gems, produced over 10 Oc (1e28) coins and bought the
+ Archeology Upgrade .
+ Upgrade Cost : 100 Oc (1e29). To be bought once throughout the entire game and permanently unlocks an "Excavation" button which will appear on the left under the Upgrades tab.
+ To unlock the chance to find Lore Artifacts , it requires the
+ Survey Equipment Upgrade .
+ Upgrade Cost : 100 Dc (1e35) and at least 100 excavations. To be bought once throughout the entire game and does not show up as bought upgrade.
+ Excavations 
+ The first excavation costs 1 Oc (1e27) coins, and each subsequent excavation costs without any cost multiplier reduction 20% more than the one before.
+ Cost Formula for the x-th excavation : (1e27 ^ (0.75 ^ A) * M ^ (x - 1)), where A is the number of times you have ascended and M the excavation cost multiplier.
+ The excavation cost multiplier is equal to:
+ - A0: (1 + 0.2 - C), where C is the sum of your flat cost reduction upgrades (such as DN8 or E290).
+ - A1+: (1 + (0.2 - C) / (5 * A)), where C is the sum of your flat cost reduction upgrades and A is the number of times you have ascended.
+ Every time you excavate, you have a 35% (40% with 'That Excavated Quickly' upgrade) chance per excavation to find a certain amount of Faction Coins as reward.
+ Faction Coin Reward Formula : (1500 + 0.05 * (x - 1) ^ 2.75), where x is the number of excavations you have.
+ Note : Every time you reincarnate or ascend, your excavation counter will be set back to zero.
+ Excavation Reset 
+ To be able to do more excavations within a Reincarnation you can do an Excavation Reset, which also sets the counter back to zero. There are two options:
+Ruby Reset and Free Reset.
+ Ruby Cost for Ruby Reset : (floor(x / 3000) + 1), where x is the number of excavations.
+ Note : Not recommended. It is better to spend rubies in ruby power, unless you have very specific reason to spend them on a reset.
+ Free Reset Requirement Formula : (2000 + 50 * R + 500 * x), where R is the number of times you have reincarnated and x is the amount of Free Resets already done this Reincarnation.
+ Note : When doing a Free Reset, you will lose all gold on hand and receive a 90% production penalty until you abdicate or reincarnate.
+ Note : Free Resets are not available until around R30, since the requirement is too high for lower stages.
+ Note : Each ruby found from excavation is a single all-time reward. No matter how the counter is set back to zero, you cannot find the same ruby again.
+ Ancient Stoneslab 1 
+ Description : We discovered an ancient stone slab written in old scriptures. It appears to say something about Halls of Legends.
+ Requirement : 5th Excavation
+ Effect : 1st clue required to unlock the Titan Alliance.
+ " coords="3,43,56,96" shape="rect">
+ Fossilized Piece of Bark 1 
+ Description : We discovered a fossilized piece of Bark with the image of a Faction Coin carved into it.
+ Requirement : 10th Excavation
+ Effect : 1st clue required to unlock the Druid Alliance.
+ " coords="63,43,116,96" shape="rect">
+ Bone Fragment 1 
+ Description : We discovered a sundial shaped artefact, probably made of animal bones.
+ Requirement : 15th Excavation
+ Effect : 1st clue required to unlock the Faceless Alliance.
+ " coords="123,43,176,96" shape="rect">
+ Ancient Stoneslab 2 
+ Description : We discovered an ancient stone slab written in old scriptures.We can recognize the number 300.
+ Requirement : 20th Excavation
+ Effect : 2nd clue required to unlock the Titan Alliance.
+ " coords="183,43,236,96" shape="rect">
+ Fossilized Piece of Bark 2 
+ Description : We discovered a fossilized piece of Bark with the symbol of One Million.
+ Requirement : 25th Excavation
+ Effect : 2nd clue required to unlock the Druid Alliance.
+ " coords="243,43,296,96" shape="rect">
+ Bone Fragment 2 
+ Description : We discovered an artefact shaped like the number 36, probably made of animal bones.
+ Requirement : 30th Excavation
+ Effect : 2nd clue required to unlock the Faceless Alliance.
+ " coords="303,43,356,96" shape="rect">
+ Key to the Lost City 
+ Description : Despite being thousands of years old, it's still shiny.
+ Requirement : R23+, 1500th Excavation
+ Effect : Part of the Neutral research quest
+ " coords="363,43,416,96" shape="rect">
+ Ancient Device 
+ Description : This strange Device seems to react to the Ancient Races magical capabilities. We may channel its power to increase their research potential!
+ Requirement : Play any Neutral Faction, their Unique Building, 2000+ excavations.
+ Effect : Provides 2 additional slots: 1 for each related to the Neutral Faction's Facility you are playing.
+ Chance : 0.2% 
+ Cost : 100 QiSxg (1e200)
+ Note : Has no effect in R100+
+ " coords="3,103,56,156" shape="rect">
+ Earth Core 
+ Description : This piece of rock is continuously shifting its shape, responding to mysterious energy sources.
+ Requirement : R29+, 2750th Excavation
+ Effect : Part of the Prestige research quest
+ " coords="63,103,116,156" shape="rect">
+ Horn of the Kings 
+ Description : It is said that when this horn is blown, the voices of past Dwarven Kings can be heard in the Wind.
+ Requirement : Dwarven Faction, Dwarven Forges, 3250+ Excavations
+ Effect : Unlocks the upgrade Legacy of the Kings that adds 3 extra slots: 2 for Craftsmanship and 1 related to the Good Base Faction's facility you are playing.
+ Chance : 0.5%
+ Cost : 10 SxSpg (1e232) and 100 M (1e8) Dwarven Coins
+ Note : Has no effect in R100+
+ " coords="123,103,176,156" shape="rect">
+ Flame of Bondelnar 
+ Description : The magical azure flame of Bondelnar constantly emanates a silent, yet subtle, evil aura.
+ Requirement : Drow Faction, Spider Sanctuaries, 3250+ Excavations
+ Effect : Unlocks the upgrade The Dark Light of Bondelnar that adds 3 extra slots: 2 for Warfare and 1 related to the Evil Base Faction's facility you are playing.
+ Chance : 0.5%
+ Cost : 10 SxSpg (1e232), 100 M (1e8) Drow Coins
+ Note : Has no effect in R100+
+ " coords="183,103,236,156" shape="rect">
+ Spiky Rough Egg 
+ Description : What a weird egg... it looks ages old, yet something alive is inside. Perhaps if you wait long enough, something will hatch?
+ Requirement : R46+, 1500 Excavations
+ Chance : 2%
+ Effect : Unlocks the Hatch! Egg
+ " coords="243,103,296,156" shape="rect">
+ Obsidian Shard 
+ Description : Extremely hard and black as darkness itself, this material cannot apparently be carved or melted. It is a mystery how you can make this thing into a sword.
+ Requirement : R75+, any Faction, 8000th Excavation
+ Effect : Unlocks Secrets of the Warriors
+ " coords="303,103,356,156" shape="rect">
+ First Iron Fragment 
+ Hint : This one seems to require a lot of magical renewance.
+ Description : It looks like a piece of an iron object. It's broken off on two sides.
+ Requirement : R125+, Angel Faction, 12,500+ Excavations
+ Chance : (log10(1 + x) ^ 3 / 100,000)%, where x is your Mana Regeneration.
+ " coords="363,103,416,156" shape="rect">
+ Second Iron Fragment 
+ Hint : Found via extensive Royal Trading mandates.
+ Description : It looks like a piece of an iron object. It's broken off on two sides.
+ Requirement : R125+, Titan Faction, 12,500+ Excavations
+ Chance : (x ^ 3 / 5,000,000,000 (5 B))%, where x is the individual Royal Exchange bonus.
+ " coords="3,163,56,216" shape="rect">
+ Third Iron Fragment 
+ Hint : Chances to find increase while not actively searching.
+ Description : It looks like a piece of an iron object. It's broken off on two sides.
+ Requirement : R125+, Undead Faction, 12,500+ Excavations
+ Chance : ((log10(1 + x) - 2) ^ 3 / 500,000)%, where x is offline bonus.
+ " coords="63,163,116,216" shape="rect">
+ First Crystal Fragment 
+ Hint : Assistants will lead the way.
+ Description : A strange, glass-like material that appears to have been shattered into three pieces.
+ Requirement : R125+, Fairy Faction, 12,500+ Excavations
+ Chance : (x / 100,000,000,000 (100 B))%, where x is assistant count (including temporary assistants).
+ " coords="123,163,176,216" shape="rect">
+ Second Crystal Fragment 
+ Hint : Are Faction Coins attracted to glass?
+ Description : A strange, glass-like material that appears to have been shattered into three pieces.
+ Requirement : R125+, Faceless Faction, 12,500+ Excavations
+ Chance : (log10(1 + x) ^ 3 / 2,500,000 (2.5 M))%, where x is Faction Coins found this game.
+ " coords="183,163,236,216" shape="rect">
+ Third Crystal Fragment 
+ Hint : Also acts as a spell catalyst.
+ Description : A strange, glass-like material that appears to have been shattered into three pieces.
+ Requirement : R125+, Demon Faction, 12,500+ Excavations
+ Chance : (x / 50,000,000 (50 M))%, where x is evil spells cast this Reincarnation.
+ " coords="243,163,296,216" shape="rect">
+ First Stone Fragment 
+ Hint : Click to Carve.
+ Description : Made from stone so ancient it is unknown to the current world. Two parts seem to be missing.
+ Requirement : R125, Elven Faction, 12,500+ Excavations
+ Chance : (log10(1 + x) ^ 3 / 20,000)%, where x is the amount of clicks made in this game.
+ " coords="303,163,356,216" shape="rect">
+ Second Stone Fragment 
+ Hint : Stone to stone, buildings to buildings.
+ Description : Made from stone so ancient it is unknown to the current world. Two parts seem to be missing.
+ Requirement : R125+, Druid Faction, 12,500+ Excavations
+ Chance : (x / 20,000,000 (20 M))%, where x is amount of buildings.
+ " coords="363,163,416,216" shape="rect">
+ Third Stone Fragment 
+ Hint : Might be collected with taxes.
+ Description : Made from stone so ancient it is unknown to the current world. Two parts seem to be missing.
+ Requirement : R125+, Goblin Faction, 12,500+ Excavations
+ Chance : (log10(1 + x) ^ 3 / 125,000)%, where x is Tax Collections cast in this game.
+ " coords="3,223,56,276" shape="rect">
+ Obsidian Crown 
+ Hint : Only the wisest turns over the same stone twice. Or more.
+ Description : The legendary Black Crown of the Mercenary Lord. Some words are engraved into the inner circle at its base: "Aran en Ilya, Silas en Quenta".
+ Requirement : R170+, Mercenary Faction, 10 Excavation Resets (This game)
+ Chance : ((x - 10) / 1,000)%, x is the number of free and ruby excavation resets (This game)
+ Effect : Unlocks Mercenary Union Contract
+ " coords="63,223,116,276" shape="rect">
+ Forgotten Relic 
+ Hint : Research it!
+ Description : Intricate leylines of mana cover the surface of this stone, moving and flailing endlessly to create ever-different patterns.
+ Requirement : R175+
+ Chance : (x ^ 2 / 100,000,000,000 (100 B))%, where x is spent Research budget.
+ Effect : Unlocks Research Facility upgrades
+ Note : Each Facility needs their respective artifact and this artifact to get their respective upgrade.
+ " coords="123,223,176,276" shape="rect">
+ Rough Stone 
+ Hint : A first-time only discovery.
+ Description : A common, totally uninteresting stone.
+ Chance : 2% on the first excavation of a run, after abdication or reincarnation.
+ Effect : Unlocks Research D290
+ " coords="3,43,56,96" shape="rect">
+ Scarab of Fortune 
+ Hint : Rarely found in the pyramids of old.
+ Description : You found the rarest of relics. This golden scarab will grant you 7 days of good luck, starting from now. Make good use of it.
+ Chance : (x / 1,000)%, where x is the amount of Ancient Pyramids you own.
+ Effect : Awards an upgrade of the same name that increases the production of all buildings by 0.1% for each trophy you unlocked.
+ Cost : 7 Td (7e42)
+ " coords="63,43,116,96" shape="rect">
+ Chocolate Cookie 
+ Hint : Excavated commonly in all areas.
+ Description : Found in a wasteland made of cakes and sweets, snatched from the hands of an old woman.
+ Chance : (x / 50)%, where x is the your Excavation count.
+ " coords="123,43,176,96" shape="rect">
+ Fossilized Rodent 
+ Hint : Hello, mouse.
+ Description : What's this, a prehistoric mouse...?
+ Chance : (x / 5,000,000 (5 M))%, where x is the amount of clicks made in this Reincarnation.
+ Effect : Awards an upgrade of the same name.
+ Effect : Increase clicking reward based on the amount of artifacts you discovered.
+ Formula : (10 * x)%, where x is number of artifacts you discovered.
+ Cost : 100 Qid (1e50)
+ " coords="183,43,236,96" shape="rect">
+ Power Orb 
+ Hint : Attracted by massive concentration of mana.
+ Description : Throbbing with Arcane Power
+ Requirement : 3000+ Maximum Mana
+ Chance : (x / 15,000)%, where x is your Maximum Mana.
+ Effect : Awards an upgrade of the same name.
+ Effect : Multiplicatively increases Mana Regeneration by 2.5%.
+ Cost : 1 QaVg (1e75), A1+: Free
+ " coords="243,43,296,96" shape="rect">
+ Pink Carrot 
+ Hint : Found randomly in the Farms.
+ Description : The main product of properly nurtured Farms.
+ Requirement : Fairy Faction (Not Dwarven)
+ Chance : (x / 5,000)%, where x is the amount of Farms you own.
+ " coords="303,43,356,96" shape="rect">
+ Bottled Voice 
+ Hint : Can be captured when Chanting.
+ Description : The essence of a melodic Fairy voice.
+ Requirement : Fairy Faction (Not Dwarven)
+ Chance : (x / 40,000)%, where x is the is the amount of Fairy Chantings cast this game.
+ " coords="363,43,416,96" shape="rect">
+ Lucky Clover 
+ Hint : Requires extreme amounts of luck!
+ Description : A perfectly shaped four leaf clover. Each leaf is almost unnaturally identical to the other three.
+ Requirement : Elven Faction (Not Dwarven)
+ Chance : (x - 1) * 50)%, where x is the highest number of consecutive Elven Lucks.
+ " coords="3,103,56,156" shape="rect">
+ Mini-treasure 
+ Hint : Click your way to the treasure!
+ Description : It's a small perfect replica of our gold-filled treasure.
+ Requirement : Elven Faction (Not Dwarven)
+ Chance : (x / 3,000,000 (3 M))%, where x is the amount of clicks made this game.
+ " coords="63,103,116,156" shape="rect">
+ Pillar Fragment 
+ Hint : May fall from the Heavens.
+ Description : A tiny piece of the legendary pillars which sustain all the Heavens.
+ Requirement : Angel Faction (Not Dwarven)
+ Chance : (x / 3,750)%, where x is the amount of Heaven's Gates you own.
+ " coords="123,103,176,156" shape="rect">
+ Divine Sword 
+ Hint : Only found by dedicated Angel allies.
+ Description : The shining golden sword of an Archangel. Its hilt feels pleasantly warm to the pure of heart and burning hot for the villain.
+ Requirement : Angel Faction (Not Dwarven), 3+ consecutive Angels affiliations in this Reincarnation.
+ Chance : (x / 60)%, where x is the amount of consecutive times affiliated with Angels in this Reincarnation.
+ " coords="183,103,236,156" shape="rect">
+ Ancient Coin Piece 
+ Hint : Rarely found among other special coins.
+ Description : A common goblin lucky charm. The older it is, the luckier you are, or so they say.
+ Requirement : Goblin Faction (Not Drow)
+ Chance : (x / 50,000,000 (50 M))%, where x is the amount of Faction Coins found this Reincarnation.
+ " coords="243,103,296,156" shape="rect">
+ Goblin Purse 
+ Hint : Fill your pockets with extorted money.
+ Description : Heavy and roomy. Definitely too big for just pocket change.
+ Requirement : Goblin Faction (Not Drow)
+ Chance : (x / 300,000)%, where x is Tax collections cast this game.
+ " coords="303,103,356,156" shape="rect">
+ Rotten Organ 
+ Hint : Found among large masses of dead bodies.
+ Description : Ew... disgusting. It still pulses.
+ Requirement : Undead Faction (Not Drow)
+ Chance : (x / 500)%, where x is the amount of assistants you own.
+ " coords="363,103,416,156" shape="rect">
+ Jaw Bone 
+ Hint : Needs some time off.
+ Description : A jaw, missing more than half of its teeth.
+ Requirement : Undead Faction (Not Drow), 24h+ offline time (this Reincarnation)
+ Chance : (x / 864,000)%, where x is offline time in seconds this Reincarnation.
+ " coords="3,163,56,216" shape="rect">
+ Demonic Figurine 
+ Hint : Look for the trophies of the beast.
+ Description : An intricate figurine representing the evil face of a lesser demon.
+ Requirement : Demon Faction (Not Drow), 666+ Trophies unlocked.
+ Chance : 1%
+ " coords="63,163,116,216" shape="rect">
+ Demon Horn 
+ Hint : Only found by dedicated Demon allies.
+ Description : Still blazing with the flames of Hell. Handle with care.
+ Requirement : Demon Faction (Not Drow), 3+ consecutive Demon affiliations in this Reincarnation.
+ Chance : (x / 60)%, where x is the amount of consecutive times affiliated with Demons this Reincarnation.
+ " coords="123,163,176,216" shape="rect">
+ Huge Titan Statue 
+ Hint : Struck by the lightning.
+ Description : The granite representation of a giant wielding a lightning bolt in its fist. A foot appears to be missing.
+ Requirement : Titan Faction (Not Dragon)
+ Chance : (x / 1,000)%, where x is Lightning Strike casts this game.
+ " coords="183,163,236,216" shape="rect">
+ Titan Shield 
+ Hint : Don't fret it.
+ Description : A gargantuan metal shield, twice as tall as a common human.
+ Requirement : Titan Faction (Not Dragon), 10+ hours playtime (This game)
+ Chance : (x / 180,000)%, where x is time played in this game.
+ " coords="243,163,296,216" shape="rect">
+ Glyph Table 
+ Hint : Balance your buildings.
+ Description : Contains all the secrets of the Druidic Alphabet.
+ Requirement : Druid Faction (Not Dragon), same amount of each building tier
+ Chance : 2%
+ " coords="303,163,356,216" shape="rect">
+ Stone of Balance 
+ Hint : A Grand Balance performance.
+ Description : A carved stone hovering above its pedestal.
+ Requirement : Druid Faction (Not Dragon)
+ Chance : (x / 30,000)%, where x is Grand Balance casts this game.
+ " coords="363,163,416,216" shape="rect">
+ Translucent Goo 
+ Hint : Byproduct of the Brain.
+ Description : A completely odorless sticky substance with a diaphanous, unsettling glow.
+ Requirement : Faceless Faction (Not Dragon)
+ Chance : (x / 400)%, where x is Brainwave casts this game
+ " coords="3,223,56,276" shape="rect">
+ Octopus-shaped Helmet 
+ Hint : Found in the Labyrinths.
+ Description : A large helmet with empty metal prongs to accommodate tentacular appendages.
+ Requirement : Faceless Faction (Not Dragon)
+ Chance : (x / 2,000)%, where x is the amount of Labyrinths you own.
+ " coords="63,223,116,276" shape="rect">
+ Dwarven Bow 
+ Hint : Click to throw.
+ Description : Actually a heavy throwing hammer.
+ Requirement : Dwarven Faction
+ Chance : (x / 25,000)%, where x is the amount of clicks made in this game.
+ " coords="123,223,176,276" shape="rect">
+ Stone Tankard 
+ Hint : Found in the Inns.
+ Description : A very heavy mug for drinking the heaviest beers.
+ Requirement : Dwarven Faction
+ Chance : (x / 25,000)%, where x is the amount of Inns you own.
+ " coords="183,223,236,276" shape="rect">
+ Ceremonial Dagger 
+ Hint : Avoid hurting your fingers.
+ Description : Its blade is unnaturally keen and sharp.
+ Requirement : Drow Faction, 0 Treasure clicks this Game (including automatic clicks)
+ Chance : 2%
+ " coords="243,223,296,276" shape="rect">
+ Arachnid Figurine 
+ Hint : Embrace Evil. For a while.
+ Description : If you are afraid of spiders, Drow aren't your faction.
+ Requirement : Drow Faction, 24h+ Evil Playtime (All Time)
+ Chance : (x / 4,320,000 (4.32 M))%, where x is time spent as Evil (All Time).
+ " coords="303,223,356,276" shape="rect">
+ Steel Plate 
+ Hint : Legacy from 50 generations ago.
+ Description : A full plate made of hardened steel.
+ Requirement : R5+, Mercenary Faction
+ Chance : (x / 50)%, where x is the number of times you have reincarnated.
+ " coords="363,223,416,276" shape="rect">
+ Black Sword 
+ Hint : Only found by really, really dedicated Mercenary allies.
+ Description : A long sword with an extremely sharp blade made of dark metal.
+ Requirement : Mercenary Faction, at least 100 Mercenary affiliations (All Time)
+ Chance : (x / 60,000)%, where x is time spent as Mercenary (All Time).
+ " coords="3,283,56,336" shape="rect">
+ Dragon Fang 
+ Hint : Found in the Wyrm Dens.
+ Description : This huge fang can barely fit in the hands of a Titan.
+ Requirement : R50+, Dragon Faction
+ Chance : (x / 400,000)%, where x is the amount of Iron Strongholds you own.
+ " coords="63,283,116,336" shape="rect">
+ Dragon Soul 
+ Hint : Take five deep breaths.
+ Description : The extracted soul from an ancient dragon, wields the power to end the world in an instant. Also makes a good soup ingredient.
+ Requirement : R50+, Dragon Faction, have 5 different Dragon Breath effects active simultaneously
+ Chance : (x / 200,000)%, where x is Dragon's Breath casts this game.
+ " coords="123,283,176,336" shape="rect">
+ Vanilla Flavor Juice 
+ Hint : Quickly!
+ Description : An essence from extremely savory vanilla beans.
+ Requirement : R16+, any Vanilla Faction, first 5 minutes of the game
+ Chance : 20%
+ Effect : Awards an upgrade of the same name.
+ Effect : Increase the production of all buildings by 2,500% for the first 25 minutes (this game) for all Vanilla factions. Does not work while offline.
+ Cost : 1 coin
+ Note : Effect is nullified if you affiliate with Prestige. 
+ " coords="183,283,236,336" shape="rect">
+ Ancient Cocoa Bean 
+ Hint : True Neutral Flavor.
+ Description : Despite being centuries old, it still smells like top-quality cocoa.
+ Requirement : R22+, any Neutral Faction
+ Chance : 10%
+ Effect : Awards an upgrade named Chocolate Flavor Smoothie.
+ Effect : Increase the production of all buildings by 2,500% for the first 15 minutes (this game) for all Neutral factions. Does not work while offline.
+ Cost : 1 coin
+ Note : Effect is nullified if you affiliate with Prestige. 
+ " coords="243,283,296,336" shape="rect">
+ Know Your Enemy, Part I 
+ Hint : A true Mercenary should learn by all other cultures.
+ Description : All the knowledge you need, stored in a handy book.
+ Requirement : R12+, Mercenary Faction, have upgrades from all 11 Factions
+ Chance : 10%
+ Effect : Awards an upgrade of the same name.
+ Effect : Increases the production of all buildings based on time spent as Non-Mercenary (All Time 'Time spent' with Factions in the stats). Only available to Mercenaries.
+ Formula : (0.75 * x ^ 0.6)%, where x is time spent as non-Mercenary factions (All Time).
+ Cost : 100 Vg (1e65)
+ " coords="303,283,356,336" shape="rect">
+ Voodoo Doll 
+ Hint : Found in the Witch Conclaves.
+ Description : You are now CURSED! And you feel a sting in your lower rear.
+ Requirement : R16+, Evil Alignment
+ Chance : (x / 10,000)%, where x is the amount of Witch Conclaves you own.
+ Effect : Awards an upgrade of the same name.
+ Effect : Increase the production of all building by 0.1% for each trophy you have unlocked.
+ Cost : 20 Qig (2e154)
+ " coords="363,283,416,336" shape="rect">
+ Wall Fragment 
+ Hint : Ascension...
+ Description : A fragment of an utterly and completely unbreakable wall. Enjoy your paradox.
+ Requirement : R40+
+ Chance : 10%
+ Effect : Awards an upgrade of the same name.
+ Effect : Increase the production of all buildings based on their tier.
+ Formula : (3 * (2 * (11 - T)) ^ 3)%, where T is building tier.
+ Cost : 1 M (1e6), A2+ free
+ " coords="3,343,56,396" shape="rect">
+ Fortune Teller Machine 
+ Hint : Don't choose your allies until you know more.
+ Description : Will tell you 1 of 24 statements at random.
+ Requirement : Not affiliated with any Faction
+ Chance : 0.1%
+ Effect : Awards an upgrade of the same name.
+ Upgrade Requirement : R40+
+ Effect : Increase the production of Non-Unique buildings based on time spent in this Reincarnation.
+ Formula : (6.5 * x ^ 0.65)%, where x is time spent in this Reincarnation.
+ Cost : 100 Qi (1e20), A2+ Free
+ " coords="63,343,116,396" shape="rect">
+ Dawnstone 
+ Hint : Relic of the Dawn hours.
+ Description : Only found during sunrise hours. Emits a faint glow.
+ Requirement : R16+, between 5:00 AM and 8:00 AM (Your local time)
+ Chance : (x / 10,000)%, where x is your Excavation count.
+ Effect : With Both the Dawnstone and Duskstone artifacts, awards the Sun Force upgrade.
+ Note : Click image for details
+ " coords="123,343,176,396" shape="rect">
+ Duskstone 
+ Hint : Relic of the Dusk hours.
+ Description : Only found during sunset hours. Absorbs light in a small radius.
+ Requirement : R16+, between 6:00 PM and 9:00 PM (Your local time)
+ Chance : (x / 10,000)%, where x is your Excavation count.
+ Effect : With Both the Dawnstone and Duskstone artifacts, awards the Sun Force upgrade.
+ Note : Click image for details
+ " coords="183,343,236,396" shape="rect">
+ Ancient Heirloom 
+ Hint : Relic of the Lineage.
+ Description : Passed down countless generations.
+ Requirement : Have at least 1 Lineage level purchased (R60+).
+ Chance : (x / 20)%, where x is the sum of all lineage levels.
+ Effect : Awards an upgrade of the same name.
+ Note : Click image for details
+ " coords="243,343,296,396" shape="rect">
+ Know Your Enemy, Part II 
+ Hint : Even an expert Mercenary should learn by all other cultures.
+ Description : Much more knowledge than you need, stored in a handy book.
+ Requirement : R75+, Mercenary Faction, Unique Building, have upgrades from all 12 Factions
+ Effect : Awards an upgrade of the same name.
+ Effect : Increases the production of all buildings based on time spent as Non-Mercenary (All Time 'Time spent' with Factions in the stats). Only available to Mercenaries.
+ Formula : (0.065 * x ^ 0.65)%, where x is time spent as non-mercenary factions in seconds (All Time).
+ Chance : 5%
+ Cost : 100 Noqag (1e152)
+ " coords="303,343,356,396" shape="rect">
+ Veteran Figurine 
+ Hint : A reward for the veteran challenger.
+ Description : The warrior of a thousand battles, ultimate champion of the Realms.
+ Requirement : R90+, Dragon Challenge 6
+ Chance : (x / 1,000,000)%, where x is time spent in this game in seconds.
+ Effect : Passive effect: allows Mercenaries to benefit from all faction challenges of your primary alignment.
+ Note : Does not grant elite challenges.
+ " coords="363,343,416,396" shape="rect">
+ Wall Chunk 
+ Hint : More Ascension...
+ Description : A bigger piece of the infamous Ascension Wall.
+ Requirement : R100+
+ Chance : 10%
+ Effect : Awards an upgrade of the same name.
+ Effect : Increase the production of all buildings based on their tier.
+ Formula : (30,000 * (11 - T) ^ 3.5)%, where T is building tier.
+ Cost : 1 Sx (1e21), A3+ Free
+ " coords="3,403,56,456" shape="rect">
+ Excavated Mirage 
+ Hint : Raise your chances.
+ Description : You know all too well this does not exist, yet it fills you with hope and optimism.
+ Requirement : R100+
+ Chance : (log10(x) / 100)%, where x is your Faction Coin find chance.
+ Effect : Awards an upgrade of the same name.
+ Effect : Increase Faction Coin find chance by a multiplicative 200%.
+ Cost : 1 Sx (1e21), A3+ Free
+ " coords="63,403,116,456" shape="rect">
+ Ancestral Hourglass 
+ Hint : Really, raise your chances.
+ Description : The silver sands contained within seem to never stop flowing.
+ Requirement : R100+
+ Chance : (x / 5,000,000,000,000,000 (5 QA))%, where x your Faction Coin find chance.
+ Effect : Awards an upgrade of the same name.
+ Note : Click image for details
+ " coords="123,403,176,456" shape="rect">
+ Silk Cloth 
+ Hint : Found in the Swarming Towers.
+ Description : The purest silk made for Fairies, by Fairies, of Fairies.
+ Requirement : R100+, Fairy Faction, Pink Carrot and Bottled Voice artifacts, 2000+ Excavations
+ Chance : ((x - 8,000) / 200,000)%, where x is the amount of Wizard Towers you own (Building count multipliers do not count).
+ " coords="183,403,236,456" shape="rect">
+ Raw Emerald 
+ Hint : Not found on the first Excavation round.
+ Description : Just slightly less precious than a raw Ruby.
+ Requirement : R100+, Elven Faction, Lucky Clover and Mini-treasure artifacts, 2000+ Excavations
+ Chance : (((3 * x) ^ 4.5) / 10,000)%, where x is free and ruby excavation resets (this game).
+ " coords="243,403,296,456" shape="rect">
+ Fossilized Wing 
+ Hint : Angels may fall after a long time.
+ Description : The remains of an Angel fallen to earth.
+ Requirement : R100+, Angel Faction, Pillar Fragment and Divine Sword artifacts, 2000+ Excavations
+ Chance : (x / 25,920,000 (25.92 M))%, where x time spent with Angels (All Time).
+ " coords="303,403,356,456" shape="rect">
+ Spiked Whip 
+ Hint : Used by the overseers in the Slave Markets.
+ Description : Use with caution. You do not want to exterminate all your slaves.
+ Requirement : R100+, Goblin Faction, Ancient Coin Piece and Goblin Purse artifacts, 2000+ Excavations
+ Chance : ((x - 8,000) / 300,000)%, where x is the amount of Slave Pens you own (Building count multipliers do not count).
+ " coords="363,403,416,456" shape="rect">
+ Dusty Coffin 
+ Hint : Quick! Quick! You have no time to waste!
+ Description : Sealed since forever, yet you can hear a strange noise from within.
+ Requirement : R100+, Undead Faction, Rotten Organ and Jaw Bone artifacts, 2000+ Excavations
+ Chance : (1 / (30 + x ^ 1.5))%, where x is time spent in this game.
+ " coords="3,463,56,516" shape="rect">
+ Crystallized Lava 
+ Hint : Found in the Burning Abysses.
+ Description : Incandescent but still. Can be used efficiently as a desk lamp.
+ Requirement : R100+, Demon Faction, Demonic Figurine and Demon Horn artifacts, 2000+ Excavations
+ Chance : ((x - 8,000) / 200,000)%, where x is the amount of Hall of Legends you own (Building count multipliers do not count).
+ " coords="63,463,116,516" shape="rect">
+ Titan Helmet 
+ Hint : Found in the trade route used for Exchanges.
+ Description : Made of enough metal to craft a human-sized full plate.
+ Requirement : R100+, Titan Faction, Huge Titan Statue and Titan Shield artifacts, 2000+ Excavations
+ Chance : ((x ^ 2) / 1,500,000,000 (1.5B))%, where x is Royal Exchanges (Royal Exchange count multipliers do not count).
+ " coords="123,463,176,516" shape="rect">
+ Branch of the Life Tree 
+ Hint : Found in the remains of druidic ancestors.
+ Description : Despite being torn from its source tree, it keeps growing buds and leaves.
+ Requirement : R100+, Druid Faction, Glyph Table and Stone of Balance artifacts, 2000+ Excavations
+ Chance : ((x ^ 3) / 2,000,000 (2M))%, where x is level of Druid Lineage.
+ " coords="183,463,236,516" shape="rect">
+ Nightmare Figment 
+ Hint : A strong and quick brain is required.
+ Description : An unshaped, ephemeral substance which is politely trying to corrupt your mind.
+ Requirement : R100+, Faceless Faction, Translucent Goo and Octupus-shaped Helmet artifacts, 2000+ Excavations
+ Chance : ((x ^ 1.5) / 20,000,000 (20M))%, where x is Brainwave's headstart time.
+ " coords="243,463,296,516" shape="rect">
+ Beard Hair 
+ Hint : It requires a lot of beard samples to get the perfect hair.
+ Description : Hopefully coming from a real dwarven beard.
+ Requirement : R116+, Dwarven Faction, Stone Tankard and Dwarven Bow artifacts, 2000+ Excavations
+ Chance : (x / 1,000,000,000 (1 B))%, where x is the amount of assistant you own (including temporary assistants).
+ " coords="303,463,356,516" shape="rect">
+ Poison Vial 
+ Hint : Combo your way through.
+ Description : One drop of this is enough to fell thousands of non-immune creatures.
+ Requirement : R116+, Drow Faction, Ceremonial Dagger and Arachnid Figurine artifacts, 2000+ Excavations
+ Chance : ((40 * x ^ 0.9) / 10,000,000 (10 M))%, where x is combo strike counter.
+ " coords="363,463,416,516" shape="rect">
+ Dragon Scale 
+ Hint : Usually found when a lot of magic is lingering.
+ Description : Very high on the realms' most accurate hardiness rankings.
+ Requirement : R116+, Dragon Faction, Dragon Fang and Dragon Soul artifacts, 2000+ Excavations
+ Chance : (x / 2,500)%, where x is the amount of active spells.
+ " coords="3,523,56,576" shape="rect">
+ Lantern of Guidance 
+ Hint : Massive mana flows can offer guidance.
+ Description : Follow the guiding light, o wonderer, for it shall bring you fortune.
+ Requirement : R120+, Proof of Order
+ Chance : (x / 10,000,000,000 (10 B))%, where x is your Mana Regeneration.
+ Effect : Unlocks Tier 2 Temporal Flux
+ " coords="63,523,116,576" shape="rect">
+ Oil Lamp 
+ Hint : Chaos magic burns brightly.
+ Description : Rub it, polish it. And remember to express your desires precisely, lest you want to face dire consequences.
+ Requirement : R120+, Proof of Chaos
+ Chance : (min(x, y, z) / 86,400,000 (86.4 M))%, where x is Fairy Chanting spell activity time, y is Hellfire Blast spell activity time, and z is Brainwave spell activity time (All Time).
+ Effect : Unlocks Tier 2 Maelstrom
+ " coords="123,523,176,576" shape="rect">
+ Spark of Life 
+ Hint : The power of Creation may spark something new.
+ Description : The spark of Creation, dimly shining from the bottom of its encasing crystal.
+ Requirement : R120+, Proof of Balance
+ Chance : (log10(1 + x) ^ 2 / 6,000)%, where x is the amount of Faction Coins collected this game.
+ Effect : Unlocks Tier 2 All Creation
+ " coords="183,523,236,576" shape="rect">
+ Planetary Force 
+ Hint : Try every day for better luck! Missing a day is the same as breaking a mirror, you know.
+ Description : Planets aligning seem to affect your realm in different ways...
+ Requirement : R100+
+ Chance : ((x ^ 2.5) / 5,000)%, where x is amount of consecutive days logged in.
+ Effect : Awards an upgrade with the same name.
+ Effect : Activates all Sun Force effects at once.
+ Cost : 100 Qi (1e20), A3+ Free
+ " coords="243,523,296,576" shape="rect">
+ Mercenary Insignia 
+ Hint : Gem rhabdomancy seems to work best.
+ Description : The infamous metal cross of the Mercenaries. You should be both proud and afraid to carry one.
+ Requirement : R160+, Mercenary Faction, Steel Plate and Black Sword artifacts
+ Chance : (floor(log10(1 + x) - 37) * 0.1)%, where x is the amount of gems owned.
+ " coords="303,523,356,576" shape="rect">
+ Mana Loom 
+ Hint : Attracted by amassed mana reserves.
+ Description : Used to weave even the thinnest mana strings.
+ Requirement : R180+, Chaos Alignment
+ Chance : (log10(x) ^ 3 / 50,000)%, where x is the amount of Mana produced in this game.
+ Effect : Awards upgrade with same name.
+ " coords="363,523,416,576" shape="rect">
+ Factory 
+ Hint : Dig it manually.
+ Description : Mass-production is the way to go.
+ Requirement : R180+, Neutral Alignment
+ Chance : (log10(x) ^ 3 / 10,000)%, where x is the amount of clicks made in this game.
+ Effect : Awards upgrade with same name.
+ " coords="3,583,56,636" shape="rect">
+ Mythos 
+ Hint : Spells get sad when not used for a long time.
+ Description : Accurate historical list of every existing or non-existing deity.
+ Requirement : R180+, Good Alignment
+ Chance : (x / 4,320,000 (4.32 M)%, where x is the activity time in this Reincarnation of your least used spell (excluding Share Benefits, Catalyst and Event spells).
+ Effect : Awards upgrade with same name.
+ " coords="63,583,116,636" shape="rect">
+ Vault 
+ Hint : Show your prowess as a Royal Trader.
+ Description : Never a place could be more secure.
+ Requirement : R180+, Balance Alignment
+ Chance : (x / 100,000,000 (100 M))%, where x is Royal Exchange Bonus.
+ Effect : Awards upgrade with same name.
+ " coords="123,583,176,636" shape="rect">
+ Athanor 
+ Hint : Archemy.
+ Description : The legendary oven that could smelt souls into matter.
+ Requirement : R180+, Order Alignment
+ Chance : (x / 1,000,000 (1 M))%, where x is Alchemy research points.
+ Effect : Awards upgrade with same name.
+ " coords="183,583,236,636" shape="rect">
+ Battlefield 
+ Hint : Would you think an army is enough to excavate this?
+ Description : An extremely accurate replica of a battle fought long ago.
+ Requirement : R180+, Evil Alignment
+ Chance : (log10(1 + x) ^ 3 / 20,000)%, where x is amount of assistants you own.
+ Effect : Awards an upgrade with same name
+ " coords="243,583,296,636" shape="rect">
+ Apeiron 
+ Hint : Be different.
+ Description : The source of everything. Can fit in the average pocket.
+ Requirement : R175+, Mercenary, 15 different Faction upgrades
+ Chance : 0.1%
+ Effect : Awards an upgrade with same name.
+ " coords="303,583,356,636" shape="rect">
+ Glowing Wing 
+ Hint : Mana Wings!
+ Description : And this is why Fairies don't need torches.
+ Requirement : R220+, Fairy Faction, 10,000+ Excavations
+ Chance : (log10(1 + x) / 8,000)%, where x is Mana produced this game.
+ " coords="363,583,416,636" shape="rect">
+ Sylvan Mirror 
+ Hint : Pay a barber with Faction Coins.
+ Description : An Elf with messy hair is not an Elf, by their own laws.
+ Requirement : R220+, Elven Faction, 10,000+ Excavations
+ Chance : (log10(1 + x) / 8,000)%, where x is your Faction Coin find chance.
+ " coords="3,643,56,696" shape="rect">
+ Solid Cloud 
+ Hint : A cloud of spells.
+ Description : Angels have the power to save your life! And make a backup of it on the internet.
+ Requirement : R220+, Angel Faction, 10,000+ Excavations
+ Chance : (x / 40,000)%, where x is the amount of active spells (Active Spells count more multipliers do not count).
+ " coords="63,643,116,696" shape="rect">
+ Orc Fang Necklace 
+ Hint : Torment your subjects with taxes.
+ Description : To remind your slaves who's in charge.
+ Requirement : R220+, Goblin Faction, 10,000+ Excavations
+ Chance : (log10(1 + x) / 8,000)%, where x is Tax Collection casts in this game.
+ " coords="123,643,176,696" shape="rect">
+ Blood Chalice 
+ Hint : Pour a bottle of Frenzy.
+ Description : The healthiest vampire breakfast.
+ Requirement : R220+, Undead Faction, 10,000+ Excavations
+ Chance : (x / 10,000)%, where x is Blood Frenzy's duration (The duration when it was cast).
+ " coords="183,643,236,696" shape="rect">
+ Demon Tail 
+ Hint : Evil wizardry.
+ Description : Said to bring great luck to whom it possess...es.
+ Requirement : R220+, Demon Faction, 10,000+ Excavations
+ Chance : (x / 1,000,000)%, where x is Evil Spell Casts in this game.
+ " coords="243,643,296,696" shape="rect">
+ Frozen Lightning 
+ Hint : Lightning never strikes the same place a couple million times. Maybe.
+ Description : A sculpture representing the embodiment of Titanic power.
+ Requirement : R220+, Titan Faction, 10,000+ Excavations
+ Chance : (x / 1,000,000)%, where x is Lightning Strike activity time in this game.
+ " coords="303,643,356,696" shape="rect">
+ Primal Leaf 
+ Hint : Huuuuge blue ball.
+ Description : Druid Catalyst for channeling the power of nature.
+ Requirement : R220+, Druid Faction, 10,000+ Excavations
+ Chance : (log10(1 + x) / 8,000)%, where x is the highest Maximum Mana in this Reincarnation.
+ " coords="363,643,416,696" shape="rect">
+ The Blackest Ink 
+ Hint : Quality takes time.
+ Description : High-quality, freshly produced Faceless ink.
+ Requirement : R220+, Faceless Faction, 10,000+ Excavations
+ Chance : (x / 10,000)%, where x is the longest game session this Reincarnation (but not this game).
+ " coords="3,703,56,756" shape="rect">
+ Dwarven Anvil 
+ Hint : Dwarven clicks!
+ Description : Every dwarven child is required to bring this to school every day.
+ Requirement : R235+, Dwarven Faction, 10,000+ Excavations
+ Chance : (log10(1 + x) / 10,000)%, where x is your number of clicks in this Reincarnation.
+ " coords="63,703,116,756" shape="rect">
+ Stiletto Heel 
+ Hint : A drow trade.
+ Description : Drow make the most beautiful underground females.
+ Requirement : R235+, Drow Faction, 10,000+ Excavations
+ Chance : (x / 10,000)%, where x is the number of Royal Exchanges you have.
+ " coords="123,703,176,756" shape="rect">
+ Eye Of The Dragon 
+ Hint : Draconic Assistants.
+ Description : The ultimate thrill of the fight.
+ Requirement : R235+, Dragon Faction, 10,000+ Excavations
+ Chance : (log10(1 + x) / 10,000)%, where x is the highest amount of assistants you had in this Reincarnation.
+ " coords="183,703,236,756" shape="rect">
+ | Resources | Soft Resets | Buildings | Heritages | Bloodlines 
+ | Spells | Excavations | Challenges | Upgrades | Trophies 
+ | Factions | Research |
+ | Merc Builds | Research Builds | Prestige Builds | Dragon Unlock | Neutral Prestige Builds | Research Tree |
+ | Good : Fairy, Elf , Angel Evil : Goblin , Undead , Demon Neutral : Titan , Druid , Faceless"> Vanilla Factions 
+ | Fairy Elf Angel "> Good Factions 
+ | Goblin Undead Demon"> Evil Factions 
+ | Titan Druid Faceless"> Neutral Factions 
+ | Dwarf Drow Dragon"> Prestige Factions 
+ | Archon Djinn Makers"> A2 Elite Factions |
+ | Events | Latest Major Patch | Changelog | Notation | Terminology | Tools | Kongregate Links |
+ | Fairy 
+ | Elven 
+ | Angel 
+ | Goblin 
+ | Undead 
+ | Demon 
+ | Titan 
+ | Druid 
+ | Faceless |
+ | Mercenary 
+ | Dwarf 
+ | Drow 
+ | Dragon 
+ | Archon 
+ | Djinn 
+ | Makers |
+ 

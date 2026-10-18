@@ -1,0 +1,244 @@
+{{DISPLAYTITLE:Dragon}}
+{{Tocright}}
+[[File:Dragon_Faction_Building.png|thumb|left]]{{Description|"The Dragon is the mightiest, most imposing creature of all the realms. None may stand a chance alone against a Dragon, not even the fiercest of heroes. They usually care little for the lower creatures, but you have piqued their interest."}} 
+ 
+== The Dragon Faction ==
+[[File:DragonChampionTrophy.png|left|Dragon Champion Trophy]]
+[[File:DragonSpellUpgrade.png|right|54x54px|Dragon's Roar]]
+The Dragons were implemented during the ''[[Updates#2.3 Ancient Eternals|Ancient Eternals]]'' expansion (v2.3), and can be unlocked after reincarnating at R46. Grand and mighty, they demand to be played alongside a Neutral faction, and feature a Heritage that persists through [[reincarnations]] and becomes stronger the more you abide with them.
+
+The dragons refuse to be mingled with any [[Vanilla]] or other [[Prestige]] faction.
+* '''[[Alignment]]:''' '''''Prestige''''' (Neutral)
+* '''[[Spells|Faction Spell]]:''' '''''Dragon's Breath''''' - Activates one of the following five effects at random for 20 seconds.
+{{Breaths}}
+* '''[[Spells#Spell Upgrades|Spell Upgrade]]:''' '''''Dragon's Roar''''' - ''Dragon's Breath'' also produces Faction Coins based on its activity time. 
+** Unlock requirement: Cast ''Dragon's Breath'' while having at least 4 other active spells.
+* [[Heritage|'''Heritage''']]: Increases assistant production based on all-time spent affiliated with Dragons.<br />{{Formula|(0.55 * x^{0.55})%|hours affiliated with dragon at all R's}}
+* [[Bloodline|'''Bloodline''']]: Increase the production of all buildings based on Faction Coin find chance.<br />{{Formula|4 * (x^{0.4})|your Faction Coin find chance}}
+* '''[[Challenge|Challenge Reward]]''': '''''Prismatic Breath''''' - While all 5 breaths are active, Reincarnations count double for all purposes.
+* '''[[Unique Building]]''': '''''Wyrm's Den''''' (from Iron Strongholds)
+* '''Faction Unlock Requirements''': R46 + See [[Dragon#Unlock Requirements|below]].
+
+== Tier 1 Upgrades ==
+{| class="wikitable" style="width:100%"
+|-
+! colspan="2" | Name
+! width="100px"|Cost
+! Effect
+|-
+![[File:DragonTradeTreaty.png]]
+! width="110px" |''Dragons Trade Treaty''
+| style="padding:0 8px;" |''{{Number|5e9}} Drow + {{Number|5e9}} Dwarf Coins''
+| style="padding:0 8px;" |''Unlocks Tier 1 Dragon Upgrades.''
+|-
+![[File:DragonUpgradeTier1Up1.png]]
+!Dragonscales
+| style="padding:0 8px;" |{{Number|5e66|table}}
+| style="padding:0 8px;" |Increase the production of ''Stone Pillars, Labyrinths'' and ''Halls of Legends'' based on the total amount of time spent as Neutral.
+{{Formula|stat|({(1.25 * x / 60)^{0.55})}%)|total amount of time spent as Neutral}}
+|-
+![[File:DragonUpgradeTier1Up2.png]]
+!Iron Flight
+| style="padding:0 8px;" |{{Number|5e67|table}}
+| style="padding:0 8px;" |Increase the production of ''Iron Strongholds'' by 2000% when affected by any spell.
+|-
+![[File:DragonUpgradeTier1Up3.png]]
+!Eternal Wisdom
+| style="padding:0 8px;" |{{Number|5e68|table}}
+| style="padding:0 8px;" |Increase the production of all buildings based on Royal Exchange bonus.
+{{Formula|({2 * (x^{1.15})}%)|Royal Exchange bonus}}
+|}
+
+== Tier 2 Upgrades ==
+{| class="wikitable" style="width:100%"
+|-
+! colspan="2" |Name
+! width="100px"|Cost
+!Effect
+|-
+![[File:DragonsFriendshipPact.png]]
+! width="110px" |''Dragons Friendship Pact''
+| style="padding:0 8px;" |''{{Number|2.5e10}} Drow + {{Number|2.5e10}} Dwarf Coins''
+| style="padding:0 8px;" |''Unlocks Tier 2 Dragon Upgrades.''
+|-
+![[File:DragonUpgradeTier2Up1.png]]
+!Dragonborn
+| style="padding:0 8px;" |{{Number|5e70|table}}
+| style="padding:0 8px;" |Increase assistants production based on time spent affiliated with Dragons.<br />{{Formula|stat|({0.75 * (x^{0.55})}%)|amount of time spent with Dragons}}
+|-
+![[File:DragonUpgradeTier2Up2.png]]
+!Bountiful Hoard
+| style="padding:0 8px;" |{{Number|5e71|table}}
+| style="padding:0 8px;" |Increase the production of all buildings based on the amount of Artifacts you found.<br />{{Formula|({5 * (x^{1.25})}%)|amount of artifacts you found}}
+|-
+![[File:DragonUpgradeTier2Up3.png]]
+!Sharp Claws
+| style="padding:0 8px;" |{{Number|5e72|table}}
+| style="padding:0 8px;" |Gain additional assistants based on clicks made in this game.<br />{{Formula|floor(0.1 * ln(1 + x)^{2.75})|number of clicks}}
+|}
+
+== Tier 3 Upgrades ==
+{| class="wikitable" style="width:100%"
+|-
+! colspan="2" |Name
+! width="100px" |Cost
+! Effect
+|-
+![[File:DragonAlliance.png]]
+! width="110px" |''Dragon Alliance''
+| style="padding:0 8px;" |''{{Number|6.5e10}} Drow + {{Number|6.5e10}} Dwarf Coins''
+| style="padding:0 8px;" |''Unlocks Tier 3 Dragon Upgrades.''
+|-
+![[File:DragonUpgradeTier3Up1.png]]
+!Ancient Hunger
+| style="padding:0 8px;" |{{Number|5e74|table}}
+| style="padding:0 8px;" |Increase maximum mana based on the amount of Faction Coins found in this game.<br />{{Formula|stat|floor(45 * ln(1 + (x^{6.5}))M)|amount of FCs found (This Game)}}
+|-
+![[File:DragonUpgradeTier3Up2.png]]
+!Imposing Presence
+| style="padding:0 8px;" |{{Number|5e75|table}}
+| style="padding:0 8px;" |Increase mana regeneration based on the amount of neutral buildings you own.
+{{Formula|build|floor((1 * (x^{0.55})) / 10)|neutral buildings}}
+|-
+![[File:DragonUpgradeTier3Up3.png]]
+!Chromatic Scales
+| style="padding:0 8px;" |{{Number|5e76|table}}
+| style="padding:0 8px;" |Increase the production of all buildings based on the amount of active ''Dragon's Breath'' effects.
+{{Formula|({100 * (x^2)}%)|number of active Dragon's Breath effects}}
+|}
+
+== Unlock Requirements ==
+[[File:Advisor-dragon_hatch-message.png|right|300px]]
+At [[Reincarnation|R46]]+, to unlock the Dragon Faction, players will have to [[excavate]] the dragon egg, and raise it into an elder dragon.
+
+Each item below can be unlocked in separate game plays, and only need to be bought once throughout the entire game play. You can Abdicate and Reincarnate during the 12 hour wait of all 4 stages.
+{| class="wikitable" style="width:100%;"
+! colspan="6" |Dragon Faction Unlock Requirements
+|-
+! colspan="2" |Name
+!Type
+!Description
+! width="110px" |Requirements
+! style="width:13%;" |Cost
+|-
+![[File:Spiky-rough-egg.png]]
+! width="45px" |Spiky Rough Egg
+|[[Artifact]]
+|''What a weird egg... it looks ages old. yet something alive is inside. Perhaps if you wait long enough, something will hatch?''
+|R46+, 1500+ Excavations
+|
+|-
+![[File:Hatch.png]]
+!Hatch!
+|Quest [[Upgrade]]
+|''After waiting for a while... hatch the spiky egg and reveal what's inside!''
+|''Spiky Rough Egg'' Artifact, 12 hours obtaining the artifact
+|{{Number|10 Vg}}  Coins, {{Number|10 M}} Vanilla and Prestige Faction coins
+|-
+![[File:Drakeling.png|54x54px]]
+!Drakeling
+|Quest [[Upgrade]]
+|''The baby dragon needs to learn how to breathe flames first... perhaps a fair amount of Hellfire Blasts will help. Once it is ready, grow your baby dragon into a drakeling.''
+<br />
+<small>'''Note:''' Do not use Research A25 as it will mess up the timer even worse and could increase the time needed.</small>
+|''Hatch!'', 12+ hours ''Hellfire Blast'' activity time (Total across all Reincarnations '''after''' upgrade appears)
+|{{Number|10 Uvg}} Coins, {{Number|100 M}} Vanilla and Prestige Faction coins
+|-
+![[File:Dragon.png|54x54px]]
+!Dragon
+|Quest [[Upgrade]]
+|''The drakeling can now breathe fire, but it is not self-sufficient yet. A decent army of Fairy assistants will surely help. Once it is ready, grow your drakeling into a mature dragon.''
+|''Drakeling'', 3750 current [[Fairy]] Assistants, 12 hours since purchasing the previous stage
+|{{Number|1e70}} Coins, {{Number|1 B}} Vanilla and Prestige Faction coins
+|-
+![[File:ElderDragon.png|54x54px]]
+!Elder Dragon
+|Quest [[Upgrade]]
+|''The dragon is now mature and has learned the customs of your realm. The only thing that remains is to feed him with a large amount of magical power... increase your maximum mana. Once it is ready, grow your dragon into an elder dragon.''
+|''Dragon,'' 50000 max mana, 12 hours since purchasing the previous stage
+|{{Number|1e73}} Coins, {{Number|10 B}} Vanilla and Prestige Faction coins
+|}
+* See [http://www.kongregate.com/forums/8945-realm-grinder/topics/753457-spoilers-r46-guide this thread] for up to date tips on these unlocks.
+
+== Unique Building  ==
+[[File:Dragon_Unique_Building_Design.png|thumb|left]]
+The Dragons ''Iron Strongholds'' can be upgraded to a [[Buildings#Unique Buildings|Unique Building]]: '''''Wyrm's Den''''', which is required for some [[challenges]] and research quests. [[File:DragonUniqueBuilding.png|right]]{{clr}}
+
+== Dragon Research  ==
+{| class="wikitable" style="width:100%"
+! colspan="6" |Dragon Research Unlock Requirements & Upgrades
+|-
+! colspan="2" |Name
+!Type
+!Description
+! width="110px" |Requirement
+! width="75px" |Cost
+|-
+![[File:WyrmsDenQuest.png]]
+! width="90px" |Wyrm's Den Quest
+|Quest [[Upgrade]]
+|''Ava'yorn thurirl. Our kind needs large spaces and a place to take flight. Build enough Iron Strongholds to make room for us.''
+<small>''Required once throughout the entire game play and does not count towards the bought upgrade stat.''</small>
+|R46+, 5000 ''Iron Strongholds''
+|{{Number|1e74|table}}
+|-
+![[File:WyrmsDen.png]]
+!Wyrm's Den
+|[[Upgrades#Allegiances Upgrades|Allegiances Upgrades]]
+|Upgrade ''Iron Strongholds'' to ''Wyrm's Dens'', boosting their production based on the total amount of Faction Coins you collected and unlocking more unique perks for the building.
+{{Formula|xy|(0.065 * (ln(1 + x/ 2 + y))^{3.65})|faction coins (This Game)|Faction Coins (This R)}}
+|''Wyrm's Den Quest'', Dragon's Trade Treaty
+|{{Number|1e71|table}}
+|}
+
+== Related Items ==
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%"
+! colspan="6" |Related Trophies, Artifacts & Upgrades
+|-
+! colspan="2" |Name
+! width="65px" |Type
+!Description
+! width="110px" |Requirement
+! style="width:13%;" |Cost
+|-
+![[File:Dragon Tamer.png]]
+!Dragon Tamer
+|[[Trophy]] & [[Upgrade]]
+|Increase the production of all buildings by 100% and doubles FC find chance.
+|Fully develop your ''Spiky Egg'' into ''Elder Dragon''.
+|{{Number|1e65|table}}
+|-
+![[File:MasterResearcher.png]]
+!Master Researcher
+|Trophy & Upgrade
+|Increase overall production of Dragons by 7.18%
+|Research 10,000 across all fields
+|{{Number|1e75|table}}
+|-
+![[File:EternalResearcher.png]]
+!Eternal Researcher
+|Trophy & Upgrade
+|Increase the production of all buildings based on research done.
+|Discover all the Dragon researches.
+|{{Number|1e90|table}}
+|-
+![[File:DragonFang.png|54x54px]]
+!'''Dragon Fang'''
+|[[Artifact]]
+|"''This huge fang can barely fit in the hands of a Titan."''
+|R50+, play as Dragons<br />''Chance: (# Iron Strongholds / 400,000)%''
+|
+|-
+![[File:DragonSoul.png|54x54px]]
+!'''Dragon Soul'''
+|Artifact
+|"''The extracted soul from an ancient dragon, wields the power to end the world in an instant. Also makes a good soup ingredient."''
+|R50+, play as Dragons, have 5 different Dragon Breath effects active simultaneously.<br />''Chance: (# Dragon Breath casts this game / 200,000)%''
+|
+|}
+
+
+<references />{{Sitenav}}
+[[Category:Dragon| ]]
+[[Category:Factions]]
+[[Category:Unlock Requirements]]

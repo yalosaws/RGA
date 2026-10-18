@@ -1,0 +1,9 @@
+# 汉化包体积大（单个 swf 80MB+），不进 git
+汉化/
+
+# Office/WPS 打开文件时产生的锁文件
+~$*
+
+# Python 缓存
+__pycache__/
+*.pyc

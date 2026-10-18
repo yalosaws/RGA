@@ -1,0 +1,1028 @@
+{{Tocright}}'''Spells''' are an active component of the game mechanics that enables to boost production and  cost [[Mana|mana]].
+
+Their duration, resource gain, mana cost, and mana regeneration speed can be altered by getting specific [[Factions|Faction]], [[Heritage]], [[Challenges|Challenge]], or [[Research]] upgrades. Different aspects of the spells can also be used in other upgrades (''eg: while a spell is active, the number of spell casts, based on mana produced, etc.'').
+
+Spells are not cast while offline, but purchasing the [[Spells#Automatic Casting|autocasting upgrades]] allow "Mana produced (This game)", the "Spells casted (This game)" and spell activity time stats to keep growing while offline, at a vastly reduced rate.[[File:Spell-count.png|407x407px|right|Call To Arm Spell tooltip]]
+
+The trick to use spells efficiently relies on finding the best setup: Which spell combination to cast, at what timing, with which automatic-casting tool, and where to set the contingency arrow. Like for upgrades, these choices can make a crucial difference for your game progress.
+
+In Realm Grinder, the spells can be classified in three types:
+* Default spells - which are always available.
+* [[Alignments|Alignment]] spells - which appear when the player chooses an alignment.
+* [[Faction]] spells - which appear when the player allies with a Faction.
+
+These terms are mostly used for perk description purposes.
+
+== The Spells ==
+{| class="mw-collapsible mw-collapsed sortable wikitable" style="width:100%;text-align:center;"
+! colspan="5" class="unsortable" |The Spells
+|-
+! style="white-space: nowrap;" data-sort-type="text" |Name
+! style="white-space: nowrap;" data-sort-type="text" |<abbr title="Spell available for Alignment or Faction...">For</abbr>
+! style="white-space: nowrap;" data-sort-type="number" |Mana
+! style="white-space: nowrap;" data-sort-type="number" |Seconds
+! data-sort-type="number" |Effects <small style="font-weight:normal;">Undo sort:</small>
+|-
+![[Tax Collection]]
+|All
+|200
+|instant
+| style="padding-left:10px;text-align:left;" |<span style="display:none;">1</span>Instantly gain 30 seconds worth of coin production from [[buildings]] and [[assistants]].
+|-
+![[Call to Arms]]
+|All
+|400
+|20
+| style="padding-left:10px;text-align:left;" |<span style="display:none;">2</span>Increase the production of all buildings based on the amount of buildings you own.
+{{Formula|build|0.3 * x^{0.975}%|buildings}}
+|-
+![[Spiritual Surge]]
+|All (R14)
+|2500
+|20
+| style="padding-left:10px;text-align:left;" |<span style="display:none;">3</span>Increase the production of all buildings based on the amount of times you [[Reincarnation|reincarnated]] and [[Ascension|ascended]].
+{{Formula|xy|(10000*1.05^x)^{(1+0.5*y)}%|number of times you have reincarnated |how many times you ascended}}
+|-
+! colspan="5" |Alignment spells
+|-
+![[Holy Light]]
+|[[Good]]
+|900
+|10
+| style="padding-left:10px;text-align:left;" |<span style="display:none;">5</span>Increase [[clicking reward]] by 2500%
+|-
+![[Blood Frenzy]]
+|[[Evil]]
+|600
+|20
+| style="padding-left:10px;text-align:left;" |<span style="display:none;">6</span>Increases the production of all Evil buildings by 1000%.
+|-
+![[Gem Grinder]]
+|[[Neutral]]
+|1000
+|20
+| style="padding-left:10px;text-align:left;" |<span style="display:none;">7</span>Increase production bonus from [[gems]] by 5000%
+|-
+![[Temporal Flux]]
+|[[Alignments#Leges|Order]]
+|5000
+|12
+| style="padding-left:10px;text-align:left;" |<span style="display:none;">20</span>Increase Unique building production by time spent this game.<br />Also multiplicatively increase Mana Regeneration based on time spent in this game.
+{{Formula|stat|(5*(x/60)^{0.7})%|time (this game)|seconds}} 
+|-
+![[Maelstrom]]
+|[[Alignments#Leges|Chaos]]
+|3500
+|12
+| style="padding-left:10px;text-align:left;" |<span style="display:none;">21</span>Increase the production of three random buildings based on these stats in this game, chosen at random: mana produced, clicks made, Faction Coin found or amount of assistants.
+''Mana'' {{Formula|stat|(0.02*(\log_{10}(1+x))^5%|mana produced (this game)}}<br />''Clicks'' {{Formula|stat|(0.075*(\log_{10}(1+x))^{2.5})%|clicks (this game)}}<br />''Faction Coins'' {{Formula|stat|(0.01*(\log_{10}(1+x))^4)%|faction coins found (this game)}}<br />''Assistants'' {{Formula|(0.25*(\log_{10}(1+x))^5)%|amount of assistants}}
+|-
+![[All Creation]]
+|[[Alignments#Leges|Balance]]
+|6000
+|12
+| style="padding-left:10px;text-align:left;" |<span style="display:none;">22</span>Increase production of all buildings based on mana regeneration rate.<br />Also multipicatively increase Faction Coin find chance based on your mana regeneration rate.
+{{Formula|floor(0.2*x^{0.6})|mana per seconds.}}
+|-
+! colspan="5" |Faction spells
+|-
+![[Fairy Chanting]]
+|[[Fairy]]
+|1000
+|10
+| style="padding-left:10px;text-align:left;" |<span style="display:none;">9</span>Increase the production of Farms, Inns and Blacksmiths by 50'000%
+|-
+![[Moon Blessing]]
+|[[Elf]]
+|700
+|20
+| style="padding-left:10px;text-align:left;" |<span style="display:none;">10</span>Increase the production of all buildings based on Treasure Clicks ([[Stats|Total]]).
+{{Formula|stat|1.75 * ln^{3.1}(1 + x)%|Treasure Clicks (Total)}}
+|-
+![[God's Hand]]
+|[[Angel]]
+|900
+|20
+| style="padding-left:10px;text-align:left;" |<span style="display:none;">11</span>Increase the production of all buildings by 150x your mana regeneration rate.
+|-
+![[Goblin's Greed]]
+|[[Goblin]]
+|800
+(650)
+|5
+(10 with challenge reward)
+| style="padding-left:10px;text-align:left;" |<span style="display:none;">12</span>Instantly produces [[Faction Coins]] based on the amount of Gems you own. Also increases the production of all buildings based on the amount of Faction Coins found in this game for 10 seconds.
+''FC'' {{Formula|floor(\ln^3(1 + x) + 20|your current gems}}<br />''Production'' {{Formula|stat|0.75 * ln^{3.15}(1 + x)%|Faction Coins Gained (This Game)}}
+|-
+![[Night Time]]
+|[[Undead]]
+|1000
+|20
+| style="padding-left:10px;text-align:left;" |<span style="display:none;">13</span>The production of [[assistants]] is increased by 30% per Necropolis you own.
+|-
+![[Hellfire Blast]]
+|[[Demon]]
+|1000
+(variable with challenge upgrade)
+|20
+| style="padding-left:10px;text-align:left;" |<span style="display:none;">14</span>Increase the production of Evil Fortresses and Hell Portals based on the amount of [[trophies]].
+{{Formula|stat|(round(200 * x^{0.8}))%|Trophies Unlocked}}
+|-
+![[Lightning Strike]]
+|[[Titan]]
+|900
+|20
+| style="padding-left:10px;text-align:left;" |<span style="display:none;">15</span>The production of a random building is multiplied by 300% for each Iron Stronghold. Also grants Faction Coins depending on your current amount of gems.
+{{Formula|round(1.5*ln(1+x)^3)|your current gems}}
+|-
+![[Grand Balance]]
+|[[Druid]]
+|1000 (800)
+|20
+(24 with spell upgrade)
+| style="padding-left:10px;text-align:left;" |<span style="display:none;">16</span>Increase the production of your least productive building based on the amount of the three most built ones.
+{{Formula|naked|round(0.25 * (x * y * z / 729) ^{0.9})|where x, y, and z are the number of your three most-built buildings.}}
+|-
+![[Brainwave]]
+|[[Faceless]]
+|600
+|600
+| style="padding-left:10px;text-align:left;" |<span style="display:none;">17</span>Increase production of all buildings by a cumulative 2% per second.
+|-
+![[Diamond Pickaxe]]
+|[[Dwarf]]
+|1000
+|12
+(20 with challenge upgrade)
+| style="padding-left:10px;text-align:left;" |<span style="display:none;">18</span>Increase clicking reward by 25% per [[Excavation]] you made and increase your Faction Coin find chance by 200%.
+|-
+![[Combo Strike]]
+|[[Drow]]
+|800
+|20
+| style="padding-left:10px;text-align:left;" |<span style="display:none;">19</span>Increase the production of all buildings by a progressively higher value as you continue casting this spell ([[Stats|This game]]).
+{{Formula|30*(x^{0.9})%|the number of times you have cast Combo Strike (This game)}}
+{{ComboS}}
+|-
+![[Dragon's Breath]]
+|[[Dragon]]
+|1500
+|20
+| style="padding-left:10px;text-align:left;" |<span style="display:none;">19</span>Activates one of the following effects at random for 20 seconds. (Spell is only for R46+){{Breaths}}
+|}
+
+== Spell Upgrades ==
+Starting from R0, these spell upgrades are obtained by unlocking the spell's [[Trophies|trophy]], with the exception of [[Mercenary|Mercenaries]], which require R75+.
+{| class="mw-collapsible mw-collapsed sortable wikitable" style="width:100%"
+! colspan="5" |Spell Upgrades
+|-
+! colspan="2" class="unsortable" |Name
+! class="unsortable" |Cost
+! class="unsortable" |Requirements
+! class="unsortable" |Effects
+|-
+![[File:Coin Pillage.png]]
+!Coin Pillage
+| style="padding-left:10px;" |{{Number|1 Dc|table}}
+| style="padding-left:10px;" |Cast 150 [[Tax Collection]] in less than 5 seconds.
+| style="padding-left:10px;" |Tax Collection also finds 30 seconds worth of Faction Coins.
+|-
+![[File:Fairy Choir.png]]
+!Fairy Choir
+| style="padding-left:10px;" |{{Number|1 M|table}}
+| style="padding-left:10px;" |Cast [[Fairy]] Chanting while having 45 or more assistants.
+| style="padding-left:10px;" |[[Fairy Chanting]] triples your assistants for its duration.
+|-
+![[File:Sun Blessing.png]]
+!Sun Blessing
+| style="padding-left:10px;" |{{Number|1 M|table}}
+| style="padding-left:10px;" |Cast the [[Elven]] spell [[Moon Blessing]] between 6 am and 12 pm (noon)
+| style="padding-left:10px;" |Autoclicks 15 times per second while [[Moon Blessing]] is active.
+|-
+![[File:God's Rest.png]]
+!God's Rest
+| style="padding-left:10px;" |{{Number|1 M|table}}
+| style="padding-left:10px;" |Cast [[Angel]]'s [[God's Hand]] on a Sunday.
+| style="padding-left:10px;" |Gives random [[Faction Coins]] based on your Faction Coin find chance for each other spell you cast while God's Hand is active.
+(Formula currently unknown)
+|-
+![[File:Greed Drive.png]]
+!Greed Drive
+| style="padding-left:10px;" |{{Number|1 M|table}}
+| style="padding-left:10px;" |Cast 100 [[Goblin]]'s Greed spells in a row. The chain is interrupted by casting other spells.
+| style="padding-left:10px;" |[[Goblin's Greed]] costs 150 less mana.
+|-
+![[File:True Night.png]]
+!True Night
+| style="padding-left:10px;" |{{Number|1 M|table}}
+| style="padding-left:10px;" |Cast [[Undead]]'s [[Night Time]] spell between 11 pm and 6 am.
+| style="padding-left:10px;" |Increase [[Night Time]] boost to assistants production to 40% per Necropolis.
+|-
+![[File:Hell-rush-spell-upgrade.png]]
+!Hell Rush
+| style="padding-left:10px;" |{{Number|1 M|table}}
+| style="padding-left:10px;" |Cast [[Demon]]'s [[Hellfire Blast]] spell in the first 60 seconds of playtime.
+| style="padding-left:10px;" |[[Hellfire Blast]] also boosts Hall of Legends.
+|-
+![[File:Lightning Storm.png]]
+!Lightning Storm
+| style="padding-left:10px;" |{{Number|10 Dd|table}}
+| style="padding-left:10px;" |Cast 100 [[Titan]]'s [[Lightning Strike]] spell in a single game
+| style="padding-left:10px;" |Increase [[Lightning Strike]] multiplier to 5x Iron Strongholds.
+|-
+![[File:Halls Of Balance.png]]
+!Halls of Balance
+| style="padding-left:10px;" |{{Number|10 Dd|table}}
+| style="padding-left:10px;" |Have [[Druid]]'s [[Grand Balance]] spell affect Hall of Legends.
+| style="padding-left:10px;" |Increase [[Grand Balance]] duration to 24 seconds and lower its cost by 200.
+|-
+![[File:Faceless-Overmind-spell-upgrade.png]]
+!Faceless Overmind
+| style="padding-left:10px;" |{{Number|10 Dd|table}}
+| style="padding-left:10px;" |Affiliate with the [[Faceless]] 5 times in a row.
+| style="padding-left:10px;" |Increase [[Brainwave]] ticks to 3% per second.
+|-
+![[File:Minedwarf.png]]
+!Minedwarf
+| style="padding-left:10px;" |{{Number|100 Sxd|table}}
+| style="padding-left:10px;" |Find 30,000 faction coins from the [[Dwarf]] spell [[Diamond Pickaxe]] in a single game.
+| style="padding-left:10px;" |Increase [[Diamond Pickaxe]] bonus to Faction Coin find chance to 300%
+|-
+![[File:Perfect Combo.png]]
+!Perfect Combo
+| style="padding-left:10px;" |{{Number|100 Sxd|table}}
+| style="padding-left:10px;" |Cast 100 [[Drow]]'s [[Combo Strike]] spell in a row. The chain is interrupted by casting other spells.
+| style="padding-left:10px;" |Increase [[Combo Strike]] bonus.
+{{Formula|40 * (x^{0.9})%|the number of times you have cast Combo Strike}}
+|-
+![[File:DragonSpellUpgrade.png]]
+!Dragon's Roar {{PA}}
+| style="padding-left:10px;" |{{Number|1 Qad|table}}  R46+
+| style="padding-left:10px;" |Cast [[Dragon's Breath]] while having at least 4 other active spells.
+| style="padding-left:10px;" |[[Dragon's Breath]] also produces Faction Coins based on its activity time.
+{{Formula|floor(135 * x^{0.98})|all Rs activity time in seconds}}
+|-
+![[File:Round Table.png]]
+!Round Table
+| style="padding-left:10px;" |{{Number|1 Qaqag|table}} {{PA}}
+| style="padding-left:10px;" |''Mercenary Camp'' Upgrade
+| style="padding-left:10px;" |Upgrades ''Tax Collection'' to ''Share Benefits''.<br />Increases the production of all buildings and Faction Coin find chance based on this spell tier level for 20 seconds. Can be cast up to 35 tiers.
+{{Formula|20 ^{(0.25 * x)}|tier (FC chance multiplier)}}<br />{{Formula|naked|((2.20 ^x) - 1) * 100|multiplicative (production multiplier)}}
+|-
+![[File:Dark Covenant.png]]
+!Dark Covenant
+| style="padding-left:10px;" |{{Number|1 Qaqag|table}} {{PA}}
+| style="padding-left:10px;" |''Tyrant Garrison'' Upgrade
+| style="padding-left:10px;" |Upgrades ''Tax Collection'' to ''Reap Interests''.<br />Additional casts of Reap Interests increase its seconds worth of production.
+{{Formula|yx|y ^{(1 + 0.2 * \log_{10}(1 + x))}|TC original power|amount of TC casts}}<br />(Extra time from reap interests does apply to S50. S50 tax collections do increase reap interests.)
+|-
+![[File:Secret Exchange.png]]
+!Secret Exchange
+| style="padding-left:10px;" |{{Number|1 Qaqag|table}} {{PA}}
+| style="padding-left:10px;" |''Freemason's Hall'' Upgrade
+| style="padding-left:10px;" |Upgrades ''Tax Collection'' to ''Appraisal Vantage''.<br />Generates additional Faction Coins per cast.
+{{Formula|(2.5 * x^{2.5})|original Faction Coin chance}}
+|-
+|}
+
+== Challenge Spell Upgrades ==
+From R2 to R33, [[Challenge]] Spell Upgrades are given on completion of all Tier challenges of a Faction. Once obtained, and the active Faction's [[#Default Spell Upgrades|default spell upgrade]] is bought, they will be turned on by default.
+{| class="mw-collapsible mw-collapsed wikitable" style="width: 100%;"
+! colspan="4" |[[Challenge]] Spell Upgrades
+|-
+! colspan="2" |Name
+!Faction
+!Upgrade Effect
+|-
+![[File:Challenge-Fairy-Orchestra.png]]
+! Fairy Orchestra
+| style="text-align:center;" |[[Fairy]]
+| Each [[Assistants|assistant]] generates 3 times as many faction coins while [[Fairy Chanting]] is active.
+|-
+![[File:Challenge-Star-Blessing.png]]
+! Star Blessing
+| style="text-align:center;" |[[Elf]]
+| Automatic clicks from Sun Blessing have an additional 5% chance to trigger [[Elf#Tier 3 Upgrades|Elven Luck]], gaining coins equal to 250,000% of the production of all buildings and the production of 1 assistant and generating 200 random faction coins.<!-- Pulled from the source file. Needs actual on-hand checking. -->
+|-
+![[File:Challenge-Gods-Throne.png]]
+! God's Throne
+| style="text-align:center;" |[[Angel]]
+| Mana regeneration is increased by 50% while [[God's Hand]] is active.
+|-
+![[File:Challenge-Avarice-Drive.png]]
+! Avarice Drive
+| style="text-align:center;" |[[Goblin]]
+| Increase [[Goblin's Greed]] duration by 5 seconds.
+|-
+![[File:Challenge-Midnight-Time.png]]
+! Midnight Time
+| style="text-align:center;" |[[Undead]]
+|Increase [[Night Time]] assistant bonus based on total time spent offline.
+{{Formula|stat|0.2 * x^{0.7}%|your Time Spent Offline (Total)|seconds}}
+|-
+![[File:Challenge-Hellfire-Burst.png]]
+! Hellfire Burst
+| style="text-align:center;" |[[Demon]]
+| Reduces [[Hellfire Blast]] mana cost based on of the amount of trophies you have unlocked.
+{{Formula|floor(0.25 * x)|the amount of trophies unlocked}}
+|-
+![[File:Challenge-Thunderstorm.png]]
+! Thunderstorm
+| style="text-align:center;" |[[Titan]]
+|[[Lightning Strike]] now grants more faction coins based on your faction coin find chance.
+{{Formula|round(x^{0.8})%|your current chance to find Faction Coins}}
+|-
+![[File:Challenge-Primal-Balance.png]]
+! Primal Balance
+| style="text-align:center;" |[[Druid]]
+| [[Grand Balance]] now affects extra buildings based on total mana spent, starting from the least to most productive building. To affect all 11 building tiers, you will need 10B mana produced (total).<br>
+{{Formula|naked|(0.1 * x^{0.2})^{(1-A/8)}|where x is mana produced and A is Ascension (Total) stat}}<br />{{PrimalB}}
+
+|-
+![[File:Challenge-Focused-Thoughts.png]]
+! Focused Thoughts
+| style="text-align:center;" |[[Faceless]]
+| Give [[Brainwave]] a headstart based on its activity time in this game, with a minimum of 1 minute, then grows up to maximum duration.<br />''+1 second per 5 minutes Active Time (This Game).''
+|-
+![[File:Challenge-Iron-Grip.png]]
+! Iron Grip
+| style="text-align:center;" |[[Dwarf]]
+| Increase [[Diamond Pickaxe]] duration by 8 seconds, and its bonus to Faction Coin find chance is passively applied as a multiplier to excavations Faction Coin rewards.
+|-
+![[File:Challenge-Versatile-Combo.png]]
+! Versatile Combo
+| style="text-align:center;" |[[Drow]]
+| Increase [[Combo Strike]] counter based on the amount of spells cast in this game, not including Tax Collection.
+{{Formula|xy|10 * \log_{10}(1 + (y * 30)) + x|your Combo Strike cast count|every other spell cast count (except TC)}}<br />Also increases offline spell cast amount by multiplicatively based on your offline mana regeneration <math>(10 * \log_{10}(1 + x))</math>.
+|-
+![[File:PrismaticBreath.png]]
+!Prismatic Breath
+|[[Dragon]]
+|While all 5 [[Dragon Breath|breaths]] are active, [[Reincarnations]] count double for all purposes.
+|}
+
+== Tier Spell Upgrades ==
+After the first [[Ascension]], for each [[#The Spells|spell]] besides tax collection, 6 tier spell upgrades become available. Each tier gives 1 additional spell cast, and with all tiers combined, allows to cast one spell up to 6 times simultaneously. Each Tier will require double the amount of [[mana]] as the previous one<ref>If you have CtA tier 5 but not enough mana to cast all 5 tiers at once, the game will cast them when it can. eg: In the middle of CtA T1, it will start CtA T2, then CtA T3... and each time, the timer will get reset. All tiers combined, this results in fewer but longer casts. (which is not an advantage as you will also have longer inactivity time between the spell casts.)</ref>, and they do not seem to affect spell activity time, neither online nor offline.<br />Tier upgrade names starts with the default spell's name followed by the tier number, starting from 2 to 6. (e.g.: Holy Light 2, Holy Light 3, etc.)
+
+Once tier spell upgrades are bought, you will need to use the [[Spells#Automatic Casting|Tiered Autocasting]] to set the amount of tier casts you wish, or else the spells will remain at tier 1.
+
+After the second Ascension, the 7th tier spell upgrades will become available. This tier is unaffected by ascension penalties, with the exception of Dragon's Breath (presumably it would require 7 tiers of the same breath effect).
+
+'''Note:''' you only need to unlock the tiers for each spell once, but you need to buy the tiers with coins/FC at every abdication. Also note that what counts for unlocking a tier is the total time (i.e, you need roughly 15 days to unlock tiers 1-6, as opposed to 15 days of spell activity after unlocking tier 5 in order to unlock tier 6), so it's more beneficial to unlock a spell up to tier 6 whenever possible. Since version 3 the Arcane Brilliance trophy series reduces the unlock times required, so unlocking spells tier-by-tier (for all spells to get the trophies) can be a viable strategy as well.
+
+{| class="article-table" style="width:100%;"
+!Unlock & Cost Formulas <ref>Formula [https://www.kongregate.com/forums/8945-realm-grinder/topics/653232 source]</ref>
+|-
+|Unlocking Tier Spell upgrades requires spell activity time (Active Time Total in the spell tool-tips), [[Coins]], and [[Faction Coins]] (except for Call to arms).
+<blockquote style="font-size: 99%;">
+Spell Active Time for tier n + 1: <math>43200 * ((n - 0.5 * A) ^2 - (n - 0.5 * A)) * 0.98 ^{(R - (n - 0.5 * (A + 1)) - 42)}</math> seconds,<br />where T is tier, A is amount of arcane brilliance trophies, R is reincarnation.
+</blockquote><blockquote>This formula is not correct - assuming that (T) is supposed to be (n), it is showing 8.83 hours for a tier 5 unlock for reincarnation 93 with 4 trophies.</blockquote><blockquote style="font-size: 99%;">
+Coins for tier n + 1: <math>x^{1 + 0.25 * (n - 1)}</math><br />
+Faction Coins for tier n + 1: <math>x^{1 + 0.15 * (n - 1)}</math><br />
+''where: x is Costs (see below table), R is your Reincarnation count, and n + 1 is number of tier upgrades.''</blockquote>
+|}
+
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%"
+! colspan="4" |Coin & Faction Coin Costs
+|-
+!Spells
+!Tier
+!Coins
+!<abbr title=" Amount of Faction Coins per FC type - See Faction Coin Types in below table">Faction Coin Amount</abbr>
+|-
+! rowspan="6" |Default Spell<br /><span style="font-weight: normal;">([[Call to Arms]])</span>
+!2
+|{{Number|51 sxd}}
+|style="text-align:center;"| -
+|-
+!3
+|{{Number|766.4 Vg}}
+|style="text-align:center;"| -
+|-
+!4
+|{{Number|11.52 Qivg}}
+|style="text-align:center;"| -
+|-
+!5
+|{{Number|173.1 Novg}}
+|style="text-align:center;"| -
+|-
+!6
+|{{Number|2.601 Qatg}}
+|style="text-align:center;"| -
+|-
+!7
+|Free|| -
+|-
+! rowspan="6" |[[Spiritual Surge]]
+!2
+|{{Number|6.6e67}}||{{Number|10 T}}
+|-
+!3
+|{{Number|5.949e84}}||{{Number|893.1 T}}
+|-
+!4
+|{{Number|5.36187e101}}||{{Number|79.43 Qa}}
+|-
+!5
+|{{Number|4.83283e118}}||{{Number|7.079 Qi}}
+|-
+!6
+|{{Number|4.356e135}}||{{Number|631 Qi}}
+|-
+!7
+|Free||{{Number|56.23 Sx}}
+|-
+! rowspan="6" |Vanilla Alignment<br /><span style="font-weight: normal;">([[Holy Light]], [[Blood Frenzy]])</span>
+!2
+|{{Number|5.4e55}}||{{Number|1 B}}
+|-
+!3
+|{{Number|4.62905e69}}||{{Number|22.39 B}}
+|-
+!4
+|{{Number|396.8 Sxvg}}||{{Number|501.2 B}}
+|-
+!5
+|{{Number|3.40165e97}}||{{Number|11.22 T}}
+|-
+!6
+|{{Number|2.916 Sxtg}}||{{Number|10 Qa}}
+|-
+!7
+|Free||{{Number|5.623 Qa}}
+|-
+! rowspan="6" |Neutral Alignment<br /><span style="font-weight: normal;">([[Gem Grinder]])</span>
+!2
+|{{Number|60 Nod}}||{{Number|5 B}}
+|-
+!3
+|{{Number|1.66989e77}}||{{Number|142.5 B}}
+|-
+!4
+|{{Number|4.64758e92}}||{{Number|4.061 T}}
+|-
+!5
+|{{Number|1.29349e108}}||{{Number|115.7 T}}
+|-
+!6
+|{{Number|3.6e123}}||{{Number|3.299 Qa}}
+|-
+!7
+|Free||{{Number|94.02 Qa}}
+|-
+! rowspan="6" |Vanilla Faction<br /><span style="font-weight: normal;">([[Fairy Chanting]], [[Moon Blessing]],<br />[[Goblin's Greed]] etc.)</span>
+!2
+|{{Number|54 Spd}}||{{Number|10 B}}
+|-
+!3
+|{{Number|4.62905E69}}||{{Number|316.2 B}}
+|-
+!4
+|{{Number|3.96817e83}}||{{Number|10 T}}
+|-
+!5
+|{{Number|3.40165e97}}||{{Number|316.2 T}}
+|-
+!6
+|{{Number|2.916 Sxtg}}||{{Number|10 Qa}}
+|-
+!7
+|Free||{{Number|316.2 Qa}}
+|-
+! rowspan="6" |Neutral Faction<br /><span style="font-weight: normal;">([[Lightning Strike]],<br />[[Grand Balance]], [[Brainwave]])</span>
+!2
+|{{Number|5.7e58}}||{{Number|50 b}}
+|-
+!3
+|{{Number|2.78512e73}}||{{Number|2.013 T}}
+|-
+!4
+|{{Number|1.36086e88}}||{{Number|81.03 T}}
+|-
+!5
+|{{Number|6.64938e102}}||{{Number|3.262 Qa}}
+|-
+!6
+|{{Number|3.249 Octg}}||{{Number|131.3 Qa}}
+|-
+!7
+|Free||{{Number|5.287 Qi}}
+|-
+! rowspan="6" |Prestige Faction<br /><span style="font-weight: normal;">([[Diamond Pickaxe]], [[Combo Strike]])</span>
+!2
+|{{Number|6.3e64}}||{{Number|1e12}}
+|-
+!3
+|{{Number|9.98104e80}}||{{Number|63.1 T}}
+|-
+!4
+|{{Number|1.58129e97}}||{{Number|3.981 Qa}}
+|-
+!5
+|{{Number|2.50522e113}}||{{Number|251.2 Qa}}
+|-
+!6
+|{{Number|3.969 Dqag}}||{{Number|15.85 Qi}}
+|-
+!7
+|Free||{{Number|1 Sx}}
+|-
+! rowspan="6" |Neutral Prestige Faction<br /><span style="font-weight: normal;">([[Dragon's Breath]])</span>
+!2
+|{{Number|6.9e70}}||{{Number|1e15}}
+|-
+!3
+|{{Number|3.536e88}}||{{Number|177.8 Qa}}
+|-
+!4
+|{{Number|1.812e106}}||{{Number|31.62 Qi}}
+|-
+!5
+|{{Number|9.289e123}}||{{Number|5.623 Sx}}
+|-
+!6
+|{{Number|4.761e141}}||{{Number|1e24}}
+|-
+!7
+|Free||{{Number|177.8 Sp}}
+|}
+
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%"
+! colspan="4" |Effects & Faction Coin Types
+|-
+| colspan="4" |Each tier spell upgrade enables:
+* 1 additional spell cast
+* Also increases [[Offline Production|offline production]] based on both your mana regen and maximum mana (formula?)
+* plus the individual effects below:
+|-
+! colspan="2" |Name
+!Additional Effects
+!<abbr title="See above Costs table for the amount of FCs required for each FC type">Faction Coin Types</abbr>
+|-
+![[File:Calltoarms2.png]]
+![[Call to Arms]]
+| style="text-align:center;" | -
+| style="text-align:center;" | -
+|-
+![[File:Spiritual_Surge_tier.png]]
+![[Spiritual Surge]]
+| style="text-align:center;" | -
+|Fairy, Elven, Angel, Goblin, Undead, Demon, Dwarven, Drow
+|-
+![[File:Holy_Light_tier.png]]
+![[Holy Light]]
+| style="text-align:center;" | -
+|[[Fairy]], [[Elven]], [[Angel]], [[Dwarf]]
+|-
+![[File:Bloodfrenzy2.png]]
+![[Blood Frenzy]]
+| style="text-align:center;" | -
+|[[Goblin]], [[Undead]], [[Demon]], [[Drow]]
+|-
+![[File:Gem_Grinder_tier.png]]
+![[Gem Grinder]]
+| style="text-align:center;" | -
+|Fairy, Elven, Angel, Goblin, Undead, Demon, Dwarven, Drow
+|-
+![[File:Fairy_Chanting_tier.png]]
+![[Fairy Chanting]]
+|Increases the duration of the spell by 10 seconds per tier.
+|[[Fairy]]
+|-
+![[File:Moon_Blessing_tier.png]]
+![[Moon Blessing]]
+|[[Moon Blessing]] will increase click reward by an additional 35.6% per tier.
+|[[Elven]]
+|-
+![[File:Gods_Hand_tier.png]]
+![[God's Hand]]
+| style="text-align:center;" | -
+|[[Angel]]
+|-
+![[File:Goblinsgreed2.png]]
+![[Goblin's Greed]]
+| style="text-align:center;" | -
+|[[Goblin]]
+|-
+![[File:Night_Time_tier.png]]
+![[Night Time]]
+| style="text-align:center;" | -
+|[[Undead]]
+|-
+![[File:Hellfire_Blast_tier.png]]
+![[Hellfire Blast]]
+| style="text-align:center;" | -
+|[[Demon]]
+|-
+![[File:LightningStrike2.png]]
+![[Lightning Strike]]
+|Iron Strongholds count for 50% more per tier for the spell bonus.
+|[[Angel]], [[Goblin]]
+|-
+![[File:Grand_Balance_tier.png]]
+![[Grand Balance]]
+| style="text-align:center;" | -
+|[[Elven]], [[Demon]]
+|-
+![[File:Brainwave_tier.png]]
+![[Brainwave]]
+|[[Brainwave]] headstarts for an additional 10 minutes per tier.
+|[[Fairy]], [[Undead]]
+|-
+![[File:Diamond_Pickaxe_tier.png]]
+![[Diamond Pickaxe]]
+|The FC find chance boost is multiplied by Diamond Pickaxe's tier (this happens after the additive effect of research C520)
+|[[Dwarf]]
+|-
+![[File:Combo_strike_tier_upgrade.png]]
+![[Combo Strike]]
+|The [[Combo Strike]] counter is increased more per tier.
+|[[Drow]]
+|-
+![[File:DragonSpellTier.png]]
+![[Dragon's Breath]]
+|Each tier gives an other random effect per cast. Tier 5 will trigger all the effects simultaneously. Tier 6 will trigger an additional random effect. Tier 7 will trigger 2 additional random effects.
+|[[Dwarf]], [[Drow]]
+|}
+
+{| class="article-table" style="width:100%;text-align:left;"
+!Unlock Spell Active Time
+|-
+|As of the [[Updates#3.0 Chaos Leges|3.0 update]], each of the ''Arcane Brilliance'' [[Trophies#Tier spell Trophies|trophies]], for unlocking all spells at a tier level, now passively reduce the time requirement for subsequent spell tiers.
+<blockquote style="font-size:99%">{{Formula|naked|43200 * ((T-0.5 * A)^2-(T+0.5*A)) * 0.98^{(R-T+0.5*A-42)}|<br />where T is tier, A is amount of arcane brilliance trophies, R is reincarnation.}}</blockquote>
+|}
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%; text-align:center;"
+! colspan="6" |Unlock Spell Active Time (Total) Per R# & Tier<ref>Unlock time table by [[User:cueballkev|cueballkev]] ([[:File:Spell tiers.png|source]])</ref>
+|-
+! width="10%" |R#
+! width="18%" |Tier 2
+! width="18%" |Tier 3
+! width="18%" |Tier 4
+! width="18%" |Tier 5
+! width="18%" |Tier 6
+|-
+!42
+|1d 59m||3d 4h 29m||6d 12h 7m||11d 1h 30m||16d 22h 23m
+|- style="background:#ebebeb;"
+!43
+|1d 29m||3d 2h 58m||6d 8h 59m||10d 20h 11m||16d 14h 15m
+|-
+!44
+|1d||3d 1h 28m||6d 5h 59m||10d 14h 59m||16d 6h 17m
+|- style="background:#ebebeb;"
+!45
+|23h 31m||3d||6d 2h 56m||10d 9h 53m||15d 22h 29m
+|-
+!46
+|23h 2m||2d 22h 33m||6d||10d 4h 53m||15d 14h 50m
+|- style="background:#ebebeb;"
+!47
+|22h 35m||2d 21h 8m||5d 21h 7m||10d||15d 7h 20m
+|-
+!48
+|22h 8m||2d 19h 45m||5d 18h 17m||9d 19h 12m||15d
+|- style="background:#ebebeb;"
+!49
+|21h 41m||2d 18h 24m||5d 15h 31m||9d 14h 29m||14d 16h 48m
+|-
+!50
+|21h 15m||2d 17h 4m||5d 12h 49m||9d 9h 53m||14d 9h 44m
+|- style="background:#ebebeb;"
+!51
+|20h 50m||2d 15h 46m||5d 10h 9m||9d 5h 22m||14d 2h 49m
+|-
+!52
+|20h 25m||2d 14h 30m||5d 7h 33m||9d 56m||13d 20h 3m
+|- style="background:#ebebeb;"
+!53
+|20h||2d 13h 15m||5d 5h||8d 20h 36m||13d 13h 24m
+|-
+!54
+|19h 36m||2d 12h 1m||5d 2h 30m||8d 16h 21m||13d 6h 54m
+|- style="background:#ebebeb;"
+!55
+|19h 13m||2d 10h 49m||5d 3m||8d 12h 10m||13d 31m
+|-
+!56
+|18h 50m||2d 9h 39m||4d 21h 39m||8d 8h 5m||12d 18h 16m
+|- style="background:#ebebeb;"
+!57
+|18h 27m||2d 8h 29m||4d 19h 18m||8d 4h 5m||12d 12h 8m
+|-
+!58
+|18h 5m||2d 7h 22m||4d 16h 59m||8d 10m||12d 6h 8m
+|- style="background:#ebebeb;"
+!59
+|17h 43m||2d 6h 15m||4d 14h 44m||7d 20h 19m||12d 15m
+|-
+!60
+|17h 22m||2d 5h 10m||4d 12h 31m||7d 16h 33m||11d 18h 29m
+|- style="background:#ebebeb;"
+!61
+|17h 1m||2d 4h 6m||4d 10h 21m||7d 12h 52m||11d 12h 50m
+|-
+!62
+|16h 41m||2d 3h 4m||4d 8h 13m||7d 9h 15m||11d 7h 18m
+|- style="background:#ebebeb;"
+!63
+|16h 20m||2d 2h 2m||4d 6h 8m||7d 5h 42m||11d 1h 53m
+|-
+!64
+|16h 1m||2d 1h 2m||4d 4h 5m||7d 2h 14m||10d 20h 34m
+|- style="background:#ebebeb;"
+!65
+|15h 42m||2d 4m||4d 2h 5m||6d 22h 49m||10d 15h 21m
+|-
+!66
+|15h 23m||1d 23h 6m||4d 8m||6d 19h 29m||10d 10h 14m
+|- style="background:#ebebeb;"
+!67
+|15h 4m||1d 22h 9m||3d 22h 12m||6d 16h 13m||10d 5h 14m
+|-
+!68
+|14h 46m||1d 21h 14m||3d 20h 19m||6d 13h 1m||10d 20m
+|- style="background:#ebebeb;"
+!69
+|14h 28m||1d 20h 20m||3d 18h 28m||6d 9h 52m||9d 19h 31m
+|-
+!70
+|14h 11m||1d 19h 26m||3d 16h 40m||6d 6h 48m||9d 14h 49m
+|- style="background:#ebebeb;"
+!71
+|13h 54m||1d 18h 34m||3d 14h 53m||6d 3h 47m||9d 10h 12m
+|-
+!72
+|13h 37m||1d 17h 43m||3d 13h 9m||6d 49m||9d 5h 40m
+|- style="background:#ebebeb;"
+!73
+|13h 21m||1d 16h 53m||3d 11h 27m||5d 21h 56m||9d 1h 14m
+|-
+!74
+|13h 5m||1d 16h 4m||3d 9h 47m||5d 19h 5m||8d 20h 54m
+|- style="background:#ebebeb;"
+!75
+|12h 49m||1d 15h 16m||3d 8h 9m||5d 16h 18m||8d 16h 38m
+|-
+!76
+|12h 34m||1d 14h 29m||3d 6h 32m||5d 13h 35m||8d 12h 28m
+|- style="background:#ebebeb;"
+!77
+|12h 19m||1d 13h 43m||3d 4h 58m||5d 10h 54m||8d 8h 22m
+|-
+!78
+|12h 4m||1d 12h 57m||3d 3h 26m||5d 8h 17m||8d 4h 22m
+|- style="background:#ebebeb;"
+!79
+|11h 50m||1d 12h 13m||3d 1h 55m||5d 5h 43m||8d 26m
+|-
+!80
+|11h 35m||1d 11h 30m||3d 27m||5d 3h 13m||7d 20h 35m
+|- style="background:#ebebeb;"
+!81
+|11h 21m||1d 10h 47m||2d 23h||5d 45m||7d 16h 49m
+|-
+!82
+|11h 8m||1d 10h 5m||2d 21h 34m||4d 22h 20m||7d 13h 7m
+|- style="background:#ebebeb;"
+!83
+|10h 54m||1d 9h 24m||2d 20h 11m||4d 19h 58m||7d 9h 30m
+|-
+!84
+|10h 41m||1d 8h 44m||2d 18h 49m||4d 17h 39m||7d 5h 57m
+|- style="background:#ebebeb;"
+!85
+|10h 28m||1d 8h 5m||2d 17h 29m||4d 15h 22m||7d 2h 28m
+|-
+!86
+|10h 16m||1d 7h 26m||2d 16h 10m||4d 13h 9m||6d 23h 4m
+|- style="background:#ebebeb;"
+!87
+|10h 4m||1d 6h 49m||2d 14h 53m||4d 10h 58m||6d 19h 43m
+|-
+!88
+|9h 51m||1d 6h 12m||2d 13h 38m||4d 8h 49m||6d 16h 27m
+|- style="background:#ebebeb;"
+!89
+|9h 40m||1d 5h 35m||2d 12h 24m||4d 6h 43m||6d 13h 14m
+|-
+!90
+|9h 28m||1d 5h||2d 11h 11m||4d 4h 40m||6d 10h 5m
+|- style="background:#ebebeb;"
+!91
+|9h 17m||1d 4h 25m||2d 10h||4d 2h 39m||6d 7h
+|-
+!92
+|9h 6m||1d 3h 51m||2d 8h 51m||4d 41m||6d 3h 59m
+|- style="background:#ebebeb;"
+!93
+|8h 55m||1d 3h 18m||2d 7h 43m||3d 22h 45m||6d 1h 2m
+|-
+!94
+|8h 44m||1d 2h 45m||2d 6h 36m||3d 20h 51m||5d 22h 8m
+|- style="background:#ebebeb;"
+!95
+|8h 33m||1d 2h 13m||2d 5h 30m||3d 19h||5d 19h 17m
+|-
+!96
+|8h 23m||1d 1h 41m||2d 4h 26m||3d 17h 11m||5d 16h 30m
+|- style="background:#ebebeb;"
+!97
+|8h 13m||1d 1h 10m||2d 3h 23m||3d 15h 24m||5d 13h 46m
+|-
+!98
+|8h 3m||1d 40m||2d 2h 21m||3d 13h 39m||5d 11h 6m
+|- style="background:#ebebeb;"
+!99
+|7h 54m||1d 11m||2d 1h 21m||3d 11h 56m||5d 8h 28m
+|-
+!100
+|7h 44m||23h 42m||2d 22m||3d 10h 15m||5d 5h 54m
+|-
+| colspan="6" |[http://vignette1.wikia.nocookie.net/realm-grinder/images/f/fc/Spell_tiers.png/revision/latest?cb=20161129204455 &rArr; R100]
+|}
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%;text-align:center;"
+! colspan="7" |Unlock Spell Active Time (Total) - R101+
+|-
+! width="8%" |R#
+! width="15%" |Tier 2
+! width="15%" |Tier 3
+! width="15%" |Tier 4
+! width="15%" |Tier 5
+! width="15%" |Tier 6
+! width="15%" |Tier 7
+|-
+!101
+|7h 35m||23h 14m||1d 23h 24m||3d 8h 37m||5d 3h 23m||7d 8h 16m
+|- style="background:#ebebeb;"
+!102
+|7h 26m||22h 46m||1d 22h 27m||3d 7h||5d 55m||7d 4h 45m
+|-
+!103
+|7h 17m||22h 18m||1d 21h 31m||3d 5h 25m||4d 22h 30m||7d 1h 18m
+|- style="background:#ebebeb;"
+!104
+|7h 8m||21h 52m||1d 20h 37m||3d 3h 52m||4d 20h 8m||6d 21h 54m
+|-
+!105
+|7h||21h 25m||1d 19h 43m||3d 2h 21m||4d 17h 49m||6d 18h 35m
+|- style="background:#ebebeb;"
+!106
+|6h 52m||21h||1d 18h 51m||3d 52m||4d 15h 32m||6d 15h 20m
+|-
+!107
+|6h 43m||20h 35m||1d 17h 59m||2d 23h 25m||4d 13h 18m||6d 12h 9m
+|- style="background:#ebebeb;"
+!108
+|6h 35m||20h 10m||1d 17h 9m||2d 21h 59m||4d 11h 7m||6d 9h 2m
+|-
+!109
+|6h 27m||19h 46m||1d 16h 20m||2d 20h 35m||4d 8h 59m||6d 5h 58m
+|- style="background:#ebebeb;"
+!110
+|6h 20m||19h 22m||1d 15h 31m||2d 19h 13m||4d 6h 53m||6d 2h 58m
+|-
+!111
+|6h 12m||18h 59m||1d 14h 44m||2d 17h 52m||4d 4h 49m||6d 2m
+|- style="background:#ebebeb;"
+!112
+|6h 5m||18h 36m||1d 13h 57m||2d 16h 33m||4d 2h 48m||5d 21h 9m
+|-
+!113
+|5h 57m||18h 14m||1d 13h 12m||2d 15h 16m||4d 50m||5d 18h 19m
+|- style="background:#ebebeb;"
+!114
+|5h 50m||17h 52m||1d 12h 27m||2d 14h||3d 22h 53m||5d 15h 33m
+|-
+!115
+|5h 43m||17h 30m||1d 11h 43m||2d 12h 45m||3d 21h||5d 12h 51m
+|- style="background:#ebebeb;"
+!116
+|5h 36m||17h 9m||1d 11h 1m||2d 11h 32m||3d 19h 8m||5d 10h 11m
+|-
+!117
+|5h 30m||16h 49m||1d 10h 19m||2d 10h 21m||3d 17h 19m||5d 7h 35m
+|- style="background:#ebebeb;"
+!118
+|5h 23m||16h 29m||1d 9h 37m||2d 9h 11m||3d 15h 31m||5d 5h 2m
+|-
+!119
+|5h 16m||16h 9m||1d 8h 57m||2d 8h 2m||3d 13h 46m||5d 2h 32m
+|- style="background:#ebebeb;"
+!120
+|5h 10m||15h 49m||1d 8h 18m||2d 6h 55m||3d 12h 3m||5d 5m
+|-
+| colspan="7" | <b>based on spell tier time calculator on G00F's not a wiki</b>
+|}
+
+== Automatic Casting ==
+Spells can be cast by clicking the spell button, using [[keyboard shortcuts]] (hotkeys n°1-6 in visual order from top to bottom) or automated using the automatic casting tools obtainable through the upgrades listed here below.
+
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%;" id="Auto Casting Upgrades"
+! colspan="5" |Automatic Casting Upgrades
+|-
+! colspan="2" |Name
+!Cost
+!Requirements
+!Effect
+|-
+![[File:Autocast1 upgrade.png]]
+!Automatic Casting
+| style="padding-left:10px;" |{{Number|100 B|table}}
+| style="padding-left:10px;" |60,000 Mana Produced (This R)
+| style="padding-left:10px;" |Allows autocasting of spells by CTRL+Clicking them.
+While [[offline]] spells are not cast. instead, increase your mana produced amount by 10% of your mana regeneration.
+|-
+![[File:Autocast2 upgrade.png]]
+!Improved Autocasting
+| style="padding-left:10px;" |{{Number|200 Qi|table}}
+| style="padding-left:10px;" |{{Number|2M}} Mana Produced (This R)
+| style="padding-left:10px;" |Increases mana regeneration by 5%.
+Only while offline, increase your mana produced amount by an additional 15% of your mana regeneration per second.
+|-
+![[File:Autocast3 upgrade.png]]
+!Masterful Autocasting
+| style="padding-left:10px;" |{{Number|300 Oc|table}}
+| style="padding-left:10px;" |{{Number|6M}} Mana Produced (This R)
+| style="padding-left:10px;" |Increases mana regeneration by 10%
+Only while offline, increase your mana produced by an additional 35% of your mana regeneration per second, and increase Activity time for spells set to autocast based on their duration, cost and mana regen. See [[Spells#Offline Spell Casting|Offline spell casting]].
+|-
+![[File:Autocast4 upgrade.png]]
+!Priority Autocasting
+| style="padding-left:10px;" |{{Number|400 Ud|table}}
+| style="padding-left:10px;" |{{Number|12M}} Mana Produced (This R)
+| style="padding-left:10px;" |Allows you to prioritize the order of spell casting.
+Spells with lower priority will be cast only if the higher priority spells are already active.
+Only while offline, increase your spells cast amount by 1 per minute.
+|-
+![[File:Autocast5 upgrade.png]]
+!Contingency Autocasting
+| style="padding-left:10px;" |{{Number|500 Qad|table}}
+| style="padding-left:10px;" |{{Number|20M}} Mana Produced (This R)
+| style="padding-left:10px;" |Allows you to set a minimum amount of mana before starting to Autocast. A slide bar will appear on the mana bar when you CTRL+Click: [[File:Contingency-slidebar.png]]<br />By adjusting its height you will set a minimum amount of mana for spells to start casting. Once your mana reaches the threshold, spells will follow the priority rules. The contingency loop will break when there is not enough mana to continue, at which point the cycle will reset.
+Only while offline, increase your spells cast amount by an additional 2 per minute.
+|-
+![[File:Autocast6 upgrade.png]]
+!Planned Autocasting
+| style="padding-left:10px;" |{{Number|600 Spd|table}}
+| style="padding-left:10px;" |{{Number|30M}} Mana Produced (This R)
+| style="padding-left:10px;" |Allows you to set Primary and Secondary spells. Primary spells (Set with CTRL+Click) will fire when the mana reaches amount set by the Contingency slidebar. Secondary spells (Set with SHIFT+Click) will fire as soon as there is enough mana, and if ALL the primary spells are active.
+Only while offline, increase mana produced by an additional 10% of your mana regeneration per second and your spells cast amount by an additional 2 per minute.
+|-
+![[File:Autocast7 upgrade.png]]
+!Efficient Autocasting
+| style="padding-left:10px;" |{{Number|700 Vg|table}}
+| style="padding-left:10px;" |{{Number|50M}} Mana Produced (This R)
+| style="padding-left:10px;" |Allows you to set spells to work outside of contingency and planned settings. These spells (set with CTRL+SHIFT+Click) disregard your contingency rules and are cast as soon as you have enough mana for them.
+Only while offline, increase your mana production by an additional 10% of your mana regeneration per second, and your spells cast amount by an additional 2 per minute.
+|-
+![[File:Autocast8 upgrade.png|54x54px]]
+!Tiered Autocasting
+| style="padding-left:10px;" |{{Number|800 Vg|table}}
+| style="padding-left:10px;" |{{Number|200M}} Mana Produced (This R) {{PA}}
+| style="padding-left:10px;" |For [[#Tier Spell Upgrades .28R42.2B.29|Tier spell upgrades]]: Allows you to set the maximum tier you wish to autocast each spell to. In the spell tooltip<ref name=":0">To manage to click inside the spell tool-tips, the [[option]] "Enable Spell Tooltip Persist" requires to be enabled.</ref>, use the Diamond icon to change its mode until you get to the desired maximum tier number. Spells will still follow their previous priority rules.
+Only while offline, increase mana produced by an additional 10% of your mana regeneration per second and your spells cast amount by an additional 3 per minute. (Combined total of 90%)
+|}
+
+[[File:Automatic-casting.png|left|Automatic Casting buttons in spell tool-tips]]
+Automatic casting can be setup by clicking on the autocast buttons inside each spell tool-tip<ref name=":0" />, or by using the keyboard shortcuts: Silver: CTRL+Click, Gold: SHIFT+Click, Bronze: CTRL+SHIFT+Click, Diamond: CTRL+X+Click. Highest Possible Diamond Tier: Z+Click.
+
+The total offline bonuses cap at a combined total of 90% boost to mana produced, and a count of 10 generic spellcasts per minute.
+
+If auto-casting ''Tax Collection,'' note that it should be set as last spell, if at all. As it is the cheapest and has no duration, it will use up all the mana, and never leave enough for the other spells to be cast.
+
+== Offline Spell Casting ==
+While [[offline]], Spells set on autocast will not be cast, and no effects will be gained. Instead, a generic non-specific spell will increase your overall "Spell Casts" entry in the [[stats]]. Individual spell counts (eg [[Combo Strike]]) will not increase.
+
+However, individual spells ''will'' gain some "Active Time (This game)" based on their duration, cost and online mana regeneration rate. The amount is calculated as follows:
+
+{| class="article-table" style="width:100%;"
+!Offline Activity Time Gain Formula
+|-
+|[[File:Gif.gif|centre|thumb|156x156px]]<blockquote>Where t is offline time, m is online mana regen per second, d is spell duration, c is spell mana cost, and n is number of spells set to autocast</blockquote>
+|}
+For Spells to work offline, you need certain upgrades:
+* '''Offline Mana Regen''' Upgrades (such as included in the 'Automatic auto-casting' upgrade)
+* '''Offline Spell Casting''' Upgrades (such as included in the 'Priority Auto-casting' and later upgrades)
+The bonuses combine additively. The total bonus of all the offline auto-casting upgrades is 90% of your online mana regeneration rate, as well as 10 spell casts per minute and .
+
+Mana ''spent'' is not a stat, and does not seem to accumulate at all while offline (but note that [[Challenges|Primal Balance]] depends on mana ''produced'', not spent).
+
+'''<u>Special cases:</u>'''
+* ''Tax Collection'' has no duration. It is counted for the number of spells set to autocast but no production will be gained from it being set to autocast offline.  
+
+* If any ''Brainwave'' cast time remains when going offline, it will simply continue until finished.<ref>Source: [http://www.kongregate.com/forums/8945-realm-grinder/topics/702930 offline spell activity time, its kinda weird now] @kongregate forums</ref>
+
+== See also ==
+* [[Challenges]]  - some [[tier challenge rewards]] also have spell upgrades
+* [[Tools|Realm Weather Service]] Lightning Strike spell forecast tool
+
+== Reference ==
+<references />
+
+{{Sitenav}}
+[[Category:Spells| ]]
+[[Category:Upgrades]]
+[[Category:Unlock Requirements]]
+[[Category:Realm Grinder Wiki]]
+[[Category:Duration]]

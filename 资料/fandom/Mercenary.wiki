@@ -1,0 +1,400 @@
+{{tocright}}[[File:Mercenary_Faction_Building.png|left]]
+{{Description|"When a mercenary crosses your path, there's only one thing that can save your life: offer him more money than he can get by killing you. If you gain the favor of the mercenaries, you will be able to combine the power of all races at once."}}
+
+==The Mercenary Faction ==
+[[File:Mecenary champion trophy.png|left|Mercenary Champion Trophy]]
+The Mercenaries were implemented in the [[Updates#1.3 Afterlife|After Life]] expansion (v1.3), and differ from the other factions: Unlocked at R3, they are available in all [[alignments]], and can combine the power of all the other unlocked [[factions]] by letting you choose 2 [[spells]] and 3x4 [[Faction Upgrades|faction upgrades]]. This enables you to create powerful cross-faction [[Merc Builds|mercenary builds]]. However, this comes with the downside of high Faction Coin requirements, and initial gem requirement to reach E55 coins with unbonused alignment buildings only.
+
+{| style="float:right; clear:right;"
+|[[File:Mercerairy spell choice.png|thumb|177x177px|Spell Selection]]
+|[[File:Merc-spell-choice1.png|thumb|177x177px|Upgrade selection]]
+|}
+* '''[[Alignment]]''': '''Any'''
+* '''[[Spells|Faction Spell]]''': '''Custom''' (depending on alignment<ref name=":0">The ''Hellfire Blast'' and ''Lighting Strike'' spells are based on [[aligned buildings]]. As such, they are only available when you have those buildings. Same goes for upgrades based on aligned items.</ref>)  
+* '''[[Spells#Spell Upgrades|Spell Upgrade]]''': see [[#Other Upgrades|below]]
+* '''[[Heritage]]''':  Increase the production of all buildings based on the highest amount of coins you gained in a single game.<br />{{Formula|stat|floor(5 * log(1 + x))|Coins Gained (Max)}}
+* '''[[Bloodline]]''': None - See [[Bloodline#Bloodstream|Bloodstream]]  
+* '''[[Challenge]]''': None  
+* '''[[Unique Building]]s''':  ''Good:'' Mercenary Camp (from Knights Jousts)<br />''Evil:'' Tyrant Garrison - (from Evil Fortresses)<br />''Neutral:'' Freemason's Hall - (from Alchemist Labs)  
+* '''[[Research]]''': R75  
+* '''Faction Unlock Requirements''': R3+ see [[#Unlock Requirements|below]]
+
+== Mercenary Tier Upgrades ==
+The Tier upgrades enable to choose from the all the existing [[faction upgrades]]. These cost coins and [[Faction Coins]]. The FC type necessary depends on your selection: For a Fairy upgrade, it will cost Fairy coins; for Elven upgrade, it will cost Elven coins; and so forth.
+
+=== Tier 1 Upgrades ===
+{| class="wikitable" style="width:100%" id="Mercenary Tier 1 Upgrades"
+! colspan="4" |Tier 1 Upgrades
+|-
+! colspan="2" |Name
+! width="75px" | Cost
+! Effect
+|-
+![[File:Merc.png]]
+! width="110px" |''Mercenary First Contract''
+|{{Number|50 Spd}}
+|''Unlocks [[Faction Upgrades#Tier 1 Upgrades|Tier 1 Upgrades]].''
+|-
+![[File:Mecenary magic1 upgrade.png]]
+![[Mercenary Magic Contract]]
+|{{Number|50 Ocd}},<br />1,000 FC
+|Pick an available [[Spell]] from any faction.
+''The choice depends on the [[Alignments|alignment]] you have chosen.''
+|-
+![[File:Mecenary11 faction-upgrade.png]]
+!Mercenary Upgrade 1
+|1,500 FC
+| rowspan="4" |Pick an available [[Faction_Upgrades#Tier_1_Upgrades|Tier 1 Upgrade]] from existing factions.
+''The choice can depend on the alignment and spells you have chosen<ref name=":0" /><ref name=":1">Every tier may only have one [[Dragon]] upgrade and no more.</ref>.''
+|-
+![[File:Mecenary12 faction-upgrade.png]]
+!Mercenary<br />Upgrade 2
+|3,000 FC
+|-
+![[File:Mecenary13 faction-upgrade.png]]
+!Mercenary<br />Upgrade 3
+|4,500 FC
+|-
+![[File:Mecenary14 faction-upgrade.png]]
+!Mercenary<br />Upgrade 4
+|6,000 FC
+|}
+
+=== Tier 2 Upgrades ===
+{| class="wikitable" style="width:100%" id="Mercenary Tier 2 Upgrades"
+! colspan="4" |Tier 2 Upgrades
+|-
+! colspan="2"|Name
+! width="75px" |Cost
+! Effect
+|-
+![[File:Mercenarysecondcontract.png]]
+! width="110px" |''Mercenary Second Contract''
+|{{Number|25 Vg}}
+|''Unlock [[Faction Upgrades#Tier 2 Upgrades|Tier 2 upgrades]].''
+|-
+![[File:Holycrusaders mecenary upgrade.png]]
+!'''Holy Crusaders'''<br /><small style="font-weight:normal;">(For Good Alignments)</small>
+|{{Number|25 Uvg}}
+|You gain additional Crusader [[Assistants]] based on the amount of [[spells]] cast in this game. Increase clicking reward by 1000% for each active spell.
+{{Formula|stat|floor((\sqrt{(1 + 0.8 * x)} - 1) / 2)|Spells Cast (This Game)}}
+|-
+![[File:Heresiarchs mecenary upgrade.png]]
+! '''Heresiarchs'''<br /><small style="font-weight:normal">(For Evil Alignments)</small>
+|{{Number|25 Uvg}}
+|Increase the production of Evil buildings based on your most built Evil building.
+{{Formula|round(1.15 * x^{0.85})%|the number of the most-built evil building you own}}
+|-
+![[File:TradeLords mecenary upgrade.png]]
+!'''Trade Lords'''<br /><small style="font-weight:normal">(For Neutral Alignments)</small>
+|{{Number|25 Uvg}}
+|When assistants finds a faction coin, they also find a faction coin for every other faction. Increase mana regeneration based on faction coins gained in this game.<br />{{Formula|stat|floor(10 * log(1 + x^{1.5})) / 10|Faction Coins Gained (This Game)}}
+|-
+![[File:Mecenary21 faction-upgrade.png]]
+!'''Mercenary Upgrade 5'''
+|3,000 FC
+| rowspan="4" |Pick an available [[Faction Upgrades#Tier 2 Upgrades|Tier 2 Upgrade]] from existing factions.
+''The choice can depend on the alignment and spells you have chosen<ref name=":0" /><ref name=":1" />.''
+|-
+![[File:Mecenary22 faction-upgrade.png]]
+!'''Mercenary Upgrade 6'''
+|6,000 FC
+|-
+!
+[[File:Mecenary23 faction-upgrade.png]]
+!'''Mercenary Upgrade 7'''
+|10,500 FC
+|-
+!
+[[File:Mecenary24 faction-upgrade.png]]
+!'''Mercenary Upgrade 8'''
+|13,500 FC
+|}
+
+=== Tier 3 Upgrades ===
+{| class="wikitable" style="width:100%" id="Mercenary Tier 3 Upgrades"
+! colspan="4" |Tier 3 Upgrades
+|-
+! colspan="2" |Name
+! width="75px" |Cost
+! Effect
+|-
+![[File:Mercenarythirdcontract.png]]
+! width="110px" |''Mercenary Third Contract''
+|{{Number|5 Tvg}}
+|''Unlock [[Faction Upgrades#Tier 3 Upgrades|Tier 3 upgrades]].''
+|-
+![[File:Mecenary magic2 upgrade.png]]
+![[Mercenary Sorcery Contract|Mercenary<br />Sorcery Contract]]
+|{{Number|5 Qavg}}, 25,000 FC
+|You can purchase a spell from any faction. You will not be able to change it during the current run.
+''The choice will depend on the alignment you have chosen.''
+|-
+![[File:Mecenary31 faction-upgrade.png]]
+!Mercenary Upgrade 9
+|4,500 FC
+| rowspan="4" |Pick an available [[Faction_Upgrades#Tier_3_Upgrades|Tier 3 Upgrade]] from existing factions.
+''The choice can depend on the alignment and spells you have chosen<ref name=":0" /><ref name=":1" />.''
+|-
+![[File:Mecenary32 faction-upgrade.png]]
+!Mercenary Upgrade 10
+|10,500 FC
+|-
+![[File:Mecenary33 faction-upgrade.png]]
+!Mercenary Upgrade 11
+|16,500 FC
+|-
+![[File:Mecenary34 faction-upgrade.png]]
+!Mercenary Upgrade 12
+|22,500 FC
+|}
+
+== Unlock Requirements ==
+Unlocking the Mercenaries requires the third reincarnation, the following can be unlocked in different abdications.
+{| class="wikitable" style="width:100%" id="Unlock Requirements"
+! colspan="4" |Mercenary Unlock Requirements
+|-
+! colspan="2" |Name
+!Cost
+!Description
+|-
+![[File:MercTribute.png]]
+!Mercenary Tribute
+|At least (minimum):
+* {{Number|1 Nod}} Coins
+* 100,000 of each [[Faction Coins|Faction Coin]]
+(Price increases with time, but is reset at [[Abdications]].)
+| style="width:50%;" |''Pay the mercenaries a tribute to unlock their powers. Be quick though, the price increases over time!''
+|-
+![[File:MercOath.png]]
+!Mercenary Oath
+|{{Number|1 Tvg}} Coins.
+| style="width:50%;" |''By reciting the Oath of the Mercenaries you will be able to join mercenaries for the rest of your existence. Not even Reincarnations will strip you of this right. You will be able to take any alignment and become a Good, Neutral or Evil mercenary, therefore determining your building set, and from there on you will be able to take any spell or ability from any other faction.''
+|}
+<u>'''Unlocking The Mercenaries:'''</u><br />
+The cost of the "''Mercenary Tribute"'' rises very quickly and gets reset at abdications. Aim for a run where you can quickly gain enough [[Faction Coins|FCs]] to buy it before it gets too expensive. Do it when you have enough gems to afford ~100 or more [[excavations]]. Suggested faction to do this is [[Titans]] with at least {{Number|1 No}} gems - ''<u>and make [[Save Tab|save files]]</u> before in case you want to start over and get your excavations back.''
+
+<blockquote style="font-size:99%">''Coin'' {{Formula|stat|1e60 * (ceil (1+x)/60))^{3.5}|playtime|seconds}}<br />
+''FC'' {{Formula|stat|100000 * (ceil((1 + x)/60))^{0.5}|playtime|seconds}}</blockquote>
+
+[[File:MercUnlockMsg-s.png|300px|right]]
+Once it is purchased, you have unlocked the mercenaries and their trade treaty, the "''Mercenary First Contact"'', will show up in all your future games, alongside other Faction Trade Treaties of the same alignment.
+
+See also "[http://www.kongregate.com/forums/8945-realm-grinder/topics/547245#posts-9738076 Unlocking Mercenaries]" in why_amihere's guide.
+
+Joining the Mercenaries for the first time will grant the ''Mercenary Oath'' [[Trophies#Secret Trophies|Secret Trophy]]. (You will need at least {{Number|1 No}} gems to do this, and to not join any other faction!)
+{{clr}}
+
+== Unique Buildings ==
+{| style="float:right;" cellspacing=0 cellpadding=0
+|[[File:GoodMerc_Unique_Building.png]]
+|-
+|[[File:EvilMerc_Unique_Building.png]]
+|-
+|[[File:NeutralMerc_Unique_Building.png]]
+|}
+At R75, the buildings can be upgraded to a [[Buildings#Unique Buildings|Unique Building]] depending on your chosen alignment, which are required for some research quests and upgrades.
+*'''Good:''' Mercenary Camp - Upgraded from Knights Jousts
+*'''Evil:''' Tyrant Garrison - Upgraded from Evil Fortresses
+*'''Neutral:''' Freemason's Hall - Upgraded from Inns{{clr}}
+
+== Mercenary Research ==
+Upon reaching R75, the game advisor tells us that the Mercenary Lord himself has come to speak with you. 
+
+''"He is a man of uncomparable strength and influence... From what I heard, he wishes to task you with the retrieval of an Obsidian Shard, the legendary material of which Mercenary Blades are made."''
+
+To gain access to Mercenary research, you will need the ''Secrets of the Warriors'' upgrade. This upgrade will appear once you have bought a unique Mercenary building and found the ''Obsidian Shard'' artifact.
+{| class="wikitable" style="width:100%;"
+! colspan="6" |Mercenary Research Unlock Requirements
+|-
+! colspan="2" |Name
+!Type
+!Description
+! width="110px" |Requirements
+! style="width:13%;" |Cost
+|-
+![[File:MercResearchQuest.png]]
+!Mercenary Encampment Quest
+|Quest
+[[Upgrade]]
+|''We salute you, commander. Your strategical skills had not gone unnoticed within our ranks. We have decided to offer you a chance to establish a formal encampment within your boundaries... Build more structures to strengthen our city.''
+<small>''Required once throughout the entire game play and does not count towards the bought upgrade stat.''</small>
+|R75 + 125K buildings
+|{{Number|10 Notg|table}}
+|-
+![[File:Mercenary Camp icon.png]]
+!Mercenary Camp
+|[[Upgrades#Allegiances Upgrades|Allegiances Upgrades]]<br />(Good)
+|Upgrade Knights Jousts to Mercenary Camps, boosting their production based on the amount of Non-Unique buildings you own and unlocking more unique perks for the building.
+{{Formula|build|1.5 * (1+x)|Non-Unique Buildings}}
+|Mercenary Encampment Quest
+|{{Number|10 Dqag|table}}
+|-
+![[File:Tyrant Garrison icon.png]]
+!Tyrant Garrison
+|[[Upgrades#Allegiances Upgrades|Allegiances Upgrades]]<br />(Evil)
+|Upgrade Evil Fortresses to Tyrant Garrisons, boosting their production based on Offline Production Bonus and unlocking more unique perks for the building.<br />{{Formula|0.5 * \log_{10}(1+x)^{4.5}|the Offline Production Bonus}}
+|Mercenary Encampment Quest
+|{{Number|1 Tqag|table}}
+|-
+![[File:Freemason's Hall icon.png]]
+!Freemason's Hall
+|[[Upgrades#Allegiances Upgrades|Allegiances Upgrades]]<br />(Neutral)
+|Upgrade Alchemist Labs to Freemason's Hall, boosting their production based on the highest amount of assistants you had in a single game and unlocking more unique perks for the building.<br />{{Formula|2.5 * x^{2.5}|assistants you had in a single game (This R)}}
+|Mercenary Encampment Quest
+|{{Number|1 Tqag|table}}
+|-
+![[File:Obsidian shard.png]]
+!Obsidian Shard
+|Quest [[Artifact]]
+|Unlocks the ''Secrets of the Warriors'' upgrade
+|R75+, 8000th [[Excavation]]
+|
+|-
+![[File:Secrets of the Warriors.png]]
+!Secrets of the Warriors
+|Upgrade
+|Unlocks [[research]] for Mercenaries and increases their production by 1000%. 
+|''Obsidian Shard'' artifact, Unique Building
+|{{Number|100 Qiqag}} Coins, {{Number|10 Qa}} FCs of each faction
+|-
+|}
+
+== Other Upgrades ==
+{| class="wikitable" style="width:100%;"
+! colspan="6" |Other Mercenary Upgrades
+|-
+! colspan="2" |Name
+!Type
+!Description
+!Requirements
+! width:75px" |Cost
+|-
+![[File:Round Table.png]]
+!Round Table
+|Spell Upgrade
+|Upgrades ''Tax Collection'' to ''[[Share Benefits]]''.<br />Increases the production of all buildings and Faction Coin find chance based on this spell tier level for 20 seconds. Can be cast up to 35 tiers.
+{{Formula|naked|20 ^{(0.25 * x)}|(FC chance multiplier)}}}<br />{{Formula|naked|((2.20 ^x) - 1) * 100|multiplicative (production multiplier)}}<br />''where x is tier.''
+|''Mercenary Camp''
+|{{Number|1 Qaqag|table}}
+|-
+![[File:Mecenary35 faction-upgrade.png]]
+!Good Mercenary Upgrade 13
+|Upgrade
+|You can purchase any upgrade from any Good Faction for an increased price.
+|''Round Table''
+|
+|-
+![[File:Dark Covenant.png]]
+!Dark Covenant
+|Spell Upgrade
+|Upgrades ''Tax Collection'' to ''[[Reap Interests]]''.<br />Additional casts of Reap Interests increase its seconds worth of production.
+{{Formula|yx|y ^{(1 + 0.2 * \log_{10}(1 + x))}|TC original power|amount of TC casts}}<br />(Extra time from reap interests does apply to S50. S50 tax collections do increase reap interests.)
+|''Tyrant Garrison''
+|{{Number|1 Qaqag|table}}
+|-
+![[File:Mecenary36 faction-upgrade.png]]
+!Evil Mercenary Upgrade 13
+|Upgrade
+|You can purchase any upgrade from any Evil Faction for an increased price.
+|''Dark Covenant''
+|
+|-
+![[File:Secret Exchange.png]]
+!Secret Exchange
+|Spell Upgrade
+|Upgrades ''Tax Collection'' to ''[[Appraisal Vantage]]''.<br />Generates additional Faction Coins per cast.
+{{Formula|(2.5 * x^{2.5})|original Faction Coin chance}}
+|''Freemason's Hall''
+|{{Number|1 Qaqag|table}}
+|-
+|}
+
+== Related Items ==
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%"
+! colspan="6" |Related Trophies, Artifacts & Upgrades
+|-
+! colspan="2" |Name
+! width="65px" |Type
+!Description
+! width="110px" |Requirement
+! width:75px" |Cost
+|-
+![[File:Mercenary_Spirit.png]]
+!Mercenary Spirit
+|Trophy & Upgrade
+|Increase the production of all buildings by 15% per reincarnation.
+|Reincarnate while playing as a Mercenary
+|{{Number|1 Ocd|table}}
+|-
+![[File:Harlequin.png]]
+!Harlequin
+|Trophy & Upgrade
+|Increase the production of all buildings based on the amount of different factions involved in your mercenary upgrades.
+{{Formula|x^3%|the number of different factions you've bought upgrades from}}
+|As a Mercenary, purchase upgrades from 11 different factions in one run. (See [[Merc Builds#Joker|Joker merc Build]])
+|{{Number|5 Qivg|table}}
+|-
+![[File:Lucifer.png]]
+!Lucifer
+|Trophy & Upgrade
+|Increase the production of all non-neutral mercenary buildings by 300%.
+|As a Good Mercenary, purchase only Evil mercenary faction upgrades or vice versa.
+|{{Number|50 Vg|table}}
+|-
+![[File:Norecruit.png]]
+!No Recruiting
+|Trophy & Upgrade
+|Increase Mercenary production by 1% per Reincarnation
+|Reach {{Number|1 NoVg}} gems in a Reincarnation without ever affiliating with the Mercenaries
+|{{Number|1 Tg|table}}
+|-
+![[File:Helden Sterben Nicht.png]]
+!Helden Sterben Nicht
+|Trophy & Upgrade
+|Increase the mana regeneration and maximum mana by 10%.
+|Join Mercenaries, then Undead, then Angels within 15 minutes since the beginning of a new run in a single game session.
+|{{Number|5 Qavg|table}}
+|-
+![[File:KnowYourEnemyPart1.png]]
+!'''Know Your Enemy, Part I '''
+|[[Artifact]] & Upgrade
+|Increases the production of all buildings based on time spent as Non-Mercenary. ("''Time allied with..."'' in the stats)
+{{Formula|stat|(0.5 * x^{0.75})%|time spent as non-mercenary factions|seconds}}
+|R12+, Play with upgrades from 11 different factions.<br />''Chance: 10%''
+|{{Number|100 Vg|table}}
+|-
+![[File:KnowYourEnemyPart2.png]]
+!'''Know Your Enemy, Part II '''
+|Artifact & Upgrade
+|Increases the production of all buildings based on time spent as Non-Mercenary.
+{{Formula|stat|0.065 * x^{0.65}%|time spent as non-mercenary factions|seconds}}
+|R76+, Play with upgrades from 12 different factions.<br />''Chance: 10%''
+|{{Number|100 Noqag|table}}
+|-
+![[File:Veteran Figurine.png|54x54px]]
+!Veteran Figurine
+|Artifact
+|''The warrior of a thousand battles, ultimate champion of the Realms.''
+Allows Mercenaries to benefit from all Challenges.
+|R90+<br />''Chance: (1,000,000 seconds This Game)%''
+|
+|-
+|}
+
+== See Also ==
+* [[Faction Upgrades]]
+* [[Faction Upgrades by Effect]]
+* [[Merc Builds]]: tested combinations of spells and faction upgrades.
+* [[Bloodstream]]
+
+== Notes ==
+* Divine Games had planned a kind of [[Unimplemented content|Mercenary Tax]], payable at regular intervals in mana or gold. This was visible in the game code but wasn't implemented - ''and hopefully, never will be!''
+
+
+<references />
+{{Sitenav}}
+[[Category:Mercenary| ]]
+[[Category:Factions]]
+[[Category:Upgrades]]
+[[Category:Unlock Requirements]]

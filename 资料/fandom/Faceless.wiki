@@ -1,0 +1,269 @@
+{{tocright}}
+{|
+|[[File:Faceless_Faction_Building.png|thumb|left]]
+|{{Description|"Little is known about the Faceless, but it is said they did not possess individual minds, instead they were all connected to a central consciousness which governed all their choices and behaviors. Affiliating yourself to the Faceless Faction will boost your production based on your past choices while giving progressively better bonuses."}}
+|}
+
+== The Faceless Faction ==
+[[File:Faceless champion trophy.png|left|Faceless Champion Trophy]]
+[[File:Faceless-Overmind-spell-upgrade.png|right|54x54px|Faceless Overmind]]
+The ancient race, '''Faceless''', feature perks that becomes stronger with time. Their [[Heritage]] is based on the highest amount of buildings owned in the current reincarnation, and thus can easily be improved by doing a [[Bloodline|goblin-line]] run. Late game, their ability to increase assistants using [[Research#Research Upgrades by Facility|S375 (Illusion)]]  and their brainwaves come in handy.
+
+* '''[[Alignment]]''': '''''Neutral'''''
+* '''[[Alignment#Leges|Leges]]''': '''''Chaos'''''
+* '''[[Spells|Faction Spell]]''': '''''Brainwave''''' - Increase production of all buildings by a cumulative 2% for 10 minutes.
+* '''[[Spells#Spell Upgrades|Spell Upgrade]]''': '''''Faceless Overmind''''' Increases ''Brainwave'' ticks to 3% per second.
+** Unlock requirement: Affiliate with the Faceless 5 times in a row.
+* '''[[Heritage]]''': Increase the production of all buildings based on the highest amount of buildings purchased in a single game.<br />{{Formula|stat|0.25 \times x^{0.75}%|your Buildings Owned (Max)}}
+* '''[[Bloodline]]''': Increase maximum mana based on mana produced in this game.<br />{{Formula|stat|\left\lfloor30 \times \log_{10}(1 + x)^{3.5}\right\rfloor|your Mana Produced (This Game)}}
+* '''[[Challenge|Challenge Reward]]''': '''''Focused Thoughts''''' - Give Brainwave a headstart based on its activity time in this game, with a minimum of 1 minute, then grows up to maximum duration.<br />''+1 second per 5 minutes Active Time (This Game).''
+* '''[[Unique Buildings|Research Building]]''': '''''Sunken Cities''''' (from Labyrinths)
+* '''[[Research|Research Facilities]]''': '''''Spellcraft, Divine'''''
+* '''[[Buildings#Leges Unique Buildings|Leges Building]]''':  '''''Forbidden Libraries''''' (from Monasteries)
+* '''Faction Unlock Requirements''': See [[#Unlock Requirements|below]]
+
+==Tier 1 Upgrades==
+{| class="wikitable" style="width:100%"
+|-
+! colspan="2" |Name
+!width="95px" | Cost
+! Effect
+|-
+![[File:Faceless.png]]
+! width="110px" |''Faceless Trade Treaty''
+| style="padding:0 0 0 8px;" | ''500 Fairy + 500 Undead Coins''
+| style="padding:0 0 0 8px;" | ''Unlocks Tier 1 Faceless Upgrades.''
+|-
+![[File:Faceless-faction-upgrade-11.png]]
+! Territorial Expanse
+| style="padding:0 0 0 8px;" | {{Number|500 Qi|table}}
+| style="padding:0 0 0 8px;" | Increase the production of Labyrinth based on assistants owned.
+''Formula:'' <math>(50\times\ln(1+x)^2)%</math> where x is the amount of assistant you own.(Not updated)
+|-
+![[File:Faceless-faction-upgrade-12.png]]
+! Evolutive Mutation
+| style="padding:0 0 0 8px;" | {{Number|5 Sx|table}}
+| style="padding:0 0 0 8px;" | Increase Faction Coin find chance based on the highest amount of Labyrinths you built in this Reincarnation.<br />{{Formula|build|\left\lfloor 3 \times x^{0.6}\right\rfloor|Labyrinths}}(Not updated)
+|-
+![[File:Faceless-faction-upgrade-13.png]]
+! Deep Memory
+| style="padding:0 0 0 8px;" | {{Number|50 Sx|table}}
+| style="padding:0 0 0 8px;" | Multiplicatively increase assistants based on the time spent on your longest Era in this Reincarnation.
+''Formula:'' <math>(0.3\times x^{0.7})%</math>where x is the longest session this reincarnation in second.(Not updated)
+
+''(Under Metagame, Longest Session in the [[Stats]].)''
+|}
+
+==Tier 2 Upgrades==
+{| class="wikitable" style="width:100%"
+|-
+! colspan="2" |Name
+!width="95px" | Cost
+! Effect
+|-
+![[File:FacelessTradeTreaty.png]]
+! width="110px" |''Faceless Friendship Pact''
+| style="padding:0 0 0 8px;" | ''2,500 Fairy + 2,500 Undead Coins''
+| style="padding:0 0 0 8px;" | ''Unlocks Tier 2 Faceless Upgrades.''
+|-
+![[File:Faceless-faction-upgrade-21.png]]
+! Gold Synthesis
+| style="padding:0 0 0 8px;" | {{Number|5 Sp|table}}
+| style="padding:0 0 0 8px;" | Increases the production of Neutral buildings based on your current amount of Coins.
+''Formula:'' <math>(0.2\times\ln(1+x)^2)%</math>where x is the amount of coins owned.(Not updated)
+|-
+![[File:Faceless-faction-upgrade-22.png]]
+! Mitosis
+| style="padding:0 0 0 8px;" | {{Number|50 Sp|table}}
+| style="padding:0 0 0 8px;" | Gain [[Assistants]] based on buildings built.
+{{Formula|stat|\left\lfloor 0.5 \times x^{0.5}\right\rfloor|Buildings Owned (This Game)}}(Not updated)
+|-
+![[File:Faceless-faction-upgrade-23.png]]
+! Overgrowth
+| style="padding:0 0 0 8px;" | {{Number|500 Sp|table}}
+| style="padding:0 0 0 8px;" | Increase the production of all buildings based on the highest amount of buildings built in this Reincarnation.<br />{{Formula|stat|0.8\times\left(x^{0.8}\right)%|Buildings Owned (Max)}}(Not updated)
+|}
+
+==Tier 3 Upgrades==
+{| class="wikitable" style="width:100%"
+|-
+! colspan="2" |Name
+!width="95px" | Cost
+! Effect
+|-
+![[File:FacelessAlliance.PNG]]
+! width="110px" |''Faceless Alliance''
+| style="padding:0 0 0 8px;" | ''10,000 Fairy + 10,000 Undead Coins''
+| style="padding:0 0 0 8px;" | ''Unlocks Tier 3 Faceless Upgrades.''
+|-
+![[File:Faceless-faction-upgrade-31.png]]
+! Magical Treasure
+| style="padding:0 0 0 8px;" | {{Number|50 Oc|table}}
+| style="padding:0 0 0 8px;" | Increase Mana Regeneration based on assistants owned.
+{{Formula|+(2.5 \times x^{0.5})|the number of assistants you own}}(Not updated)
+|-
+![[File:Faceless-faction-upgrade-32.png]]
+! Abominations
+| style="padding:0 0 0 8px;" | {{Number|500 Oc|table}}
+| style="padding:0 0 0 8px;" | Increase the production of assistants based on active spells.
+''Formula:'' <math>(20\times x^{0.9})%</math> where x is the amount of active spell.(Not updated)
+|-
+![[File:Faceless-faction-upgrade-33.png]]
+! [[Hive Mind]]
+| style="padding:0 0 0 8px;" | {{Number|5 No|table}}
+| style="padding:0 0 0 8px;" | Increase the production of all buildings based on time spent as the Faceless. Persists through Reincarnations.
+''Formula:'' <math>(\sqrt{x})%</math> where x is the time spent as Facelless in second.(Not updated)
+|}
+
+== Unlock Requirements ==
+These requirements can be done in different game plays.
+
+Once unlocked, to affiliate with a Neutral Faction you first need to choose their alignment, just like Vanilla Factions. The alignment upgrade for Neutral Factions is called the [[Proof of Neutrality]]. Once all the 3 Faction quest items have been collected it will automatically appear in your next run. Once unlocked, each faction is permanently available.
+
+{| class="wikitable" style="width:100%;"
+! colspan="5" |Faceless Faction Unlock Requirements
+|-
+! colspan="2" |Name
+!Type
+!Unlock
+!Notes
+|-
+![[File:FL-quest1.png]]
+!'''Bone Fragment''' 1
+|Quest Artifact
+|15 [[Excavations]]
+|''1st clue required'' &ndash; indicates hours.
+|-
+![[File:FL-quest2.png]]
+!'''Bone Fragment''' 2
+|Quest Artifact
+|30 Excavations
+|''2nd clue required'' &ndash; together means "36 hours"
+|-
+![[File:Faceless-unlock.png]]
+!'''Octopus Shaped Spine'''
+|Upgrade
+|2 ''Bone Fragments'', 36 Hours playtime
+|''Unlocks the Faceless Faction.''<br />Price: {{Number|1 No}},<br />25,000 Fairy Coins,<br />25,000 Undead Coins
+|-
+![[File:Neutral.png]]
+!Proof Of Neutrality
+|[[Alignment]] Upgrade
+|Collect the 3 quest artifacts of any Neutral Faction.
+|{{Number|10Qa}} Coins
+|}
+
+== Unique Buildings ==
+[[File:Faceless_Unique_Building_Design.png|thumb|left]]
+[[File:Sunken building.png|right]]
+[[File:Forbidden Library.png|right]]
+At R22, Faceless' ''Labyrinths'' can be upgraded to a [[Buildings#Unique Buildings|Unique Building]]: '''''Sunken Cities,''''' which is required for some [[challenges]] and [[research]] quests.
+
+At R100, the Faceless' ''Ancient Pyramids'' can be upgraded to a Unique Building: '''''Forbidden Libraries''''', which when bought will grant access to the [[Faction Union]] upgrade.{{Clr}}
+
+== Faceless Research ==
+[[File:Neutral-research-unlock.png|right|250px]]
+Upon reaching R23, the game advisor tells us we have unearthed some ruins of the Ancient Races which might enable us to discover their research technology. The requirements can be done in different game plays.
+
+To gain access to Faceless [[research]], you will need the Secrets of the Ancients upgrade. This upgrade will appear when you have both Neutral Unique buildings and the Key to the Lost city artifact. The Key to the Lost city can be excavated in a separate run, and with any faction.
+{| class="wikitable" style="width:100%;"
+! colspan="6" |Research Unlock Requirements & Upgrade
+|-
+! colspan="2" |Name
+!Type
+!Description
+! width="110px" |Requirement
+! style="width:13%;" |Cost
+|-
+![[File:Faceless-research-quest.png|54x54px]]
+! width="90px" |Sunken Cities Quest
+|Quest [[Upgrade]]
+|''C-uh'e sll'ha hrii nog nwyar. Kn'a wgah'n ph'sgn'wahl. (Those unpronounceable words with no apparent meaning have spoken directly to your mind: you have to build enough Labyrinths).''
+<small>''Required once throughout the entire game play and does not count towards the bought upgrade stat.''</small>
+|R22<ref>''Neutral unique buildings can be acquired at R22, but Neutral research cannot be accessed without the Key to the Lost City, which is only available from R23.''</ref> + 2000 Labyrinths
+|{{Number|10 Dtg|table}}
+|-
+![[File:Sunken_City_icon.png|54x54px]]
+!Sunken Cities
+|[[Upgrades#Allegiances Upgrades|Allegiances Upgrades]]
+|Upgrade ''Labyrinths'' to ''Sunken Cities'', boosting their production based on time spent in your longest game session and unlocking more unique perks for the building.
+{{Formula|stat|75 \times x^{0.9}%|Playtime (Longest Session)}}
+|Sunken Cities Quest
+|{{Number|10 Ttg|table}}
+|-
+![[File:Artifact-lostcity.png|54x54px]]
+!Key to the Lost City
+|Quest [[Artifact]]
+|Unlocks the Secrets of the Ancients upgrade
+|Found on the 1500th excavation at R23
+|
+|-
+![[File:Secrets of the Ancients.png]]
+!Secrets of the Ancients
+|Upgrade
+|Unlocks research for [[Titan]], [[Druids]] and Faceless and increases production by 100,000%, plus an additional bonus based on Economics research points.
+<small>''Required once throughout the entire game play and does not count towards the bought upgrade stat.''</small>
+|''Key To The Lost City'' artifact, Neutral Unique Building
+|{{Number|1e151}} Coins,
+{{Number|1e6}} of each Vanilla FCs
+|-
+! colspan="6" |Neutral Research Upgrade
+|-
+![[File:Artifact-ancientdevice.png]]
+!Ancient Device
+|Quest Artifact and Upgrade
+|Adds 2 extra slots to the Neutral faction you are playing.
+Faceless are related to the ''Spellcraft'' and ''Divine'' Facilities.
+<br /><small>''Requires being purchased for each Neutral research run.''</small>
+|Neutral Faction + 2,000 excavations.<br />''Chance: 0.2% per excavation''
+|{{Number|100 QiSxg|table}}
+|}
+
+== Faceless Leges ==
+Upon reaching R100, the ''[[Alignments|Proof of Chaos]]'' will become available, which provides a quest for an additional unique building, which when bought will grant access to the its Union upgrade.
+{| class="wikitable" style="width:100%;"
+! colspan="6" |Faceless Leges Requirements
+|-
+! colspan="2" |Name
+!Type
+!Description
+! width="110px" |Requirement
+! width="75px" |Cost
+|-
+![[File:Faceless-research-quest.png]]
+! width="90px"|Forbidden Library Quest
+|Quest [[Upgrade]]
+|Grants access to Unique Building.
+|5000 Excavations
+|{{Number|1 Ud|table}}
+|-
+![[File:Forbidden Library Upgrade.png]]
+!Forbidden Library
+|[[Buildings#Unique Buildings|Unique Building]]
+|Upgrade ''Monasteries'' to ''Forbidden Libraries'', boosting production based on spells cast and unlocking more unique perks for the building.
+{{Formula|\left(15 \times \frac{\ln (1 + x)}{ln\left(x \bmod 10 + 2\right)}\right)^{1.5}%|spells cast}}<br />+Access to the Faction Union.
+|''Forbidden Library Quest''
+|{{Number|1 Td|table}}
+|-
+![[File:FacelessUnion.png]]
+!Faceless Union
+|Faction Union
+|Grants access to Union Upgrade.
+|''Forbidden Library'' Unique Building
+|{{Number|1 Qi}} Angel and Goblin Coins
+|-
+![[File:PrimalKnowledge.png]]
+!Primal Knowledge
+|Union Upgrade
+|Multiplicatively increase Faction Coin find chance based on the amount of ''Forbidden Libraries'' you own. Grows over time and resets every 15 minutes.
+{{Formula|xy|\frac{y \bmod 900}{60} \times x^{0.4}|Forbidden Libraries count|time this game.}}
+|Faceless Union
+|{{Number|1 Nod|table}}
+|}
+
+
+<references />
+{{Sitenav}}
+[[Category:Faceless| ]]
+[[Category:Factions]]
+[[Category:Unlock Requirements]]

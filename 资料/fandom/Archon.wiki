@@ -1,0 +1,30 @@
+== Tier 1 Upgrades ==
+{| class="article-table"
+! colspan="2" |Name
+!Cost
+!Effect
+!Formula
+|-
+|[[File:ArchonTradeTreaty.png|thumb|54x54px]]
+|'''Archon Trade''''' '''''Treaty'''
+|1 Oc (1e27)
+Angel & Undead
+
+Coins
+|Unlocks Tier 1
+Archon Upgrades
+|N/A
+|-
+|[[File:StarTrading.png|thumb|54x54px]]
+|'''Star Trading'''
+|1 NoQag 
+(1e150) Coins
+|Increase the production of all buildings based on the maximum amount of Royal Exchanges you made in this Reincarnation.
+|{{Formula|0.9 * x|Royal Exchanges}}
+|-
+|
+|
+|
+|
+|
+|}

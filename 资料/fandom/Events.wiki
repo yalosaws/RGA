@@ -1,0 +1,1019 @@
+[[File:Event-button.PNG|center]]
+Realm Grinder '''Events''' take place at annual festivals such as Thanksgiving, Christmas, Easter etc. Playing during an Event gives the players special one-time Trophies and temporary and/or permanent perks.
+
+== Event Items ==
+* '''Feats:''' Special kind of Trophies which can only be unlocked during their respective Event. Feats may have any kind of requirement and you will sometimes have to discover what you need to do by yourself.
+
+* '''Event Quests:''' Missions entirely based on event-specific mechanics that can be completed during their respective Event.
+
+Completing quest series awards a <u>permanent bonus</u> which will add to the bonuses from other quest series to make one all buildings bonus. The bonus of each quest series is determined with <math>(0.5 * (2 - x + x^2))%</math> where x is the number of quests completed in the series.
+
+Most event items are temporary and can only be seen, and acquired<ref name=":0">''For new players, there is sometimes the possibility to catch up on feats. eg: see Thanksgiving 2015 and 2016''</ref>, during the event in question. Once it is finished, all the items will disappear, and only the feats and permanent bonuses will remain ([[:File:Event pannel feats.png|Image]]).
+
+== Event Announcements ==
+Events are announced a few days in advance, by DivineGames, in the [http://www.kongregate.com/forums/8945-realm-grinder Realm Grinder forum] at Kongregate.com. A copy of these announcements can be found on the [[Updates#Events|updates page]].
+
+== Total Event Bonuses ==
+<div style="text-align:center; margin: 10px auto; padding:20px; border:1px solid #ccc;">'''Cumulative and Permanent Bonuses From All Past Events:'''<div style="font-size:160%;padding:10px; ">118'''%'''</div><div style="font-size:x-small; line-height:120%;">2015 - Christmas: 14%<br />2016 - Valentines: 4%, Easter: 14%, Summer Festival : 8%, Halloween 11%, Christmas: 14%<br />2017 - Valentines: 4%, Easter: 14%, Anniversary: 8%, Goblin: 8%, Summer Festival : 8%, Halloween 11%</div></div>
+
+== Past Events ==
+{| class="mw-collapsible mw-collapsed wikitable" align=center
+!colspan=3| Past Event Dates
+|-
+!2023
+|Christmas Event
+|21-Dec - 5 Jan 2024
+|-
+! rowspan="8" |2017
+|Ruby Shine - Thanksgiving||27 Nov - 30 Nov
+|-
+|Halloween||30 Oct - 6 Nov
+|-
+|Summer Festival||16 - 23 Aug
+|-
+|Goblin's invasion||21 - 25 July
+|-
+|2nd Anniversary - Blood Wars||2 - 6 June
+|-
+|Easter||12 - 19 April
+|-
+|April Fools' Day||1 April
+|-
+|St Valentine's Day
+|14 - 18 Feb
+|-
+!rowspan=8|2016
+|Christmas Event||20 Dec - 4 Jan 2017
+|-
+|Thanksgiving & Black Friday Sale Event||24 - 26 Nov
+|-
+|Halloween||28 Oct - 04 Nov
+|-
+|Summer Festival||30 Aug - 6 Sept
+|-
+|Anniversary||19-20 May
+|-
+|April Fools' Day||1 April
+|-
+|Easter||25 - 31 March
+|-
+|St Valentine's Day||12 - 16 Feb
+|-
+!rowspan=2|2015
+|Thanksgiving Event||26 - 30 Nov
+|-
+|Christmas Event||21 Dec - 5 Jan 2016
+|}
+*[[Events/Past|Pre-Version 2 overhaul events]]
+Note: All events prior to the 2016 RG Anniversary event use images from before the [[Updates#2.0 Realm Grinder Graphic Overhaul|v2 RG graphic overhaul]] - only the feats have been redrawn. A screenshot of the new feats can be found [http://musicfamily.org/realm/Events/ here].
+
+== Events ==
+All Event perks work only during the event. All event items, including spell cast totals, persist during the entire event, throughout abdications and reincarnations.
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%"
+! colspan="5" |Christmas Event
+|-
+| colspan="5" style="padding: 10px 20px;" |[[File:Snowball.png|right]]<blockquote>'''Event Theme:''' '''Snowballs'''. They will accumulate at a rate of 1 per minute, up to a maximum of 720 (12 hours). Collecting Snowballs will allow you to complete quests and increase your Avalanche upgrade bonus.</blockquote>[[File:Christmas-present01.png|left|thumb|66x66px]]<blockquote>Every day, you will also receive a '''Christmas Present''' ([[:File:Christmas-present.png|image]]) containing Snowballs or Rubies. Presents are required to complete quests and can only be retrieved once per day by going online.</blockquote>{{Clr}}You can find all this information in a [[:File:Christmas-guide.png|guide]] by pressing the <strong>"?"</strong> button in the Event Panel. ([http://www.kongregate.com/forums/8945-realm-grinder/topics/691442-realm-grinder-neutral-prestige-challenges-and-christmas-event-v2-5-0-0-full-patch-notes?page=1 Source])
+|-
+! colspan="5" |Upgrades & Spells
+|-
+! colspan="2" |Name
+!Kind
+!Unlock / Price
+!Effect
+|-
+|[[File:Avalanche.png]]
+!Avalanche
+|upgrade
+|Free
+|Increase the production of all buildings based on the amount of snowballs collected.
+{{Formula|text|min(0.8 * (x / 35) - 0.006 * (x / 35)^2 + 0.00004 * (x / 35)^3, 100000)|the amount of collected snowballs}}
+|-
+! colspan="5" |Quest & Feats
+|-
+|[[File:SnowpileQuest2.png|54x54px]]
+!Snowpile
+|Quest series
+|Collect 1000, 4500, 10000 and 21000 Snowballs.
+|Completing all quests will increase your event bonus by 7%
+|-
+|[[File:GiftCollectorQuest1.png|54x54px]]
+!Gift Collector
+|Quest series
+|Find 1, 4, 8 and 13 Presents.
+|Completing all quests will increase your event bonus by 7%
+|-
+|[[File:SantasHelpers -feat2.png]]
+!Santa's Helpers
+|Feat||||Play Elves and get 50 assistants
+|-
+|[[File:Unholidays -feat2.png]]
+!Unholidays
+|Feat||||Ally with the Undead
+|-
+|[[File:Snowpile-feat2.png]]
+!Snowpile
+|Feat||||Complete all the Snowpile quests
+|-
+|[[File:GiftCollector-feat2.png]]
+!Gift Collector
+|Feat||||Open 13 Presents
+|-
+! colspan="5" |Other Event Specials
+|-
+|[[File:Shop-snowballs.png]]
+!500 Snowballs
+|[[Shop]] Item||5 [[Rubies]]||''He will offer you a new deal if you accept.''
+|-
+|[[File:Scry-button.png|54x54px]]
+!Scrying
+|||||Produce 1 snowball every 5 minute for 4 hours. ([[:File:Scry-christmas2016.png|image]])
+|-
+! colspan="5" |Notes
+|-
+| colspan="5" |If you didn't unlock all the [[Events#2015 Events|Christmas feats last year]], you have a chance to do so with this one! If you already did, you will be able to gain additional permanent production bonuses from completing all the quests again, and benefit from the massive bonus from the Avalanche upgrade once again.
+|-
+! colspan="5" |Event Bonus
+|-
+| colspan="5" style="text-align:center;" |Total cumulative and permanent quest bonus at the end of the Event: '''14%'''
+|}
+
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%"
+! colspan="5" |Thanksgiving & Black Friday Sale Event
+|-
+| colspan="5" |Global Reminder: The Thanksgiving & Black Friday Sale event will be starting on Nov 24th 2016, 1.01 PM UTC and will end on Nov 26th 2016, 7.59 PM UTC.<p style="text-align:right;">Source: Game News on the RG page at Kongregate.</p>
+|-
+!Icon
+!Name
+!Kind
+! style="width:23%;" |  Unlock / Price
+! Description / Effect
+|-
+|[[File:Thanksgiving2016.png]]
+!Thanksgiving
+|Upgrade & Feat
+|Free
+|Increase the production of all buildings by 25% for the duration of the Thanksgiving season.
+''Note: This is an occasion for new players to catch up: This feat is only rewarded to those who didn't have the 2015 thanksgiving feat.''
+|-
+|[[File:Thanksgiving2016-sales.png]]
+!Gift of the Heroes
+|Shop Item
+|25 Kreds
+|[[File:Thanksgiving2016-sales-promotion-button.png|right]]50% off during the event
+|-
+| colspan="5" |Screenshots: [[:File:Thanksgiving2016-help.png|Help guide]] - [[:File:Thanksgiving2016-shopsales.png|shop]]
+|-
+| colspan="5" style="text-align:center;" |No cumulative and permanent quest bonus.
+|}
+
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%"
+! colspan="5" |Halloween
+|-
+| colspan="5" |[[File:Pumpkin.png|thumb|86x86px|left]]This event will feature daily presents: '''Pumpkins''' ([[:File:HaloweenEvent-PumpkinPresent.png|image]]). You will get a Pumpkin Smasher once a day (1:01 PM UTC Time).<br />You will receive some 75 of each resources and a Ruby with each Pumpkin Smasher.<br />The first Pumpkin Smasher will give you 1 of the 3 Monsters.<br />The next 2 Pumpkins will give you one of the remaining Monsters.
+
+Activating your first Monster will unlock the upgrade, '''''Crucible Of Darkness'''''.
+
+There will be three unique resources for the event:
+<center><div style="display:table-cell;padding-right:10px;">[[File:Blood.png]]<br />'''Blood'''</div><div style="display:table-cell;padding:10px;">[[File:Ectoplsm.png|46x46px]]<br />'''Ectoplasm'''</div><div style="display:table-cell;padding:10px;">[[File:Bone.png|46x46px]]<br />'''Bones'''</div></center>
+They will appear in a random location of the game screen at a rate of 1 per minute, stacking up to a maximum of 720 units in 12 hours [http://www.kongregate.com/forums/8945-realm-grinder/topics/663882-realm-grinder-developers-diary-aug-11th-2017?page=4]. You can only collect one type of resource at a time, the others will disappear. Each resource will be used to feed a one of the monsters, which will upgrade its levels as it grows.
+
+Once you have found a monster, you will be able to feed it to make it grow, unlocking perks and bonuses in the process. At levels 1, 10, 25 and 50 each monster will grant you new perks, including unique spells and upgrades. You will be able to choose which monster to take advantage of by toggling them on and off in the Event panel.
+
+As usual, there will be Quests and Feats to unlock.
+
+A Halloween Event guide is also available by clicking on the question mark on the top right of the Events tab ([[:File:HalloweenEventGuide.png|image]]).
+|-
+! colspan="5" |Upgrades & Spells
+|-
+!Icon
+!Name
+!Kind
+!Unlock / Cost
+!Description / Effect
+|-
+|[[File:CrusiableOfDarkness.png|center]]
+!Crucible Of Darkness
+|[[Upgrade]]
+|Free
+|Increase the production of all buildings based on Halloween Resources collected. Increases as you gain new monsters.
+{{Formula|nakedT|1 + 0.0035 * ((Blood + Ectoplasm + Bones) / 3) * ((1 + min(0 + 1.6 * (Blood/25) - 0.002 * (Blood/25)^2 + 0.000024 * (Blood/25)^3), 12500) * (same for Ectoplasm and Bones))^0.4}}
+|-
+|[[File:SpectralSurge.png|centre|thumb|54x54px]]
+!Spectral Surge
+|[[Upgrade]]
+|Collect 480 Blood, Bones, and Ectoplasm in a single game
+|Turn [[Spiritual Surge]] into Spectral Surge, which increases the previous bonus based on your Event Bonus.
+Once unlocked, it is available during any Seasonal Event.
+|-
+|[[File:Vampire.png|center]]
+!Vampire
+|Monster
+|Free from daily pumpkin present
+|''Accompany yourself with an almighty Vampire gaining powerful bonuses. Click on this upgrade to activate it and deactivate other monsters (if any).''
+|-
+|[[File:ShadowEmbrace.png|center]]
+!Shadow Embrace
+|Spell
+|Vampires Lv 10
+|Increase the size of your [[assistant]] army based on the amount of Reincarnations you made for 20 seconds. Increases progressively as you continue casting this spell.
+{{Formula|nakedT|(R + 1) * (Number of casts (this game))^0.5, where R is Reincarnation count.}}
+|-
+|[[File:Vampire1.png|center]]
+!Vampire Sire
+|Monster upgrade
+|Vampires Lv 10<br />198 Blood
+|Gives the spell ''Shadow Embrace''
+|-
+|[[File:Vampire2.png|center]]
+!Vampire Lord
+|Monster upgrade
+|Vampires Lv 25<br />660 Blood
+|Gain all ''[[Bloodline]]'' effects of [[prestige]] factions outside your alignment at once. (You can select any ''[[Lineage]]'' based on those bloodlines.)
+|-
+|[[File:Vampire3.png|center]]
+!Vampire King
+|Monster upgrade
+|Vampires Lv 50<br />2200 Blood
+|Reduce the cost of faction spells by 75%.
+|-
+|[[File:Ghosts.png|center]]
+!Ghost
+|Monster
+|Free from daily pumpkin present
+|''Accompany yourself with an spooky Ghost gaining powerful bonuses.''
+|-
+|[[File:WailoftheBanshee.png|center]]
+!Wail of the Banshee
+|Spell
+|Ghosts Lv 10
+|Increase the production of all buildings based on mana produced in this game and the amount of Reincarnations you made for 20 seconds.
+{{Formula|nakedT|0.2 * (R + 1) * x^0.45, where R is reincarnation count and x is mana produced.}}
+|-
+|[[File:Ghost1.png|center]]
+!Banshee
+|Monster upgrade
+|Ghosts Lv 10<br />198 Ectoplasm
+|Gives the spell ''Wail of the Banshee''
+|-
+|[[File:Monsters2.png|center]]
+!Wraith
+|Monster upgrade
+|Ghosts Lv 25<br />660 Ectoplasm
+|Increase maximum mana and mana regeneration based on clicks made in this game.
+''Max Mana'' {{Formula|nakedT|log10((1 + x) ^ 2.5)}}<br />''Mana Regeneration'' {{Formula|nakedT|log10((1 + x) ^ 2.25), non additive boost.}}
+|-
+|[[File:Monsters3.png|center]]
+!Spectre
+|Monster upgrade
+|Ghosts Lv 50<br />2200 Ectoplasm
+|All productive clicks benefit from a 100 times greater Faction Coin find chance.
+|-
+|[[File:Skeleton.png|center]]
+!Skeleton
+|Monster
+|Free from daily pumpkin present
+|''Accompany yourself with an sturdy Skeleton gaining powerful bonuses.''
+|-
+|[[File:Cannibalize.png|center]]
+!Cannibalize
+|Spell
+|Skeletons Lv 10
+|Increase Faction Coin find chance based on the total amount of Bones collected and the amount of Reincarnations you made for 20 seconds.
+{{Formula|nakedT|ceil(0.75 * (R + 1) * x^0.75), where R is Reincarnation count and x is bones collected.}}
+|-
+|[[File:Skeletons.png|center]]
+!Big Skeleton
+|Monster upgrade
+|Skeletons Lv 10<br />198 Bones
+|Gives the spell ''Cannibalize''
+|-
+|[[File:Skeleton2.png|center]]
+!Huge Skeleton
+|Monster upgrade
+|Skeletons Lv 25<br />660 Bones
+|Increase Offline production bonus based on time spent with the faction you are affiliated with.
+{{Formula|nakedT|x^0.7}} (Not effected by ascension penalties)
+|-
+|[[File:Skeleton3.png|center]]
+!Giant Skeleton
+|Monster upgrade
+|Skeletons Lv 50<br />2200 Bones
+|Triple your offline productions of clicks, mana, spells cast and spell activity time.
+|-
+! colspan="5" |Quest & Feats
+|-
+| style="text-align:center;" |[[File:MonsterBreederQuest.png]] [[File:Monstersbreeder2.png]]
+!Monster Breeder
+|3 Quest Series
+|Grow all monsters to levels 10, 25, 50
+|''10/25'': Adds 1% cumulative bonus to total Event bonus. ''50'': Adds 2%.<br />Completing all quests will increase your event bonus by 4% (Total)
+|-
+| style="text-align:center;" |[[File:PumpkinSmasher.png]] [[File:Psmasher3.png]]
+!Pumpkin Smasher
+|4 Quest Series
+|Collect 1, 2, 3, 6 pumpkins
+|''1/2'': Adds 1% cumulative bonus to total Event bonus. ''3'': Adds 2%. ''6'': Adds 3%.<br />Completing all quests will increase your event bonus by 7% (Total)
+|-
+|[[File:MonsterBreeder.png|center]]
+!Monster Breeder
+|Feat||||Complete the ''Monster Breeder'' Quest series
+|-
+|[[File:PumpkinSmasherFeat.png|center]]
+!Pumpkin Smasher
+|Feat||||Complete the ''Pumpkin Smasher'' Quest series
+|-
+|[[File:Spooky.png|center]]
+!Spooky
+|Feat||||Collect a full stack of 480 Ectoplasm while Ghost monster pet is active. (Must have spell)
+|-
+|[[File:BloodThirsty.png|center]]
+!Bloodthirsty
+|Feat||||Collect a full stack of 480 Blood while Vampire monster pet is active. (Must have spell)
+|-
+|[[File:BonePicker.png|center]]
+!Bone Picker
+|Feat||||Collect a full stack of 480 Bones while Skeleton monster pet is active. (Must have spell)
+|-
+|[[File:SpectralSurge.png|centre|thumb|54x54px]]
+!Spectral Surge
+|Feat
+|
+|Collect at least 480 each of Blood, Bones, and Ectoplasm in a single game. It is not required to collect full stacks only.
+Completing this feat unlocks the Spectral Surge upgrade.
+|-
+! colspan="5" |Other Event Specials
+|-
+|[[File:HalloweenShopItem.png|center]]
+!50 Halloween resource units
+|[[Shop]] Item||5 [[Rubies]]||''A creepy figure wants to sell you 50 units of Blood, ectoplasm and bones. He will offer you a new deal if you accept.''
+|-
+|
+!225 Blood, Ectoplasm and Bones
+|[[Shop]] Item||15 Rubies||''A creepy figure wants to sell you 225 units of Blood, Ectoplasm and Bones for 15 Rubies. He will offer you a new deal if you accept.''
+|-
+|
+!875 Blood, Ectoplasm and Bones
+|[[Shop]] Item||45 Rubies||''A creepy figure wants to sell you 875 units of Blood, Ectoplasm and Bones for 45 Rubies. He will offer you a new deal if you accept.''
+|-
+|
+!2250 Blood, Ectoplasm and Bones
+|[[Shop]] Item||100 Rubies||''A creepy figure wants to sell you 2250 units of Blood, Ectoplasm and Bones for 100 Rubies. He will offer you a new deal if you accept.''
+|-
+! colspan="5" |Event Bonus
+|-
+| colspan="5" style="text-align:center;" |Total cumulative and permanent Quest Bonus at the end of the Event: '''11%'''
+|}
+
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%"
+! colspan="5" |Summer Festival
+|-
+| colspan="5" |The event will feature two new mini-factions, the '''[[Summeraan]]s''' and the '''[[Winterly]]''', which will last for the duration of the event, they will stack upon any existing faction and will provide '''3 new upgrades and a new spell''' to boost your production!
+* There will be two new resources for the event: '''Flame''' and '''Frost''' Orbs. They will appear in a random location of the game screen at a rate of 1 per minute, you can stack them for 8 hours, up to 480 orbs. ([[:File:SummerFest event-window3.png|screenshot]])
+
+* You can only collect one type of orb: by doing so, the other will disappear.
+
+[[File:flameOrb.png|40x40px]] '''Flame Orbs''' used to purchase and empower Summeraan upgrades.
+
+[[File:FrostOrb.png|41x41px]] '''Frost Orbs''' used to purchase and empower Winterly upgrades.
+* As with any faction in Realm Grinder, you can choose to affiliate with only one of them per [[abdication]] – upgrades will remain free if you purchased them once though.
+* Collected orbs will persist through [[soft resets]] and remain until the end of the event.
+
+[http://www.kongregate.com/forums/8945-realm-grinder/topics/663882-realm-grinder-developers-diary-aug-11th-2017?page=2 Event announcement source post]
+|-
+! colspan="5" |Upgrades & Spells
+|-
+!Icon !! Name !! Kind !! Price / Unlock !! Effect & Notes
+|-
+|[[File:Antipodes_event_upgrade1.png|center]]
+!Antipodes
+|Upgrade
+|Free
+|Increase the production of all buildings based on the total amount of Frost and Flame Orbs collected.
+{{Formula|text|min(100000, (x / 27) - (x^2 / 36450) + (x^3 / 98415000)) %|the number of Orbs collected in total}}
+|-
+|[[File:Summeraan_Alliance.png|center|54x54px]]
+!Summeraan Alliance
+|Upgrade
+|400 Flame Orbs
+|''The Summeraan spirits enjoy freedom, open spaces and hot temperatures above all. They are chaotic by nature and can't stand any rule or authority. Affiliating with the Summeraan faction will provide short production bursts and will prevent any contact from and to Winterly until you break your alliance.''
+|-
+|[[File:heatwave.png]]
+!Heatwave
+|Spell
+|300 mana
+|Increase the production of all buildings based on the spells cast in this game for 12 seconds.
+Also grants faction coins based on the amount of Flame Orbs collected in this event.
+{{Formula|text|5 * x^0.85%|the number of spells cast this game}}<br />{{Formula|xyT|x * y^1.1|your faction coin chance|the number of Flame Orbs collected in this event.}}
+|-
+|[[File:summer1.png|center]]
+!Sun Beams
+|Upgrade
+|800 Flame Orbs
+|Whenever you collect Flame Orbs floating on your realm, the production of all buildings is increased based on the amount of Orbs collected with this click for 10 seconds.
+{{Formula|text|25 * x%|the number of Flame Orbs collected with the last click}}
+|-
+|[[File:summer2.png|center]]
+!Eruption
+|Upgrade
+|1300 Flame Orbs
+|Gain additional [[assistants]] based on [[clicks]] made this game.
+{{Formula|text|2 * log (1 + x<sup>2</sup>)|the number of clicks made in this game}}
+|-
+|[[File:summer3.png|center]]
+!Burning Rage
+|Upgrade
+|2000 Flame Orbs
+|Decrease the cost of all spells by 50%
+|-
+|[[File:Winterly_Alliance.png|center|54x54px]]
+!Winterly Alliance
+|Upgrade
+|400 Frost Orbs
+|''The Winterly spirits believe in absolute order and perfect organization. They are incredibly meticulous about details and hate last-minute changes. Affiliating with the Winterly faction will provide steady growing bonuses to your production and will prevent any contact from and to Summeraan until you break your alliance.''
+|-
+|[[File:hailstorm.png|center]]
+!Hailstorm
+|Spell
+|1000 mana
+|Increase the production of all buildings based on Hailstorm activity time for 2m. Bonus provided increases progressively over the duration of the spell.
+{{Formula|xyt|0.1 * x<sup>0.6</sup> * y<sup>1.1</sup>%|the Hailstorm activity time (this game) stat in seconds|the duration of the current Hailstorm (in seconds)}}
+|-
+|[[File:winter1.png|center]]
+!Glaciality
+|Upgrade
+|800 Frost Orbs
+|Increase the production of all buildings based on the time spent affiliated with the Winterly.
+{{Formula|text|20 * x<sup>0.75</sup>%|the number of Orbs collected in total}}
+|-
+|[[File:winter2.png|center]]
+!Permafrost
+|Upgrade
+|1300 Frost Orbs
+|Increase assistants production based on the total amount of Frost Orbs collected in this event.
+{{Formula|text|x<sup>1.03</sup>%|the number of Orbs collected in total}}
+|-
+|[[File:winter3.png|center]]
+!Cold Blood
+|Upgrade
+|2000 Frost Orbs
+|Spell durations are increased by 100%.
+|-
+! colspan="5" |Quests & Feats (Event Tab)
+|-
+|[[File:summer3.png|center]]
+!Summeraan Champion
+|3 Quest Series
+| style="white-space:nowrap;" |Collect 800, 1300,<br />2000 Flame Orbs
+|''800/1300:'' Adds 1% cumulative bonus to total Event bonus. ''2000:'' Adds 2%. (Total: 4%)
+|-
+|[[File:winter3.png|center]]
+!Winterly Champion
+|3 Quest Series
+|Collect 800, 1300,<br />2000 Frost Orbs
+|''800/1300:'' Adds 1% cumulative bonus to total Event bonus. ''2000:'' Adds 2%. (Total: 4%)
+|-
+|[[File:Summeraan_Alliance.png|center]]
+!Summeraan Champion
+|Feat||||Purchase all Summeraan upgrades
+|-
+|[[File:Winterly_Alliance.png|center]]
+!Winterly Champion
+|Feat||||Purchase all Winterly upgrades
+|-
+|[[File:Chill_out.png|center]]
+!Chill Out
+|Feat||||Collect 480 Frost Orbs while affiliated with the Summeraans.
+|-
+|[[File:Warm_up.png|center]]
+!Warm Up
+|Feat||||Collect 480 Flame Orbs while affiliated with the Winterly.
+|-
+! colspan="5" |Other Event Specials:
+|-
+|[[File:Scry-button.png|54x54px|center]]
+![[Scry]] option
+||||||Produce 1 Flame and 1 Frost obs every 10 minutes for 4 hours ([[:File:Event-Scry-window.png|screenshot]])
+|-
+|[[File:Orb_shop.png|center]]
+!75 Frost and Flame Orbs
+|[[Shop]] Item||5 [[Rubies]]||A spring wizard wants to sell you 75 Frost and Flame Orbs for 5 Rubies. He will offer you a new deal if you accept.
+|-
+|
+!300 Frost and Flame Orbs
+|Shop Item||15 Rubies||A spring wizard wants to exchange 300 Frost and Flame Orbs for 15 Rubies. He will offer you a new deal if you accept. 
+|-
+|
+!1250 Frost and Flame Orbs
+|Shop Item||45 Rubies||A spring wizard wants to exchange 1250 Frost and Flame Orbs for 45 Rubies. He will offer you a new deal if you accept. 
+|-
+|
+!3500 Frost and Flame Orbs
+|Shop Item||100 Rubies||A spring wizard wants to exchange 3500 Frost and Flame Orbs for 100 Rubies. These are all the orbs he could gather.
+|-
+! colspan="5" |Event Bonus
+|-
+| colspan="5" style="text-align:center;" |Total cumulative and permanent Quest Bonus at the end of the Event: '''8%'''
+|-
+|}
+
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%"
+! colspan="5" | Goblin Invasion
+|-
+| colspan="5" |[[File:Gobin Crown.png|left]]During the Goblin Invasion event you will be able to collect Goblin Crowns. This resource will be used to either '''fight''' or '''support''' the invading Goblin Army. Both choices will grant you new bonuses and unlock new unique upgrades.
+
+Goblin Crowns will appear on a random location of the game screen and you simply have to click to collect them, then wait for another Goblin Crown to appear. Or, you can let them grow bigger over time (at a rate of 1 Goblin Crown per minute) if you are idle or offline — up to a maximum size of 480 Goblin Crowns!
+
+Note: Required GCs to level per faction: 203 to level 25; 740 to level 50; 2685 to level 100
+
+Total: 5370 GCs to level both factions to 100; Total time: 3 days 17 hours 30 minutes (without scrying). 
+|-
+!Icon !! Name !! Kind !! Price / Unlock !! Effect & Notes
+|-
+! colspan="5" |Upgrades
+|-
+|[[File:The Greatest Army.png|center]]
+!The Greatest Army
+|Upgrade
+|Free
+| style="font-size:9pt;" |Increase the production of all buildings based on the total amount of Goblin Crowns collected.<br />Persists through Abdications and Reincarnations. Will disappear at the end of the current Event.
+{{Formula|text|(x/20-0.005*(x/20)<sup>2</sup>+0.00045*(x/20)<sup>3</sup>)%|the amount of collected Goblin Crowns}} Capped at 100000%.
+|-
+|[[File:Fight the Goblin Army.png|center]]
+!Fight the Goblin Army
+|Upgrade
+|Good or Neutral alignment
+|Increase maximum mana and mana regeneration based on the amount of times you fought the Goblin Army. 1% per level.<br />Can be bought an infinite amount of times, but the cost Increases after every purchase
+{{Formula|nakedT|floor((level + 1) <sup>0.85</sup>)}} GCs
+|-
+|[[File:Goblin's Bane 1.png|center]]
+!Magical Clicks
+|Upgrade
+| style="white-space:nowrap;" |Fight the Goblin<br />Army Level 25
+|Active spells generate additional automatic clicks. Higher spell tiers provide higher bonuses.
+{{Formula|text|floor(x<sup>1.2</sup>/10) clicks per seconds|the amount of active spells}}
+|-
+|[[File:Goblin's Bane 2.png|center]]
+!Eye of the King
+|Upgrade
+|Fight the Goblin Army Level 50
+|Increase the production of Neutral buildings based on the total amount of clicks made.
+{{Formula|text|((log10(1+x))<sup>3.5</sup>)%|the total amount of clicks made}}
+|-
+|[[File:Goblin's Bane 3.png|center]]
+!God's Finger
+|Upgrade
+|Fight the Goblin Army Level 100
+|Each manual click counts as 1000 clicks for all purposes. 
+|-
+|[[File:Support the Goblin Army.png|center]]
+!Support the Goblin Army
+|Upgrade
+|Evil alignment
+|Increase assistants based on the amount of times you supported the Goblin Army. 1% per level.<br />Can be bought an infinite amount of times, but the cost Increases after every purchase
+{{Formula|nakedT|floor((level + 1) <sup>0.85</sup>)}} GCs
+|-
+|[[File:Goblin's Commander 1.png|center]]
+!Elite Goblins
+|Upgrade
+|Support the Goblin Army Level 25
+|All spells activity time counts more based on the amount of assistants you own.
+{{Formula|text|(x<sup>0.5</sup>)%|the amount of assistants you own}}<br />Note: Does '''not''' work for spell tier leveling 
+|-
+|[[File:Goblin's Commander 2.png|center]]
+!Goblin Commandos
+|Upgrade
+|Support the Goblin Army Level 50
+|Increases the production of Neutral buildings based on the amount of assistants you own.
+{{Formula|text|(150 * x<sup>0.25</sup>)%|the amount of assistants you own}}
+|-
+|[[File:Goblin's Commander 3.png|center]]
+!The Slack King
+|Upgrade
+|Support the Goblin Army Level 100
+|Increase the production of all buildings based on total time spent, Also further increase Offline production by the same amount.
+{{Formula|text|(0.01*x<sup>0.7</sup>)%|the total time spent in seconds}}
+|-
+! colspan="5" |Quests & Feats
+|-
+|[[File:Goblin's Bane 1.png|center]]
+!Goblin's Bane
+|Quest series
+|3 Quest Series
+|Fight the Goblin Army to levels 25, 50, 100
+''25/50'': Adds 1% cumulative bonus to total Event bonus. ''100'': Adds 2%.
+|-
+|[[File:Goblin's Commander 1.png|center]]
+!Goblin's Commander
+|Quest series
+|3 Quest Series
+|Support the Goblin Army to levels 25, 50, 100
+''25/50'': Adds 1% cumulative bonus to total Event bonus. ''100'': Adds 2%.
+|-
+|[[File:Goblins Everywhere!.png|center]]
+!Goblins Everywhere!
+|Feat||||Collect at least 10 Goblin Crowns in a single click while affiliated with any 6 different factions.<br />'''Note:''' Prestige Factions will only count once if used. Clicking coins while a Prestige Faction is active will not count for the vanilla faction. Example: Play with Fairies+Dwarves. If you click the 10 Goblin Coin stack after unlocking the Dwarves, it counts only for the Dwarves, not for the Fairies.
+If, on the other hand, you play only Fairies, click a 10 coin stack, then unlock Dwarves and click another 10 coin stack, the first stack will count for the Fairy faction, the second for the Dwarven Faction.
+|-
+! colspan="5" |Other Event Specials
+|-
+![[File:Scry-button.png]]
+!Scrying||||Produce 1 Goblin Crown every 5 minutes for 4 hours.
+|-
+|[[File:75 Goblin Crowns.png|center]]
+!75 Goblin Crowns
+|[[Shop]] Item||5 [[Rubies]]||A greedy shady merchant wants to exchange 75 Goblin Crowns for 5 Rubies. He will offer you a new deal if you accept. 
+|-
+|[[File:300 Goblin Crowns.png|center]]
+!300 Goblin Crowns
+|Shop Item||15 Rubies||A greedy shady merchant wants to exchange 300 Goblin Crowns for 15 Rubies. He will offer you a new deal if you accept. 
+|-
+|[[File:1250 Goblin Crowns.png|center]]
+!1250 Goblin Crowns
+|Shop Item||45 Rubies||A greedy shady merchant wants to exchange 1250 Goblin Crowns for 45 Rubies. He will offer you a new deal if you accept. 
+|-
+|[[File:3500 Goblin Crowns.png|center]]
+!3500 Goblin Crowns
+|Shop Item||100 Rubies||A greedy shady merchant wants to exchange 3500 Goblin Crowns for 100 Rubies. These are all the crowns he could gather.
+|-
+! colspan="5" |Event Bonus
+|-
+| colspan="5" style="text-align:center;" |Total cumulative and permanent Quest Bonus at the end of the Event: '''8%'''
+|-
+|}
+
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%"
+! colspan="5" |2nd Anniversary - Blood Wars
+|-
+| colspan="5" |[[File:Holy Symbols.png|left]][[File:Lava Stones.png|left]]'''Holy Symbols''' and '''Lava Stones''' will appear on a random location of the game screen and you simply have to click to collect them, then wait for more Resources to appear. Or you can let them grow bigger over time (at a rate of 1 Resource per Minute) if you are idle or offline, up to a maximum size of 480 Holy Symbols or Lava Stones! Be careful though, you can only collect one stack of Holy Symbols or Lava Stones - by doing so, the other will disappear.
+
+Note: 2350 of each needed to get all the upgrades.
+
+Note: All upgrades have a 1 time cost but need activation every Abdication/Reincarnation. 
+|-
+!Icon !! Name !! Kind !! Price / Unlock !! Effect & Notes
+|-
+! colspan="5" |Upgrades
+|-
+|[[File:Nephilim Glory.png|center]]
+!Nephilim Glory
+|Upgrade
+|Free
+|Increase the production of all buildings based on the total amount of Holy Symbols and Lava Stones collected.<br />Persists through Abdications and Reincarnations. Will disappear at the end of the current Event. 
+|-
+|[[File:Seraphim Alliance.png|center]]
+!Seraphim Alliance
+|Upgrade
+|Good or Neutral alignment<br />200 Holy Symbols
+|''The highest Angelic ranks carry wings blazing with pure light, whose every feather is infused with enough magical power to revive a dead soul or purify the hearts of a thousand sinners. Affiliating with the Seraphim will increase your magical abilities to the extreme, but you can only do so when playing as Good or Neutral.''
+|-
+|[[File:Seraphim Champion 1.png|center]]
+!Heavenly Feathers
+|Upgrade
+|400 Holy Symbols
+|All buildings also increase your mana regeneration.
+{{Formula|nakedT|2 * x <sup>0.2</sup>}}
+|-
+|[[File:Seraphim Champion 2.png|center]]
+!God's Chamber
+|Upgrade
+|750 Holy Symbols
+|Increase maximum mana by 1 for every 10 buildings you own. 
+|-
+|[[File:Seraphim Champion 3.png|center]]
+!Boon of Radiance
+|Upgrade
+|1000 Holy Symbols
+|Increase the production of all buildings based on mana regeneration.
+{{Formula|nakedT|0.2 * (x * 30) <sup>0.85</sup>}}
+|-
+|[[File:Asmodean Alliance.png|center]]
+!Asmodean Alliance
+|Upgrade
+|Evil or Neutral alignment<br />200 Lava Stones
+|''The most cruel of Demons also happen to be the biggest and most deformed abyssal creatures, featuring all kinds of unnatural flesh and bone appendages. Their very existence is a pain to see and hear. Affiliating with the Asmodeans will bolster your assistant army unbelievably, but you can only do so when playing as Evil or Neutral.''
+|-
+|[[File:Asmodean Champion 1.png|center]]
+!Broodmothers
+|Upgrade
+|400 Lava Stones
+|Gain additional assistants based on time spent affiliated with the Asmodeans.
+{{Formula|text|0.25 * x * (x + 1)|hours}}
+|-
+|[[File:Asmodean Champion 2.png|center]]
+!Abyssal Gaze
+|Upgrade
+|750 Lava Stones
+|Increase assistant production based on total time spent as Evil.
+{{Formula|text|2 x <sup>0.7</sup>|seconds of total evil time}}
+|-
+|[[File:Asmodean Champion 3.png|center]]
+!Legion's Limbs
+|Upgrade
+|1000 Holy Symbols
+|Increase offline production bonus based on the amount of assistants you own. 
+|-
+! colspan="5" |Quests & Feats
+|-
+|[[File:Seraphim Alliance.png|center]]
+!Seraphim Alliance
+|3 Quest Series
+| style="white-space:nowrap;" |Collect 400, 750,<br />1000 Holy Symbols
+|''25/50:'' Adds 1% cumulative bonus to total Event bonus. ''100:'' Adds 2%. 
+|-
+|[[File:Asmodean Alliance.png|center]]
+!Asmodean Alliance
+|3 Quest Series
+|Collect 400, 750, 1000 Lava Stones
+|''25/50:'' Adds 1% cumulative bonus to total Event bonus. ''100:'' Adds 2%. 
+|-
+|[[File:Seraphim Alliance.png|center]]
+!Seraphim Champion
+|Feat||||Purchase all Seraphim Upgrades.
+|-
+|[[File:Asmodean Alliance.png|center]]
+!Asmodean Champion
+|Feat||||Purchase all Asmodean Upgrades
+|-
+|[[File:Sacred Holiness.png|center]]
+!Sacred Holiness
+|Feat||||Collect a full stack of 480 Holy Symbols while affiliated with the Angels.
+|-
+|[[File:Darkest Heresy.png|center]]
+!Darkest Heresy
+|Feat||||Collect a full stack of 480 Lava Stones while affiliated with the Demons
+|-
+! colspan="5" |Other Event Specials
+|-
+![[File:Scry-button.png]]
+!Scrying
+||||||Produce 1 Holy Symbols and Lava Stones every 5 minutes for 4 hours.
+|-
+|[[File:40 HolyLava.png|center]]
+!40 Holy Symbols and Lava Stones
+|[[Shop]] Item
+|5 [[Rubies]]
+|A greedy shady merchant wants to exchange 40 Holy Symbols and Lava Stones for 5 Rubies. He will offer you a new deal if you accept. 
+|-
+|[[File:150 HolyLava.png|center]]
+!150 Holy Symbols and Lava Stones
+|Shop Item
+|15 Rubies
+|A greedy shady merchant wants to exchange 150 Holy Symbols and Lava Stones for 15 Rubies. He will offer you a new deal if you accept. 
+|-
+|[[File:650 HolyLava.png|center]]
+!650 Holy Symbols and Lava Stones
+|Shop Item
+|45 Rubies
+|A greedy shady merchant wants to exchange 650 Holy Symbols and Lava Stones for 45 Rubies. He will offer you a new deal if you accept. 
+|-
+|[[File:1800 HolyLava.png|center]]
+!1800 Holy Symbols and Lava Stones
+|Shop Item
+|100 Rubies
+|A greedy shady merchant wants to exchange 1800 Holy Symbols and Lava Stones for 100 Rubies. These are all the resources he could gather.
+|-
+| colspan="5" |Total cumulative and permanent Quest Bonus at the end of the Event: '''8%'''
+|-
+|}
+
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%"
+! colspan="5" |Easter
+|-
+| colspan="5" |[[File:Easter Resource.png|left]]'''Event Theme''': Eggs. They will appear in a random location of the game screen at a rate of 1 per minute, stacking up to 480 eggs (8 hours) if you are idle or offline (image). When collected, each of them will produce one random Egg among three different types: Common, Rare and Unique:
+* '''Common Eggs:''' Random colored eggs that will work as the primary currency for the Easter Event.
+* '''Rare Eggs:''' Blue-colored eggs that also work as a currency for buying and increasing the bonus of an upgrade that boosts your production.
+* '''Unique Eggs:''' Uniquely shaped and colored eggs that you can only find once per type. There are 8 Unique Eggs to find, and each one of them will unlock an unique upgrade (see below).
+
+All eggs of all kinds will stack in one bundle based on their rarity until collected.
+
+Event announcement source post
+|-
+!Icon !! Name !! Kind
+! width="120px" | Price / Unlock
+! Effect & Notes
+|-
+|[[File:Blue Omelette v2.png|center]]
+!Blue Omelette
+|Upgrade
+|Free
+|Increase the production of all buildings based on the amount of rare eggs collected. 
+''(Growth: (3 * (Rare eggs) – 0.03 * (Rare eggs)<sup>2</sup> + 0.0002 * (Rare eggs)<sup>3</sup> ) % and it is limited by 100000% (sourceby daemonik92))''
+|-
+|[[File:Buy Rare Egg v2.png|center]]
+!Buy Rare Egg
+|Converter
+|125 Common Eggs
+|Exchange 125 Common Eggs for 1 Rare Egg.
+|-
+|[[File:Buy 3000 Unique Egg v2.png|center]]
+!Buy Unique Egg
+|Converter
+|3000 Common Eggs
+|Exchange 3000 Common Eggs for 1 Unique Egg.
+|-
+|[[File:Buy 100 Unique Egg v2.png|center]]
+!Buy Unique Egg
+|Converter
+|100 Rare Eggs
+|Exchange 100 Rare Eggs for 1 Unique Egg
+|-
+! colspan="5" |Quests & Feats
+|-
+|[[File:Egg Hunter 3 v2.png|center]]
+!Egg Hunter
+|4 Quest Series
+|Collect 750, 2000, 4000, and 7000 Common eggs
+|''750/2000:'' Adds 1% cumulative bonus to total Event bonus. ''4000:'' Adds 2%. ''7000:'' Adds 3%. (Total: 7%)
+|-
+|[[File:Egg Collection 3 v2.png|center]]
+!Egg Collection
+|4 Quest Series
+|Find 1, 3, 5 and 8 Unique eggs
+|''1/3:'' Adds 1% cumulative bonus to total Event bonus. ''5:'' Adds 2%. ''8:'' Adds 3%. (Total: 7%)
+|-
+|[[File:Egg Hunter 4 v2.png|center]]
+!Egg Hunter
+|Feat||||Collect 7000 Common Eggs.
+Buying Eggs will not influence this total.
+|-
+|[[File:Egg Collection 4 v2.png|center]]
+!Egg Collection
+|Feat||||Collect 8 Unique Eggs.
+|-
+|[[File:Golden Chicken v2.png|center]]
+!Golden Chicken
+|Feat||||Collect a full stack of 480 eggs while playing as Goblin or Droblin (1m per egg = 8h)
+|-
+|[[File:Grey Easter v2.png|center]]
+!Grey Easter
+|Feat||||Find at least 1 Rare Egg while playing with no faction.
+''To get this Feat simply make a big stack, abdicate and then collect before aligning or affiliating''
+|-
+! colspan="5" |Unique Egg Upgrades
+|-
+| colspan="5" |You can find up to 8 unique eggs: One of each kind, and you cannot have more, nor 2 of the same kind. Unique eggs are found by 'luck' and the upgrades are free. When a unique egg is found, its upgrade will instantly appear in the upgrade tab, and will count towards the 'bought upgrades' stats.
+In addition, when you buy or find an Unique Egg, you will also gain a free Ruby!
+
+(Unique egg source by daemonik92)
+|-
+|[[File:Giant Egg v2.png|center]]
+!Giant Egg
+| colspan="3" |Increase maximum mana by 500
+|-
+|[[File:Golden Egg v2.png|center]]
+!Golden Egg
+| colspan="3" |Increase the production of all buildings by 100% (post A 7.18% A2: 0.7%)
+|-
+|[[File:Arcane Egg v2.png|center]]
+!Arcane Egg
+| colspan="3" |Increase mana regeneration by 10%
+|-
+|[[File:Radiant Egg v2.png|center]]
+!Radiant Egg
+| colspan="3" |Increase clicking reward by 100% (post A 7.18%, A2: 0.7%)
+|-
+|[[File:Wooden Egg v2.png|center]]
+!Wooden Egg
+| colspan="3" |Increase chance to find Faction Coins by 25%
+|-
+|[[File:Dark Egg v2.png|center]]
+!Dark Egg
+| colspan="3" |Increase offline production by 500% (post A 19.6%, A2: 1.81%)
+|-
+|[[File:Ancient Egg v2.png|center]]
+!Ancient Egg
+| colspan="3" |Reduce excavations cost multiplier. (Excavation cost increase – 0.025)
+|-
+|[[File:Crystal Egg v2.png|center]]
+!Crystal Egg
+| colspan="3" |Increase production bonus from gems by an additional 8%
+|-
+! colspan="5" |Other Event Specials
+|-
+|[[File:Egg Hunter 1 v2.png|center]]
+!150 Eggs
+|Shop Item||5 Rubies||The Easter Bunny wants to sell you 150 eggs for 5 rubies. He will offer you a deal if you accept.
+|-
+|[[File:Egg Hunter 2 v2.png|center]]
+!600 Eggs
+|Shop Item||15 Rubies||The Easter Bunny wants to sell you 600 eggs for 15 rubies. It will offer you a new deal if you accept.
+|-
+|[[File:Egg Hunter 3 v2.png|center]]
+!2500 Eggs
+|Shop Item||45 Rubies||The Easter Bunny wants to sell you 2500 eggs for 45 rubies. It will offer you a new deal if you accept.
+|-
+|[[File:Egg Hunter 4 v2.png|center]]
+!7000 Eggs
+|Shop Item||100 Rubies||The Easter Bunny wants to sell you 7000 eggs for 100 rubies. These are all the eggs he could gather.
+|-
+| colspan="5" |'''Egg Find chance:'''
+
+The chance to find a common, rare or unique egg is based on your event's generated random number (RNG). Finding and buying eggs are not the same: Buying eggs will shift, your event's RNG ahead by +1. (If the RMI shows you will get an unique egg in 3002 egg finds, and you then buy 1 rare egg, the RMI will then show 3001.)
+
+You can check what your next eggs will be and try aim, and avoid missing, a rare or unique egg using the seasonal RAB tool:
+* [http://dox4242.github.io/mri/index.html Meggnetic Resonance Imager] - Courtesy of dox4242 (source)
+
+Buying eggs will not influence your Common Eggs total, and the bought/converted egg will be add to your total rare/unique eggs.
+
+Estimated Find chance by catdrake (source)
+* Common: 95.27643%
+* Rare: 4.56406%
+* Unique: 0.15952%
+
+'''Notes:'''
+* Eggs will hatch if you warp time, therefore your Egg on screen will not grow during Timewarps.
+* Event Scrying choice: Produce 1 random egg every 5 min for 4 hours.
+
+'''Tips:'''<br />
+Moving Egg stacks: You cannot move an egg stack, but refreshing the page will randomly place it elsewhere. (source)
+|-
+| colspan="5" |Total cumulative and permanent Quest Bonus at the end of the Event: '''14%'''
+|}
+
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%"
+! colspan="5" |April Fools' Day
+|-
+! colspan="2" style="width:23%;" | Name
+!Kind
+! style="width:23%;" |  Unlock / Price
+! Effect & Notes
+|-
+|[[File:April fools1.png]]
+!Enhanced Production
+|Upgrade
+|1 Coin
+|Increase the production of all buildings by 1E6%.<br />Note: The upgrade does nothing.
+|-
+|}
+
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%"
+! colspan="5" |St Valentine's Day
+|-
+| colspan="5" |It will feature a new resource, Hearts , which can be collected passively at a rate of 1 per second. You will be able to increase your Heart production by doing any of the following:
+
+* Casting Call to Love will increase your Hearts per second rate based on its activity time. The rate increases to 2/second at about 2,000 seconds (33 minutes) and 3/s at 200,000 seconds (2 days, 7 hours, 33 minutes).
+* Scrying and choosing the right option will temporarily increase your Hearts per second both online and offline.
+
+As usual, there will be Quests and Feats to unlock: you will be able to find every information you need in the Events panel in game! Note: Event Feat requirements will no longer be hidden before you unlock them.
+|-
+! colspan="2" style="width:23%;" | Name
+!Kind
+! style="width:23%;" | Unlock / Price
+! Effect & Notes
+|-
+|[[File:call2loveSpell.png|160x44px|center]]
+!Call to Love
+|Spell
+|Mana Cost:200
+(Replaces [[Call to Arms]])
+|In addition to the Call to Arms spell effect, progressively increases heart production based on total spell active time (persists through Reincarnations). Does not work offline.
+{{Formula|text|1 + floor(0.5 * log10(1 + x / 20))|Call to Love activity time (all Rs)}}
+|-
+|[[File:HeartUpgradese.png|54x54px|center]]
+!Heart Upgrades
+|[[Upgrade]]
+|
+|Gives similar bonus as ruby upgrades, for increasing costs. They last until the end of the event, and every 100 upgrades award a free ruby. It is possible to get 3 rubies from this event.
+|-
+! colspan="5" |Quest & Feats
+|-
+|[[File:FeelTheLoveQuest2.png|54x54px|center]]
+!Feel The Love
+|Quest series
+|Complete 50, 125, 250 Heart Upgrades.
+|Completing all quests will increase your event bonus by 4%
+|-
+|[[File:ILoveYouInEveryLanguageFeat2.png|54x54px|center]]
+!I Love You In Every Language
+|Feat||||Cast ''Feel The Love'' with 6 different factions ([[Mercenaries]] counts for this feat).
+|
+|-
+| colspan="5" style="text-align:center;" |Total cumulative and permanent Quest Bonus at the end of the Event: '''4%'''
+|-
+! colspan="5" |Other Event Specials
+|-
+|[[File:Scry-button.png|center]]
+!Scrying
+||||||Produce 1 heart every 5 seconds for 4 hours.
+|-
+|[[File:15000hearts.png|54x54px|center]]
+!15000 Hearts
+|Shop item||5 [[Rubies]]||A love machine will offer you 15000 hearts for 5 rubies. It will offer you a new deal if you accept.
+|-
+|}
+
+== References ==
+<references />
+
+== See Also ==
+* [[Patch_Notes#Events|Event Announcements]]
+* [[Events/2015]]
+* [[Events/2016]]
+
+{{Sitenav}}
+[[Category:Events|  ]]
+[[Category:Resources]]
+[[Category:Spells]]
+[[Category:Upgrades]]
+[[Category:Realm Grinder Wiki]]
+[[Category:A]]

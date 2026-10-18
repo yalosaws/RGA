@@ -1,0 +1,207 @@
+{{tocright}}
+[[File:Angel_Faction_Building.png|thumb|left]]
+{{Description|Angels' ability with magic is unparalleled as they have the innate power to infuse mana into everything they touch. Affiliating yourself with the Angels faction will grant you nearly unlimited spell power and the ability to take advantage of it directly.}}
+
+== The Angel Faction ==
+[[File:Angelchampion.png|left|Angel Champion Trophy]]
+[[File:God's_Rest.png|right|God's Rest]]
+Part of the original Good Vanilla Factions, the '''Angels''' empower [[mana]] and [[spells]], and thus can help when aiming for the [[Trophies#Magic Trophies|magic trophy]] series.
+* '''[[Alignment]]''': '''''Good'''''
+* '''[[Alignment#Leges|Leges]]''': '''''Order'''''
+* '''[[Spells|Faction Spell]]''':  '''''[[God's Hand]]''''' - Increase the production of all buildings by 150x your mana regeneration rate for 20 seconds.
+* '''[[Spells#Spell Upgrades|Spell Upgrade]]''':  '''''God's Rest''''' - Gives random [[Faction Coins]] based on your [[mana]] regeneration for each other spell you cast while God's Hand is active.<br />{{Formula|stat|\left\lfloor x^{1.1}\right\rfloor |mana regen per second}}
+** Unlock requirement: Cast God's Hand on any Sunday.
+* '''[[Heritage]]''': Increase mana regeneration rate by 10%.  
+* '''[[Bloodline]]''': Increase mana regeneration based on spells cast this game.<br />{{Formula|stat|1.31 \times x^{0.31}|spell casts (this game)}}
+* '''[[Challenge|Challenge Reward]]''': '''God's Throne''' -  Mana regeneration is increased by 50% while ''God's Hand'' is active.  
+* '''[[Unique Buildings|Research Building]]''':  '''''Heaven Domain''''' (from Heaven Gates)  
+* '''[[Research#Research#The Facilities & Related Factions|Research Facility]]''': '''''Divine'''''  
+* '''[[Buildings#Unique Buildings|Leges Building]]''':  '''''Holy Sites''''' (from Cathedrals)
+* '''Faction Unlock Requirements''': None (All Vanilla Factions are enabled by default)
+
+== Tier 1 Upgrades ==
+{| class="wikitable" style="width:100%"
+|-
+! colspan="2" |Name
+! width="75px" |Cost
+! Effect
+|-
+![[File:Angel.png]]
+! width="110px" |''Angel Trade Treaty''
+| style="padding:0 8px;" |''20 Angel Coins''
+| style="padding:0 8px;" |''Unlocks Angel Upgrades.''
+|-
+![[File:Holy-Bells Angel-Faction upgrade.png]]
+!Holy Bells
+| style="padding:0 8px;" |{{Number|50 M|table}}
+| style="padding:0 8px;" |Increased Mana Regeneration based on buildings built.
+''Formula:'' <math>1.6 \times x^{0.4}</math>where x is the amount of buildings you own.
+|-
+![[File:Angelic-Determination Angel-Faction upgrade.png]]
+!Angelic Determination
+| style="padding:0 8px;" |{{Number|500 M|table}}
+| style="padding:0 8px;" |Increase the production of all buildings based on spells cast this Era.<br />''Formula:'' <math>(4 \times \ln(1+x)^{2})%</math> where x is spells cast this game.
+Also increase Angel Coins found (from all sources) by 500%.
+|-
+![[File:Angel-Feathers Angel-Faction upgrade.png]]
+!Angel Feathers
+| style="padding:0 8px;" |{{Number|5 B|table}}
+| style="padding:0 8px;" |Increase Faction Coin find chance based on active spells.
+{{Formula|10%\times x|your active Spellcount}}
+|}
+
+== Tier 2 Upgrades ==
+{| class="wikitable" style="width:100%"
+|-
+! colspan="2" |Name
+! width="75px" |Cost
+! Effect
+|-
+![[File:Angel-Friendship-Pact Angel-Faction upgrade.png]]
+! width="110px" |''Angel Friendship Pact''
+| style="padding:0 8px;" |''100 Angel Coins''
+| style="padding:0 8px;" |''Unlocks more Angel Upgrades.''
+|-
+![[File:Guardian-Angels Angel-Faction upgrade.png]]
+!Guardian Angels
+| style="padding:0 8px;" |{{Number|500 B|table}}
+| style="padding:0 8px;" |Increase the base production of Cathedrals by +98000 and increase their production based on their quantity.
+|-
+![[File:Angelic-Wisdom Angel-Faction upgrade.png]]
+!Angelic Wisdom
+| style="padding:0 8px;" |{{Number|5 T|table}}
+| style="padding:0 8px;" |Increased spell durations and multiplicatively increase mana regeneration by 50%. Also multiplicatively increase offline spell cast based on offline Mana Regeneration.<br />Also increases offline spell cast amount by multiplicatively based on your offline Mana Regeneration <math>(10 * \log_{10}(1 + x))</math>
+|-
+![[File:Archangel-Feathers Angel-Faction upgrade.png]]
+!Archangel Feathers
+| style="padding:0 8px;" |{{Number|50 T|table}}
+| style="padding:0 8px;" |Increase the production of all buildings based on Mana Regeneration.
+|}
+
+== Tier 3 Upgrades ==
+{| class="wikitable" style="width:100%"
+|-
+! colspan="2" |Name
+! width="75px" |Cost
+! Effect
+|-
+![[File:Angel-Alliance Angel-Faction upgrade.png]]
+! width="110px" |''Angel Alliance''
+| style="padding:0 8px;" |''500 Angel Coins''
+| style="padding:0 8px;" |''Unlocks more Angel Upgrades.''
+|-
+![[File:Magical-Gates Angel-Faction upgrade.png]]
+!Magical Gates
+| style="padding:0 8px;" |{{Number|5 Qa|table}}
+| style="padding:0 8px;" |Increased Maximum mana based on time spent as Good in this Reincarnation.
+''Formula :'' <math>+ \left ( 3.5 \times x^{0.7}\right )</math>where  x is time spent in second.
+|-
+![[File:Angelic-Dominance Angel-Faction upgrade.png]]
+!Angelic Dominance
+| style="padding:0 8px;" |{{Number|50 Qa|table}}
+| style="padding:0 8px;" |Increased production bonus from gems based on God's hand activity time in this Era.
+|-
+![[File:Wings of Liberty Angel-Faction upgrade.png|54×54px]]
+!Wings of Liberty
+| style="padding:0 8px;" |{{Number|500 Qa|table}}
+| style="padding:0 8px;" |Increase the production of all buildings based on the duration of longest spell.
+''Formula:'' <math>(4 \times \ln(1+x)^{2})%</math> where x is your Mana Regeneration
+|}
+
+== Unique Buildings ==
+[[File:Angel Unique Building Design.png|left]]
+[[File:Special-building-angel.png|right|Heaven Domain button]]
+[[File:Holy Site.png|right|Holy Site button]]
+At R16, the Angels' building ''Heaven Gates'' can be upgraded to a [[Buildings#Unique Buildings|Unique Building]]: '''''Heaven's Domain''''', which is required for some [[challenges]] and [[research]] quests. 
+
+At R100, the Angels' ''Cathedrals'' can be upgraded to a [[Buildings#Unique Buildings|Unique Building]]: '''''Holy Sites''''', which when bought will grant access to the [[Faction Union]] upgrade.{{Clr}}
+
+== Angel Research ==
+[[File:Research-new-progress-system-msg.PNG|right|250px]]
+Upon reaching R16, the game advisor tells us that the Vanilla factions have gained tremendous power. Their power can be ours if we get ready and seek them again. 
+
+To unlock Angel research, play the Angel faction and simply follow the appearing quests (Do not [[prestige]]). These can be done in separate game plays.
+{| class="wikitable" style="width:100%;"
+! colspan="5" |Angel Research Requirements
+|-
+! colspan="2" |Name
+!In-game Description
+!Requirements
+!Cost
+|-
+|[[File:Angel-research-quest.png]]
+! width="90px" |Heaven's Domain Quest
+|''Bless you, dear friend. The Lands of the sky are expanding as more good souls are joining our ranks. Would you be so kind to provide them a place to stay in the Heavens?''
+<small>''Required once throughout the entire game play and does not count towards the bought upgrade stat.''</small>
+|R16 + 1500 ''Heaven's Gates''
+|{{Number|10 Dtg}}
+|-
+|[[File:Heaven's_Domain_icon.png]]
+!Heaven's Domain
+|Upgrade ''Heaven's Gate'' To ''Heaven's Domains'', boosting their production by x250 per spell affecting them and unlocking more unique perks for the building.<br />+Access to the Research Facilities.
+|Buy ''Heaven's Domain Quest''
+|{{Number|10 Ttg}}
+|-
+|[[File:Divine Facility icon.png]]
+!Pantheon
+|Unlocks the ''Divine'' research facility and increases Angel production by 100000%, plus an additional bonus based on Divine research points.
+<small>''Required once throughout the entire game play and does not count towards the bought upgrade stat.''</small>
+|All Angel faction upgrades bought, ''Heaven's Domain''
+|{{Number|1e121}} coins, {{Number|1e6}} Angel coins
+|-
+! colspan="5" |Trophy & Upgrade
+|-
+![[File:Demigod.png]]
+!Demigod
+|Increase ''Divine'' upgrade slot by 1
+|R20+, Discover at least 10 ''Divine'' Researches
+|{{Number|2.5e152}}
+|-
+|}
+
+== Angel Leges ==
+Upon reaching R100, the ''[[Alignments|Proof of Order]]'' will become available, which provides a quest for an additional unique building, which when bought will grant access to the its Union upgrade.
+{| class="wikitable" style="width:100%;"
+! colspan="6" |Angel Leges Requirements
+|-
+! colspan="2" |Name
+!Type
+!Description
+! width="110px" |Requirement
+! width="75px" |Cost
+|-
+![[File:Angel-research-quest.png]]
+! width="90px" |'''Holy Site''' Quest
+|Quest [[Upgrade]]
+|Grants access to Unique Building.
+|More than {{Number|2M}} Mana Regeneration¹
+|{{Number|1 Ud|table}}
+|-
+![[File:Holy Site Upgrade.png]]
+!Holy Site
+|Allegiances Upgrades
+|Upgrade ''Cathedrals'' to ''Holy Sites'', boosting their production based on time spent as good and unlocking more unique perks for the building.
+{{Formula|stat|\left(0.08 \times x^{0.8}\right)%|time in seconds as good in this R}}<br />+Access to the Faction Union.
+|''Holy Site Quest''
+|{{Number|1 Td|table}}
+|-
+![[File:AngelsUnion.png]]
+!Angels Union
+|[[Faction Union]]
+|Grants access to Union Upgrade.
+|''Holy Site'' Unique Building
+|{{Number|1 Qi}} Angel Coins
+|-
+![[File:AngelicFortitude.png]]
+!Angelic Fortitude
+|Union Upgrade
+|Increase the bonus multiplier for all spells at tier 7 and above based on the amount of ''Holy'' Sites you own. All ''[[Dragon's Breath]]'' effects are increased based on the amount of ''Holy Sites'' you own.
+{{Formula|build|0.6 \times x^{0.6}|Holy Sites}}
+|Angels Union
+|{{Number|1 Nod|table}}
+|}
+
+¹On V4.2.17.0 2.6e6 Mana Regeneneration was not enough. After adding some research I instantly got to 6e7, wich was enough.
+{{Sitenav}}
+[[Category:Angel| ]]
+[[Category:Factions]]

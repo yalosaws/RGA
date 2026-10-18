@@ -1,0 +1,218 @@
+{{tocright}}[[File:Dwarf_Faction_Building.png|thumb|left]]{{Description|"The Dwarves make the best masons, artisans and blacksmiths in all the realms. Their creations will outlast anything made by other races... except for beer, that is."}}
+
+== The Dwarf Faction ==
+[[File:Dwarven champion trophy.png|left|Dwarf Champion Trophy]]
+[[File:Minedwarf.png|right|Minedwarf]]
+The '''Dwarves''' were implemented as one of the [[Prestige Factions]] during the [[Updates#1.2 The Underworld|Underworld]] expansion (v1.2). They appear as an addition to a [[Factions#Good Factions|good faction]], and enable the player to use a total of two faction spells as well as all the 18 upgrades from both the Good and Dwarf factions.<br />With their strong clicking reward upgrades, the Dwarves find it lucrative to work along with the click-heavy [[Elven Faction]].
+
+* [[Alignment|'''Alignment''']]: '''''Prestige''''' (Good)
+* '''[[Spells|Faction Spell]]''': '''''Diamond Pickaxe''''' Increase clicking reward by 25% per [[Excavation]] and "[[Faction Coins|Faction Coin]] Find Chance" by 200% for 12 seconds.  
+* '''[[Spells#Spell Upgrades|Spell Upgrade]]''': '''''Minedwarf''''' Increases ''Diamond Pickaxe'' bonus to "Faction Coin Find Chance" to 300%.
+** Unlock requirement: Find 30,000 Faction Coins using ''Diamond Pickaxe'' in a single game. Only FCs generated from ''Diamond Pickaxe'' count towards this trophy.  
+* [[Heritage|'''Heritage''']]: Increase the production of all buildings based on the amount of [[Excavations]] you made.<br />''{{Formula|2 \times (x^{0.9})%|number of excavations you've purchased}}''
+* [[Bloodline|'''Bloodline''']]: Increase the production of all buildings based on the amount of excavations you made.<br />''{{Formula|10 \times x^{0.8}%|number of excavations purchased}}''
+* '''[[Challenges|Challenge Reward]]''': '''''Iron Grip''''' -  Increase Diamond Pickaxe duration by 8 seconds, and its bonus to Faction Coin find chance is passively applied as a multiplier to excavations Faction Coin rewards.
+* [[Research|'''Research Facilities''']]: '''''Craftsmanship, Divine, Economics''''' 
+* '''Faction Unlock Requirements''': See [[Dwarf#Faction Unlock Requirements|below]]
+
+== Tier 1 Upgrades ==
+{| class="wikitable" style="width:100%"
+|-
+! colspan="2" |Name
+! width="75px" |Cost
+! Effect
+|-
+![[File:Dwarves.png]]
+! width="110px" |''Dwarven Trade Treaty''
+| style="padding:0 0 0 8px;" | ''3000 Dwarven Coins''
+| style="padding:0 0 0 8px;" | ''Unlocks Tier 1 Dwarven Upgrades''
+|-
+![[File:Dwarven-Ale Dwarf-Faction upgrade.png]]
+! Dwarven Ale
+| style="padding:0 0 0 8px;" | {{Number|5 Qad|table}}
+| style="padding:0 0 0 8px;" | Increase Faction Coin find chance based on Blacksmiths owned.
+''Formula:'' <math>+(2 \times \sqrt{x})%</math> where x is the amount of ''Blacksmiths'' you own.(Not updated)
+|-
+![[File:Expert-Masonry Dwarf-Faction upgrade.png]]
+! Expert Masonry
+| style="padding:0 0 0 8px;" | {{Number|50 Qad|table}}
+| style="padding:0 0 0 8px;" | Reduce all building cost multipliers.<br />{{MultiplierReduction|0.01|1.14|1.15}}(Not updated)
+|-
+![[File:Mining-Prodigies Dwarf-Faction upgrade.png]]
+! Mining Prodigies
+| style="padding:0 0 0 8px;" | {{Number|500 Qad|table}}
+| style="padding:0 0 0 8px;" | Increase the production of all buildings based on Excavation depth.
+{{Formula|(40 \times (x \times  (1 + 2 \times y))^{0.4})%|the number of excavations made this Reincarnation, y is the number of excavation resets in this Reincarnation.}}(Not updated)
+|}
+
+== Tier 2 Upgrades ==
+{| class="wikitable" style="width:100%"
+|-
+! colspan="2" |Name
+! width="75px" |Cost
+! Effect
+|-
+![[File:Dwarven-Friendship-Pact Dwarf-Faction upgrade.png]]
+! width="110px" |''Dwarven Friendship Pact''
+| style="padding:0 0 0 8px;" | ''12000 Dwarven Coins''
+| style="padding:0 0 0 8px;" | ''Unlocks Tier 2 Dwarven Upgrades.''
+|-
+![[File:Underground-Citadels Dwarf-Faction upgrade.png]]
+! Underground Citadels
+| style="padding:0 0 0 8px;" | {{Number|50 Qid|table}}
+| style="padding:0 0 0 8px;" | Multiplicatively increase Mana Regeneration based on Gems owned.
+''Formula:'' <math>(1.5 \times \log_{10}(1+x)^{1.5})%</math> where x is the amount of Gems you own.(Not updated)
+|-
+! [[File:Indestructible-Treasure Dwarf-Faction upgrade.png]]
+! Indestructible Treasure
+| style="padding:0 0 0 8px;" | {{Number|500 Qid|table}}
+| style="padding:0 0 0 8px;" | Increase clicking reward based on buildings built.
+{{Formula|stat|0.5 \times x^{0.65}%|Buildings Owned (This Game)}}(Not updated)
+|-
+![[File:Bearded-Assistants Dwarf-Faction upgrade.png]]
+![[Bearded Assistants]]
+| style="padding:0 0 0 8px;" |{{Number|5 Sxd|table}}
+| style="padding:0 0 0 8px;" |Increase the production of [[assistants]] based on how long their beard is (it grows over time!).
+{{Formula|stat|( x^{0.7})%|your Playtime (This Game)|seconds}}(Not updated)
+|}
+
+==Tier 3 Upgrades==
+{| class="wikitable" style="width:100%"
+|-
+! colspan="2" |Name
+! width="75px" |Cost
+! Effect
+|-
+![[File:Dwarven-Alliance Dwarf-Faction upgrade.png]]
+! width="110px" |''Dwarven Alliance''
+| style="padding:0 0 0 8px;" |''30000 Dwarven Coins''
+| style="padding:0 0 0 8px;" |''Unlocks Tier 3 Dwarven Upgrades.''
+|-
+![[File:Battlehammers Dwarf-Faction upgrade.png]]
+!Battlehammers
+| style="padding:0 0 0 8px;" |{{Number|500 Sxd|table}}
+| style="padding:0 0 0 8px;" |Increase the production of all buildings based on Dwarven Coins found in this Era.
+{{Formula|stat|(2 \times ln(1+x)^2)%|Dwarven Coins Gained (This Game)}}(Not updated)
+|-
+![[File:Magic-Resistance Dwarf-Faction upgrade.png]]
+!Magic Resistance
+| style="padding:0 0 0 8px;" |{{Number|5 Spd|table}}
+| style="padding:0 0 0 8px;" |Reduce Excavation cost multiplier.
+Reduces cost multiplier by 0.02; with no other reductions applying, the multiplier will be 1.18 instead of 1.2(Not updated)
+|-
+![[File:Overwatch Dwarf-Faction upgrade.png]]
+!Overwatch
+| style="padding:0 0 0 8px;" |{{Number|50 Spd|table}}
+| style="padding:0 0 0 8px;" |Increase Maximum Mana based on the duration of your longest spell.
+''Formula:'' <math>+(50 + 35 \times x^{0.7})</math>where x is the duration of your longest spell in second.(Not updated)
+|}
+
+== Faction Unlock Requirements ==
+[[File:PassagetotheUnderworld-msg.png|center|350px]]
+Below requirements can be done in separate game plays.
+{| class="wikitable" style="width:100%"
+|-
+! colspan="5" |Dwarven Faction Unlock Requirements
+|-
+! colspan="2" |Name
+! width="75px" |Cost
+!Description
+! width="135px" |Requirement
+|-
+![[File:PassageToTheUnderWorld.PNG]]
+!Passage to the Underworld
+|{{Number|50 Qid|table}}
+|Unlocks Prestige Quests
+<small>''Required once throughout the entire game play and does not count towards the bought upgrade stat.''</small>
+|200 [[Excavations]]
+|-
+![[File:SturdyBeardManQuest.png]]
+!Sturdy Bearded Man's Quest
+|{{Number|10 Qad}}, 10K Fairy, Elven and Angel Coins
+|Unlocks ''Underworld Diplomacy''
+<small>''Required once throughout the entire game play and does not count towards the bought upgrade stat.''</small>
+|Good [[Alignment]], Build 800 ''Inns'', 7000 Buildings Owned (This Game), 10000 treasure clicks (Total)
+|-
+![[File:UnderworldDiplomacy-upgrade.PNG]]
+!Underworld Diplomacy
+|{{Number|1Qad|table}}
+|Unlocks Prestige [[Faction Coins]], [[Trade Treaty]], [[Royal Exchanges]] and [[Heritage]]
+''Required each run until R3''
+|''Sturdy Bearded Man's'' Quest
+|}
+
+== Dwarven Unique Building ==
+[[File:Dwarf_Unique_Building_Design.png|thumb|left]] At R28, the Dwarven ''Blacksmiths'' can be upgraded to a [[Buildings#Unique Buildings|Unique Building]]: '''''Dwarven Forges''''', which is required for some [[challenges]] and research quests. [[File:Uniquebuilding-dwarf.PNG|right]]{{Clr}}
+
+== Dwarven Research ==
+[[File:R29-Prestige-research-msg.png|right|300px]]
+Upon reaching R29, the game advisor tells us that the Prestige factions have discovered an almost infinite source of magical power: Prestige Research.
+
+Dwarven [[Research]] is related to the ''Craftsmanship, Divine'' and ''Economics'' facilities. It enables one to acquire both Vanilla and Dwarven unique buildings, and combine their researches.
+
+Each item below can be unlocked in separate game plays, and most only need to be bought once throughout the entire game play. The Unique building upgrade and the Horn of the Kings are the only ones that need to be bought each run and count towards the 'Bought Upgrades' [[stats]].
+{| class="wikitable" style="width:100%"
+! colspan="6" |Research Unlock Requirements
+|-
+! colspan="2" |Name
+!Type
+!Description
+! width="110px" |Requirement
+! style="width:13%;" |Cost
+|-
+![[File:DwarfResearchQuest.PNG]]
+! width="90px" |Dwarven Forge Quest
+|Quest [[Upgrade]]
+|''Aye again lad! Don't ye want a better place to forge yer weapons? With Enough Blacksmiths me people can help ye!''
+<small>''Required once throughout the entire game play and does not count towards the bought upgrade stat.''</small>
+|R28+, 3500 ''Blacksmiths''
+|{{Number|10 Sxg|table}}
+|-
+![[File:Dwarven Forge icon.png]]
+!Dwarven Forges
+|[[Upgrades#Allegiances Upgrades|Allegiances Upgrades]]
+|Upgrade ''Blacksmiths'' to ''Dwarven Forges'', boosting their production based on mana regen and unlocking more unique perks for the building.
+{{Formula|stat|100 \times x^{0.9}%|Mana per Second}}
+|''Dwarven Forge Quest''
+|{{Number|10 USxg|table}}
+|-
+![[File:Artifact-earthcore.png]]
+!Earth Core [[Artifacts|Artifact]]
+|Quest [[Artifact]]
+|Unlocks ''The Secrets of the Underworld'' upgrade
+|Requirements: R29 + 2750th [[Excavation]].
+|
+|-
+![[File:Secrets Of the Underworld.png]]
+!Secrets of the Underworld
+|Quest Upgrade
+|Unlocks Researches for Dwarves and Drow and provides a bonus for individual research branches.
+<small>''Required once throughout the entire game play and does not count towards the bought upgrade stat.''</small>
+|Prestige Unique Building, ''Earth Core'' Artifact
+|{{Number|1e200}},<br />{{Number|1e7}} of every FC
+|-
+! colspan="6" |Dwarven Research Upgrade
+|-
+! colspan="2" |Name
+! colspan="2" |Description
+!Requirement
+!Cost
+|-
+![[File:Artifact-hornofkings.PNG]]
+!Legacy of The Dwarven Kings
+| colspan="2" |Adds 3 extra Dwarven research slots: 2 for ''Craftsmanship'' and 1 to the faction's facility you are playing.
+<small>''Requires being purchased for each Dwarven run.''</small>
+|''Horn of the Kings'' [[artifact]] (Requires ''Dwarven Forges'' and 3250 Excavations)
+|{{Number|10 SxSpg|table}}, {{Number|100M}} Dwarven Coins
+|}
+<u>To Unlock Prestige Research:</u>
+# Uncover the [[Artifacts|''Earth Core'' Artifact]] with any Faction, and gather enough gems to be able to buy the Secrets of the Underworld ({{Number|1e200}} coins and {{Number|1e7}} FCs)
+# When ready, play a [[Vanilla faction]] (Good Faction for Dwarf, Evil for Drow). Choose one that will be able to afford the Secrets of the Underworld. Do not buy the Vanilla faction's Unique building upgrade until you have bought the prestige [[Trade Treaty]].
+# Once affiliated with the prestige faction, buy their Unique building quest, Unique Building upgrade, and then the Secrets of the Underworld. With the latter, the research button and prestige research will show up.
+After you have unlocked Prestige research, the Vanilla unique building and Vanilla researches can be acquired before purchasing the prestige trade treaty. Plan in advance to not use up all your RUS on Vanilla researches, as prestige researches only show up after you affiliate with a prestige faction.
+
+
+{{Sitenav}}
+[[Category:Dwarf| ]]
+[[Category:Factions]]
+[[Category:Unlock Requirements]]

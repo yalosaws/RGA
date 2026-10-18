@@ -1,0 +1,2804 @@
+{{Tocright}}For an up to date list of trophies, see http://musicfamily.org/realm/TrophyPage/[[File:Gametab-Trophies.png|centre]]
+<br />Unlock them by performing tasks of increasing difficulty in different areas of the game. See below tables for unlock requirements.<br />Once unlocked, it's there to stay, throughout [[abdications]] and [[reincarnations]]!
+
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%" id="Trophy Overview"
+!Trophies: Overview
+|-
+|Trophies listed by category as displayed in the game. (With the option 'Don't list trophies by category' disabled.)
+PA = Post [[Ascension]] Trophies
+
+'''[[#Allegiances Trophies|Allegiances Trophies]] [41]'''
+* '''Faction Champion''': For each faction, purchase all their 12 faction upgrades in a single game.
+* '''Faction Grand Champion''': For each faction, upgrade their [[Lineage]] to level 20 and purchase all three of their respective Lineage perks.
+
+
+
+
+
+
+
+
+'''[[#Misc Trophies|Misc Trophies]] [168]'''
+* '''Coins''' [20]: Awarded at multiples of 1,000 up to 1 Ocg coins in a single game.
+* '''Coins by Clicking''' [19]: Gain 100, 1K, 1M, 1B, 1T, 1Qa, 1Qi, 1Sx, 1Sp, 1Ud, 1Qad, 1Spd, 1Vg, 1Qivg, 1Tg, 1Qitg, 1Qag, 1Qig and 1SxSxg coins by clicking in a single game.
+* '''Clicks''' [9]: Click 100, 500, 1,000, 2,500, 5,000, 10,000, 20,000, 50,000, 100,000 times in a single game.
+* '''Faction Coins''' [21]: Find 1, 50, 250, 1k, 5k, 10k, 50k, 100k, 500k, 1M, 100M, 1B, 100B, 1T, 100T, 1Qa, 1Qi, 1Sx, 1No, 1Td, 1Spd FCs.
+* '''Assistants''' [18]: Have 1, 10, 50, 100, 200, 300, 500, 1k, 2k, 5k, 10k, 25k, 50k, 500k, 5M, 5B, 5T, 5Qi assistants.
+* '''Artifacts''' [7]: Find 1, 5, 10, 20, 35, 50, and 75 artifacts (all time).
+* '''Gems''' [23]: Gain 1, 50, 150, 500, 1k, 5k, 15k, 50k, 100k, 1B, 1Qa, 1Sx, 1No, 1Dd, 1Qid, 1Ocd, 1Uvg, 1Qavg, 1Spvg, 1Tg, 1Ttg, 1Sxtg, 1Uqag gems.
+* '''Rubies''' [4]: Collect 1, 10, 25 and 50 rubies (all time).
+* '''Upgrades''' [11]: Purchase 1, 5, 15, 30, 50, 85, 120, 175, 235, 305, 385 upgrades in a single game.
+* '''Reincarnations''' [20]: Reincarnate 1, 3, 5, 7, 10, 12, 15, 20, 25, 30, 35, 40, 45, 60, 70, 85, 100, 125, 150 times.
+* '''Misc '''[16]
+
+
+
+
+
+
+
+
+'''[[#Magic Trophies|Magic Trophies]] [61]'''
+* '''Mana '''[14]: Produce 200, 2k, 5k, 10k, 20k, 100k, 200k, 20M, 1B, 20B, 1T, 2T, 100T, 200Qi mana.
+* '''Spell Casts''' [16]: Cast 10, 100, 500, 1k, 2k, 5k, 20k, 50k, 100k, 200k, 500k, 1M, 50M, 1B, 50T, 10Qa Spells in a single game.
+* '''Spell Autocasting''' [9]: Produce 60k, 2M, 6M, 12M, 20M, 30M, 50M, 150M, 200M mana.
+* '''Spell Tier Trophies''' [6]: Unlock tier 2, 3, 4, 5, 6, 7 for all spells.
+* '''Spell Trophies '''[16] - 1 for Tax Collection and each Faction spell
+
+
+
+
+
+
+
+
+'''[[#Building Trophies|Building Trophies]] [566]'''
+* '''Building Types''' [25x22]: Build 1, 50, 100, 150, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1500, 2000, 2500, 3000, 3500, 5000, 7500, 12000, 20000 of each building type in a single game.
+* '''Total Buildings''' [15]: Build 100, 250, 500, 1k, 2k, 3k, 5k, 8k, 12k, 20k, 35k, 50k, 125k, 200k, 300k buildings in a single game.
+* '''Misc '''[1]
+
+
+
+
+
+
+
+
+'''[[#Secret Trophies|Secret Trophies]] [64] '''
+:'''<u>TOTAL TROPHIES: 900</u>'''
+|}
+
+== Allegiances Trophies ==
+<table-progress-tracking table-id="1" unique-column-index="2">
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%" id="Champion Trophies"
+! colspan="3" |Allegiances - 14 Trophies
+|-
+! colspan="2" |Name
+!Unlock Requirement
+|-
+![[File:Fairychampion.png]]
+!Fairy Champion
+|Purchase all [[Fairy]] Faction Upgrades (in a single game)
+|-
+![[File:Elvenchampion.png]]
+!Elven Champion
+|Purchase all [[Elven]] Faction Upgrades.
+|-
+![[File:Angelchampion.png]]
+!Angel Champion
+|Purchase all [[Angel]] Faction Upgrades.
+|-
+![[File:Goblin champion trophy.png]]
+!Goblin Champion
+|Purchase all [[Goblin]] Faction Upgrades.
+|-
+![[File:Undead champion trophy.png]]
+!Undead Champion
+|Purchase all [[Undead]] Faction Upgrades.
+|-
+![[File:Demon champion trophy.png]]
+!Demon Champion
+|Purchase all [[Demon]] Faction Upgrades.
+|-
+![[File:Titan champion trophy.png]]
+!Titan Champion
+|Purchase all [[Titan]] Faction Upgrades.
+|-
+![[File:Druid champion trophy.png]]
+!Druid Champion
+|Purchase all [[Druid]] Faction Upgrades.
+|-
+![[File:Faceless champion trophy.png]]
+!Faceless Champion
+|Purchase all [[Faceless]] Faction Upgrades.
+|-
+![[File:Dwarven champion trophy.png]]
+!Dwarven Champion
+|Purchase all [[Dwarven]] Faction Upgrades.
+|-
+![[File:Drow champion trophy.png]]
+!Drow Champion
+|Purchase all [[Drow]] Faction Upgrades.
+|-
+![[File:Mecenary champion trophy.png]]
+!Mercenary Champion
+|Purchase all [[Mercenary]] Faction Upgrades.
+|-
+![[File:DragonChampionTrophy.png]]
+!Dragon Champion {{PA}}
+|Purchase all [[Dragon]] Faction Upgrades.
+|-
+![[File:MercOath.png]]
+!Mercenary Oath
+|"You have become a [[Mercenary]] for the rest of your existence."<br />''Select Mercenary for the first time.''
+|}
+</table-progress-tracking>
+
+<table-progress-tracking table-id="2" unique-column-index="2">
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%" id="Champion Trophies"
+! colspan="3" |Lineages {{PA}} - 12 Trophies
+|-
+! colspan="2" |Name
+!Unlock Requirement
+|-
+![[File:FairyGCT.png]]
+!Fairy Grand Champion
+|Purchase all three [[Fairy]] [[Lineage]] perks.
+|-
+![[File:ElfGCT.png]]
+!Elven Grand Champion
+|Purchase all three [[Elven]] Lineage perks.
+|-
+![[File:AngelGCT.png]]
+!Angel Grand Champion
+|Purchase all three [[Angel]] Lineage perks.
+|-
+![[File:GoblinGCT.png]]
+!Goblin Grand Champion
+|Purchase all three [[Goblin]] Lineage perks.
+|-
+![[File:UndeadGCT.png]]
+!Undead Grand Champion
+|Purchase all three [[Undead]] Lineage perks.
+|-
+![[File:DemonGCT.png]]
+!Demon Grand Champion
+|Purchase all three [[Demon]] Lineage perks.
+|-
+![[File:TitanGCT.png]]
+!Titan Grand Champion
+|Purchase all three [[Titan]] Lineage perks.
+|-
+![[File:DruidGCT.png]]
+!Druid Grand Champion
+|Purchase all three [[Druid]] Lineage perks.
+|-
+![[File:FacelessGCT.png]]
+!Faceless Grand Champion
+|Purchase all three [[Faceless]] Lineage perks.
+|-
+![[File:DwarfGCT.png]]
+!Dwarven Grand Champion
+|Purchase all three [[Dwarf|Dwarven]] Lineage perks.
+|-
+![[File:DrowGCT.png]]
+!Drow Grand Champion
+|Purchase all three [[Drow]] Lineage perks.
+|-
+![[File:DragonGCT.png]]
+!Dragon Grand Champion
+|Purchase all three [[Dragon]] Lineage perks.
+|}
+</table-progress-tracking>
+
+== Misc Trophies ==
+<table-progress-tracking table-id="3" unique-column-index="1">
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%" id="Coin Trophies"
+! colspan="2" | Coins - 20 Trophies
+|-
+! Name
+! scope="col" |Unlock Requirement
+|-
+!A Thousand Coins
+|Gain 1,000 [[coins]] in a single game
+|-
+!A Million Coins
+|Gain {{Number|1 M}} coins in a single game
+|-
+!A Billion Coins
+|Gain {{Number|1 B}} coins in a single game
+|-
+!A Trillion Coins
+|Gain {{Number|1 T}} coins in a single game
+|-
+!A Quadrillion Coins
+|Gain {{Number|1 Qa}} coins in a single game
+|-
+!A Quintillion Coins
+|Gain {{Number|1 Qi}} coins in a single game
+|-
+!A Sextillion Coins
+|Gain {{Number|1 Sx}} coins in a single game
+|-
+!A Septillion Coins
+|Gain {{Number|1 Sp}} coins in a single game
+|-
+!An Octillion Coins
+|Gain {{Number|1 Oc}} coins in a single game
+|-
+!A Nonillion Coins
+|Gain {{Number|1 No}} coins in a single game
+|-
+!A Decillion Coins
+|Gain {{Number|1 Dc}} coins in a single game
+|-
+!Countless Coins
+|Gain {{Number|1 Ud}} coins in a single game
+|-
+!Infinite Coins
+|Gain {{Number|1 Uvg}} coins in a single game
+|-
+!Unlimited Coins
+|Gain {{Number|1 Qivg}} coins in a single game
+|-
+!Endless Coins
+|Gain {{Number|1 Tg}} coins in a single game
+|-
+!Coins Galore
+|Gain {{Number|1 Qitg}} coins in a single game
+|-
+!Coin Multiplication
+|Gain {{Number|1 Qag}} coins in a single game
+|-
+!Coin Hemisphere
+|Gain {{Number|1 e153}} coins in a single game
+|-
+!Coin World
+|Gain {{Number|1 SxSxg}} coins in a single game
+|-
+!Coin Universe
+|Gain {{Number|1 Ocg}} coins in a single game
+|}
+</table-progress-tracking>
+
+<table-progress-tracking table-id="4" unique-column-index="1">
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%" id="Treasure Trophies"
+! colspan="2" | Coins by Clicking - 19 Trophies
+|-
+! Name
+! scope="col" |Unlock Requirement
+|-
+!Treasure Clicker
+|Gain 100 coins by [[click]]ing in a single game
+|-
+!Treasure Finder
+|Gain 1,000 coins by clicking in a single game
+|-
+!Treasure Digger
+|Gain {{Number|1 M}} coins by clicking in a single game
+|-
+!Treasure Hunter
+|Gain {{Number|1 B}} coins by clicking in a single game
+|-
+!Treasure Seeker
+|Gain {{Number|1 T}} coins by clicking in a single game
+|-
+!Treasure Master
+|Gain {{Number|1 Qa}} coins by clicking in a single game
+|-
+!Treasure Hero
+|Gain {{Number|1 Qi}} coins by clicking in a single game
+|-
+!Treasure Legend
+|Gain {{Number|1 Sx}} coins by clicking in a single game
+|-
+!Treasure Grinder
+|Gain {{Number|1 Sp}} coins by clicking in a single game
+|-
+!Treasure Breaker
+|Gain {{Number|1 Ud}} coins by clicking in a single game
+|-
+!Treasure Smasher
+|Gain {{Number|1 Qad}} coins by clicking in a single game
+|-
+!Treasure destroyer
+|Gain {{Number|1 Spd}} coins by clicking in a single game
+|-
+!Treasure Annihilator
+|Gain {{Number|1 Vg}} coins by clicking in a single game
+|-
+!Treasure Disintegrator
+|Gain {{Number|1 Qivg}} coins by clicking in a single game
+|-
+!Treasure Ender
+|Gain {{Number|1 Tg}} coins by clicking in a single game
+|-
+!Treasure Unmaker
+|Gain {{Number|1 Qitg}} coins by clicking in a single game
+|-
+!Treasure Nullifier
+|Gain {{Number|1 e123}} coins by clicking in a single game
+|-
+!Treasure Wrecker
+|Gain {{Number|1 e153}} coins by clicking in a single game
+|-
+!Treasure Obliterator
+|Gain {{Number|1 e201}} coins by clicking in a single game
+|}
+</table-progress-tracking>
+
+<table-progress-tracking table-id="5" unique-column-index="1">
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%" id="Click Trophies"
+! colspan="2" | Clicks - 9 Trophies
+|-
+! Name
+! scope="col" |Unlock Requirement
+|-
+!A Clicking Start
+|[[Click]] the background 100 Times in a single game.
+|-
+!Clicking More
+|Click the background 500 Times in a single game.
+|-
+!Click Clock
+|Click the background 1,000 Times in a single game.
+|-
+!Clicking Forward
+|Click the background 2,500 Times in a single game.
+|-
+!Clicking Frenzy
+|Click the background 5,000 Times in a single game.
+|-
+!World of Clicks
+|Click the background 10,000 Times in a single game.
+|-
+!The Clicky Way
+|Click the background 20,000 Times in a single game.
+|-
+!Clicker Eternal
+|Click the background 50,000 Times in a single game.
+|-
+!Realm Clicker
+|Click the background 100,000 Times in a single game.
+|}
+</table-progress-tracking>
+
+<table-progress-tracking table-id="6" unique-column-index="1">
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%" id="Faction Coin Trophies"
+! colspan="2" | Faction Coins - 21 Trophies
+|-
+! Name
+! scope="col" |Unlock Requirement
+|-
+!1 Faction Coin
+|Find 1 [[Faction Coins|Faction Coin]] (in a single game)
+|-
+!50 Faction Coins
+|Find 50 Faction Coins
+|-
+!250 Faction Coins
+|Find 250 Faction Coins
+|-
+!1000 Faction Coins
+|Find 1,000 Faction Coins
+|-
+!5000 Faction Coins
+|Find 5,000 Faction Coins
+|-
+!10000 Faction Coins
+|Find 10,000 Faction Coins
+|-
+!50000 Faction Coins
+|Find 50,000 Faction Coins
+|-
+!100000 Faction Coins
+|Find 100,000 Faction Coins
+|-
+!500000 Faction Coins
+|Find 500,000 Faction Coins
+|-
+!1 Million Faction Coins
+|Find {{Number|1 M}} Faction Coins
+|-
+!100 Million Faction Coins
+|Find {{Number|100 M}} Faction Coins
+|-
+!1 Billion Faction Coins
+|Find {{Number|1 B}} Faction Coins
+|-
+!100 Billion Faction Coins
+|Find {{Number|100 B}} Faction Coins
+|-
+!1 Trillion Faction Coins
+|Find {{Number|1 T}} Faction Coins
+|-
+!100 Trillion Faction Coins
+|Find {{Number|100 T}} Faction Coins
+|-
+!1 Quadrillion Faction Coins
+|Find {{Number|1 Qa}} Faction Coins
+|-
+!1 Quintillion Faction Coins
+|Find {{Number|1 Qi}} Faction Coins
+|-
+!1 Sextillion Faction Coins
+|Find {{Number|1 Sx}} Faction Coins
+|-
+!1 Nonillion Faction Coins
+|Find {{Number|1 No}} Faction Coins
+|-
+!1 Tredicillion Faction Coins
+|Find {{Number|1 Td}} Faction Coins
+|-
+!1 Septendecillion Faction Coins
+|Find {{Number|1 Spd}} Faction Coins
+|}
+</table-progress-tracking>
+
+<table-progress-tracking table-id="7" unique-column-index="1">
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%" id="Assistant Trophies"
+! colspan="2" | Assistants - 18 Trophies
+|-
+! Name
+! scope="col" |Unlock Requirement
+|-
+!Assistant Solo
+|Have 1 [[Assistants|Assistant]] (in a single game)
+|-
+!Assistant Group
+|Have 10 Assistants
+|-
+!Assistant Commando
+|Have 50 Assistants
+|-
+!Assistant Squad
+|Have 100 Assistants
+|-
+!Assistant Army
+|Have 200 Assistants
+|-
+!Assistant Legion
+|Have 300 Assistants
+|-
+!Assistant Horde
+|Have 500 Assistants
+|-
+!Assistant Host
+|Have 1,000 Assistants
+|-
+!Assistant Clump
+|Have 2,000 Assistants
+|-
+!Assistant Nation
+|Have 5,000 Assistants
+|-
+!Assistant Kingdom
+|Have 10,000 Assistants
+|-
+!Assistant Continent
+|Have 25,000 Assistants
+|-
+!Assistant World
+|Have 50,000 Assistants
+|-
+!Assistant Galaxy
+|Have 500,000 Assistants
+|-
+!Assistant Universe
+|Have {{Number|5M}} Assistants
+|-
+!Assistant Dimension
+|Have {{Number|5B}} Assistants
+|-
+!Assistant Multiverse
+|Have {{Number|5T}} Assistants
+|-
+!Assistant Stratum
+|Have {{Number|5Qi}} Assistants
+|}
+</table-progress-tracking>
+
+<table-progress-tracking table-id="8" unique-column-index="1">
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%" id="Artifact Trophies"
+! colspan="2" |Artifacts - 7 Trophies
+|-
+!Name
+!Unlock Requirement
+|-
+!1 Artifact
+|Find 1 [[Excavations|Artifact]] (All Time).
+|-
+!5 Artifacts
+|Find 5 Artifacts.
+|-
+!10 Artifacts
+|Find 10 Artifacts.
+|-
+!20 Artifacts
+|Find 20 Artifacts.
+|-
+!35 Artifacts
+|Find 35 Artifacts.
+|-
+!50 Artifacts
+|Find 50 Artifacts.
+|-
+!75 Artifacts
+|Find 75 Artifacts.
+|}
+</table-progress-tracking>
+
+<table-progress-tracking table-id="9" unique-column-index="1">
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%" id="Gem Trophies"
+! colspan="2" | Gems - 23 Trophies
+|-
+! Name
+! scope="col" |Unlock Requirement
+|-
+!1 Gem
+|Gain 1 [[Gems|Gem]] ([[Stats|Total]])
+|-
+!50 Gems
+|Gain 50 Gems
+|-
+!150 Gems
+|Gain 150 Gems
+|-
+!500 Gems
+|Gain 500 Gems
+|-
+!1000 Gems
+|Gain 1,000 Gems
+|-
+!5000 Gems
+|Gain 5,000 Gems
+|-
+!15000 Gems
+|Gain 15,000 Gems
+|-
+!50000 Gems
+|Gain 50,000 Gems
+|-
+!100000 Gems
+|Gain 100,000 Gems
+|-
+!1 Billion Gems
+|Gain {{Number|1 B}} Gems
+|-
+!1 Quadrillion Gems
+|Gain {{Number|1 Qa}} Gems
+|-
+!1 Sextillion Gems
+|Gain {{Number|1 Sx}} Gems
+|-
+!1 Nonillion Gems
+|Gain {{Number|1 No}} Gems
+|-
+!1 Duodecillion Gems
+|Gain {{Number|1 Dd}} Gems
+|-
+!1 Quindecillion Gems
+|Gain {{Number|1 Qid}} Gems
+|-
+!1 Octodecillion Gems
+|Gain {{Number|1 Ocd}} Gems
+|-
+!1 Unvigintillion Gems
+|Gain {{Number|1 Uvg}} Gems
+|-
+!1 Quadravigintillion Gems
+|Gain {{Number|1 Qavg}} Gems
+|-
+!1 Septenvigintillion Gems
+|Gain {{Number|1 Spvg}} Gems
+|-
+!1 Trigintillion Gems
+|Gain {{Number|1 Tg}} Gems
+|-
+!1 Tretrigintillion Gems
+|Gain {{Number|1 Ttg}} Gems
+|-
+!1 Sextrigintillion Gems
+|Gain {{Number|1 Sxtg}} Gems
+|-
+!1 Unquadragintillion Gems
+|Gain {{Number|1 Uqag}} Gems
+|}
+</table-progress-tracking>
+
+<table-progress-tracking table-id="10" unique-column-index="1">
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%" id="Ruby Trophies"
+! colspan="2" | Rubies - 4 Trophies
+|-
+! Name
+! scope="col" |Unlock Requirement
+|-
+!1 Ruby
+|Gain 1 [[Ruby]] (All time)
+|-
+!10 Rubies
+|Gain 10 Rubies
+|-
+!25 Rubies
+|Gain 25 Rubies
+|-
+!50 Rubies
+|Gain 50 Rubies
+|}
+</table-progress-tracking>
+
+<table-progress-tracking table-id="11" unique-column-index="1">
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%" id="Upgrade Trophies"
+! colspan="2" | Upgrades - 11 Trophies
+|-
+! Name
+! scope="col" |Unlock Requirement
+|-
+!1 Upgrade
+|Purchase 1 [[Upgrade]] (in a single game)
+|-
+!5 Upgrades
+|Purchase 5 Upgrades
+|-
+!15 Upgrades
+|Purchase 15 Upgrades
+|-
+!30 Upgrades
+|Purchase 30 Upgrades
+|-
+!50 Upgrades
+|Purchase 50 Upgrades
+|-
+!85 Upgrades
+|Purchase 85 Upgrades
+|-
+!120 Upgrades
+|Purchase 120 Upgrades
+|-
+!175 Upgrades
+|Purchase 175 Upgrades
+|-
+!235 Upgrades
+|Purchase 235 Upgrades
+|-
+!305 Upgrades
+|Purchase 305 Upgrades
+|-
+!385 Upgrades
+|Purchase 385 Upgrades
+|}
+</table-progress-tracking>
+
+<table-progress-tracking table-id="12" unique-column-index="2">
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%" id="Reincarnation Trophies"
+! colspan="3" |Reincarnations - 20 Trophies
+|-
+! colspan="2" |Name
+!Unlock Requirement
+|-
+! style="width:60px;" |[[File:Trophy-R1.png]]
+! 1 Reincarnation
+|[[Reincarnation|Reincarnate]] 1 time
+|-
+! style="width:60px;" |[[File:Trophy-R3.png]]
+!3 Reincarnations
+|Reincarnate 3 times
+|-
+! style="width:60px;" |[[File:Trophy-R5.png]]
+!5 Reincarnations
+|Reincarnate 5 times
+|-
+! style="width:60px;" |[[File:Trophy-R7.png]]
+!7 Reincarnations
+|Reincarnate 7 times
+|-
+! style="width:60px;" |[[File:Trophy-R10.png]]
+!10 Reincarnations
+|Reincarnate 10 times
+|-
+! style="width:60px;" |[[File:Trophy-R12.png]]
+!12 Reincarnations
+|Reincarnate 12 times
+|-
+! style="width:60px;" |[[File:Trophy-R15.png]]
+!15 Reincarnations
+|Reincarnate 15 times
+|-
+! style="width:60px;" |[[File:Trophy-R20.png]]
+!20 Reincarnations
+|Reincarnate 20 times
+|-
+! style="width:60px;" |[[File:Trophy-R25.png]]
+!25 Reincarnations
+|Reincarnate 25 times
+|-
+! style="width:60px;" |[[File:Trophy-R30.png]]
+!30 Reincarnations
+|Reincarnate 30 times
+|-
+! style="width:60px;" |[[File:Trophy-R35.png]]
+!35 Reincarnations
+|Reincarnate 35 times
+|-
+! style="width:60px;" |[[File:Trophy-R40.png]]
+!40 Reincarnations<br />{{PA}}
+|[[Ascend]] 1 time
+|-
+! style="width:60px;" |[[File:Trophy-R45.png]]
+!45 Reincarnations {{PA}}
+|Reincarnate 45 times
+|-
+! style="width:60px;" |[[File:Trophy-R50.png|54x54px]]
+!50 Reincarnations {{PA}}
+|Reincarnate 50 times
+|-
+! style="width:60px;" |[[File:Trophy-R60.png|54x54px]]
+!60 Reincarnations {{PA}}
+|Reincarnate 60 times
+|-
+! style="width:60px;" |[[File:Trophy-R70.png|54x54px]]
+!70 Reincarnations {{PA}}
+|Reincarnate 70 times
+|-
+! style="width:60px;" |[[File:Trophy-R85.png|54x54px]]
+!85 Reincarnations {{PA}}
+|Reincarnate 85 times
+|-
+! style="width:60px;" |[[File:Trophy-R100.png|54x54px]]
+!100 Reincarnations {{PA|2}}
+|Reincarnate 100 times
+|-
+!
+!125 Reincarnations (PA2)
+|Reincarnate 125 times
+|-
+!
+150 Reincarnations (PA2)
+|Reincarnate 150 times
+|}
+</table-progress-tracking>
+
+<table-progress-tracking table-id="13" unique-column-index="2">
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%" id="Archaeology Trophy"
+! colspan="3" | Misc - 16 Trophies
+|-
+! colspan="2" |Name
+!Unlock Requirement
+|-
+![[File:Trophy-Archaeology-Expedition.png]]
+!Archaeology Expedition
+|You have funded an archaeology expedition to find relics of the Ancient Races. ([[Excavate]] for 1st time.)
+|-
+![[File:Clouded.PNG]]
+!Clouded
+|Register your realm in the Cloud Service!<br />''("Cloud options" in the [[Options]])''
+|-
+![[File:VanillaChallenger.png]]
+!Vanilla Challenger
+|Complete all the Vanilla Challenges.
+|-
+![[File:NeutralChallenger.png]]
+!Neutral Challenger
+|Complete all the Neutral Challenges.
+|-
+![[File:PrestigeChallenger.png|frameless]]
+!Prestige Challenger
+|Complete all the Prestige Challenges.
+|-
+!
+!Elite Challenger
+|Complete all the Mercenary(?) Challenges.
+|-
+![[File:NoviceResearcher.png]]
+!Novice Researcher
+|Research 600 times across all fields.
+|-
+![[File:IntermediateResearcher.png]]
+!Intermediate Researcher
+|Research 1800 times across all fields.
+|-
+![[File:ExpertResearcher.png]]
+!Expert Researcher
+|Research 2750 times across all fields.
+|-
+![[File:MasterResearcher.png]]
+!Master Researcher {{PA}}
+|Research 10000 times across all fields.
+|-
+![[File:GrandmasterResearcher.png]]
+!Grandmaster Researcher {{PA}}
+|Research 18500 times across all fields.
+|-
+![[File:VanillaResearcher.png]]
+!Vanilla Researcher
+|Discover all the Vanilla researches.
+|-
+![[File:AncientResearcher.png]]
+!Ancient Researcher
+|Discover all the Ancient Races researches.
+|-
+![[File:UnderworldResearcher.png]]
+!Underworld Researcher
+|Discover all the Underworld researches.
+|-
+![[File:EternalResearcher.png]]
+!Eternal Researcher {{PA}}
+|Discover all the Dragon researches.
+|-
+![[File:WarriorResearcher.png]]
+!Warrior Researcher {{PA}}
+|Discover all the Mercenary researches.
+|}
+</table-progress-tracking>
+(?) I haven't unlocked it yet, but it should be on here
+
+== Magic Trophies ==
+<table-progress-tracking table-id="14" unique-column-index="1">
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%" id="Mana Trophies"
+! colspan="2" | Mana - 16 Trophies
+|-
+! Name
+! scope="col" |Unlock Requirement
+|-
+!Mana Droplet
+|Produce 200 [[mana]] (Total)
+|-
+!Mana Rain
+|Produce 2,000 mana
+|-
+!Mana Surge
+|Produce 5,000 mana
+|-
+!Mana Fountain
+|Produce 10,000 mana
+|-
+!Mana Shower
+|Produce 20,000 mana
+|-
+!Mana Stream
+|Produce 100,000 mana
+|-
+!Mana Flood
+|Produce 200,000 mana
+|-
+!Mana Squall {{PA}}
+|Produce {{Number|10 m}} mana
+|-
+!Mana Storm {{PA}}
+|Produce {{Number|200 M}} mana
+|-
+!Mana Wave {{PA}}
+|Produce {{Number|20 B}} mana
+|-
+!Mana River {{PA}}
+|Produce {{Number|2 T}} mana
+|-
+!Mana Lake {{PA}}
+|Produce {{Number|200 T}} mana
+|-
+!Mana Sea {{PA}}
+|Produce {{Number|20 Qa}} mana
+|-
+!Mana Ocean {{PA}}
+|Produce {{Number|2 Qi}} mana
+|-
+!Mana Spring {{PA|2}}
+|Produce {{Number|20 Sx}} mana
+|-
+!Mana Falls (PA2)
+|Produce {{Number|200 Sp}} mana
+|}
+</table-progress-tracking>
+
+<table-progress-tracking table-id="15" unique-column-index="1">
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%" id="Spell Casts Trophies"
+! colspan="2" | Spell Casts - 16 Trophies
+|-
+! Name
+! scope="col" |Unlock Requirement
+|-
+!Magic User
+|10 [[spell]] casts (in a single game)
+|-
+!Magic Abuser
+|100 spell casts
+|-
+!Spell Prodigy
+|500 spells casts
+|-
+!Mana Leaker
+|1,000 spell casts
+|-
+!Mana Eraser
+|2,000 spell casts
+|-
+!Autocaster
+|5,000 spell casts
+|-
+!Spell Spammer
+|20,000 spell casts
+|-
+!Mana Annihilator
+|50,000 spell casts
+|-
+!Master Channeler
+|100,000 spell casts
+|-
+!Caster Supreme
+|200,000 spell casts
+|-
+!Spell Superiority
+|500,000 spell casts
+|-
+!Massive Autocaster
+|{{Number|1 M}} spell casts
+|-
+!Spell Weaver
+|{{Number|50 M}} spell casts
+|-
+!Archwizard
+|{{Number|1 B}} spell casts
+|-
+!SpellMaster
+|{{Number|50T}} spell casts
+|-
+!Spell Grinder
+|{{Number|10Qa}} spell casts
+|}
+</table-progress-tracking>
+
+<table-progress-tracking table-id="16" unique-column-index="2">
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%" id="Spell Casting Unlocks"
+! colspan="3" |Spell Autocasting Unlocks - 9 Trophies
+|-
+! colspan="2" |Name
+! scope="col" |Unlock Requirement
+|-
+![[File:Autocast1 upgrade.png]]
+!Automatic Casting
+|Reach 60,000 [[mana]] (Total) - Unlock (and buy) the Automatic Casting upgrade.
+|-
+![[File:Autocast2 upgrade.png]]
+!Improved Autocasting
+|Reach {{Number|2 M}} mana and unlock the Improved Autocasting upgrade.
+|-
+![[File:Autocast3 upgrade.png]]
+!Masterful Autocasting
+|Reach {{Number|6 M}} mana and unlock the Masterful Autocasting upgrade.
+|-
+![[File:Autocast4 upgrade.png]]
+!Priority Autocasting
+|Reach {{Number|12 M}} mana and unlock the Priority Autocasting upgrade.
+|-
+![[File:Autocast-5-Contingency.png]]
+!Contingency Autocasting
+|Reach {{Number|20 M}} mana and unlock the Contingency Autocasting upgrade.
+|-
+![[File:Autocast-6-Planned.png]]
+!Planned Autocasting
+|Reach {{Number|30 M}} mana and unlock the Planned Autocasting upgrade.
+|-
+![[File:Autocast-7-Efficient.png]]
+!Efficient Autocasting
+|Reach {{Number|50 M}} mana and unlock the Efficient Autocasting upgrade.
+|-
+!
+!Reverse Autocasting {{PA}}
+|Reach 150 M mana and unlock the Reverse Autocasting upgrade.
+|-
+![[File:Autocast8 upgrade.png]]
+!Tiered Autocasting {{PA}}
+|Reach {{Number|200 M}} mana and unlock the Tiered Autocasting upgrade.
+|}
+</table-progress-tracking>
+<table-progress-tracking table-id="16a" unique-column-index="2">
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%" id="Tier spell Trophies"
+! colspan="2" |'''Tier Spells {{PA}} - 6 Trophies<sup>†</sup>'''
+|-
+! Name
+! scope="col" |Unlock Requirement
+|-
+!Arcane Brilliance 1
+|Unlock [[Tier spell upgrades|tier]] 2 for all spells
+|-
+!Arcane Brilliance 2
+|Unlock tier 3 for all spells
+|-
+!Arcane Brilliance 3
+|Unlock tier 4 for all spells
+|-
+!Arcane Brilliance 4
+|Unlock tier 5 for all spells
+|-
+!Arcane Brilliance 5
+|Unlock tier 6 for all spells
+|-
+!Arcane Brilliance 6 {{PA|2}}
+|Unlock tier 7 for all spells
+|}
+</table-progress-tracking>
+
+<table-progress-tracking table-id="17" unique-column-index="2">
+{| class="mw-collapsible mw-collapsed sortable wikitable" style="width:100%"
+! colspan="3" |Spells - 16 Trophies
+|-
+! colspan="2" class="unsortable" |Name
+! class="unsortable" |Unlock Requirement
+|-
+![[File:Coin Pillage.png]]
+!Coin Pillage
+| style="padding-left:10px;" |Default Spell: Cast 150 Tax Collection [[spells]] in less than 5 seconds.
+|-
+![[File:Fairy Choir.png]]
+!Fairy Choir
+| style="padding-left:10px;" |[[Fairy]] Spell: Cast Fairy Chanting while having 45 or more [[assistants]].
+|-
+![[File:Sun Blessing.png]]
+!Sun Blessing
+| style="padding-left:10px;" |[[Elven]] Spell: Activate the Moon Blessing spell after 6 am and before 12 pm (noon).
+|-
+![[File:God's Rest.png]]
+!God's Rest
+| style="padding-left:10px;" |[[Angel]] Spell: Cast God's Hand on any Sunday.
+|-
+![[File:Greed Drive.png]]
+!Greed Drive
+| style="padding-left:10px;" |[[Goblin]] Spell: Cast 100 Goblin's Greed spells in a row while not casting any other spell).<br />''<small>Note: Spell casts from the Goblin's Central Bank upgrade are included in the [stats], but they do not count for this trophy.</small>''
+|-
+![[File:True Night.png]]
+!True Night
+| style="padding-left:10px;" |[[Undead]] Spell: Activate the Night Time spell after 11 pm and before 6 am.
+|-
+![[File:Hell-rush-spell-upgrade.png]]
+!Hell Rush
+| style="padding-left:10px;" |[[Demon]] Spell: Cast Hellfire Blast in the first 60 seconds of playtime.
+|-
+![[File:Lightning Storm.png]]
+!Lightning Storm
+| style="padding-left:10px;" |[[Titan]] Spell: Cast Lightning Strike 100 times in a single game.
+|-
+![[File:Halls Of Balance.png]]
+!Halls of Balance
+| style="padding-left:10px;" |[[Druid]] Spell: Have Grand Balance affect Hall of Legends.
+|-
+![[File:Faceless-Overmind-spell-upgrade.png]]
+!Faceless Overmind
+| style="padding-left:10px;" |[[Faceless]] Spell: Affiliate with the Faceless 5 times in a row. ''(Buy Faceless Trade Treaty 5x in a row)''
+|-
+![[File:Minedwarf.png]]
+!Minedwarf
+| style="padding-left:10px;" |[[Dwarf]] Spell: Find 30,000 Faction Coins from Diamond Pickaxe in a single game.
+|-
+![[File:Perfect Combo.png]]
+!Perfect Combo
+| style="padding-left:10px;" |[[Drow]] Spell: Cast a chain of 100 Combo Strikes in a single game. The chain is interrupted by casting a different spell.
+|-
+![[File:Dragons Roar.png]]
+!Dragon's Roar<br />{{PA}}
+| style="padding-left:10px;" |[[Dragon]] Spell: Cast Dragon's Breath while having at least 4 other active spells.
+|}
+</table-progress-tracking>
+<sup>†</sup> As of the [[Updates#3.0 Chaos Leges|3.0 update]], ''Tier Spell'' trophies now passively reduce the time requirement for subsequent [[Spells#Tier Spell Upgrades|spell tiers]].
+
+== Building Trophies ==
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%" id="Building Trophies by Type"
+! colspan="1" | Building Types - 25x22 Trophies
+|-
+|
+<table-progress-tracking table-id="18" unique-column-index="1">
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%" id="Farms"
+! colspan="2" | Farms
+|-
+! Name
+! scope="col" |Unlock Requirement
+|-
+|'''1 Farm'''||[[Buildings|Build]] 1 Farm (in a single game)
+|-
+|'''50 Farms'''||Build 50 Farms
+|-
+|'''100 Farms'''||Build 100 Farms
+|-
+|'''150 Farms'''||Build 150 Farms
+|-
+|'''200 Farms'''||Build 200 Farms
+|-
+|'''300 Farms'''||Build 300 Farms
+|-
+|'''400 Farms'''||Build 400 Farms
+|-
+|'''500 Farms'''||Build 500 Farms
+|-
+|'''600 Farms'''||Build 600 Farms
+|-
+|'''700 Farms'''||Build 700 Farms
+|-
+|'''800 Farms'''||Build 800 Farms
+|-
+|'''900 Farms'''||Build 900 Farms
+|-
+|'''1000 Farms'''||Build 1000 Farms
+|-
+|'''1500 Farms'''||Build 1500 Farms
+|-
+|'''2000 Farms'''||Build 2000 Farms
+|-
+|'''2500 Farms'''||Build 2500 Farms
+|-
+|'''3000 Farms'''||Build 3000 Farms
+|-
+|'''3500 Farms'''||Build 3500 Farms
+|-
+|'''5000 Farms'''||Build 5000 Farms
+|-
+|'''7500 Farms'''||Build 7500 Farms
+|-
+|'''12000 Farms'''
+|Build 12000 Farms
+|-
+|'''20000 Farms'''
+|Build 20000 Farms
+|}
+</table-progress-tracking>
+<table-progress-tracking table-id="19" unique-column-index="1">
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%" id="Inns"
+! colspan="2" | Inns
+|-
+! Name
+! scope="col" |Unlock Requirement
+|-
+|'''1 Inn'''||Build 1 Inn
+|-
+|'''50 Inns'''||Build 50 Inns
+|-
+|'''100 Inns'''||Build 100 Inns
+|-
+|'''150 Inns'''||Build 150 Inns
+|-
+|'''200 Inns'''||Build 200 Inns
+|-
+|'''300 Inns'''||Build 300 Inns
+|-
+|'''400 Inns'''||Build 400 Inns
+|-
+|'''500 Inns'''||Build 500 Inns
+|-
+|'''600 Inns'''||Build 600 Inns
+|-
+|'''700 Inns'''||Build 700 Inns
+|-
+|'''800 Inns'''||Build 800 Inns
+|-
+|'''900 Inns'''||Build 900 Inns
+|-
+|'''1000 Inns'''||Build 1000 Inns
+|-
+|'''1500 Inns'''||Build 1500 Inns
+|-
+|'''2000 Inns'''||Build 2000 Inns
+|-
+|'''2500 Inns'''||Build 2500 Inns
+|-
+|'''3000 Inns'''||Build 3000 Inns
+|-
+|'''3500 Inns'''||Build 3500 Inns
+|-
+|'''5000 Inns'''||Build 5000 Inns
+|-
+|'''7500 Inns'''||Build 7500 Inns
+|-
+|'''12000 Inns'''||Build 12000 Inns
+|-
+|'''20000 Inns'''
+|Build 20000 Inns
+|}
+</table-progress-tracking>
+<table-progress-tracking table-id="20" unique-column-index="1">
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%" id="Blacksmiths"
+! colspan="2" | Blacksmiths
+|-
+! Name
+! scope="col" |Unlock Requirement
+|-
+|'''1 Blacksmith'''||Build 1 Blacksmith
+|-
+|'''50 Blacksmiths'''||Build 50 Blacksmiths
+|-
+|'''100 Blacksmiths'''||Build 100 Blacksmiths
+|-
+|'''150 Blacksmiths'''||Build 150 Blacksmiths
+|-
+|'''200 Blacksmiths'''||Build 200 Blacksmiths
+|-
+|'''300 Blacksmiths'''||Build 300 Blacksmiths
+|-
+|'''400 Blacksmiths'''||Build 400 Blacksmiths
+|-
+|'''500 Blacksmiths'''||Build 500 Blacksmiths
+|-
+|'''600 Blacksmiths'''||Build 600 Blacksmiths
+|-
+|'''700 Blacksmiths'''||Build 700 Blacksmiths
+|-
+|'''800 Blacksmiths'''||Build 800 Blacksmiths
+|-
+|'''900 Blacksmiths'''||Build 900 Blacksmiths
+|-
+|'''1000 Blacksmiths'''||Build 1000 Blacksmiths
+|-
+|'''1500 Blacksmiths'''||Build 1500 Blacksmiths
+|-
+|'''2000 Blacksmiths'''||Build 2000 Blacksmiths
+|-
+|'''2500 Blacksmiths'''||Build 2500 Blacksmiths
+|-
+|'''3000 Blacksmiths'''||Build 3000 Blacksmiths
+|-
+|'''3500 Blacksmiths'''||Build 3500 Blacksmiths
+|-
+|'''5000 Blacksmiths'''||Build 5000 Blacksmiths
+|-
+|'''7500 Blacksmiths'''||Build 7500 Blacksmiths
+|-
+|'''12000 Blacksmiths'''||Build 12000 Blacksmiths
+|-
+|'''20000 Blacksmiths'''
+|Build 20000 Blacksmiths
+|}
+</table-progress-tracking>
+<table-progress-tracking table-id="21" unique-column-index="1">
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%" id="Warrior Barracks"
+! colspan="2" | Warrior Barracks
+|-
+! Name
+! scope="col" |Unlock Requirement
+|-
+|'''1 Warrior Barrack'''||Build 1 Warrior Barrack
+|-
+|'''50 Warrior Barracks'''||Build 50 Warrior Barracks
+|-
+|'''100 Warrior Barracks'''||Build 100 Warrior Barracks
+|-
+|'''150 Warrior Barracks'''||Build 150 Warrior Barracks
+|-
+|'''200 Warrior Barracks'''||Build 200 Warrior Barracks
+|-
+|'''300 Warrior Barracks'''||Build 300 Warrior Barracks
+|-
+|'''400 Warrior Barracks'''||Build 400 Warrior Barracks
+|-
+|'''500 Warrior Barracks'''||Build 500 Warrior Barracks
+|-
+|'''600 Warrior Barracks'''||Build 600 Warrior Barracks
+|-
+|'''700 Warrior Barracks'''||Build 700 Warrior Barracks
+|-
+|'''800 Warrior Barracks'''||Build 800 Warrior Barracks
+|-
+|'''900 Warrior Barracks'''||Build 900 Warrior Barracks
+|-
+|'''1000 Warrior Barracks'''||Build 1000 Warrior Barracks
+|-
+|'''1500 Warrior Barracks'''||Build 1500 Warrior Barracks
+|-
+|'''2000 Warrior Barracks'''||Build 2000 Warrior Barracks
+|-
+|'''2500 Warrior Barracks'''||Build 2500 Warrior Barracks
+|-
+|'''3000 Warrior Barracks'''||Build 3000 Warrior Barracks
+|-
+|'''3500 Warrior Barracks'''||Build 3500 Warrior Barracks
+|-
+|'''5000 Warrior Barracks'''||Build 5000 Warrior Barracks
+|-
+|'''7500 Warrior Barracks'''||Build 7500 Warrior Barracks
+|-
+|'''12000 Warrior Barracks'''||Build 12000 Warrior Barracks
+|-
+|'''20000 Warrior Barracks'''
+|Build 20000 Warrior Barracks
+|}
+</table-progress-tracking>
+<table-progress-tracking table-id="22" unique-column-index="1">
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%" id="Knights Jousts"
+! colspan="2" | Knights Jousts
+|-
+! Name
+! scope="col" |Unlock Requirement
+|-
+|'''1 Knights Joust'''||Build 1 Knights Joust
+|-
+|'''50 Knights Jousts'''||Build 50 Knights Jousts
+|-
+|'''100 Knights Jousts'''||Build 100 Knights Jousts
+|-
+|'''150 Knights Jousts'''||Build 150 Knights Jousts
+|-
+|'''200 Knights Jousts'''||Build 200 Knights Jousts
+|-
+|'''300 Knights Jousts'''||Build 300 Knights Jousts
+|-
+|'''400 Knights Jousts'''||Build 400 Knights Jousts
+|-
+|'''500 Knights Jousts'''||Build 500 Knights Jousts
+|-
+|'''600 Knights Jousts'''||Build 600 Knights Jousts
+|-
+|'''700 Knights Jousts'''||Build 700 Knights Jousts
+|-
+|'''800 Knights Jousts'''||Build 800 Knights Jousts
+|-
+|'''900 Knights Jousts'''||Build 900 Knights Jousts
+|-
+|'''1000 Knights Jousts'''||Build 1000 Knights Jousts
+|-
+|'''1500 Knights Jousts'''||Build 1500 Knights Jousts
+|-
+|'''2000 Knights Jousts'''||Build 2000 Knights Jousts
+|-
+|'''2500 Knights Jousts'''||Build 2500 Knights Jousts
+|-
+|'''3000 Knights Jousts'''||Build 3000 Knights Jousts
+|-
+|'''3500 Knights Jousts'''||Build 3500 Knights Jousts
+|-
+|'''5000 Knights Jousts'''||Build 5000 Knights Jousts
+|-
+|'''7500 Knights Jousts'''||Build 7500 Knights Jousts
+|-
+|'''12000 Knights Jousts'''||Build 12000 Knights Jousts
+|-
+|'''20000 Knights Jousts'''
+|Build 20000 Knights Jousts
+|}
+</table-progress-tracking>
+<table-progress-tracking table-id="23" unique-column-index="1">
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%" id="Wizard Towers"
+! colspan="2" | Wizard Towers
+|-
+! Name
+! scope="col" |Unlock Requirement
+|-
+|'''1 Wizard Tower'''||Build 1 Wizard Tower
+|-
+|'''50 Wizard Towers'''||Build 50 Wizard Towers
+|-
+|'''100 Wizard Towers'''||Build 100 Wizard Towers
+|-
+|'''150 Wizard Towers'''||Build 150 Wizard Towers
+|-
+|'''200 Wizard Towers'''||Build 200 Wizard Towers
+|-
+|'''300 Wizard Towers'''||Build 300 Wizard Towers
+|-
+|'''400 Wizard Towers'''||Build 400 Wizard Towers
+|-
+|'''500 Wizard Towers'''||Build 500 Wizard Towers
+|-
+|'''600 Wizard Towers'''||Build 600 Wizard Towers
+|-
+|'''700 Wizard Towers'''||Build 700 Wizard Towers
+|-
+|'''800 Wizard Towers'''||Build 800 Wizard Towers
+|-
+|'''900 Wizard Towers'''||Build 900 Wizard Towers
+|-
+|'''1000 Wizard Towers'''||Build 1000 Wizard Towers
+|-
+|'''1500 Wizard Towers'''||Build 1500 Wizard Towers
+|-
+|'''2000 Wizard Towers'''||Build 2000 Wizard Towers
+|-
+|'''2500 Wizard Towers'''||Build 2500 Wizard Towers
+|-
+|'''3000 Wizard Towers'''||Build 3000 Wizard Towers
+|-
+|'''3500 Wizard Towers'''||Build 3500 Wizard Towers
+|-
+|'''5000 Wizard Towers'''||Build 5000 Wizard Towers
+|-
+|'''7500 Wizard Towers'''
+|Build 7500 Wizard Towers
+|-
+|'''12000 Wizard Towers'''
+|Build 12000 Wizard Towers
+|-
+|'''20000 Wizard Towers'''
+|Build 20000 Wizard Towers
+|}
+</table-progress-tracking>
+<table-progress-tracking table-id="24" unique-column-index="1">
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%" id="Cathedrals"
+! colspan="2" | Cathedrals
+|-
+! Name
+! scope="col" |Unlock Requirement
+|-
+|'''1 Cathedral'''||Build 1 Cathedral
+|-
+|'''50 Cathedrals'''||Build 50 Cathedrals
+|-
+|'''100 Cathedrals'''||Build 100 Cathedrals
+|-
+|'''150 Cathedrals'''||Build 150 Cathedrals
+|-
+|'''200 Cathedrals'''||Build 200 Cathedrals
+|-
+|'''300 Cathedrals'''||Build 300 Cathedrals
+|-
+|'''400 Cathedrals'''||Build 400 Cathedrals
+|-
+|'''500 Cathedrals'''||Build 500 Cathedrals
+|-
+|'''600 Cathedrals'''||Build 600 Cathedrals
+|-
+|'''700 Cathedrals'''||Build 700 Cathedrals
+|-
+|'''800 Cathedrals'''||Build 800 Cathedrals
+|-
+|'''900 Cathedrals'''||Build 900 Cathedrals
+|-
+|'''1000 Cathedrals'''||Build 1000 Cathedrals
+|-
+|'''1500 Cathedrals'''||Build 1500 Cathedrals
+|-
+|'''2000 Cathedrals'''||Build 2000 Cathedrals
+|-
+|'''2500 Cathedrals'''||Build 2500 Cathedrals
+|-
+|'''3000 Cathedrals'''||Build 3000 Cathedrals
+|-
+|'''3500 Cathedrals'''||Build 3500 Cathedrals
+|-
+|'''5000 Cathedrals'''||Build 5000 Cathedrals
+|-
+|'''7500 Cathedrals'''||Build 7500 Cathedrals
+|-
+|'''12000 Cathedrals'''||Build 12000 Cathedrals
+|-
+|'''20000 Cathedrals'''
+|Build 20000 Cathedrals
+|}
+</table-progress-tracking>
+<table-progress-tracking table-id="25" unique-column-index="1">
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%" id="Citadels"
+! colspan="2" | Citadels
+|-
+! Name
+! scope="col" |Unlock Requirement
+|-
+|'''1 Citadel'''||Build 1 Citadel
+|-
+|'''50 Citadels'''||Build 50 Citadels
+|-
+|'''100 Citadels'''||Build 100 Citadels
+|-
+|'''150 Citadels'''||Build 150 Citadels
+|-
+|'''200 Citadels'''||Build 200 Citadels
+|-
+|'''300 Citadels'''||Build 300 Citadels
+|-
+|'''400 Citadels'''||Build 400 Citadels
+|-
+|'''500 Citadels'''||Build 500 Citadels
+|-
+|'''600 Citadels'''||Build 600 Citadels
+|-
+|'''700 Citadels'''||Build 700 Citadels
+|-
+|'''800 Citadels'''||Build 800 Citadels
+|-
+|'''900 Citadels'''||Build 900 Citadels
+|-
+|'''1000 Citadels'''||Build 1000 Citadels
+|-
+|'''1500 Citadels'''||Build 1500 Citadels
+|-
+|'''2000 Citadels'''||Build 2000 Citadels
+|-
+|'''2500 Citadels'''||Build 2500 Citadels
+|-
+|'''3000 Citadels'''||Build 3000 Citadels
+|-
+|'''3500 Citadels'''||Build 3500 Citadels
+|-
+|'''5000 Citadels'''||Build 5000 Citadels
+|-
+|'''7500 Citadels'''||Build 7500 Citadels
+|-
+|'''12000 Citadels'''||Build 12000 Citadels
+|-
+|'''20000 Citadels'''
+|Build 20000 Citadels
+|}
+</table-progress-tracking>
+<table-progress-tracking table-id="26" unique-column-index="1">
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%" id="Royal Castles"
+! colspan="2" | Royal Castles
+|-
+! Name
+! scope="col" |Unlock Requirement
+|-
+|'''1 Royal Castle'''||Build 1 Royal Castle
+|-
+|'''50 Royal Castles'''||Build 50 Royal Castles
+|-
+|'''100 Royal Castles'''||Build 100 Royal Castles
+|-
+|'''150 Royal Castles'''||Build 150 Royal Castles
+|-
+|'''200 Royal Castles'''||Build 200 Royal Castles
+|-
+|'''300 Royal Castles'''||Build 300 Royal Castles
+|-
+|'''400 Royal Castles'''||Build 400 Royal Castles
+|-
+|'''500 Royal Castles'''||Build 500 Royal Castles
+|-
+|'''600 Royal Castles'''||Build 600 Royal Castles
+|-
+|'''700 Royal Castles'''||Build 700 Royal Castles
+|-
+|'''800 Royal Castles'''||Build 800 Royal Castles
+|-
+|'''900 Royal Castles'''||Build 900 Royal Castles
+|-
+|'''1000 Royal Castles'''||Build 1000 Royal Castles
+|-
+|'''1500 Royal Castles'''||Build 1500 Royal Castles
+|-
+|'''2000 Royal Castles'''||Build 2000 Royal Castles
+|-
+|'''2500 Royal Castles'''||Build 2500 Royal Castles
+|-
+|'''3000 Royal Castles'''||Build 3000 Royal Castles
+|-
+|'''3500 Royal Castles'''||Build 3500 Royal Castles
+|-
+|'''5000 Royal Castles'''||Build 5000 Royal Castles
+|-
+|'''7500 Royal Castles'''||Build 7500 Royal Castles
+|-
+|'''12000 Royal Castles'''||Build 12000 Royal Castles
+|-
+|'''20000 Royal Castles'''
+|Build 20000 Royal Castles
+|}
+</table-progress-tracking>
+<table-progress-tracking table-id="27" unique-column-index="1">
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%" id="Heaven's Gates"
+! colspan="2" | Heaven's Gates
+|-
+! Name
+! scope="col" |Unlock Requirement
+|-
+|'''1 Heaven's Gates'''||Build 1 Heaven's Gate
+|-
+|'''50 Heaven's Gates'''||Build 50 Heaven's Gates
+|-
+|'''100 Heaven's Gates'''||Build 100 Heaven's Gates
+|-
+|'''150 Heaven's Gates'''||Build 150 Heaven's Gates
+|-
+|'''200 Heaven's Gates'''||Build 200 Heaven's Gates
+|-
+|'''300 Heaven's Gates'''||Build 300 Heaven's Gates
+|-
+|'''400 Heaven's Gates'''||Build 400 Heaven's Gates
+|-
+|'''500 Heaven's Gates'''||Build 500 Heaven's Gates
+|-
+|'''600 Heaven's Gates'''||Build 600 Heaven's Gates
+|-
+|'''700 Heaven's Gates'''||Build 700 Heaven's Gates
+|-
+|'''800 Heaven's Gates'''||Build 800 Heaven's Gates
+|-
+|'''900 Heaven's Gates'''||Build 900 Heaven's Gates
+|-
+|'''1000 Heaven's Gates'''||Build 1000 Heaven's Gates
+|-
+|'''1500 Heaven's Gates'''||Build 1500 Heaven's Gates
+|-
+|'''2000 Heaven's Gates'''||Build 2000 Heaven's Gates
+|-
+|'''2500 Heaven's Gates'''||Build 2500 Heaven's Gates
+|-
+|'''3000 Heaven's Gates'''||Build 3000 Heaven's Gates
+|-
+|'''3500 Heaven's Gates'''||Build 3500 Heaven's Gates
+|-
+|'''5000 Heaven's Gates'''||Build 5000 Heaven's Gates
+|-
+|'''7500 Heaven's Gates'''||Build 7500 Heaven's Gates
+|-
+|'''12000 Heaven's Gates'''||Build 12000 Heaven's Gates
+|-
+|'''20000 Heaven's Gates'''
+|Build 20000 Heaven's Gates
+|}
+</table-progress-tracking>
+<table-progress-tracking table-id="28" unique-column-index="1">
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%" id="Slave Pens"
+! colspan="2" | Slave Pens
+|-
+! Name
+! scope="col" |Unlock Requirement
+|-
+|'''1 Slave Pen'''||Build 1 Slave Pen
+|-
+|'''50 Slave Pens'''||Build 50 Slave Pens
+|-
+|'''100 Slave Pens'''||Build 100 Slave Pens
+|-
+|'''150 Slave Pens'''||Build 150 Slave Pens
+|-
+|'''200 Slave Pens'''||Build 200 Slave Pens
+|-
+|'''300 Slave Pens'''||Build 300 Slave Pens
+|-
+|'''400 Slave Pens'''||Build 400 Slave Pens
+|-
+|'''500 Slave Pens'''||Build 500 Slave Pens
+|-
+|'''600 Slave Pens'''||Build 600 Slave Pens
+|-
+|'''700 Slave Pens'''||Build 700 Slave Pens
+|-
+|'''800 Slave Pens'''||Build 800 Slave Pens
+|-
+|'''900 Slave Pens'''||Build 900 Slave Pens
+|-
+|'''1000 Slave Pens'''||Build 1000 Slave Pens
+|-
+|'''1500 Slave Pens'''||Build 1500 Slave Pens
+|-
+|'''2000 Slave Pens'''||Build 2000 Slave Pens
+|-
+|'''2500 Slave Pens'''||Build 2500 Slave Pens
+|-
+|'''3000 Slave Pens'''||Build 3000 Slave Pens
+|-
+|'''3500 Slave Pens'''||Build 3500 Slave Pens
+|-
+|'''5000 Slave Pens'''||Build 5000 Slave Pens
+|-
+|'''7500 Slave Pens'''||Build 7500 Slave Pens
+|-
+|'''12000 Slave Pens'''||Build 12000 Slave Pens
+|-
+|'''20000 Slave Pens'''
+|Build 20000 Slave Pens
+|}
+</table-progress-tracking>
+<table-progress-tracking table-id="29" unique-column-index="1">
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%" id="Orcish Arenas"
+! colspan="2" | Orcish Arenas
+|-
+! Name
+! scope="col" |Unlock Requirement
+|-
+|'''1 Orcish Arena'''||Build 1 Orcish Arena
+|-
+|'''50 Orcish Arenas'''||Build 50 Orcish Arenas
+|-
+|'''100 Orcish Arenas'''||Build 100 Orcish Arenas
+|-
+|'''150 Orcish Arenas'''||Build 150 Orcish Arenas
+|-
+|'''200 Orcish Arenas'''||Build 200 Orcish Arenas
+|-
+|'''300 Orcish Arenas'''||Build 300 Orcish Arenas
+|-
+|'''400 Orcish Arenas'''||Build 400 Orcish Arenas
+|-
+|'''500 Orcish Arenas'''||Build 500 Orcish Arenas
+|-
+|'''600 Orcish Arenas'''||Build 600 Orcish Arenas
+|-
+|'''700 Orcish Arenas'''||Build 700 Orcish Arenas
+|-
+|'''800 Orcish Arenas'''||Build 800 Orcish Arenas
+|-
+|'''900 Orcish Arenas'''||Build 900 Orcish Arenas
+|-
+|'''1000 Orcish Arenas'''||Build 1000 Orcish Arenas
+|-
+|'''1500 Orcish Arenas'''||Build 1500 Orcish Arenas
+|-
+|'''2000 Orcish Arenas'''||Build 2000 Orcish Arenas
+|-
+|'''2500 Orcish Arenas'''||Build 2500 Orcish Arenas
+|-
+|'''3000 Orcish Arenas'''||Build 3000 Orcish Arenas
+|-
+|'''3500 Orcish Arenas'''||Build 3500 Orcish Arenas
+|-
+|'''5000 Orcish Arenas'''||Build 5000 Orcish Arenas
+|-
+|'''7500 Orcish Arenas'''||Build 7500 Orcish Arenas
+|-
+|'''12000 Orcish Arenas'''||Build 12000 Orcish Arenas
+|-
+|'''20000 Orcish Arenas'''
+|Build 20000 Orcish Arenas
+|}
+</table-progress-tracking>
+<table-progress-tracking table-id="30" unique-column-index="1">
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%" id="Witch Conclaves"
+! colspan="2" | Witch Conclaves
+|-
+! Name
+! scope="col" |Unlock Requirement
+|-
+|'''1 Witch Conclave'''||Build 1 Witch Conclave
+|-
+|'''50 Witch Conclaves'''||Build 50 Witch Conclaves
+|-
+|'''100 Witch Conclaves'''||Build 100 Witch Conclaves
+|-
+|'''150 Witch Conclaves'''||Build 150 Witch Conclaves
+|-
+|'''200 Witch Conclaves'''||Build 200 Witch Conclaves
+|-
+|'''300 Witch Conclaves'''||Build 300 Witch Conclaves
+|-
+|'''400 Witch Conclaves'''||Build 400 Witch Conclaves
+|-
+|'''500 Witch Conclaves'''||Build 500 Witch Conclaves
+|-
+|'''600 Witch Conclaves'''||Build 600 Witch Conclaves
+|-
+|'''700 Witch Conclaves'''||Build 700 Witch Conclaves
+|-
+|'''800 Witch Conclaves'''||Build 800 Witch Conclaves
+|-
+|'''900 Witch Conclaves'''||Build 900 Witch Conclaves
+|-
+|'''1000 Witch Conclaves'''||Build 1000 Witch Conclaves
+|-
+|'''1500 Witch Conclaves'''||Build 1500 Witch Conclaves
+|-
+|'''2000 Witch Conclaves'''||Build 2000 Witch Conclaves
+|-
+|'''2500 Witch Conclaves'''||Build 2500 Witch Conclaves
+|-
+|'''3000 Witch Conclaves'''||Build 3000 Witch Conclaves
+|-
+|'''3500 Witch Conclaves'''||Build 3500 Witch Conclaves
+|-
+|'''5000 Witch Conclaves'''||Build 5000 Witch Conclaves
+|-
+|'''7500 Witch Conclaves'''||Build 7500 Witch Conclaves
+|-
+|'''12000 Witch Conclaves'''||Build 12000 Witch Conclaves
+|-
+|'''20000 Witch Conclaves'''
+|Build 20000 Witch Conclaves
+|}
+</table-progress-tracking>
+<table-progress-tracking table-id="31" unique-column-index="1">
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%" id="Dark Temples"
+! colspan="2" | Dark Temples
+|-
+! Name
+! scope="col" |Unlock Requirement
+|-
+|'''1 Dark Temple'''||Build 1 Dark Temple
+|-
+|'''50 Dark Temples'''||Build 50 Dark Temples
+|-
+|'''100 Dark Temples'''||Build 100 Dark Temples
+|-
+|'''150 Dark Temples'''||Build 150 Dark Temples
+|-
+|'''200 Dark Temples'''||Build 200 Dark Temples
+|-
+|'''300 Dark Temples'''||Build 300 Dark Temples
+|-
+|'''400 Dark Temples'''||Build 400 Dark Temples
+|-
+|'''500 Dark Temples'''||Build 500 Dark Temples
+|-
+|'''600 Dark Temples'''||Build 600 Dark Temples
+|-
+|'''700 Dark Temples'''||Build 700 Dark Temples
+|-
+|'''800 Dark Temples'''||Build 800 Dark Temples
+|-
+|'''900 Dark Temples'''||Build 900 Dark Temples
+|-
+|'''1000 Dark Temples'''||Build 1000 Dark Temples
+|-
+|'''1500 Dark Temples'''||Build 1500 Dark Temples
+|-
+|'''2000 Dark Temples'''||Build 2000 Dark Temples
+|-
+|'''2500 Dark Temples'''||Build 2500 Dark Temples
+|-
+|'''3000 Dark Temples'''||Build 3000 Dark Temples
+|-
+|'''3500 Dark Temples'''||Build 3500 Dark Temples
+|-
+|'''5000 Dark Temples'''||Build 5000 Dark Temples
+|-
+|'''7500 Dark Temples'''||Build 7500 Dark Temples
+|-
+|'''12000 Dark Temples'''||Build 12000 Dark Temples
+|-
+|'''20000 Dark Temples'''
+|Build 20000 Dark Temples
+|}
+</table-progress-tracking>
+<table-progress-tracking table-id="32" unique-column-index="1">
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%" id="Necropolises"
+! colspan="2" | Necropolises
+|-
+! Name
+! scope="col" |Unlock Requirement
+|-
+|'''1 Necropolis'''||Build 1 Necropolis
+|-
+|'''50 Necropolises'''||Build 50 Necropolises
+|-
+|'''100 Necropolises'''||Build 100 Necropolises
+|-
+|'''150 Necropolises'''||Build 150 Necropolises
+|-
+|'''200 Necropolises'''||Build 200 Necropolises
+|-
+|'''300 Necropolises'''||Build 300 Necropolises
+|-
+|'''400 Necropolises'''||Build 400 Necropolises
+|-
+|'''500 Necropolises'''||Build 500 Necropolises
+|-
+|'''600 Necropolises'''||Build 600 Necropolises
+|-
+|'''700 Necropolises'''||Build 700 Necropolises
+|-
+|'''800 Necropolises'''||Build 800 Necropolises
+|-
+|'''900 Necropolises'''||Build 900 Necropolises
+|-
+|'''1000 Necropolises'''||Build 1000 Necropolises
+|-
+|'''1500 Necropolises'''||Build 1500 Necropolises
+|-
+|'''2000 Necropolises'''||Build 2000 Necropolises
+|-
+|'''2500 Necropolises'''||Build 2500 Necropolises
+|-
+|'''3000 Necropolises'''||Build 3000 Necropolises
+|-
+|'''3500 Necropolises'''||Build 3500 Necropolises
+|-
+|'''5000 Necropolises'''||Build 5000 Necropolises
+|-
+|'''7500 Necropolises'''||Build 7500 Necropolises
+|-
+|'''12000 Necropolises'''||Build 12000 Necropolises
+|-
+|'''20000 Necropolises'''
+|Build 20000 Necropolises
+|}
+</table-progress-tracking>
+<table-progress-tracking table-id="33" unique-column-index="1">
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%" id="Evil Fortresses"
+! colspan="2" | Evil Fortresses
+|-
+! Name
+! scope="col" |Unlock Requirement
+|-
+|'''1 Evil Fortress'''||Build 1 Evil Fortress
+|-
+|'''50 Evil Fortresses'''||Build 50 Evil Fortresses
+|-
+|'''100 Evil Fortresses'''||Build 100 Evil Fortresses
+|-
+|'''150 Evil Fortresses'''||Build 150 Evil Fortresses
+|-
+|'''200 Evil Fortresses'''||Build 200 Evil Fortresses
+|-
+|'''300 Evil Fortresses'''||Build 300 Evil Fortresses
+|-
+|'''400 Evil Fortresses'''||Build 400 Evil Fortresses
+|-
+|'''500 Evil Fortresses'''||Build 500 Evil Fortresses
+|-
+|'''600 Evil Fortresses'''||Build 600 Evil Fortresses
+|-
+|'''700 Evil Fortresses'''||Build 700 Evil Fortresses
+|-
+|'''800 Evil Fortresses'''||Build 800 Evil Fortresses
+|-
+|'''900 Evil Fortresses'''||Build 900 Evil Fortresses
+|-
+|'''1000 Evil Fortresses'''||Build 1000 Evil Fortresses
+|-
+|'''1500 Evil Fortresses'''||Build 1500 Evil Fortresses
+|-
+|'''2000 Evil Fortresses'''||Build 2000 Evil Fortresses
+|-
+|'''2500 Evil Fortresses'''||Build 2500 Evil Fortresses
+|-
+|'''3000 Evil Fortresses'''||Build 3000 Evil Fortresses
+|-
+|'''3500 Evil Fortresses'''||Build 3500 Evil Fortresses
+|-
+|'''5000 Evil Fortresses'''||Build 5000 Evil Fortresses
+|-
+|'''7500 Evil Fortresses'''||Build 7500 Evil Fortresses
+|-
+|'''12000 Evil Fortresses'''||Build 12000 Evil Fortresses
+|-
+|'''20000 Evil Fortresses'''
+|Build 20000 Evil Fortresses
+|}
+</table-progress-tracking>
+<table-progress-tracking table-id="34" unique-column-index="1">
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%" id="Hell Portals"
+! colspan="2" | Hell Portals
+|-
+! Name
+! scope="col" |Unlock Requirement
+|-
+|'''1 Hell Portal'''||Build 1 Hell Portal
+|-
+|'''50 Hell Portals'''||Build 50 Hell Portals
+|-
+|'''100 Hell Portals'''||Build 100 Hell Portals
+|-
+|'''150 Hell Portals'''||Build 150 Hell Portals
+|-
+|'''200 Hell Portals'''||Build 200 Hell Portals
+|-
+|'''300 Hell Portals'''||Build 300 Hell Portals
+|-
+|'''400 Hell Portals'''||Build 400 Hell Portals
+|-
+|'''500 Hell Portals'''||Build 500 Hell Portals
+|-
+|'''600 Hell Portals'''||Build 600 Hell Portals
+|-
+|'''700 Hell Portals'''||Build 700 Hell Portals
+|-
+|'''800 Hell Portals'''||Build 800 Hell Portals
+|-
+|'''900 Hell Portals'''||Build 900 Hell Portals
+|-
+|'''1000 Hell Portals'''||Build 1000 Hell Portals
+|-
+|'''1500 Hell Portals'''||Build 1500 Hell Portals
+|-
+|'''2000 Hell Portals'''||Build 2000 Hell Portals
+|-
+|'''2500 Hell Portals'''||Build 2500 Hell Portals
+|-
+|'''3000 Hell Portals'''||Build 3000 Hell Portals
+|-
+|'''3500 Hell Portals'''||Build 3500 Hell Portals
+|-
+|'''5000 Hell Portals'''||Build 5000 Hell Portals
+|-
+|'''7500 Hell Portals'''||Build 7500 Hell Portals
+|-
+|'''12000 Hell Portals'''||Build 12000 Hell Portals
+|-
+|'''20000 Hell Portals'''
+|Build 20000 Hell Portals
+|}
+</table-progress-tracking>
+<table-progress-tracking table-id="35" unique-column-index="1">
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%" id="Deep Mines"
+! colspan="2" | Deep Mines
+|-
+! Name
+! scope="col" |Unlock Requirement
+|-
+|'''1 Deep Mine'''||Build 1 Deep mine
+|-
+|'''50 Deep Mines'''||Build 50 Deep Mines
+|-
+|'''100 Deep Mines'''||Build 100 Deep Mines
+|-
+|'''150 Deep Mines'''||Build 150 Deep Mines
+|-
+|'''200 Deep Mines'''||Build 200 Deep Mines
+|-
+|'''300 Deep Mines'''||Build 300 Deep Mines
+|-
+|'''400 Deep Mines'''||Build 400 Deep Mines
+|-
+|'''500 Deep Mines'''||Build 500 Deep Mines
+|-
+|'''600 Deep Mines'''||Build 600 Deep Mines
+|-
+|'''700 Deep Mines'''||Build 700 Deep Mines
+|-
+|'''800 Deep Mines'''||Build 800 Deep Mines
+|-
+|'''900 Deep Mines'''||Build 900 Deep Mines
+|-
+|'''1000 Deep Mines'''||Build 1000 Deep Mines
+|-
+|'''1500 Deep Mines'''||Build 1500 Deep Mines
+|-
+|'''2000 Deep Mines'''||Build 2000 Deep Mines
+|-
+|'''2500 Deep Mines'''||Build 2500 Deep Mines
+|-
+|'''3000 Deep Mines'''||Build 3000 Deep Mines
+|-
+|'''3500 Deep Mines'''||Build 3500 Deep Mines
+|-
+|'''5000 Deep Mines'''||Build 5000 Deep Mines
+|-
+|'''7500 Deep Mines'''||Build 7500 Deep Mines
+|-
+|'''12000 Deep Mines'''||Build 12000 Deep Mines
+|-
+|'''20000 Deep Mines'''
+|Build 20000 Deep Mines
+|}
+</table-progress-tracking>
+<table-progress-tracking table-id="36" unique-column-index="1">
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%" id="Stone Pillars"
+! colspan="2" | Stone Pillars
+|-
+! Name
+! scope="col" |Unlock Requirement
+|-
+|'''1 Stone Pillar'''||Build 1 Stone Pillar
+|-
+|'''50 Stone Pillars'''||Build 50 Stone Pillars
+|-
+|'''100 Stone Pillars'''||Build 100 Stone Pillars
+|-
+|'''150 Stone Pillars'''||Build 150 Stone Pillars
+|-
+|'''200 Stone Pillars'''||Build 200 Stone Pillars
+|-
+|'''300 Stone Pillars'''||Build 300 Stone Pillars
+|-
+|'''400 Stone Pillars'''||Build 400 Stone Pillars
+|-
+|'''500 Stone Pillars'''||Build 500 Stone Pillars
+|-
+|'''600 Stone Pillars'''||Build 600 Stone Pillars
+|-
+|'''700 Stone Pillars'''||Build 700 Stone Pillars
+|-
+|'''800 Stone Pillars'''||Build 800 Stone Pillars
+|-
+|'''900 Stone Pillars'''||Build 900 Stone Pillars
+|-
+|'''1000 Stone Pillars'''||Build 1000 Stone Pillars
+|-
+|'''1500 Stone Pillars'''||Build 1500 Stone Pillars
+|-
+|'''2000 Stone Pillars'''||Build 2000 Stone Pillars
+|-
+|'''2500 Stone Pillars'''||Build 2500 Stone Pillars
+|-
+|'''3000 Stone Pillars'''||Build 3000 Stone Pillars
+|-
+|'''3500 Stone Pillars'''||Build 3500 Stone Pillars
+|-
+|'''5000 Stone Pillars'''||Build 5000 Stone Pillars
+|-
+|'''7500 Stone Pillars'''||Build 7500 Stone Pillars
+|-
+|'''12000 Stone Pillars'''||Build 12000 Stone Pillars
+|-
+|'''20000 Stone Pillars'''
+|Build 20000 Stone Pillars
+|}
+</table-progress-tracking>
+<table-progress-tracking table-id="37" unique-column-index="1">
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%" id="Alchemist Labs"
+! colspan="2" | Alchemist Labs
+|-
+! Name
+! scope="col" |Unlock Requirement
+|-
+|'''1 Alchemist Lab'''||Build 1 Alchemist Lab
+|-
+|'''50 Alchemist Labs'''||Build 50 Alchemist Labs
+|-
+|'''100 Alchemist Labs'''||Build 100 Alchemist Labs
+|-
+|'''150 Alchemist Labs'''||Build 150 Alchemist Labs
+|-
+|'''200 Alchemist Labs'''||Build 200 Alchemist Labs
+|-
+|'''300 Alchemist Labs'''||Build 300 Alchemist Labs
+|-
+|'''400 Alchemist Labs'''||Build 400 Alchemist Labs
+|-
+|'''500 Alchemist Labs'''||Build 500 Alchemist Labs
+|-
+|'''600 Alchemist Labs'''||Build 600 Alchemist Labs
+|-
+|'''700 Alchemist Labs'''||Build 700 Alchemist Labs
+|-
+|'''800 Alchemist Labs'''||Build 800 Alchemist Labs
+|-
+|'''900 Alchemist Labs'''||Build 900 Alchemist Labs
+|-
+|'''1000 Alchemist Labs'''||Build 1000 Alchemist Labs
+|-
+|'''1500 Alchemist Labs'''||Build 1500 Alchemist Labs
+|-
+|'''2000 Alchemist Labs'''||Build 2000 Alchemist Labs
+|-
+|'''2500 Alchemist Labs'''||Build 2500 Alchemist Labs
+|-
+|'''3000 Alchemist Labs'''||Build 3000 Alchemist Labs
+|-
+|'''3500 Alchemist Labs'''||Build 3500 Alchemist Labs
+|-
+|'''5000 Alchemist Labs'''||Build 5000 Alchemist Labs
+|-
+|'''7500 Alchemist Labs'''||Build 7500 Alchemist Labs
+|-
+|'''12000 Alchemist Labs'''||Build 12000 Alchemist Labs
+|-
+|'''20000 Alchemist Labs'''
+|Build 20000 Alchemist Labs
+|}
+</table-progress-tracking>
+<table-progress-tracking table-id="38" unique-column-index="1">
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%" id="Monasteries"
+! colspan="2" | Monasteries
+|-
+! Name
+! scope="col" |Unlock Requirement
+|-
+|'''1 Monastery'''||Build 1 Monastery
+|-
+|'''50 Monasteries'''||Build 50 Monasteries
+|-
+|'''100 Monasteries'''||Build 100 Monasteries
+|-
+|'''150 Monasteries'''||Build 150 Monasteries
+|-
+|'''200 Monasteries'''||Build 200 Monasteries
+|-
+|'''300 Monasteries'''||Build 300 Monasteries
+|-
+|'''400 Monasteries'''||Build 400 Monasteries
+|-
+|'''500 Monasteries'''||Build 500 Monasteries
+|-
+|'''600 Monasteries'''||Build 600 Monasteries
+|-
+|'''700 Monasteries'''||Build 700 Monasteries
+|-
+|'''800 Monasteries'''||Build 800 Monasteries
+|-
+|'''900 Monasteries'''||Build 900 Monasteries
+|-
+|'''1000 Monasteries'''||Build 1000 Monasteries
+|-
+|'''1500 Monasteries'''||Build 1500 Monasteries
+|-
+|'''2000 Monasteries'''||Build 2000 Monasteries
+|-
+|'''2500 Monasteries'''||Build 2500 Monasteries
+|-
+|'''3000 Monasteries'''||Build 3000 Monasteries
+|-
+|'''3500 Monasteries'''||Build 3500 Monasteries
+|-
+|'''5000 Monasteries'''||Build 5000 Monasteries
+|-
+|'''7500 Monasteries'''||Build 7500 Monasteries
+|-
+|'''12000 Monasteries'''||Build 12000 Monasteries
+|-
+|'''20000 Monasteries'''
+|Build 20000 Monasteries
+|}
+</table-progress-tracking>
+<table-progress-tracking table-id="39" unique-column-index="1">
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%" id="Labyrinths"
+! colspan="2" | Labyrinths
+|-
+! Name
+! scope="col" |Unlock Requirement
+|-
+|'''1 Labyrinth'''||Build 1 Labyrinth
+|-
+|'''50 Labyrinths'''||Build 50 Labyrinths
+|-
+|'''100 Labyrinths'''||Build 100 Labyrinths
+|-
+|'''150 Labyrinths'''||Build 150 Labyrinths
+|-
+|'''200 Labyrinths'''||Build 200 Labyrinths
+|-
+|'''300 Labyrinths'''||Build 300 Labyrinths
+|-
+|'''400 Labyrinths'''||Build 400 Labyrinths
+|-
+|'''500 Labyrinths'''||Build 500 Labyrinths
+|-
+|'''600 Labyrinths'''||Build 600 Labyrinths
+|-
+|'''700 Labyrinths'''||Build 700 Labyrinths
+|-
+|'''800 Labyrinths'''||Build 800 Labyrinths
+|-
+|'''900 Labyrinths'''||Build 900 Labyrinths
+|-
+|'''1000 Labyrinths'''||Build 1000 Labyrinths
+|-
+|'''1500 Labyrinths'''||Build 1500 Labyrinths
+|-
+|'''2000 Labyrinths'''||Build 1600 Labyrinths
+|-
+|'''2500 Labyrinths'''||Build 2500 Labyrinths
+|-
+|'''3000 Labyrinths'''||Build 3000 Labyrinths
+|-
+|'''3500 Labyrinths'''||Build 3500 Labyrinths
+|-
+|'''5000 Labyrinths'''||Build 5000 Labyrinths
+|-
+|'''7500 Labyrinths'''||Build 7500 Labyrinths
+|-
+|'''12000 Labyrinths'''||Build 12000 Labyrinths
+|-
+|'''20000 Labyrinths'''
+|Build 20000 Labyrinths
+|}
+</table-progress-tracking>
+<table-progress-tracking table-id="40" unique-column-index="1">
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%" id="Iron Strongholds"
+! colspan="2" | Iron Strongholds
+|-
+! Name
+! scope="col" |Unlock Requirement
+|-
+|'''1 Iron Stronghold'''||Build 1 Iron Stronghold
+|-
+|'''50 Iron Strongholds'''||Build 50 Iron Strongholds
+|-
+|'''100 Iron Strongholds'''||Build 100 Iron Strongholds
+|-
+|'''150 Iron Strongholds'''||Build 150 Iron Strongholds
+|-
+|'''200 Iron Strongholds'''||Build 200 Iron Strongholds
+|-
+|'''300 Iron Strongholds'''||Build 300 Iron Strongholds
+|-
+|'''400 Iron Strongholds'''||Build 400 Iron Strongholds
+|-
+|'''500 Iron Strongholds'''||Build 500 Iron Strongholds
+|-
+|'''600 Iron Strongholds'''||Build 600 Iron Strongholds
+|-
+|'''700 Iron Strongholds'''||Build 700 Iron Strongholds
+|-
+|'''800 Iron Strongholds'''||Build 800 Iron Strongholds
+|-
+|'''900 Iron Strongholds'''||Build 900 Iron Strongholds
+|-
+|'''1000 Iron Strongholds'''||Build 1000 Iron Strongholds
+|-
+|'''1500 Iron Strongholds'''||Build 1500 Iron Strongholds
+|-
+|'''2000 Iron Strongholds'''||Build 2000 Iron Strongholds
+|-
+|'''2500 Iron Strongholds'''||Build 2500 Iron Strongholds
+|-
+|'''3000 Iron Strongholds'''||Build 3000 Iron Strongholds
+|-
+|'''3500 Iron Strongholds'''||Build 3500 Iron Strongholds
+|-
+|'''5000 Iron Strongholds'''||Build 5000 Iron Strongholds
+|-
+|'''7500 Iron Strongholds'''||Build 7500 Iron Strongholds
+|-
+|'''12000 Iron Strongholds'''||Build 12000 Iron Strongholds
+|-
+|'''20000 Iron Strongholds'''
+|Build 20000 Iron Strongholds
+|}
+</table-progress-tracking>
+<table-progress-tracking table-id="41" unique-column-index="1">
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%" id="Ancient Pyramids"
+! colspan="2" | Ancient Pyramids
+|-
+! Name
+! scope="col" |Unlock Requirement
+|-
+|'''1 Ancient Pyramid'''||Build 1 Ancient Pyramid
+|-
+|'''50 Ancient Pyramids'''||Build 50 Ancient Pyramids
+|-
+|'''100 Ancient Pyramids'''||Build 100 Ancient Pyramids
+|-
+|'''150 Ancient Pyramids'''||Build 150 Ancient Pyramids
+|-
+|'''200 Ancient Pyramids'''||Build 200 Ancient Pyramids
+|-
+|'''300 Ancient Pyramids'''||Build 300 Ancient Pyramids
+|-
+|'''400 Ancient Pyramids'''||Build 400 Ancient Pyramids
+|-
+|'''500 Ancient Pyramids'''||Build 500 Ancient Pyramids
+|-
+|'''600 Ancient Pyramids'''||Build 600 Ancient Pyramids
+|-
+|'''700 Ancient Pyramids'''||Build 700 Ancient Pyramids
+|-
+|'''800 Ancient Pyramids'''||Build 800 Ancient Pyramids
+|-
+|'''900 Ancient Pyramids'''||Build 900 Ancient Pyramids
+|-
+|'''1000 Ancient Pyramids'''||Build 1000 Ancient Pyramids
+|-
+|'''1500 Ancient Pyramids'''||Build 1500 Ancient Pyramids
+|-
+|'''2000 Ancient Pyramids'''||Build 2000 Ancient Pyramids
+|-
+|'''2500 Ancient Pyramids'''||Build 2500 Ancient Pyramids
+|-
+|'''3000 Ancient Pyramids'''||Build 3000 Ancient Pyramids
+|-
+|'''3500 Ancient Pyramids'''||Build 3500 Ancient Pyramids
+|-
+|'''5000 Ancient Pyramids'''||Build 5000 Ancient Pyramids
+|-
+|'''7500 Ancient Pyramids'''||Build 7500 Ancient Pyramids
+|-
+|'''12000 Ancient Pyramids'''||Build 12000 Ancient Pyramids
+|-
+|'''20000 Ancient Pyramids'''
+|Build 20000 Ancient Pyramids
+|}
+</table-progress-tracking>
+<table-progress-tracking table-id="42" unique-column-index="1">
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%" id="Halls of Legends"
+! colspan="2" | Halls of Legends
+|-
+! Name
+! scope="col" |Unlock Requirement
+|-
+|'''1 Hall of Legend'''||Build 1 Hall of Legends
+|-
+|'''50 Halls of Legends'''||Build 50 Halls of Legends
+|-
+|'''100 Halls of Legends'''||Build 100 Halls of Legends
+|-
+|'''150 Halls of Legends'''||Build 150 Halls of Legends
+|-
+|'''200 Halls of Legends'''||Build 200 Halls of Legends
+|-
+|'''300 Halls of Legends'''||Build 300 Halls of Legends
+|-
+|'''400 Halls of Legends'''||Build 400 Halls of Legends
+|-
+|'''500 Halls of Legends'''||Build 500 Halls of Legends
+|-
+|'''600 Halls of Legends'''||Build 600 Halls of Legends
+|-
+|'''700 Halls of Legends'''||Build 700 Halls of Legends
+|-
+|'''800 Halls of Legends'''||Build 800 Halls of Legends
+|-
+|'''900 Halls of Legends'''||Build 900 Halls of Legends
+|-
+|'''1000 Halls of Legends'''||Build 1,000 Halls of Legends
+|-
+|'''1500 Halls of Legends'''||Build 1,500 Halls of Legends
+|-
+|'''2000 Halls of Legends'''||Build 2,000 Halls of Legends
+|-
+|'''2500 Halls of Legends'''||Build 2,500 Halls of Legends
+|-
+|'''3000 Halls of Legends'''||Build 3,000 Halls of Legends
+|-
+|'''3500 Halls of Legends'''||Build 3,500 Halls of Legends
+|-
+|'''5000 Halls of Legends'''||Build 5,000 Halls of Legends
+|-
+|'''7500 Halls of Legends'''||Build 7,500 Halls of Legends
+|-
+|'''12000 Halls of Legends'''||Build 12,000 Halls of Legends
+|-
+|'''20000 Halls of Legends'''
+|Build 20,000 Halls of Legends
+|}
+</table-progress-tracking>
+|}
+
+<table-progress-tracking table-id="43" unique-column-index="1">
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%" id="Total Building Trophies"
+! colspan="2" | Total Buildings - 15 Trophies
+|-
+! Name
+! scope="col" |Unlock Requirement
+|-
+!Village Grinder
+|Build a total of 100 [[buildings]] (in a single game)
+|-
+!Town Grinder
+|Build a total of 250 buildings
+|-
+!City Grinder
+|Build a total of 500 buildings
+|-
+!Kingdom Grinder
+|Build a total of 1,000 buildings
+|-
+!Empire Grinder
+|Build a total of 2,000 buildings
+|-
+!Realm Grinder
+|Build a total of 3,000 buildings
+|-
+!History Grinder
+|Build a total of 5,000 buildings
+|-
+!World Grinder
+|Build a total of 8,000 buildings
+|-
+!Universe Grinder
+|Build a total of 12,000 buildings
+|-
+!Multiverse Grinder
+|Build a total of 20,000 buildings
+|-
+!Metagrinder
+|Build a total of 35,000 buildings
+|-
+!Overgrinder
+|Build a total of 50,000 buildings
+|-
+!True Grinder
+|Build a total of 125,000 buildings
+|-
+!Master Grinder
+|Build a total of 200,000 buildings
+|-
+!Grandmaster Grinder
+|Build a total of 300,000 buildings
+|}
+</table-progress-tracking>
+
+== Secret Trophies ==
+[[File:Secret-Trophy.png|thumb||left]]
+Secret trophy icons and tooltips only become visible once you have completed them. Each rewards a [[Upgrades #Secret Upgrades|Secret Upgrade]] which shows up in the upgrades tab, and in the current game, as soon as you approach their total cost.<br />To get information on the effects of trophy upgrades, see the [[Upgrades #Secret Upgrades|Upgrades]] page.<br />Most of the information below comes from [https://www.kongregate.com/forums/8945-realm-grinder/topics/522336-full-hidden-trophy-list this forum post], created and maintained by [[User:Rahler|Rahler]].
+
+<table-progress-tracking table-id="44" unique-column-index="2">
+{| class="mw-collapsible mw-collapsed sortable wikitable" style="width:100%"
+! colspan="3" |Secret Trophies - 64 Trophies
+|-
+! colspan="2" class="unsortable" |Name
+! class="unsortable" |Unlock Requirement
+|-
+![[File:Leet.png]]
+!Leet
+|Have exactly 1337 [[Coins]] at any given time.
+|-
+![[File:Unitary.png]]
+!Unitary
+|Have exactly 1 of each [[Buildings|building]] at any given time.
+|-
+![[File:Building Hater.png]]
+!Building Hater
+|Reach 100,000 Coins without building anything.
+|-
+![[File:Grand Diplomat.png]]
+!Grand Diplomat
+|Ally with each [[faction]] at least once.
+|-
+![[File:Exchange Master.png]]
+!Exchange Master
+|Purchase 500 [[Royal Exchanges]] in a single game.
+|-
+![[File:Lucky Neutral.png]]
+!Lucky Neutral
+|Spend 777 minutes being [[Neutral Faction|Neutral]].<br />''(12h 57m)''
+|-
+![[File:Perfectly Good.png]]
+!Perfectly Good
+|Spend 333 minutes being [[Good factions|Good]].<br />''(5h 33m)''
+|-
+![[File:Diabolical Evil.png]]
+!Diabolical Evil
+|Spend 666 minutes being [[Evil faction|Evil]].<br />''(11h 6m)''
+|-
+![[File:Assistant Squasher.png]]
+!Assistant Squasher
+|Click 100 times on the little [[assistant]] above your realm.<br />''(tiny assistants in the background [[:File:Background-assistant.png|here]])''
+|-
+![[File:Rewind.png]]
+!Rewind
+|[[Abdicate]] after producing at least {{Number|1 Oc}} Coins.
+|-
+![[File:Faction Grinder.png]]
+!Faction Grinder
+|Purchase the first 6 Faction [[Heritages|Heritage upgrades]] in a single game.
+|-
+![[File:Master Archeologist.png]]
+!Master Archeologist
+|You have discovered all the relics of the [[Ancient Races]]. (''Titans, Druids, and Faceless)''
+|-
+![[File:Spellfury.png]]
+!Spellfury
+|Cast Tax Collection while having 3 spells active.
+|-
+![[File:Speed Run.png]]
+![[Speed Run]]
+|Reach {{Number|1 M}} coins in less than 5 minutes, without using [[Gem Power]].<br />''(Can be done at R0)''
+|-
+![[File:Equality.png]]
+!Equality
+|With no less than 3 days of playtime, have less than 1 minute of playtime difference for the 3 alignments.<br />''(See [[#Tips|tips]]; counts time only for <u>CURRENT</u> reincarnation)''
+|-
+![[File:Beard Carpet.png]]
+!Beard Carpet
+|Have at least43m [[Bearded Assistants|beards]] on your assistants. ''(This takes ??h ??m.)''
+|-
+![[File:Premeditation.png]]
+!Premeditation
+|Have at least 850 Dark Temples on any individual run before affiliating with the [[Drow]].
+|-
+![[File:Fast Forward.png]]
+!Fast Forward
+|Accumulate an offline time of at least 8 hours. The sum of all your offline reports counts towards this purpose. ''(This R)''
+|-
+![[File:Need a Head Start.png]]
+!Need a Head Start?
+|Don't do anything for 5 minutes after starting a new game.<br />''(Don't buy anything for 5 minutes, acquired while manually clicking to Leet. See [[#Tips|tips]])''
+|-
+![[File:Realm Digger.png]]
+!Realm Digger
+|[[Excavation|Excavate]] 400 times.
+|-
+![[File:Harlequin.png]]
+!Harlequin
+|As a [[Mercenary]], purchase one upgrade from 11 different factions.
+|-
+![[File:Lucifer.png]]
+!Lucifer
+|As a Good Mercenary, purchase only Evil mercenary [[faction upgrades]] or vice versa.
+|-
+![[File:Mathematician.png]]
+!Mathematician
+|Have building amounts exactly equal to 2<sup>tier-1</sup> from bottom to top, starting from 2<sup>0</sup> Halls of Legends.<br />''(1024 Farms, 512 Inns, 256 Blacksmiths, 128, 64, 32, 16, 8, 4, 2 and 1 Hall of Legends)''
+|-
+![[File:Mercenary Spirit.png]]
+!Mercenary Spirit
+|[[Reincarnation|Reincarnate]] while playing as a [[Mercenary]].
+|-
+![[File:Bloodstream.png]]
+!Bloodstream
+|Purchase 100 upgrades from each faction as a Mercenary (across all Reincarnations)
+|-
+![[File:Unlimited Mana.png]]
+!Unlimited Mana
+|Have a mana regeneration rate of at least 300 [[mana]] per second.
+|-
+![[File:ForScience.png]]
+!For Science!
+|Purchase all the [[research]] facilities.
+|-
+![[File:Exchange Lord.png]]
+!Exchange Lord
+|Purchase 1500 [[Royal Exchanges]] in a single Era.
+|-
+![[File:Magician.png]]
+!Magician
+|Discover at least 15 Spellcraft [[Researches]].
+|-
+![[File:Artisan.png]]
+!Artisan
+|Discover at least 15 Craftsmanship Researches.
+|-
+![[File:Demigod.png]]
+!Demigod
+|Discover at least 15 Divine Researches.
+|-
+![[File:Businessman.png]]
+!Businessman
+|Discover at least 15 Economics Researches.
+|-
+![[File:Apothecary.png]]
+!Apothecary
+|Discover at least 15 Alchemy Researches.
+|-
+![[File:Warlord.png]]
+!Warlord
+|Discover at least 15 Warfare Researches.
+|-
+![[File:Secret-trophy53-FactionRun.png]]
+![[Faction Run]]
+|Reach {{Number|1.5 M}} Faction Coins in less than 5 minutes, without using [[Gem Power]], [[Excavations]] nor any [[spell]].
+|-
+![[File:Norecruit.png]]
+!No Recruiting
+|Reach {{Number|1 NoVg}} gems in a Reincarnation without ever affiliating with the Mercenaries. ''(See [[#Tips|Tips]])''
+|-
+![[File:ThatExcavatedQuickly.png]]
+!That Excavated Quickly
+|Excavate 1000 times in the first 30 seconds of playtime.<br />''(Can be done from around R9+)''
+|-
+![[File:Glho kohhl snod.png]]
+!glho kohhl snod
+|''"Barely whispering these letters makes your heart pound harder..."''<br />''(In the [[options]], try to import this:'' glho kohhl snod)
+|-
+![[File:Mana_Matrix.png]]
+!Mana Matrix
+|Have exactly 4767 maximum [[mana]]. ''(See [[#Tips|Tips]])''
+|-
+![[File:Suggestion Master.png]]
+!Suggestion Master
+|Open the [[Patch Notes|changelog]] and ponder about what could be added in there for 3 minutes.
+''Note: To open the changelog click the [https://realm-grinder.wikia.com/wiki/File:RG-changelog-access.png version number] in the options.''
+|-
+![[File:Rule 'dis.png]]
+!Rule 'dis
+|[[Abdicate]] 10 times within 3 minutes.
+|-
+![[File:Because I Like to Grind.png]]
+!Because I Like to Grind
+|Spend at least 3 hours playing in a single Era.
+|-
+![[File:TripleWeirdness.png|54x54px]]
+!Triple Weirdness<br />{{PA}}
+|333 of each Royal Exchange
+''Note: Whilst the exchange count can be reached before Ascension, the trophy won't be awarded in build 3.0 .''
+|-
+![[File:StoicResistance.png]]
+!Stoic Resistance
+|Reach an amount of Gems in your treasury equal to the requisite of the first [[Reincarnation]] ({{Number|1 Oc}} gems) without abdicating since the start of a new Reincarnation. ''(See [[#Tips|Tips]])''
+|-
+![[File:Van!shment.png]]
+!Van!shment
+|Reach an Offline Bonus of at least {{Number|1 Qa}}%.<br />{{PA|1895%}}
+|-
+![[File:Iron_Rush.png]]
+!Iron Rush
+|Reach 725 Iron Strongholds in 5 minutes without use of Gem Power and Reincarnation Power. ''([[Challenges|Underground Foundations (Dwarf 5)]] and [[Research|Siege (W400)]] DOES NOT''' '''work for this trophy)''
+|-
+![[File:Colorful_Autocasting.png]]
+!Colorful Autocasting<br />{{PA}}
+|Have each type of [[autocasting]] active simultaneously. ''(Note: You must use the buttons in the spell tooltip, rather than keyboard shortcuts, in order to trigger this trophy. Make sure "Enable Spell Tooltip Persist" is checked in the options.)''
+|-
+![[File:Cata.png]]
+!Spell Cataclysm<br />{{PA}}
+|Have at least 6 spells active on tier 2 or higher.
+''(See [[#Tips|Tips]])''
+|-
+![[File:Double_Bottom.png]]
+!Double Bottom
+|Reset excavations for the first time.
+|-
+![[File:Advisor_Insight.png|54x54px]]
+!Advisor Insight
+|Click the Hint button 100 times.
+|-
+![[File:Dragon Tamer.png]]
+!Dragon Tamer<br />{{PA}}
+|Fully develop your [[Artifacts|Spiky Egg]] into an Elder [[Dragon]].
+|-
+![[File:Helden Sterben Nicht.png]]
+!Helden Sterben Nicht
+|Join Mercenaries, then Undead, then Angels within 15 minutes since the beginning of a new run in a single game session.
+|-
+![[File:ManaWaste.png]]
+!Mana Waste
+|Have [[mana]] regeneration higher than max mana.
+|-
+![[File:Prismatic mana 2.png]]
+!Prismatic Mana<br />{{PA}}
+|Cast the same amount of Faction spells with all Vanilla and Neutral factions with a minimum of 100 each.
+Can only be unlocked after ascending once.
+|-
+![[File:SecretAutoclick.png]]
+!Autoclicker<br />{{PA}}
+|Have at least 40 [[Clicking & Automatic Clicks|autoclick power]]. Only available at R60 or higher.
+|-
+![[File:Exchange High Lord.png|54x54px]]
+!Exchange High Lord<br />{{PA}}
+|Purchase 5000 royal exchanges in a single game.
+|-
+![[File:Uniformity.png|54x54px]]
+!Uniformity<br />(PA2)
+|With no less than 3 days of playtime, have less than one minute of playtime difference for Order, Chaos and Balance alignments
+|-
+![[File:Genealogist.png|54x54px]]
+!Genealogist<br />{{PA}}
+|Have a total of 300 [[lineage]] levels.
+|-
+![[File:Holy Frenzy.png|54x54px]]
+!Holy Frenzy<br />(PA2)
+|Within a single reincarnation, have a combined activity time of at least 3 days from Blood Frenzy and Holy Light.
+|-
+![[File:ArtOfTheCrowAchivement.png|54x54px]]
+!Art Of The Crow<br />(PA2)
+|Excavate 6 full Faction Artifact Sets
+|-
+![[File:Faction Ruler.png|54x54px]]
+!Faction Ruler<br />(PA2)
+|Unlock all Advanced Heritages
+|-
+![[File:Mad masks.png|thumb|54x54px]]
+!MAD Masks<br />(PA2)
+|R125+, Find all fragments of the Makers, Archon and Djinn masks.
+|-
+![[File:FutureLinkinSecretTrophy.png|thumb|54x54px]]
+!Future Linkin<br />(PA2)
+|A2+, Abdicate with at least 100,000 Unique Buildings.
+|-
+![[File:God'sFingers.png|thumb|54x54px]]
+!God's Fingers<br />(PA3)
+|Reach 100 M (1e8) automatic clicks in this Reincarnation.
+|-
+![[File:TrueHarlequin.png|thumb|50x50px]]
+!True Harlequin<br />(PA3)
+|As a Mercenary, purchase one upgrade from 15 different factions.
+|}
+</table-progress-tracking>
+
+== Tips ==
+Tips, hints, and potential spoilers for acquiring certain (kinds of) trophies.
+
+Keep in mind that there are trophies for all levels of progress and they are all feasible. If you think it's too hard, then you probably need to wait until you progress further.
+
+{| class="mw-collapsible mw-collapsed wikitable" style="width:100%" id="Trophy Overview"
+!Tips & Hints
+|-
+|
+* '''Coin, Click, Spell, Mana, Assistants, Building... trophies''': use [[Merc Builds#Special Builds|special merc]] (IGOT for magic and assistants) and [[Research Builds#Special Builds|research builds]].
+
+* '''Assistant Trophies''': [[Fairy|Fairy Choir]] spell upgrade effect does not count for these trophies.
+
+* '''Spell Cast Trophies''': are based on the amount of spell casts (this Game) in the [[stats]]. Offline spell casts and [[Goblin#Tier 3 Upgrades|Goblin Central Bank]] count towards these trophies.
+
+* '''5k Building Type Trophies''': With no [[Premium Upgrades|gifts]], tiers 1, 2 and 3 buildings can be done easily below R20 using the Fairy Faction. Unique buildings can be done with individual runs around R25-30. Good Buildings become possible around R34 or maybe even earlier with prestige research (can be done from R29, first get the Earth core with a excavations-oriented run after you got enough gems to reincarnate, then develop the prestige research with Fairy-Dwarf, then run a Angel-Dwarf with Goblin bloodline to get 5K buildings). Evil and Neutral around R38 using a merc build ([https://www.kongregate.com/forums/8945-realm-grinder/topics/614615-recommendations-for-5k-neutral-building-trophies source]) To get all the building type trophies, tweak builds to fit other alignments.
+
+*'''7.5k Building Type Trophies''': The earliest methods for these are essentially a repeat of the same for the 5k series. Tiers 1-3 can be easily collected before R39 using Goblin Bloodline and Fairy/Dwarf research. The remaining Neutrals will start to happen naturally in the mid R50s by using Neutral Prestige research, with Good builds becoming viable a little earlier and Evil a little later, mostly depending on gem totals.
+
+* '''Mana Wave, River, and Lake Trophies''' reward upgrades only post-ascension. (as of RG v2.5.0)
+
+*[[Ascension]] marks a unique milestone where unfinished trophies generally become harder at R40 than they were at earlier reincarnations due to a gamewide reduction of bonuses. This setback is effectively temporary, however, and any non-secret trophies that seem difficult at R39 might be best regarded as defacto Post-Ascension tasks that will not be missed if delayed.
+
+
+
+
+
+<u>Secret Trophies</u>
+* [https://www.kongregate.com/forums/8945-realm-grinder/topics/605675-secret-trophy-guide-easiest-to-later '''Secret Trophy Guide'''] advised order to get the trophies. - created and maintained by dox4242
+
+* '''Suggestion Master''' and '''glho kohhl snod''', do not interfere with getting '''Need a Head Start?''' These can all be done in the first five minutes of a run. (Tested. Tip thanks to this [[Trophies#comm-5894|comment]])
+* '''Leet:''' If you have a premium upgrade, turn it off to start a game with 0 coins.
+* '''Equality:''' In case you have one alignment playtime much longer than an other: restart and do it after Reincarnating, play times will be reset to zero. When two alignments are one minute apart, the third can be done while offline.
+* '''Mana Matrix:''' Be careful not to skip 4767 mana. When close to 4k mana, it is recommended to buy buildings one by one.
+* '''That Excavated Quickly''': Can be done at R17. Make sure to keep your excavations low until you have enough gems to excavate 1000 times, make a [[Options#Making Back-Ups|save file]], abdicate, and then try go for the trophy. - Undo if unsuccessful and try again later. Suggested 200 Tvg (2<sub>E</sub>74) gems and no excavations (use Lightning Forge to get Faction Coins). After abdicating, quickly get the Druid Bloodline, and any alignment to unlock Halls of Legends for income. Possible at R15 with 1.5 Dvg (1.5<sub>E</sub>69) gems and Elven Bloodline.
+* '''No Recruiting''': Requires R21, where it can be reached in 3-4 hours using U-Fairy R21 from [[Research Builds]]. There's no need to explicitly chase after this trophy as it will likely come naturally (~R30) if you keep relying on optimized research builds.
+* '''Stoic Resistance''': possible at R33 in less than 1 hour with fairy and fairy bloodline. Can be done in 2-3 hours at R30, the same way as at R33, and within 30 minutes at R30 with Excavations.
+* '''Spell Cataclysm''': Use dragon-faceless with Dragon Challenge 3 unlocked, needs R54.
+* '''Helden Sterben Nicht''': You need to wait for a few seconds as mercenary and undead before abdicating for the trophy to register.
+* '''Mana Waste''': Mana regen gained from spell effects, directly or indirectly, counts for this trophy. This includes W205 and fairy choir + shapeshifting/magical treasure.
+* '''Van!shment''': This is very easy from around R29 with an Undead/Drow Research build, as Undead (2,2) Unholy Ritual and Undead (3,3) Resilience provide good offline bonuses. You will want A55, and note that S270 and D400 give you offline bonus as well. Fast Forward and Nonexistent Ruler secret upgrades may also help, as well as Sun Force.
+* '''Coin Pillage''': With autocasting upgrade and mana at 30 x Tax Collection cost (standard 6000) just autocast Tax Collection.
+* '''Prismatic Mana''': Requires R40+. Only counts the 9 faction-specific spells for the 9 vanilla/neutral factions. Can be done with Mercenaries. Repeated Abdications can be used to circumvent the long timer for Brainwave.
+* [[Ascension]] can render No Recruiting and Stoic Resistance disproportionately difficult to obtain because they retain their original gem requirements and gems are not quickly restored to pre-Ascension levels. No Recruiting will jump from trivial at R39 to impossible until the equivalent of R75. Stoic Resistance may require a similar wait, or the use of Rubies to buy Gem Conversions to circumvent the abdication restriction.
+* '''Autoclicker''': Offline automatic clicks from the Sturdy Treasure series of upgrades are counted.
+|}
+
+== See Also ==
+* [[Events|Event Feats]]
+* [[Upgrades]]: Contains the requirements for unlocking the trophy upgrades.
+
+{{Sitenav}}
+[[Category:Trophies| ]]
+[[Category:Tips]]
+[[Category:Unlock Requirements]]
+[[Category:Realm Grinder Wiki]]

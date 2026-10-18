@@ -1,0 +1,66 @@
+[[File:Royalexchange.PNG|left|thumb|54x54px]][[File:Royal-exchange-pannel.png|right|266x266px]]
+'''Royal Exchange''' (or '''RE''') is a function that lets the player exchange [[Faction Coins]] for an increase in [[building]] production. This building production increase is called "Royal Exchange bonus", and can be increased through upgrades and other perks, such as the R25 [[Reincarnation Power]].
+
+The Royal Exchange button appears as the first item in the Upgrades tab, and is available after a [[faction]] is chosen. It leads to a panel where individual Faction Coin types can be exchanged.
+
+==Royal Exchange Bonus==
+Each exchange initially (without any upgrades) increases the production of all buildings by 10%. They can be bought an indefinite number of times, but the price increases each time. They are additive beetwen themselves. This means that the total boost is: 
+
+Royal exchange unitary bonus  X  number of royal exchanges purchased (sum of the royal exchange of all factions).
+
+The formula for the cost of your next exchange is:
+
+: {{Formula|floor(20\cdot{1.1}^x)| the actual exchanges you have}}
+
+The cost for multiple exchanges is:
+
+: {{Formula|xy|200 (1.1^y-1.1^x)|the actual exchanges you have|the exchanges you are buying up to.}}
+
+==Related Secret Trophy Upgrades==
+{| class="wikitable" style="width:100%;" id="Faction Coin Secret Upgrades" cellpadding="10"
+! colspan="6" |Royal Exchange Secret Trophy Upgrades
+|-
+! colspan="2" |Name
+!Cost
+!Unlock Requirements
+!Effect
+|-
+![[File:Exchange Master.png]]
+!Exchange Master
+|{{Number|500 Dc|table}}
+|Purchase 500 Royal Exchange in a single game.
+|Increase Royal Exchange bonus by 5%
+|-
+![[File:Exchange Lord.png]]
+!Exchange Lord
+|{{Number|500 Qag|table}}
+|Purchase 1500 Royal Exchanges in a single game.
+|Increase Royal Exchange bonus by 5%
+|-
+![[File:Because I Like to Grind.png]]
+!Because I Like to Grind
+|1000
+|Spend at least 3 hours playing in this game.
+|Increase Royal Exchange bonus by an additional 1.
+|-
+![[File:TripleWeirdness.png|54x54px]]
+!Triple Weirdness
+|Free
+|Exactly 333 of each Royal Exchange
+''Note: Whilst the exchange count can be reached before Ascension, the trophy won't be awarded in build 3.0+.''
+|Increase Faction Coins generation while offline based on your mana regeneration.
+|-
+![[File:Exchange_High_Lord.png]]
+!Exchange High Lord
+|{{Number|10 DQig|table}}
+|Purchase 5000 royal exchanges in a single game.
+|Increase Royal Exchange bonus by 250%
+|}
+
+== Tips ==
+* As the first REs are very cheap, it can be beneficial to exchange a few before saving up to buy the more expensive [[Heritages|Faction Heritage]] upgrades.
+* As the cost of RE increases, there is a threshold amount that is hard to overcome, hence it will not help to get too many FC upgrades.
+* Enabling the "Buy All Exchanges" in the [[options]] will buy all possible REs when clicking on the "Buy All" button. This setting persists through abdications.
+
+{{Sitenav}}
+[[Category:Resources]]

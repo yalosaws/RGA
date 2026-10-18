@@ -1,0 +1,212 @@
+{{tocright}}
+[[File:Goblin_Faction_Building.png|thumb|left]]
+{{Description|"The sly Goblins excel at making the best possible deals and bargains. Affiliating yourself with the Goblin faction will offer you economic opportunities and allows you to benefit from larger quantities of everything."}}<ref>Note: the in-game flavor text refers to the very early versions of goblin and has not been changed since. Goblin no longer has upgrades to help reduce the price of buildings, aside from the bloodline, which is available to all factions. Goblin's current focus is on faction coin generation.</ref>
+
+== The Goblin Faction ==
+[[File:Goblin champion trophy.png|left|54x54px|Goblin Champion Trophy]]
+[[File:Greed_Drive.png|right|Greed Drive]]
+Part of the original Evil [[Vanilla Factions]], the '''Goblin''''s asset is the ability to [[Buildings|build]] cheap, thus allowing you to build more. Their Bloodline is valuable when aiming for all the [[Trophies#Building Trophies|building trophy series]].
+* '''[[Alignment]]''': '''''Evil'''''
+* [[Alignment#Leges|'''Leges''']]: '''''Balance'''''
+* '''[[Spells|Faction Spell]]''': '''''Goblin's Greed''''' - Instantly produces [[Faction Coins]] based on the amount of [[Gems]] you own. Also increases the production of all buildings based on the amount of Faction Coins found in this game for 5 seconds.<br />''FC'' {{Formula|\left\lfloor\ln^3(1 + x) + 20\right\rfloor|your current gems}}<br />''Production'' {{Formula|stat|0.75 \times \ln^{3.15}(1 + x)%|your Faction Coins Gained (This Game)}}
+* '''[[Spells#Spell Upgrades|Spell Upgrade]]''': '''''Greed Drive''''' - Goblin's Greed costs 150 less [[mana]].
+** Unlock requirement: Cast a chain of 100 Goblin's Greeds in a single game. The chain is interrupted by casting different spells. <br /><sup>''Note: Spell casts from the [[Goblin#Tier 3 Upgrades|Goblin Central Bank]] upgrade do not count toward or interfere with getting this trophy.''</sup>  
+* '''[[Heritage]]''': Increase the production of all buildings based on the amount of gems you own. <br />{{Formula|\left\lfloor7.5 * \log(1 + x)\right\rfloor%|the amount of gems you have}}
+* '''[[Bloodline]]''': Reduce all building cost multipliers. <br />{{MultiplierReduction|0.02|1.13|1.15}}
+* '''[[Challenge|Challenge Reward]]''': '''''Avarice Drive''''' - Increase Goblin's Greed spell duration by 5 seconds.  
+* '''[[Unique Buildings|Research Building]]''':  '''''Goblin Bank''''' (from Witch Conclaves)  
+* '''[[Research#Research#The Facilities & Related Factions|Research Facility]]''': '''''Economics'''''  
+* '''[[Buildings#Unique Buildings|Leges Building]]''':  '''''Slave Markets''''' (from Slave Pens)
+* '''Faction Unlock Requirements''': None (All Vanilla Factions are enabled by default)
+
+== Tier 1 Upgrades ==
+{| class="wikitable" style="width:100%"
+|-
+! colspan="2" |Name
+! width="75px" |Cost
+! Effect
+|-
+![[File:Goblin.png]]
+! width="110px" |''Goblin Trade Treaty''
+| style="padding:0 8px;" |''20 Goblin Coins''
+| style="padding:0 8px;" |''Unlocks Goblin Upgrades.''
+|-
+![[File:Goblin-faction-upgrade-11.png]]
+!Strong Currency
+| style="padding:0 8px;" |{{Number|50 M|table}}
+| style="padding:0 8px;" |Gain assistants based on Faction Coins found in this game.
+''Formula:'' <math>0.5\times \ln(1+x)^{2}</math> where x is the amount of Faction Coins found this game.
+|-
+![[File:Goblin-faction-upgrade-12.png]]
+!Slave Trading
+| style="padding:0 8px;" |{{Number|500 M|table}}
+| style="padding:0 8px;" |Increase the production of all buildings based on the amount of Evil buildings you own.
+''Formula:'' <math>(2\times x^{0.7})%</math> where x is the amount of Evil buildings you own.
+|-
+![[File:Goblin-faction-upgrade-13.png]]
+!Cheap Materials
+| style="padding:0 8px;" |{{Number|5 B|table}}
+| style="padding:0 8px;" |Tax collection is worth more seconds based on the amount of buildings you own.
+''Formula:'' <math>\sqrt{x}</math> where x is the amount of buildings you own.
+|}
+
+== Tier 2 Upgrades ==
+{| class="wikitable" style="width:100%"
+|-
+! colspan="2" |Name
+! width="75px" |Cost
+! Effect
+|-
+![[File:Goblin-Friendship-Pact goblin-Faction upgrade.png]]
+! width="110px" |''Goblin Friendship Pact''
+| style="padding:0 8px;" |''100 Goblin Coins''
+| style="padding:0 8px;" |''Unlocks more Goblin Upgrades.''
+|-
+![[File:Goblin-faction-upgrade-21.png]]
+!Fool's Gold 
+| style="padding:0 8px;" |{{Number|500 B|table}}
+| style="padding:0 8px;" |Increase Faction Coin find chance based on the highest amount of Witch Conclaves you built in this Reincarnation.
+{{Formula|build|floor(2 \times x^{0.6})%|Witch Conclaves}}
+|-
+![[File:Goblin-faction-upgrade-22.png]]
+!Goblin Economists
+| style="padding:0 8px;" |{{Number|5 T|table}}
+| style="padding:0 8px;" |Multiplicatively increase Mana Regeneration based on your current amount of Coins
+''Formula:'' <math>(0.75\times \log_{10}(1+x)^{1.25})%</math> where x is the amount of Gold owned.
+|-
+![[File:Goblin-faction-upgrade-23.png]]
+!Hobgoblin Gladiators
+| style="padding:0 8px;" |{{Number|50 T|table}}
+| style="padding:0 8px;" |Increase the production of all buildings based on Tax Collection worth.
+''Formula:'' <math>(12\times \ln(1+x)^{3})%</math>where x is the seconds of your tax collection.
+
+(note : ingame description doesn't seems to match actual boost).
+|}
+
+== Tier 3 Upgrades ==
+{| class="wikitable" style="width:100%"
+|-
+! colspan="2" |Name
+! width="75px" |Cost
+! Effect
+|-
+![[File:Goblin-alliance goblin-Faction upgrade.png]]
+! width="110px" |''Goblin Alliance''
+| style="padding:0 8px;" |''500 Goblin Coins''
+| style="padding:0 8px;" |''Unlocks more Goblin Upgrades.''
+|-
+![[File:Goblin-faction-upgrade-31.png]]
+!Goblin Central Bank
+| style="padding:0 8px;" |{{Number|5 Qa|table}}
+| style="padding:5px 5px 5px 8px;" |Each time you cast a spell, you also cast free Tax Collection based on your Maximum Mana.<br />''<sub>This does not work offline, and the Tax Collection casts do not interfere with the consecutive casts required to unlock Greed Drive and [[Drow|Perfect Combo]], but they do count towards amounts of spell casts, such as those required for the [[Trophies#Magic Trophies|Archwizard trophy]], or those used in the [[research]] upgrades Refraction (A55) and Capacity (S400).</sub>''
+|-
+![[File:Goblin-faction-upgrade-32.png]]
+!Black Market 
+| style="padding:0 8px;" |{{Number|50 Qa|table}}
+| style="padding:0 8px;" |Multiplicatively increase production bonus from Gems based on Gems owned. Also increase Offline production based on Tax Collection casts in this era.
+''Formula:'' <math>(\log_{10}(1+x)^{2})%</math> where x is the the Tax Collection spell count of this game.
+|-
+![[File:Goblin-faction-upgrade-33.png]]
+!Green Fingers Discount
+| style="padding:0 8px;" |{{Number|500 Qa|table}}
+| style="padding:0 8px;" |Gain coins randomly every 30 seconds based on your total production. Value increases over time spent in this Reincarnation, Also works while offline.<br />{{Formula|\text{randRange}(1,2500)\times x|your total coin production per second, including both buildings and assistants}}
+|}
+
+== Unique Buildings ==
+[[File:Goblin_Unique_Building_Design.png|thumb|left]] 
+[[File:Special-building-goblin.png|right]]
+[[File:Slave Market.png|right]]
+At R16, the Goblin's ''Witch Conclaves'' can be upgraded to a [[Buildings#Unique Buildings|Unique Building]]: '''''Goblin Bank''''', which is required for some [[challenges]] and [[research]] quests.
+
+At R100, the Goblin's ''Slave Pens'' can be upgraded to a [[Buildings#Unique Buildings|Unique Building]]: '''''Slave Markets''''', which when bought will grant access to the [[Faction Union]] upgrade.{{Clr}}
+
+== Goblin Research ==
+[[File:Research-new-progress-system-msg.PNG|right|250px]]
+Upon reaching R16, the game advisor tells us that the Vanilla factions have gained tremendous power. Their power can be ours if we get ready and seek them again. 
+
+To unlock Goblin research, play the Goblin faction and simply follow the appearing quests (Do not [[prestige]]). These can be done in separate game plays.
+{| class="wikitable" style="width:100%;"
+! colspan="5" |Goblin Research Requirements
+|-
+! colspan="2" |Name
+!In-game Description
+!Requirements
+!Cost
+|-
+![[File:G-research-quest.png]]
+! width="90px"|Goblin Banks Quest
+|''Hey There! We need a safe place to keep our honestly earned savings. We'll turn those Witch Conclaves into something more... useful, if you build enough of them.''
+<small>''Required once throughout the entire game play and does not count towards the bought upgrade stat.''</small>
+|R16 + 1750 ''Witch Conclaves''
+|{{Number|10 Dtg|table}}
+|-
+![[File:Goblin_Bank_icon.png]]
+!Goblin Banks
+|Upgrade ''Witch Conclaves'' To ''Goblin Banks'', boosting their production based on the amount of gold you own and unlocking more unique perks for the building.
+{{Formula|xy|650+10000 \times \frac {\left( \log_{10} \left( 1+x \right) \right) ^ {\frac{3.1}{1+0.1 \times(y+1)} } }{30}|your current amount of Coins|ascension}}
+|Buy ''Goblin Banks Quest''
+|{{Number|10 Ttg|table}}
+|-
+![[File:Economics Facility icon.png]]
+!Exchequer
+|Unlocks the ''Economics'' research facility and increases Goblin production by 100000%, plus an additional bonus based on ''Economics'' research points.
+<small>''Required once throughout the entire game play and does not count towards the bought upgrade stat.''</small>
+|All Goblin faction upgrades bought, ''Goblin Banks''
+|{{Number|1e121}} coins, {{Number|1e6}} Goblin coins
+|-
+! colspan="5" |Trophy & Upgrade
+|-
+![[File:Businessman.png]]
+!Businessman
+|Increase ''Economics'' upgrade slot by 1
+|R20+, Discover at least 10 ''Economics'' Researches
+|{{Number|2.5e152|table}}
+|-
+|}
+
+== Goblin Leges ==
+Upon reaching R100, the ''[[Alignments|Proof of Balance]]'' will become available, which provides a quest for an additional unique building, which when bought will grant access to the its Union upgrade.
+{| class="wikitable" style="width:100%;"
+! colspan="6" |Goblin Leges Requirements
+|-
+! colspan="2" |Name
+!Type
+!Description
+! width="110px" |Requirement
+! width="75px" |Cost
+|-
+![[File:G-research-quest.png]]
+! width="90px" |Slave Market Quest
+|Quest [[Upgrade]]
+|Grants access to Unique Building.
+|30K Neutral buildings
+|{{Number|1 Ud|table}}
+|-
+![[File:Slave Market Upgrade.png]]
+!Slave Market
+|Allegiances Upgrades
+|Upgrade ''Slave Pens'' to ''Slave Market'', boosting their production based on assistants and unlocking more unique perks for the building.
+{{Formula|stat|\left\lfloor 0.25 \times x^{0.75}\right\rfloor%|assistants}}<br />+Access to the Faction Union.
+|''Slave Market Quest''
+|{{Number|1 Td|table}}
+|-
+![[File:GoblinsUnion.png]]
+!Goblins Union
+|Faction Union
+|Grants access to Union Upgrade.
+|''Slave Market'' Unique Building
+|{{Number|1 Qi}} Elven Coins
+|-
+![[File:FoolsGems.png]]
+!Fools Gems
+|Union Upgrade
+|Increase production bonus from Gems based on the amount of ''Slave Markets'' you own.
+{{Formula|build|x^{0.5}|Slave Market}}
+|Goblins Union
+|{{Number|1 Nod|table}}
+|}
+
+<references />
+{{sitenav}}
+[[Category:Goblin| ]]
+[[Category:Factions]]

@@ -1,0 +1,206 @@
+{{tocright}}[[File:Undead_Faction_Building.png|thumb|left]]{{Description|"Undead are resilient and tireless, but most importantly, they can't die. Affiliating yourself with the Undead faction will grant you a steady flow of production which increases drastically as time passes."}}  
+== The Undead Faction ==
+[[File:Undead champion trophy.png|left|54x54px|Undead Champion Trophy]]
+[[File:True_Night.png|right|True Night]]
+Part of the original Evil [[Vanilla Factions]], the '''Undead''' become more powerful with time. Their Heritage and Bloodline give [[assistants]] based on playtime and reincarnations is more frequently used in late games.
+* '''[[Alignment]]''': '''''Evil'''''
+* '''[[Alignment#Leges|Leges]]''': '''''Order'''''
+* '''[[Spells|Faction Spell]]''': '''''Night Time''''' - The production of assistants is increased by 30% based on the amount of Necropolises you own for 20 seconds.  
+* '''[[Spells#Spell Upgrades|Spell Upgrade]]''':'''''True Night''''' - Increases ''Night Time''<nowiki/>'s production of assistants to 40% per Necropolis.   
+** Unlock requirement: Cast the ''Night Time'' spell after 11 pm and before 6 am.  
+* '''[[Heritage]]''':  You gain additional assistants based on the time spent in this game.<br />{{Formula|floor(1 + 1.5 * x^{0.5})|your Playtime (This Game) stat in hours}}
+* '''[[Bloodline]]''': Gain additional assistants based on the amount of times you [[Reincarnate|reincarnated]].<br />{{Formula|floor(8 * x^{0.8})|the number of times you have reincarnated}}  
+* '''[[Challenge|Challenge Reward]]''':  '''''Midnight Time''''' - Increase Night Time assistant bonus based on [[Stats|total time]] spent [[offline]].<br />{{Formula|0.2 \times x^{0.7}%|your Time Spent Offline (Total) stat in seconds}}  
+* '''[[Unique Buldings|Research Building]]''':  '''''Undercities''''' (from Necropolis)
+* '''[[Research|Research Facility]]''': '''''Alchemy'''''  
+* '''[[Buildings#Leges Unique Buildings|Leges Building]]''':  '''''Flesh Workshops''''' (from Orcish Arenas)
+* '''Faction Unlock Requirements''': None (All Vanilla Factions are enabled by default)
+
+== Tier 1 Upgrades ==
+{| class="wikitable" style="width:100%"
+|-
+! colspan="2" |Name
+! width="75px" |Cost
+! Effect
+|-
+![[File:Undead.png]]
+! width="110px" |''Undead Trade Treaty''
+| style="padding:0 8px;" |''20 Undead Coins''
+| style="padding:0 8px;" |''Unlocks Undead Upgrades.''
+|-
+![[File:Undead-faction-upgrade-11.png]]
+!The Walking Dead
+| style="padding:0 8px;" |{{Number|50 M|table}}
+| style="padding:0 8px;" |Increased Faction Coins find chance based on assistants owned.
+''Formula:'' <math>(\ln(1+x)^{1.75})%</math> where x is the amount of assistants you own.
+|-
+![[File:Undead-faction-upgrade-12.png]]
+!Deadened Muscles
+| style="padding:0 8px;" |{{Number|500 M|table}}
+| style="padding:0 8px;" |Increase the production of all buildings based on the highest amount of Necropolises built in this Reincarnation.
+''Formula:'' <math>(4\times x^{0.8})%</math> where x is the highest amount of ''Necropolises'' you built in this Reincarnation.
+|-
+![[File:Undead-faction-upgrade-13.png]]
+!Death Temples
+| style="padding:0 8px;" |{{Number|5 B|table}}
+| style="padding:0 8px;" |Increased Mana Regeneration based on the highest amount of Necropolises built in this Reincarnation.
+''Formula:'' <math>+(x^{0.3})</math> where x is the highest amount of Necropolises you built in this Reincarnation.
+|}
+
+== Tier 2 Upgrades ==
+{| class="wikitable" style="width:100%"
+|-
+! colspan="2" |Name
+! width="75px" |Cost
+! Effect
+|-
+![[File:UndeadTradeTreaty.png]]
+! width="110px" |''Undead Friendship Pact''
+| style="padding:0 8px;" |''100 Undead Coins''
+| style="padding:0 8px;" |''Unlocks more Undead Upgrades.''
+|-
+![[File:Undead-faction-upgrade-21.png]]
+!Undead Resilience
+| style="padding:0 8px;" |{{Number|500 B|table}}
+| style="padding:0 8px;" |Increased Night Time duration based on Undead coins found in this Era.
+''Formula:'' <math>(125\times \ln(1+x)^{2.5})%</math> where x is your  your Mana Regeneration.
+|-
+![[File:Undead-faction-upgrade-22.png]]
+!Corpse Supply
+| style="padding:0 8px;" |{{Number|5 T|table}}
+| style="padding:0 8px;" |Gain assistants based on time spent in this Era.
+''Formula:'' <math>+(0.4 \times x^{0.6})</math> where x  is time spent offline this Reincarnation in second.
+|-
+![[File:Undead-faction-upgrade-23.png]]
+!Deadly Impatience
+| style="padding:0 8px;" |{{Number|50 T|table}}
+| style="padding:0 8px;" |Increased the production of all buildings based on the activity time of your most used spell in this era. Also adds offline time in this Era to Night TIme activity time
+''Formula:'' <math>(0.75\times x^{0.75})%</math> where x is the time spent this game in second.
+|}
+
+== Tier 3 Upgrades ==
+{| class="wikitable" style="width:100%"
+|-
+! colspan="2" |Name
+! width="75px" |Cost
+! Effect
+|-
+![[File:Undead Alliance.png]]
+! width="110px" |''Undead Alliance''
+| style="padding:0 8px;" |''500 Undead Coins''
+| style="padding:0 8px;" |''Unlocks more Undead Upgrades.''
+|-
+![[File:Undead-faction-upgrade-31.png]]
+!Dead Fields
+| style="padding:0 8px;" |{{Number|5 Qa|table}}
+| style="padding:0 8px;" |All buildings and all spell activity counts 75% more.
+|-
+![[File:Undead-faction-upgrade-32.png]]
+!Tireless Workers
+| style="padding:0 8px;" |{{Number|50 Qa|table}}
+| style="padding:0 8px;" |Increased the production of assistants based on Mana Regeneration.
+|-
+![[File:Undead-faction-upgrade-33.png]]
+!Unholy Rituals
+| style="padding:0 8px;" |{{Number|500 Qa|table}}
+| style="padding:0 8px;" |Increased production and offline production based on time spent as offline in this Era.
+{{Formula|0.4 \times x^{0.8}|your Time Spent Offline this Reincarnation in second}}
+|}
+
+== Unique Buildings ==
+[[File:Undead_Unique_Building_Design.png|thumb|left]]
+[[File:Special-building-undead.png|right]] 
+[[File:Flesh Workshop.png|right]] 
+At R16, the Undead's  ''Necropolis'' can be upgraded to a [[Buildings#Unique Buildings|Unique Building]] called '''''Undercity''''', which is required for some [[challenges]] and [[research]] quests. 
+
+At R100, the Undead's ''Orcish Arenas'' can be upgraded to a [[Buildings#Unique Buildings|Unique Building]]: '''''Flesh Workshops''''', which when bought will grant access to the [[Faction Union]] upgrade.{{Clr}}
+
+== Undead Research ==
+[[File:Research-new-progress-system-msg.PNG|right|250px]]
+Upon reaching R16, the game advisor tells us that the Vanilla factions have gained tremendous power. Their power can be ours if we get ready and seek them again. 
+
+To unlock Undead research, play the Undead faction and simply follow the appearing quests (Do not [[prestige]]). These can be done in separate game plays.
+{| class="wikitable" style="width:100%;"
+! colspan="5" |Undead Research Requirements
+|-
+! colspan="2" |Name
+!In-game Description
+!Requirements
+!Cost
+|-
+![[File:U-research-quest.png]]
+! width="90px" |Undercities Quest
+|''Hello there. The dead stand ready. Give them a place to rise and live again... Build enough Necropolises, we'll take care of the rest.''
+<small>''Required once throughout the entire game play and does not count towards the bought upgrade stat.''</small>
+|R16 + 1750 ''Necropolises''
+|{{Number|10 Dtg}}
+|-
+![[File:Undercity_icon.png]]
+!Undercities
+|Upgrade ''Necropolises'' To ''Undercities'', boosting their production bases on time spent in this game and unlocking more unique perks for the building.<br />{{Formula|stat|\left(10 \times \left(2x\right)^{0.75}\right)%|Playtime (This Game)}}
+|Buy ''Undercities Quest''
+|{{Number|10 Ttg}}
+|-
+![[File:Alchemy Facility icon.png]]
+!Laboratory
+|Unlocks the ''Alchemy'' research facility and increases Undead production by 100000%, plus an additional bonus based on ''Alchemy'' research points.
+<small>''Required once throughout the entire game play and does not count towards the bought upgrade stat.''</small>
+|All Undead faction upgrades bought, ''Undercities''
+|{{Number|1e121}} coins, {{Number|1e6}} Undead coins
+|-
+! colspan="5" |Trophy & Upgrade
+|-
+![[File:Apothecary.png]]
+!Apothecary
+|Increase ''Alchemy'' upgrade slot by 1
+|R17+, Discover at least 10 ''Alchemy'' Researches
+|{{Number|2.5e152}}
+|-
+|}
+
+== Undead Leges ==
+Upon reaching R100, the ''[[Alignments|Proof of Order]]'' will become available, which provides a quest for an additional unique building, which when bought will grant access to the its Union upgrade.
+{| class="wikitable" style="width:100%;"
+! colspan="6" |Undead Leges Requirements
+|-
+! colspan="2" |Name
+!Type
+!Description
+! width="110px" |Requirement
+! width="75px" |Cost
+|-
+![[File:U-research-quest.png]]
+! width="90px"|Flesh Workshop Quest
+|Quest Upgrade
+|Grants access to Unique Building.
+|{{Number|85M}}% offline production bonus
+|{{Number|1 Ud|table}}
+|-
+![[File:Flesh Workshop Upgrade.png]]
+!Flesh Workshop
+|Allegiances Upgrades
+|Upgrade ''Orcish Arenas'' to ''Flesh Workshops'', boosting their production based on your mana regeneration rate and unlocking more unique perks for the building.
+{{Formula|stat|\left(2 \times x^{0.6}\right)|mana regen per second}}<br />+Access to the Faction Union.
+|''Flesh Workshop Quest''
+|{{Number|1 Td|table}}
+|-
+![[File:UndeadUnion.png]]
+!Undead Union
+|Faction Union
+|Grants access to Union Upgrade.
+|''Flesh Workshop'' Unique Building
+|{{Number|1 Qi}} Elven Coins
+|-
+![[File:FleshServants.png]]
+!Flesh Servants
+|Union Upgrade
+|Increase assistants based on the amount of ''Flesh Workshops'' you own.
+{{Formula|build|1.2 \times x^{0.65}|Flesh Workshop}}
+|Undead Union
+|{{Number|1 Nod|table}}
+|}
+
+
+{{Sitenav}}
+[[Category:Undead| ]]
+[[Category:Factions]]

@@ -1,0 +1,241 @@
+R220+ Builds (Not updated for v4.2) 
+ Artifact Sets
+ Finding all the faction artifacts for a specific faction (R100+) will also unlock a new selection of upgrades called "Artifact Sets". You will be able to pick one per game only, similar to Bloodlines and Lineages. Abdicating will reset your choice and allow to pick another.
+ Requires all lore artifacts related to the faction to use its set. All artifacts can be found on the Lore Artifacts page.
+ Fairy Set 
+ Requirement : R100+, Pink Carrot, Bottled Voice, Silk Cloth
+ Effect : Farms, Inns and Blacksmiths count more based on the amount of time spent with Fairies in this Reincarnation.
+ Formula : (2 * ln(1 + x) ^ 1.5)%, where x is time spent with Fairies in this Reincarnation.
+ Second Effect Requirement : R220+, Glowing Wing
+ Effect : Multiplicatively increase Maximum Mana based on the amount of Good Buildings owned.
+ Formula : (x ^ 0.5)%, where x is the amount of Good Buildings you own.
+ " coords="10,10,64,64" shape="rect">
+ Elven Set 
+ Requirement : R100+, Lucky Clover, Mini-treasure, Raw Emerald
+ Effect : Autoclicks 10 times per second.
+ Note : Also generates the same amount of clicks offline.
+ Second Effect Requirement : R220+, Sylvan Mirror
+ Effect : Clicks count more based on automatic clicks.
+ Formula : (ln(1 + x) ^ 2.5 + x ^ 0.25)%, where x is automatic clicks this game.
+ Note : NOT affected by any 'clicks count more' effects.
+ " coords="70,10,124,64" shape="rect">
+ Angel Set 
+ Requirement : R100+, Pillar Fragment, Divine Sword, Fossilized Wing
+ Effect : Additively increase Mana Regeneration based on highest amount of spells cast in a single game.
+ Formula : +(3.5 * x ^ 0.35), where x is spells cast in a single game.
+ Second Effect Requirement : R220+, Solid Cloud
+ Effect : Increase the duration of all spells based on the amount of Unique Buildings you own.
+ Formula : (0.7 * x ^ 0.7)%, where x is the amount of Unique Buildings you own.
+ " coords="130,10,184,64" shape="rect">
+ Goblin Set 
+ Requirement : R100+, Ancient Coin Piece, Goblin Purse, Spiked Whip
+ Effect : Increase Faction Coin find chance additively and multiplicatively based on time spent in this game.
+ Additive Formula : +(70 * x ^ 0.7)%, where x is time spent in this game.
+ Multiplicative Formula : (0.6 * x ^ 0.6)%, where x is time spent in this game.
+ Second Effect Requirement : R220+, Orc Fang Necklace
+ Effect : Each time you cast a spell, you also cast free Tax Collections based on time spent in this game.
+ Formula : +(floor(1 + 0.25 * ln(1 + x) ^ 1.5)), where x is time spent this game.
+ " coords="10,70,64,124" shape="rect">
+ Undead Set 
+ Requirement : R100+, Rotten Organ, Jaw Bone, DustyCoffin
+ Effect : Additively Increase max mana based on offline bonus.
+ Formula : +(7 * ln(1 + x) ^ 3.5), where x is offline Multiplier.
+ Second Effect Requirement : R220+, Blood Chalice
+ Effect : Multiplicatively increases production bonus from Gems based on Faction Coins found this game.
+ Formula : (log10(1 + x) ^ 2)%, where x is Faction Coins found this game.
+ " coords="70,70,124,124" shape="rect">
+ Demon Set 
+ Requirement : R100+, Demonic Figurine, Demon Horn, Crystallized Lava
+ Effect : Trophies count more based on the amount of the three highest tier buildings you own.
+ Formula : (0.5 * x ^ 0.5)%, where x is the sum of the three highest tier buildings.
+ Second Effect Requirement : R220+, Demon Tail
+ Effect : Increase production bonus from Gems based on the amount of Evil spells cast in this Reincarnation.
+ Formula : +(2.25 * ln(1 + x) ^ 2.25)%, where x is Evil Spell Casts this Reincarnation.
+ " coords="130,70,184,124" shape="rect">
+ Titan Set 
+ Requirement : R100+, Huge Titan Statue, Titan Shield, Titan Helmet
+ Effect : Increase Royal Exchange Bonus additively and multiplicatively based on time spent in this game.
+ Additive Formula : +(0.3 * x ^ 0.7)%, where x is time spent in this game.
+ Multiplicative Formula : (0.45 * x ^ 0.45)%, where x is time spent in this game.
+ Second Effect Requirement : R220+, Frozen Lightning
+ Effect : Whenever you cast a spell, your production is increased based on Lightning Strike activity in this Reincarnation for 20 seconds. If another spell is cast while this effect is active, it is restored to full duration.
+ Formula : (x ^ 0.7)%, where x is Lightning Strike activity time this Reincarnation.
+ " coords="10,130,64,184" shape="rect">
+ Druid Set 
+ Requirement : R100+, Glyph Table, Stone Of Balance, Branch of the Life Tree
+ Effect : Increase the duration of each spell based on their respective activity time (This Game).
+ Formula : (x ^ 0.5)%, where x is each individual spell's activity time This Game in seconds.
+ Second Effect Requirement : R220+, Primal Leaf
+ Effect : Lineage levels count more based on spell casts in this game.
+ Formula : (0.5 * log10(1 + x) ^ 1.5)%, where x is spell casts this game.
+ " coords="70,130,124,184" shape="rect">
+ Faceless Set 
+ Requirement : R100+, Translucent Goo, Octopus-shaped Helmet, Nightmare Figment
+ Effect : Additively gain Assistants based on the highest amount of Assistants you had in a previous game.
+ Formula : +(0.45 * x ^ 0.45), where x is the highest amount of Assistants you had in a previous game.
+ Second Effect Requirement : R220+, The Blackest Ink
+ Effect : Increases spell duration based on time spent being offline in this game.
+ Formula : (0.5 * x ^ 0.5)%, where x is offline time this game.
+ " coords="130,130,184,184" shape="rect">
+ Dwarven Set 
+ Requirement : R116+, Dwarven Bow, Stone Tankard, Beard Hair
+ Effect : Multiplicatively increase Assistants based on your Royal Exchange bonus.
+ Formula : (8 * x ^ 0.4)%, where x is Royal Exchange bonus.
+ Second Effect Requirement : R235+, Dwarven Anvil
+ Effect : Multiplicatively increase Mana Regeneration based on time spent in this game.
+ Formula : (0.7 * x ^ 0.7)%, where x is your time spent in this game.
+ " coords="10,190,64,244" shape="rect">
+ Drow Set 
+ Requirement : R116+, Ceremonial Dagger, Arachnid Figurine, Poison Vial
+ Effect : Spells cast count more based on time spent as Evil in this Reincarnation.
+ Formula : (6 * ln(1 + x) ^ 1.6)%, where x is time spent as Evil in this Reincarnation.
+ Second Effect Requirement : R235+, Stiletto Heel
+ Effect : Remove Ascension penalties from Royal Exchange bonus, starting from 0 and removing more levels of penalty over time and increase their production based on the amount of Gems you own.
+ Formula : (log10(1 + x) ^ 2)%, where x is the amount of Gems you own.
+ Penalties Reduction : (round((0.3 * x / 3600) ^ 0.5) - 1), where x is time spent in this game.
+ Note : Penalty Reduction unaffected by Set power bonuses.
+ " coords="70,190,124,244" shape="rect">
+ Dragon Set 
+ Requirement : R116+, Dragon Fang, Dragon Soul, Dragon Scale
+ Effect : Increase the duration of all spells based on spells cast in this Reincarnation.
+ Formula : (1.25 * ln(1 + x) ^ 1.25)%, where x is spells cast in this Reincarnation.
+ Second Effect Requirement : R235+, Eye of the Dragon
+ Effect : All alignment spells gain 1 additional Tier and all spells activity time count more based on the amount of excavations you made, including resets.
+ Formula : (0.25 * (x * (y + 1)) ^ 0.5)%, where x is the number of excavations made, and y is your number of resets in this game.
+ " coords="130,190,184,244" shape="rect">
+ Mercenary Set 
+ Requirement : R160+, Steel Plate, Black Sword, Mercenary Insignia
+ Effect : Allows you to pick the same lineage as your faction including Prestige/Elite lineage of same alignment.
+ Effect : Lineage levels count 25% more.
+ " coords="10,250,64,304" shape="rect">
+ Fairy Set 
+ Requirement : R100+, Pink Carrot, Bottled Voice, Silk Cloth
+ Effect : Farms, Inns and Blacksmiths count more based on the amount of time spent with Fairies in this Reincarnation.
+ Formula : (2 * ln(1 + x) ^ 1.5)%, where x is time spent with Fairies in this Reincarnation.
+ Second Effect Requirement : R220+, Glowing Wing
+ Effect : Multiplicatively increase Maximum Mana based on the amount of Good Buildings owned.
+ Formula : (x ^ 0.5)%, where x is the amount of Good Buildings you own.
+ Elven Set 
+ Requirement : R100+, Lucky Clover, Mini-treasure, Raw Emerald
+ Effect : Autoclicks 10 times per second.
+ Note : Also generates the same amount of clicks offline.
+ Second Effect Requirement : R220+, Sylvan Mirror
+ Effect : Clicks count more based on automatic clicks.
+ Formula : (ln(1 + x) ^ 2.5 + x ^ 0.25)%, where x is automatic clicks this game.
+ Note : NOT affected by any "clicks count more" effects.
+ Angel Set 
+ Requirement : R100+, Pillar Fragment, Divine Sword, Fossilized Wing
+ Effect : Additively increase Mana Regeneration based on highest amount of spells cast in a single game.
+ Formula : +(3.5 * x ^ 0.35), where x is spells cast in a single game.
+ Second Effect Requirement : R220+, Solid Cloud
+ Effect : Increase the duration of all spells based on the amount of Unique Buildings you own.
+ Formula : (0.7 * x ^ 0.7)%, where x is the amount of Unique Buildings you own.
+ Goblin Set 
+ Requirement : R100+, Ancient Coin Piece, Goblin Purse, Spiked Whip
+ Effect : Increase Faction Coin find chance additively and multiplicatively based on time spent in this game.
+ Additive Formula : +(70 * x ^ 0.7)%, where x is time spent in this game.
+ Multiplicative Formula : (0.6 * x ^ 0.6)%, where x is time spent in this game.
+ Second Effect Requirement : R220+, Orc Fang Necklace
+ Effect : Each time you cast a spell, you also cast free Tax Collections based on time spent in this game.
+ Formula : +(floor(1 + 0.25 * ln(1 + x) ^ 1.5)), where x is time spent this game.
+ Undead Set 
+ Requirement : R100+, Rotten Organ, Jaw Bone, DustyCoffin
+ Effect : Additively increase max mana based on offline bonus.
+ Formula : +(7 * ln(1 + x) ^ 3.5), where x is offline Multiplier.
+ Second Effect Requirement : R220+, Blood Chalice
+ Effect : Multiplicatively increases production bonus from gems based on Faction Coins found this game.
+ Formula : (log10(1 + x) ^ 2)%, where x is faction coins this game.
+ Demon Set 
+ Requirement : R100+, Demonic Figurine, Demon Horn, Crystallized Lava
+ Effect : Trophies count more based on the amount of the three highest tier buildings you own.
+ Formula : (0.5 * x ^ 0.5)%, where x is the sum of the three highest tier buildings.
+ Second Effect Requirement : R220+, Demon Tail
+ Effect : Increase production bonus from Gems based on the amount of Evil spells cast in this Reincarnation.
+ Formula : +(2.25 * ln(1 + x) ^ 2.25)%, where x is Evil Spell Casts this Reincarnation.
+ Titan Set 
+ Requirement : R100+, Huge Titan Statue, Titan Shield, Titan Helmet
+ Effect : Increase Royal Exchange Bonus additively and multiplicatively based on time spent in this game.
+ Additive Formula : +(0.3 * x ^ 0.7)%, where x is time spent in this game.
+ Multiplicative Formula : (0.45 * x ^ 0.45)%, where x is time spent in this game.
+ Second Effect Requirement : R220+, Frozen Lightning
+ Effect : Whenever you cast a spell, your production is increased based on Lightning Strike activity in this Reincarnation for 20 seconds. If another spell is cast while this effect is active, it is restored to full duration.
+ Formula : (x ^ 0.7)%, where x is Lightning Strike activity time this Reincarnation.
+ Druid Set 
+ Requirement : R100+, Glyph Table, Stone Of Balance, Branch of the Life Tree
+ Effect : Increase the duration of each spell based on their respective activity time (This Game).
+ Formula : (x ^ 0.5)%, where x is each individual spell's activity time This Game in seconds.
+ Second Effect Requirement : R220+, Primal Leaf
+ Effect : Lineage levels count more based on spell casts in this game.
+ Formula : (0.5 * log10(1 + x) ^ 1.5)%, where x is spell casts this game.
+ Faceless Set 
+ Requirement : R100+, Translucent Goo, Octopus-shaped Helmet, Nightmare Figment
+ Effect : Additively gain Assistants based on the highest amount of Assistants you had in a previous game.
+ Formula : +(0.45 * x ^ 0.45), where x is the highest amount of Assistants you had in a previous game.
+ Second Effect Requirement : R220+, The Blackest Ink
+ Effect : Increases spell duration based on time spent being offline in this game.
+ Formula : (0.5 * x ^ 0.5)%, where x is offline time this game.
+ Dwarven Set 
+ Requirement : R116+, Dwarven Bow, Stone Tankard, Beard Hair
+ Effect : Multiplicatively increase Assistants based on your Royal Exchange bonus.
+ Formula : (8 * x ^ 0.4)%, where x is Royal Exchange bonus.
+ Second Effect Requirement : R235+, Dwarven Anvil
+ Effect : Multiplicatively increase Mana Regeneration based on time spent in this game.
+ Formula : (0.7 * x ^ 0.7)%, where x is your time spent in this game.
+ Drow Set 
+ Requirement : R116+, Ceremonial Dagger, Arachnid Figurine, Poison Vial
+ Effect : Spells cast count more based on time spent as Evil in this Reincarnation.
+ Formula : (6 * ln(1 + x) ^ 1.6)%, where x is time spent as Evil in this Reincarnation.
+ Second Effect Requirement : R235+, Stiletto Heel
+ Effect : Remove Ascension penalties from Royal Exchange bonus, starting from 0 and removing more levels of penalty over time and increase their production based on the amount of Gems you own.
+ Formula : (log10(1 + x) ^ 2)%, where x is the amount of Gems you own.
+ Penalty Reduction : (round((0.3 * x / 3600) ^ 0.5) - 1), where x is time spent in this game.
+ Penalties Removed
+ Time
+ 1
+ 7 Hours 30 Minutes
+ 2
+ 20 Hours 50 Minutes
+ 3
+ 1 Day 16 Hours 50 Minutes
+ 4
+ 2 Days 19 Hours 30 Minutes
+ Note : Penalty Reduction unaffected by Set power bonuses.
+ Dragon Set 
+ Requirement : R116+, Dragon Fang, Dragon Soul, Dragon Scale
+ Effect : Increase the duration of all spells based on spells cast in this Reincarnation.
+ Formula : (1.25 * ln(1 + x) ^ 1.25)%, where x is spells cast in this Reincarnation.
+ Second Effect Requirement : R235+, Eye of the Dragon
+ Effect : All alignment spells gain 1 additional Tier and all spells activity time count more based on the amount of excavations you made, including resets.
+ Formula : (0.25 * (x * (y + 1)) ^ 0.5)%, where x is the number of excavations made, and y is your number of resets in this game.
+ Mercenary Set 
+ Requirement : R160+, Steel Plate, Black Sword, Mercenary Insignia
+ Effect : Allows you to pick the same lineage as your faction including Prestige/Elite lineage of same alignment.
+ Effect : Lineage levels count 25% more.
+ | Resources | Soft Resets | Buildings | Heritages | Bloodlines 
+ | Spells | Excavations | Challenges | Upgrades | Trophies 
+ | Factions | Research |
+ | Merc Builds | Research Builds | Prestige Builds | Dragon Unlock | Neutral Prestige Builds | Research Tree |
+ | Good : Fairy, Elf , Angel Evil : Goblin , Undead , Demon Neutral : Titan , Druid , Faceless"> Vanilla Factions 
+ | Fairy Elf Angel "> Good Factions 
+ | Goblin Undead Demon"> Evil Factions 
+ | Titan Druid Faceless"> Neutral Factions 
+ | Dwarf Drow Dragon"> Prestige Factions 
+ | Archon Djinn Makers"> A2 Elite Factions |
+ | Events | Latest Major Patch | Changelog | Notation | Terminology | Tools | Kongregate Links |
+ | Fairy 
+ | Elven 
+ | Angel 
+ | Goblin 
+ | Undead 
+ | Demon 
+ | Titan 
+ | Druid 
+ | Faceless |
+ | Mercenary 
+ | Dwarf 
+ | Drow 
+ | Dragon 
+ | Archon 
+ | Djinn 
+ | Makers |
+ 
