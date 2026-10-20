@@ -34,8 +34,11 @@ ALIAS = {'TC': '征税', 'CtA': '动员令', 'HoL': '传说圣殿', 'BF': '嗜�
 # 遗物表里阵营遗物按全阶英豪奖杯的顺序排，每个阵营两个
 ART_FACTIONS = ['仙灵', '精灵', '天使', '地精', '亡灵', '恶魔', '泰坦', '德鲁伊', '无面者', '矮人', '卓尔', '佣兵']
 # 程序版本：改了功能就加版本号，在 CHANGES 最前面写这一版改了什么
-VERSION = '0.2.2'  # 还没到正式发布，用 0.x（用户要求）
+VERSION = '0.2.3'  # 还没到正式发布，用 0.x（用户要求）
 CHANGES = [
+    ('0.2.3', '2026-10-20', [
+        '修复建筑升级页鼠标移上去整块变色（和存档页的样式重名）',
+    ]),
     ('0.2.2', '2026-10-20', [
         '建筑升级页改成顶上选建筑、下面只列这个建筑的升级（数量、升级名、产能加成），不再是 50 多列的大表；记住上次看的建筑',
         '传说圣殿下面列出独特建筑升级',
@@ -416,13 +419,13 @@ def build_buildings(ws):
                     get_column_letter(c + 2), r, html.escape(need), html.escape(zh), html.escape(en), TERMS.render(val(r, c + 3))))
         panels.append('<div class="bd-p" id="%s" hidden>%s</div>' % (cid, ''.join(out)))
     note = next((val(r, 1) for r in range(rows[-1] + 1, ws.max_row + 1) if val(r, 1)), '')
-    return ('<div class="bd"><div class="bd-tabs">%s</div>%s%s</div>' % (''.join(tabs), ''.join(panels),
+    return ('<div class="bd-page"><div class="bd-tabs">%s</div>%s%s</div>' % (''.join(tabs), ''.join(panels),
             '<p class="bd-note">%s</p>' % TERMS.render(note) if note else '') + BD_JS)
 
 
 # 建筑升级页：点建筑切换面板，记住上次看的建筑；从别处跳到某个升级时先切到它所在的建筑（捕获阶段，赶在页面路由滚动之前）
 BD_JS = """<script>(function(){
-  var root = document.querySelector('.bd'), btns = [].slice.call(root.querySelectorAll('.bd-tabs button'));
+  var root = document.querySelector('.bd-page'), btns = [].slice.call(root.querySelectorAll('.bd-tabs button'));
   function pick(id){
     btns.forEach(function(b){ b.classList.toggle('on', b.dataset.p === id); });
     root.querySelectorAll('.bd-p').forEach(function(p){ p.hidden = p.id !== id; });
@@ -809,7 +812,7 @@ td.flash{outline:3px solid #f59e0b;outline-offset:-2px;background:var(--flash)!i
 .bd-ub .bd-n{font-weight:normal;font-size:12.5px;color:var(--muted)}
 .bd-sub{font-size:15px;font-weight:600;margin:24px 2px 6px}
 .bd-note{margin:18px 2px 0;font-size:12.5px;color:var(--muted)}
-.bd .nil{color:#c9d1dd}
+.bd-page .nil{color:#c9d1dd}
 /* 已获得 / 未获得（读到存档后才出现）：已获得图标描蓝边带勾，未获得变灰，鼠标移上去恢复 */
 /* 一个小胶囊，往下滚时浮在内容上面（带阴影），不占满整行 */
 .own-bar{display:flex;align-items:center;gap:14px;height:36px;box-sizing:border-box;padding:0 16px 0 4px;
