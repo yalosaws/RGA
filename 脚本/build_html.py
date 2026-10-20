@@ -34,8 +34,12 @@ ALIAS = {'TC': '征税', 'CtA': '动员令', 'HoL': '传说圣殿', 'BF': '嗜�
 # 遗物表里阵营遗物按全阶英豪奖杯的顺序排，每个阵营两个
 ART_FACTIONS = ['仙灵', '精灵', '天使', '地精', '亡灵', '恶魔', '泰坦', '德鲁伊', '无面者', '矮人', '卓尔', '佣兵']
 # 程序版本：改了功能就加版本号，在 CHANGES 最前面写这一版改了什么
-VERSION = '1.0.2'
+VERSION = '1.0.3'
 CHANGES = [
+    ('1.0.3', '2026-10-20', [
+        '侧栏「工具」放到最上面，去掉「法术预报」「遗物预测」两项（在存档页里切换）',
+        '遗物、隐藏奖杯页的搜索框挪到这一行的右边',
+    ]),
     ('1.0.2', '2026-10-20', [
         '去掉各页标题；攻略的颜色图例改成悬浮小胶囊，去掉开头的来源说明框',
         '遗物、隐藏奖杯的搜索框和「已获得」切换并排成两个小胶囊，往下滚时一起浮着',
@@ -392,7 +396,7 @@ def main():
     save_js, save_miss = '', []
     if os.path.isdir(save_tools.RG):
         save_html, save_js, save_miss = save_tools.build(find, {'t%d-%s' % c: code for code, c in research.items()})
-        nav += '<div class="grp">工具</div>' + item('save', '我的存档') + item('save/rws', '法术预报') + item('save/arch', '遗物预测')
+        nav = '<div class="grp">工具</div>' + item('save', '我的存档') + nav  # 工具放最上面；法术预报、遗物预测在存档页里切换
         body += save_html
     else:
         print('没有 工具/RG-tools，跳过「我的存档」（git clone https://github.com/shadowgull/dox4242.github.io 工具/RG-tools）')
@@ -505,8 +509,9 @@ table.sheet img{width:40px;height:40px;object-fit:contain;display:block;margin:0
 td.flash{outline:3px solid #f59e0b;outline-offset:-2px;background:var(--flash)!important;transition:background 1.5s}
 /* 遗物：卡片列表 */
 /* 顶上并排两个小胶囊（已获得切换、搜索框），往下滚时浮在内容上面 */
-.cl-top{position:sticky;top:6px;z-index:3;display:flex;flex-wrap:wrap;align-items:center;gap:10px;width:max-content;max-width:100%}
-.cl-q{width:320px;max-width:100%;height:36px;box-sizing:border-box;padding:0 16px;border:1px solid transparent;border-radius:999px;font:inherit;font-size:13px;
+.cl-top{position:sticky;top:6px;z-index:3;display:flex;flex-wrap:wrap;align-items:center;gap:10px;max-width:100%}
+.cl-top{pointer-events:none}.cl-top>*{pointer-events:auto}  /* 两个胶囊中间的空白不挡下面的卡片 */
+.cl-q{width:320px;max-width:100%;margin-left:auto;height:36px;box-sizing:border-box;padding:0 16px;border:1px solid transparent;border-radius:999px;font:inherit;font-size:13px;
   background:#e6ecf5;transition:box-shadow .25s,background .25s}
 .cl-q:focus{outline:none;border-color:#bcd0f7;background:#fff}
 .cl-top.float .cl-q,.cl-top.float .own-bar{background:rgba(255,255,255,.92);backdrop-filter:blur(8px);box-shadow:0 8px 28px rgba(20,40,90,.16),0 0 0 1px rgba(20,40,90,.05)}
@@ -590,7 +595,7 @@ html.app.max .grip{display:none}
     var sec = h.split(/[-\/]/)[0], sub = h.indexOf('/') > 0 ? h.split('/')[1] : '';  // 「save/rws」：存档栏里的子页
     if (!document.getElementById('sec-' + sec)) { sec = 'r0'; h = 'r0'; sub = ''; }
     secs.forEach(function(s){ s.hidden = s.id !== 'sec-' + sec; });
-    navs.forEach(function(a){ a.classList.toggle('on', a.dataset.sec === (sub ? sec + '/' + sub : sec)); });
+    navs.forEach(function(a){ a.classList.toggle('on', a.dataset.sec === sec); });  // 存档子页（save/rws）也算「我的存档」
     slide();
     if (sub) h = sec;
     window.dispatchEvent(new CustomEvent('subpage', {detail: {sec: sec, sub: sub}}));
