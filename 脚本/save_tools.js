@@ -54,8 +54,8 @@
   }
   function summary(save) {
     var f = function (id) { var x = util.assoc.faction.find(function (y) { return y.id == id; }); return x && id >= 0 ? zh(x.name) : ''; };
-    return 'R' + save.reincarnation + (save.ascension ? ' A' + save.ascension : ' A0') + ' · ' +
-      [f(save.faction), f(save.prestigeFaction), f(save.elitePrestigeFaction)].filter(Boolean).join('/');
+    var fs = [f(save.faction), f(save.prestigeFaction), f(save.elitePrestigeFaction)].filter(Boolean).join('/');
+    return 'R' + save.reincarnation + (save.ascension ? ' A' + save.ascension : ' A0') + ' · ' + (fs || '未结盟');
   }
 
   var cur = null;  // {str, save}
@@ -662,6 +662,7 @@
   function appMode() {
     if (app.on) return;
     app.on = true;
+    windowControls();
     if (!location.hash) location.hash = 'save';
     $('sv-game').hidden = false;
     $('sv-pastebox').hidden = true;
@@ -676,6 +677,41 @@
     $('sv-pastetoggle').addEventListener('click', function () { $('sv-pastebox').hidden = !$('sv-pastebox').hidden; });
     readGame(true);
     tick();
+  }
+  // 无边框窗口：标题栏按钮、双击标题栏最大化、右下角拖动改大小
+  function windowControls() {
+    var api = window.pywebview.api, root = document.documentElement;
+    root.classList.add('app');
+    var max = function () {
+      api.toggle_maximize().then(function (m) {
+        root.classList.toggle('max', m);
+        document.querySelector('.ab-btns [data-w=max]').title = m ? '还原' : '最大化';
+      });
+    };
+    document.querySelector('.ab-btns').addEventListener('click', function (e) {
+      var b = e.target.closest('button'); if (!b) return;
+      if (b.dataset.w === 'min') api.minimize();
+      else if (b.dataset.w === 'max') max();
+      else if (b.dataset.w === 'close') api.close();
+    });
+    document.querySelector('.ab-drag').addEventListener('dblclick', max);
+    var grip = document.querySelector('.grip');
+    grip.addEventListener('mousedown', function (e) {
+      e.preventDefault();
+      var x0 = e.screenX, y0 = e.screenY, busy = false, pending = null;
+      api.size().then(function (sz) {
+        var move = function (ev) {
+          pending = [sz.w + ev.screenX - x0, sz.h + ev.screenY - y0];
+          if (busy) return;
+          busy = true;
+          var p = pending; pending = null;
+          api.resize(p[0], p[1]).then(function () { busy = false; if (pending) move({screenX: pending[0] - sz.w + x0, screenY: pending[1] - sz.h + y0}); });
+        };
+        var up = function () { window.removeEventListener('mousemove', move); window.removeEventListener('mouseup', up); };
+        window.addEventListener('mousemove', move);
+        window.addEventListener('mouseup', up);
+      });
+    });
   }
   function tick() {
     clearInterval(app.timer);

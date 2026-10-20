@@ -1,8 +1,10 @@
-"""Realm Grinder 助手：把「Realm Grinder 资料.html」装进桌面窗口，并直接读取本机游戏存档。
+"""Realm Grinder 助手：把「Realm Grinder 资料.html」装进无边框圆角窗口，并直接读取本机游戏存档。
 
 运行：python 应用/rg_app.py（需要 pywebview）；打包成 exe：python 应用/build_exe.py
-网页通过 window.pywebview.api 调用下面 Api 的方法（只读，不会改动存档）。
+网页通过 window.pywebview.api 调用下面 Api 的方法：读存档（只读，不会改动存档）和窗口按钮。
+标题栏是网页自己画的（.appbar），带 pywebview-drag-region 的部分可以拖动窗口。
 """
+import ctypes
 import glob
 import os
 import re
@@ -15,10 +17,11 @@ PAGE = 'Realm Grinder 资料.html'
 SAVE_RE = re.compile(rb'\$\d{2}s[A-Za-z0-9+/=]+\$e')
 
 
-def page_path():
-    if getattr(sys, 'frozen', False):  # PyInstaller 打包后，网页在临时解压目录里
-        return os.path.join(sys._MEIPASS, PAGE)
-    return os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), PAGE)
+def res_path(name):
+    if getattr(sys, 'frozen', False):  # PyInstaller 打包后，资源在临时解压目录里
+        return os.path.join(sys._MEIPASS, name)
+    here = os.path.dirname(os.path.abspath(__file__))
+    return os.path.join(os.path.dirname(here) if name == PAGE else here, name)
 
 
 def find_saves():
@@ -30,7 +33,22 @@ def find_saves():
     return sorted(files, key=os.path.getmtime, reverse=True)
 
 
+def round_corners(window):
+    """Windows 11：让无边框窗口用系统的圆角和阴影（Windows 10 上没有效果，也不报错）"""
+    try:
+        hwnd = window.native.Handle.ToInt64()
+        pref = ctypes.c_int(2)  # DWMWCP_ROUND
+        ctypes.windll.dwmapi.DwmSetWindowAttribute(ctypes.c_void_p(hwnd), 33, ctypes.byref(pref), ctypes.sizeof(pref))
+    except Exception:
+        pass
+
+
 class Api:
+    def __init__(self):
+        self._win = None
+        self._max = False
+
+    # ---- 存档 ----
     def read_save(self):
         """返回最新的存档字符串和文件修改时间（毫秒）"""
         files = find_saves()
@@ -53,13 +71,39 @@ class Api:
         if os.path.isdir(folder):
             os.startfile(folder)
 
+    # ---- 窗口按钮（无边框窗口自己画标题栏） ----
+    def minimize(self):
+        self._win.minimize()
+
+    def toggle_maximize(self):
+        if self._max:
+            self._win.restore()
+        else:
+            self._win.maximize()
+        self._max = not self._max
+        return self._max
+
+    def close(self):
+        self._win.destroy()
+
+    def size(self):
+        return {'w': self._win.width, 'h': self._win.height}
+
+    def resize(self, w, h):
+        if not self._max:
+            self._win.resize(max(640, int(w)), max(420, int(h)))
+
 
 def main():
     storage = os.path.join(os.environ.get('LOCALAPPDATA', os.path.expanduser('~')), 'RealmGrinder助手')
-    webview.create_window(TITLE, page_path(), js_api=Api(), width=1280, height=860,
-                          min_size=(480, 400), text_select=True, zoomable=True)
+    api = Api()
+    win = webview.create_window(TITLE, res_path(PAGE), js_api=api, width=1280, height=860, min_size=(640, 420),
+                                frameless=True, easy_drag=False, shadow=True, text_select=True, zoomable=True,
+                                background_color='#F5F3FA')
+    api._win = win
+    win.events.shown += lambda: round_corners(win)
     # private_mode=False + storage_path：网页的 localStorage（保存过的存档、页面设置）在关掉程序后还在
-    webview.start(private_mode=False, storage_path=storage)
+    webview.start(private_mode=False, storage_path=storage, icon=res_path('icon.ico'))
 
 
 if __name__ == '__main__':

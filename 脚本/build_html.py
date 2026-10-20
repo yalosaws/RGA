@@ -216,6 +216,7 @@ def main():
     else:
         print('没有 工具/RG-tools，跳过「我的存档」（git clone https://github.com/shadowgull/dox4242.github.io 工具/RG-tools）')
     page = TEMPLATE.replace('%%NAV%%', nav).replace('%%BODY%%', body).replace('%%TCOLORS%%', md2html.CSS[md2html.CSS.index('.t-fa'):md2html.CSS.index('[class^')])
+    page = page.replace('%%APPBAR%%', appbar())
     page = page.replace('%%SAVEJS%%', save_js)  # 最后替换：脚本里可能有别的 %% 记号
     open(DST, 'w', encoding='utf-8').write(page)
     print('写入', DST, '%.1f MB' % (len(page.encode()) / 1e6))
@@ -224,6 +225,18 @@ def main():
         print('  ', x)
     if save_miss:
         print('存档工具：%d 个名字没翻译，显示英文：' % len(save_miss), '、'.join(save_miss))
+
+
+def appbar():
+    """程序模式的标题栏（网页里平时隐藏）：图标 + 名字（可拖动窗口）+ 最小化/最大化/关闭"""
+    icon = os.path.join(ROOT, '应用', 'icon.png')
+    img = ('<img alt="" src="data:image/png;base64,%s">' % base64.b64encode(open(icon, 'rb').read()).decode()) if os.path.exists(icon) else ''
+    btn = '<button data-w="%s" title="%s"%s><svg viewBox="0 0 10 10">%s</svg></button>'
+    return ('<div class="appbar"><div class="pywebview-drag-region ab-drag">%s<span>Realm Grinder 助手</span></div><div class="ab-btns">' % img +
+            btn % ('min', '最小化', '', '<path d="M0 5h10"/>') +
+            btn % ('max', '最大化', '', '<rect x=".5" y=".5" width="9" height="9" rx="1.5"/>') +
+            btn % ('close', '关闭', ' class="ab-close"', '<path d="M0 0l10 10M10 0L0 10"/>') +
+            '</div></div><div class="grip" title="拖动改变窗口大小"></div>')
 
 
 TEMPLATE = r"""<!doctype html>
@@ -269,7 +282,44 @@ table.sheet img{width:40px;height:40px;object-fit:contain;display:block}
 td.flash{outline:3px solid #f0a000;outline-offset:-2px;background:var(--flash)!important;transition:background 1.5s}
 #back{position:fixed;left:16px;bottom:16px;padding:8px 14px;border:none;border-radius:20px;background:var(--accent);color:#fff;font:inherit;box-shadow:0 2px 8px rgba(0,0,0,.25);cursor:pointer}
 @media (max-width:640px){header{flex-wrap:wrap}#q{width:100%}main{padding:10px 12px 80px}body{font-size:14px}}
+/* 简洁圆角风格 */
+:root{--bg:#f5f3fa;--card:#fff;--soft:#f3effb;--line:#e4dff0}
+body{background:var(--bg)}
+header{background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:6px 14px}
+nav a{border-radius:999px;padding:4px 12px;transition:background .15s,color .15s}
+nav a:hover{background:var(--soft)}
+nav a.on{background:var(--accent);color:#fff}
+#q{border-radius:999px;padding:5px 14px;background:var(--soft);border:1px solid transparent}
+#q:focus{outline:none;border-color:#c9b6f2;background:#fff}
+main{padding:16px 18px 80px}
+main>section{background:var(--card);border-radius:16px;box-shadow:0 1px 2px rgba(40,20,90,.05),0 8px 28px rgba(40,20,90,.06);padding:18px 24px}
+.wrap{border-radius:10px;border:1px solid var(--line)}
+#res{border-radius:14px;border-color:var(--line);top:52px}
+#res a:first-child{border-radius:14px 14px 0 0}
+#back{border-radius:999px;padding:8px 18px}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-thumb{background:#d6cfe6;border-radius:10px;border:2px solid transparent;background-clip:padding-box}
+::-webkit-scrollbar-thumb:hover{background:#bfb3d9;background-clip:padding-box}
+::-webkit-scrollbar-track{background:transparent}
+/* 程序模式（Realm Grinder 助手.exe）：网页自己画标题栏 */
+.appbar{display:none}
+html.app .appbar{display:flex;position:sticky;top:0;z-index:8;height:40px;align-items:center;background:#fff;user-select:none}
+html.app header{top:40px;border-top:none}
+html.app header>b{display:none}
+.ab-drag{flex:1;height:100%;display:flex;align-items:center;gap:8px;padding-left:14px;font-size:13px;color:#555}
+.ab-drag img{width:20px;height:20px;pointer-events:none}
+.ab-drag span{pointer-events:none}
+.ab-btns{display:flex;height:100%}
+.ab-btns button{width:46px;height:100%;border:none;background:none;color:#555;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.ab-btns button:hover{background:#efeaf8}
+.ab-btns button.ab-close:hover{background:#e81123;color:#fff}
+.ab-btns svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:1.2}
+.grip{display:none}
+html.app .grip{display:block;position:fixed;right:0;bottom:0;width:18px;height:18px;cursor:nwse-resize;z-index:9;
+  background:linear-gradient(135deg,transparent 55%,#c9bfe0 55%,#c9bfe0 62%,transparent 62%,transparent 72%,#c9bfe0 72%,#c9bfe0 79%,transparent 79%)}
+html.app.max .grip{display:none}
 </style></head><body>
+%%APPBAR%%
 <header><b>Realm Grinder 资料</b><nav>%%NAV%%</nav><input id="q" type="search" placeholder="搜表格…"></header>
 <div id="res" hidden></div>
 <main>%%BODY%%</main>

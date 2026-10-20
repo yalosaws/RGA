@@ -9,6 +9,7 @@ import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PAGE = os.path.join(ROOT, 'Realm Grinder 资料.html')
+ICON = os.path.join(ROOT, '应用', 'icon.ico')  # 由 应用/make_icon.py 生成
 
 
 def main():
@@ -18,6 +19,7 @@ def main():
         sys.executable, '-m', 'PyInstaller', '--noconfirm', '--onefile', '--windowed',
         '--name', 'Realm Grinder 助手',
         '--add-data', PAGE + os.pathsep + '.',
+        '--add-data', ICON + os.pathsep + '.', '--icon', ICON,
         '--distpath', os.path.join(ROOT, '发布'), '--workpath', work, '--specpath', work,
         os.path.join(ROOT, '应用', 'rg_app.py')], cwd=ROOT)
     print('完成：', os.path.join(ROOT, '发布', 'Realm Grinder 助手.exe'))
