@@ -3,17 +3,29 @@
 运行：python 应用/rg_app.py（需要 pywebview）；打包成 exe：python 应用/build_exe.py
 网页通过 window.pywebview.api 调用下面 Api 的方法：读存档（只读，不会改动存档）和窗口按钮。
 标题栏是网页自己画的（.appbar），带 pywebview-drag-region 的部分可以拖动窗口。
+
+打包版（内测）：界面加密成 RGA.dat 装进 exe，启动时在内存里解密，由下面的本地服务按一次性的随机路径提供，
+别的路径一律 404（直接在浏览器里开 127.0.0.1:42001 看不到内容）；程序本身再由 PyArmor 混淆，见 build_exe.py。
 """
 import ctypes
 import glob
+import hashlib
+import http.server
 import os
 import re
+import secrets
 import sys
+import threading
+import zlib
 
 import webview
 
 TITLE = 'RGA'
 PAGE = 'RGA.html'
+DATA = 'RGA.dat'
+PORT = 42001  # 和以前 pywebview 内置服务的端口一样，网页的 localStorage（同一个来源）才能接着用
+_K = None  # 打包时由 build_exe.py 填入密钥（源码里永远是 None）
+MAGIC = b'RGA1'
 SAVE_RE = re.compile(rb'\$\d{2}s[A-Za-z0-9+/=]+\$e')
 
 
@@ -23,6 +35,55 @@ def res_path(name):
     here = os.path.dirname(os.path.abspath(__file__))
     # 直接用源码运行时：界面在 build/（先跑 脚本/build_html.py），图标在 应用/
     return os.path.join(os.path.dirname(here), 'build', name) if name == PAGE else os.path.join(here, name)
+
+
+def crypt(data, key):
+    """SHA-256 计数器生成密钥流，和数据异或（加密、解密是同一个操作）"""
+    n = len(data)
+    stream = b''.join(hashlib.sha256(key + i.to_bytes(8, 'little')).digest() for i in range((n + 31) // 32))[:n]
+    return (int.from_bytes(data, 'little') ^ int.from_bytes(stream, 'little')).to_bytes(n, 'little')
+
+
+def seal(html, key):
+    """打包时用：界面 HTML → 加密数据"""
+    return crypt(MAGIC + zlib.compress(html, 9), key)
+
+
+def load_page():
+    """打包版：解密 RGA.dat；源码运行：读 build/RGA.html"""
+    if _K is None:
+        with open(res_path(PAGE), 'rb') as f:
+            return f.read()
+    with open(res_path(DATA), 'rb') as f:
+        plain = crypt(f.read(), _K)
+    if not plain.startswith(MAGIC):
+        raise SystemExit('界面数据损坏')
+    return zlib.decompress(plain[len(MAGIC):])
+
+
+def serve(page):
+    """只在本机、只按随机路径提供界面；返回网址"""
+    token = '/%s/' % secrets.token_urlsafe(24)
+
+    class Handler(http.server.BaseHTTPRequestHandler):
+        def do_GET(self):
+            ok = self.path.split('?')[0] == token
+            body = page if ok else b''
+            self.send_response(200 if ok else 404)
+            self.send_header('Content-Type', 'text/html; charset=utf-8')
+            self.send_header('Content-Length', str(len(body)))
+            self.send_header('Cache-Control', 'no-store')
+            self.end_headers()
+            self.wfile.write(body)
+
+        def log_message(self, *a):
+            pass
+    try:
+        srv = http.server.ThreadingHTTPServer(('127.0.0.1', PORT), Handler)
+    except OSError:  # 端口被占用：换一个（这次的 localStorage 会是空的）
+        srv = http.server.ThreadingHTTPServer(('127.0.0.1', 0), Handler)
+    threading.Thread(target=srv.serve_forever, daemon=True).start()
+    return 'http://127.0.0.1:%d%s' % (srv.server_address[1], token)
 
 
 def find_saves():
@@ -108,7 +169,25 @@ class Api:
             self._win.resize(max(640, int(w)), max(420, int(h)))
 
 
+WEBVIEW2_URL = 'https://go.microsoft.com/fwlink/p/?LinkId=2124703'  # 微软官方 WebView2 运行时安装包
+
+
+def has_webview2():
+    """没装 Edge WebView2 运行时的话，pywebview 会悄悄退回旧的 IE 内核：页面能显示，但脚本跑不起来，点什么都没反应"""
+    try:
+        from webview.platforms import winforms
+        return winforms.renderer != 'mshtml'
+    except Exception:
+        return True
+
+
 def main():
+    if sys.platform == 'win32' and not has_webview2():
+        ctypes.windll.user32.MessageBoxW(
+            None, 'RGA 需要 Microsoft Edge WebView2 运行时，这台电脑上没有找到。\n\n'
+                  '点「确定」会打开微软的下载页，安装后重新打开 RGA 即可。', TITLE, 0x30)
+        os.startfile(WEBVIEW2_URL)
+        return
     base = os.environ.get('LOCALAPPDATA', os.path.expanduser('~'))
     storage = os.path.join(base, 'RGA')
     old = os.path.join(base, 'RealmGrinder助手')  # 改名前的数据目录，搬过来以保留存档记录和设置
@@ -117,8 +196,10 @@ def main():
             os.rename(old, storage)
         except OSError:  # 被占用搬不动时先接着用旧目录，下次再搬
             storage = old
+    if _K is not None:  # 打包版不允许外部调试端口连进来读页面
+        os.environ.pop('WEBVIEW2_ADDITIONAL_BROWSER_ARGUMENTS', None)
     api = Api()
-    win = webview.create_window(TITLE, res_path(PAGE), js_api=api, width=1280, height=860, min_size=(640, 420),
+    win = webview.create_window(TITLE, serve(load_page()), js_api=api, width=1280, height=860, min_size=(640, 420),
                                 frameless=True, easy_drag=False, shadow=True, text_select=True, zoomable=True,
                                 background_color='#F5F3FA')
     api._win = win

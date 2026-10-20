@@ -34,8 +34,13 @@ ALIAS = {'TC': '征税', 'CtA': '动员令', 'HoL': '传说圣殿', 'BF': '嗜�
 # 遗物表里阵营遗物按全阶英豪奖杯的顺序排，每个阵营两个
 ART_FACTIONS = ['仙灵', '精灵', '天使', '地精', '亡灵', '恶魔', '泰坦', '德鲁伊', '无面者', '矮人', '卓尔', '佣兵']
 # 程序版本：改了功能就加版本号，在 CHANGES 最前面写这一版改了什么
-VERSION = '0.2.3'  # 还没到正式发布，用 0.x（用户要求）
+VERSION = '0.3.0'  # 还没到正式发布，用 0.x（用户要求）
+AUTHOR = 'Yalosaws'
 CHANGES = [
+    ('0.3.0', '2026-10-20', [
+        '内测版正式发布',
+        '修复若干问题',
+    ]),
     ('0.2.3', '2026-10-20', [
         '修复建筑升级页鼠标移上去整块变色（和存档页的样式重名）',
     ]),
@@ -669,7 +674,7 @@ def main():
 
 def version_page():
     """「版本」页：版本号和更新记录"""
-    out = ['<div class="ver-hero">%s<div><h1>RGA</h1><p>Realm Grinder 助手 · 版本 <b>%s</b></p></div></div>' % (icon_img(), VERSION)]
+    out = ['<div class="ver-hero">%s<div><h1>RGA</h1><p>Realm Grinder 助手 · 版本 <b>%s</b></p><p class="ver-by">作者 %s</p></div></div>' % (icon_img(), VERSION, AUTHOR)]
     out.append('<h2>更新记录</h2>')
     for v, d, items in CHANGES:
         out.append('<h3>%s <small>%s</small></h3><ul>%s</ul>' % (v, d, ''.join('<li>%s</li>' % html.escape(x) for x in items)))
@@ -740,7 +745,7 @@ section.guide{max-width:960px;margin:0 auto}
 .ver-hero{display:flex;align-items:center;gap:18px;margin:4px 0 8px}
 .ver-hero img{width:64px;height:64px;image-rendering:pixelated}
 .ver-hero h1{margin:0;font-size:30px;letter-spacing:.02em}
-.ver-hero p{margin:0;color:var(--muted)} .ver-hero b{color:var(--blue)}
+.ver-hero p{margin:0;color:var(--muted)} .ver-hero b{color:var(--blue)} .ver-hero .ver-by{font-size:13px;margin-top:2px}
 #sec-ver h3 small{font-weight:normal;color:var(--muted);font-size:13px;margin-left:8px}
 %%TCOLORS%%
 [class^="t-"]{font-weight:600}
