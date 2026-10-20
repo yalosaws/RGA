@@ -67,13 +67,27 @@ def lookup_name(en):
 
 
 def old_zh(s):
-    for a, b in cfg.OLD_ZH:
-        s = s.replace(a, b)
-    return s
+    """旧术语替换；\\x02…\\x03 包着的是刚换上的游戏译名（如「阵营耕耘者」），不动"""
+    kept = []
+    def hide(m):  # 译名换成占位符，只留最后两个字给规则的前后文判断用
+        kept.append(m.group(0))
+        return '\x02%d:%s\x03' % (len(kept) - 1, m.group(1)[-2:])
+    s = re.sub(r'\x02([^\x03]*)\x03', hide, s)
+    for r in cfg.OLD_ZH:
+        if r[0] == 're':
+            if ALIGN_RULE:
+                s = re.sub(r[1], r[2], s)
+        else:
+            s = s.replace(r[0], r[1])
+    return re.sub(r'\x02(\d+):[^\x03]*\x03', lambda m: kept[int(m.group(1))], s)
 
 
-def en_terms(s):
-    """把中文句子里夹的英文专名换成游戏译名"""
+# 「阵营」单独出现时改成「立场」只适用于综合列表（旧表「阵营」指立场）；血统表是机翻，「阵营」本来就指阵营
+ALIGN_RULE = True
+
+
+def en_terms(s, keep=False):
+    """把中文句子里夹的英文专名换成游戏译名；keep=True 时保留 \\x02…\\x03 标记"""
     def repl(m):
         run = m.group(0)
         words = run.split(' ')
@@ -102,16 +116,16 @@ def en_terms(s):
 
     def gloss(m):  # 「新译名（旧译）」：旧译和新译名意思重复时去掉
         name, g = m.group(1), m.group(2)
-        return name if g in name or len(set(g) & set(name)) >= 2 else m.group(0)
+        return '\x02' + name + '\x03' if g in name or len(set(g) & set(name)) >= 2 else m.group(0)
     s = EN_RUN.sub(repl, s)
     s = re.sub(r'\x02([^\x03]*)\x03\s*[（(]([一-鿿·]{1,12})[）)]', gloss, s)
-    return s.replace('\x02', '').replace('\x03', '')
+    return s if keep else s.replace('\x02', '').replace('\x03', '')
 
 
 def free(s):
     # 先换英文再换旧术语，「Order阵营」才能变成「秩序立场」
     dup = r'([一-鿿]{2,})\1'  # 「连击连击数」「升级升级」
-    t = old_zh(en_terms(s))
+    t = old_zh(en_terms(s, keep=True)).replace('\x02', '').replace('\x03', '')
     return t if re.search(dup, s) else re.sub(dup, r'\1', t)
 
 
@@ -119,6 +133,8 @@ def name_part(zh, g, digits=False):
     """zh 是「旧中文名[系列][（括注）……]」时返回换成游戏译名 g 的结果，否则返回 None"""
     if not CJK.search(g):  # 游戏里也用英文的（glho kohhl snod）不动
         return None
+    if re.fullmatch(r'[一-鿿]{1,6}，[一-鿿]{1,6}', zh):  # 「兵书，第一卷」这种带逗号的名字
+        return g
     chars = r'[^（(\[【：:，,；;。、%％+*]' if digits else r'[^（(\[【：:，,；;。、%％+*0-9]'
     m = re.match(r'^(%s{0,16}?)(系列)?((?:[（(][^）)]*[）)])*)$' % chars, zh)  # 只有括注时在前面补名字
     if not m:
@@ -209,6 +225,8 @@ def fix_sst(xml):
 
 
 def main(src, dst, report=None):
+    global ALIGN_RULE
+    ALIGN_RULE = not any('血统和种族升级' in os.path.basename(p) for p in (src, dst))
     del log[:]
     tmp = dst + '.tmp'
     with zipfile.ZipFile(src) as zin, zipfile.ZipFile(tmp, 'w') as zout:

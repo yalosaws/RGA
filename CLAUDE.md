@@ -14,6 +14,7 @@
 | `表格/旧版/RG综合列表（4.2.0.1）.xlsx` | `脚本/apply.py` 的输入：原表加上第一次修的 8 处隐藏成就（其中几处后来在 4.3.14 版里又按新数据改过） |
 | `表格/旧版/RG综合列表（4.2.0.1）_修改前备份.xlsx` | 用户下载来的原始 4.2.0.1 表，未经任何修改 |
 | `攻略/` | Discord #pre-ascension 置顶 Beginner Guide（作者 ensteffahn）的中文翻译，md + pdf |
+| `Realm Grinder 资料.html` | 给用户浏览用的单文件网页：两篇攻略 + 综合列表 9 个工作表（含图标），攻略里的专名点了跳到表格对应格子。由 `脚本/build_html.py` 生成，**不要手改**；改了表格或攻略要重新生成 |
 | `脚本/` | 表格更新脚本，见下文 |
 | `资料/` | 抓取的原始资料：`A0 Guide.txt`（Discord 置顶 full A0 Guide 英文原文，用户下载；`攻略/A0攻略要点.md` 据此整理）、官方 4.3+ 补丁说明、Not a Wiki 页面（`naw_*.txt`）、Fandom wikitext（`fandom/`）、changelog、旧表各工作表的文本导出（`sheetN.txt`）、`4.3.14更新笔记.md`（含补丁说明各段行号索引）、`汉化文本（PC_20260921）.tsv`（汉化包的全部 5723 条「英文原文→中文译文」，见下文） |
 | `汉化/` | 游戏汉化包（PC 解压版 + PC/安卓 rar），体积大，**不进 git** |
@@ -48,7 +49,8 @@
 - `脚本/fetch.py <url> <输出>`：抓网页转纯文本（当初用来抓 Not a Wiki）。
 - `脚本/fandom.py <页面名...>`：通过 Fandom API 下载 wikitext 到 `资料/fandom/`。
 - `脚本/hanhua.py <swf> <输出.tsv>`：从汉化包的 `RealmGrinderDesktop.swf` 导出中文语言包（SWF 内 zlib 压缩的 gettext .mo，汉化放在原 es_ES 那份里）。汉化包更新后重跑，输出换个日期名存进 `资料/`。
-- `脚本/md2html.py <md> <html>`：把攻略 md 转成带样式的 HTML，再用 Edge 打印成 PDF：
+- `脚本/build_html.py [xlsx] [html]`：生成 `Realm Grinder 资料.html`。专名到格子的对应：名称格里的中文名（同名时按 `PREFER` 里各类优先的工作表）、研究代号→研究表「代号」行上一格、升级代号（UD1）→阵营表该阵营行第 N 列、挑战代号（DMC1、「恶魔挑战 1」）→挑战表、「德鲁伊 1」这类阵营遗物→遗物表（按全阶英豪奖杯顺序每阵营两格）、缩写见 `ALIAS`。研究按 4.3.9 改号后的新代号对应，表里只有「原 xxx」注记的旧号不算。运行时会列出没对上格子的专名（目前约 10 个，都是表里没有的东西，如宝石之力、自动施法类奖杯）。
+- `脚本/md2html.py <md> <html>`：把攻略 md 转成带样式的 HTML，再用 Edge 打印成 PDF（`convert()` 也给 build_html.py 用）：
   `msedge --headless=new --user-data-dir=<临时目录> --no-pdf-header-footer --print-to-pdf=<pdf> file:///<html>`
   （用户开着 Edge 时，不加 `--user-data-dir` 就会被并进已打开的 Edge，什么也不输出；输出路径用英文，生成后再复制过去。用户开着那个 PDF 时复制会失败，要请用户先关掉。）
 
