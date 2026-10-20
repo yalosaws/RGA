@@ -16,6 +16,7 @@
 | `攻略/` | Discord #pre-ascension 置顶 Beginner Guide（作者 ensteffahn）的中文翻译，md + pdf |
 | `Realm Grinder 资料.html` | 给用户浏览用的单文件网页：两篇攻略 + 综合列表 9 个工作表（含图标），攻略里的专名点了跳到表格对应格子；还有「我的存档」栏（只读存档查看、法术预报、遗物预测，见下文）。由 `脚本/build_html.py` 生成，**不要手改**；改了表格或攻略要重新生成 |
 | `脚本/` | 表格更新脚本，见下文 |
+| `应用/` | 桌面程序「Realm Grinder 助手」：`rg_app.py`（pywebview 窗口装着资料网页，并直接读本机游戏存档）、`build_exe.py`（打包）。打包结果在 `发布/Realm Grinder 助手.exe`（单文件，约 20 MB，**不进 git**） |
 | `资料/` | 抓取的原始资料：`A0 Guide.txt`（Discord 置顶 full A0 Guide 英文原文，用户下载；`攻略/A0攻略要点.md` 据此整理）、官方 4.3+ 补丁说明、Not a Wiki 页面（`naw_*.txt`）、Fandom wikitext（`fandom/`）、changelog、旧表各工作表的文本导出（`sheetN.txt`）、`4.3.14更新笔记.md`（含补丁说明各段行号索引）、`汉化文本（PC_20260921）.tsv`（汉化包的全部 5723 条「英文原文→中文译文」，见下文） |
 | `工具/RG-tools/` | Royal Advisory Board 社区工具站（shadowgull/dox4242.github.io，适配到 4.3.10+）的本地克隆：`edit/edit.html` 存档编辑器、`rws/` Realm Weather Service、`arch/` Lara Crypt、`mri/` 活动工具。纯本地 JS，双击 html 即可离线用；`git pull` 更新（更新后重新生成网页）。网页的「我的存档」栏用它的库和数据，没有这个文件夹时 `build_html.py` 跳过该栏。自带 git 仓库，**不进 git** |
 | `汉化/` | 游戏汉化包（PC 解压版 + PC/安卓 rar），体积大，**不进 git** |
@@ -56,6 +57,10 @@
   - 法术预报、遗物预测：逻辑照搬 `rws/index.js`、`arch/index.js`（含原版的细节，例如同一次考古到点的两个固定遗物后一个顺延），2026-10-20 用改过的测试存档和原版逐条对比过一致。
   - 存档字符串存在浏览器 localStorage（键 `rg-saves`，最近 10 份），只在本机。
   - 名字翻译：`脚本/存档译名.py`（手写的统计项、建筑复数、拼接规则、artifacts.js 说明文字替换）→ 游戏词典 → 汉化文本里「X: %0」形式的统计标签。生成时会列出没翻出的名字（目前只有游戏里也用英文的 glho kohhl snod）。
+- `应用/build_exe.py`：先跑 build_html.py，再用 PyInstaller 打成单个 exe（需要 `pip install pywebview pyinstaller`；pywebview 装在用户目录，所以不能用 `python -I` 跑）。exe 里带着打包时的网页，表格、攻略、RG-tools 更新后要重新打包。程序：
+  - 游戏存档位置：`%APPDATA%\<AIR 应用 id>\Local Store\#SharedObjects\RealmGrinderDesktop.swf\realm-grinder.sol`（本机是 `com.kongregate.mobile.realmgrinder.air`）。程序取最新的 .sol，从里面找 `$00s…$e` 存档字符串，只读不写。游戏自动保存就会更新这个文件，大约每一两分钟。
+  - 网页检测到 `window.pywebview` 就进入程序模式：打开即读游戏存档，勾了「游戏保存后自动更新」每 10 秒检查一次文件；手动粘贴收进按钮里。从游戏读到的存档在记录里只留最新一份（标「游戏最新」）。
+  - 网页由 pywebview 内置服务打开（`http://127.0.0.1:42001/`），localStorage 存在 `%LOCALAPPDATA%\RealmGrinder助手`。调试：设环境变量 `WEBVIEW2_ADDITIONAL_BROWSER_ARGUMENTS=--remote-debugging-port=9333` 再启动 exe，就能用 CDP 读页面状态。
 - `脚本/md2html.py <md> <html>`：把攻略 md 转成带样式的 HTML，再用 Edge 打印成 PDF（`convert()` 也给 build_html.py 用）：
   `msedge --headless=new --user-data-dir=<临时目录> --no-pdf-header-footer --print-to-pdf=<pdf> file:///<html>`
   （用户开着 Edge 时，不加 `--user-data-dir` 就会被并进已打开的 Edge，什么也不输出；输出路径用英文，生成后再复制过去。用户开着那个 PDF 时复制会失败，要请用户先关掉。）

@@ -66,13 +66,14 @@
     list.forEach(function (it, k) {
       var o = document.createElement('option');
       o.value = k;
-      o.textContent = when(it.saved * 1000) + '　' + it.label;
+      o.textContent = (it.src === 'game' ? '［游戏最新］' : '') + when(it.saved * 1000) + '　' + it.label;
       if (k === idx) o.selected = true;
       sel.appendChild(o);
     });
     $('sv-histbox').hidden = !list.length;
   }
 
+  // store：false 只显示；true 手动粘贴的，存进记录；'game' 程序从游戏读到的，只保留最新一份
   function use(str, store) {
     var save;
     try { save = decode(str); } catch (e) {
@@ -83,8 +84,8 @@
     cur = {str: str.trim(), save: save};
     var list = loadList(), idx = 0;
     if (store) {
-      list = list.filter(function (it) { return it.s !== cur.str; });
-      list.unshift({s: cur.str, saved: save.lastsave, label: summary(save)});
+      list = list.filter(function (it) { return it.s !== cur.str && !(store === 'game' && it.src === 'game'); });
+      list.unshift({s: cur.str, saved: save.lastsave, label: summary(save), src: store === 'game' ? 'game' : 'paste'});
       list = list.slice(0, MAXKEEP);
       if (!saveList(list)) $('sv-msg').textContent = '（浏览器不让保存，这次关掉页面后需要重新粘贴）';
     } else {
@@ -97,9 +98,11 @@
       '（' + dur(age) + '前）　存档版本 ' + save.saveVersion;
     $('sv-main').hidden = false;
     $('sv-in').value = '';
+    var y = window.scrollY;  // 自动更新时不要跳回页首
     renderView(save);
     rws.run(save);
     arch.run(save);
+    if (store === 'game') window.scrollTo(0, y);
     return true;
   }
 
@@ -650,6 +653,46 @@
     var list = loadList();
     if (list.length) use(list[0].s, false);
     else refreshHist([], -1);
+    window.addEventListener('pywebviewready', appMode);
+    if (window.pywebview && window.pywebview.api && window.pywebview.api.read_save) appMode();
+  }
+
+  // ---------- 程序模式（Realm Grinder 助手.exe）：直接读本机游戏存档 ----------
+  var app = {on: false, mtime: 0, timer: null, path: ''};
+  function appMode() {
+    if (app.on) return;
+    app.on = true;
+    if (!location.hash) location.hash = 'save';
+    $('sv-game').hidden = false;
+    $('sv-pastebox').hidden = true;
+    $('sv-pastetoggle').hidden = false;
+    try { $('sv-gauto').checked = localStorage.getItem('rg-auto') !== '0'; } catch (e) { /* 默认开 */ }
+    $('sv-gread').addEventListener('click', function () { readGame(true); });
+    $('sv-gdir').addEventListener('click', function () { if (app.path) window.pywebview.api.open_folder(app.path); });
+    $('sv-gauto').addEventListener('change', function () {
+      try { localStorage.setItem('rg-auto', this.checked ? '1' : '0'); } catch (e) { /* 忽略 */ }
+      tick();
+    });
+    $('sv-pastetoggle').addEventListener('click', function () { $('sv-pastebox').hidden = !$('sv-pastebox').hidden; });
+    readGame(true);
+    tick();
+  }
+  function tick() {
+    clearInterval(app.timer);
+    if ($('sv-gauto').checked) app.timer = setInterval(function () { readGame(false); }, 10000);
+  }
+  function readGame(force) {
+    window.pywebview.api.read_save().then(function (r) {
+      var st = $('sv-gstat');
+      if (!r.ok) { st.textContent = r.error; st.className = 'sv-hint err'; return; }
+      app.path = r.path;
+      st.className = 'sv-hint';
+      st.textContent = '存档文件更新于 ' + when(r.mtime) + (force ? '' : '，已自动读取');
+      if (!force && r.mtime === app.mtime) return;
+      app.mtime = r.mtime;
+      if (cur && cur.str === r.save.trim() && !force) return;
+      use(r.save, 'game');
+    });
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();

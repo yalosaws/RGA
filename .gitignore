@@ -10,3 +10,7 @@ __pycache__/
 
 # 社区工具站源码（自带 git 仓库，git pull 更新）
 工具/RG-tools/
+
+# exe 打包输出（python 应用/build_exe.py 生成）
+发布/
+build/

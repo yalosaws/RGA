@@ -1,8 +1,13 @@
 <section id="sec-save" class="savesec" hidden>
 <h1>我的存档</h1>
 <div class="sv-box">
-  <textarea id="sv-in" rows="2" spellcheck="false" placeholder="在游戏里导出存档，把整段存档字符串粘贴到这里（粘贴后自动读取）"></textarea>
-  <div class="sv-row"><button id="sv-load">读取存档</button>
+  <div id="sv-game" class="sv-row" hidden><button id="sv-gread">读取最新游戏存档</button>
+    <label><input type="checkbox" id="sv-gauto" checked> 游戏保存后自动更新</label>
+    <button id="sv-gdir" class="sv-lite">打开存档文件夹</button> <button id="sv-pastetoggle" class="sv-lite" hidden>手动粘贴存档</button>
+    <span id="sv-gstat" class="sv-hint"></span></div>
+  <div id="sv-pastebox"><textarea id="sv-in" rows="2" spellcheck="false" placeholder="在游戏里导出存档，把整段存档字符串粘贴到这里（粘贴后自动读取）"></textarea>
+  <div class="sv-row"><button id="sv-load">读取存档</button></div></div>
+  <div class="sv-row">
     <span id="sv-histbox" hidden>已保存的存档：<select id="sv-hist"></select> <button id="sv-del" class="sv-lite">删除这份</button></span></div>
   <p id="sv-msg" class="sv-msg">存档只保存在这台电脑的浏览器里（最近 10 份），不会上传。工具只读取存档，不能修改。</p>
 </div>
@@ -40,7 +45,7 @@
 .savesec button.sv-lite,.sv-more{background:#fff!important;color:var(--accent)!important}
 .savesec select,.savesec input[type=number],#sv-filter{font:inherit;font-size:14px;padding:3px 6px;border:1px solid var(--line);border-radius:6px}
 #sv-filter{width:min(360px,100%)} #sv-alim{width:110px} #sv-aover{width:80px}
-.sv-msg{margin:6px 0 0;font-size:14px;color:#444} .sv-msg.err{color:#c62828}
+.sv-msg{margin:6px 0 0;font-size:14px;color:#444} .sv-msg.err,.sv-hint.err{color:#c62828}
 .sv-tabs{display:flex;gap:4px;border-bottom:2px solid var(--accent);margin-bottom:10px}
 .sv-tabs button{border-radius:6px 6px 0 0;background:#fff;color:var(--fg);border-color:var(--line);border-bottom:none}
 .sv-tabs button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
