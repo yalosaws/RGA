@@ -203,20 +203,21 @@ def main():
     for gid, label, path in GUIDES:
         title, body = md2html.convert(open(os.path.join(ROOT, path), encoding='utf-8').read(), link)
         guides[gid] = body
-    nav = ''.join('<a href="#%s" data-sec="%s">%s</a>' % (g, g, l) for g, l, _ in GUIDES)
-    nav += '<span class="sep"></span>' + ''.join('<a href="#t%d" data-sec="t%d">%s</a>' % (n, n, SHEETS[n][0]) for n in sections)
+    item = lambda h, icon, label: '<a href="#%s" data-sec="%s">%s%s</a>' % (h, h, ICONS[icon], label)
+    nav = '<div class="grp">攻略</div>' + ''.join(item(g, 'book', l) for g, l, _ in GUIDES)
+    nav += '<div class="grp">资料表</div>' + ''.join(item('t%d' % n, 'grid', SHEETS[n][0]) for n in sections)
     body = ''.join('<section id="sec-%s" class="guide" hidden>%s</section>' % (g, guides[g]) for g, _, _ in GUIDES)
     body += ''.join('<section id="sec-t%d" class="table" hidden><h1>%s</h1>%s</section>' % (n, SHEETS[n][1], sections[n]) for n in sections)
     # 存档工具：只读存档查看、法术预报、遗物预测（数据和库来自 工具/RG-tools）
     save_js, save_miss = '', []
     if os.path.isdir(save_tools.RG):
         save_html, save_js, save_miss = save_tools.build(find, {'t%d-%s' % c: code for code, c in research.items()})
-        nav += '<span class="sep"></span><a href="#save" data-sec="save">我的存档</a>'
+        nav += '<div class="grp">工具</div>' + item('save', 'save', '我的存档') + item('save/rws', 'bolt', '法术预报') + item('save/arch', 'pick', '遗物预测')
         body += save_html
     else:
         print('没有 工具/RG-tools，跳过「我的存档」（git clone https://github.com/shadowgull/dox4242.github.io 工具/RG-tools）')
     page = TEMPLATE.replace('%%NAV%%', nav).replace('%%BODY%%', body).replace('%%TCOLORS%%', md2html.CSS[md2html.CSS.index('.t-fa'):md2html.CSS.index('[class^')])
-    page = page.replace('%%APPBAR%%', appbar())
+    page = page.replace('%%APPBAR%%', appbar()).replace('%%ICON%%', icon_img())
     page = page.replace('%%SAVEJS%%', save_js)  # 最后替换：脚本里可能有别的 %% 记号
     open(DST, 'w', encoding='utf-8').write(page)
     print('写入', DST, '%.1f MB' % (len(page.encode()) / 1e6))
@@ -227,10 +228,24 @@ def main():
         print('存档工具：%d 个名字没翻译，显示英文：' % len(save_miss), '、'.join(save_miss))
 
 
+# 侧栏图标（线条风格）
+ICONS = {k: '<svg viewBox="0 0 24 24">%s</svg>' % v for k, v in {
+    'book': '<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/>',
+    'grid': '<rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/>',
+    'save': '<path d="M12 3l8 5v8l-8 5-8-5V8z"/><path d="M12 12l8-4M12 12v9M12 12L4 8"/>',
+    'bolt': '<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>',
+    'pick': '<path d="M14 4c3 0 6 2 7 5-3-1-6-1-9 1M14 4c-3 0-6 2-7 5 3-1 6-1 9 1M12 10L4 20"/>',
+}.items()}
+
+
+def icon_img():
+    icon = os.path.join(ROOT, '应用', 'icon.png')
+    return ('<img alt="" src="data:image/png;base64,%s">' % base64.b64encode(open(icon, 'rb').read()).decode()) if os.path.exists(icon) else ''
+
+
 def appbar():
     """程序模式的标题栏（网页里平时隐藏）：图标 + 名字（可拖动窗口）+ 最小化/最大化/关闭"""
-    icon = os.path.join(ROOT, '应用', 'icon.png')
-    img = ('<img alt="" src="data:image/png;base64,%s">' % base64.b64encode(open(icon, 'rb').read()).decode()) if os.path.exists(icon) else ''
+    img = icon_img()
     btn = '<button data-w="%s" title="%s"%s><svg viewBox="0 0 10 10">%s</svg></button>'
     return ('<div class="appbar"><div class="pywebview-drag-region ab-drag">%s<span>Realm Grinder 助手</span></div><div class="ab-btns">' % img +
             btn % ('min', '最小化', '', '<path d="M0 5h10"/>') +
@@ -243,84 +258,84 @@ TEMPLATE = r"""<!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Realm Grinder 资料</title>
 <style>
-:root{--bg:#fff;--fg:#222;--muted:#666;--line:#d6d6d6;--head:#5a2fa8;--accent:#7a4bd0;--soft:#f4f0fb;--flash:#ffe58a}
+:root{--blue:#2563eb;--accent:#2563eb;--bg:#f3f6fb;--card:#fff;--fg:#1b2433;--muted:#6b7689;--line:#e6ebf3;--soft:#eef3fc;--head:#1b2433;--flash:#ffe58a;
+  --shadow:0 4px 24px rgba(20,40,90,.06)}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.65 "Microsoft YaHei","PingFang SC",sans-serif}
-header{position:sticky;top:0;z-index:5;background:#fff;border-bottom:2px solid var(--accent);display:flex;align-items:center;gap:8px;padding:6px 12px}
-header b{color:var(--head);white-space:nowrap}
-nav{display:flex;gap:2px;overflow-x:auto;flex:1;scrollbar-width:thin}
-nav a{padding:4px 10px;border-radius:6px;color:var(--fg);text-decoration:none;white-space:nowrap;font-size:14px}
-nav a.on{background:var(--accent);color:#fff}
-nav .sep{border-left:1px solid var(--line);margin:4px 6px}
-#q{width:180px;padding:4px 8px;border:1px solid var(--line);border-radius:6px;font:inherit;font-size:14px}
-#res{position:fixed;right:12px;top:48px;width:min(460px,calc(100vw - 24px));max-height:70vh;overflow:auto;background:#fff;border:1px solid var(--line);border-radius:8px;box-shadow:0 6px 24px rgba(0,0,0,.15);z-index:6}
-#res a{display:block;padding:6px 10px;border-bottom:1px solid #eee;color:var(--fg);text-decoration:none;font-size:13px}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.65 "Microsoft YaHei UI","Microsoft YaHei","PingFang SC",sans-serif}
+a{color:var(--blue)}
+/* 左侧悬浮侧栏 */
+aside.side{position:fixed;left:16px;top:16px;bottom:16px;width:232px;z-index:5;background:var(--card);border-radius:20px;box-shadow:0 10px 40px rgba(20,40,90,.07);padding:16px 12px 12px;display:flex;flex-direction:column}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;padding:0 8px 14px}
+.brand img{width:26px;height:26px}
+#q{width:100%;padding:7px 12px;border:1px solid transparent;border-radius:12px;background:var(--soft);font:inherit;font-size:13.5px;color:var(--fg)}
+#q:focus{outline:none;border-color:#bcd0f7;background:#fff}
+nav{flex:1;overflow-y:auto;margin:6px -4px 0;padding:0 4px;scrollbar-width:thin}
+nav .grp{font-size:11px;color:#9aa5b8;letter-spacing:.12em;margin:16px 10px 6px}
+nav a{display:flex;align-items:center;gap:10px;padding:7px 12px;margin:1px 0;border-radius:12px;color:#3d4a5f;font-size:13.5px;text-decoration:none;transition:background .15s}
+nav a svg{width:16px;height:16px;flex:none;fill:none;stroke:#9aa5b8;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+nav a:hover{background:var(--soft)}
+nav a.on{background:var(--blue);color:#fff;box-shadow:0 6px 16px rgba(37,99,235,.28)}
+nav a.on svg{stroke:#fff}
+#res{position:fixed;left:264px;top:16px;width:min(480px,calc(100vw - 290px));max-height:75vh;overflow:auto;background:#fff;border-radius:16px;box-shadow:0 12px 40px rgba(20,40,90,.16);z-index:6}
+#res a{display:block;padding:8px 14px;border-bottom:1px solid var(--line);color:var(--fg);text-decoration:none;font-size:13px}
 #res a:hover{background:var(--soft)} #res small{color:var(--muted);margin-right:6px}
-main{padding:12px 16px 80px}
-section.guide{max-width:920px;margin:0 auto}
-.guide h1{font-size:24px;border-bottom:3px solid var(--accent);padding-bottom:6px;margin:8px 0 12px}
-.guide h2{font-size:19px;color:var(--head);margin:22px 0 8px;border-left:5px solid var(--accent);padding-left:8px}
-.guide h3{font-size:16px;margin:16px 0 6px}
-.guide blockquote{margin:0 0 12px;padding:8px 12px;background:var(--soft);border-left:4px solid #b9a3e3;color:#444;font-size:14px}
-.guide hr{border:none;border-top:1px solid #ddd;margin:16px 0}
-.guide code{font-family:Consolas,monospace;background:#eee;padding:1px 4px;border-radius:3px}
-.guide table{border-collapse:collapse;margin:8px 0 12px;width:100%}
-.guide th,.guide td{border:1px solid #ccc;padding:5px 8px;text-align:left;vertical-align:top}
-.guide th{background:#ede6f8}
+main{margin-left:264px;padding:16px 24px 80px 16px}
+main>section{background:var(--card);border-radius:20px;box-shadow:var(--shadow);padding:24px 30px}
+section.guide{max-width:960px;margin:0 auto}
+.guide h1{font-size:26px;margin:4px 0 12px}
+.guide h2{font-size:19px;margin:28px 0 10px;padding-left:12px;border-left:4px solid var(--blue);border-radius:2px}
+.guide h3{font-size:16px;margin:18px 0 6px}
+.guide blockquote{margin:0 0 14px;padding:10px 14px;background:var(--soft);border-radius:12px;color:#44506a;font-size:14px}
+.guide hr{border:none;border-top:1px solid var(--line);margin:18px 0}
+.guide code{font-family:Consolas,monospace;background:var(--soft);padding:1px 5px;border-radius:5px}
+.guide table{border-collapse:separate;border-spacing:0;margin:8px 0 14px;width:100%;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.guide th,.guide td{border-bottom:1px solid var(--line);padding:6px 10px;text-align:left;vertical-align:top}
+.guide tr:last-child td{border-bottom:none}
+.guide th{background:var(--soft);font-weight:600}
 .guide ul,.guide ol{padding-left:24px}
 %%TCOLORS%%
 [class^="t-"]{font-weight:600}
 a[class^="t-"]{text-decoration:underline dotted;text-underline-offset:3px}
 a[class^="t-"]:hover{text-decoration-style:solid}
 .legend{font-size:13px}.legend span{margin-right:14px;white-space:nowrap}
-.legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:2px;background:currentColor;margin-right:4px}
-section.table h1{font-size:19px;color:var(--head);margin:4px 0 10px}
-.wrap{overflow:auto;max-height:calc(100vh - 120px);border:1px solid var(--line)}
+.legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:3px;background:currentColor;margin-right:4px}
+section.table h1{font-size:20px;margin:0 0 14px}
+.wrap{overflow:auto;max-height:calc(100vh - 150px);border:1px solid var(--line);border-radius:14px}
 table.sheet{border-collapse:collapse;table-layout:fixed;font-size:13px;line-height:1.5}
-table.sheet td{border:1px solid var(--line);padding:3px 6px;vertical-align:top;overflow-wrap:anywhere;scroll-margin:80px}
+table.sheet td{border:1px solid var(--line);padding:4px 7px;vertical-align:top;overflow-wrap:anywhere;scroll-margin:80px}
 table.sheet img{width:40px;height:40px;object-fit:contain;display:block}
-td.flash{outline:3px solid #f0a000;outline-offset:-2px;background:var(--flash)!important;transition:background 1.5s}
-#back{position:fixed;left:16px;bottom:16px;padding:8px 14px;border:none;border-radius:20px;background:var(--accent);color:#fff;font:inherit;box-shadow:0 2px 8px rgba(0,0,0,.25);cursor:pointer}
-@media (max-width:640px){header{flex-wrap:wrap}#q{width:100%}main{padding:10px 12px 80px}body{font-size:14px}}
-/* 简洁圆角风格 */
-:root{--bg:#f5f3fa;--card:#fff;--soft:#f3effb;--line:#e4dff0}
-body{background:var(--bg)}
-header{background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:6px 14px}
-nav a{border-radius:999px;padding:4px 12px;transition:background .15s,color .15s}
-nav a:hover{background:var(--soft)}
-nav a.on{background:var(--accent);color:#fff}
-#q{border-radius:999px;padding:5px 14px;background:var(--soft);border:1px solid transparent}
-#q:focus{outline:none;border-color:#c9b6f2;background:#fff}
-main{padding:16px 18px 80px}
-main>section{background:var(--card);border-radius:16px;box-shadow:0 1px 2px rgba(40,20,90,.05),0 8px 28px rgba(40,20,90,.06);padding:18px 24px}
-.wrap{border-radius:10px;border:1px solid var(--line)}
-#res{border-radius:14px;border-color:var(--line);top:52px}
-#res a:first-child{border-radius:14px 14px 0 0}
-#back{border-radius:999px;padding:8px 18px}
+td.flash{outline:3px solid #f59e0b;outline-offset:-2px;background:var(--flash)!important;transition:background 1.5s}
+#back{position:fixed;left:280px;bottom:20px;padding:9px 20px;border:none;border-radius:999px;background:var(--fg);color:#fff;font:inherit;font-size:14px;box-shadow:0 6px 20px rgba(20,40,90,.25);cursor:pointer}
 ::-webkit-scrollbar{width:10px;height:10px}
-::-webkit-scrollbar-thumb{background:#d6cfe6;border-radius:10px;border:2px solid transparent;background-clip:padding-box}
-::-webkit-scrollbar-thumb:hover{background:#bfb3d9;background-clip:padding-box}
+::-webkit-scrollbar-thumb{background:#cfd8e6;border-radius:10px;border:2px solid transparent;background-clip:padding-box}
+::-webkit-scrollbar-thumb:hover{background:#b3c0d4;background-clip:padding-box}
 ::-webkit-scrollbar-track{background:transparent}
+@media (max-width:760px){
+  aside.side{position:static;width:auto;margin:10px;max-height:none}
+  nav{display:flex;flex-wrap:wrap;gap:4px;overflow:visible}nav .grp{width:100%;margin:8px 4px 2px}nav a{padding:5px 10px}
+  main{margin-left:0;padding:0 10px 80px}main>section{padding:16px}#res{left:10px;width:calc(100vw - 20px)}#back{left:16px}body{font-size:14px}}
 /* 程序模式（Realm Grinder 助手.exe）：网页自己画标题栏 */
 .appbar{display:none}
-html.app .appbar{display:flex;position:sticky;top:0;z-index:8;height:40px;align-items:center;background:#fff;user-select:none}
-html.app header{top:40px;border-top:none}
-html.app header>b{display:none}
-.ab-drag{flex:1;height:100%;display:flex;align-items:center;gap:8px;padding-left:14px;font-size:13px;color:#555}
-.ab-drag img{width:20px;height:20px;pointer-events:none}
+html.app body{padding-top:40px}
+html.app .appbar{display:flex;position:fixed;top:0;left:0;right:0;z-index:8;height:40px;align-items:center;background:var(--bg);user-select:none}
+html.app aside.side{top:48px}
+html.app #res{top:48px}
+html.app .brand{display:none}
+.ab-drag{flex:1;height:100%;display:flex;align-items:center;gap:9px;padding-left:24px;font-size:13px;color:var(--muted)}
+.ab-drag img{width:18px;height:18px;pointer-events:none}
 .ab-drag span{pointer-events:none}
 .ab-btns{display:flex;height:100%}
-.ab-btns button{width:46px;height:100%;border:none;background:none;color:#555;cursor:pointer;display:flex;align-items:center;justify-content:center}
-.ab-btns button:hover{background:#efeaf8}
+.ab-btns button{width:46px;height:100%;border:none;background:none;color:#4b5569;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.ab-btns button:hover{background:#e4eaf4}
 .ab-btns button.ab-close:hover{background:#e81123;color:#fff}
 .ab-btns svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:1.2}
 .grip{display:none}
 html.app .grip{display:block;position:fixed;right:0;bottom:0;width:18px;height:18px;cursor:nwse-resize;z-index:9;
-  background:linear-gradient(135deg,transparent 55%,#c9bfe0 55%,#c9bfe0 62%,transparent 62%,transparent 72%,#c9bfe0 72%,#c9bfe0 79%,transparent 79%)}
+  background:linear-gradient(135deg,transparent 55%,#c3cee0 55%,#c3cee0 62%,transparent 62%,transparent 72%,#c3cee0 72%,#c3cee0 79%,transparent 79%)}
 html.app.max .grip{display:none}
 </style></head><body>
 %%APPBAR%%
-<header><b>Realm Grinder 资料</b><nav>%%NAV%%</nav><input id="q" type="search" placeholder="搜表格…"></header>
+<aside class="side"><div class="brand">%%ICON%%Realm Grinder 资料</div><input id="q" type="search" placeholder="搜索表格…"><nav>%%NAV%%</nav></aside>
 <div id="res" hidden></div>
 <main>%%BODY%%</main>
 <button id="back" hidden>← 返回</button>
@@ -331,10 +346,12 @@ html.app.max .grip{display:none}
   var cur = null, pos = {}, fromLink = false;
   function show(){
     var h = decodeURIComponent(location.hash.slice(1)) || 'r0';
-    var sec = h.indexOf('-') > 0 ? h.split('-')[0] : h;
-    if (!document.getElementById('sec-' + sec)) { sec = 'r0'; h = 'r0'; }
+    var sec = h.split(/[-\/]/)[0], sub = h.indexOf('/') > 0 ? h.split('/')[1] : '';  // 「save/rws」：存档栏里的子页
+    if (!document.getElementById('sec-' + sec)) { sec = 'r0'; h = 'r0'; sub = ''; }
     secs.forEach(function(s){ s.hidden = s.id !== 'sec-' + sec; });
-    navs.forEach(function(a){ a.classList.toggle('on', a.dataset.sec === sec); });
+    navs.forEach(function(a){ a.classList.toggle('on', a.dataset.sec === (sub ? sec + '/' + sub : sec)); });
+    if (sub) h = sec;
+    window.dispatchEvent(new CustomEvent('subpage', {detail: {sec: sec, sub: sub}}));
     var el = h !== sec && document.getElementById(h);
     if (el) {
       el.scrollIntoView({block:'center', inline:'center'});
@@ -359,7 +376,7 @@ html.app.max .grip{display:none}
   // 全表搜索
   var q = document.getElementById('q'), res = document.getElementById('res'), timer;
   var tds = Array.prototype.slice.call(document.querySelectorAll('table.sheet td[id]'));
-  var names = {}; navs.forEach(function(a){ names[a.dataset.sec] = a.textContent; });
+  var names = {}; navs.forEach(function(a){ names[a.dataset.sec] = a.textContent.trim(); });
   q.addEventListener('input', function(){
     clearTimeout(timer);
     timer = setTimeout(function(){

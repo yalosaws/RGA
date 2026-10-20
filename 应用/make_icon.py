@@ -1,4 +1,4 @@
-"""画程序图标：紫色渐变圆角方块 + 白色切面宝石。输出 应用/icon.ico（多尺寸）和 icon.png。
+"""画程序图标：纯蓝圆角方块 + 白色切面宝石。输出 应用/icon.ico（多尺寸）和 icon.png。
 
 用法：python 应用/make_icon.py（需要 Pillow）
 """
@@ -10,18 +10,9 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 N = 1024  # 先画大图再缩小，边缘更平滑
 
 
-def lerp(a, b, t):
-    return tuple(int(a[i] + (b[i] - a[i]) * t) for i in range(3))
-
-
 def draw():
-    # 背景：左上浅紫 → 右下深紫
-    bg = Image.new('RGB', (N, N))
-    px = bg.load()
-    c1, c2 = (167, 139, 250), (91, 33, 182)
-    for y in range(N):
-        for x in range(N):
-            px[x, y] = lerp(c1, c2, (x + y) / (2 * N))
+    # 背景：纯蓝（和网页主色 #2563eb 一致）
+    bg = Image.new('RGB', (N, N), (37, 99, 235))
     mask = Image.new('L', (N, N), 0)
     ImageDraw.Draw(mask).rounded_rectangle([40, 40, N - 40, N - 40], radius=220, fill=255)
     img = Image.new('RGBA', (N, N), (0, 0, 0, 0))
@@ -36,17 +27,17 @@ def draw():
         'b': (cx, bot),
     }
     shadow = Image.new('RGBA', (N, N), (0, 0, 0, 0))
-    ImageDraw.Draw(shadow).polygon([pts['tl'], pts['tr'], pts['mr'], pts['b'], pts['ml']], fill=(40, 10, 90, 120))
+    ImageDraw.Draw(shadow).polygon([pts['tl'], pts['tr'], pts['mr'], pts['b'], pts['ml']], fill=(10, 30, 90, 110))
     shadow = shadow.filter(ImageFilter.GaussianBlur(28))
     img.alpha_composite(shadow, (0, 24))
     d = ImageDraw.Draw(img)
     faces = [  # 不同亮度的切面
         ([pts['tl'], pts['tm'], pts['mm1'], pts['ml']], (255, 255, 255, 255)),
-        ([pts['tm'], pts['tr'], pts['mr'], pts['mm2']], (233, 225, 255, 255)),
-        ([pts['tm'], pts['mm2'], pts['mm1']], (246, 242, 255, 255)),
-        ([pts['ml'], pts['mm1'], pts['b']], (225, 214, 255, 255)),
-        ([pts['mm1'], pts['mm2'], pts['b']], (245, 240, 255, 255)),
-        ([pts['mm2'], pts['mr'], pts['b']], (205, 190, 250, 255)),
+        ([pts['tm'], pts['tr'], pts['mr'], pts['mm2']], (226, 234, 252, 255)),
+        ([pts['tm'], pts['mm2'], pts['mm1']], (241, 245, 255, 255)),
+        ([pts['ml'], pts['mm1'], pts['b']], (214, 226, 250, 255)),
+        ([pts['mm1'], pts['mm2'], pts['b']], (240, 244, 255, 255)),
+        ([pts['mm2'], pts['mr'], pts['b']], (190, 208, 248, 255)),
     ]
     for poly, col in faces:
         d.polygon(poly, fill=col)

@@ -16,7 +16,7 @@
 | `攻略/` | Discord #pre-ascension 置顶 Beginner Guide（作者 ensteffahn）的中文翻译，md + pdf |
 | `Realm Grinder 资料.html` | 给用户浏览用的单文件网页：两篇攻略 + 综合列表 9 个工作表（含图标），攻略里的专名点了跳到表格对应格子；还有「我的存档」栏（只读存档查看、法术预报、遗物预测，见下文）。由 `脚本/build_html.py` 生成，**不要手改**；改了表格或攻略要重新生成 |
 | `脚本/` | 表格更新脚本，见下文 |
-| `应用/` | 桌面程序「Realm Grinder 助手」：`rg_app.py`（pywebview 无边框圆角窗口装着资料网页，并直接读本机游戏存档）、`build_exe.py`（打包）、`make_icon.py`（画图标 `icon.ico`/`icon.png`，紫色圆角方块 + 白色宝石）。打包结果在 `发布/Realm Grinder 助手.exe`（单文件，约 20 MB，**不进 git**） |
+| `应用/` | 桌面程序「Realm Grinder 助手」：`rg_app.py`（pywebview 无边框圆角窗口装着资料网页，并直接读本机游戏存档）、`build_exe.py`（打包）、`make_icon.py`（画图标 `icon.ico`/`icon.png`，纯蓝圆角方块 + 白色宝石）。打包结果在 `发布/Realm Grinder 助手.exe`（单文件，约 20 MB，**不进 git**） |
 | `资料/` | 抓取的原始资料：`A0 Guide.txt`（Discord 置顶 full A0 Guide 英文原文，用户下载；`攻略/A0攻略要点.md` 据此整理）、官方 4.3+ 补丁说明、Not a Wiki 页面（`naw_*.txt`）、Fandom wikitext（`fandom/`）、changelog、旧表各工作表的文本导出（`sheetN.txt`）、`4.3.14更新笔记.md`（含补丁说明各段行号索引）、`汉化文本（PC_20260921）.tsv`（汉化包的全部 5723 条「英文原文→中文译文」，见下文） |
 | `工具/RG-tools/` | Royal Advisory Board 社区工具站（shadowgull/dox4242.github.io，适配到 4.3.10+）的本地克隆：`edit/edit.html` 存档编辑器、`rws/` Realm Weather Service、`arch/` Lara Crypt、`mri/` 活动工具。纯本地 JS，双击 html 即可离线用；`git pull` 更新（更新后重新生成网页）。网页的「我的存档」栏用它的库和数据，没有这个文件夹时 `build_html.py` 跳过该栏。自带 git 仓库，**不进 git** |
 | `汉化/` | 游戏汉化包（PC 解压版 + PC/安卓 rar），体积大，**不进 git** |
@@ -52,6 +52,7 @@
 - `脚本/fandom.py <页面名...>`：通过 Fandom API 下载 wikitext 到 `资料/fandom/`。
 - `脚本/hanhua.py <swf> <输出.tsv>`：从汉化包的 `RealmGrinderDesktop.swf` 导出中文语言包（SWF 内 zlib 压缩的 gettext .mo，汉化放在原 es_ES 那份里）。汉化包更新后重跑，输出换个日期名存进 `资料/`。
 - `脚本/build_html.py [xlsx] [html]`：生成 `Realm Grinder 资料.html`。专名到格子的对应：名称格里的中文名（同名时按 `PREFER` 里各类优先的工作表）、研究代号→研究表「代号」行上一格、升级代号（UD1）→阵营表该阵营行第 N 列、挑战代号（DMC1、「恶魔挑战 1」）→挑战表、「德鲁伊 1」这类阵营遗物→遗物表（按全阶英豪奖杯顺序每阵营两格）、缩写见 `ALIAS`。研究按 4.3.9 改号后的新代号对应，表里只有「原 xxx」注记的旧号不算。运行时会列出没对上格子的专名（目前约 10 个，都是表里没有的东西，如宝石之力、自动施法类奖杯）。
+- 网页风格（2026-10-20 用户从 4 个样板里选定）：浅灰蓝底 `#f3f6fb` + 白色圆角卡片，左侧悬浮圆角侧栏（攻略 / 资料表 / 工具三组，带线条图标，搜索框在侧栏顶部），主色纯蓝 `#2563eb`、**不用渐变**；存档页顶部 6 张数字卡片，第一张（重生）纯蓝底。样式都在 `build_html.py` 的 `TEMPLATE` 和 `save_tools.html` 里，颜色用 `:root` 的变量。侧栏的「法术预报」「遗物预测」是 `#save/rws`、`#save/arch`，路由会发 `subpage` 事件给存档页切换子页。
 - `脚本/save_tools.py`（由 build_html.py 调用）：网页「我的存档」栏。把 RG-tools 的 `pako`、`savecodec2`（解码）、`pmprng`（随机数）、`util`（数据表）、`arch/artifacts.js`（遗物条件）原样嵌进网页，界面是 `save_tools.js` + `save_tools.html` 写的中文只读版：
   - 存档查看：从 `edit/edit.html` 解析出 25 个分页的每一行（统计项、建筑、法术、奖杯、挑战、研究等），只显示不编辑。研究代号按表格里的新代号（按名字找到研究表的格子再取代号），名字能对上表格的加链接。
   - 法术预报、遗物预测：逻辑照搬 `rws/index.js`、`arch/index.js`（含原版的细节，例如同一次考古到点的两个固定遗物后一个顺延），2026-10-20 用改过的测试存档和原版逐条对比过一致。

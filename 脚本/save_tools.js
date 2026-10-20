@@ -94,8 +94,8 @@
     refreshHist(list, idx);
     var age = Date.now() / 1000 - save.lastsave;
     $('sv-msg').className = 'sv-msg';
-    $('sv-msg').innerHTML = '<b>' + esc(summary(save)) + '</b>　存档时间 ' + when(save.lastsave * 1000) +
-      '（' + dur(age) + '前）　存档版本 ' + save.saveVersion;
+    $('sv-msg').innerHTML = '存档时间 <b>' + when(save.lastsave * 1000) + '</b>（' + dur(age) + '前）· 存档版本 ' + save.saveVersion;
+    cards(save);
     $('sv-main').hidden = false;
     $('sv-in').value = '';
     var y = window.scrollY;  // 自动更新时不要跳回页首
@@ -104,6 +104,16 @@
     arch.run(save);
     if (store === 'game') window.scrollTo(0, y);
     return true;
+  }
+
+  // 顶部数字卡片
+  function cards(s) {
+    var f = function (id) { var x = util.assoc.faction.find(function (y) { return y.id == id; }); return x && id >= 0 ? zh(x.name) : ''; };
+    var fac = [f(s.faction), f(s.prestigeFaction), f(s.elitePrestigeFaction)].filter(Boolean).join(' / ') || '未结盟';
+    var ab = s.stats[28] ? s.stats[28].stats + s.stats[28].statsReset + s.stats[28].statsRei : null;
+    var items = [['重生', 'R' + s.reincarnation], ['飞升', 'A' + (s.ascension || 0)], ['阵营', fac],
+      ['宝石', s.gems >= 1e6 ? s.gems.toExponential(2).replace('e+', 'e') : num(s.gems)], ['退位次数', num(ab)], ['考古', num(s.excavations)]];
+    $('sv-cards').innerHTML = items.map(function (x) { return '<div><small>' + x[0] + '</small><b title="' + esc(x[1]) + '">' + esc(x[1]) + '</b></div>'; }).join('');
   }
 
   // ---------- 存档查看（按编辑器的分页，只读） ----------
@@ -633,12 +643,20 @@
       if (list.length) use(list[0].s, false);
       else { cur = null; refreshHist([], -1); $('sv-main').hidden = true; $('sv-msg').textContent = '已删除。'; }
     });
+    // 三个子页对应侧栏的「我的存档 / 法术预报 / 遗物预测」，地址是 #save、#save/rws、#save/arch
     $('sv-tabs').addEventListener('click', function (e) {
       var b = e.target.closest('button'); if (!b) return;
-      this.querySelectorAll('button').forEach(function (x) { x.classList.toggle('on', x === b); });
-      ['view', 'rws', 'arch'].forEach(function (t) { $('sv-' + t).hidden = t !== b.dataset.t; });
-      if (b.dataset.t === 'arch') arch.draw();
+      location.hash = b.dataset.t === 'view' ? 'save' : 'save/' + b.dataset.t;
     });
+    var pane = function (t) {
+      if (['view', 'rws', 'arch'].indexOf(t) < 0) t = 'view';
+      $('sv-tabs').querySelectorAll('button').forEach(function (x) { x.classList.toggle('on', x.dataset.t === t); });
+      ['view', 'rws', 'arch'].forEach(function (k) { $('sv-' + k).hidden = k !== t; });
+      if (t === 'arch') arch.draw();
+    };
+    window.addEventListener('subpage', function (e) { if (e.detail.sec === 'save') pane(e.detail.sub); });
+    var h = location.hash.slice(1);
+    if (h.indexOf('save/') === 0) pane(h.split('/')[1]);
     $('sv-vtabs').addEventListener('click', function (e) {
       var b = e.target.closest('button'); if (!b) return;
       $('sv-filter').value = '';
@@ -723,7 +741,7 @@
       if (!r.ok) { st.textContent = r.error; st.className = 'sv-hint err'; return; }
       app.path = r.path;
       st.className = 'sv-hint';
-      st.textContent = '存档文件更新于 ' + when(r.mtime) + (force ? '' : '，已自动读取');
+      st.textContent = '游戏存档 ' + when(r.mtime) + ' 更新' + (force ? '' : '，已自动读取');
       if (!force && r.mtime === app.mtime) return;
       app.mtime = r.mtime;
       if (cur && cur.str === r.save.trim() && !force) return;

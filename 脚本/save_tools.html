@@ -1,82 +1,118 @@
 <section id="sec-save" class="savesec" hidden>
-<h1>我的存档</h1>
-<div class="sv-box">
-  <div id="sv-game" class="sv-row" hidden><button id="sv-gread">读取最新游戏存档</button>
-    <label><input type="checkbox" id="sv-gauto" checked> 游戏保存后自动更新</label>
-    <button id="sv-gdir" class="sv-lite">打开存档文件夹</button> <button id="sv-pastetoggle" class="sv-lite" hidden>手动粘贴存档</button>
-    <span id="sv-gstat" class="sv-hint"></span></div>
-  <div id="sv-pastebox"><textarea id="sv-in" rows="2" spellcheck="false" placeholder="在游戏里导出存档，把整段存档字符串粘贴到这里（粘贴后自动读取）"></textarea>
-  <div class="sv-row"><button id="sv-load">读取存档</button></div></div>
-  <div class="sv-row">
-    <span id="sv-histbox" hidden>已保存的存档：<select id="sv-hist"></select> <button id="sv-del" class="sv-lite">删除这份</button></span></div>
-  <p id="sv-msg" class="sv-msg">存档只保存在这台电脑的浏览器里（最近 10 份），不会上传。工具只读取存档，不能修改。</p>
+<div class="sv-head">
+  <h1>我的存档</h1>
+  <p id="sv-msg" class="sv-msg">存档只保存在这台电脑上（最近 10 份），不会上传。工具只读取存档，不能修改。</p>
+</div>
+<div class="sv-bar">
+  <span id="sv-game" class="sv-grp" hidden><button id="sv-gread">立即读取</button>
+    <label class="sv-switch"><input type="checkbox" id="sv-gauto" checked><i></i>自动同步</label>
+    <button id="sv-gdir" class="sv-lite">打开存档文件夹</button><button id="sv-pastetoggle" class="sv-lite" hidden>手动粘贴</button></span>
+  <span id="sv-histbox" class="sv-grp" hidden><select id="sv-hist" title="已保存的存档"></select><button id="sv-del" class="sv-lite">删除</button></span>
+  <span id="sv-gstat" class="sv-hint"></span>
+</div>
+<div id="sv-pastebox" class="sv-card sv-paste">
+  <textarea id="sv-in" rows="2" spellcheck="false" placeholder="在游戏里导出存档，把整段存档字符串粘贴到这里（粘贴后自动读取）"></textarea>
+  <button id="sv-load">读取存档</button>
 </div>
 <div id="sv-main" hidden>
+  <div id="sv-cards" class="sv-cards"></div>
   <div class="sv-tabs" id="sv-tabs"><button data-t="view" class="on">存档查看</button><button data-t="rws">法术预报</button><button data-t="arch">遗物预测</button></div>
   <div id="sv-view">
-    <div class="sv-row"><input id="sv-filter" type="search" placeholder="筛选项目，例如：雷击、考古、仙灵"></div>
+    <div class="sv-tools"><input id="sv-filter" type="search" placeholder="筛选项目，例如：雷击、考古、仙灵"><div id="sv-vtabs" class="sv-tabs2"></div></div>
+    <div id="sv-vbody" class="sv-card"></div>
     <p class="sv-hint">✓ 表示存档里有这一项（升级、奖杯、挑战）；阵营升级和传承的勾，鼠标停上去能看名字。研究：<span class="rs-own">绿色</span>已购买，<span class="rs-unl">黄色</span>已解锁未购买，<span class="rs-lock">灰色</span>未解锁。带虚线的名字点了跳到表格。</p>
-    <div id="sv-vtabs" class="sv-tabs2"></div>
-    <div id="sv-vbody"></div>
   </div>
-  <div id="sv-rws" hidden></div>
+  <div id="sv-rws" class="sv-card" hidden></div>
   <div id="sv-arch" hidden>
-    <p class="sv-warn">有些遗物的条件用到存档里没有的数据，下面写的「可以获得（需要…）」要自己和游戏里的数值对比：力量宝珠、胡须、第一水晶碎片、三块铁片、考古幻影、先祖沙漏、指引之灯、金库、战场、鲜血圣杯。</p>
-    <div class="sv-row">往后计算 <input id="sv-alim" type="number" min="1" step="1000" value="10000"> 个随机数</div>
-    <div id="sv-aout"></div>
-    <h3>小随机数分布</h3>
-    <p class="sv-hint">每个点是往后某一个很小的随机数，<b>越小越好</b>。点一下看用上这个数能拿到哪些遗物。</p>
-    <canvas id="sv-achart"></canvas>
-    <div class="sv-row"><label><input type="checkbox" id="sv-aovc"> 按指定的重生次数看</label> <input id="sv-aover" type="number" value="125" disabled></div>
-    <div id="sv-adetail"></div>
+    <div class="sv-card">
+      <p class="sv-warn">有些遗物的条件用到存档里没有的数据，「可以获得（需要…）」要自己和游戏里的数值对比：力量宝珠、胡须、第一水晶碎片、三块铁片、考古幻影、先祖沙漏、指引之灯、金库、战场、鲜血圣杯。</p>
+      <div class="sv-row">往后计算 <input id="sv-alim" type="number" min="1" step="1000" value="10000"> 个随机数</div>
+      <div id="sv-aout"></div>
+    </div>
+    <div class="sv-card">
+      <h3>小随机数分布</h3>
+      <p class="sv-hint">每个点是往后某一个很小的随机数，<b>越小越好</b>。点一下看用上这个数能拿到哪些遗物。</p>
+      <canvas id="sv-achart"></canvas>
+      <div class="sv-row"><label><input type="checkbox" id="sv-aovc"> 按指定的重生次数看</label> <input id="sv-aover" type="number" value="125" disabled></div>
+      <div id="sv-adetail"></div>
+    </div>
   </div>
 </div>
 <p class="sv-note">法术预报和遗物预测改写自社区工具 Royal Advisory Board（Realm Weather Service、Lara Crypt，MIT 许可，本地副本在 工具/RG-tools），查看页的项目来自它的存档编辑器。游戏更新后预报可能不准，以游戏内为准。</p>
 </section>
 <style>
-.savesec{max-width:1100px;margin:0 auto}
-.sv-vt,#sv-rws,#sv-aout,#sv-adetail{overflow-x:auto}
-.savesec h1{font-size:22px;margin:4px 0 14px}
-.savesec h3{font-size:16px;margin:16px 0 6px;color:var(--head)}
-.sv-box{background:var(--soft);border:none;border-radius:14px;padding:12px 16px;margin-bottom:14px}
-#sv-in{width:100%;font:12px Consolas,monospace;padding:8px 10px;border:1px solid var(--line);border-radius:10px;resize:vertical;background:#fff}
-.sv-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:6px 0}
-.savesec button{font:inherit;font-size:14px;padding:5px 14px;border:1px solid var(--accent);background:var(--accent);color:#fff;border-radius:10px;cursor:pointer;transition:filter .15s,background .15s}
-.savesec button:hover{filter:brightness(1.08)}
-.savesec button.sv-lite,.sv-more{background:#fff!important;color:var(--accent)!important}
-.savesec select,.savesec input[type=number],#sv-filter{font:inherit;font-size:14px;padding:4px 10px;border:1px solid var(--line);border-radius:10px;background:#fff}
-#sv-filter{border-radius:999px;padding:5px 14px}
-#sv-filter:focus,.savesec select:focus{outline:none;border-color:#c9b6f2}
-#sv-filter{width:min(360px,100%)} #sv-alim{width:110px} #sv-aover{width:80px}
-.sv-msg{margin:6px 0 0;font-size:14px;color:#444} .sv-msg.err,.sv-hint.err{color:#c62828}
-.sv-tabs{display:inline-flex;gap:2px;background:var(--soft);border-radius:12px;padding:3px;margin-bottom:12px}
-.sv-tabs button{border:none!important;background:none!important;color:#555!important;border-radius:9px;padding:5px 18px}
-.sv-tabs button.on{background:#fff!important;color:var(--head)!important;font-weight:600;box-shadow:0 1px 3px rgba(40,20,90,.12)}
-.sv-tabs2{display:flex;flex-wrap:wrap;gap:4px;margin:6px 0 10px}
-.sv-tabs2 button{background:#fff;color:var(--fg);border-color:var(--line);font-size:13px;padding:3px 12px;border-radius:999px}
-.sv-tabs2 button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
-.sv-tabs2 button.off{color:#999}
+[hidden]{display:none!important}
+main>section.savesec{background:none;box-shadow:none;padding:8px 6px;max-width:1180px;margin:0 auto}
+.sv-head h1{font-size:26px;margin:0}
+.sv-msg{margin:2px 0 0;font-size:13px;color:var(--muted)} .sv-msg.err,.sv-hint.err{color:#dc2626}
+.sv-msg b{color:var(--fg)}
+.sv-bar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;margin:14px 0 16px}
+.sv-grp{display:inline-flex;gap:8px;align-items:center}
+.sv-card{background:var(--card);border-radius:18px;box-shadow:var(--shadow);padding:18px 20px;margin-bottom:16px}
+.sv-paste{display:flex;gap:10px;align-items:flex-start}
+#sv-in{flex:1;font:12px Consolas,monospace;padding:9px 12px;border:1px solid var(--line);border-radius:12px;resize:vertical;background:var(--soft)}
+#sv-in:focus{outline:none;border-color:#bcd0f7;background:#fff}
+.sv-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0}
+.savesec button{font:inherit;font-size:13.5px;padding:6px 16px;border:none;background:var(--fg);color:#fff;border-radius:10px;cursor:pointer;transition:opacity .15s,background .15s;white-space:nowrap}
+.savesec button:hover{opacity:.88}
+.savesec button.sv-lite,.sv-more{background:#fff!important;color:var(--fg)!important;box-shadow:0 1px 3px rgba(20,40,90,.1)}
+.savesec select,.savesec input[type=number],#sv-filter{font:inherit;font-size:13.5px;padding:5px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--fg)}
+#sv-filter{border-radius:999px;padding:6px 16px;width:260px}
+#sv-filter:focus,.savesec select:focus,.savesec input[type=number]:focus{outline:none;border-color:#bcd0f7}
+#sv-hist{max-width:300px} #sv-alim{width:120px} #sv-aover{width:90px}
+/* 开关 */
+.sv-switch{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;cursor:pointer;user-select:none}
+.sv-switch input{display:none}
+.sv-switch i{width:34px;height:20px;border-radius:999px;background:#cfd8e6;position:relative;transition:background .2s}
+.sv-switch i:after{content:"";position:absolute;left:2px;top:2px;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.2);transition:left .2s}
+.sv-switch input:checked+i{background:var(--blue)}
+.sv-switch input:checked+i:after{left:16px}
+/* 数字卡片：第一张纯蓝 */
+.sv-cards{display:grid;grid-template-columns:1.5fr repeat(5,1fr);gap:14px;margin-bottom:18px}
+.sv-cards div{background:var(--card);border-radius:18px;box-shadow:var(--shadow);padding:16px 18px;min-width:0}
+.sv-cards small{display:block;color:var(--muted);font-size:12px}
+.sv-cards b{display:block;font-size:22px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-variant-numeric:tabular-nums}
+.sv-cards div:first-child{background:var(--blue);color:#fff;box-shadow:0 10px 28px rgba(37,99,235,.3)}
+.sv-cards div:first-child small{color:rgba(255,255,255,.75)}
+.sv-cards div:first-child b{font-size:34px;line-height:1.2}
+/* 分段切换 */
+.sv-tabs{display:inline-flex;gap:2px;background:#e6ecf5;border-radius:12px;padding:4px;margin-bottom:14px}
+.sv-tabs button{background:none!important;color:var(--muted)!important;border-radius:9px;padding:6px 20px}
+.sv-tabs button.on{background:#fff!important;color:var(--fg)!important;font-weight:600;box-shadow:0 2px 8px rgba(20,40,90,.1)}
+.sv-tools{margin-bottom:12px}
+.sv-tools #sv-filter{margin-bottom:10px}
+.sv-tabs2{display:flex;flex-wrap:wrap;gap:6px}
+.sv-tabs2 button{background:#fff!important;color:#4b5569!important;font-size:13px;padding:4px 13px;border-radius:999px;box-shadow:0 1px 2px rgba(20,40,90,.06)}
+.sv-tabs2 button.on{background:var(--fg)!important;color:#fff!important}
+.sv-tabs2 button.off{color:#a0aabb!important}
 .sv-tabs2.dim{opacity:.4}
-table.sv-tb{border-collapse:separate;border-spacing:0;font-size:13px;margin:4px 0 10px;border:1px solid var(--line);border-radius:10px;overflow:hidden}
-.sv-tb th,.sv-tb td{border:none;border-bottom:1px solid #eeeaf5;padding:4px 10px;text-align:left;vertical-align:top}
-.sv-tb tr:last-child>*{border-bottom:none}
-.sv-tb tr[data-k]:hover>*{background:#faf8fe}
+#sv-vbody{padding:8px 10px}
+.sv-vt,#sv-rws,#sv-aout,#sv-adetail{overflow-x:auto}
+.sv-vt h3,.sv-card h3{font-size:15px;margin:6px 6px 8px}
+table.sv-tb{border-collapse:separate;border-spacing:0;font-size:13.5px;margin:0 0 6px;width:100%}
+.sv-tb th,.sv-tb td{border:none;border-top:1px solid #eef2f8;padding:8px 12px;text-align:left;vertical-align:top}
+.sv-tb tr:first-child>*{border-top:none}
+.sv-tb tr[data-k]:hover>*{background:#f7f9fd}
 .sv-tb td{text-align:right;font-variant-numeric:tabular-nums}
-.sv-tb tr.hd th{background:#ede6f8;text-align:center;font-weight:600}
-.sv-tb tr.sub th{background:var(--soft);text-align:center;color:var(--head)}
-.sv-tb tr>th:first-child{font-weight:normal;min-width:180px}
+.sv-tb tr.hd th{color:#9aa5b8;font-size:12px;font-weight:500;text-align:right}
+.sv-tb tr.hd th:first-child{text-align:left}
+.sv-tb tr.sub th{background:var(--soft);color:var(--fg);font-weight:600;border-radius:8px}
+.sv-tb tr>th:first-child{font-weight:normal;min-width:200px}
 .sv-tb tr.rs td{text-align:left;white-space:nowrap}
 .sv-kv td{text-align:left}
-.sv-tb .ok{color:#2e7d32;font-weight:700} .sv-tb .no{color:#bbb} .sv-tb .nul{color:#ccc}
-.rs-own{color:#2e7d32;font-weight:600} .rs-unl{color:#9e7c00} .rs-lock{color:#aaa}
-.rs-lock a{color:#aaa}
+.sv-tb .ok{color:#16a34a;font-weight:700} .sv-tb .no{color:#cbd3df} .sv-tb .nul{color:#d5dbe5}
+.rs-own{color:#16a34a;font-weight:600} .rs-unl{color:#d97706} .rs-lock{color:#a0aabb}
+.rs-lock a{color:#a0aabb}
 a.tl{color:inherit;text-decoration:underline dotted;text-underline-offset:3px}
-.sv-hint{font-size:13px;color:var(--muted);margin:4px 0}
-.sv-warn{font-size:13px;background:#fff8e1;border-radius:10px;padding:8px 12px}
-.sv-fc ol,.sv-ex{padding-left:28px;margin:6px 0} .sv-fc li,.sv-ex li{margin:2px 0}
-.bd{cursor:pointer;border-radius:3px;padding:0 2px} .bd:hover{background:#eee} .bd.hl{background:#ffe58a;font-weight:600}
-.br0{color:#c62828}.br1{color:#2e7d32}.br2{color:#1565c0}.br3{color:#777}.br4{color:#111;font-weight:600}.br5{color:#b8860b}
-#sv-achart{width:100%;border:1px solid var(--line);border-radius:12px;cursor:crosshair}
-.sv-note{font-size:12px;color:var(--muted);margin-top:24px;border-top:1px solid var(--line);padding-top:8px}
-@media (max-width:640px){.sv-tb tr>th:first-child{min-width:110px}}
+a.tl:hover{color:var(--blue)}
+.sv-hint{font-size:13px;color:var(--muted);margin:4px 2px}
+.sv-warn{font-size:13px;background:#fff7e6;color:#8a5a00;border-radius:12px;padding:10px 14px;margin:0 0 10px}
+.sv-tabs2+.sv-fc,.sv-fc{margin-top:6px}
+.sv-fc ol,.sv-ex{padding-left:28px;margin:6px 0} .sv-fc li,.sv-ex li{margin:3px 0}
+.bd{cursor:pointer;border-radius:6px;padding:1px 4px} .bd:hover{background:var(--soft)} .bd.hl{background:#dbe7ff;color:#1d4ed8;font-weight:600}
+.br0{color:#dc2626}.br1{color:#16a34a}.br2{color:#2563eb}.br3{color:#6b7689}.br4{color:#111;font-weight:600}.br5{color:#ca8a04}
+#sv-achart{width:100%;border:1px solid var(--line);border-radius:14px;cursor:crosshair;background:#fbfcfe}
+.sv-note{font-size:12px;color:#9aa5b8;margin:20px 4px 0}
+@media (max-width:1000px){.sv-cards{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:640px){.sv-cards{grid-template-columns:repeat(2,1fr)}.sv-tb tr>th:first-child{min-width:120px}.sv-paste{flex-direction:column}#sv-in{width:100%}}
 </style>
