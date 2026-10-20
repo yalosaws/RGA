@@ -34,9 +34,12 @@ ALIAS = {'TC': '征税', 'CtA': '动员令', 'HoL': '传说圣殿', 'BF': '嗜�
 # 遗物表里阵营遗物按全阶英豪奖杯的顺序排，每个阵营两个
 ART_FACTIONS = ['仙灵', '精灵', '天使', '地精', '亡灵', '恶魔', '泰坦', '德鲁伊', '无面者', '矮人', '卓尔', '佣兵']
 # 程序版本：改了功能就加版本号，在 CHANGES 最前面写这一版改了什么
-VERSION = '0.3.0'  # 还没到正式发布，用 0.x（用户要求）
+VERSION = '0.3.1'  # 还没到正式发布，用 0.x（用户要求）
 AUTHOR = 'Yalosaws'
 CHANGES = [
+    ('0.3.1', '2026-10-20', [
+        '挑战页的「法术强化」标签改用紫色',
+    ]),
     ('0.3.0', '2026-10-20', [
         '内测版正式发布',
         '修复若干问题',
@@ -796,7 +799,7 @@ td.flash{outline:3px solid #f59e0b;outline-offset:-2px;background:var(--flash)!i
 .ch-g h2{font-size:16px;margin:0}.ch-g h2 span{font-size:12px;font-weight:normal;color:#9aa5b8;margin-left:6px}
 .ch-g{margin:22px 2px 8px;scroll-margin:80px}
 .ch-sp{margin-top:8px;padding:9px 14px;border-radius:14px;background:var(--soft);font-size:13.5px;color:#3d4a5f;scroll-margin:80px;transition:background 1.5s}
-.ch-sp em{font-style:normal;font-size:11.5px;color:#b45309;background:#fdf1e1;border-radius:6px;padding:0 7px;margin-right:8px}
+.ch-sp em{font-style:normal;font-size:11.5px;color:#6b4fa0;background:#f2edfb;border-radius:6px;padding:0 7px;margin-right:8px}
 .ch-sp b{font-size:14px;color:var(--fg)}.ch-sp .en{font-size:12px;color:#9aa5b8;margin-left:8px}
 .ch-sp p{margin:4px 0 0}
 .ch-sp.flash{background:var(--flash)}
