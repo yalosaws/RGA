@@ -16,6 +16,7 @@ from openpyxl.utils import get_column_letter
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import md2html
+import save_tools
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = sys.argv[1] if len(sys.argv) > 1 else os.path.join(ROOT, '表格', 'RG综合列表（4.3.14）.xlsx')
@@ -177,7 +178,7 @@ def main():
     research, upgrade, challenge, artifact = code_maps(cells)
     missing = []
 
-    def link(kind, name):
+    def find(kind, name):
         key = ALIAS.get(name, name)
         hit = None
         # 攻略按 4.3.9 改号后的新代号写；表里只有「原 xxx」注记的旧代号不算
@@ -189,10 +190,14 @@ def main():
             if not hit and k in index:
                 places = index[k]
                 hit = next((p for s in PREFER.get(kind, []) for p in places if p[0] == s), places[0])
+        return 't%d-%s' % hit if hit else None
+
+    def link(kind, name):
+        hit = find(kind, name)
         if not hit:
             missing.append('%s:%s' % (kind, name))
             return None
-        return '#t%d-%s' % hit
+        return '#' + hit
 
     guides = {}
     for gid, label, path in GUIDES:
@@ -202,12 +207,23 @@ def main():
     nav += '<span class="sep"></span>' + ''.join('<a href="#t%d" data-sec="t%d">%s</a>' % (n, n, SHEETS[n][0]) for n in sections)
     body = ''.join('<section id="sec-%s" class="guide" hidden>%s</section>' % (g, guides[g]) for g, _, _ in GUIDES)
     body += ''.join('<section id="sec-t%d" class="table" hidden><h1>%s</h1>%s</section>' % (n, SHEETS[n][1], sections[n]) for n in sections)
+    # 存档工具：只读存档查看、法术预报、遗物预测（数据和库来自 工具/RG-tools）
+    save_js, save_miss = '', []
+    if os.path.isdir(save_tools.RG):
+        save_html, save_js, save_miss = save_tools.build(find, {'t%d-%s' % c: code for code, c in research.items()})
+        nav += '<span class="sep"></span><a href="#save" data-sec="save">我的存档</a>'
+        body += save_html
+    else:
+        print('没有 工具/RG-tools，跳过「我的存档」（git clone https://github.com/shadowgull/dox4242.github.io 工具/RG-tools）')
     page = TEMPLATE.replace('%%NAV%%', nav).replace('%%BODY%%', body).replace('%%TCOLORS%%', md2html.CSS[md2html.CSS.index('.t-fa'):md2html.CSS.index('[class^')])
+    page = page.replace('%%SAVEJS%%', save_js)  # 最后替换：脚本里可能有别的 %% 记号
     open(DST, 'w', encoding='utf-8').write(page)
     print('写入', DST, '%.1f MB' % (len(page.encode()) / 1e6))
     print('专名链接：%d 个没找到对应格子' % len(missing))
     for x in sorted(set(missing)):
         print('  ', x)
+    if save_miss:
+        print('存档工具：%d 个名字没翻译，显示英文：' % len(save_miss), '、'.join(save_miss))
 
 
 TEMPLATE = r"""<!doctype html>
@@ -285,7 +301,7 @@ td.flash{outline:3px solid #f0a000;outline-offset:-2px;background:var(--flash)!i
   window.addEventListener('scroll', function(){ if (cur && !(location.hash.indexOf('-') > 0)) pos[cur] = window.scrollY; });
   document.addEventListener('click', function(e){
     var a = e.target.closest('a[href^="#t"]');
-    if (a && a.closest('section.guide, #res')) fromLink = true;
+    if (a && a.closest('section.guide, section.savesec, #res')) fromLink = true;
   });
   back.addEventListener('click', function(){ history.back(); });
   window.addEventListener('hashchange', show);
@@ -321,6 +337,9 @@ td.flash{outline:3px solid #f0a000;outline-offset:-2px;background:var(--flash)!i
   res.addEventListener('click', function(e){ if (e.target.closest('a')) res.hidden = true; });
   document.addEventListener('keydown', function(e){ if (e.key === 'Escape') res.hidden = true; });
 })();
+</script>
+<script>
+%%SAVEJS%%
 </script>
 </body></html>
 """

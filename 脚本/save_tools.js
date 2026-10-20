@@ -1,0 +1,655 @@
+/* 网页「存档」栏：只读存档查看、法术预报、遗物预测。
+ * 解码、随机数和遗物条件用的是 RG-tools 原来的库（SaveHandler、PM_PRNG、util、Artifacts），
+ * 预报逻辑照搬 rws/index.js 和 arch/index.js，只把界面换成中文、去掉 jQuery/Vue。
+ * 存档字符串存在浏览器 localStorage（rg-saves），只在本机，不会上传。
+ */
+(function () {
+  'use strict';
+  var D = SAVE_DATA;
+  var KEY = 'rg-saves', MAXKEEP = 10;
+  var $ = function (id) { return document.getElementById(id); };
+
+  // ---------- 通用 ----------
+  function zh(en) { return en == null ? '' : (D.zh[en] || en); }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return {'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]; }); }
+  // 中文名；表格里有对应格子的加链接
+  function nm(s) { var id = D.links[s]; return id ? '<a class="tl" href="#' + id + '">' + esc(s) + '</a>' : esc(s); }
+  function num(v) {
+    if (v === undefined || v === null || (typeof v === 'number' && isNaN(v))) return '—';
+    if (typeof v === 'boolean') return v ? '✓' : '';
+    if (typeof v !== 'number') return esc(v);
+    var a = Math.abs(v);
+    if (a === Infinity) return '∞';
+    if (a >= 1e12) return v.toExponential(3).replace('e+', 'e');
+    return v.toLocaleString('zh-CN', {maximumFractionDigits: a < 10 ? 3 : 1});
+  }
+  function dur(s) {
+    if (s === undefined || s === null || isNaN(s)) return '—';
+    var neg = s < 0; s = Math.floor(Math.abs(s));
+    if (s < 1) return '0秒';
+    var d = Math.floor(s / 86400), h = Math.floor(s % 86400 / 3600), m = Math.floor(s % 3600 / 60), x = s % 60;
+    var out = (d ? d + '天' : '') + (h ? h + '小时' : '') + (m ? m + '分' : '') + (x && d < 10 ? x + '秒' : '');
+    return (neg ? '-' : '') + out;
+  }
+  function when(t) {
+    var d = new Date(t);
+    return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2) + ' ' +
+      ('0' + d.getHours()).slice(-2) + ':' + ('0' + d.getMinutes()).slice(-2);
+  }
+  util.render.time = dur;  // artifacts.js 的说明文字里用到
+  var ck = function (b) { return b ? '<span class="ok">✓</span>' : '<span class="no">–</span>'; };
+  var NUL = '<span class="nul">—</span>';
+
+  // ---------- 存档保存 ----------
+  function loadList() {
+    try { var a = JSON.parse(localStorage.getItem(KEY) || '[]'); return Array.isArray(a) ? a : []; } catch (e) { return []; }
+  }
+  function saveList(a) {
+    try { localStorage.setItem(KEY, JSON.stringify(a)); return true; } catch (e) { return false; }
+  }
+  function decode(str) {
+    var save = SaveHandler.Decode(str.trim());
+    if (save.options && save.options[0]) save.options = save.options[0];
+    return save;
+  }
+  function summary(save) {
+    var f = function (id) { var x = util.assoc.faction.find(function (y) { return y.id == id; }); return x && id >= 0 ? zh(x.name) : ''; };
+    return 'R' + save.reincarnation + (save.ascension ? ' A' + save.ascension : ' A0') + ' · ' +
+      [f(save.faction), f(save.prestigeFaction), f(save.elitePrestigeFaction)].filter(Boolean).join('/');
+  }
+
+  var cur = null;  // {str, save}
+
+  function refreshHist(list, idx) {
+    var sel = $('sv-hist');
+    sel.innerHTML = '';
+    list.forEach(function (it, k) {
+      var o = document.createElement('option');
+      o.value = k;
+      o.textContent = when(it.saved * 1000) + '　' + it.label;
+      if (k === idx) o.selected = true;
+      sel.appendChild(o);
+    });
+    $('sv-histbox').hidden = !list.length;
+  }
+
+  function use(str, store) {
+    var save;
+    try { save = decode(str); } catch (e) {
+      $('sv-msg').textContent = '读不出这个存档：' + e.message + '。请在游戏里重新导出，整段粘贴（以 $00s 开头、$e 结尾）。';
+      $('sv-msg').className = 'sv-msg err';
+      return false;
+    }
+    cur = {str: str.trim(), save: save};
+    var list = loadList(), idx = 0;
+    if (store) {
+      list = list.filter(function (it) { return it.s !== cur.str; });
+      list.unshift({s: cur.str, saved: save.lastsave, label: summary(save)});
+      list = list.slice(0, MAXKEEP);
+      if (!saveList(list)) $('sv-msg').textContent = '（浏览器不让保存，这次关掉页面后需要重新粘贴）';
+    } else {
+      idx = list.findIndex(function (it) { return it.s === cur.str; });
+    }
+    refreshHist(list, idx);
+    var age = Date.now() / 1000 - save.lastsave;
+    $('sv-msg').className = 'sv-msg';
+    $('sv-msg').innerHTML = '<b>' + esc(summary(save)) + '</b>　存档时间 ' + when(save.lastsave * 1000) +
+      '（' + dur(age) + '前）　存档版本 ' + save.saveVersion;
+    $('sv-main').hidden = false;
+    $('sv-in').value = '';
+    renderView(save);
+    rws.run(save);
+    arch.run(save);
+    return true;
+  }
+
+  // ---------- 存档查看（按编辑器的分页，只读） ----------
+  var H5 = ['本纪元', '之前的纪元', '本次重生', '之前的重生', '总计'];
+  var HEAD = {
+    'fivestat-header': H5, 'onestat-header': ['数值'], 'factioncoin-header': ['阵营币', '皇家贸易令'],
+    'unique-header': ['本次重生', '之前的重生', '总计'], 'upgrade-header': ['已拥有'], 'trophy-header': ['已获得'],
+    'event-trophy-header': ['已获得', '今年完成', '累计完成'], 'challenge-header': ['已解锁', '已开启'],
+    'legacy-header': ['铜', '银', '金', '钻石'],
+    'faction-upgrade-header': ['1', '2', '3', '4', '5', '6', '7', '8', '9', '遗产', '10', '11', '12', '高级遗产'],
+    'research-upgrades-header': ['法术学', '工艺学', '神学', '经济学', '炼金学', '战争学'],
+    'research-upgrades-header2': ['禁忌学']
+  };
+  var BL = {0: 194, 1: 164, 2: 39, 3: 212, 4: 396, 5: 103, 6: 380, 7: 136, 8: 183, 9: 150, 10: 120, 12: 598, 13: 939, 14: 940, 15: 953};
+  var SETS = {0: 832, 1: 830, 2: 824, 3: 833, 4: 838, 5: 825, 6: 837, 7: 828, 8: 831, 9: 829, 10: 827, 11: 834, 12: 826};
+
+  function ev(expr, save, i) {
+    if (expr === 'upgradesArray') return save.upgrades;
+    if (expr === 'trophiesArray') return save.trophies;
+    try { return new Function('save', 'i', 'return ' + expr)(save, i); } catch (e) { return undefined; }
+  }
+  function assocName(type, id) {
+    var x = (util.assoc[type] || []).find(function (y) { return y.id == id; });
+    return x ? zh(x.name) : (id == -1 || id == null ? '无' : String(id));
+  }
+  function uname(id) { return D.uname[id] || String(id); }
+  function stat5(st, r, f, max) {
+    if (!st) return [NUL];
+    var a = st.stats, b = st.statsReset, c = st.statsRei;
+    var v = [a, b, max ? Math.max(a, b) : a + b, c, max ? Math.max(a, b, c) : a + b + c];
+    var hide = [r['hide-ab'], r['hide-prev-abs'], r['hide-rei'], r['hide-prev-reis'], r['hide-total']];
+    return v.map(function (x, k) { return hide[k] ? NUL : f(x); });
+  }
+  function highest(ids, owned) {
+    var n = 0, top = -1;
+    ids.forEach(function (id) { if (owned[id]) { n++; top = id; } });
+    return {n: n, top: top};
+  }
+  function research(id, up, code) {
+    var info = D.research[id] || {}, u = up[id];
+    var st = u && u.u1 ? 'own' : u ? 'unl' : 'lock';
+    return '<span class="rs-' + st + '" title="' + (st === 'own' ? '已购买' : st === 'unl' ? '已解锁，未购买' : '未解锁') + '">' +
+      esc(info.code || code) + ' ' + (info.zh ? nm(info.zh) : '') + '</span>';
+  }
+
+  // 每种行：返回 [名称 HTML, [各格 HTML]]，返回 null 表示不显示
+  var W = {
+    'stat': function (r, s, i) { return stat5(ev(r.stat, s, i), r, num); },
+    'stat-time': function (r, s, i) { return stat5(ev(r.stat, s, i), r, dur); },
+    'stat-max': function (r, s, i) { return stat5(ev(r.stat, s, i), r, num, true); },
+    'stat-max-time': function (r, s, i) { return stat5(ev(r.stat, s, i), r, dur, true); },
+    'field': function (r, s, i) { return [num(ev(r.field, s, i))]; },
+    'field-time': function (r, s, i) {
+      if (r.field === 'offlinetime') return [dur(Date.now() / 1000 - s.lastsave)];
+      return [dur(ev(r.field, s, i))];
+    },
+    'field-dropdown': function (r, s, i) {
+      var v = ev(r.field, s, i);
+      return [r.type === 'upgradeIDs' ? (v > 0 ? nm(uname(v)) : '无') : nm(assocName(r.type, v))];
+    },
+    'bloodline-dropdown': function (r, s) { var f = ev(r.field, s); return [f == -1 || BL[f] == null ? '无' : nm(uname(BL[f]))]; },
+    'artifactSet-dropdown': function (r, s) { var f = ev(r.field, s); return [f == -1 || SETS[f] == null ? '无' : nm(uname(SETS[f]))]; },
+    'neutraltime': function (r, s) {
+      var t = ev(r.total, s), g = ev(r.good, s), e = ev(r.evil, s);
+      var a = t.stats - g.stats - e.stats, b = t.statsReset - g.statsReset - e.statsReset, c = t.statsRei - g.statsRei - e.statsRei;
+      return [a, b, a + b, c, a + b + c].map(dur);
+    },
+    'building': function (r, s) { var b = ev(r.building, s); return b ? [b.q, b.t - b.q, b.t, b.r, b.r + b.t].map(num) : [NUL]; },
+    'building-max': function (r, s) { var b = ev(r.building, s); return b ? [num(b.q), NUL, num(b.m), num(b.e), num(Math.max(b.m, b.e))] : [NUL]; },
+    'unique-max': function (r, s) {
+      var b = ev(r.building, s); if (!b) return [NUL];
+      var m = b['um' + r.id], e = b['ue' + r.id];
+      return [num(m), num(e), num(Math.max(m || 0, e || 0))];
+    },
+    'spell': function (r, s, i) { var p = ev(r.spell, s, i); return p ? [p.c, p.r, p.c + p.r, p.e, p.c + p.r + p.e].map(num) : [NUL]; },
+    'spell-rng': function (r, s, i) { var p = ev(r.spell, s, i); return [p ? num(p.s) : NUL]; },
+    'spell-time': function (r, s, i) {
+      var p = ev(r.spell, s, i);
+      return p ? [p.active0, p.active1, p.active0 + p.active1, p.active2, p.active0 + p.active1 + p.active2].map(dur) : [NUL];
+    },
+    'spell-duration': function (r, s, i) { var p = ev(r.spell, s, i); return [p && p.t >= 0 ? dur(p.t) : NUL]; },
+    'spell-autocasting': function (r, s, i) {
+      var p = ev(r.spell, s, i); if (!p) return [NUL];
+      var o = function (n) { return n >= 0 ? n : '–'; };
+      return [ck(p.a) + '　金 ' + o(p.n2) + ' / 银 ' + o(p.n) + ' / 铜 ' + o(p.n3)];
+    },
+    'spell-tiers-dropdown': function (r, s) {
+      var ids = D.ids[r.filter] || [], h = highest(ids, s.upgrades);
+      return [h.top < 0 ? '无' : esc(uname(h.top)) + '（' + h.n + '/' + ids.length + '）'];
+    },
+    'trophy-dropdown': function (r, s) {
+      var ids = D.ids[r.filter] || [], h = highest(ids, s.trophies);
+      return [h.top < 0 ? '无' : nm(D.tname[h.top] || String(h.top)) + '（' + h.n + '/' + ids.length + '）'];
+    },
+    'upgrade': function (r, s) { return [ck(s.upgrades[r.id])]; },
+    'faction-upgrade': function (r, s) {
+      var up = s.upgrades, out = [];
+      ['b1', 'b2', 'b3', 's1', 's2', 's3', 'g1', 'g2', 'g3', 'nh', 'd1', 'd2', 'd3', 'ah'].forEach(function (k) {
+        var id = r[k + '_id'];
+        if (!id) { out.push(''); return; }
+        var has = k === 'ah' ? up[id] && up[id].u1 : up[id];
+        out.push('<span title="' + esc(uname(id)) + '">' + ck(has) + '</span>');
+      });
+      return out;
+    },
+    'challenge': function (r, s) { var u = s.upgrades[r.id]; return [ck(u), ck(u && u.u1)]; },
+    'research-upgrade-row': function (r, s) {
+      return ['s', 'c', 'd', 'e', 'a', 'w'].map(function (k) { return research(r[k + '_id'], s.upgrades, r[k + '_name']); });
+    },
+    'research-upgrade-row2': function (r, s) { return [research(r.f_id, s.upgrades, r.f_name)]; },
+    'lineage-perk': function (r, s) { var u = s.upgrades[r.id]; return [ck(u) + ' ' + ck(u && u.u1)]; },
+    'legacy': function (r, s) {
+      var b = +r.id, up = s.upgrades;
+      return [b, b + 1, b + 2, r.name === 'Undead' ? 1126 : b + 3].map(function (id) { return '<span title="' + esc(uname(id)) + '">' + ck(up[id]) + '</span>'; });
+    },
+    'trophy': function (r, s) { return [ck(s.trophies[r.id])]; },
+    'event-trophy': function (r, s) { var t = s.trophies[r.id]; return [ck(t), ck(t && t.u1), num(t ? t.u2 : 0)]; },
+    'option': function (r, s) { return [ck(s.options && s.options[r.id])]; },
+    'factioncoin': function (r, s, i) { var f = ev(r.fc, s, i); return f ? [num(f.factionCoins), num(f.royalExchanges)] : [NUL]; }
+  };
+  W['trophy-comp-dropdown'] = W['trophy-dropdown'];
+
+  function expand(r) {
+    if (!r['v-for']) return [null];
+    var m = /i in (\w+)(?: \| filterDef "(\w+)")?/.exec(r['v-for']);
+    var list = {spells: util.assoc.spells, spellsRNG: util.assoc.spellsRNG, factions: util.assoc.faction}[m[1]] || [];
+    return m[2] ? list.filter(function (x) { return x[m[2]] !== undefined; }) : list;
+  }
+  function rowName(r, i) {
+    if (r.w === 'neutraltime') return '中立立场时间';
+    if (r.name && typeof r.name === 'object') return (D.zh['@' + r.name.suffix] || '{}').replace('{}', zh(i.name));
+    return zh(r.name);
+  }
+
+  function renderView(save) {
+    var tabs = $('sv-vtabs'), body = $('sv-vbody');
+    var keep = tabs.querySelector('.on');
+    keep = keep ? keep.dataset.t : 'general';
+    tabs.innerHTML = ''; body.innerHTML = '';
+    D.tabs.forEach(function (t) {
+      var b = document.createElement('button');
+      b.textContent = zh(t.name); b.dataset.t = t.id;
+      if (t.id === keep) b.className = 'on';
+      tabs.appendChild(b);
+      var html = [], cols = 1;
+      t.rows.forEach(function (r) {
+        if (r.h) { html.push('<tr class="sub"><th colspan="9">' + esc(zh(r.h)) + '</th></tr>'); return; }
+        if (r.w === 'mercenaryselection-header') { html.push('<tr class="sub"><th colspan="9">佣兵选择</th></tr>'); return; }
+        if (HEAD[r.w]) {
+          cols = HEAD[r.w].length;
+          var first = r.w.indexOf('research') === 0 ? '' : r.w === 'legacy-header' || r.w === 'faction-upgrade-header' ? '阵营' : '项目';
+          html.push('<tr class="hd">' + (r.w.indexOf('research') === 0 ? '' : '<th>' + first + '</th>') +
+            HEAD[r.w].map(function (h) { return '<th>' + h + '</th>'; }).join('') + '</tr>');
+          return;
+        }
+        if (!W[r.w]) return;
+        if (r.show) { try { if (!new Function('save', 'return ' + r.show)(save)) return; } catch (e) { /* 照常显示 */ } }
+        expand(r).forEach(function (i) {
+          var cells;
+          try { cells = W[r.w](r, save, i); } catch (e) { cells = [NUL]; }
+          if (!cells) return;
+          var tds = cells.map(function (c, k) {
+            var span = k === cells.length - 1 && cells.length < cols ? ' colspan="' + (cols - k) + '"' : '';
+            return '<td' + span + '>' + c + '</td>';
+          }).join('');
+          if (r.w.indexOf('research-upgrade-row') === 0) { html.push('<tr class="rs">' + tds + '</tr>'); return; }
+          var name = rowName(r, i);
+          html.push('<tr data-k="' + esc(name.toLowerCase()) + '"><th>' + nm(name) + '</th>' + tds + '</tr>');
+        });
+      });
+      var sec = document.createElement('div');
+      sec.className = 'sv-vt'; sec.dataset.t = t.id; sec.hidden = t.id !== keep;
+      sec.innerHTML = '<h3>' + esc(zh(t.name)) + '</h3><table class="sv-tb">' + html.join('') + '</table>';
+      body.appendChild(sec);
+    });
+    filterView();
+  }
+  function filterView() {
+    var k = $('sv-filter').value.trim().toLowerCase();
+    var on = $('sv-vtabs').querySelector('.on');
+    document.querySelectorAll('#sv-vbody .sv-vt').forEach(function (sec) {
+      var any = false;
+      sec.querySelectorAll('tr[data-k]').forEach(function (tr) {
+        var hit = !k || tr.dataset.k.indexOf(k) >= 0;
+        tr.hidden = !hit; if (hit) any = true;
+      });
+      sec.querySelectorAll('tr.sub, tr.hd, tr.rs').forEach(function (tr) { tr.hidden = !!k; });
+      sec.hidden = k ? !any : !(on && on.dataset.t === sec.dataset.t);
+      sec.querySelector('h3').hidden = !k;
+    });
+    $('sv-vtabs').classList.toggle('dim', !!k);
+  }
+
+  // ---------- 法术预报（Realm Weather Service） ----------
+  var rws = (function () {
+    var BN = util.save.building_names, BIDS = util.save.building_ids;
+    var BREATH = ['红色', '绿色', '蓝色', '白色', '黑色', '黄色'];
+    var MAEL = ['产生的法力', '已解锁的奖杯数量', '找到的阵营币', '助手数量'];
+    var WISH = ['所有建筑产量', '助手', '法力上限', '奖杯数和离线加成', '阵营币获取概率', '法力恢复速度', '所有法术持续时间'];
+    var CATA = ['Fairy Chanting', 'Moon Blessing', "God's Hand", "Goblin's Greed", 'Night Time', 'Hellfire Blast', 'Gem Grinder', 'Holy Light', 'Blood Frenzy'];
+    var CATA_ID = [null, null, 'Holy Light', 'Blood Frenzy', 'Gem Grinder', null, null, null, 'Fairy Chanting', 'Moon Blessing', "God's Hand", "Goblin's Greed", 'Night Time', 'Hellfire Blast'];
+    var DJC4 = [[88, 88, 888], [88, 888, 88], [88, 88, 888], [88, 888, 88], [888, 88, 88], [888, 88, 88]];
+    var LINEAGE = ['Fairy', 'Elven', 'Angel', 'Goblin', 'Undead', 'Demon', 'Titan', 'Druid', 'Faceless', 'Dwarven', 'Drow', null, 'Dragon', 'Archon', 'Djinn', 'Makers'];
+    var hl = {};  // 高亮的建筑 id
+    var F = {};   // 各预报：{name, msg, more()}
+    var owned = [], avail = [];
+    var bname = function (id) { return zh(BN[id]); };
+    var bspan = function (id) { return '<span class="bd' + (hl[id] ? ' hl' : '') + '" data-b="' + id + '">' + esc(bname(id)) + '</span>'; };
+    var has = function (s, n) { return util.save.hasSpell(s, n); };
+
+    function add(key, name, msg, gen) {
+      F[key] = {name: name, msg: msg, gen: gen, items: []};
+      if (gen) more(key, 10);
+    }
+    function more(key, n) {
+      var f = F[key];
+      for (var k = 0; k < n; k++) f.items.push(f.gen());
+    }
+
+    function run(s) {
+      F = {}; owned = []; avail = [];
+      BIDS.forEach(function (i) {
+        if (s.buildings[i] && s.buildings[i].q > 0) owned.push(i);
+        if (util.save.building_alignment[i] == 0 || util.save.building_alignment[i] == s.alignment) avail.push(i);
+      });
+      var no = function (key, name, why) { add(key, name, why, null); };
+
+      // 雷击
+      if (!has(s, 'Lightning Strike')) no('ls', '雷击', '没有雷击。');
+      else if (s.alignment != 3 && !util.save.upgrade_owned(s, 688)) no('ls', '雷击', '不是中立立场。');
+      else if (owned.length < 2) no('ls', '雷击', owned.length ? '只有' + bname(owned[0]) + '，每次都打它。' : '没有建筑。');
+      else (function () {
+        var rng = new PM_PRNG(s.spells[13].s), rod = util.save.upgrade_owned(s, 143018);
+        add('ls', '雷击', '随机数状态 ' + rng.state + '。' + (rod ? '有避雷针（不会打到传说圣殿）。' : ''), function () {
+          var len = owned.length;
+          if (rod && owned[owned.length - 1] == 10) len -= 1;
+          return bspan(owned[rng.strikeTier(len)]);
+        });
+      })();
+
+      // 奇迹（研究 D400）
+      var mir = s.upgrades[143719];
+      if (!mir || !mir.u1) no('mir', '奇迹', '还没有奇迹（研究 D400）。');
+      else if (owned.length < 2) no('mir', '奇迹', owned.length ? '只有' + bname(owned[0]) + '。' : '没有建筑。');
+      else (function () {
+        var rng = new PM_PRNG(mir.s);
+        add('mir', '奇迹', '随机数状态 ' + rng.state + '。', function () { return bspan(owned[rng.strikeTier(owned.length)]); });
+      })();
+
+      // 龙息
+      if (!has(s, "Dragon's Breath")) no('db', '龙息', '没有龙息。');
+      else (function () {
+        var rng = new PM_PRNG(s.spells[21].s), tier = s.spells[21].activeTiers + 1, asc = s.ascension > 0 ? s.ascension : 1;
+        if (util.save.upgrade_owned(s, 796)) tier *= 2;  // 龙族能力 4
+        add('db', '龙息', '随机数状态 ' + rng.state + '，每次 ' + tier + ' 道龙息。', function () {
+          var hits = [0, 0, 0, 0, 0, 0], el = BREATH.slice();
+          if (asc == 1) { hits.pop(); el.pop(); }
+          for (var c = 0; c < tier; c++) {
+            var hit = el.splice(rng.nextIntRange(0, el.length - 1), 1)[0];
+            if (!el.length) el = BREATH.slice();
+            hits[BREATH.indexOf(hit)]++;
+          }
+          return hits.map(function (h, c) { return h ? '<span class="br' + c + '">' + BREATH[c] + (h > 1 ? '×' + h : '') + '</span>' : ''; }).filter(Boolean).join('，');
+        });
+      })();
+
+      // 混沌涡流
+      if (!has(s, 'Maelstrom')) no('ms', '混沌涡流', '没有混沌涡流。');
+      else (function () {
+        var rng = new PM_PRNG(s.spells[27].s), n = 2;
+        for (var k = 0; k < 4; k++) n += util.save.upgrade_owned(s, 402701 + k) ? 1 : 0;
+        add('ms', '混沌涡流', '随机数状态 ' + rng.state + '，每次 ' + n + ' 个目标。前提：每次持续时间结束就用最高阶重新施放，中间不施放其他阶层，否则预报不准。', function () {
+          var el = avail.slice(), t = [], out = [];
+          for (var c = 0; c < n; c++) { var loc = rng.nextIntRange(0, el.length - 1); t.push(el[loc]); el.splice(loc, 1); }
+          for (c = 0; c < n; c++) out.push(bspan(t[c]) + '：' + MAEL[rng.nextIntRange(0, MAEL.length - 1)]);
+          return out.join('<br>');
+        });
+      })();
+
+      // 有限祈愿
+      if (!has(s, 'Limited Wish')) no('lw', '有限祈愿', '没有有限祈愿。');
+      else (function () {
+        var rng = new PM_PRNG(s.spells[29].s), cnt = s.spells[29].c, base = 1, el = [];
+        if (util.save.upgrade_owned(s, 975)) { cnt += 149; base = 149; }  // Persistent Entropy
+        if (util.save.upgrade_owned(s, 962)) cnt += s.spells[31].c;      // 巨灵能力 1
+        cnt = Math.floor(cnt);
+        if (!util.save.upgrade_owned(s, 994)) el.push(WISH[0]);           // Full Wish
+        if (s.alignment == 1) el.push(WISH[1], WISH[6], WISH[5]);
+        else if (s.alignment == 2) el.push(WISH[3], WISH[5], WISH[4]);
+        else if (s.alignment == 3) el.push(WISH[2], WISH[6], WISH[4]);
+        add('lw', '有限祈愿', '随机数状态 ' + rng.state + '。巨灵能力 3 会影响强度，强度只是近似值。', function () {
+          var type = el[rng.nextIntRange(0, el.length - 1)];
+          var v = Math.floor(rng.nextDoubleRange(base, cnt + 1));
+          var txt = '提升' + type + '，随机值 ' + v.toLocaleString() + ' / ' + cnt.toLocaleString() + '（强度约 ' + (Math.pow(v, 0.45) / Math.pow(cnt, 0.45) * 100).toPrecision(4) + '%）';
+          cnt++;
+          return txt;
+        });
+      })();
+
+      // 催化
+      if (!has(s, 'Catalyst')) no('cata', '催化', '没有催化。');
+      else (function () {
+        var rng = new PM_PRNG(s.spells[31].s);
+        var el = CATA.filter(function (sp) { return !has(s, sp); });
+        var now = (s.catalystTargets || []).map(function (t) { return zh(CATA_ID[t.targetspell]); }).filter(Boolean);
+        add('cata', '催化', '随机数状态 ' + rng.state + '。' + (now.length ? '当前法术：' + now.join('，') + '。' : ''), function () {
+          var tmp = el.slice(), out = [];
+          for (var j = 0; j < 2 && tmp.length; j++) out.push(zh(tmp.splice(rng.nextIntRange(0, tmp.length - 1), 1)[0]));
+          return out.join('，');
+        });
+      })();
+
+      // 巨灵挑战 4：尘世之欲
+      if (!util.save.challenge_active(s, 992)) no('djc4', zh('Worldly Desires'), '没有在进行巨灵挑战 4。');
+      else (function () {
+        var rng = new PM_PRNG(s.upgrades[992].s);
+        add('djc4', zh('Worldly Desires'), '随机数状态 ' + rng.state + '。', function () {
+          var h = DJC4[rng.nextIntRange(0, DJC4.length - 1)];
+          return '助手 +' + h[0] + '%，宝石产量加成 +' + h[1] + '%，法力上限 +' + h[2] + '%';
+        });
+      })();
+
+      // 混乱挑战 2：混沌疯狂
+      if (!util.save.challenge_active(s, 1064)) no('mcc2', zh('Chaos Madness'), '没有在进行佣兵挑战 2。');
+      else (function () {
+        var rng = new PM_PRNG(s.spells[32].s), ok = [];
+        [0, 1, 2, 3, 5, 4, 6, 8, 7, 9, 10, 12, 13, 14, 15].forEach(function (i) {
+          if (s.lineageFaction == i || s.combinationBL == i) return;
+          ok.push(zh(LINEAGE[i] + ' Lineage'));
+        });
+        add('mcc2', zh('Chaos Madness'), '随机数状态 ' + rng.state + '。', function () { return esc(ok[rng.nextIntRange(0, ok.length - 1)]); });
+      })();
+
+      draw();
+    }
+
+    var curTab = 'ls';
+    function draw() {
+      var box = $('sv-rws');
+      var bar = Object.keys(F).map(function (k) {
+        return '<button data-f="' + k + '" class="' + (k === curTab ? 'on' : '') + (F[k].gen ? '' : ' off') + '">' + esc(F[k].name) + '</button>';
+      }).join('');
+      var f = F[curTab];
+      var list = f.gen ? '<ol>' + f.items.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ol><button class="sv-more" data-more="' + curTab + '">再预报 10 次</button>' : '';
+      box.innerHTML = '<p class="sv-hint">拥有的建筑（点一下高亮，预报里同一建筑一起变色）：' +
+        (owned.length ? owned.map(bspan).join('、') : '无') + '</p>' +
+        '<div class="sv-tabs2">' + bar + '</div><div class="sv-fc"><p>' + esc(f.msg) + '</p>' + list + '</div>';
+    }
+    document.addEventListener('click', function (e) {
+      var t = e.target;
+      if (!t.closest || !t.closest('#sv-rws')) return;
+      var b = t.closest('[data-f]'), m = t.closest('[data-more]'), bd = t.closest('[data-b]');
+      if (b) { curTab = b.dataset.f; draw(); }
+      else if (m) { more(m.dataset.more, 10); draw(); }
+      else if (bd) { hl[bd.dataset.b] = !hl[bd.dataset.b]; draw(); }
+    });
+    return {run: run};
+  })();
+
+  // ---------- 遗物预测（Lara Crypt） ----------
+  var arch = (function () {
+    var save, eligible, unobtain, nonrandom, raw, smalls, chartPts, sel = null;
+    function copy(a) {
+      return {name: a.name, id: a.id, invertedchance: a.invertedchance, excav: a.excav, fixed: a.fixed, random: a.random, fail: a.fail,
+        notry: a.notry, required: a.required, display: a.display, nocache: a.nocache, precheck: a.precheck, reincarnation: a.reincarnation};
+    }
+    function an(a) { return nm(zh(a.name)); }
+
+    function classify() {
+      raw = {owned: [], eligible: [], unobtain: [], nonrandom: [], ineligible: [], unowned: []};
+      eligible = []; unobtain = []; nonrandom = [];
+      var excav = save.excavations, num0 = util.save.stat(save, 35), ue = [], ui = [];
+      Artifacts.forEach(function (a) {
+        var fixed = !a.fixed || a.fixed(save), fail = !a.fail || !a.fail(save, num0 + 1);
+        var ok = a.precheck ? a.precheck(save) : fixed;
+        if (util.save.trophy_owned(save, a.id)) raw.owned.push(an(a));
+        else if (ok && fail) {
+          if (a.random) {
+            ue.push(a);
+            var c = copy(a);
+            if (!c.nocache) c.random = c.random(save);
+            eligible.push(c);
+            raw.eligible.push(an(a) + (excav < a.excav ? '（第 ' + a.excav + ' 次考古后）' : ''));
+            if (a.notry && a.notry(save)) { raw.unobtain.push(an(a)); unobtain.push(a.id); }
+          } else {
+            nonrandom.push(copy(a));
+            raw.nonrandom.push(an(a) + (excav < a.excav ? '（第 ' + a.excav + ' 次考古时）' : ''));
+          }
+        } else { raw.ineligible.push(an(a)); ui.push(a); }
+      });
+      raw.unowned = ue.concat(ui);
+    }
+
+    function forecast(limit) {
+      var rng = new PM_PRNG(save.artifactRngState), excav = save.excavations;
+      var remaining = eligible.length - unobtain.length + nonrandom.length;
+      var nr = nonrandom.slice(), un = {}, events = [], n = 0, rawn = 0;
+      unobtain.forEach(function (i) { un[i] = true; });
+      var canignore = -unobtain.length, vlim = 100 / limit;
+      smalls = [];
+      eligible.forEach(function (a) { a.finished = false; a.lastreq = null; });
+      while (remaining > 0) {
+        excav++; n++;
+        var ex = [excav, excav - save.excavations];
+        for (var k = 0; k < eligible.length; k++) {
+          var a = eligible[k];
+          if (excav < a.excav || a.finished) continue;
+          if (a.fail && a.fail(excav, n)) { a.finished = true; continue; }
+          var val = rng.nextDouble();
+          if (rawn < limit) { rawn++; if (val < vlim) smalls.push({x: rawn, y: val}); }
+          if (un[a.id]) continue;
+          var rnd = a.nocache ? a.random(save, excav) : a.random;
+          if (val < rnd) { ex.push(['find', a]); a.finished = true; remaining--; }
+          else if (a.required && !a.nocache) {
+            var req = a.required(val, save, excav);
+            if (req !== Infinity && req >= 0 && (a.lastreq == null || (a.invertedchance ? req > a.lastreq : req < a.lastreq))) {
+              a.lastreq = req; ex.push(['improve', req, a]);
+            }
+          }
+        }
+        // 和原版一样边删边往后走：同一次考古到点的两个固定遗物，后一个顺延到下一次
+        for (k = 0; k < nr.length; k++) {
+          if (excav >= nr[k].excav) { ex.push(['find', nr.splice(k, 1)[0]]); remaining--; }
+        }
+        if (ex.length > 2) events.push(ex);
+        if (n >= limit || remaining <= canignore) break;
+      }
+      while (rawn < limit) { var v = rng.nextDouble(); rawn++; if (v < vlim) smalls.push({x: rawn, y: v}); }
+      return events;
+    }
+
+    function run(s) {
+      save = s; sel = null;
+      var def = s.ascension >= 4 ? 1000000 : s.ascension >= 2 ? 100000 : 10000;
+      var inp = $('sv-alim');
+      if (!inp.dataset.user) inp.value = def;
+      draw();
+    }
+    function draw() {
+      if (!save) return;
+      classify();
+      var limit = Math.max(1, Math.min(5000000, +$('sv-alim').value || 10000));
+      var events = forecast(limit);
+      var list = events.map(function (ex) {
+        var evs = ex.slice(2).map(function (e) {
+          return e[0] === 'find' ? '<b>获得</b> ' + an(e[1]) : '可以获得 ' + an(e[2]) + '（需要 ' + esc(e[2].display(e[1])) + '）';
+        });
+        return '<li>第 ' + ex[0] + ' 次考古（再挖 ' + ex[1] + ' 次）：' + evs.join('；') + '</li>';
+      }).join('');
+      var j = function (a) { return a.length ? a.join('、') : '无'; };
+      $('sv-aout').innerHTML =
+        '<table class="sv-tb sv-kv">' +
+        '<tr><th>遗物随机数状态</th><td>' + save.artifactRngState + '</td></tr>' +
+        '<tr><th>当前考古次数</th><td>' + save.excavations + '</td></tr>' +
+        '<tr><th>参与抽取的遗物</th><td>' + j(raw.eligible) + '<div class="sv-hint">每次考古，这些遗物各消耗一个随机数；本次退位拿不到的也可能在里面。</div></td></tr>' +
+        '<tr><th>其中本次拿不到的</th><td>' + j(raw.unobtain) + '</td></tr>' +
+        '<tr><th>固定获得的遗物</th><td>' + j(raw.nonrandom) + '</td></tr>' +
+        '<tr><th>已拥有</th><td>' + raw.owned.length + ' 个</td></tr>' +
+        '<tr><th>暂不满足条件</th><td><details><summary>' + raw.ineligible.length + ' 个</summary>' + j(raw.ineligible) + '</details></td></tr>' +
+        '</table><h3>接下来的考古</h3>' + (list ? '<ol class="sv-ex">' + list + '</ol>' : '<p>在计算范围内没有会发生的事件。</p>');
+      chart();
+    }
+
+    // 小随机数散点图：横轴是往后第几个随机数，纵轴是数值（越小越好），点一下看能拿哪些遗物
+    function chart() {
+      var cv = $('sv-achart'), w = cv.clientWidth || 800, h = 220, dpr = window.devicePixelRatio || 1;
+      cv.width = w * dpr; cv.height = h * dpr; cv.style.height = h + 'px';
+      var g = cv.getContext('2d'); g.scale(dpr, dpr);
+      g.clearRect(0, 0, w, h);
+      var L = 56, R = 10, T = 10, B = 28, limit = Math.max(1, +$('sv-alim').value || 10000), ymax = 100 / limit;
+      g.strokeStyle = '#bbb'; g.fillStyle = '#666'; g.font = '11px sans-serif';
+      g.beginPath(); g.moveTo(L, T); g.lineTo(L, h - B); g.lineTo(w - R, h - B); g.stroke();
+      g.fillText('0', L - 12, h - B + 4); g.fillText(ymax.toExponential(1), 4, T + 8);
+      g.fillText('往后第几个随机数 →', w / 2 - 50, h - 8); g.fillText(String(limit), w - R - 40, h - B + 14);
+      chartPts = smalls.map(function (p) {
+        return {p: p, x: L + (w - L - R) * p.x / limit, y: h - B - (h - T - B) * p.y / ymax};
+      });
+      chartPts.forEach(function (c) {
+        g.fillStyle = sel === c.p ? 'rgba(220,0,0,.85)' : 'rgba(91,110,225,.7)';
+        g.beginPath(); g.arc(c.x, c.y, sel === c.p ? 5 : 3, 0, 7); g.fill();
+      });
+    }
+    function pick(e) {
+      if (!chartPts) return;
+      var r = e.target.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top, best = null, bd = 100;
+      chartPts.forEach(function (c) { var d = Math.hypot(c.x - x, c.y - y); if (d < bd) { bd = d; best = c; } });
+      if (!best) return;
+      sel = best.p; chart(); detail(sel);
+    }
+    function detail(sv) {
+      var ne = raw.eligible.length, reinc = save.reincarnation;
+      var ov = $('sv-aover').value;
+      if ($('sv-aovc').checked && !isNaN(parseInt(ov))) reinc = parseInt(ov);
+      var out = '<p><b>考古次数：</b>' + (ne ? Math.ceil(sv.x / ne) + '（假设可抽遗物数不变）' : '没有可抽遗物，没法挪动随机数') +
+        '<br><b>位置：</b>往后第 ' + sv.x + ' 个随机数，<b>数值：</b>' + sv.y + '</p>';
+      var rows = [];
+      raw.unowned.forEach(function (a, i) {
+        if (a.reincarnation && reinc < a.reincarnation) return;
+        var p = a.required ? a.display(a.required(sv.y)) : a.random ? sv.y <= a.random(save, sv.x) : 0;
+        p = p === true ? '可以获得' : p === false ? '拿不到' : p;
+        if (!p) return;
+        var sh = '';
+        if (i < ne && ne > 1) {
+          var k = sv.x % ne; k = (i >= k ? ne : 0) + k - i - 1;
+          sh = '<td>' + (k === 0 ? '用的就是这个数' : '要错开 ' + k + ' 位') + '</td>';
+        }
+        rows.push('<tr><td>' + an(a) + '</td><td>' + esc(p) + '</td>' + sh + '</tr>');
+      });
+      if (rows.length) out += '<table class="sv-tb"><tr class="hd"><th>遗物</th><th>条件</th>' + (ne > 1 ? '<th title="每次考古每个可抽遗物各用一个随机数。想让某个遗物用上这个好数，可以在可抽遗物更少（至少一个）的时候考古来错开，通常是在另一局。注意：遗物在 2000 这种整数考古次数变成可抽时，那一次也会错开一位。">需要错开（?）</th>' : '') + '</tr>' + rows.join('') + '</table>';
+      $('sv-adetail').innerHTML = out;
+    }
+    return {run: run, draw: draw, pick: pick, detail: function () { if (sel) detail(sel); }};
+  })();
+
+  // ---------- 绑定 ----------
+  function init() {
+    $('sv-load').addEventListener('click', function () { var v = $('sv-in').value; if (v.trim()) use(v, true); });
+    $('sv-in').addEventListener('paste', function () {
+      var el = this;
+      setTimeout(function () { if (el.value.trim()) use(el.value, true); }, 10);
+    });
+    $('sv-hist').addEventListener('change', function () { var it = loadList()[+this.value]; if (it) use(it.s, false); });
+    $('sv-del').addEventListener('click', function () {
+      var list = loadList(), k = +$('sv-hist').value;
+      if (!list[k] || !confirm('从这个浏览器里删除这份存档记录？')) return;
+      list.splice(k, 1); saveList(list);
+      if (list.length) use(list[0].s, false);
+      else { cur = null; refreshHist([], -1); $('sv-main').hidden = true; $('sv-msg').textContent = '已删除。'; }
+    });
+    $('sv-tabs').addEventListener('click', function (e) {
+      var b = e.target.closest('button'); if (!b) return;
+      this.querySelectorAll('button').forEach(function (x) { x.classList.toggle('on', x === b); });
+      ['view', 'rws', 'arch'].forEach(function (t) { $('sv-' + t).hidden = t !== b.dataset.t; });
+      if (b.dataset.t === 'arch') arch.draw();
+    });
+    $('sv-vtabs').addEventListener('click', function (e) {
+      var b = e.target.closest('button'); if (!b) return;
+      $('sv-filter').value = '';
+      this.querySelectorAll('button').forEach(function (x) { x.classList.toggle('on', x === b); });
+      filterView();
+    });
+    $('sv-filter').addEventListener('input', filterView);
+    $('sv-alim').addEventListener('change', function () { this.dataset.user = 1; arch.draw(); });
+    $('sv-achart').addEventListener('click', arch.pick);
+    $('sv-aovc').addEventListener('change', function () { $('sv-aover').disabled = !this.checked; arch.detail(); });
+    $('sv-aover').addEventListener('change', arch.detail);
+    var list = loadList();
+    if (list.length) use(list[0].s, false);
+    else refreshHist([], -1);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+})();

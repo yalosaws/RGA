@@ -7,3 +7,6 @@
 # Python 缓存
 __pycache__/
 *.pyc
+
+# 社区工具站源码（自带 git 仓库，git pull 更新）
+工具/RG-tools/
