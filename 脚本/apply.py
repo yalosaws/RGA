@@ -159,3 +159,8 @@ with zipfile.ZipFile(tmp, 'w') as zout:
         zout.writestr(info, data, compress_type=info.compress_type)
 os.replace(tmp, DST)
 print('written', DST, 'new strings', len(new_si))
+
+# 统一成游戏内译名（汉化包），规则见 rename.py / 译名.py
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import rename
+rename.main(DST, DST)

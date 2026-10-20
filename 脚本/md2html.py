@@ -1,10 +1,19 @@
 import re, html, sys
 src, dst = sys.argv[1], sys.argv[2]
 lines = open(src, encoding='utf-8').read().split('\n')
+# 专名分类上色：md 里写 {法:仙灵吟唱}，类别见 TAGS
+TAGS = {'阵': ('fa', '阵营'), '法': ('sp', '法术'), '升': ('up', '升级'), '建': ('bd', '建筑'), '奖': ('tr', '奖杯'),
+        '隐': ('ht', '隐藏奖杯'), '研': ('rs', '研究'), '挑': ('ch', '挑战'), '遗': ('ar', '遗物')}
+used = []
+def color_tag(m):
+    k = m.group(1)
+    if k not in used: used.append(k)
+    return '<span class="t-%s">%s</span>' % (TAGS[k][0], m.group(2))
 def inl(t):
     t = html.escape(t, quote=False)
     t = re.sub(r'`([^`]+)`', r'<code>\1</code>', t)
     t = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', t)
+    t = re.sub(r'\{(%s):([^{}]+)\}' % "|".join(TAGS), color_tag, t)
     return t
 out = []; stack = []  # (tag, indent)
 def close_lists(level=-1):
@@ -48,6 +57,11 @@ while i < len(lines):
         out.append('<p>' + '<br>'.join(p) + '</p>'); continue
     i += 1
 close_lists()
+# 用到了专名标记就在一级标题后放图例（按 TAGS 的顺序）
+if used:
+    legend = '<p class="legend">' + ''.join('<span class="t-%s">%s</span>' % (TAGS[k][0], TAGS[k][1]) for k in TAGS if k in used) + '</p>'
+    h1 = next((k for k, o in enumerate(out) if o.startswith('<h1>')), -1)
+    out.insert(h1 + 1, legend)
 # 标题后接短段落或短表格：整块放进不可拆分的容器；其余标题只要求不留在页底
 for k in range(len(out) - 1):
     if re.match(r'<h[23]>', out[k]):
@@ -72,6 +86,12 @@ tr{break-inside:avoid}
 th,td{border:1px solid #ccc;padding:5px 8px;text-align:left;vertical-align:top}
 th{background:#ede6f8;white-space:nowrap}
 ul,ol{margin:4px 0 10px;padding-left:24px} li{margin:2px 0}
-strong{color:#000}"""
+strong{color:#000}
+.t-fa{color:#c62828}.t-sp{color:#1565c0}.t-up{color:#00838f}.t-bd{color:#a0522d}.t-tr{color:#9e7c00}
+.t-ht{color:#8e24aa}.t-rs{color:#2e7d32}.t-ch{color:#ef6c00}.t-ar{color:#c2185b}
+[class^="t-"]{font-weight:600}
+.legend{font-size:9pt;margin:-4px 0 12px}
+.legend span{margin-right:14px;white-space:nowrap}
+.legend span::before{content:"";display:inline-block;width:9px;height:9px;border-radius:2px;background:currentColor;margin-right:4px;vertical-align:0}"""
 title = next((re.sub(r'^#\s*', '', l) for l in lines if l.startswith('# ')), 'Realm Grinder')
 open(dst, 'w', encoding='utf-8').write('<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><title>%s</title><style>%s</style></head><body>%s</body></html>' % (html.escape(title), css, '\n'.join(out)))
