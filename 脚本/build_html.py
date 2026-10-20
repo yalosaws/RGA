@@ -34,23 +34,28 @@ ALIAS = {'TC': '征税', 'CtA': '动员令', 'HoL': '传说圣殿', 'BF': '嗜�
 # 遗物表里阵营遗物按全阶英豪奖杯的顺序排，每个阵营两个
 ART_FACTIONS = ['仙灵', '精灵', '天使', '地精', '亡灵', '恶魔', '泰坦', '德鲁伊', '无面者', '矮人', '卓尔', '佣兵']
 # 程序版本：改了功能就加版本号，在 CHANGES 最前面写这一版改了什么
-VERSION = '1.0.3'
+VERSION = '0.2.0'  # 还没到正式发布，用 0.x（用户要求）
 CHANGES = [
-    ('1.0.3', '2026-10-20', [
+    ('0.2.0', '2026-10-20', [
+        '挑战页改成按阵营分组的卡片：条件、目标、效果分栏，阵营法术强化放在阵营标题下面',
+        '研究页改成按分支分组的卡片，按实际解锁 R 排序（4.3.9 改号的研究按新 R 排），带代号和绑定阵营',
+        '读到存档后，挑战页可以切换「已完成 / 未完成」，研究页可以切换「已购买 / 未购买」',
+    ]),
+    ('0.1.3', '2026-10-20', [
         '侧栏「工具」放到最上面，去掉「法术预报」「遗物预测」两项（在存档页里切换）',
         '遗物、隐藏奖杯页的搜索框挪到这一行的右边',
     ]),
-    ('1.0.2', '2026-10-20', [
+    ('0.1.2', '2026-10-20', [
         '去掉各页标题；攻略的颜色图例改成悬浮小胶囊，去掉开头的来源说明框',
         '遗物、隐藏奖杯的搜索框和「已获得」切换并排成两个小胶囊，往下滚时一起浮着',
         '攻略里鼠标放在专名上，图例胶囊会点亮它属于的那一类',
     ]),
-    ('1.0.1', '2026-10-20', [
+    ('0.1.1', '2026-10-20', [
         '遗物、隐藏奖杯改成带图标的卡片列表，可以页内搜索',
         '读到存档后可以切换「全部 / 已获得 / 未获得」，带收集进度条；没获得的变灰',
     ]),
-    ('1.0.0', '2026-10-20', [
-        '第一个正式版本，程序名叫 RGA（Realm Grinder 助手）',
+    ('0.1.0', '2026-10-20', [
+        '第一个测试版本，程序名叫 RGA（Realm Grinder 助手）',
         '攻略：R0 攻略（Discord Beginner Guide 翻译）、A0 攻略要点，专名可点击跳到表格',
         '资料表：综合列表 4.3.14 的 9 个工作表，带图标，支持全表搜索',
         '我的存档：直接读取本机游戏存档，游戏保存后自动同步；只读查看各项数据',
@@ -156,32 +161,38 @@ CL_JS = """<script>(function(){
 
 
 def merged_value(ws):
-    """合并单元格读左上角那一格"""
+    """合并单元格读左上角那一格；.covered 是被合并盖住（不是左上角）的格子"""
     top = {}
     for rg in ws.merged_cells.ranges:
         for r in range(rg.min_row, rg.max_row + 1):
             for c in range(rg.min_col, rg.max_col + 1):
                 top[(r, c)] = (rg.min_row, rg.min_col)
-    return lambda r, c: text_of(ws.cell(*top.get((r, c), (r, c))).value).strip()
+    val = lambda r, c: text_of(ws.cell(*top.get((r, c), (r, c))).value).strip()
+    val.covered = {k for k, v in top.items() if k != v}
+    return val
 
 
 def card(cid, en, img_cell, imgs, zh, en_show, badge, fields, note='', group='', alias=''):
+    """img_cell 为 None 时不放图标（挑战、研究）"""
     esc = lambda v: '<br>'.join(html.escape(l) for l in SPLIT.split(v))
-    m = re.match(r'^=_xlfn\.DISPIMG\("(ID_[0-9A-F]+)"', img_cell)
-    img = '<img alt="" src="%s">' % imgs[m.group(1)] if m and m.group(1) in imgs else '<i></i>'
+    if img_cell is None:
+        img = ''
+    else:
+        m = re.match(r'^=_xlfn\.DISPIMG\("(ID_[0-9A-F]+)"', img_cell)
+        img = '<img alt="" src="%s">' % imgs[m.group(1)] if m and m.group(1) in imgs else '<i></i>'
     body = ''.join('<div><small>%s</small>%s</div>' % (k, esc(v) if v else '<span class="nil">—</span>') for k, v in fields)
-    return ('<div class="art" id="%s" data-en="%s" data-g="%s">%s<div class="art-b"><div class="art-h"><b>%s</b><span class="en">%s</span>%s%s</div>'
+    return ('<div class="art%s" id="%s" data-en="%s" data-g="%s">%s<div class="art-b"><div class="art-h"><b>%s</b><span class="en">%s</span>%s%s</div>'
             '<div class="art-f" style="grid-template-columns:%s">%s</div></div></div>') % (
-        cid, (re.sub(r'[^a-z0-9]', '', en.lower()) + ' ' + alias).strip(), html.escape(group), img, html.escape(zh), html.escape(en_show), badge,
+        '' if img else ' noimg', cid, (re.sub(r'[^a-z0-9]', '', en.lower()) + ' ' + alias).strip(), html.escape(group), img, html.escape(zh), html.escape(en_show), badge,
         '<span class="note">%s</span>' % html.escape(note) if note else '', ' '.join(['1fr'] * (len(fields) - 1) + ['1.3fr']), body)
 
 
-def card_list(ev, placeholder, items):
+def card_list(ev, placeholder, items, got='获得'):
     return ('<div class="cl" data-ev="%s"><div class="cl-top">'
             '<div class="own-bar" hidden><div class="own-seg"><button class="on" data-o="">全部<b></b></button>'
-            '<button data-o="1">已获得<b></b></button><button data-o="0">未获得<b></b></button></div>'
+            '<button data-o="1">已%s<b></b></button><button data-o="0">未%s<b></b></button></div>'
             '<div class="own-prog"><i></i></div></div><input class="cl-q" type="search" placeholder="%s"></div>'
-            '<div class="art-list">%s</div></div>' % (ev, placeholder, ''.join(items)))
+            '<div class="art-list">%s</div></div>' % (ev, got, got, placeholder, ''.join(items)))
 
 
 def build_artifacts(ws, imgs):
@@ -231,6 +242,87 @@ def build_trophies(ws, imgs):
         items.append(card('t7-A%d' % r, en, val(r, 2), imgs, zh, '' if zh == en else en, badge, [('目标', val(r, 3)), ('加成', val(r, 4))], note,
                           alias=TROPHY_ALIAS.get(re.sub(r'[^a-z0-9]', '', en.lower()), '')))
     return card_list('trophyowned', '搜索名字、目标或加成', items)
+
+
+def strip_label(v, label):
+    """「条件：R2，……」→「R2，……」"""
+    return re.sub(r'^%s[：:]\s*' % label, '', v)
+
+
+def build_challenges(ws):
+    """挑战表 → 按阵营分组的卡片：每个挑战一张（条件 / 目标 / 效果），阵营标题下面是这个阵营的法术强化。
+    卡片 id 是原挑战名称格（t3-C2 这样），法术强化是 t3-I行号，专名链接照旧。"""
+    val = merged_value(ws)
+    items = []
+    for r in range(2, ws.max_row + 1, 5):
+        fac = val(r, 2) or val(r, 1)  # 佣兵的立场、阵营合并成一格
+        if not fac or not val(r, 3):
+            continue
+        fzh, fen = (SPLIT.split(fac) + [''])[:2]
+        align = SPLIT.split(val(r, 1))[0] if val(r, 2) else ''
+        sp = val(r, 9)
+        sp_html = ''
+        if sp:
+            szh, sen = split_name(sp)
+            sp_html = ('<div class="ch-sp" id="t3-I%d"><em>法术强化</em><b>%s</b><span class="en">%s</span><p>%s</p></div>' % (
+                r, html.escape(szh), html.escape(sen), '<br>'.join(html.escape(l) for l in SPLIT.split(val(r + 2, 9)))))
+        items.append('<div class="art-g ch-g" id="t3-%s%d" data-g="%s"><h2>%s <span>%s%s</span></h2>%s</div>' % (
+            'B' if val(r, 2) else 'A', r, html.escape(fzh), html.escape(fzh), html.escape(fen), ' · ' + html.escape(align) if align else '', sp_html))
+        for k in range(6):
+            c = 3 + k
+            if (r, c) in val.covered or not ws.cell(r, c).value:
+                continue
+            zh, en = split_name(val(r, c))
+            cond = strip_label(val(r + 2, c), '条件')
+            rq = re.match(r'R(\d+)', cond)
+            badge = '<em class="no">挑战 %d</em>' % (k + 1) + ('<em>R%s</em>' % rq.group(1) if rq else '')
+            combo = strip_label(val(r + 1, c), '生效组合')
+            items.append(card('t3-%s%d' % (get_column_letter(c), r), en, None, None, zh, en, badge,
+                              [('条件', cond), ('目标', strip_label(val(r + 3, c), '目标')), ('效果', strip_label(val(r + 4, c), '效果'))],
+                              note='生效组合：' + combo if combo else '', group=fzh))
+    return card_list('challengeowned', '搜索名字、条件、目标或效果', items, '完成')
+
+
+def build_research(ws):
+    """研究表 → 按分支分组的卡片（名字、代号、解锁 R、绑定阵营 / 解锁条件 / 效果），同一分支按解锁 R 排。
+    4.3.9 改号的研究：代号格写着「新代号（原旧代号，……解锁晚 n 个 R）」，R 按列头加上 n。卡片 id 是原名称格（t5-C4 这样）；
+    data-en 是代号（和存档编辑器研究行里的代号对上，改号的再带上旧代号）。"""
+    val = merged_value(ws)
+    head = {}  # 列 → (Ascension, R)
+    last = ('', '')
+    for c in range(3, ws.max_column + 1):
+        a, rr = val(1, c) or last[0], val(2, c) or last[1]
+        head[c] = last = (a, rr)
+    items = []
+    for r in range(4, ws.max_row + 1, 5):
+        if val(r + 1, 2) != '代号':
+            continue
+        bzh, ben = (SPLIT.split(val(r, 1)) + [''])[1], SPLIT.split(val(r, 1))[0]
+        cards = []
+        for c in range(3, ws.max_column + 1):
+            if (r, c) in val.covered or not ws.cell(r, c).value:
+                continue
+            zh, en = split_name(val(r, c))
+            code_lines = SPLIT.split(val(r + 1, c))
+            code, note = code_lines[0].strip(), ''.join(code_lines[1:]).strip()
+            rr = head[c][1]
+            m = re.match(r'^(\d+)$', rr)
+            sort_r = int(re.match(r'\d+', rr).group()) if re.match(r'\d+', rr) else 0
+            d = re.search(r'解锁(晚|早)(\d+)个R', note)
+            if m and d:
+                sort_r = int(rr) + (1 if d.group(1) == '晚' else -1) * int(d.group(2))
+                rr = str(sort_r)
+            fac = val(r + 2, c)
+            badge = '<em class="no">%s</em><em>R%s</em>' % (html.escape(code), html.escape(rr)) + (
+                '<em class="fac">%s</em>' % html.escape(fac) if fac else '')
+            cid = 't5-%s%d' % (get_column_letter(c), r)
+            old = re.search(r'原([SCDEAWF]\d+)', note)  # 存档编辑器里还是旧代号
+            cards.append((sort_r, c, card(cid, code, None, None, zh, en, badge,
+                                          [('解锁条件', val(r + 3, c)), ('效果', val(r + 4, c))], note=note, group=bzh,
+                                          alias=old.group(1).lower() if old else '')))
+        items.append('<h2 class="art-g" data-g="%s">%s <span>%s</span></h2>' % (html.escape(bzh), html.escape(bzh), html.escape(ben)))
+        items += [x[2] for x in sorted(cards)]
+    return card_list('researchowned', '搜索名字、代号或效果', items, '购买')
 
 
 def build_sheet(n, ws, imgs, index, cells):
@@ -314,7 +406,7 @@ def code_maps(cells):
             if m:
                 for k, c in enumerate('DEFGHIJKL STU'.replace(' ', '')):
                     upgrade['%s%d' % (m.group(1), k + 1)] = (1, '%s%d' % (c, row))
-        if n == 3 and col == 'B':
+        if n == 3 and col in ('A', 'B'):
             m = re.search(r'[（(]([A-Z]{2})[）)]', v)
             if m:
                 fname = SPLIT.split(v)[0].strip()
@@ -339,6 +431,16 @@ def main():
                 sections[n] = build_artifacts(ws, imgs)
             elif n == 7:
                 sections[n] = build_trophies(ws, imgs)
+            elif n == 3:
+                sections[n] = build_challenges(ws)
+            elif n == 5:
+                sections[n] = build_research(ws)
+    # 改成卡片的工作表只留下有卡片（或阵营标题、法术强化）的格子，表头之类的格子不再能链接过去
+    shown = set(re.findall(r'id="(t\d+-[A-Z]+\d+)"', ''.join(sections.values())))
+    for k in list(index):
+        index[k] = [p for p in index[k] if 't%d-%s' % p in shown]
+        if not index[k]:
+            del index[k]
     research, upgrade, challenge, artifact = code_maps(cells)
     missing = []
 
@@ -530,6 +632,19 @@ td.flash{outline:3px solid #f59e0b;outline-offset:-2px;background:var(--flash)!i
 .art-f small{display:block;font-size:11.5px;color:#9aa5b8}
 .art-f .nil{color:#c9d1dd}
 .art.flash{background:var(--flash);border-color:#f59e0b}
+/* 挑战、研究：没有图标的卡片 */
+.art.noimg{padding:12px 16px}
+.art.noimg.own::before{left:auto;right:14px;top:12px}
+.art-h em.no{color:#fff;background:var(--blue)}
+.art-h em.fac{color:#6b4fa0;background:#f2edfb}
+.has-own .art.noimg:not(.own) .art-h em.no{background:#aab4c4}
+.ch-g h2{font-size:16px;margin:0}.ch-g h2 span{font-size:12px;font-weight:normal;color:#9aa5b8;margin-left:6px}
+.ch-g{margin:22px 2px 8px;scroll-margin:80px}
+.ch-sp{margin-top:8px;padding:9px 14px;border-radius:14px;background:var(--soft);font-size:13.5px;color:#3d4a5f;scroll-margin:80px;transition:background 1.5s}
+.ch-sp em{font-style:normal;font-size:11.5px;color:#b45309;background:#fdf1e1;border-radius:6px;padding:0 7px;margin-right:8px}
+.ch-sp b{font-size:14px;color:var(--fg)}.ch-sp .en{font-size:12px;color:#9aa5b8;margin-left:8px}
+.ch-sp p{margin:4px 0 0}
+.ch-sp.flash{background:var(--flash)}
 /* 已获得 / 未获得（读到存档后才出现）：已获得图标描蓝边带勾，未获得变灰，鼠标移上去恢复 */
 /* 一个小胶囊，往下滚时浮在内容上面（带阴影），不占满整行 */
 .own-bar{display:flex;align-items:center;gap:14px;height:36px;box-sizing:border-box;padding:0 16px 0 4px;
@@ -635,7 +750,7 @@ html.app.max .grip{display:none}
   show();
   // 全表搜索
   var q = document.getElementById('q'), res = document.getElementById('res'), timer;
-  var tds = Array.prototype.slice.call(document.querySelectorAll('table.sheet td[id], .art[id]'));
+  var tds = Array.prototype.slice.call(document.querySelectorAll('table.sheet td[id], .art[id], .ch-sp[id]'));
   var names = {}; navs.forEach(function(a){ names[a.dataset.sec] = a.textContent.trim(); });
   q.addEventListener('input', function(){
     clearTimeout(timer);

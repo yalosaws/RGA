@@ -116,6 +116,19 @@
       tro = [];
       D.tabs.forEach(function (t) { t.rows.forEach(function (r) { if (r.w === 'trophy' && r.name && s.trophies[r.id]) tro.push(key(r.name)); }); });
     }
+    // 挑战：存档里有这个挑战（编辑器的「已解锁」）就是完成了，u1 是正在进行；研究：已购买（u1）的，按代号对上卡片
+    var ch = null, rs = null;
+    if (s) {
+      ch = []; rs = [];
+      D.tabs.forEach(function (t) { t.rows.forEach(function (r) {
+        if (r.w === 'challenge' && r.name && s.upgrades[r.id]) ch.push(key(r.name.replace(/^[^:]*:\s*/, '')));
+        if (r.w && r.w.indexOf('research-upgrade-row') === 0) ['s', 'c', 'd', 'e', 'a', 'w', 'f'].forEach(function (k) {
+          if (r[k + '_id'] && util.save.upgrade_owned(s, r[k + '_id'])) rs.push(key(r[k + '_name']));
+        });
+      }); });
+    }
+    window.dispatchEvent(new CustomEvent('challengeowned', {detail: ch}));
+    window.dispatchEvent(new CustomEvent('researchowned', {detail: rs}));
     window.dispatchEvent(new CustomEvent('artowned', {detail: art}));
     window.dispatchEvent(new CustomEvent('trophyowned', {detail: tro}));
   }
