@@ -14,9 +14,9 @@
 | `表格/旧版/RG综合列表（4.2.0.1）.xlsx` | `脚本/apply.py` 的输入：原表加上第一次修的 8 处隐藏成就（其中几处后来在 4.3.14 版里又按新数据改过） |
 | `表格/旧版/RG综合列表（4.2.0.1）_修改前备份.xlsx` | 用户下载来的原始 4.2.0.1 表，未经任何修改 |
 | `攻略/` | Discord #pre-ascension 置顶 Beginner Guide（作者 ensteffahn）的中文翻译，md + pdf |
-| `Realm Grinder 资料.html` | 给用户浏览用的单文件网页：两篇攻略 + 综合列表 9 个工作表（含图标），攻略里的专名点了跳到表格对应格子；还有「我的存档」栏（只读存档查看、法术预报、遗物预测，见下文）。由 `脚本/build_html.py` 生成，**不要手改**；改了表格或攻略要重新生成 |
+| `RGA.html` | 给用户浏览用的单文件网页：两篇攻略 + 综合列表 9 个工作表（含图标），攻略里的专名点了跳到表格对应格子；还有「我的存档」栏（只读存档查看、法术预报、遗物预测，见下文）。由 `脚本/build_html.py` 生成，**不要手改**；改了表格或攻略要重新生成 |
 | `脚本/` | 表格更新脚本，见下文 |
-| `应用/` | 桌面程序「Realm Grinder 助手」：`rg_app.py`（pywebview 无边框圆角窗口装着资料网页，并直接读本机游戏存档）、`build_exe.py`（打包）、`make_icon.py`（画图标 `icon.ico`/`icon.png`，纯蓝圆角方块 + 白色宝石）。打包结果在 `发布/Realm Grinder 助手.exe`（单文件，约 20 MB，**不进 git**） |
+| `应用/` | 桌面程序「RGA」（Realm Grinder 助手，2026-10-20 改名）：`rg_app.py`（pywebview 无边框圆角窗口装着资料网页，并直接读本机游戏存档）、`build_exe.py`（打包）、`make_icon.py`（画图标 `icon.ico`/`icon.png`：16×16 像素的蓝紫色水晶，最近邻放大）。打包结果在 `发布/RGA.exe`（单文件，约 20 MB，**不进 git**） |
 | `资料/` | 抓取的原始资料：`A0 Guide.txt`（Discord 置顶 full A0 Guide 英文原文，用户下载；`攻略/A0攻略要点.md` 据此整理）、官方 4.3+ 补丁说明、Not a Wiki 页面（`naw_*.txt`）、Fandom wikitext（`fandom/`）、changelog、旧表各工作表的文本导出（`sheetN.txt`）、`4.3.14更新笔记.md`（含补丁说明各段行号索引）、`汉化文本（PC_20260921）.tsv`（汉化包的全部 5723 条「英文原文→中文译文」，见下文） |
 | `工具/RG-tools/` | Royal Advisory Board 社区工具站（shadowgull/dox4242.github.io，适配到 4.3.10+）的本地克隆：`edit/edit.html` 存档编辑器、`rws/` Realm Weather Service、`arch/` Lara Crypt、`mri/` 活动工具。纯本地 JS，双击 html 即可离线用；`git pull` 更新（更新后重新生成网页）。网页的「我的存档」栏用它的库和数据，没有这个文件夹时 `build_html.py` 跳过该栏。自带 git 仓库，**不进 git** |
 | `汉化/` | 游戏汉化包（PC 解压版 + PC/安卓 rar），体积大，**不进 git** |
@@ -51,8 +51,11 @@
 - `脚本/fetch.py <url> <输出>`：抓网页转纯文本（当初用来抓 Not a Wiki）。
 - `脚本/fandom.py <页面名...>`：通过 Fandom API 下载 wikitext 到 `资料/fandom/`。
 - `脚本/hanhua.py <swf> <输出.tsv>`：从汉化包的 `RealmGrinderDesktop.swf` 导出中文语言包（SWF 内 zlib 压缩的 gettext .mo，汉化放在原 es_ES 那份里）。汉化包更新后重跑，输出换个日期名存进 `资料/`。
-- `脚本/build_html.py [xlsx] [html]`：生成 `Realm Grinder 资料.html`。专名到格子的对应：名称格里的中文名（同名时按 `PREFER` 里各类优先的工作表）、研究代号→研究表「代号」行上一格、升级代号（UD1）→阵营表该阵营行第 N 列、挑战代号（DMC1、「恶魔挑战 1」）→挑战表、「德鲁伊 1」这类阵营遗物→遗物表（按全阶英豪奖杯顺序每阵营两格）、缩写见 `ALIAS`。研究按 4.3.9 改号后的新代号对应，表里只有「原 xxx」注记的旧号不算。运行时会列出没对上格子的专名（目前约 10 个，都是表里没有的东西，如宝石之力、自动施法类奖杯）。
-- 网页风格（2026-10-20 用户从 4 个样板里选定）：浅灰蓝底 `#f3f6fb` + 白色圆角卡片，左侧悬浮圆角侧栏（攻略 / 资料表 / 工具三组，带线条图标，搜索框在侧栏顶部），主色纯蓝 `#2563eb`、**不用渐变**；存档页顶部 6 张数字卡片，第一张（重生）纯蓝底。样式都在 `build_html.py` 的 `TEMPLATE` 和 `save_tools.html` 里，颜色用 `:root` 的变量。侧栏的「法术预报」「遗物预测」是 `#save/rws`、`#save/arch`，路由会发 `subpage` 事件给存档页切换子页。
+- `脚本/build_html.py [xlsx] [html]`：生成 `RGA.html`。专名到格子的对应：名称格里的中文名（同名时按 `PREFER` 里各类优先的工作表）、研究代号→研究表「代号」行上一格、升级代号（UD1）→阵营表该阵营行第 N 列、挑战代号（DMC1、「恶魔挑战 1」）→挑战表、「德鲁伊 1」这类阵营遗物→遗物表（按全阶英豪奖杯顺序每阵营两格）、缩写见 `ALIAS`。研究按 4.3.9 改号后的新代号对应，表里只有「原 xxx」注记的旧号不算。运行时会列出没对上格子的专名（目前约 10 个，都是表里没有的东西，如宝石之力、自动施法类奖杯）。
+- 遗物页、隐藏奖杯页（2026-10-20 起）不再画成表格：`build_artifacts()`、`build_trophies()` 用 `card()` / `card_list()` / `CL_JS` 渲染成卡片（图标、中英文名、R 要求/必出标记、几栏说明）和页内搜索（用户要求去掉了类型、阵营筛选和计数）；隐藏奖杯的 R 标记来自行底色（`TROPHY_TIER`），奖杯卡片 id 是 `t7-A行号`。遗物页卡片 id 仍是原名称格 `t10-B行号`，专名链接、全表搜索、存档页链接照旧。读到存档后，`save_tools.js` 的 `ownedArtifacts()` 发 `artowned`、`trophyowned` 事件（已获得的英文名，按卡片 `data-en` 对上；奖杯的编号和英文名取自编辑器的 widget-trophy 行，名字不一样的在 `TROPHY_ALIAS` 里），两页就显示「全部 / 已获得 / 未获得」小胶囊（往下滚时浮在内容上面）和进度条：已获得的图标描蓝边带勾，未获得的变灰（用户选的样式，要求不加多余文字标记）。综合列表里没有 Mask of Scorch'Rah，这一个对不上。其他工作表还是表格，用户在考虑换成卡片 / 对比表等样式（样板做过 A 阵营档案、B 主从双栏、C 对比表、D 条目列表）。
+- 版本页（侧栏「关于」→「版本 x.y.z」，`#ver`）：版本号和更新记录写在 `build_html.py` 开头的 `VERSION`、`CHANGES`（当前 1.0.0）；改了功能要加版本号并在 `CHANGES` 最前面写这一版改了什么。收录资料（综合列表、汉化文本、RG-tools 更新日期）和生成时间是生成网页时自动填的。
+- 动画：侧栏选中块（`nav .ind`）滑到当前项；切换页面、存档子页、存档查看分页时淡入上移（`rg-in`）。
+- 网页风格（2026-10-20 用户从 4 个样板里选定）：浅灰蓝底 `#f3f6fb` + 白色圆角卡片，左侧悬浮圆角侧栏（攻略 / 资料表 / 工具三组，纯文字不带图标，搜索框在侧栏顶部），主色纯蓝 `#2563eb`、**不用渐变**；存档页顶部 6 张数字卡片，第一张（重生）纯蓝底。样式都在 `build_html.py` 的 `TEMPLATE` 和 `save_tools.html` 里，颜色用 `:root` 的变量。侧栏的「法术预报」「遗物预测」是 `#save/rws`、`#save/arch`，路由会发 `subpage` 事件给存档页切换子页。
 - `脚本/save_tools.py`（由 build_html.py 调用）：网页「我的存档」栏。把 RG-tools 的 `pako`、`savecodec2`（解码）、`pmprng`（随机数）、`util`（数据表）、`arch/artifacts.js`（遗物条件）原样嵌进网页，界面是 `save_tools.js` + `save_tools.html` 写的中文只读版：
   - 存档查看：从 `edit/edit.html` 解析出 25 个分页的每一行（统计项、建筑、法术、奖杯、挑战、研究等），只显示不编辑。研究代号按表格里的新代号（按名字找到研究表的格子再取代号），名字能对上表格的加链接。
   - 法术预报、遗物预测：逻辑照搬 `rws/index.js`、`arch/index.js`（含原版的细节，例如同一次考古到点的两个固定遗物后一个顺延），2026-10-20 用改过的测试存档和原版逐条对比过一致。
@@ -60,9 +63,10 @@
   - 名字翻译：`脚本/存档译名.py`（手写的统计项、建筑复数、拼接规则、artifacts.js 说明文字替换）→ 游戏词典 → 汉化文本里「X: %0」形式的统计标签。生成时会列出没翻出的名字（目前只有游戏里也用英文的 glho kohhl snod）。
 - `应用/build_exe.py`：先跑 build_html.py，再用 PyInstaller 打成单个 exe（需要 `pip install pywebview pyinstaller`；pywebview 装在用户目录，所以不能用 `python -I` 跑）。exe 里带着打包时的网页，表格、攻略、RG-tools 更新后要重新打包。程序：
   - 游戏存档位置：`%APPDATA%\<AIR 应用 id>\Local Store\#SharedObjects\RealmGrinderDesktop.swf\realm-grinder.sol`（本机是 `com.kongregate.mobile.realmgrinder.air`）。程序取最新的 .sol，从里面找 `$00s…$e` 存档字符串，只读不写。游戏自动保存就会更新这个文件，大约每一两分钟。
-  - 网页检测到 `window.pywebview` 就进入程序模式：打开即读游戏存档，勾了「游戏保存后自动更新」每 10 秒检查一次文件；手动粘贴收进按钮里。从游戏读到的存档在记录里只留最新一份（标「游戏最新」）。
-  - 窗口无边框（Windows 11 用 DWM 系统圆角）：标题栏是网页画的 `.appbar`（`build_html.py` 的 `appbar()`，平时隐藏，`html.app` 时显示），名字那块带 `pywebview-drag-region` 可拖动、双击最大化；按钮调用 Api 的 minimize / toggle_maximize / close；右下角 `.grip` 拖动改大小（Api.size / resize）。
-  - 网页由 pywebview 内置服务打开（`http://127.0.0.1:42001/`），localStorage 存在 `%LOCALAPPDATA%\RealmGrinder助手`。调试：设环境变量 `WEBVIEW2_ADDITIONAL_BROWSER_ARGUMENTS=--remote-debugging-port=9333` 再启动 exe，就能用 CDP 读页面状态。
+  - 网页检测到 `window.pywebview` 就进入程序模式：打开即读游戏存档，开着「自动同步」每 10 秒检查一次文件。存档页标题右边只有「自动同步」开关和「立即读取」按钮（用户要求去掉了打开存档文件夹、手动粘贴、历史记录下拉框和删除、读取状态那行）；读取出错时提示显示在标题下面。历史记录和粘贴框只在浏览器里打开网页时出现。
+  - 每次打开都放在主屏幕中央（`center()`，窗口比屏幕大时缩到 92%）。
+  - 窗口无边框（Windows 11 用 DWM 系统圆角）：标题栏是网页画的 `.appbar`（`build_html.py` 的 `appbar()`，平时隐藏，`html.app` 时显示；不显示图标和标题文字，用户要求），左边空白区带 `pywebview-drag-region` 可拖动、双击最大化；按钮调用 Api 的 minimize / toggle_maximize / close；右下角 `.grip`（看不见）拖动改大小（Api.size / resize）。程序里整页不滚动，只有 `main` 滚动（滚动条从标题栏下面开始，不和关闭按钮并排）；脚本里读写滚动位置要用 `rgScroller()`，不要用 `window.scrollY`。
+  - 网页由 pywebview 内置服务打开（`http://127.0.0.1:42001/`），localStorage 存在 `%LOCALAPPDATA%\RGA`（旧版的 `RealmGrinder助手` 目录在第一次启动时自动改名搬过来）。调试：设环境变量 `WEBVIEW2_ADDITIONAL_BROWSER_ARGUMENTS=--remote-debugging-port=9333` 再启动 exe，就能用 CDP 读页面状态。
 - `脚本/md2html.py <md> <html>`：把攻略 md 转成带样式的 HTML，再用 Edge 打印成 PDF（`convert()` 也给 build_html.py 用）：
   `msedge --headless=new --user-data-dir=<临时目录> --no-pdf-header-footer --print-to-pdf=<pdf> file:///<html>`
   （用户开着 Edge 时，不加 `--user-data-dir` 就会被并进已打开的 Edge，什么也不输出；输出路径用英文，生成后再复制过去。用户开着那个 PDF 时复制会失败，要请用户先关掉。）

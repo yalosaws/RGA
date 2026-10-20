@@ -98,12 +98,26 @@
     cards(save);
     $('sv-main').hidden = false;
     $('sv-in').value = '';
-    var y = window.scrollY;  // 自动更新时不要跳回页首
+    var y = rgScroller().scrollTop;  // 自动更新时不要跳回页首
     renderView(save);
     rws.run(save);
     arch.run(save);
-    if (store === 'game') window.scrollTo(0, y);
+    ownedArtifacts(save);
+    if (store === 'game') rgScroller().scrollTop = y;
     return true;
+  }
+
+  // 遗物页、隐藏奖杯页：告诉它们哪些已经拿到（按英文名对上卡片的 data-en；奖杯的编号和英文名来自编辑器的奖杯行）
+  function ownedArtifacts(s) {
+    var key = function (x) { return x.replace(/&(#\d+|\w+);/g, '').toLowerCase().replace(/[^a-z0-9]/g, ''); };  // 编辑器里的名字可能带 &apos; 这类转义
+    var art = s ? Artifacts.filter(function (a) { return util.save.trophy_owned(s, a.id); }).map(function (a) { return key(a.name); }) : null;
+    var tro = null;
+    if (s) {
+      tro = [];
+      D.tabs.forEach(function (t) { t.rows.forEach(function (r) { if (r.w === 'trophy' && r.name && s.trophies[r.id]) tro.push(key(r.name)); }); });
+    }
+    window.dispatchEvent(new CustomEvent('artowned', {detail: art}));
+    window.dispatchEvent(new CustomEvent('trophyowned', {detail: tro}));
   }
 
   // 顶部数字卡片
@@ -641,7 +655,7 @@
       if (!list[k] || !confirm('从这个浏览器里删除这份存档记录？')) return;
       list.splice(k, 1); saveList(list);
       if (list.length) use(list[0].s, false);
-      else { cur = null; refreshHist([], -1); $('sv-main').hidden = true; $('sv-msg').textContent = '已删除。'; }
+      else { cur = null; refreshHist([], -1); $('sv-main').hidden = true; $('sv-msg').textContent = '已删除。'; ownedArtifacts(null); }
     });
     // 三个子页对应侧栏的「我的存档 / 法术预报 / 遗物预测」，地址是 #save、#save/rws、#save/arch
     $('sv-tabs').addEventListener('click', function (e) {
@@ -675,8 +689,8 @@
     if (window.pywebview && window.pywebview.api && window.pywebview.api.read_save) appMode();
   }
 
-  // ---------- 程序模式（Realm Grinder 助手.exe）：直接读本机游戏存档 ----------
-  var app = {on: false, mtime: 0, timer: null, path: ''};
+  // ---------- 程序模式（RGA.exe）：直接读本机游戏存档 ----------
+  var app = {on: false, mtime: 0, timer: null};
   function appMode() {
     if (app.on) return;
     app.on = true;
@@ -684,15 +698,12 @@
     if (!location.hash) location.hash = 'save';
     $('sv-game').hidden = false;
     $('sv-pastebox').hidden = true;
-    $('sv-pastetoggle').hidden = false;
     try { $('sv-gauto').checked = localStorage.getItem('rg-auto') !== '0'; } catch (e) { /* 默认开 */ }
     $('sv-gread').addEventListener('click', function () { readGame(true); });
-    $('sv-gdir').addEventListener('click', function () { if (app.path) window.pywebview.api.open_folder(app.path); });
     $('sv-gauto').addEventListener('change', function () {
       try { localStorage.setItem('rg-auto', this.checked ? '1' : '0'); } catch (e) { /* 忽略 */ }
       tick();
     });
-    $('sv-pastetoggle').addEventListener('click', function () { $('sv-pastebox').hidden = !$('sv-pastebox').hidden; });
     readGame(true);
     tick();
   }
@@ -737,11 +748,7 @@
   }
   function readGame(force) {
     window.pywebview.api.read_save().then(function (r) {
-      var st = $('sv-gstat');
-      if (!r.ok) { st.textContent = r.error; st.className = 'sv-hint err'; return; }
-      app.path = r.path;
-      st.className = 'sv-hint';
-      st.textContent = '游戏存档 ' + when(r.mtime) + ' 更新' + (force ? '' : '，已自动读取');
+      if (!r.ok) { if (force || !cur) { $('sv-msg').textContent = r.error; $('sv-msg').className = 'sv-msg err'; } return; }
       if (!force && r.mtime === app.mtime) return;
       app.mtime = r.mtime;
       if (cur && cur.str === r.save.trim() && !force) return;

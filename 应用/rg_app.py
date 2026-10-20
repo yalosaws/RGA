@@ -1,4 +1,4 @@
-"""Realm Grinder 助手：把「Realm Grinder 资料.html」装进无边框圆角窗口，并直接读取本机游戏存档。
+"""RGA（Realm Grinder 助手）：把「RGA.html」装进无边框圆角窗口，并直接读取本机游戏存档。
 
 运行：python 应用/rg_app.py（需要 pywebview）；打包成 exe：python 应用/build_exe.py
 网页通过 window.pywebview.api 调用下面 Api 的方法：读存档（只读，不会改动存档）和窗口按钮。
@@ -12,8 +12,8 @@ import sys
 
 import webview
 
-TITLE = 'Realm Grinder 助手'
-PAGE = 'Realm Grinder 资料.html'
+TITLE = 'RGA'
+PAGE = 'RGA.html'
 SAVE_RE = re.compile(rb'\$\d{2}s[A-Za-z0-9+/=]+\$e')
 
 
@@ -43,6 +43,24 @@ def round_corners(window):
         pass
 
 
+def center(window):
+    """放到屏幕中央（主屏幕去掉任务栏的区域）；窗口比屏幕大时缩到屏幕的 92%"""
+    try:
+        u = ctypes.windll.user32
+        hwnd = ctypes.c_void_p(window.native.Handle.ToInt64())
+
+        class RECT(ctypes.Structure):
+            _fields_ = [('l', ctypes.c_long), ('t', ctypes.c_long), ('r', ctypes.c_long), ('b', ctypes.c_long)]
+        wa, wr = RECT(), RECT()
+        u.SystemParametersInfoW(0x30, 0, ctypes.byref(wa), 0)  # SPI_GETWORKAREA
+        u.GetWindowRect(hwnd, ctypes.byref(wr))
+        aw, ah = wa.r - wa.l, wa.b - wa.t
+        w, h = min(wr.r - wr.l, int(aw * .92)), min(wr.b - wr.t, int(ah * .92))
+        u.SetWindowPos(hwnd, None, wa.l + (aw - w) // 2, wa.t + (ah - h) // 2, w, h, 0x4 | 0x10)  # NOZORDER | NOACTIVATE
+    except Exception:
+        pass
+
+
 class Api:
     def __init__(self):
         self._win = None
@@ -65,11 +83,6 @@ class Api:
             return {'ok': False, 'path': path, 'error': '存档文件里没有找到存档数据（游戏可能正在写入，稍后再试）。'}
         return {'ok': True, 'path': path, 'mtime': int(os.path.getmtime(path) * 1000),
                 'save': max(found, key=len).decode('ascii')}
-
-    def open_folder(self, path):
-        folder = os.path.dirname(path)
-        if os.path.isdir(folder):
-            os.startfile(folder)
 
     # ---- 窗口按钮（无边框窗口自己画标题栏） ----
     def minimize(self):
@@ -95,13 +108,20 @@ class Api:
 
 
 def main():
-    storage = os.path.join(os.environ.get('LOCALAPPDATA', os.path.expanduser('~')), 'RealmGrinder助手')
+    base = os.environ.get('LOCALAPPDATA', os.path.expanduser('~'))
+    storage = os.path.join(base, 'RGA')
+    old = os.path.join(base, 'RealmGrinder助手')  # 改名前的数据目录，搬过来以保留存档记录和设置
+    if os.path.isdir(old) and not os.path.exists(storage):
+        try:
+            os.rename(old, storage)
+        except OSError:  # 被占用搬不动时先接着用旧目录，下次再搬
+            storage = old
     api = Api()
     win = webview.create_window(TITLE, res_path(PAGE), js_api=api, width=1280, height=860, min_size=(640, 420),
                                 frameless=True, easy_drag=False, shadow=True, text_select=True, zoomable=True,
                                 background_color='#F5F3FA')
     api._win = win
-    win.events.shown += lambda: round_corners(win)
+    win.events.shown += lambda: (center(win), round_corners(win))
     # private_mode=False + storage_path：网页的 localStorage（保存过的存档、页面设置）在关掉程序后还在
     webview.start(private_mode=False, storage_path=storage, icon=res_path('icon.ico'))
 

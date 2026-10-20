@@ -1,14 +1,12 @@
 <section id="sec-save" class="savesec" hidden>
 <div class="sv-head">
-  <h1>我的存档</h1>
-  <p id="sv-msg" class="sv-msg">存档只保存在这台电脑上（最近 10 份），不会上传。工具只读取存档，不能修改。</p>
+  <div><h1>我的存档</h1>
+  <p id="sv-msg" class="sv-msg">存档只保存在这台电脑上（最近 10 份），不会上传。工具只读取存档，不能修改。</p></div>
+  <span id="sv-game" class="sv-grp" hidden><label class="sv-switch"><input type="checkbox" id="sv-gauto" checked><i></i>自动同步</label>
+    <button id="sv-gread">立即读取</button></span>
 </div>
 <div class="sv-bar">
-  <span id="sv-game" class="sv-grp" hidden><button id="sv-gread">立即读取</button>
-    <label class="sv-switch"><input type="checkbox" id="sv-gauto" checked><i></i>自动同步</label>
-    <button id="sv-gdir" class="sv-lite">打开存档文件夹</button><button id="sv-pastetoggle" class="sv-lite" hidden>手动粘贴</button></span>
   <span id="sv-histbox" class="sv-grp" hidden><select id="sv-hist" title="已保存的存档"></select><button id="sv-del" class="sv-lite">删除</button></span>
-  <span id="sv-gstat" class="sv-hint"></span>
 </div>
 <div id="sv-pastebox" class="sv-card sv-paste">
   <textarea id="sv-in" rows="2" spellcheck="false" placeholder="在游戏里导出存档，把整段存档字符串粘贴到这里（粘贴后自动读取）"></textarea>
@@ -43,10 +41,14 @@
 <style>
 [hidden]{display:none!important}
 main>section.savesec{background:none;box-shadow:none;padding:8px 6px;max-width:1180px;margin:0 auto}
+.sv-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin:0 0 20px}
 .sv-head h1{font-size:26px;margin:0}
+.sv-head .sv-grp{gap:14px}
+/* 程序里存档直接从游戏读，不需要历史记录和粘贴 */
+html.app .sv-bar{display:none}
 .sv-msg{margin:2px 0 0;font-size:13px;color:var(--muted)} .sv-msg.err,.sv-hint.err{color:#dc2626}
 .sv-msg b{color:var(--fg)}
-.sv-bar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;margin:14px 0 16px}
+.sv-bar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;margin:-6px 0 16px}
 .sv-grp{display:inline-flex;gap:8px;align-items:center}
 .sv-card{background:var(--card);border-radius:18px;box-shadow:var(--shadow);padding:18px 20px;margin-bottom:16px}
 .sv-paste{display:flex;gap:10px;align-items:flex-start}
