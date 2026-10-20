@@ -34,8 +34,17 @@ ALIAS = {'TC': '征税', 'CtA': '动员令', 'HoL': '传说圣殿', 'BF': '嗜�
 # 遗物表里阵营遗物按全阶英豪奖杯的顺序排，每个阵营两个
 ART_FACTIONS = ['仙灵', '精灵', '天使', '地精', '亡灵', '恶魔', '泰坦', '德鲁伊', '无面者', '矮人', '卓尔', '佣兵']
 # 程序版本：改了功能就加版本号，在 CHANGES 最前面写这一版改了什么
-VERSION = '0.2.0'  # 还没到正式发布，用 0.x（用户要求）
+VERSION = '0.2.2'  # 还没到正式发布，用 0.x（用户要求）
 CHANGES = [
+    ('0.2.2', '2026-10-20', [
+        '建筑升级页改成顶上选建筑、下面只列这个建筑的升级（数量、升级名、产能加成），不再是 50 多列的大表；记住上次看的建筑',
+        '传说圣殿下面列出独特建筑升级',
+    ]),
+    ('0.2.1', '2026-10-20', [
+        '研究、挑战、隐藏奖杯、遗物页的说明文字里，专名按攻略的九类上色，点一下跳到对应的格子或卡片',
+        '研究页的「已购买 / 未购买」改叫「已解锁 / 未解锁」',
+        'R0 攻略去掉「之后（R1 以后）用什么 build？」一节',
+    ]),
     ('0.2.0', '2026-10-20', [
         '挑战页改成按阵营分组的卡片：条件、目标、效果分栏，阵营法术强化放在阵营标题下面',
         '研究页改成按分支分组的卡片，按实际解锁 R 排序（4.3.9 改号的研究按新 R 排），带代号和绑定阵营',
@@ -172,9 +181,50 @@ def merged_value(ws):
     return val
 
 
-def card(cid, en, img_cell, imgs, zh, en_show, badge, fields, note='', group='', alias=''):
-    """img_cell 为 None 时不放图标（挑战、研究）"""
-    esc = lambda v: '<br>'.join(html.escape(l) for l in SPLIT.split(v))
+class Terms:
+    """卡片页（研究、挑战、隐藏奖杯、遗物）说明文字里的专名染色，颜色和攻略的九类一样，并链接到对应的格子 / 卡片。
+    专名来自表格里的名称格（各列是哪一类见 main()）、卡片名、攻略里标过的专名，再加上 UD1、DMC1、E300 这类代号。
+    研究名、建筑升级名大多是「统治」「灌溉」这样的普通词，两个字的不染（阵营、法术、攻略里标过的除外）。"""
+    ORDER = '阵法遗隐挑研建升奖'  # 同名时优先的类别
+
+    def __init__(self):
+        self.names, self.codes, self.rx = {}, {}, None
+
+    def add(self, kind, name, target, short=False):
+        name = name.strip()
+        if not name or name.startswith('~') or not CJK.search(name) or (len(name) < 3 and not short):
+            return
+        old = self.names.get(name)
+        if not old or self.ORDER.index(kind) < self.ORDER.index(old[0]):
+            self.names[name] = (kind, target)
+
+    def ready(self):
+        alts = sorted(self.names, key=len, reverse=True)
+        self.rx = re.compile('(%s)|(?<![A-Za-z0-9])([A-Z]{1,2}C?\\d+)(?![A-Za-z0-9])' % '|'.join(map(re.escape, alts)))
+
+    def render(self, text, self_id=''):
+        """纯文本 → 染好色的 HTML（换行变 <br>）；指向卡片自己的专名不加链接"""
+        out, last = [], 0
+        for m in self.rx.finditer(text) if self.rx else ():
+            kind, target = self.names[m.group(1)] if m.group(1) else self.codes.get(m.group(2), (None, None))
+            if not kind:
+                continue
+            out.append(html.escape(text[last:m.start()]))
+            cls, s = md2html.TAGS[kind][0], html.escape(m.group(0))
+            out.append('<a class="t-%s" href="#%s">%s</a>' % (cls, target, s) if target and target != self_id else '<span class="t-%s">%s</span>' % (cls, s))
+            last = m.end()
+        out.append(html.escape(text[last:]))
+        return re.sub(r'\r\n|\r|\n', '<br>', ''.join(out))
+
+
+TERMS = Terms()
+
+
+def card(cid, en, img_cell, imgs, zh, en_show, badge, fields, note='', group='', alias='', kind=''):
+    """img_cell 为 None 时不放图标（挑战、研究）；kind 是这一页的专名类别，卡片名登记进 TERMS"""
+    if kind:
+        TERMS.add(kind, zh, cid)
+    esc = lambda v: TERMS.render(v, cid)
     if img_cell is None:
         img = ''
     else:
@@ -211,7 +261,7 @@ def build_artifacts(ws, imgs):
         cond, rate, use = val(r, 4), val(r, 5), val(r, 6)
         rq = re.search(r'R(\d+)\+', cond)
         badge = ('<em>R%s+</em>' % rq.group(1) if rq else '') + ('<em class="sure">必出</em>' if '必出' in rate else '')
-        items.append(card('t10-B%d' % r, en, val(r, 3), imgs, zh, en, badge, [('发掘条件', cond), ('概率', rate), ('用途', use)], group=kzh))
+        items.append(card('t10-B%d' % r, en, val(r, 3), imgs, zh, en, badge, [('发掘条件', cond), ('概率', rate), ('用途', use)], group=kzh, kind='遗'))
     return card_list('artowned', '搜索名字、条件或用途', items)
 
 
@@ -240,7 +290,7 @@ def build_trophies(ws, imgs):
         tier = TROPHY_TIER.get(color, '')
         badge = '<em>%s</em>' % tier if tier else ''
         items.append(card('t7-A%d' % r, en, val(r, 2), imgs, zh, '' if zh == en else en, badge, [('目标', val(r, 3)), ('加成', val(r, 4))], note,
-                          alias=TROPHY_ALIAS.get(re.sub(r'[^a-z0-9]', '', en.lower()), '')))
+                          alias=TROPHY_ALIAS.get(re.sub(r'[^a-z0-9]', '', en.lower()), ''), kind='隐'))
     return card_list('trophyowned', '搜索名字、目标或加成', items)
 
 
@@ -265,7 +315,7 @@ def build_challenges(ws):
         if sp:
             szh, sen = split_name(sp)
             sp_html = ('<div class="ch-sp" id="t3-I%d"><em>法术强化</em><b>%s</b><span class="en">%s</span><p>%s</p></div>' % (
-                r, html.escape(szh), html.escape(sen), '<br>'.join(html.escape(l) for l in SPLIT.split(val(r + 2, 9)))))
+                r, html.escape(szh), html.escape(sen), TERMS.render(val(r + 2, 9))))
         items.append('<div class="art-g ch-g" id="t3-%s%d" data-g="%s"><h2>%s <span>%s%s</span></h2>%s</div>' % (
             'B' if val(r, 2) else 'A', r, html.escape(fzh), html.escape(fzh), html.escape(fen), ' · ' + html.escape(align) if align else '', sp_html))
         for k in range(6):
@@ -279,7 +329,7 @@ def build_challenges(ws):
             combo = strip_label(val(r + 1, c), '生效组合')
             items.append(card('t3-%s%d' % (get_column_letter(c), r), en, None, None, zh, en, badge,
                               [('条件', cond), ('目标', strip_label(val(r + 3, c), '目标')), ('效果', strip_label(val(r + 4, c), '效果'))],
-                              note='生效组合：' + combo if combo else '', group=fzh))
+                              note='生效组合：' + combo if combo else '', group=fzh, kind='挑'))
     return card_list('challengeowned', '搜索名字、条件、目标或效果', items, '完成')
 
 
@@ -319,10 +369,76 @@ def build_research(ws):
             old = re.search(r'原([SCDEAWF]\d+)', note)  # 存档编辑器里还是旧代号
             cards.append((sort_r, c, card(cid, code, None, None, zh, en, badge,
                                           [('解锁条件', val(r + 3, c)), ('效果', val(r + 4, c))], note=note, group=bzh,
-                                          alias=old.group(1).lower() if old else '')))
+                                          alias=old.group(1).lower() if old else '', kind='研')))
         items.append('<h2 class="art-g" data-g="%s">%s <span>%s</span></h2>' % (html.escape(bzh), html.escape(bzh), html.escape(ben)))
         items += [x[2] for x in sorted(cards)]
-    return card_list('researchowned', '搜索名字、代号或效果', items, '购买')
+    return card_list('researchowned', '搜索名字、代号或效果', items, '解锁')
+
+
+def build_buildings(ws):
+    """建筑升级表 → 顶上选建筑，下面只列这个建筑的升级（数量 / 升级名 / 产能加成）。25 个建筑每个 23 个升级，
+    加成按建筑层级重复（表里第 4 层起的加成格是合并的，merged_value 读出来每行都有）。
+    建筑面板 id 是原建筑名格（t6-B2），升级行 id 是原升级名格（t6-B4），专名链接照旧；传说圣殿下面再列独特建筑升级。"""
+    val = merged_value(ws)
+    rows = [r for r in range(4, ws.max_row + 1) if val(r, 1) and re.match(r'\d', val(r, 1))]
+    tabs, panels, tier = [], [], ''
+    for c in range(2, ws.max_column + 1, 2):
+        if not val(2, c) or val(3, c) != '升级名称':
+            continue
+        tier = val(1, c) or tier
+        bzh = SPLIT.split(val(2, c))[-1].strip()
+        ben = SPLIT.split(val(2, c))[0].strip()
+        cid = 't6-%s2' % get_column_letter(c)
+        tabs.append('<button data-p="%s">%s</button>' % (cid, html.escape(bzh)))
+        out = ['<div class="bd-h"><b>%s</b><span class="en">%s</span><em>第 %s 层建筑</em></div>' % (html.escape(bzh), html.escape(ben), html.escape(tier)),
+               '<div class="bd-r bd-th"><span>数量</span><span>升级</span><span>产能加成</span></div>']
+        for r in rows:
+            name = val(r, c)
+            if not name:
+                continue
+            lines = SPLIT.split(val(r, 1))
+            req = re.search(r'R\d+\+', val(r, 1))
+            zh, en = SPLIT.split(name)[-1].strip(), SPLIT.split(name)[0].strip()
+            out.append('<div class="bd-r" id="t6-%s%d"><span class="bd-n">%s%s</span><span><b>%s</b><small>%s</small></span><span>%s</span></div>' % (
+                get_column_letter(c), r, html.escape(lines[0].strip()), '<em>%s</em>' % req.group() if req else '',
+                html.escape(zh), html.escape(en), TERMS.render(val(r, c + 1), 't6-%s%d' % (get_column_letter(c), r)) or '<span class="nil">—</span>'))
+        # 传说圣殿右边的独特建筑升级
+        if c + 2 <= ws.max_column and val(3, c + 2) == '独特建筑升级':
+            out.append('<div class="bd-sub">独特建筑升级</div>')
+            for r in range(4, ws.max_row + 1):
+                v = val(r, c + 2)
+                if not v:
+                    continue
+                en, zh = SPLIT.split(v)[0].strip(), SPLIT.split(v)[-1].strip()
+                m = re.match(r'^(.*?)[（(](.*)[）)]$', zh)
+                zh, need = (m.group(1), m.group(2)) if m else (zh, '')
+                out.append('<div class="bd-r bd-ub" id="t6-%s%d"><span class="bd-n">%s</span><span><b>%s</b><small>%s</small></span><span>%s</span></div>' % (
+                    get_column_letter(c + 2), r, html.escape(need), html.escape(zh), html.escape(en), TERMS.render(val(r, c + 3))))
+        panels.append('<div class="bd-p" id="%s" hidden>%s</div>' % (cid, ''.join(out)))
+    note = next((val(r, 1) for r in range(rows[-1] + 1, ws.max_row + 1) if val(r, 1)), '')
+    return ('<div class="bd"><div class="bd-tabs">%s</div>%s%s</div>' % (''.join(tabs), ''.join(panels),
+            '<p class="bd-note">%s</p>' % TERMS.render(note) if note else '') + BD_JS)
+
+
+# 建筑升级页：点建筑切换面板，记住上次看的建筑；从别处跳到某个升级时先切到它所在的建筑（捕获阶段，赶在页面路由滚动之前）
+BD_JS = """<script>(function(){
+  var root = document.querySelector('.bd'), btns = [].slice.call(root.querySelectorAll('.bd-tabs button'));
+  function pick(id){
+    btns.forEach(function(b){ b.classList.toggle('on', b.dataset.p === id); });
+    root.querySelectorAll('.bd-p').forEach(function(p){ p.hidden = p.id !== id; });
+    try { localStorage.setItem('rg-bd', id); } catch (e) {}
+  }
+  root.querySelector('.bd-tabs').addEventListener('click', function(e){ var b = e.target.closest('button'); if (b) pick(b.dataset.p); });
+  function follow(){
+    var el = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    var p = el && root.contains(el) && (el.classList.contains('bd-p') ? el : el.closest('.bd-p'));
+    if (p && p.hidden) pick(p.id);
+  }
+  window.addEventListener('hashchange', follow, true);
+  var last = null; try { last = localStorage.getItem('rg-bd'); } catch (e) {}
+  pick(document.getElementById(last) ? last : btns[0].dataset.p);
+  follow();
+})();</script>"""
 
 
 def build_sheet(n, ws, imgs, index, cells):
@@ -427,21 +543,45 @@ def main():
     for n, ws in enumerate(wb.worksheets, 1):
         if n in SHEETS:
             sections[n] = build_sheet(n, ws, imgs, index, cells)  # 也用来登记名称格，供专名链接
-            if n == 10:
-                sections[n] = build_artifacts(ws, imgs)
-            elif n == 7:
-                sections[n] = build_trophies(ws, imgs)
-            elif n == 3:
-                sections[n] = build_challenges(ws)
-            elif n == 5:
-                sections[n] = build_research(ws)
+    research, upgrade, challenge, artifact = code_maps(cells)
+    # 卡片页的专名染色：表格名称格按所在列分类（阵营表 C 列阵营、AF/AJ 列法术、D–L/S–U 列阵营升级；UB 分布表都是建筑；
+    # 建筑升级表第 2 行是建筑、往下是升级）
+    up_cols = set('DEFGHIJKLSTU')
+    for name, places in index.items():
+        for n, ref in places:
+            col, row = re.match(r'([A-Z]+)(\d+)', ref).groups()
+            row, tid = int(row), 't%d-%s' % (n, ref)
+            if n == 1 and col == 'C':
+                for x in name.split('\\'):
+                    TERMS.add('阵', x, tid, short=True)
+            elif n == 1 and col in ('AF', 'AJ') and row >= 3:
+                TERMS.add('法', name, tid, short=True)
+            elif n == 1 and col in up_cols and row >= 3:
+                TERMS.add('升', name, tid)
+            elif n == 4:
+                TERMS.add('建', name, tid)
+            elif n == 6:
+                TERMS.add('建' if row == 2 else '升', name, tid)
+    for code, (n, ref) in research.items():
+        TERMS.codes[code] = ('研', 't%d-%s' % (n, ref))
+    for code, (n, ref) in upgrade.items():
+        TERMS.codes[code] = ('升', 't%d-%s' % (n, ref))
+    for code, (n, ref) in challenge.items():
+        if re.fullmatch(r'[A-Z]{2}C\d', code):
+            TERMS.codes[code] = ('挑', 't%d-%s' % (n, ref))
+    card_pages = {10: lambda ws: build_artifacts(ws, imgs), 7: lambda ws: build_trophies(ws, imgs), 3: build_challenges, 5: build_research, 6: build_buildings}
+    for n, f in card_pages.items():
+        sections[n] = f(wb.worksheets[n - 1])  # 第一遍只登记卡片名（还没染色）
+    # 攻略里标过的专名（两个字的也算）；指向卡片页的等卡片 id 定下来以后再登记，见下面 find
+    guide_tags = set()
+    for _, _, path in GUIDES:
+        guide_tags |= set(re.findall(r'\{(%s):([^{}]+)\}' % '|'.join(md2html.TAGS), open(os.path.join(ROOT, path), encoding='utf-8').read()))
     # 改成卡片的工作表只留下有卡片（或阵营标题、法术强化）的格子，表头之类的格子不再能链接过去
     shown = set(re.findall(r'id="(t\d+-[A-Z]+\d+)"', ''.join(sections.values())))
     for k in list(index):
         index[k] = [p for p in index[k] if 't%d-%s' % p in shown]
         if not index[k]:
             del index[k]
-    research, upgrade, challenge, artifact = code_maps(cells)
     missing = []
 
     def find(kind, name):
@@ -465,6 +605,13 @@ def main():
             return None
         return '#' + hit
 
+    for kind, name in guide_tags:
+        hit = find(kind, name)
+        if hit:
+            TERMS.add(kind, name, hit, short=True)
+    TERMS.ready()
+    for n, f in card_pages.items():
+        sections[n] = f(wb.worksheets[n - 1])  # 第二遍：说明文字里的专名染色
     guides = {}
     for gid, label, path in GUIDES:
         title, body = md2html.convert(open(os.path.join(ROOT, path), encoding='utf-8').read(), link)
@@ -645,6 +792,24 @@ td.flash{outline:3px solid #f59e0b;outline-offset:-2px;background:var(--flash)!i
 .ch-sp b{font-size:14px;color:var(--fg)}.ch-sp .en{font-size:12px;color:#9aa5b8;margin-left:8px}
 .ch-sp p{margin:4px 0 0}
 .ch-sp.flash{background:var(--flash)}
+/* 建筑升级：选建筑看一列 */
+.bd-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px}
+.bd-tabs button{font:inherit;font-size:13px;border:none;background:#e6ecf5;color:#3d4a5f;padding:4px 13px;border-radius:999px;cursor:pointer;transition:background .15s,color .15s}
+.bd-tabs button:hover{background:#d9e2f0}
+.bd-tabs button.on{background:var(--blue);color:#fff;box-shadow:0 4px 12px rgba(37,99,235,.25)}
+.bd-p:not([hidden]){animation:rg-in .3s cubic-bezier(.2,.8,.2,1)}
+.bd-h{display:flex;align-items:baseline;gap:10px;margin:0 2px 10px}
+.bd-h b{font-size:17px}.bd-h .en{font-size:12.5px;color:#9aa5b8}
+.bd-h em,.bd-n em{font-style:normal;font-size:11.5px;color:#1d4ed8;background:var(--soft);border-radius:6px;padding:0 7px}
+.bd-r{display:grid;grid-template-columns:120px minmax(0,1fr) minmax(0,1.4fr);gap:16px;align-items:baseline;padding:8px 12px;border-bottom:1px solid var(--line);font-size:13.5px;color:#3d4a5f;scroll-margin:80px;transition:background 1.5s}
+.bd-r b{color:var(--fg);font-weight:600;margin-right:8px}.bd-r small{font-size:12px;color:#9aa5b8}
+.bd-n{font-weight:600;color:var(--fg);display:flex;gap:6px;align-items:baseline;flex-wrap:wrap}
+.bd-th{font-size:11.5px;color:#9aa5b8;padding-top:0}
+.bd-r.flash{background:var(--flash)}
+.bd-ub .bd-n{font-weight:normal;font-size:12.5px;color:var(--muted)}
+.bd-sub{font-size:15px;font-weight:600;margin:24px 2px 6px}
+.bd-note{margin:18px 2px 0;font-size:12.5px;color:var(--muted)}
+.bd .nil{color:#c9d1dd}
 /* 已获得 / 未获得（读到存档后才出现）：已获得图标描蓝边带勾，未获得变灰，鼠标移上去恢复 */
 /* 一个小胶囊，往下滚时浮在内容上面（带阴影），不占满整行 */
 .own-bar{display:flex;align-items:center;gap:14px;height:36px;box-sizing:border-box;padding:0 16px 0 4px;
@@ -731,7 +896,7 @@ html.app.max .grip{display:none}
   document.addEventListener('scroll', function(){ if (cur && !(location.hash.indexOf('-') > 0)) pos[cur] = rgScroller().scrollTop; }, true);
   document.addEventListener('click', function(e){
     var a = e.target.closest('a[href^="#t"]');
-    if (a && a.closest('section.guide, section.savesec, #res')) fromLink = true;
+    if (a && a.closest('section.guide, section.table, section.savesec, #res')) fromLink = true;
   });
   back.addEventListener('click', function(){ history.back(); });
   // 侧栏选中块从上一项滑到当前项
@@ -750,7 +915,7 @@ html.app.max .grip{display:none}
   show();
   // 全表搜索
   var q = document.getElementById('q'), res = document.getElementById('res'), timer;
-  var tds = Array.prototype.slice.call(document.querySelectorAll('table.sheet td[id], .art[id], .ch-sp[id]'));
+  var tds = Array.prototype.slice.call(document.querySelectorAll('table.sheet td[id], .art[id], .ch-sp[id], .bd-r[id]'));
   var names = {}; navs.forEach(function(a){ names[a.dataset.sec] = a.textContent.trim(); });
   q.addEventListener('input', function(){
     clearTimeout(timer);
