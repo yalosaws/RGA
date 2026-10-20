@@ -34,8 +34,13 @@ ALIAS = {'TC': '征税', 'CtA': '动员令', 'HoL': '传说圣殿', 'BF': '嗜�
 # 遗物表里阵营遗物按全阶英豪奖杯的顺序排，每个阵营两个
 ART_FACTIONS = ['仙灵', '精灵', '天使', '地精', '亡灵', '恶魔', '泰坦', '德鲁伊', '无面者', '矮人', '卓尔', '佣兵']
 # 程序版本：改了功能就加版本号，在 CHANGES 最前面写这一版改了什么
-VERSION = '1.0.1'
+VERSION = '1.0.2'
 CHANGES = [
+    ('1.0.2', '2026-10-20', [
+        '去掉各页标题；攻略的颜色图例改成悬浮小胶囊，去掉开头的来源说明框',
+        '遗物、隐藏奖杯的搜索框和「已获得」切换并排成两个小胶囊，往下滚时一起浮着',
+        '攻略里鼠标放在专名上，图例胶囊会点亮它属于的那一类',
+    ]),
     ('1.0.1', '2026-10-20', [
         '遗物、隐藏奖杯改成带图标的卡片列表，可以页内搜索',
         '读到存档后可以切换「全部 / 已获得 / 未获得」，带收集进度条；没获得的变灰',
@@ -104,7 +109,7 @@ def split_name(text):
 CL_JS = """<script>(function(){
   document.querySelectorAll('.cl:not([data-ok])').forEach(function(root){
     root.dataset.ok = 1;
-    var q = root.querySelector('.cl-q'), seg = root.querySelector('.own-seg'), bar = root.querySelector('.own-bar');
+    var q = root.querySelector('.cl-q'), seg = root.querySelector('.own-seg'), bar = root.querySelector('.own-bar'), top = root.querySelector('.cl-top');
     var cards = [].slice.call(root.querySelectorAll('.art')), heads = [].slice.call(root.querySelectorAll('.art-g'));
     var sel = '', owned = null;
     function run(){
@@ -117,11 +122,11 @@ CL_JS = """<script>(function(){
     function pick(v){ sel = v; seg.querySelectorAll('button').forEach(function(x){ x.classList.toggle('on', x.dataset.o === v); }); run(); }
     q.addEventListener('input', run);
     seg.addEventListener('click', function(e){ var b = e.target.closest('button'); if (b) pick(b.dataset.o); });
-    // 胶囊离开原位、浮在内容上面时加阴影
+    // 两个胶囊离开原位、浮在内容上面时加阴影
     var home = document.createElement('div');
-    bar.parentNode.insertBefore(home, bar);
+    top.parentNode.insertBefore(home, top);
     document.addEventListener('scroll', function(){
-      if (!bar.hidden) bar.classList.toggle('float', bar.getBoundingClientRect().top - home.getBoundingClientRect().top > 12);
+      top.classList.toggle('float', top.getBoundingClientRect().top - home.getBoundingClientRect().top > 12);
     }, true);
     window.addEventListener(root.dataset.ev, function(e){
       owned = e.detail;
@@ -168,10 +173,11 @@ def card(cid, en, img_cell, imgs, zh, en_show, badge, fields, note='', group='',
 
 
 def card_list(ev, placeholder, items):
-    return ('<div class="cl" data-ev="%s"><input class="cl-q" type="search" placeholder="%s">'
+    return ('<div class="cl" data-ev="%s"><div class="cl-top">'
             '<div class="own-bar" hidden><div class="own-seg"><button class="on" data-o="">全部<b></b></button>'
             '<button data-o="1">已获得<b></b></button><button data-o="0">未获得<b></b></button></div>'
-            '<div class="own-prog"><i></i></div></div><div class="art-list">%s</div></div>' % (ev, placeholder, ''.join(items)))
+            '<div class="own-prog"><i></i></div></div><input class="cl-q" type="search" placeholder="%s"></div>'
+            '<div class="art-list">%s</div></div>' % (ev, placeholder, ''.join(items)))
 
 
 def build_artifacts(ws, imgs):
@@ -191,7 +197,7 @@ def build_artifacts(ws, imgs):
         rq = re.search(r'R(\d+)\+', cond)
         badge = ('<em>R%s+</em>' % rq.group(1) if rq else '') + ('<em class="sure">必出</em>' if '必出' in rate else '')
         items.append(card('t10-B%d' % r, en, val(r, 3), imgs, zh, en, badge, [('发掘条件', cond), ('概率', rate), ('用途', use)], group=kzh))
-    return card_list('artowned', '搜索名字、条件或用途，例如：回魔、R100、佣兵', items)
+    return card_list('artowned', '搜索名字、条件或用途', items)
 
 
 # 隐藏奖杯表的行底色 → 最低进度（表头 A1:C2 的图例）
@@ -220,7 +226,7 @@ def build_trophies(ws, imgs):
         badge = '<em>%s</em>' % tier if tier else ''
         items.append(card('t7-A%d' % r, en, val(r, 2), imgs, zh, '' if zh == en else en, badge, [('目标', val(r, 3)), ('加成', val(r, 4))], note,
                           alias=TROPHY_ALIAS.get(re.sub(r'[^a-z0-9]', '', en.lower()), '')))
-    return card_list('trophyowned', '搜索名字、目标或加成，例如：考古、回魔、佣兵', items)
+    return card_list('trophyowned', '搜索名字、目标或加成', items)
 
 
 def build_sheet(n, ws, imgs, index, cells):
@@ -356,13 +362,32 @@ def main():
     guides = {}
     for gid, label, path in GUIDES:
         title, body = md2html.convert(open(os.path.join(ROOT, path), encoding='utf-8').read(), link)
-        guides[gid] = body
+        # 网页里不要开头的来源说明框（和紧跟的分隔线），PDF 里保留
+        body = re.sub(r'<h1>.*?</h1>\s*', '', body, count=1, flags=re.S)  # 网页里不要标题（用户要求）
+        guides[gid] = re.sub(r'(<p class="legend">.*?</p>)\s*<blockquote>.*?</blockquote>\s*(<hr>)?', lambda m: m.group(1), body, count=1, flags=re.S)
     item = lambda h, label: '<a href="#%s" data-sec="%s">%s</a>' % (h, h, label)
     nav = '<div class="grp">攻略</div>' + ''.join(item(g, l) for g, l, _ in GUIDES)
     nav += '<div class="grp">资料表</div>' + ''.join(item('t%d' % n, SHEETS[n][0]) for n in sections)
     body = ''.join('<section id="sec-%s" class="guide" hidden>%s</section>' % (g, guides[g]) for g, _, _ in GUIDES)
-    body += ''.join('<section id="sec-t%d" class="table" hidden><h1>%s</h1>%s</section>' % (n, SHEETS[n][1], sections[n]) for n in sections)
+    body += ''.join('<section id="sec-t%d" class="table" hidden>%s</section>' % (n, sections[n]) for n in sections)
     body += CL_JS  # 卡片列表（遗物、隐藏奖杯）的搜索和已获得切换
+    # 攻略图例离开原位、浮在内容上面时加阴影
+    body += """<script>document.querySelectorAll('.guide .legend').forEach(function(el){
+  var home = document.createElement('div'); el.parentNode.insertBefore(home, el);
+  document.addEventListener('scroll', function(){ el.classList.toggle('float', el.getBoundingClientRect().top - home.getBoundingClientRect().top > 12); }, true);
+  // 鼠标放在专名上：图例里点亮这一类，其余变淡
+  var sec = el.closest('section'), cur = null;
+  function show(c){
+    if (c === cur) return; cur = c;
+    el.querySelectorAll('span').forEach(function(x){ x.classList.toggle('hl', !!c && x.classList.contains(c)); });
+    el.classList.toggle('act', !!c && !!el.querySelector('.hl'));
+  }
+  sec.addEventListener('mouseover', function(e){
+    var t = e.target.closest('[class^="t-"]');
+    show(t && !el.contains(t) ? t.className.split(' ')[0] : null);
+  });
+  sec.addEventListener('mouseleave', function(){ show(null); });
+});</script>"""
     # 存档工具：只读存档查看、法术预报、遗物预测（数据和库来自 工具/RG-tools）
     save_js, save_miss = '', []
     if os.path.isdir(save_tools.RG):
@@ -464,17 +489,27 @@ section.guide{max-width:960px;margin:0 auto}
 [class^="t-"]{font-weight:600}
 a[class^="t-"]{text-decoration:underline dotted;text-underline-offset:3px}
 a[class^="t-"]:hover{text-decoration-style:solid}
-.legend{font-size:13px}.legend span{margin-right:14px;white-space:nowrap}
+/* 攻略的图例：小胶囊，往下滚时浮在内容上面（和遗物页的已获得胶囊一样） */
+.legend{position:sticky;top:6px;z-index:3;width:max-content;max-width:100%;margin:0 0 16px;padding:5px 16px;font-size:13px;
+  background:#e6ecf5;border-radius:999px;transition:box-shadow .25s,background .25s}
+.legend.float{background:rgba(255,255,255,.92);backdrop-filter:blur(8px);box-shadow:0 8px 28px rgba(20,40,90,.16),0 0 0 1px rgba(20,40,90,.05)}
+.legend span{display:inline-block;margin:0 1px;padding:1px 7px;border-radius:999px;white-space:nowrap;transition:background .15s,opacity .15s}
+.legend span.hl{background:color-mix(in srgb,currentColor 16%,transparent)}
+.legend.act span:not(.hl){opacity:.35}
 .legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:3px;background:currentColor;margin-right:4px}
 section.table h1{font-size:20px;margin:0 0 14px}
-.wrap{overflow:auto;max-height:calc(100vh - 150px);border:1px solid var(--line);border-radius:14px}
+.wrap{overflow:auto;max-height:calc(100vh - 110px);border:1px solid var(--line);border-radius:14px}
 table.sheet{border-collapse:collapse;table-layout:fixed;font-size:13px;line-height:1.5}
 table.sheet td{border:1px solid var(--line);padding:4px 7px;vertical-align:top;overflow-wrap:anywhere;scroll-margin:80px}
 table.sheet img{width:40px;height:40px;object-fit:contain;display:block;margin:0 auto}
 td.flash{outline:3px solid #f59e0b;outline-offset:-2px;background:var(--flash)!important;transition:background 1.5s}
 /* 遗物：卡片列表 */
-.cl-q{width:420px;max-width:100%;padding:7px 16px;border:1px solid var(--line);border-radius:999px;font:inherit;font-size:13.5px;background:var(--soft);margin:0 0 4px}
+/* 顶上并排两个小胶囊（已获得切换、搜索框），往下滚时浮在内容上面 */
+.cl-top{position:sticky;top:6px;z-index:3;display:flex;flex-wrap:wrap;align-items:center;gap:10px;width:max-content;max-width:100%}
+.cl-q{width:320px;max-width:100%;height:36px;box-sizing:border-box;padding:0 16px;border:1px solid transparent;border-radius:999px;font:inherit;font-size:13px;
+  background:#e6ecf5;transition:box-shadow .25s,background .25s}
 .cl-q:focus{outline:none;border-color:#bcd0f7;background:#fff}
+.cl-top.float .cl-q,.cl-top.float .own-bar{background:rgba(255,255,255,.92);backdrop-filter:blur(8px);box-shadow:0 8px 28px rgba(20,40,90,.16),0 0 0 1px rgba(20,40,90,.05)}
 .art-list{margin-top:14px}
 .art-g{font-size:16px;margin:22px 2px 8px}.art-g span{font-size:12px;font-weight:normal;color:#9aa5b8;margin-left:6px}
 .art{display:flex;gap:16px;padding:14px 16px;border-radius:16px;border:1px solid var(--line);margin-bottom:10px;scroll-margin:80px;transition:background 1.5s,border-color .2s}
@@ -491,14 +526,13 @@ td.flash{outline:3px solid #f59e0b;outline-offset:-2px;background:var(--flash)!i
 .art.flash{background:var(--flash);border-color:#f59e0b}
 /* 已获得 / 未获得（读到存档后才出现）：已获得图标描蓝边带勾，未获得变灰，鼠标移上去恢复 */
 /* 一个小胶囊，往下滚时浮在内容上面（带阴影），不占满整行 */
-.own-bar{position:sticky;top:6px;z-index:3;display:flex;align-items:center;gap:14px;width:max-content;margin:10px 0 2px;padding:4px 16px 4px 4px;
+.own-bar{display:flex;align-items:center;gap:14px;height:36px;box-sizing:border-box;padding:0 16px 0 4px;
   background:#e6ecf5;border-radius:999px;transition:box-shadow .25s,background .25s}
-.own-bar.float{background:rgba(255,255,255,.92);backdrop-filter:blur(8px);box-shadow:0 8px 28px rgba(20,40,90,.16),0 0 0 1px rgba(20,40,90,.05)}
 .own-seg{display:inline-flex;gap:2px}
 .own-seg button{font:inherit;font-size:13px;border:none;background:none;color:var(--muted);padding:4px 14px;border-radius:999px;cursor:pointer;transition:background .15s}
 .own-seg button.on{background:#fff;color:var(--fg);font-weight:600;box-shadow:0 2px 8px rgba(20,40,90,.1)}
-.own-bar.float .own-seg button.on{background:var(--blue);color:#fff;box-shadow:none}
-.own-bar.float .own-seg button.on b{color:#fff}
+.cl-top.float .own-seg button.on{background:var(--blue);color:#fff;box-shadow:none}
+.cl-top.float .own-seg button.on b{color:#fff}
 .own-seg b{font-weight:600;margin-left:5px;color:var(--blue)}
 .own-prog{width:120px;height:6px;background:rgba(20,40,90,.08);border-radius:99px;overflow:hidden}
 .own-prog i{display:block;height:100%;width:0;background:var(--blue);border-radius:99px;transition:width .5s cubic-bezier(.2,.8,.2,1)}
