@@ -1,7 +1,7 @@
 """把综合列表和两篇攻略合成一个 HTML：攻略里的 {类:名} 专名链接到表格里对应的格子。
 
 用法：python 脚本/build_html.py [综合列表.xlsx] [输出.html]
-默认读 表格/RG综合列表（4.3.14）.xlsx，写到 RGA.html。
+默认读 表格/RG综合列表（4.3.14）.xlsx，写到 build/RGA.html（程序界面，打包时装进 exe；不进 git）。
 openpyxl 只用来读取（不能用它保存这个表，见 CLAUDE.md）。
 """
 import base64
@@ -20,7 +20,7 @@ import save_tools
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = sys.argv[1] if len(sys.argv) > 1 else os.path.join(ROOT, '表格', 'RG综合列表（4.3.14）.xlsx')
-DST = sys.argv[2] if len(sys.argv) > 2 else os.path.join(ROOT, 'RGA.html')
+DST = sys.argv[2] if len(sys.argv) > 2 else os.path.join(ROOT, 'build', 'RGA.html')
 GUIDES = [('r0', 'R0 攻略', '攻略/Realm-Grinder-R0攻略.md'), ('a0', 'A0 攻略要点', '攻略/A0攻略要点.md')]
 # 工作表序号（按工作簿顺序，从 1 起）→ 导航名、标题；9 是 WPS 隐藏的图片表
 SHEETS = {1: ('阵营', '阵营升级、遗产、UB、血统、世系、契印、法术'), 2: ('传承', '传承组合（Legacy Combo）'),
@@ -405,6 +405,7 @@ def main():
     page = TEMPLATE.replace('%%NAV%%', nav).replace('%%BODY%%', body).replace('%%TCOLORS%%', md2html.CSS[md2html.CSS.index('.t-fa'):md2html.CSS.index('[class^')])
     page = page.replace('%%APPBAR%%', appbar()).replace('%%ICON%%', icon_img())
     page = page.replace('%%SAVEJS%%', save_js)  # 最后替换：脚本里可能有别的 %% 记号
+    os.makedirs(os.path.dirname(DST), exist_ok=True)
     open(DST, 'w', encoding='utf-8').write(page)
     print('写入', DST, '%.1f MB' % (len(page.encode()) / 1e6))
     print('专名链接：%d 个没找到对应格子' % len(missing))

@@ -1,4 +1,4 @@
-"""RGA（Realm Grinder 助手）：把「RGA.html」装进无边框圆角窗口，并直接读取本机游戏存档。
+"""RGA（Realm Grinder 助手）：把界面「RGA.html」（build_html.py 生成到 build/）装进无边框圆角窗口，并直接读取本机游戏存档。
 
 运行：python 应用/rg_app.py（需要 pywebview）；打包成 exe：python 应用/build_exe.py
 网页通过 window.pywebview.api 调用下面 Api 的方法：读存档（只读，不会改动存档）和窗口按钮。
@@ -21,7 +21,8 @@ def res_path(name):
     if getattr(sys, 'frozen', False):  # PyInstaller 打包后，资源在临时解压目录里
         return os.path.join(sys._MEIPASS, name)
     here = os.path.dirname(os.path.abspath(__file__))
-    return os.path.join(os.path.dirname(here) if name == PAGE else here, name)
+    # 直接用源码运行时：界面在 build/（先跑 脚本/build_html.py），图标在 应用/
+    return os.path.join(os.path.dirname(here), 'build', name) if name == PAGE else os.path.join(here, name)
 
 
 def find_saves():
