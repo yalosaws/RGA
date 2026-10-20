@@ -17,13 +17,13 @@
 | `RGA.html` | 给用户浏览用的单文件网页：两篇攻略 + 综合列表 9 个工作表（含图标），攻略里的专名点了跳到表格对应格子；还有「我的存档」栏（只读存档查看、法术预报、遗物预测，见下文）。由 `脚本/build_html.py` 生成，**不要手改**；改了表格或攻略要重新生成 |
 | `脚本/` | 表格更新脚本，见下文 |
 | `应用/` | 桌面程序「RGA」（Realm Grinder 助手，2026-10-20 改名）：`rg_app.py`（pywebview 无边框圆角窗口装着资料网页，并直接读本机游戏存档）、`build_exe.py`（打包）、`make_icon.py`（画图标 `icon.ico`/`icon.png`：16×16 像素的蓝紫色水晶，最近邻放大）。打包结果在 `发布/RGA.exe`（单文件，约 20 MB，**不进 git**） |
-| `资料/` | 抓取的原始资料：`A0 Guide.txt`（Discord 置顶 full A0 Guide 英文原文，用户下载；`攻略/A0攻略要点.md` 据此整理）、官方 4.3+ 补丁说明、Not a Wiki 页面（`naw_*.txt`）、Fandom wikitext（`fandom/`）、changelog、旧表各工作表的文本导出（`sheetN.txt`）、`4.3.14更新笔记.md`（含补丁说明各段行号索引）、`汉化文本（PC_20260921）.tsv`（汉化包的全部 5723 条「英文原文→中文译文」，见下文） |
+| `资料/` | 抓取的原始资料：`A0 Guide.txt`（Discord 置顶 full A0 Guide 英文原文，用户下载；`攻略/A0攻略要点.md` 据此整理）、官方 4.3+ 补丁说明、Not a Wiki 页面（`naw_*.txt`）、Fandom wikitext（`fandom/`）、changelog、旧表各工作表的文本导出（`sheetN.txt`）、`4.3.14更新笔记.md`（含补丁说明各段行号索引）、`汉化文本（PC_20261019）.tsv`（汉化包的全部 5725 条「英文原文→中文译文」，见下文；旧的 0921 版留着对照，比 1019 版只少万圣节活动新壮举的 2 条） |
 | `工具/RG-tools/` | Royal Advisory Board 社区工具站（shadowgull/dox4242.github.io，适配到 4.3.10+）的本地克隆：`edit/edit.html` 存档编辑器、`rws/` Realm Weather Service、`arch/` Lara Crypt、`mri/` 活动工具。纯本地 JS，双击 html 即可离线用；`git pull` 更新（更新后重新生成网页）。网页的「我的存档」栏用它的库和数据，没有这个文件夹时 `build_html.py` 跳过该栏。自带 git 仓库，**不进 git** |
 | `汉化/` | 游戏汉化包（PC 解压版 + PC/安卓 rar），体积大，**不进 git** |
 
 ## 游戏内中文译名
 
-用户玩的是汉化版，回答时阵营、法术、术语**优先用 `资料/汉化文本（PC_20260921）.tsv` 里的游戏内译名**（必要时括注英文），查不到再自己译。查法：`grep -a -P "^英文名\t" 资料/汉化文本（PC_20260921）.tsv`（文件按英文排序，换行转义成 `\n`，复数形式用 `\0` 隔开）。
+用户玩的是汉化版，回答时阵营、法术、术语**优先用 `资料/汉化文本（PC_20261019）.tsv` 里的游戏内译名**（必要时括注英文），查不到再自己译。查法：`grep -a -P "^英文名\t" 资料/汉化文本（PC_20261019）.tsv`（文件按英文排序，换行转义成 `\n`，复数形式用 `\0` 隔开）。
 
 表格和攻略都已改成游戏译名（2026-10-20）。和旧资料（Not a Wiki 中文、`资料/sheetN.txt`、旧版表格、修改对照）的叫法不同，常见的：Fairy 仙灵（旧：妖精）、Goblin 地精（旧：哥布林）、Undead 亡灵（旧：不死族）、Makers 永衡族、Djinn 巨灵、Lineage 世系（旧：先祖血脉）、Legacy 传承（旧：遗承）、Unique Building 独特建筑、Artifact Set 遗物契印、Prestige 显赫（旧：声望）、Spell Tier 法术阶层、Trophy 奖杯（旧：成就）、Excavation 考古、Royal Exchange 皇家贸易令、Call to Arms 动员令、Reincarnation 重生、Rubies 红玉、Faction Coins 阵营币。**注意立场/阵营**：游戏里 Alignment（善良/邪恶/中立/秩序/混乱/平衡）叫「立场」，Faction 叫「阵营」；旧表格用「阵营」指立场、「种族」指阵营。描述里的缩写（fc、gem、RE、UB、TC、CtA、Ascension、R）和回魔、魔上限这类简称照旧保留。
 
@@ -50,7 +50,7 @@
 - `脚本/rename.py <输入.xlsx> <输出.xlsx> [--report 报告.txt]`：把表格译名换成游戏内译名，只改 sharedStrings。规则（名称格换名、描述里换英文专名和旧术语）在文件开头；例外词和旧术语对照在 `脚本/译名.py`。**只能对没改过的表跑一次**（再跑会把原「邪恶种族」变成的「邪恶阵营」误改成「邪恶立场」）：4.3.14 版用 `apply.py` 重新生成，血统表用 `git show` 取出改名前的版本再跑。
 - `脚本/fetch.py <url> <输出>`：抓网页转纯文本（当初用来抓 Not a Wiki）。
 - `脚本/fandom.py <页面名...>`：通过 Fandom API 下载 wikitext 到 `资料/fandom/`。
-- `脚本/hanhua.py <swf> <输出.tsv>`：从汉化包的 `RealmGrinderDesktop.swf` 导出中文语言包（SWF 内 zlib 压缩的 gettext .mo，汉化放在原 es_ES 那份里）。汉化包更新后重跑，输出换个日期名存进 `资料/`。
+- `脚本/hanhua.py <swf> <输出.tsv>`：从汉化包的 `RealmGrinderDesktop.swf` 导出中文语言包（SWF 内 zlib 压缩的 gettext .mo，汉化放在原 es_ES 那份里）。汉化包更新后重跑，输出换个日期名存进 `资料/`（`rename.py`、`save_tools.py` 自动用文件名日期最新的一份）。
 - `脚本/build_html.py [xlsx] [html]`：生成 `RGA.html`。专名到格子的对应：名称格里的中文名（同名时按 `PREFER` 里各类优先的工作表）、研究代号→研究表「代号」行上一格、升级代号（UD1）→阵营表该阵营行第 N 列、挑战代号（DMC1、「恶魔挑战 1」）→挑战表、「德鲁伊 1」这类阵营遗物→遗物表（按全阶英豪奖杯顺序每阵营两格）、缩写见 `ALIAS`。研究按 4.3.9 改号后的新代号对应，表里只有「原 xxx」注记的旧号不算。运行时会列出没对上格子的专名（目前约 10 个，都是表里没有的东西，如宝石之力、自动施法类奖杯）。
 - 遗物页、隐藏奖杯页（2026-10-20 起）不再画成表格：`build_artifacts()`、`build_trophies()` 用 `card()` / `card_list()` / `CL_JS` 渲染成卡片（图标、中英文名、R 要求/必出标记、几栏说明）和页内搜索（用户要求去掉了类型、阵营筛选和计数）；隐藏奖杯的 R 标记来自行底色（`TROPHY_TIER`），奖杯卡片 id 是 `t7-A行号`。遗物页卡片 id 仍是原名称格 `t10-B行号`，专名链接、全表搜索、存档页链接照旧。读到存档后，`save_tools.js` 的 `ownedArtifacts()` 发 `artowned`、`trophyowned` 事件（已获得的英文名，按卡片 `data-en` 对上；奖杯的编号和英文名取自编辑器的 widget-trophy 行，名字不一样的在 `TROPHY_ALIAS` 里），两页就显示「全部 / 已获得 / 未获得」小胶囊（往下滚时浮在内容上面）和进度条：已获得的图标描蓝边带勾，未获得的变灰（用户选的样式，要求不加多余文字标记）。综合列表里没有 Mask of Scorch'Rah，这一个对不上。其他工作表还是表格，用户在考虑换成卡片 / 对比表等样式（样板做过 A 阵营档案、B 主从双栏、C 对比表、D 条目列表）。
 - 版本页（侧栏「关于」→「版本 x.y.z」，`#ver`）：版本号和更新记录写在 `build_html.py` 开头的 `VERSION`、`CHANGES`（当前 1.0.3）；改了功能要加版本号并在 `CHANGES` 最前面写这一版改了什么。版本页只放版本号和更新记录（用户不要收录资料、生成时间这些）。
