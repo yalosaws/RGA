@@ -372,7 +372,7 @@ def main():
     else:
         print('没有 工具/RG-tools，跳过「我的存档」（git clone https://github.com/shadowgull/dox4242.github.io 工具/RG-tools）')
     nav += '<div class="grp">关于</div>' + item('ver', '版本 ' + VERSION)
-    body += version_page(SRC)
+    body += version_page()
     page = TEMPLATE.replace('%%NAV%%', nav).replace('%%BODY%%', body).replace('%%TCOLORS%%', md2html.CSS[md2html.CSS.index('.t-fa'):md2html.CSS.index('[class^')])
     page = page.replace('%%APPBAR%%', appbar()).replace('%%ICON%%', icon_img())
     page = page.replace('%%SAVEJS%%', save_js)  # 最后替换：脚本里可能有别的 %% 记号
@@ -385,24 +385,9 @@ def main():
         print('存档工具：%d 个名字没翻译，显示英文：' % len(save_miss), '、'.join(save_miss))
 
 
-def version_page(sheet_src):
-    """「版本」页：版本号、收录资料的版本、更新记录"""
-    import datetime
-    import subprocess
-    rg = '没有收录'
-    if os.path.isdir(save_tools.RG):
-        try:
-            rg = '本地副本更新于 ' + subprocess.run(['git', '-C', save_tools.RG, 'log', '-1', '--format=%cd', '--date=short'],
-                                                capture_output=True, text=True, timeout=20).stdout.strip()
-        except (OSError, subprocess.SubprocessError):
-            rg = '已收录'
-    hh = sorted(f for f in os.listdir(os.path.join(ROOT, '资料')) if f.startswith('汉化文本'))
-    rows = [('综合列表', os.path.splitext(os.path.basename(sheet_src))[0]),
-            ('游戏译名', os.path.splitext(hh[-1])[0] if hh else '—'),
-            ('社区工具 RG-tools', rg),
-            ('生成时间', datetime.datetime.now().strftime('%Y-%m-%d %H:%M'))]
+def version_page():
+    """「版本」页：版本号和更新记录"""
     out = ['<div class="ver-hero">%s<div><h1>RGA</h1><p>Realm Grinder 助手 · 版本 <b>%s</b></p></div></div>' % (icon_img(), VERSION)]
-    out.append('<h2>收录资料</h2><table>' + ''.join('<tr><th>%s</th><td>%s</td></tr>' % (html.escape(a), html.escape(b)) for a, b in rows) + '</table>')
     out.append('<h2>更新记录</h2>')
     for v, d, items in CHANGES:
         out.append('<h3>%s <small>%s</small></h3><ul>%s</ul>' % (v, d, ''.join('<li>%s</li>' % html.escape(x) for x in items)))
@@ -474,8 +459,6 @@ section.guide{max-width:960px;margin:0 auto}
 .ver-hero img{width:64px;height:64px;image-rendering:pixelated}
 .ver-hero h1{margin:0;font-size:30px;letter-spacing:.02em}
 .ver-hero p{margin:0;color:var(--muted)} .ver-hero b{color:var(--blue)}
-#sec-ver table{width:auto;min-width:420px}
-#sec-ver th{width:150px;font-weight:500;color:var(--muted)}
 #sec-ver h3 small{font-weight:normal;color:var(--muted);font-size:13px;margin-left:8px}
 %%TCOLORS%%
 [class^="t-"]{font-weight:600}
