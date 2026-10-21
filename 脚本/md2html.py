@@ -26,7 +26,7 @@ th,td{border:1px solid #ccc;padding:5px 8px;text-align:left;vertical-align:top}
 th{background:#ede6f8;white-space:nowrap}
 ul,ol{margin:4px 0 10px;padding-left:24px} li{margin:2px 0}
 strong{color:#000}
-.t-fa{color:#c62828}.t-sp{color:#1565c0}.t-up{color:#00838f}.t-bd{color:#a0522d}.t-tr{color:#9e7c00}
+.t-fa{color:#c62828}.t-sp{color:#1565c0}.t-up{color:#00838f}.t-bd{color:#a0522d}.t-tr{color:#d4a000}
 .t-ht{color:#8e24aa}.t-rs{color:#2e7d32}.t-ch{color:#ef6c00}.t-ar{color:#c2185b}
 [class^="t-"]{font-weight:600}
 .legend{font-size:9pt;margin:-4px 0 12px}

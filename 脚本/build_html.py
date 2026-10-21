@@ -34,9 +34,13 @@ ALIAS = {'TC': '征税', 'CtA': '动员令', 'HoL': '传说圣殿', 'BF': '嗜�
 # 遗物表里阵营遗物按全阶英豪奖杯的顺序排，每个阵营两个
 ART_FACTIONS = ['仙灵', '精灵', '天使', '地精', '亡灵', '恶魔', '泰坦', '德鲁伊', '无面者', '矮人', '卓尔', '佣兵']
 # 程序版本：改了功能就加版本号，在 CHANGES 最前面写这一版改了什么
-VERSION = '0.3.8'  # 还没到正式发布，用 0.x（用户要求）
+VERSION = '0.3.9'  # 还没到正式发布，用 0.x（用户要求）
 AUTHOR = 'Yalosaws'
 CHANGES = [
+    ('0.3.9', '2026-10-22', [
+        '攻略和资料里的奖杯专名改用黄色',
+        '移除自动点击页面；自动点击固定用 F8 启停、每 35 毫秒点一次，暂不支持修改',
+    ]),
     ('0.3.8', '2026-10-22', [
         '隐藏奖杯页去掉 4.3 起改成阵营奖杯 / 法术奖杯的 5 项（驯龙高手、系谱学家、墨翎之艺、精英面具、神圣狂热）',
         '攻略图例的「已解锁变灰」开关改成「已解锁」小胶囊：去掉开关和分隔线（保留前面的小灰块），点一下选中，已解锁的链接从上到下依次变灰',
@@ -725,9 +729,7 @@ def main():
         body += save_html
     else:
         print('没有 工具/RG-tools，跳过「我的存档」（git clone https://github.com/shadowgull/dox4242.github.io 工具/RG-tools）')
-    nav = ('<div class="grp">工具</div>' + nav).replace('<div class="grp">攻略</div>',
-            item('click', '自动点击') + '<div class="grp">攻略</div>', 1)
-    body += open(os.path.join(ROOT, '脚本', 'auto_click.html'), encoding='utf-8').read()
+    nav = '<div class="grp">工具</div>' + nav
     nav += '<div class="grp">关于</div>' + item('ver', '版本 ' + VERSION)
     body += version_page()
     page = TEMPLATE.replace('%%NAV%%', nav).replace('%%BODY%%', body).replace('%%TCOLORS%%', md2html.CSS[md2html.CSS.index('.t-fa'):md2html.CSS.index('[class^')])

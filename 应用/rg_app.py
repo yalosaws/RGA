@@ -130,15 +130,6 @@ class Api:
         self._max = False
         self._clicker = clicker
 
-    def click_status(self):
-        return self._clicker.status()
-
-    def click_configure(self, settings):
-        return self._clicker.command('configure', settings)
-
-    def click_toggle(self):
-        return self._clicker.command('toggle')
-
     def shutdown(self):
         if self._clicker:
             self._clicker.close()
@@ -214,7 +205,7 @@ def main():
             storage = old
     if _K is not None:  # 打包版不允许外部调试端口连进来读页面
         os.environ.pop('WEBVIEW2_ADDITIONAL_BROWSER_ARGUMENTS', None)
-    api = Api(AutoClicker(os.path.join(storage, 'autoclick.json')))
+    api = Api(AutoClicker())  # 固定 F8 启停、35 毫秒间隔，没有设置页
     win = webview.create_window(TITLE, serve(load_page()), js_api=api, width=1280, height=860, min_size=(640, 420),
                                 frameless=True, easy_drag=False, shadow=True, text_select=True, zoomable=True,
                                 background_color='#F5F3FA')
