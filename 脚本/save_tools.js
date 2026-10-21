@@ -469,17 +469,21 @@
       if (!has(s, 'Limited Wish')) no('lw', '有限祈愿', '没有有限祈愿。');
       else (function () {
         var rng = new PM_PRNG(s.spells[29].s), cnt = s.spells[29].c, base = 1, el = [];
-        if (util.save.upgrade_owned(s, 975)) { cnt += 149; base = 149; }  // Persistent Entropy
+        var lt = Math.pow(Math.log(1 + s.spells[29].active0), 1.75);  // 本纪元有限祈愿生效时间，用当前值估算
+        // 恒常混沌（Persistent Entropy）：4.3 起起步 500 次（原 150 次，社区工具按起步数 −1 计）
+        if (util.save.upgrade_owned(s, 975)) { cnt += 499; base = 499; }
         if (util.save.upgrade_owned(s, 962)) cnt += s.spells[31].c;      // 巨灵能力 1
         cnt = Math.floor(cnt);
         if (!util.save.upgrade_owned(s, 994)) el.push(WISH[0]);           // Full Wish
         if (s.alignment == 1) el.push(WISH[1], WISH[6], WISH[5]);
         else if (s.alignment == 2) el.push(WISH[3], WISH[5], WISH[4]);
         else if (s.alignment == 3) el.push(WISH[2], WISH[6], WISH[4]);
-        add('lw', '有限祈愿', '随机数状态 ' + rng.state + '。巨灵能力 3 会影响强度，强度只是近似值。', function () {
+        add('lw', '有限祈愿', '随机数状态 ' + rng.state + '。加成按现在的生效时间估算，施放时会更高；巨灵能力 3 也会影响强度，只是近似值。', function () {
           var type = el[rng.nextIntRange(0, el.length - 1)];
           var v = Math.floor(rng.nextDoubleRange(base, cnt + 1));
-          var txt = '提升' + type + '，随机值 ' + v.toLocaleString() + ' / ' + cnt.toLocaleString() + '（强度约 ' + (Math.pow(v, 0.45) / Math.pow(cnt, 0.45) * 100).toPrecision(4) + '%）';
+          // 4.3 公式：产能 (50 + 5·ln(1+x)^1.75·y^0.25)%，其他 (250 + 2.5·ln(1+x)^1.75·y^0.5)%
+          var pct = type === WISH[0] ? 50 + 5 * lt * Math.pow(v, 0.25) : 250 + 2.5 * lt * Math.pow(v, 0.5);
+          var txt = '提升' + type + '，随机值 ' + v.toLocaleString() + ' / ' + cnt.toLocaleString() + '（加成约 ' + pct.toPrecision(4) + '%）';
           cnt++;
           return txt;
         });
@@ -550,7 +554,8 @@
     var save, eligible, unobtain, nonrandom, raw, smalls, chartPts, sel = null;
     function copy(a) {
       return {name: a.name, id: a.id, invertedchance: a.invertedchance, excav: a.excav, fixed: a.fixed, random: a.random, fail: a.fail,
-        notry: a.notry, required: a.required, display: a.display, nocache: a.nocache, precheck: a.precheck, reincarnation: a.reincarnation};
+        notry: a.notry, required: a.required, display: a.display, nocache: a.nocache, precheck: a.precheck, reincarnation: a.reincarnation,
+        guess: a.guess};
     }
     function an(a) { return nm(zh(a.name)); }
 
@@ -598,7 +603,8 @@
           if (rawn < limit) { rawn++; if (val < vlim) smalls.push({x: rawn, y: val}); }
           if (un[a.id]) continue;
           var rnd = a.nocache ? a.random(save, excav) : a.random;
-          if (val < rnd) { ex.push(['find', a]); a.finished = true; remaining--; }
+          // guess：概率用了存档里没有的数值（arch_fixes.js），不下「获得」结论，只报需要达到的数值
+          if (val < rnd && !a.guess) { ex.push(['find', a]); a.finished = true; remaining--; }
           else if (a.required && !a.nocache) {
             var req = a.required(val, save, excav);
             if (req !== Infinity && req >= 0 && (a.lastreq == null || (a.invertedchance ? req > a.lastreq : req < a.lastreq))) {
@@ -636,6 +642,8 @@
         return '<li>第 ' + ex[0] + ' 次考古（再挖 ' + ex[1] + ' 次）：' + evs.join('；') + '</li>';
       }).join('');
       var j = function (a) { return a.length ? a.join('、') : '无'; };
+      $('sv-aguess').innerHTML = '有些遗物的条件用到存档里没有的数据，只给出需要达到的数值（「可以获得（需要…）」），不判断能不能拿到，要自己和游戏里的数值对比：' +
+        Artifacts.filter(function (a) { return a.guess; }).map(an).join('、') + '。';
       $('sv-aout').innerHTML =
         '<table class="sv-tb sv-kv">' +
         '<tr><th>遗物随机数状态</th><td>' + save.artifactRngState + '</td></tr>' +

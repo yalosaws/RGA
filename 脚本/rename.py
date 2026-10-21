@@ -23,6 +23,8 @@ import 译名 as cfg
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CJK = re.compile(r'[一-鿿]')
+# 「英文+中文」单行格里，中文部分出现这些字眼就是说明文字
+DESC = re.compile(r'\d|达到|增加|提升|降低|减少|次数|图标|等级|根据|可以|持续|触发|成本|范围|时间|数量|获得|使用')
 EN_RUN = re.compile(r"[A-Za-z][A-Za-z'’\- ]*[A-Za-z]|[A-Za-z]")
 
 
@@ -173,7 +175,8 @@ def transform_lines(lines):
     # 「English Name中文名」（无换行）
     if not out and len(lines) == 1:
         m = re.match(r"^([A-Za-z][A-Za-z0-9 '’\-,.!&:]+?)([一-鿿].*)$", lines[0])
-        if m:
+        # 「Temporal Flux可以根据……」「Hellfire Blast新图标」是说明不是名字，不能把后半句换成译名
+        if m and not DESC.search(re.split(r'[（(]', m.group(2))[0]):
             g = lookup_name(m.group(1))
             n = name_part(m.group(2), g, digits=True) if g else None
             if n:

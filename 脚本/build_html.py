@@ -34,9 +34,19 @@ ALIAS = {'TC': '征税', 'CtA': '动员令', 'HoL': '传说圣殿', 'BF': '嗜�
 # 遗物表里阵营遗物按全阶英豪奖杯的顺序排，每个阵营两个
 ART_FACTIONS = ['仙灵', '精灵', '天使', '地精', '亡灵', '恶魔', '泰坦', '德鲁伊', '无面者', '矮人', '卓尔', '佣兵']
 # 程序版本：改了功能就加版本号，在 CHANGES 最前面写这一版改了什么
-VERSION = '0.3.6'  # 还没到正式发布，用 0.x（用户要求）
+VERSION = '0.3.7'  # 还没到正式发布，用 0.x（用户要求）
 AUTHOR = 'Yalosaws'
 CHANGES = [
+    ('0.3.7', '2026-10-22', [
+        '资料表恢复 21 处被译名处理吞掉的说明（时流涌动、几项研究的解锁条件、活动的等级要求和新图标奖励等）',
+        '遗物：补上灼痕拉之面具；日曜之力 12:00～17:59 一档改为提升产能；胡须毛发等三个显赫遗物改为 R110，矮人铁砧等三个改为 R235；粗糙石头对应的研究代号改为 D270',
+        '研究页、挑战页顶部加上适用说明；受雇佣兵的前置改为 S2900；隐藏奖杯的收集进度不再计入已改成阵营 / 法术奖杯的 5 项',
+        'A0 攻略：A480 改为 A450；占卜机器要在不加入任何阵营时才能挖到',
+        '遗物预测：修正法力织机、工厂、战场、固态云算不出概率的问题，以及第二 / 第三晶片、第二石片、毒药瓶、第三铁片的概率和 8 个遗物的最低 R',
+        '遗物预测：神话按用得最多的法术计算，被遗忘的遗物按新研究代号算已花研究点数，噩梦残片用新的脑波起步时间',
+        '遗物预测：用到存档里没有的数值的 14 个遗物只显示需要达到的数值，不再直接显示「获得」',
+        '有限祈愿预报：恒常混沌起步改为 500 次，加成按 4.3 的产能 / 非产能公式估算',
+    ]),
     ('0.3.6', '2026-10-21', [
         '去掉攻略中已解锁链接前的小色块，仅保留灰色文字和点击跳转',
     ]),
@@ -181,14 +191,18 @@ CL_JS = """<script>(function(){
     }, true);
     window.addEventListener(root.dataset.ev, function(e){
       owned = e.detail;
-      var set = {}, n = 0;
+      var set = {}, n = 0, total = 0;
       (owned || []).forEach(function(k){ set[k] = 1; });
-      cards.forEach(function(c){ var y = !!owned && c.dataset.en.split(' ').some(function(k){ return set[k]; }); c.classList.toggle('own', y); if (y) n++; });
+      cards.forEach(function(c){
+        var y = !!owned && c.dataset.en.split(' ').some(function(k){ return set[k]; });
+        c.classList.toggle('own', y);
+        if (!c.dataset.skip) { total++; if (y) n++; }  // data-skip：列着但不算进进度
+      });
       root.classList.toggle('has-own', !!owned);
       bar.hidden = !owned;
       var b = seg.querySelectorAll('b');
-      b[0].textContent = cards.length; b[1].textContent = n; b[2].textContent = cards.length - n;
-      root.querySelector('.own-prog i').style.width = (n / cards.length * 100) + '%';
+      b[0].textContent = total; b[1].textContent = n; b[2].textContent = total - n;
+      root.querySelector('.own-prog i').style.width = (n / total * 100) + '%';
       if (!owned) sel = '';
       run();
     });
@@ -285,32 +299,31 @@ def card(cid, en, img_cell, imgs, zh, en_show, badge, fields, note='', group='',
         '<span class="note">%s</span>' % html.escape(note) if note else '', ' '.join(['1fr'] * (len(fields) - 1) + ['1.3fr']), body)
 
 
-def card_list(ev, placeholder, items, got='获得'):
+def card_list(ev, placeholder, items, got='获得', note=''):
     return ('<div class="cl" data-ev="%s"><div class="cl-top">'
             '<div class="own-bar" hidden><div class="own-seg"><button class="on" data-o="">全部<b></b></button>'
             '<button data-o="1">已%s<b></b></button><button data-o="0">未%s<b></b></button></div>'
             '<div class="own-prog"><i></i></div></div><input class="cl-q" type="search" placeholder="%s"></div>'
-            '<div class="art-list">%s</div></div>' % (ev, got, got, placeholder, ''.join(items)))
+            '%s<div class="art-list">%s</div></div>' % (ev, got, got, placeholder,
+                                                        '<p class="cl-note">%s</p>' % TERMS.render(note) if note else '', ''.join(items)))
 
 
 def build_artifacts(ws, imgs):
     """遗物表 → 卡片：图标 + 名字 + 发掘条件 / 概率 / 用途。卡片 id 就是原名称格（t10-B行号），攻略、存档页的链接照旧能跳过来。"""
     val = merged_value(ws)
-    items, last = [], None
+    groups = {}  # 同一类的遗物放在一起（表末尾补的探索遗物归到前面的探索遗物里）
     for r in range(2, ws.max_row + 1):
         name = val(r, 2)
         if not name:
             continue
         kzh, ken = split_name(val(r, 1))
-        if kzh != last:
-            last = kzh
-            items.append('<h2 class="art-g" data-g="%s">%s <span>%s</span></h2>' % (html.escape(kzh), html.escape(kzh), html.escape(ken)))
+        g = groups.setdefault(kzh, ['<h2 class="art-g" data-g="%s">%s <span>%s</span></h2>' % (html.escape(kzh), html.escape(kzh), html.escape(ken))])
         zh, en = split_name(name)
         cond, rate, use = val(r, 4), val(r, 5), val(r, 6)
         rq = re.search(r'R(\d+)\+', cond)
         badge = ('<em>R%s+</em>' % rq.group(1) if rq else '') + ('<em class="sure">必出</em>' if '必出' in rate else '')
-        items.append(card('t10-B%d' % r, en, val(r, 3), imgs, zh, en, badge, [('发掘条件', cond), ('概率', rate), ('用途', use)], group=kzh, kind='遗'))
-    return card_list('artowned', '搜索名字、条件或用途', items)
+        g.append(card('t10-B%d' % r, en, val(r, 3), imgs, zh, en, badge, [('发掘条件', cond), ('概率', rate), ('用途', use)], group=kzh, kind='遗'))
+    return card_list('artowned', '搜索名字、条件或用途', [x for g in groups.values() for x in g])
 
 
 # 隐藏奖杯表的行底色 → 最低进度（表头 A1:C2 的图例）
@@ -322,7 +335,7 @@ TROPHY_ALIAS = {'madmask': 'madmasks', 'godsfinger': 'godsfingers'}
 def build_trophies(ws, imgs):
     """隐藏奖杯表 → 卡片：图标 + 名字 + 目标 / 加成；行底色表示的最低进度做成标记。卡片 id 是原名称格（t7-A行号）。"""
     val = merged_value(ws)
-    items = []
+    items, moved = [], 0
     for r in range(5, ws.max_row + 1):
         name = val(r, 1)
         if not name:
@@ -337,9 +350,14 @@ def build_trophies(ws, imgs):
         color = (f.fgColor.rgb if f.fgColor.type == 'rgb' else f.fgColor.theme) if f is not None and f.fill_type == 'solid' else None
         tier = TROPHY_TIER.get(color, '')
         badge = '<em>%s</em>' % tier if tier else ''
-        items.append(card('t7-A%d' % r, en, val(r, 2), imgs, zh, '' if zh == en else en, badge, [('目标', val(r, 3)), ('加成', val(r, 4))], note,
-                          alias=TROPHY_ALIAS.get(re.sub(r'[^a-z0-9]', '', en.lower()), ''), kind='隐'))
-    return card_list('trophyowned', '搜索名字、目标或加成', items)
+        c = card('t7-A%d' % r, en, val(r, 2), imgs, zh, '' if zh == en else en, badge, [('目标', val(r, 3)), ('加成', val(r, 4))], note,
+                 alias=TROPHY_ALIAS.get(re.sub(r'[^a-z0-9]', '', en.lower()), ''), kind='隐')
+        if re.search(r'改为(阵营|法术)奖杯', note):  # 4.3 起已不是隐藏奖杯：照样列出，不算进收集进度
+            c = c.replace('<div class="art', '<div data-skip="1" class="art', 1)
+            moved += 1
+        items.append(c)
+    return card_list('trophyowned', '搜索名字、目标或加成', items,
+                     note='标着「4.3起改为阵营奖杯 / 法术奖杯」的 %d 项现在已不算隐藏奖杯，不计入收集进度。' % moved if moved else '')
 
 
 def strip_label(v, label):
@@ -382,7 +400,8 @@ def build_challenges(ws):
             items.append(card(cid, en, None, None, zh, en, badge,
                               [('条件', cond), ('目标', strip_label(val(r + 3, c), '目标')), ('效果', strip_label(val(r + 4, c), '效果'))],
                               note='生效组合：' + combo if combo else '', group=fzh, kind='挑'))
-    return card_list('challengeowned', '搜索名字、条件、目标或效果', items, '完成')
+    m = re.search(r'[（(](.+)[）)]', val(1, 9))  # 「法术强化效果（4.3起挑战效果均不受Ascension产能惩罚）」
+    return card_list('challengeowned', '搜索名字、条件、目标或效果', items, '完成', note=m.group(1) + '。' if m else '')
 
 
 def build_research(ws):
@@ -423,7 +442,8 @@ def build_research(ws):
                                           kind='研')))
         items.append('<h2 class="art-g" data-g="%s">%s <span>%s</span></h2>' % (html.escape(bzh), html.escape(bzh), html.escape(ben)))
         items += [x[2] for x in sorted(cards)]
-    return card_list('researchowned', '搜索名字、代号或效果', items, '解锁')
+    note = re.sub(r'^说明[（(][^）)]*[）)][：:]\s*', '', val(40, 1))  # A40 的总说明（A3 起移除低点数研究等）
+    return card_list('researchowned', '搜索名字、代号或效果', items, '解锁', note=note)
 
 
 def build_buildings(ws):
@@ -834,6 +854,7 @@ td.flash{outline:3px solid #f59e0b;outline-offset:-2px;background:var(--flash)!i
 .art-f small{display:block;font-size:11.5px;color:#9aa5b8}
 .art-f .nil{color:#c9d1dd}
 .art-f .t-ch{white-space:nowrap}
+.cl-note{margin:12px 2px 0;padding:9px 14px;border-radius:14px;background:var(--soft);font-size:13px;color:#526079;line-height:1.7}
 .art.flash{background:var(--flash);border-color:#f59e0b}
 /* 挑战、研究：没有图标的卡片 */
 .art.noimg{padding:12px 16px}

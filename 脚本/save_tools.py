@@ -209,6 +209,8 @@ def build(find, cell_code):
         if p.endswith('artifacts.js'):
             s = T.patch_artifacts(s, translate)
         libs.append('/* ---- RG-tools/%s ---- */\n%s' % (p, s))
+    # 对社区库的修正（公式、最低 R、研究预算等），见 arch_fixes.js 开头
+    libs.append(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'arch_fixes.js'), encoding='utf-8').read())
     js = ('var jQuery = window.jQuery || null;\n' + '\n'.join(libs) +
           '\nvar SAVE_DATA = %s;\n' % json.dumps(data, ensure_ascii=False) +
           open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'save_tools.js'), encoding='utf-8').read())
