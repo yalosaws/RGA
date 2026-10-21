@@ -16,7 +16,6 @@
   var sections = Array.from(document.querySelectorAll('#sec-r0, #sec-a0'));
   var buttons = [], entries = [], known = new Set(), hasSave = false, enabled = false;
   try { enabled = localStorage.getItem('rg-guide-gray') === '1'; } catch (e) {}
-  var tracked = {rs:'t5', ch:'t3', ar:'t10', ht:'t7', tr:'t7'};
   sections.forEach(function(sec){
     var legend = sec.querySelector('.legend');
     if (!legend) return;
@@ -59,7 +58,8 @@
     });
     entries.forEach(function(item){
       var target = document.getElementById(item.target);
-      var fromCard = tracked[item.kind] && item.target.indexOf(tracked[item.kind] + '-') === 0 && target && target.classList.contains('own');
+      // 链接指向的资料卡片已标成已获得 / 已解锁（例如写成「升」的隐藏奖杯升级），也算已解锁
+      var fromCard = target && target.classList.contains('own') && /^t(3|5|7|10)-/.test(item.target);
       var unlocked = known.has(item.kind + ':' + item.name) || known.has(item.kind + '@' + item.target) || fromCard;
       item.link.classList.toggle('guide-unlocked', !!unlocked);
     });

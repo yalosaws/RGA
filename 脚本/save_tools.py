@@ -197,6 +197,8 @@ def build(find, cell_code):
         'up': {i: find('升', v) for i, v in uname.items()},
         'tr': {i: find('奖', v) for i, v in tname.items()},
         'ht': {i: find('隐', v) for i, v in tname.items()},
+        # 法术奖杯（阵营表 AG / AK 列）拿到后对应的法术升级就解锁了：奖杯 id → 攻略里「升」的链接目标
+        'spt': {i: t for i, t in ((i, find('升', v)) for i, v in tname.items()) if t and re.fullmatch(r't1-A[GK]\d+', t)},
         'rs': {i: find('研', info['code']) for i, info in research.items()},
         'names': {kind: {v: find(tag, v) for v in set(zh.values()) if v}
                   for kind, tag in [('fa', '阵'), ('sp', '法'), ('bd', '建')]},

@@ -156,14 +156,23 @@
       Object.keys(s.trophies).forEach(function(id){
         if (!s.trophies[id]) return;
         ['tr', 'ht'].forEach(function(kind){ add(kind, D.tname[id], (targets[kind] || {})[id]); });
+        if ((targets.spt || {})[id]) add('up', D.tname[id], targets.spt[id]);  // 法术奖杯 = 解锁了法术升级
       });
+      var facOn = {};  // 已解锁的阵营（英文名）
       util.assoc.faction.forEach(function(f){
         if (f.id < 0) return;
         var stat = (s.stats || [])[f.timestat], seen = stat && (stat.stats > 0 || stat.statsReset > 0 || stat.statsRei > 0);
-        if ([s.faction, s.prestigeFaction, s.elitePrestigeFaction].indexOf(f.id) >= 0 || seen) named('fa', f.name);
+        if ([s.faction, s.prestigeFaction, s.elitePrestigeFaction].indexOf(f.id) >= 0 || seen) { named('fa', f.name); facOn[f.name] = 1; }
       });
       D.tabs.forEach(function(t){ t.rows.forEach(function(r){
-        if (r.w === 'faction-upgrade' && Object.keys(r).some(function(k){ return /_id$/.test(k) && s.upgrades[r[k]]; })) named('fa', r.name);
+        if (r.w !== 'faction-upgrade') return;
+        var fname = r.name === 'Dwarf' ? 'Dwarven' : r.name;  // 编辑器里矮人行叫 Dwarf
+        if (Object.keys(r).some(function(k){ return /_id$/.test(k) && s.upgrades[r[k]]; })) { named('fa', r.name); facOn[fname] = 1; }
+        // 阵营升级 1–9 只花金币，阵营解锁了就算解锁；10–12（联盟）、遗产、高级遗产另有条件，仍按存档记录
+        if (facOn[fname]) ['b1','b2','b3','s1','s2','s3','g1','g2','g3'].forEach(function(k){
+          var id = r[k + '_id'];
+          if (id != null) add('up', D.uname[id], (targets.up || {})[id]);
+        });
       }); });
       util.assoc.spells.forEach(function(spell){
         var p = (s.spells || {})[spell.id];
