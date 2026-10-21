@@ -1,12 +1,14 @@
 <style>
+.guide a[class^="t-"]{transition:color .45s ease}
 .guide.guide-gray a.guide-unlocked{color:#939dad}
-.legend .guide-gray-toggle{display:inline-flex;align-items:center;gap:6px;border:0;border-left:1px solid #cbd5e1;border-radius:0;margin:0 0 0 6px;padding:2px 0 2px 12px;background:transparent;color:#7b879b;font:inherit;font-weight:500;white-space:nowrap;cursor:pointer;vertical-align:baseline}
-.legend .guide-gray-toggle::before{content:'';width:10px;height:10px;border-radius:3px;background:#939dad}
-.legend .guide-gray-toggle i{position:relative;display:inline-block;width:25px;height:15px;border-radius:999px;background:#bdc8d8;transition:background .15s}
-.legend .guide-gray-toggle i::after{content:'';position:absolute;top:2px;left:2px;width:11px;height:11px;border-radius:50%;background:#fff;transition:transform .15s}
-.legend .guide-gray-toggle[aria-checked=true] i{background:#2563eb}
-.legend .guide-gray-toggle[aria-checked=true] i::after{transform:translateX(10px)}
-.legend .guide-gray-toggle:focus-visible{outline:2px solid #2563eb;outline-offset:3px;border-radius:4px}
+/* 图例末尾的「已解锁」：和图例里的类别一样是小胶囊，点一下选中，选中时底色变灰 */
+.legend .guide-gray-toggle{display:inline-block;margin:0 1px;padding:1px 7px;border:0;border-radius:999px;background:transparent;
+  color:#7b879b;font:inherit;font-weight:600;white-space:nowrap;cursor:pointer;vertical-align:baseline;transition:background .2s,color .2s}
+.legend .guide-gray-toggle:hover{background:rgba(100,116,139,.1)}
+.legend .guide-gray-toggle[aria-checked=true]{background:rgba(100,116,139,.2);color:#475569}
+.legend .guide-gray-toggle.pop{animation:gp-pop .3s ease}
+@keyframes gp-pop{40%{transform:scale(.9)}100%{transform:scale(1)}}
+.legend .guide-gray-toggle:focus-visible{outline:2px solid #2563eb;outline-offset:2px}
 </style>
 <script>
 (function(){
@@ -22,12 +24,13 @@
     button.setAttribute('role', 'switch');
     button.setAttribute('aria-label', '将已解锁内容显示为灰色超链接');
     button.title = '根据存档标记已解锁内容，链接仍可点击';
-    button.appendChild(document.createTextNode('已解锁变灰'));
-    var knob = document.createElement('i'); knob.setAttribute('aria-hidden', 'true'); button.appendChild(knob);
+    button.appendChild(document.createTextNode('已解锁'));
     legend.appendChild(button); buttons.push(button);
     button.addEventListener('click', function(){
       enabled = !enabled;
       try { localStorage.setItem('rg-guide-gray', enabled ? '1' : '0'); } catch (e) {}
+      button.classList.remove('pop'); void button.offsetWidth; button.classList.add('pop');
+      sweep();
       paint();
     });
     sec.querySelectorAll('a[class^="t-"]').forEach(function(link){
@@ -36,6 +39,17 @@
       entries.push({link:link, kind:kind, name:name, target:target});
     });
   });
+  // 点「已解锁」时链接从上到下依次变色：按链接在屏幕上的位置错开过渡开始的时间
+  var sweepTimer = 0;
+  function sweep(){
+    var h = window.innerHeight || 800;
+    entries.forEach(function(item){
+      var top = item.link.getBoundingClientRect().top;
+      item.link.style.transitionDelay = Math.round(Math.max(0, Math.min(1, top / h)) * 500) + 'ms';
+    });
+    clearTimeout(sweepTimer);
+    sweepTimer = setTimeout(function(){ entries.forEach(function(item){ item.link.style.transitionDelay = ''; }); }, 1100);
+  }
   function paint(){
     sections.forEach(function(sec){ sec.classList.toggle('guide-gray', enabled); });
     buttons.forEach(function(button){

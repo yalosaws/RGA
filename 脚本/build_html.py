@@ -34,9 +34,13 @@ ALIAS = {'TC': '征税', 'CtA': '动员令', 'HoL': '传说圣殿', 'BF': '嗜�
 # 遗物表里阵营遗物按全阶英豪奖杯的顺序排，每个阵营两个
 ART_FACTIONS = ['仙灵', '精灵', '天使', '地精', '亡灵', '恶魔', '泰坦', '德鲁伊', '无面者', '矮人', '卓尔', '佣兵']
 # 程序版本：改了功能就加版本号，在 CHANGES 最前面写这一版改了什么
-VERSION = '0.3.7'  # 还没到正式发布，用 0.x（用户要求）
+VERSION = '0.3.8'  # 还没到正式发布，用 0.x（用户要求）
 AUTHOR = 'Yalosaws'
 CHANGES = [
+    ('0.3.8', '2026-10-22', [
+        '隐藏奖杯页去掉 4.3 起改成阵营奖杯 / 法术奖杯的 5 项（驯龙高手、系谱学家、墨翎之艺、精英面具、神圣狂热）',
+        '攻略图例的「已解锁变灰」开关改成「已解锁」小胶囊：去掉开关和分隔线，点一下选中，已解锁的链接从上到下依次变灰',
+    ]),
     ('0.3.7', '2026-10-22', [
         '资料表恢复 21 处被译名处理吞掉的说明（时流涌动、几项研究的解锁条件、活动的等级要求和新图标奖励等）',
         '遗物：补上灼痕拉之面具；日曜之力 12:00～17:59 一档改为提升产能；胡须毛发等三个显赫遗物改为 R110，矮人铁砧等三个改为 R235；粗糙石头对应的研究代号改为 D270',
@@ -196,7 +200,7 @@ CL_JS = """<script>(function(){
       cards.forEach(function(c){
         var y = !!owned && c.dataset.en.split(' ').some(function(k){ return set[k]; });
         c.classList.toggle('own', y);
-        if (!c.dataset.skip) { total++; if (y) n++; }  // data-skip：列着但不算进进度
+        total++; if (y) n++;
       });
       root.classList.toggle('has-own', !!owned);
       bar.hidden = !owned;
@@ -335,7 +339,7 @@ TROPHY_ALIAS = {'madmask': 'madmasks', 'godsfinger': 'godsfingers'}
 def build_trophies(ws, imgs):
     """隐藏奖杯表 → 卡片：图标 + 名字 + 目标 / 加成；行底色表示的最低进度做成标记。卡片 id 是原名称格（t7-A行号）。"""
     val = merged_value(ws)
-    items, moved = [], 0
+    items = []
     for r in range(5, ws.max_row + 1):
         name = val(r, 1)
         if not name:
@@ -346,18 +350,16 @@ def build_trophies(ws, imgs):
         if m:  # 「遁世征服（口袋妖怪的梗……）」：括注放到名字后面的小字
             zh, note = m.group(1), (m.group(2) + ' ' + note).strip()
         zh = zh or en
+        if re.search(r'改为(阵营|法术)(奖杯|成就)', note):  # 4.3 起已不是隐藏奖杯，不列出
+            continue
         f = ws.cell(r, 1).fill
         color = (f.fgColor.rgb if f.fgColor.type == 'rgb' else f.fgColor.theme) if f is not None and f.fill_type == 'solid' else None
         tier = TROPHY_TIER.get(color, '')
         badge = '<em>%s</em>' % tier if tier else ''
         c = card('t7-A%d' % r, en, val(r, 2), imgs, zh, '' if zh == en else en, badge, [('目标', val(r, 3)), ('加成', val(r, 4))], note,
                  alias=TROPHY_ALIAS.get(re.sub(r'[^a-z0-9]', '', en.lower()), ''), kind='隐')
-        if re.search(r'改为(阵营|法术)奖杯', note):  # 4.3 起已不是隐藏奖杯：照样列出，不算进收集进度
-            c = c.replace('<div class="art', '<div data-skip="1" class="art', 1)
-            moved += 1
         items.append(c)
-    return card_list('trophyowned', '搜索名字、目标或加成', items,
-                     note='标着「4.3起改为阵营奖杯 / 法术奖杯」的 %d 项现在已不算隐藏奖杯，不计入收集进度。' % moved if moved else '')
+    return card_list('trophyowned', '搜索名字、目标或加成', items)
 
 
 def strip_label(v, label):
