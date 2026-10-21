@@ -34,11 +34,33 @@ ALIAS = {'TC': '征税', 'CtA': '动员令', 'HoL': '传说圣殿', 'BF': '嗜�
 # 遗物表里阵营遗物按全阶英豪奖杯的顺序排，每个阵营两个
 ART_FACTIONS = ['仙灵', '精灵', '天使', '地精', '亡灵', '恶魔', '泰坦', '德鲁伊', '无面者', '矮人', '卓尔', '佣兵']
 # 程序版本：改了功能就加版本号，在 CHANGES 最前面写这一版改了什么
-VERSION = '0.3.1'  # 还没到正式发布，用 0.x（用户要求）
+VERSION = '0.3.6'  # 还没到正式发布，用 0.x（用户要求）
 AUTHOR = 'Yalosaws'
 CHANGES = [
-    ('0.3.1', '2026-10-20', [
+    ('0.3.6', '2026-10-21', [
+        '去掉攻略中已解锁链接前的小色块，仅保留灰色文字和点击跳转',
+    ]),
+    ('0.3.5', '2026-10-21', [
+        '两篇攻略的颜色图例末尾新增「已解锁变灰」开关，设置同步并保存在本机',
+        '开启后已解锁的链接显示灰色，保留类别颜色块，仍可点击查看资料',
+    ]),
+    ('0.3.4', '2026-10-21', [
+        '研究资料页改为跟踪已解锁状态，已解锁但未购买的研究也计入进度和筛选',
+        '研究进度按当前版本代号匹配，修复部分改号研究无法标记的问题',
+    ]),
+    ('0.3.3', '2026-10-21', [
+        '新增自动点击工具：默认 F8 全局启停，可设置快捷键、组合键和点击间隔',
+        '连点设置保存在本机；只在游戏前台且鼠标位于游戏内时点击，关闭程序自动停止',
+    ]),
+    ('0.3.2', '2026-10-21', [
+        '两篇攻略分别记住上次阅读的位置，切换页面或重新打开程序后自动恢复',
+    ]),
+    ('0.3.1', '2026-10-21', [
         '挑战页的「法术强化」标签改用紫色',
+        '挑战卡片的条件说明去掉重复的重生要求，保留顶部 R 标签',
+        '「亡灵挑战1」等引用整体按挑战着色并链接，名称和编号保持在一起',
+        '「仙灵和亡灵挑战1」等共用编号的引用展开为各自的挑战链接',
+        '挑战页阵营标题去掉立场文字',
     ]),
     ('0.3.0', '2026-10-20', [
         '内测版正式发布',
@@ -199,7 +221,7 @@ class Terms:
     ORDER = '阵法遗隐挑研建升奖'  # 同名时优先的类别
 
     def __init__(self):
-        self.names, self.codes, self.rx = {}, {}, None
+        self.names, self.codes, self.rx, self.challenge_rx = {}, {}, None, None
 
     def add(self, kind, name, target, short=False):
         name = name.strip()
@@ -212,9 +234,24 @@ class Terms:
     def ready(self):
         alts = sorted(self.names, key=len, reverse=True)
         self.rx = re.compile('(%s)|(?<![A-Za-z0-9])([A-Z]{1,2}C?\\d+)(?![A-Za-z0-9])' % '|'.join(map(re.escape, alts)))
+        factions = {m.group(1) for name, (kind, _) in self.names.items()
+                    if kind == '挑' and (m := re.fullmatch(r'(.+)挑战\s*\d+', name))}
+        if factions:
+            faction = '(?:%s)' % '|'.join(map(re.escape, sorted(factions, key=len, reverse=True)))
+            self.challenge_rx = re.compile(r'(%s(?:\s*[、和及与]\s*%s)+)\s*挑战\s*(\d+)' % (faction, faction))
 
     def render(self, text, self_id=''):
         """纯文本 → 染好色的 HTML（换行变 <br>）；指向卡片自己的专名不加链接"""
+        def expand_challenges(m):
+            parts = re.split(r'(\s*[、和及与]\s*)', m.group(1))
+            names = [name + '挑战' + m.group(2) for name in parts[::2]]
+            if not all(self.names.get(name, (None,))[0] == '挑' for name in names):
+                return m.group(0)
+            parts[::2] = names
+            return ''.join(parts)
+
+        if self.challenge_rx:
+            text = self.challenge_rx.sub(expand_challenges, text)
         out, last = [], 0
         for m in self.rx.finditer(text) if self.rx else ():
             kind, target = self.names[m.group(1)] if m.group(1) else self.codes.get(m.group(2), (None, None))
@@ -320,25 +357,29 @@ def build_challenges(ws):
         if not fac or not val(r, 3):
             continue
         fzh, fen = (SPLIT.split(fac) + [''])[:2]
-        align = SPLIT.split(val(r, 1))[0] if val(r, 2) else ''
         sp = val(r, 9)
         sp_html = ''
         if sp:
             szh, sen = split_name(sp)
             sp_html = ('<div class="ch-sp" id="t3-I%d"><em>法术强化</em><b>%s</b><span class="en">%s</span><p>%s</p></div>' % (
                 r, html.escape(szh), html.escape(sen), TERMS.render(val(r + 2, 9))))
-        items.append('<div class="art-g ch-g" id="t3-%s%d" data-g="%s"><h2>%s <span>%s%s</span></h2>%s</div>' % (
-            'B' if val(r, 2) else 'A', r, html.escape(fzh), html.escape(fzh), html.escape(fen), ' · ' + html.escape(align) if align else '', sp_html))
+        items.append('<div class="art-g ch-g" id="t3-%s%d" data-g="%s"><h2>%s <span>%s</span></h2>%s</div>' % (
+            'B' if val(r, 2) else 'A', r, html.escape(fzh), html.escape(fzh), html.escape(fen), sp_html))
         for k in range(6):
             c = 3 + k
             if (r, c) in val.covered or not ws.cell(r, c).value:
                 continue
             zh, en = split_name(val(r, c))
+            cid = 't3-%s%d' % (get_column_letter(c), r)
+            for label in ('%s挑战%d', '%s挑战 %d'):
+                TERMS.add('挑', label % (fzh, k + 1), cid)
             cond = strip_label(val(r + 2, c), '条件')
             rq = re.match(r'R(\d+)', cond)
             badge = '<em class="no">挑战 %d</em>' % (k + 1) + ('<em>R%s</em>' % rq.group(1) if rq else '')
+            if rq:
+                cond = cond[rq.end():].lstrip('，, \t\r\n')
             combo = strip_label(val(r + 1, c), '生效组合')
-            items.append(card('t3-%s%d' % (get_column_letter(c), r), en, None, None, zh, en, badge,
+            items.append(card(cid, en, None, None, zh, en, badge,
                               [('条件', cond), ('目标', strip_label(val(r + 3, c), '目标')), ('效果', strip_label(val(r + 4, c), '效果'))],
                               note='生效组合：' + combo if combo else '', group=fzh, kind='挑'))
     return card_list('challengeowned', '搜索名字、条件、目标或效果', items, '完成')
@@ -377,10 +418,9 @@ def build_research(ws):
             badge = '<em class="no">%s</em><em>R%s</em>' % (html.escape(code), html.escape(rr)) + (
                 '<em class="fac">%s</em>' % html.escape(fac) if fac else '')
             cid = 't5-%s%d' % (get_column_letter(c), r)
-            old = re.search(r'原([SCDEAWF]\d+)', note)  # 存档编辑器里还是旧代号
             cards.append((sort_r, c, card(cid, code, None, None, zh, en, badge,
                                           [('解锁条件', val(r + 3, c)), ('效果', val(r + 4, c))], note=note, group=bzh,
-                                          alias=old.group(1).lower() if old else '', kind='研')))
+                                          kind='研')))
         items.append('<h2 class="art-g" data-g="%s">%s <span>%s</span></h2>' % (html.escape(bzh), html.escape(bzh), html.escape(ben)))
         items += [x[2] for x in sorted(cards)]
     return card_list('researchowned', '搜索名字、代号或效果', items, '解锁')
@@ -635,6 +675,7 @@ def main():
     body = ''.join('<section id="sec-%s" class="guide" hidden>%s</section>' % (g, guides[g]) for g, _, _ in GUIDES)
     body += ''.join('<section id="sec-t%d" class="table" hidden>%s</section>' % (n, sections[n]) for n in sections)
     body += CL_JS  # 卡片列表（遗物、隐藏奖杯）的搜索和已获得切换
+    body += open(os.path.join(ROOT, '脚本', 'guide_progress.html'), encoding='utf-8').read()
     # 攻略图例离开原位、浮在内容上面时加阴影
     body += """<script>document.querySelectorAll('.guide .legend').forEach(function(el){
   var home = document.createElement('div'); el.parentNode.insertBefore(home, el);
@@ -656,10 +697,13 @@ def main():
     save_js, save_miss = '', []
     if os.path.isdir(save_tools.RG):
         save_html, save_js, save_miss = save_tools.build(find, {'t%d-%s' % c: code for code, c in research.items()})
-        nav = '<div class="grp">工具</div>' + item('save', '我的存档') + nav  # 工具放最上面；法术预报、遗物预测在存档页里切换
+        nav = item('save', '我的存档') + nav  # 法术预报、遗物预测在存档页里切换
         body += save_html
     else:
         print('没有 工具/RG-tools，跳过「我的存档」（git clone https://github.com/shadowgull/dox4242.github.io 工具/RG-tools）')
+    nav = ('<div class="grp">工具</div>' + nav).replace('<div class="grp">攻略</div>',
+            item('click', '自动点击') + '<div class="grp">攻略</div>', 1)
+    body += open(os.path.join(ROOT, '脚本', 'auto_click.html'), encoding='utf-8').read()
     nav += '<div class="grp">关于</div>' + item('ver', '版本 ' + VERSION)
     body += version_page()
     page = TEMPLATE.replace('%%NAV%%', nav).replace('%%BODY%%', body).replace('%%TCOLORS%%', md2html.CSS[md2html.CSS.index('.t-fa'):md2html.CSS.index('[class^')])
@@ -731,7 +775,7 @@ main>section:not([hidden]),#sv-view:not([hidden]),#sv-rws:not([hidden]),#sv-arch
 #res{position:fixed;left:264px;top:16px;width:min(480px,calc(100vw - 290px));max-height:75vh;overflow:auto;background:#fff;border-radius:16px;box-shadow:0 12px 40px rgba(20,40,90,.16);z-index:6}
 #res a{display:block;padding:8px 14px;border-bottom:1px solid var(--line);color:var(--fg);text-decoration:none;font-size:13px}
 #res a:hover{background:var(--soft)} #res small{color:var(--muted);margin-right:6px}
-main{margin-left:264px;padding:16px 24px 80px 16px}
+main{margin-left:264px;padding:16px 24px 80px 16px;overflow-anchor:none}
 main>section{background:var(--card);border-radius:20px;box-shadow:var(--shadow);padding:24px 30px}
 section.guide{max-width:960px;margin:0 auto}
 .guide h1{font-size:26px;margin:4px 0 12px}
@@ -789,6 +833,7 @@ td.flash{outline:3px solid #f59e0b;outline-offset:-2px;background:var(--flash)!i
 .art-f{display:grid;grid-template-columns:1fr 1fr 1.3fr;gap:6px 18px;font-size:13.5px;color:#3d4a5f}
 .art-f small{display:block;font-size:11.5px;color:#9aa5b8}
 .art-f .nil{color:#c9d1dd}
+.art-f .t-ch{white-space:nowrap}
 .art.flash{background:var(--flash);border-color:#f59e0b}
 /* 挑战、研究：没有图标的卡片 */
 .art.noimg{padding:12px 16px}
@@ -878,11 +923,31 @@ html.app.max .grip{display:none}
 <script>
 (function(){
   var secs = document.querySelectorAll('main > section'), navs = document.querySelectorAll('nav a'), back = document.getElementById('back');
-  // 每个页面各自记住滚动位置：从表格返回攻略时回到原来读的地方
-  var cur = null, pos = {}, fromLink = false;
+  // 每页独立记位置；两篇攻略还要保存到本机，关掉程序后也能接着读。
+  var cur = null, pos = {}, fromLink = false, restoring = false, frame = 0;
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  var guideIds = ['r0', 'a0'];
+  try {
+    var saved = JSON.parse(localStorage.getItem('rg-guide-pos') || '{}');
+    guideIds.forEach(function(id){
+      if (saved && typeof saved[id] === 'number' && Number.isFinite(saved[id]) && saved[id] >= 0) pos[id] = saved[id];
+    });
+  } catch (e) {}
   // 网页里滚动的是整页，程序里（html.app）滚动的是 main
   window.rgScroller = function(){ return document.documentElement.classList.contains('app') ? document.querySelector('main') : document.scrollingElement; };
+  function remember(){
+    if (!cur || restoring) return;
+    pos[cur] = rgScroller().scrollTop;
+    if (guideIds.indexOf(cur) < 0) return;
+    var saved = {};
+    guideIds.forEach(function(id){ if (pos[id] !== undefined) saved[id] = pos[id]; });
+    try { localStorage.setItem('rg-guide-pos', JSON.stringify(saved)); } catch (e) {}
+  }
   function show(){
+    // 隐藏旧页面会使滚动位置归零，必须在切换前保存，并忽略恢复期间的滚动事件。
+    remember();
+    restoring = true;
+    cancelAnimationFrame(frame);
     var h = decodeURIComponent(location.hash.slice(1)) || 'r0';
     var sec = h.split(/[-\/]/)[0], sub = h.indexOf('/') > 0 ? h.split('/')[1] : '';  // 「save/rws」：存档栏里的子页
     if (!document.getElementById('sec-' + sec)) { sec = 'r0'; h = 'r0'; sub = ''; }
@@ -893,18 +958,24 @@ html.app.max .grip{display:none}
     window.dispatchEvent(new CustomEvent('subpage', {detail: {sec: sec, sub: sub}}));
     var el = h !== sec && document.getElementById(h);
     if (el) {
-      el.scrollIntoView({block:'center', inline:'center'});
       el.classList.add('flash');
       setTimeout(function(){ el.classList.remove('flash'); }, 2500);
-    } else {
-      var y = pos[sec] || 0;
-      requestAnimationFrame(function(){ rgScroller().scrollTop = y; });  // 盖过浏览器自己的锚点滚动
     }
+    var y = pos[sec] || 0;
+    frame = requestAnimationFrame(function(){
+      if (el) el.scrollIntoView({block:'center', inline:'center'});
+      else rgScroller().scrollTop = y;  // 盖过浏览器自己的锚点滚动
+      frame = requestAnimationFrame(function(){ restoring = false; });
+    });
     back.hidden = !(fromLink && el);
     if (!el) fromLink = false;
     cur = sec;
   }
-  document.addEventListener('scroll', function(){ if (cur && !(location.hash.indexOf('-') > 0)) pos[cur] = rgScroller().scrollTop; }, true);
+  document.addEventListener('scroll', function(e){
+    if (e.target === document || e.target === rgScroller()) remember();
+  }, true);
+  window.addEventListener('pagehide', remember);
+  document.addEventListener('visibilitychange', function(){ if (document.hidden) remember(); });
   document.addEventListener('click', function(e){
     var a = e.target.closest('a[href^="#t"]');
     if (a && a.closest('section.guide, section.table, section.savesec, #res')) fromLink = true;
@@ -923,6 +994,7 @@ html.app.max .grip{display:none}
   }
   window.addEventListener('resize', function(){ slid = false; slide(); });
   window.addEventListener('hashchange', show);
+  window.addEventListener('rgappmode', function(){ restoring = true; show(); });
   show();
   // 全表搜索
   var q = document.getElementById('q'), res = document.getElementById('res'), timer;

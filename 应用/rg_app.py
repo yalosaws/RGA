@@ -19,6 +19,7 @@ import threading
 import zlib
 
 import webview
+from auto_click import AutoClicker
 
 TITLE = 'RGA'
 PAGE = 'RGA.html'
@@ -124,9 +125,23 @@ def center(window):
 
 
 class Api:
-    def __init__(self):
+    def __init__(self, clicker=None):
         self._win = None
         self._max = False
+        self._clicker = clicker
+
+    def click_status(self):
+        return self._clicker.status()
+
+    def click_configure(self, settings):
+        return self._clicker.command('configure', settings)
+
+    def click_toggle(self):
+        return self._clicker.command('toggle')
+
+    def shutdown(self):
+        if self._clicker:
+            self._clicker.close()
 
     # ---- 存档 ----
     def read_save(self):
@@ -159,6 +174,7 @@ class Api:
         return self._max
 
     def close(self):
+        self.shutdown()
         self._win.destroy()
 
     def size(self):
@@ -198,14 +214,18 @@ def main():
             storage = old
     if _K is not None:  # 打包版不允许外部调试端口连进来读页面
         os.environ.pop('WEBVIEW2_ADDITIONAL_BROWSER_ARGUMENTS', None)
-    api = Api()
+    api = Api(AutoClicker(os.path.join(storage, 'autoclick.json')))
     win = webview.create_window(TITLE, serve(load_page()), js_api=api, width=1280, height=860, min_size=(640, 420),
                                 frameless=True, easy_drag=False, shadow=True, text_select=True, zoomable=True,
                                 background_color='#F5F3FA')
     api._win = win
     win.events.shown += lambda: (center(win), round_corners(win))
+    win.events.closed += api.shutdown
     # private_mode=False + storage_path：网页的 localStorage（保存过的存档、页面设置）在关掉程序后还在
-    webview.start(private_mode=False, storage_path=storage, icon=res_path('icon.ico'))
+    try:
+        webview.start(private_mode=False, storage_path=storage, icon=res_path('icon.ico'))
+    finally:
+        api.shutdown()
 
 
 if __name__ == '__main__':

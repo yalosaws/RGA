@@ -27,7 +27,8 @@ import rg_app  # noqa: E402  只用它的 seal()
 
 
 # PyArmor 混淆后的代码里看不出 import 了什么，PyInstaller 要靠这里列出来
-HIDDEN = ['webview', 'ctypes', 'glob', 'hashlib', 'http.server', 'secrets', 'threading', 'zlib']
+HIDDEN = ['webview', 'auto_click', 'ctypes', 'ctypes.wintypes', 'glob', 'hashlib', 'http.server',
+          'secrets', 'threading', 'zlib', 'json', 'queue', 'time']
 
 
 def build(pack):
@@ -44,7 +45,9 @@ def build(pack):
     # 先用 PyArmor 混淆（试用版不能用 --mix-str；常量在加密后的代码对象里），再把混淆后的脚本交给 PyInstaller。
     # （PyArmor 的 --pack 不支持新版 PyInstaller，所以按它文档里的「先混淆、再打包」做）
     obf = os.path.join(pack, 'obf')
-    subprocess.check_call([sys.executable, '-m', 'pyarmor.cli', 'gen', '-O', obf, script], cwd=pack)
+    click_script = os.path.join(pack, 'auto_click.py')
+    shutil.copyfile(os.path.join(APP, 'auto_click.py'), click_script)
+    subprocess.check_call([sys.executable, '-m', 'pyarmor.cli', 'gen', '-O', obf, script, click_script], cwd=pack)
     work = os.path.join(ROOT, 'build')
     cmd = [sys.executable, '-m', 'PyInstaller', '--noconfirm', '--onefile', '--windowed', '--name', 'RGA',
            '--paths', obf, '--hidden-import', next(d for d in os.listdir(obf) if d.startswith('pyarmor_runtime')),

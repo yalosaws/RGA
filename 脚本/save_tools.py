@@ -145,6 +145,13 @@ def build(find, cell_code):
     names |= {x + ' Lineage' for x in ('Fairy', 'Elven', 'Angel', 'Goblin', 'Undead', 'Demon', 'Titan', 'Druid', 'Faceless',
                                          'Dwarven', 'Drow', 'Dragon', 'Archon', 'Djinn', 'Makers')} | {'Worldly Desires'}
     up, tr = id_names('this.upgradeIDs', 'this.researches'), id_names('this.trophyIDs', 'this.upgradeIDs')
+    # util 只列出了部分固定奖杯/升级；编辑器逐项列出的条目也要纳入，供攻略按 ID 标记。
+    for tab in tabs:
+        for row in tab['rows']:
+            if row.get('w') in ('trophy', 'upgrade') and str(row.get('id', '')).isdigit() and isinstance(row.get('name'), str):
+                (tr if row['w'] == 'trophy' else up).setdefault(int(row['id']), row['name'])
+    # 社区编辑器把 218440 的 W13125（Artillery）误写成重复的 W12250，util 名称表也缺此项。
+    up.setdefault(218440, 'W13125: Artillery')
     zh, miss, links = {}, [], {}
 
     def link(kind, v):
@@ -185,7 +192,17 @@ def build(find, cell_code):
             continue
         zh[n] = v
         link('', v)
-    data = {'tabs': tabs, 'zh': zh, 'links': links, 'uname': uname, 'tname': tname, 'research': research, 'ids': id_lists()}
+    # 攻略里的同名奖杯、升级不能混用链接；按类别保存目标，缩写也可通过相同目标识别。
+    guide_targets = {
+        'up': {i: find('升', v) for i, v in uname.items()},
+        'tr': {i: find('奖', v) for i, v in tname.items()},
+        'ht': {i: find('隐', v) for i, v in tname.items()},
+        'rs': {i: find('研', info['code']) for i, info in research.items()},
+        'names': {kind: {v: find(tag, v) for v in set(zh.values()) if v}
+                  for kind, tag in [('fa', '阵'), ('sp', '法'), ('bd', '建')]},
+    }
+    data = {'tabs': tabs, 'zh': zh, 'links': links, 'uname': uname, 'tname': tname, 'research': research, 'ids': id_lists(),
+            'guide_targets': guide_targets}
     libs = []
     for p in LIBS:
         s = read(p)

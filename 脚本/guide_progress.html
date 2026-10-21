@@ -1,0 +1,58 @@
+<style>
+.guide.guide-gray a.guide-unlocked{color:#939dad}
+.legend .guide-gray-toggle{display:inline-flex;align-items:center;gap:6px;border:0;border-left:1px solid #cbd5e1;border-radius:0;margin:0 0 0 6px;padding:2px 0 2px 12px;background:transparent;color:#7b879b;font:inherit;font-weight:500;white-space:nowrap;cursor:pointer;vertical-align:baseline}
+.legend .guide-gray-toggle::before{content:'';width:10px;height:10px;border-radius:3px;background:#939dad}
+.legend .guide-gray-toggle i{position:relative;display:inline-block;width:25px;height:15px;border-radius:999px;background:#bdc8d8;transition:background .15s}
+.legend .guide-gray-toggle i::after{content:'';position:absolute;top:2px;left:2px;width:11px;height:11px;border-radius:50%;background:#fff;transition:transform .15s}
+.legend .guide-gray-toggle[aria-checked=true] i{background:#2563eb}
+.legend .guide-gray-toggle[aria-checked=true] i::after{transform:translateX(10px)}
+.legend .guide-gray-toggle:focus-visible{outline:2px solid #2563eb;outline-offset:3px;border-radius:4px}
+</style>
+<script>
+(function(){
+  var sections = Array.from(document.querySelectorAll('#sec-r0, #sec-a0'));
+  var buttons = [], entries = [], known = new Set(), hasSave = false, enabled = false;
+  try { enabled = localStorage.getItem('rg-guide-gray') === '1'; } catch (e) {}
+  var tracked = {rs:'t5', ch:'t3', ar:'t10', ht:'t7', tr:'t7'};
+  sections.forEach(function(sec){
+    var legend = sec.querySelector('.legend');
+    if (!legend) return;
+    var button = document.createElement('button');
+    button.type = 'button'; button.className = 'guide-gray-toggle';
+    button.setAttribute('role', 'switch');
+    button.setAttribute('aria-label', '将已解锁内容显示为灰色超链接');
+    button.title = '根据存档标记已解锁内容，链接仍可点击';
+    button.appendChild(document.createTextNode('已解锁变灰'));
+    var knob = document.createElement('i'); knob.setAttribute('aria-hidden', 'true'); button.appendChild(knob);
+    legend.appendChild(button); buttons.push(button);
+    button.addEventListener('click', function(){
+      enabled = !enabled;
+      try { localStorage.setItem('rg-guide-gray', enabled ? '1' : '0'); } catch (e) {}
+      paint();
+    });
+    sec.querySelectorAll('a[class^="t-"]').forEach(function(link){
+      var kind = link.classList[0].slice(2), name = link.textContent.replace(/\s+/g, '').toLowerCase();
+      var target = (link.getAttribute('href') || '').replace(/^#/, '');
+      entries.push({link:link, kind:kind, name:name, target:target});
+    });
+  });
+  function paint(){
+    sections.forEach(function(sec){ sec.classList.toggle('guide-gray', enabled); });
+    buttons.forEach(function(button){
+      button.setAttribute('aria-checked', String(enabled));
+      button.title = hasSave ? '根据存档标记已解锁内容，链接仍可点击' : '读取游戏存档后自动标记已解锁内容';
+    });
+    entries.forEach(function(item){
+      var target = document.getElementById(item.target);
+      var fromCard = tracked[item.kind] && item.target.indexOf(tracked[item.kind] + '-') === 0 && target && target.classList.contains('own');
+      var unlocked = known.has(item.kind + ':' + item.name) || known.has(item.kind + '@' + item.target) || fromCard;
+      item.link.classList.toggle('guide-unlocked', !!unlocked);
+    });
+  }
+  window.addEventListener('guideunlocked', function(e){
+    hasSave = e.detail !== null; known = new Set(e.detail || []); paint();
+  });
+  ['researchowned','challengeowned','artowned','trophyowned'].forEach(function(type){ window.addEventListener(type, paint); });
+  paint();
+})();
+</script>

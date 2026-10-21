@@ -116,14 +116,15 @@
       tro = [];
       D.tabs.forEach(function (t) { t.rows.forEach(function (r) { if (r.w === 'trophy' && r.name && s.trophies[r.id]) tro.push(key(r.name)); }); });
     }
-    // 挑战：存档里有这个挑战（编辑器的「已解锁」）就是完成了，u1 是正在进行；研究：已购买（u1）的，按代号对上卡片
+    // 挑战：存档里有这个挑战（编辑器的「已解锁」）就是完成了，u1 是正在进行；研究：有升级记录就已解锁，不要求已购买（u1）
     var ch = null, rs = null;
     if (s) {
       ch = []; rs = [];
       D.tabs.forEach(function (t) { t.rows.forEach(function (r) {
         if (r.w === 'challenge' && r.name && s.upgrades[r.id]) ch.push(key(r.name.replace(/^[^:]*:\s*/, '')));
         if (r.w && r.w.indexOf('research-upgrade-row') === 0) ['s', 'c', 'd', 'e', 'a', 'w', 'f'].forEach(function (k) {
-          if (r[k + '_id'] && util.save.upgrade_owned(s, r[k + '_id'])) rs.push(key(r[k + '_name']));
+          var id = r[k + '_id'], info = D.research[id] || {};
+          if (id && s.upgrades[id]) rs.push(key(info.code || r[k + '_name']));
         });
       }); });
     }
@@ -131,6 +132,50 @@
     window.dispatchEvent(new CustomEvent('researchowned', {detail: rs}));
     window.dispatchEvent(new CustomEvent('artowned', {detail: art}));
     window.dispatchEvent(new CustomEvent('trophyowned', {detail: tro}));
+    guideUnlocked(s);
+  }
+
+  // 攻略进度：传递类别、中文名和链接目标，不把同名升级与奖杯混为一项。
+  function guideUnlocked(s) {
+    var out = [], targets = D.guide_targets || {};
+    function add(kind, name, target) {
+      if (name) out.push(kind + ':' + String(name).replace(/\s+/g, '').toLowerCase());
+      if (target) out.push(kind + '@' + target);
+    }
+    function named(kind, name) {
+      var value = zh(name), byName = (targets.names || {})[kind] || {};
+      add(kind, value, byName[value]);
+    }
+    if (s) {
+      Object.keys(s.upgrades).forEach(function(id){
+        if (!s.upgrades[id]) return;
+        add('up', D.uname[id], (targets.up || {})[id]);
+        var info = D.research[id];
+        if (info) add('rs', info.code, (targets.rs || {})[id]);
+      });
+      Object.keys(s.trophies).forEach(function(id){
+        if (!s.trophies[id]) return;
+        ['tr', 'ht'].forEach(function(kind){ add(kind, D.tname[id], (targets[kind] || {})[id]); });
+      });
+      util.assoc.faction.forEach(function(f){
+        if (f.id < 0) return;
+        var stat = (s.stats || [])[f.timestat], seen = stat && (stat.stats > 0 || stat.statsReset > 0 || stat.statsRei > 0);
+        if ([s.faction, s.prestigeFaction, s.elitePrestigeFaction].indexOf(f.id) >= 0 || seen) named('fa', f.name);
+      });
+      D.tabs.forEach(function(t){ t.rows.forEach(function(r){
+        if (r.w === 'faction-upgrade' && Object.keys(r).some(function(k){ return /_id$/.test(k) && s.upgrades[r[k]]; })) named('fa', r.name);
+      }); });
+      util.assoc.spells.forEach(function(spell){
+        var p = (s.spells || {})[spell.id];
+        var seen = p && (p.c > 0 || p.r > 0 || p.e > 0 || p.active0 > 0 || p.active1 > 0 || p.active2 > 0);
+        if (seen || util.save.hasSpell(s, spell.id)) named('sp', spell.name);
+      });
+      Object.keys(util.save.building_names).forEach(function(id){
+        var b = (s.buildings || {})[id];
+        if (b && ['q','t','r','m','e'].some(function(k){ return b[k] > 0; })) named('bd', util.save.building_names[id]);
+      });
+    }
+    window.dispatchEvent(new CustomEvent('guideunlocked', {detail: s ? out : null}));
   }
 
   // 顶部数字卡片
@@ -724,6 +769,7 @@
   function windowControls() {
     var api = window.pywebview.api, root = document.documentElement;
     root.classList.add('app');
+    window.dispatchEvent(new CustomEvent('rgappmode'));
     var max = function () {
       api.toggle_maximize().then(function (m) {
         root.classList.toggle('max', m);
