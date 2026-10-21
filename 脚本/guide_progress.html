@@ -4,6 +4,7 @@
 /* 图例末尾的「已解锁」：和图例里的类别一样是小胶囊，点一下选中，选中时底色变灰 */
 .legend .guide-gray-toggle{display:inline-block;margin:0 1px;padding:1px 7px;border:0;border-radius:999px;background:transparent;
   color:#7b879b;font:inherit;font-weight:600;white-space:nowrap;cursor:pointer;vertical-align:baseline;transition:background .2s,color .2s}
+.legend .guide-gray-toggle::before{content:"";display:inline-block;width:10px;height:10px;border-radius:3px;background:#939dad;margin-right:4px}
 .legend .guide-gray-toggle:hover{background:rgba(100,116,139,.1)}
 .legend .guide-gray-toggle[aria-checked=true]{background:rgba(100,116,139,.2);color:#475569}
 .legend .guide-gray-toggle.pop{animation:gp-pop .3s ease}
