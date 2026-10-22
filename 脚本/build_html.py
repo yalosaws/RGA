@@ -44,6 +44,8 @@ CHANGES = [
         '攻略里的挑战统一叫「阵营挑战 n」（如卓尔挑战 1），不再用 DWC1 这类代号',
         '挑战页的条件去掉「使用本阵营」，「使用恶魔血统的恶魔」写成「使用恶魔血统」',
         '我的存档：存档查看去掉挑战分页和隐藏奖杯、遗物两段（已在对应资料页标出），自动施法分页暂时下线',
+        '我的存档：存档查看去掉阵营升级和阵营币分页',
+        '内容区改成一整张圆角卡片，滚动时顶部不再露出直角；侧栏上下留白一致',
     ]),
     ('0.3.8', '2026-10-22', [
         '隐藏奖杯页去掉 4.3 起改成阵营奖杯 / 法术奖杯的 5 项（驯龙高手、系谱学家、墨翎之艺、精英面具、神圣狂热）',
@@ -934,10 +936,15 @@ td.flash{outline:3px solid #f59e0b;outline-offset:-2px;background:var(--flash)!i
 /* 程序模式（RGA.exe）：网页自己画标题栏 */
 .appbar{display:none}
 html.app body{height:100vh;overflow:hidden}
-/* 程序里只让内容区滚动，滚动条从标题栏下面开始，不和关闭按钮并排 */
-html.app main{position:fixed;top:40px;left:0;right:0;bottom:0;overflow-y:auto;margin:0;padding:8px 24px 80px 280px}
+/* 程序里只让内容区滚动：内容区本身就是白色圆角卡片，滚动时内容在圆角里裁掉，不会露出直角 */
+html.app main{position:fixed;top:48px;left:264px;right:16px;bottom:16px;overflow-y:auto;margin:0;padding:0 0 60px;
+  background:var(--card);border-radius:20px;box-shadow:var(--shadow)}
+html.app main>section{background:none;border-radius:0;box-shadow:none}
+html.app main>section.savesec{padding:20px 24px}
+html.app main::-webkit-scrollbar-track{margin:16px 0}
 html.app .appbar{display:flex;position:fixed;top:0;left:0;right:0;z-index:8;height:40px;align-items:center;background:var(--bg);user-select:none}
-html.app aside.side{top:48px}
+/* 侧栏上下都留 16px，盖在标题栏左段上面 */
+html.app aside.side{top:16px;z-index:9}
 html.app #res{top:48px}
 html.app .brand{display:none}
 .ab-drag{flex:1;height:100%}

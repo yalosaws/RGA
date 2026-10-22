@@ -330,8 +330,8 @@
   }
 
   // 不显示的分页 / 小节（数据仍留着给资料页的已获得标记用）：
-  // 自动施法暂时下线；挑战、隐藏奖杯、遗物已在各自的资料页里标出
-  var HIDE_TAB = {autocasting: 1, challenges: 1};
+  // 自动施法暂时下线；挑战、隐藏奖杯、遗物已在各自的资料页里标出；阵营升级、阵营币用户不需要
+  var HIDE_TAB = {autocasting: 1, challenges: 1, 'faction-upgrades': 1, fc: 1};
   var HIDE_SEC = {'Secret Trophies': 1, 'Quest Artifacts': 1, 'Lore Artifacts': 1};
 
   function renderView(save) {
