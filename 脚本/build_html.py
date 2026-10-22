@@ -40,6 +40,10 @@ CHANGES = [
     ('0.3.9', '2026-10-22', [
         '攻略和资料里的奖杯专名改用黄色',
         '移除自动点击页面；自动点击固定用 F8 启停、每 35 毫秒点一次，暂不支持修改',
+        '攻略表格第一列不再自动换行',
+        '攻略里的挑战统一叫「阵营挑战 n」（如卓尔挑战 1），不再用 DWC1 这类代号',
+        '挑战页的条件去掉「使用本阵营」，「使用恶魔血统的恶魔」写成「使用恶魔血统」',
+        '我的存档：存档查看去掉挑战分页和隐藏奖杯、遗物两段（已在对应资料页标出），自动施法分页暂时下线',
     ]),
     ('0.3.8', '2026-10-22', [
         '隐藏奖杯页去掉 4.3 起改成阵营奖杯 / 法术奖杯的 5 项（驯龙高手、系谱学家、墨翎之艺、精英面具、神圣狂热）',
@@ -404,6 +408,9 @@ def build_challenges(ws):
             badge = '<em class="no">挑战 %d</em>' % (k + 1) + ('<em>R%s</em>' % rq.group(1) if rq else '')
             if rq:
                 cond = cond[rq.end():].lstrip('，, \t\r\n')
+            # 卡片已按阵营分组，「使用恶魔，」不用再写；「使用恶魔血统的恶魔」只留血统
+            cond = re.sub(r'^使用%s，' % re.escape(fzh), '', cond)
+            cond = re.sub(r'^使用(%s血统)的%s，' % ((re.escape(fzh),) * 2), r'使用\1，', cond)
             combo = strip_label(val(r + 1, c), '生效组合')
             items.append(card(cid, en, None, None, zh, en, badge,
                               [('条件', cond), ('目标', strip_label(val(r + 3, c), '目标')), ('效果', strip_label(val(r + 4, c), '效果'))],
@@ -814,6 +821,7 @@ section.guide{max-width:960px;margin:0 auto}
 .guide th,.guide td{border-bottom:1px solid var(--line);padding:6px 10px;text-align:left;vertical-align:top}
 .guide tr:last-child td{border-bottom:none}
 .guide th{background:var(--soft);font-weight:600}
+.guide th:first-child,.guide td:first-child{white-space:nowrap}
 .guide ul,.guide ol{padding-left:24px}
 .ver-hero{display:flex;align-items:center;gap:18px;margin:4px 0 8px}
 .ver-hero img{width:64px;height:64px;image-rendering:pixelated}

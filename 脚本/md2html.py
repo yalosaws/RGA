@@ -23,6 +23,7 @@ table{border-collapse:collapse;margin:8px 0 12px;width:100%}
 thead{display:table-header-group}
 tr{break-inside:avoid}
 th,td{border:1px solid #ccc;padding:5px 8px;text-align:left;vertical-align:top}
+th:first-child,td:first-child{white-space:nowrap}
 th{background:#ede6f8;white-space:nowrap}
 ul,ol{margin:4px 0 10px;padding-left:24px} li{margin:2px 0}
 strong{color:#000}

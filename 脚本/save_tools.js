@@ -329,18 +329,27 @@
     return zh(r.name);
   }
 
+  // 不显示的分页 / 小节（数据仍留着给资料页的已获得标记用）：
+  // 自动施法暂时下线；挑战、隐藏奖杯、遗物已在各自的资料页里标出
+  var HIDE_TAB = {autocasting: 1, challenges: 1};
+  var HIDE_SEC = {'Secret Trophies': 1, 'Quest Artifacts': 1, 'Lore Artifacts': 1};
+
   function renderView(save) {
     var tabs = $('sv-vtabs'), body = $('sv-vbody');
     var keep = tabs.querySelector('.on');
     keep = keep ? keep.dataset.t : 'general';
     tabs.innerHTML = ''; body.innerHTML = '';
+    if (HIDE_TAB[keep]) keep = 'general';
     D.tabs.forEach(function (t) {
+      if (HIDE_TAB[t.id]) return;
       var b = document.createElement('button');
       b.textContent = zh(t.name); b.dataset.t = t.id;
       if (t.id === keep) b.className = 'on';
       tabs.appendChild(b);
-      var html = [], cols = 1;
+      var html = [], cols = 1, skip = false;
       t.rows.forEach(function (r) {
+        if (r.h) skip = !!HIDE_SEC[r.h];
+        if (skip) return;
         if (r.h) { html.push('<tr class="sub"><th colspan="9">' + esc(zh(r.h)) + '</th></tr>'); return; }
         if (r.w === 'mercenaryselection-header') { html.push('<tr class="sub"><th colspan="9">佣兵选择</th></tr>'); return; }
         if (HEAD[r.w]) {
