@@ -58,14 +58,14 @@
 用户只用程序，不单独打开网页，说明改动时说「程序里」。**改完不自动打包**，等用户说；打包前先关掉正在运行的 RGA。
 
 - **生成**：`脚本/build_html.py [xlsx] [html]` → `build/RGA.html`（会列出没对上格子的专名，目前约 10 个，都是表里没有的东西）。`应用/build_exe.py` 先跑它再用 PyInstaller 打成 `发布/RGA.exe`（pywebview 装在用户目录，不能用 `python -I`）。
-- **版本**：`build_html.py` 开头的 `VERSION`、`CHANGES`（当前 0.3.9）。版本号用 0.x，改了功能在 `CHANGES` 最前面那版里写一条（用户说合并进哪版就写进哪版）。版本页只放版本号和更新记录。
+- **版本**：`build_html.py` 开头的 `VERSION`、`CHANGES`（当前 0.3.5，2026-10-22 合并过一次旧版本号）。版本号用 0.x，改了功能在 `CHANGES` 最前面那版里写一条（用户说合并进哪版就写进哪版）。版本页只放版本号和更新记录。
 - **页面**：侧栏分工具（只有「我的存档」）/ 攻略 / 资料表 / 关于。遗物、隐藏奖杯、挑战、研究页是卡片（`card()`/`card_list()`），建筑升级页是「选建筑看一列」，其余工作表还是表格（用户在考虑换样式）。专名链接到表格格子，卡片说明里的专名按九类染色（`TERMS`）。
 - **已获得标记**：读到存档后 `save_tools.js` 发事件（`artowned`、`trophyowned`、`challengeowned`、`researchowned`、`guideunlocked`），卡片页显示「全部 / 已获得 / 未获得」胶囊和进度条（已获得蓝边带勾，未获得变灰，不加多余文字）；攻略图例有「已解锁」胶囊，开启后已解锁的链接变灰。只按存档里有依据的记录标，不猜。
 - **我的存档**（`脚本/save_tools.py` + `save_tools.js` + `save_tools.html`）：嵌入 RG-tools 的库，中文只读。
   - 存档查看按编辑器分页显示；挑战分页、隐藏奖杯和遗物两段不显示（资料页已标出），自动施法分页暂时下线（`HIDE_TAB`/`HIDE_SEC`，数据仍保留给已获得标记用）。
   - 法术预报、遗物预测照搬 `rws/index.js`、`arch/index.js`，在存档页里切换（地址 `#save/rws`、`#save/arch`，不进侧栏）。`脚本/arch_fixes.js` 修正库里过时的遗物数据，库本身不改。
   - 名字翻译：`脚本/存档译名.py` → 游戏词典 → 汉化文本的统计标签。
-- **桌面程序**（`应用/rg_app.py`）：pywebview 无边框窗口（标题栏是网页画的 `.appbar`，不显示图标和标题），打开时居中；只读本机存档 `%APPDATA%\com.kongregate.mobile.realmgrinder.air\Local Store\#SharedObjects\RealmGrinderDesktop.swf\realm-grinder.sol`，「自动同步」每 10 秒检查。程序里只有 `main` 滚动，脚本读写滚动位置用 `rgScroller()`。localStorage 在 `%LOCALAPPDATA%\RGA`。调试：设 `WEBVIEW2_ADDITIONAL_BROWSER_ARGUMENTS=--remote-debugging-port=9333` 再启动，用 CDP 读页面。
+- **桌面程序**（`应用/rg_app.py`）：pywebview 无边框窗口（标题栏是网页画的 `.appbar`：侧栏和卡片贴窗口边，窗口按钮是卡片右上角的小胶囊；拖动只认正好点在带 `pywebview-drag-region` 的元素本身（侧栏、菜单空白、内容区顶上一条），不显示图标和标题），打开时居中；只读本机存档 `%APPDATA%\com.kongregate.mobile.realmgrinder.air\Local Store\#SharedObjects\RealmGrinderDesktop.swf\realm-grinder.sol`，「自动同步」每 10 秒检查。程序里只有 `main` 滚动，脚本读写滚动位置用 `rgScroller()`。localStorage 在 `%LOCALAPPDATA%\RGA`。调试：设 `WEBVIEW2_ADDITIONAL_BROWSER_ARGUMENTS=--remote-debugging-port=9333` 再启动，用 CDP 读页面。
 - **自动点击**（`应用/auto_click.py`）：F8 启停，每 35 毫秒一次，只在前台是游戏窗口时点；没有设置页，热键和速度暂不可改（用户要求）。`应用/test_auto_click.py` 用模拟点击测试。
 - **风格**（用户选定）：浅灰蓝底 `#f3f6fb` + 白色圆角卡片，悬浮圆角侧栏（纯文字），主色 `#2563eb`，**不用渐变**；颜色用 `:root` 变量。各页不显示标题；切换页面有淡入动画。
 

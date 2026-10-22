@@ -34,26 +34,27 @@ ALIAS = {'TC': '征税', 'CtA': '动员令', 'HoL': '传说圣殿', 'BF': '嗜�
 # 遗物表里阵营遗物按全阶英豪奖杯的顺序排，每个阵营两个
 ART_FACTIONS = ['仙灵', '精灵', '天使', '地精', '亡灵', '恶魔', '泰坦', '德鲁伊', '无面者', '矮人', '卓尔', '佣兵']
 # 程序版本：改了功能就加版本号，在 CHANGES 最前面写这一版改了什么
-VERSION = '0.3.9'  # 还没到正式发布，用 0.x（用户要求）
+VERSION = '0.3.5'  # 还没到正式发布，用 0.x（用户要求）
 AUTHOR = 'Yalosaws'
 CHANGES = [
-    ('0.3.9', '2026-10-22', [
+    ('0.3.5', '2026-10-22', [
+        '新布局：侧栏和内容区贴着窗口边、互相挨着，外侧的角和窗口圆角贴合；窗口按钮做成小胶囊放在卡片右上角，和顶上的浮动胶囊对齐',
+        '拖动窗口：侧栏和菜单的空白处、内容区顶上一条都能拖，双击最大化；滚动条从窗口按钮下面开始',
+        '内容区是一整张圆角卡片，往下滚时顶部渐隐，文字从浮动胶囊下面淡出，不再露出直角或半行字',
+    ]),
+    ('0.3.4', '2026-10-22', [
         '攻略和资料里的奖杯专名改用黄色',
         '移除自动点击页面；自动点击固定用 F8 启停、每 35 毫秒点一次，暂不支持修改',
         '攻略表格第一列不再自动换行',
         '攻略里的挑战统一叫「阵营挑战 n」（如卓尔挑战 1），不再用 DWC1 这类代号',
         '挑战页的条件去掉「使用本阵营」，「使用恶魔血统的恶魔」写成「使用恶魔血统」',
-        '我的存档：存档查看去掉挑战分页和隐藏奖杯、遗物两段（已在对应资料页标出），自动施法分页暂时下线',
-        '我的存档：存档查看去掉阵营升级和阵营币分页',
-        '内容区改成一整张圆角卡片，滚动时顶部不再露出直角；侧栏上下留白一致',
-    ]),
-    ('0.3.8', '2026-10-22', [
+        '我的存档：存档查看去掉挑战、阵营升级、阵营币分页和隐藏奖杯、遗物两段（已在对应资料页标出），自动施法分页暂时下线',
         '隐藏奖杯页去掉 4.3 起改成阵营奖杯 / 法术奖杯的 5 项（驯龙高手、系谱学家、墨翎之艺、精英面具、神圣狂热）',
         '攻略图例的「已解锁变灰」开关改成「已解锁」小胶囊：去掉开关和分隔线（保留前面的小灰块），点一下选中，已解锁的链接从上到下依次变灰',
         '攻略已解锁标记：阵营解锁后，它的阵营升级 1–9 都算已解锁（只花金币就能买）；10–12、遗产、高级遗产仍按存档记录',
         '攻略已解锁标记：拿到法术奖杯后，同名的法术升级（日耀祝福、雷暴、横征暴敛等）也变灰；链接指向的资料卡片已获得时一律变灰',
     ]),
-    ('0.3.7', '2026-10-22', [
+    ('0.3.3', '2026-10-22', [
         '资料表恢复 21 处被译名处理吞掉的说明（时流涌动、几项研究的解锁条件、活动的等级要求和新图标奖励等）',
         '遗物：补上灼痕拉之面具；日曜之力 12:00～17:59 一档改为提升产能；胡须毛发等三个显赫遗物改为 R110，矮人铁砧等三个改为 R235；粗糙石头对应的研究代号改为 D270',
         '研究页、挑战页顶部加上适用说明；受雇佣兵的前置改为 S2900；隐藏奖杯的收集进度不再计入已改成阵营 / 法术奖杯的 5 项',
@@ -63,23 +64,13 @@ CHANGES = [
         '遗物预测：用到存档里没有的数值的 14 个遗物只显示需要达到的数值，不再直接显示「获得」',
         '有限祈愿预报：恒常混沌起步改为 500 次，加成按 4.3 的产能 / 非产能公式估算',
     ]),
-    ('0.3.6', '2026-10-21', [
-        '去掉攻略中已解锁链接前的小色块，仅保留灰色文字和点击跳转',
-    ]),
-    ('0.3.5', '2026-10-21', [
-        '两篇攻略的颜色图例末尾新增「已解锁变灰」开关，设置同步并保存在本机',
-        '开启后已解锁的链接显示灰色，保留类别颜色块，仍可点击查看资料',
-    ]),
-    ('0.3.4', '2026-10-21', [
-        '研究资料页改为跟踪已解锁状态，已解锁但未购买的研究也计入进度和筛选',
-        '研究进度按当前版本代号匹配，修复部分改号研究无法标记的问题',
-    ]),
-    ('0.3.3', '2026-10-21', [
-        '新增自动点击工具：默认 F8 全局启停，可设置快捷键、组合键和点击间隔',
-        '连点设置保存在本机；只在游戏前台且鼠标位于游戏内时点击，关闭程序自动停止',
-    ]),
     ('0.3.2', '2026-10-21', [
         '两篇攻略分别记住上次阅读的位置，切换页面或重新打开程序后自动恢复',
+        '新增自动点击工具：默认 F8 全局启停，可设置快捷键、组合键和点击间隔',
+        '连点设置保存在本机；只在游戏前台且鼠标位于游戏内时点击，关闭程序自动停止',
+        '研究资料页改为跟踪已解锁状态，已解锁但未购买的研究也计入进度和筛选',
+        '研究进度按当前版本代号匹配，修复部分改号研究无法标记的问题',
+        '两篇攻略的颜色图例末尾新增「已解锁变灰」开关，设置同步并保存在本机；开启后已解锁的链接显示灰色，仍可点击查看资料',
     ]),
     ('0.3.1', '2026-10-21', [
         '挑战页的「法术强化」标签改用紫色',
@@ -771,7 +762,7 @@ def icon_img():
 def appbar():
     """程序模式的标题栏（网页里平时隐藏）：空白的拖动区（拖动窗口）+ 最小化/最大化/关闭"""
     btn = '<button data-w="%s" title="%s"%s><svg viewBox="0 0 10 10">%s</svg></button>'
-    return ('<div class="appbar"><div class="pywebview-drag-region ab-drag"></div><div class="ab-btns">' +
+    return ('<div class="appbar"><div class="pywebview-drag-region ab-drag"></div><div class="pywebview-drag-region ab-drag ab-top"></div><div class="ab-btns">' +
             btn % ('min', '最小化', '', '<path d="M0 5h10"/>') +
             btn % ('max', '最大化', '', '<rect x=".5" y=".5" width="9" height="9" rx="1.5"/>') +
             btn % ('close', '关闭', ' class="ab-close"', '<path d="M0 0l10 10M10 0L0 10"/>') +
@@ -936,21 +927,40 @@ td.flash{outline:3px solid #f59e0b;outline-offset:-2px;background:var(--flash)!i
 /* 程序模式（RGA.exe）：网页自己画标题栏 */
 .appbar{display:none}
 html.app body{height:100vh;overflow:hidden}
-/* 程序里只让内容区滚动：内容区本身就是白色圆角卡片，滚动时内容在圆角里裁掉，不会露出直角 */
-html.app main{position:fixed;top:48px;left:264px;right:16px;bottom:16px;overflow-y:auto;margin:0;padding:0 0 60px;
-  background:var(--card);border-radius:20px;box-shadow:var(--shadow)}
-html.app main>section{background:none;border-radius:0;box-shadow:none}
-html.app main>section.savesec{padding:20px 24px}
-html.app main::-webkit-scrollbar-track{margin:16px 0}
-html.app .appbar{display:flex;position:fixed;top:0;left:0;right:0;z-index:8;height:40px;align-items:center;background:var(--bg);user-select:none}
-/* 侧栏上下都留 16px，盖在标题栏左段上面 */
-html.app aside.side{top:16px;z-index:9}
-html.app #res{top:48px}
+/* 程序里：侧栏和内容区贴着窗口边、互相挨着、中间不画线，外侧的角和窗口圆角（8px）一样。只让内容区滚动，内容区本身就是白色圆角卡片，滚动时内容在圆角里裁掉 */
+html.app main{position:fixed;top:0;left:248px;right:0;bottom:0;overflow-y:auto;margin:0;padding:0 0 60px;
+  background:var(--card);border-radius:0 8px 8px 0}
+html.app.max main{border-radius:0}
+html.app main>section{background:none;border-radius:0;box-shadow:none;padding-top:68px}  /* 顶上留出窗口按钮胶囊的位置 */
+html.app main>section.savesec{padding:68px 24px 20px}
+/* 顶上就是浮动胶囊（攻略图例、卡片页的筛选和搜索）的页面：胶囊和窗口按钮排在同一行，不留空 */
+html.app main>section:has(>.legend),html.app main>section:has(>.cl:first-child>.cl-top){padding-top:16px}
+html.app .legend,html.app .cl-top{top:16px}  /* 浮动胶囊离卡片上边 16px，和窗口按钮离右边一样 */
+html.app .legend{display:flex;align-items:center;height:36px;padding-top:0;padding-bottom:0}  /* 和窗口按钮胶囊一样高，中线对齐 */
+html.app main::-webkit-scrollbar-track{margin:60px 0 12px}  /* 滚动条从窗口按钮下面开始 */
+/* 往下滚后卡片顶部渐隐：文字从浮动胶囊下面淡出，不会半行字被切开 */
+html.app main::before{content:"";position:sticky;top:0;display:block;height:80px;margin-bottom:-80px;z-index:2;pointer-events:none;
+  background:linear-gradient(var(--card) 55%,transparent);opacity:0;transition:opacity .2s}
+html.app main.scrolled::before{opacity:1}
+/* 浮动胶囊右边让出窗口按钮 */
+html.app .cl-top{padding-right:150px}
+html.app .legend{max-width:calc(100% - 150px)}
+/* 标题栏：卡片顶上一条、侧栏和菜单的空白处都能拖动窗口；按钮做成小胶囊浮在卡片右上角 */
+html.app .appbar{display:contents}
+html.app .ab-drag{position:fixed;inset:0;z-index:0}
+html.app .ab-top{inset:0 0 auto 248px;height:14px;z-index:7}
+html.app .ab-btns{position:fixed;top:16px;right:16px;height:36px;z-index:8;overflow:hidden;user-select:none;border-radius:999px;
+  background:#e6ecf5;transition:box-shadow .25s,background .25s}
+html.app .ab-btns.float{background:rgba(255,255,255,.92);backdrop-filter:blur(8px);box-shadow:0 8px 28px rgba(20,40,90,.16),0 0 0 1px rgba(20,40,90,.05)}
+html.app aside.side{top:0;left:0;bottom:0;width:248px;z-index:5;border-radius:8px 0 0 8px;box-shadow:none}
+html.app.max aside.side{border-radius:0}
+html.app #res{top:16px;left:248px}
+html.app #back{left:264px}
 html.app .brand{display:none}
 .ab-drag{flex:1;height:100%}
 .ab-btns{display:flex;height:100%}
-.ab-btns button{width:46px;height:100%;border:none;background:none;color:#4b5569;cursor:pointer;display:flex;align-items:center;justify-content:center}
-.ab-btns button:hover{background:#e4eaf4}
+.ab-btns button{width:42px;height:100%;border:none;background:none;color:#4b5569;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.ab-btns button:hover{background:#d9e2f0}
 .ab-btns button.ab-close:hover{background:#e81123;color:#fff}
 .ab-btns svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:1.2}
 .grip{display:none}
@@ -958,7 +968,7 @@ html.app .grip{display:block;position:fixed;right:0;bottom:0;width:18px;height:1
 html.app.max .grip{display:none}
 </style></head><body>
 %%APPBAR%%
-<aside class="side"><div class="brand">%%ICON%%RGA</div><input id="q" type="search" placeholder="搜索表格…"><nav>%%NAV%%</nav></aside>
+<aside class="side pywebview-drag-region"><div class="brand">%%ICON%%RGA</div><input id="q" type="search" placeholder="搜索表格…"><nav class="pywebview-drag-region">%%NAV%%</nav></aside>
 <div id="res" hidden></div>
 <main>%%BODY%%</main>
 <button id="back" hidden>← 返回</button>
@@ -977,6 +987,11 @@ html.app.max .grip{display:none}
   } catch (e) {}
   // 网页里滚动的是整页，程序里（html.app）滚动的是 main
   window.rgScroller = function(){ return document.documentElement.classList.contains('app') ? document.querySelector('main') : document.scrollingElement; };
+  // 程序里卡片往下滚后：顶部渐隐、窗口按钮胶囊浮起来（和其他浮动胶囊一样）
+  (function(){
+    var m = document.querySelector('main'), b = document.querySelector('.ab-btns');
+    m.addEventListener('scroll', function(){ var on = m.scrollTop > 4; m.classList.toggle('scrolled', on); if (b) b.classList.toggle('float', on); }, {passive: true});
+  })();
   function remember(){
     if (!cur || restoring) return;
     pos[cur] = rgScroller().scrollTop;

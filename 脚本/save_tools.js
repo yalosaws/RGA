@@ -808,7 +808,7 @@
       else if (b.dataset.w === 'max') max();
       else if (b.dataset.w === 'close') api.close();
     });
-    document.querySelector('.ab-drag').addEventListener('dblclick', max);
+    document.querySelectorAll('.ab-drag').forEach(function (d) { d.addEventListener('dblclick', max); });
     var grip = document.querySelector('.grip');
     grip.addEventListener('mousedown', function (e) {
       e.preventDefault();
