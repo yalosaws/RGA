@@ -42,7 +42,7 @@
 - 改完验证：XML 合法、改动格逐格读回、其他格不变、合并单元格和图片数量不变。
 - `脚本/apply.py` 把 `edits_sheet*.py`（`{单元格: 新文本}`；研究表按代号写，经 `research.json` 换算）打到旧版表上，输出 4.3.14 版并调用 `rename.py` 换译名。**会覆盖 4.3.14 版**，用户在 WPS 手改过就先备份。
 - `脚本/rename.py`：换游戏译名（规则在文件头和 `译名.py`）。**只能对没改过名的表跑一次**。
-- 其他：`fetch.py`（抓网页）、`fandom.py`（下 wikitext）、`hanhua.py`（从汉化包 swf 导出 tsv，汉化包更新后重跑、换日期名存进 `资料/`）。
+- 其他：`fetch.py`（抓网页）、`fandom.py`（下 wikitext）、`hanhua.py`（从汉化包 swf 导出 tsv，汉化包更新后重跑、换日期名存进 `资料/`）、`client_research.py`（从游戏 swf 的 ffdec pcode 导出研究存档 ID ↔ 代号 ↔ 英文名，存成 `资料/客户端研究对照.json`；这是研究 ID 的权威对照，社区库 util.js 和编辑器标签都有错）。
 
 ## 攻略
 

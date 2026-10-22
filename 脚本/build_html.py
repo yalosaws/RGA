@@ -27,6 +27,7 @@ SHEETS = {1: ('阵营', '阵营升级、遗产、UB、血统、世系、契印�
           3: ('挑战', '挑战（Challenge）'), 4: ('UB 分布', 'UB 分布'), 5: ('研究', '研究（Research）'),
           6: ('建筑升级', '建筑升级（产能加成部分忽略 Ascension 惩罚）'), 7: ('隐藏奖杯', '隐藏奖杯（Secret Trophy）'),
           8: ('活动', '活动（Event）'), 10: ('遗物', '遗物（Artifact）')}
+BARE_SHEETS = {2, 4, 8}  # 不套滚动框的表格页
 # 各类专名优先在哪些表里找
 PREFER = {'阵': [1, 3], '法': [1, 8], '升': [1, 6, 3, 5, 2], '建': [6, 4, 1], '隐': [7], '奖': [7, 1, 3],
           '研': [5], '挑': [3], '遗': [10]}
@@ -42,6 +43,8 @@ CHANGES = [
         '拖动窗口：侧栏和菜单的空白处、内容区顶上一条都能拖，双击最大化；滚动条从窗口按钮下面开始',
         '侧栏菜单项间距加大，选中块的阴影改小改淡，不再压到相邻一项',
         '内容区是一整张圆角卡片，往下滚时顶部渐隐，文字从浮动胶囊下面淡出，不再露出直角或半行字',
+        '传承、UB 分布、活动页去掉表格外面的滚动框：上下跟着页面滚，活动表太宽时只在表格里左右滚',
+        '研究已解锁标记按游戏客户端核对，全部 264 项对上（含 4.3.9 改号的 45 项）；修正四组互相点错的研究：合成（A150）/ 爆炸物（A270）、转换（E150）/ 投资（E400）、成圣（D245）/ 撕裂灵魂（D1375）、庄园（E3300）/ 受雇佣兵（E3250）',
     ]),
     ('0.3.4', '2026-10-22', [
         '攻略和资料里的奖杯专名改用黄色',
@@ -584,7 +587,9 @@ def build_sheet(n, ws, imgs, index, cells):
             tds.append('<td%s>%s</td>' % (attrs, body))
         rows.append('<tr>' + ''.join(tds) + '</tr>')
     # 固定列宽的表要给出总宽度，否则会被压到窗口宽
-    return '<div class="wrap"><table class="sheet" style="width:%dpx"><colgroup>%s</colgroup>%s</table></div>' % (total, ''.join(cols), ''.join(rows))
+    # 传承、UB 分布、活动不套带边框的滚动框：上下跟着页面滚，表格太宽时只在表格这一块里左右滚（用户要求）
+    wrap = 'wrap bare' if n in BARE_SHEETS else 'wrap'
+    return '<div class="%s"><table class="sheet" style="width:%dpx"><colgroup>%s</colgroup>%s</table></div>' % (wrap, total, ''.join(cols), ''.join(rows))
 
 
 def code_maps(cells):
@@ -836,6 +841,7 @@ a[class^="t-"]:hover{text-decoration-style:solid}
 .legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:3px;background:currentColor;margin-right:4px}
 section.table h1{font-size:20px;margin:0 0 14px}
 .wrap{overflow:auto;max-height:calc(100vh - 110px);border:1px solid var(--line);border-radius:14px}
+.wrap.bare{max-height:none;overflow:auto hidden;border:0;border-radius:0;width:max-content;max-width:100%}
 table.sheet{border-collapse:collapse;table-layout:fixed;font-size:13px;line-height:1.5}
 table.sheet td{border:1px solid var(--line);padding:4px 7px;vertical-align:top;overflow-wrap:anywhere;scroll-margin:80px}
 table.sheet img{width:40px;height:40px;object-fit:contain;display:block;margin:0 auto}
