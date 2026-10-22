@@ -40,6 +40,7 @@ CHANGES = [
     ('0.3.5', '2026-10-22', [
         '新布局：侧栏和内容区贴着窗口边、互相挨着，外侧的角和窗口圆角贴合；窗口按钮做成小胶囊放在卡片右上角，和顶上的浮动胶囊对齐',
         '拖动窗口：侧栏和菜单的空白处、内容区顶上一条都能拖，双击最大化；滚动条从窗口按钮下面开始',
+        '侧栏菜单项间距加大，选中块的阴影改小改淡，不再压到相邻一项',
         '内容区是一整张圆角卡片，往下滚时顶部渐隐，文字从浮动胶囊下面淡出，不再露出直角或半行字',
     ]),
     ('0.3.4', '2026-10-22', [
@@ -787,11 +788,11 @@ aside.side{position:fixed;left:16px;top:16px;bottom:16px;width:232px;z-index:5;b
 nav{flex:1;overflow-y:auto;margin:6px -4px 0;padding:0 4px;scrollbar-width:none;position:relative}
 nav::-webkit-scrollbar{display:none}
 nav .grp{font-size:11px;color:#9aa5b8;letter-spacing:.12em;margin:12px 10px 4px}
-nav a{display:block;position:relative;z-index:1;padding:6px 14px;margin:1px 0;border-radius:12px;color:#3d4a5f;font-size:13.5px;text-decoration:none;transition:background .15s,color .25s}
+nav a{display:block;position:relative;z-index:1;padding:6px 14px;margin:4px 0;border-radius:12px;color:#3d4a5f;font-size:13.5px;text-decoration:none;transition:background .15s,color .25s}
 nav a:hover{background:var(--soft)}
-nav a.on{background:var(--blue);color:#fff;box-shadow:0 6px 16px rgba(37,99,235,.28)}
+nav a.on{background:var(--blue);color:#fff;box-shadow:0 2px 8px rgba(37,99,235,.22)}
 /* 选中块：滑到当前项（有 .ind 时选中项本身不再画底色） */
-nav .ind{position:absolute;left:4px;right:4px;top:0;border-radius:12px;background:var(--blue);box-shadow:0 6px 16px rgba(37,99,235,.28);
+nav .ind{position:absolute;left:4px;right:4px;top:0;border-radius:12px;background:var(--blue);box-shadow:0 2px 8px rgba(37,99,235,.22);
   transition:transform .32s cubic-bezier(.2,.8,.2,1),height .32s cubic-bezier(.2,.8,.2,1),opacity .2s;pointer-events:none}
 nav.slide a.on{background:none;box-shadow:none}
 /* 切换页面、子页、分页时淡入上移 */
