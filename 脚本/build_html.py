@@ -628,14 +628,14 @@ RS_JS = r"""<script>(function(){
       '<div class="rs-nm">' + esc(x.zh) + '</div><div class="rs-det">' + detHtml(x, true) + '</div>';
   }
   function place(el, x, y, w, h){ el.style.left = x + 'px'; el.style.top = y + 'px'; el.style.width = w + 'px'; el.style.height = h + 'px'; }
-  function closeBig(anim){
-    if (!big) return;
-    var b = big, slot = slotEl(b.dataset.c);
-    big = null;
+  // 收起：缩回原格子。原格子这时可能正被新展开的卡片推开，所以缩到它推开后的位置和宽度（moves 里有），不然缩完会跳一下
+  function closeBig(b, anim, moves){
+    var slot = slotEl(b.dataset.c), m = slot && moves.get(slot) || {};
     b.classList.remove('open', 'sel');
+    b.classList.add('closing');  // 压在新卡片下面
     var done = function(){ b.remove(); if (slot) slot.classList.remove('rs-hide'); };
     if (!anim || !slot) { done(); return; }
-    place(b, slot.offsetLeft, slot.offsetTop, slot.offsetWidth, slot.offsetHeight);
+    place(b, slot.offsetLeft + (m.x || 0), slot.offsetTop + (m.y || 0), m.w || slot.offsetWidth, slot.offsetHeight);
     setTimeout(done, 460);
   }
   function ci(c){ return [].indexOf.call(c.parentNode.parentNode.children, c.parentNode); }  // 格子在第几列
@@ -643,7 +643,8 @@ RS_JS = r"""<script>(function(){
     var lane = $('v-lane'), slot = slotEl(SEL), still = !anim;
     if (big && !big.isConnected) big = null;  // 时间线重画过
     if (still) lane.classList.add('rs-still');
-    if (!big || big.dataset.c !== SEL) closeBig(anim && prev !== SEL);
+    var closing = big && big.dataset.c !== SEL ? big : null;
+    if (closing) big = null;
     var cells = [].slice.call(lane.querySelectorAll('.rs-col .rs-c'));
     var moves = new Map();
     if (SEL && slot) {
@@ -651,6 +652,7 @@ RS_JS = r"""<script>(function(){
       var bw = slot.parentNode.offsetWidth, colX = BR.map(function(b, k){ return k * (bw + g); });
       var x0 = colX[i], t0 = slot.offsetTop, h0 = slot.offsetHeight, W = lane.clientWidth;
       // 宽度：以格子为中心向两边撑开，每边被挤的格子最窄 60px，一边让不动了由另一边让
+      var G = g;  // 放大的卡片和四周格子的间距
       var Wo = Math.min(Math.max(300, bw * 2.2), W * .5), mn = Math.min(bw, 60), capL = i * (bw - mn), capR = (6 - i) * (bw - mn);
       Wo = Math.max(bw, Math.min(Wo, bw + capL + capR));  // 窗口很窄时也不比原格子小
       var L = Math.max(x0 - capL, Math.min(x0 + bw / 2 - Wo / 2, x0 + bw + capR - Wo)), eL = x0 - L, eR = L + Wo - x0 - bw;
@@ -665,19 +667,19 @@ RS_JS = r"""<script>(function(){
       var up = col.filter(function(c){ return c.offsetTop < t0; }).sort(function(a, b){ return b.offsetTop - a.offsetTop; });
       var dn = col.filter(function(c){ return c.offsetTop > t0; }).sort(function(a, b){ return a.offsetTop - b.offsetTop; });
       for (var pass = 0; pass < 2; pass++) {
-        var lim = T - g, minTop = 0; moves.clear();
+        var lim = T - G, minTop = 0; moves.clear();
         up.forEach(function(c){ var t = c.offsetTop, h = c.offsetHeight, nb = Math.min(t + h, lim); if (nb < t + h) moves.set(c, {y: nb - t - h}); lim = Math.min(t, nb - h) - g; minTop = Math.min(minTop, nb - h); });
         if (minTop >= 0) break;
         T -= minTop;
       }
-      var lim2 = T + Ho + g;
+      var lim2 = T + Ho + G;
       dn.forEach(function(c){ var t = c.offsetTop, h = c.offsetHeight, nt = Math.max(t, lim2); if (nt > t) moves.set(c, {y: nt - t}); lim2 = nt + h + g; });
       // 别的列：和卡片上下有重叠的格子挤窄、往两边让
       cells.forEach(function(c){
         var k = ci(c);
-        if (k === i || c.offsetTop >= T + Ho + g || c.offsetTop + c.offsetHeight <= T - g) return;
-        var s = k < i ? eL / i : eR / (6 - i); if (!(s > 0.5)) return;
-        var nl = k < i ? colX[0] + k * (bw - s + g) : L + Wo + g + (k - i - 1) * (bw - s + g);
+        if (k === i || c.offsetTop >= T + Ho + G || c.offsetTop + c.offsetHeight <= T - G) return;
+        var s = k < i ? (eL + G - g) / i : (eR + G - g) / (6 - i); if (!(s > 0.5)) return;
+        var nl = k < i ? colX[0] + k * (bw - s + g) : L + Wo + G + (k - i - 1) * (bw - s + g);
         moves.set(c, {x: nl - colX[k], w: bw - s});
       });
       // 放大的卡片
@@ -694,6 +696,7 @@ RS_JS = r"""<script>(function(){
       }
       place(big, L, T, Wo, Ho);
     }
+    if (closing) closeBig(closing, anim && prev !== SEL, moves);
     cells.forEach(function(c){
       var m = moves.get(c);
       c.style.transform = m ? 'translate(' + (m.x || 0) + 'px,' + (m.y || 0) + 'px)' : '';
@@ -714,28 +717,62 @@ RS_JS = r"""<script>(function(){
     var end = performance.now() + ms;
     (function f(){ drawLaneLinks(); if (performance.now() < end) linkRaf = requestAnimationFrame(f); })();
   }
-  // 连线：两头都接在格子边的中点；左右的接左右边，同一列的接上下边
+  // 连线：两头接在格子边的中点，每头各自选朝向对方中心的那条边，曲线沿那条边的法线方向出去、进来。
+  // 只避开高亮的格子（放大的卡片和它的前置、后续）：默认那条曲线会穿过它们时，换别的边、换弯曲程度再试，
+  // 挑一条不穿过的；变淡的格子不用管。
+  function side(r, cx, cy){
+    var dx = (cx - (r.l + r.w / 2)) / (r.w / 2), dy = (cy - (r.t + r.h / 2)) / (r.h / 2);
+    return Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? 'r' : 'l') : (dy > 0 ? 'b' : 't');
+  }
+  var NORM = {l: [-1, 0], r: [1, 0], t: [0, -1], b: [0, 1]}, SIDES = ['l', 'r', 't', 'b'];
+  function node(r, sd){ return sd === 'l' ? [r.l, r.t + r.h / 2] : sd === 'r' ? [r.l + r.w, r.t + r.h / 2] : sd === 't' ? [r.l + r.w / 2, r.t] : [r.l + r.w / 2, r.t + r.h]; }
+  function curve(B, sb, A, sa, m, off){
+    var p = node(B, sb), q = node(A, sa);
+    if (off) { if (sa === 'l' || sa === 'r') q[1] += off; else q[0] += off; }
+    var k = Math.max(28, Math.hypot(q[0] - p[0], q[1] - p[1]) * m);
+    return {sa: sa, sb: sb, m: m, p: p, q: q, c1: [p[0] + NORM[sb][0] * k, p[1] + NORM[sb][1] * k], c2: [q[0] + NORM[sa][0] * k, q[1] + NORM[sa][1] * k]};
+  }
+  function hits(o, c, W){
+    var n = Math.max(24, Math.ceil(Math.hypot(c.q[0] - c.p[0], c.q[1] - c.p[1]) / 6));
+    for (var k = 1; k < n; k++) {
+      var t = k / n, u = 1 - t;
+      var x = u*u*u*c.p[0] + 3*u*u*t*c.c1[0] + 3*u*t*t*c.c2[0] + t*t*t*c.q[0], y = u*u*u*c.p[1] + 3*u*u*t*c.c1[1] + 3*u*t*t*c.c2[1] + t*t*t*c.q[1];
+      if (x < -12 || x > W + 12) return true;  // 不要甩出时间线左右两边
+      for (var i = 0; i < o.length; i++) { var r = o[i]; if (x > r.l && x < r.l + r.w && y > r.t && y < r.t + r.h) return true; }
+    }
+    return false;
+  }
   function drawLaneLinks(){
     var lane = $('v-lane'), svg = lane.querySelector('.rs-lsvg'); if (!svg) return;
     var el = laneEl(SEL), s = '';
     if (el) {
-      var lr = lane.getBoundingClientRect(), a = el.getBoundingClientRect(), x = byCode[SEL];
-      var P = function(r, side){ return side === 'l' ? [r.left - lr.left, r.top - lr.top + r.height / 2] : side === 'r' ? [r.right - lr.left, r.top - lr.top + r.height / 2]
-        : side === 't' ? [r.left - lr.left + r.width / 2, r.top - lr.top] : [r.left - lr.left + r.width / 2, r.bottom - lr.top]; };
+      var lr = lane.getBoundingClientRect(), x = byCode[SEL];
+      var box = function(e){ var r = e.getBoundingClientRect(); return {l: r.left - lr.left, t: r.top - lr.top, w: r.width, h: r.height, el: e}; };
+      var A = box(el), acx = A.l + A.w / 2, acy = A.t + A.h / 2;
+      var inA = {l: A.l + 3, t: A.t + 3, w: A.w - 6, h: A.h - 6};  // 曲线不能穿过卡片本身（接在边上的那一头不算）
+      var hl = [].slice.call(lane.querySelectorAll('.rs-col .rs-c.rel-pre, .rs-col .rs-c.rel-post')).map(box);
+      var used = {};  // 卡片每条边上已经接了几条线：后来的沿边错开一点，别和前一条落在同一个点
       var one = function(c, color){
         var e = laneEl(c); if (!e || e === el) return;
-        var b = e.getBoundingClientRect(), p, q, d, hz = true;
-        if (b.right <= a.left + 1) { p = P(b, 'r'); q = P(a, 'l'); }
-        else if (b.left >= a.right - 1) { p = P(b, 'l'); q = P(a, 'r'); }
-        else if (b.bottom <= a.top + 1) { p = P(b, 'b'); q = P(a, 't'); hz = false; }
-        else { p = P(b, 't'); q = P(a, 'b'); hz = false; }
-        if (hz) {
-          var m = (p[0] + q[0]) / 2; d = 'M' + p[0] + ' ' + p[1] + ' C' + m + ' ' + p[1] + ',' + m + ' ' + q[1] + ',' + q[0] + ' ' + q[1];
-        } else {
-          var my = (p[1] + q[1]) / 2; d = 'M' + p[0] + ' ' + p[1] + ' C' + p[0] + ' ' + my + ',' + q[0] + ' ' + my + ',' + q[0] + ' ' + q[1];
+        var B = box(e), sb = side(B, acx, acy), sa = side(A, B.l + B.w / 2, B.t + B.h / 2);
+        var obs = hl.filter(function(r){ return r.el !== e; }).concat([inA]);
+        var best = curve(B, sb, A, sa, .45);
+        var LW = lane.clientWidth;
+        if (hits(obs, best, LW)) {
+          // 换弯曲程度、换边：先试默认的两条边，再按两头距离从近到远试别的组合
+          var tries = [], found = null;
+          [.7, 1, 1.4].forEach(function(m){ tries.push([sb, sa, m]); });
+          var pairs = [];
+          SIDES.forEach(function(b){ SIDES.forEach(function(a){ if (b !== sb || a !== sa) { var p = node(B, b), q = node(A, a); pairs.push([b, a, Math.hypot(q[0] - p[0], q[1] - p[1])]); } }); });
+          pairs.sort(function(u, v){ return u[2] - v[2]; }).forEach(function(pr){ [.45, .7, 1, 1.4].forEach(function(m){ tries.push([pr[0], pr[1], m]); }); });
+          tries.some(function(t){ var cv = curve(B, t[0], A, t[1], t[2]); if (!hits(obs, cv, LW)) { found = cv; return true; } return false; });
+          if (found) best = found;
         }
+        var nUsed = used[best.sa] || 0; used[best.sa] = nUsed + 1;
+        if (nUsed) best = curve(B, best.sb, A, best.sa, best.m, (nUsed % 2 ? 1 : -1) * Math.ceil(nUsed / 2) * 18);
+        var d = 'M' + best.p[0] + ' ' + best.p[1] + ' C' + best.c1[0] + ' ' + best.c1[1] + ',' + best.c2[0] + ' ' + best.c2[1] + ',' + best.q[0] + ' ' + best.q[1];
         s += '<path class="rs-lnk" d="' + d + '" fill="none" stroke="' + color + '" stroke-width="2.2"/>' +
-          '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="3.5" fill="' + color + '"/><circle cx="' + q[0] + '" cy="' + q[1] + '" r="3.5" fill="' + color + '"/>';
+          '<circle cx="' + best.p[0] + '" cy="' + best.p[1] + '" r="3.5" fill="' + color + '"/><circle cx="' + best.q[0] + '" cy="' + best.q[1] + '" r="3.5" fill="' + color + '"/>';
       };
       x.pre.forEach(function(c){ one(c, '#f59e0b'); });
       x.post.forEach(function(c){ one(c, '#2563eb'); });
@@ -1307,6 +1344,7 @@ td.flash{outline:3px solid #f59e0b;outline-offset:-2px;background:var(--flash)!i
 .rs-big{position:absolute;margin:0;box-sizing:border-box;overflow:hidden;z-index:3;
   transition:left .45s cubic-bezier(.2,.8,.2,1),top .45s cubic-bezier(.2,.8,.2,1),width .45s cubic-bezier(.2,.8,.2,1),height .45s cubic-bezier(.2,.8,.2,1),padding .45s cubic-bezier(.2,.8,.2,1),box-shadow .3s,border-color .2s}
 .rs-still .rs-c{transition:none!important}
+.rs-big.closing{z-index:2}
 .rs-c.sq .rs-nm{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .rs-c.sq .rs-cd span{display:none}
 /* 前置橙、后续蓝；其余变淡 */
