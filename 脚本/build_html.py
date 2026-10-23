@@ -525,8 +525,7 @@ RS_JS = r"""<script>(function(){
   }
   function cell(x){
     return '<div class="rs-c st-' + ST[x.code] + (bought(x.code) ? ' bought' : '') + '" id="' + x.id + '" data-c="' + x.code + '"><div class="rs-cd"><em>' + x.code + '</em>' +
-      (x.pre.length ? '<span>组合</span>' : '') + '<button class="rs-x" title="收起"><svg viewBox="0 0 10 10"><path d="M0 0l10 10M10 0L0 10"/></svg></button></div>' +
-      '<div class="rs-nm">' + esc(x.zh) + '</div><div class="rs-more"><div class="rs-det"></div></div></div>';
+      (x.pre.length ? '<span>组合</span>' : '') + '</div><div class="rs-nm">' + esc(x.zh) + '</div></div>';
   }
   // 时间线：一行一个 R（最早能解锁的 R），七个分支一列一个；R 不单独标，看 Ascension 分隔线和「你在这里」
   function renderLane(){
@@ -617,79 +616,126 @@ RS_JS = r"""<script>(function(){
       (x.note ? '<div class="rs-f"><small>备注</small><span class="rs-mut">' + esc(x.note) + '</span></div>' : '');
   }
 
-  // 时间线：选中的格子原地变大——只在它这一行里变宽，同一行的其他格子被挤窄；格子变高，下面的往下挤；
-  // 再画线连到前置（橙）和后续（蓝）。宽高都是 CSS 过渡，连线在过渡期间逐帧跟着重画。
-  function laneEl(c){ return c ? $('v-lane').querySelector('.rs-c[data-c="' + c + '"]') : null; }
-  function setCols(){
-    var el = laneEl(SEL), row = el && el.closest('.rs-lr'), col = el && el.parentNode;
-    $('v-lane').querySelectorAll('.rs-lr.wide').forEach(function(r){ if (r !== row) { r.classList.remove('wide'); r.style.removeProperty('--cols'); } });
-    $('v-lane').querySelectorAll('.rs-col.wide').forEach(function(c){ if (c !== col) c.classList.remove('wide'); });
-    if (!row) return;
-    var i = [].indexOf.call(row.children, col);
-    // 以格子为中心向两边撑开：左右两边各让出一半（每边的格子最窄 64px，一边让不动了再由另一边让）
-    var b = (row.clientWidth - 6 * 8) / 7, Wo = Math.min(Math.max(300, b * 2.2), row.clientWidth * .5), E = Wo - b, m = Math.min(b, 64);
-    var nl = i, nr = 6 - i, capL = nl * (b - m), capR = nr * (b - m);
-    var sL = Math.min(E / 2, capL), sR = Math.min(E - sL, capR); sL = Math.min(E - sR, capL);
-    Wo = b + sL + sR;
-    row.style.setProperty('--bw', b + 'px');  // 同一格里其他研究保持原来的宽度
-    // 都用 fr（和平时的 1fr 能连续过渡）：权重 = 想要的宽度 / 原来的宽度，总和还是 7
-    row.style.setProperty('--cols', BR.map(function(x, k){ var w = k < i ? b - sL / nl : k > i ? b - sR / nr : Wo; return (w / b).toFixed(4) + 'fr'; }).join(' '));
-    row.classList.add('wide'); col.classList.add('wide');
+  // 时间线：选中的格子以中心为基准原地变大（向上下左右同时长）。表格本身不重排：
+  // 放大的卡片是盖在原位上的一张（原格子留着占位），同一列上面的格子往上让、下面的往下让（先用掉原有的空隙），
+  // 别的列里挨着卡片的格子被挤窄、往两边让开，所以卡片旁边不会空出一块。位置和大小都是 CSS 过渡，连线逐帧跟着重画。
+  var big = null;
+  function slotEl(c){ return c ? $('v-lane').querySelector('.rs-col .rs-c[data-c="' + c + '"]') : null; }
+  function laneEl(c){ return !c ? null : big && big.dataset.c === c && big.isConnected ? big : slotEl(c); }
+  function bigHtml(x){
+    return '<div class="rs-cd"><em>' + x.code + '</em>' + (x.pre.length ? '<span>组合</span>' : '') +
+      '<button class="rs-x" title="收起"><svg viewBox="0 0 10 10"><path d="M0 0l10 10M10 0L0 10"/></svg></button></div>' +
+      '<div class="rs-nm">' + esc(x.zh) + '</div><div class="rs-det">' + detHtml(x, true) + '</div>';
   }
+  function place(el, x, y, w, h){ el.style.left = x + 'px'; el.style.top = y + 'px'; el.style.width = w + 'px'; el.style.height = h + 'px'; }
+  function closeBig(anim){
+    if (!big) return;
+    var b = big, slot = slotEl(b.dataset.c);
+    big = null;
+    b.classList.remove('open', 'sel');
+    var done = function(){ b.remove(); if (slot) slot.classList.remove('rs-hide'); };
+    if (!anim || !slot) { done(); return; }
+    place(b, slot.offsetLeft, slot.offsetTop, slot.offsetWidth, slot.offsetHeight);
+    setTimeout(done, 460);
+  }
+  function ci(c){ return [].indexOf.call(c.parentNode.parentNode.children, c.parentNode); }  // 格子在第几列
   function openCell(prev, anim){
-    var old = laneEl(prev), el = laneEl(SEL);
-    // 中心不动：展开过程中跟着滚动，让格子中心一直停在屏幕上原来的位置（格子不在屏幕里、或者是从链接跳来的就不锁）
-    var anchor = el || (prev !== SEL ? old : null), lock = null;
-    if (anim && anchor && anim !== 'jump') {
-      var r0 = anchor.getBoundingClientRect();
-      if (r0.top >= 60 && r0.bottom <= innerHeight) lock = {el: anchor, y: r0.top + r0.height / 2};
+    var lane = $('v-lane'), slot = slotEl(SEL), still = !anim;
+    if (big && !big.isConnected) big = null;  // 时间线重画过
+    if (still) lane.classList.add('rs-still');
+    if (!big || big.dataset.c !== SEL) closeBig(anim && prev !== SEL);
+    var cells = [].slice.call(lane.querySelectorAll('.rs-col .rs-c'));
+    var moves = new Map();
+    if (SEL && slot) {
+      var x = byCode[SEL], i = BR.map(function(b){ return b[0]; }).indexOf(x.b), g = 8;
+      var bw = slot.parentNode.offsetWidth, colX = BR.map(function(b, k){ return k * (bw + g); });
+      var x0 = colX[i], t0 = slot.offsetTop, h0 = slot.offsetHeight, W = lane.clientWidth;
+      // 宽度：以格子为中心向两边撑开，每边被挤的格子最窄 60px，一边让不动了由另一边让
+      var Wo = Math.min(Math.max(300, bw * 2.2), W * .5), mn = Math.min(bw, 60), capL = i * (bw - mn), capR = (6 - i) * (bw - mn);
+      Wo = Math.max(bw, Math.min(Wo, bw + capL + capR));  // 窗口很窄时也不比原格子小
+      var L = Math.max(x0 - capL, Math.min(x0 + bw / 2 - Wo / 2, x0 + bw + capR - Wo)), eL = x0 - L, eR = L + Wo - x0 - bw;
+      // 高度：按放大后的宽度先量一次
+      var ms = document.createElement('div');
+      ms.className = 'rs-c rs-big open'; ms.style.cssText = 'visibility:hidden;transition:none;height:auto;width:' + Wo + 'px';
+      ms.innerHTML = bigHtml(x); lane.appendChild(ms);
+      var Ho = ms.offsetHeight; ms.remove();
+      var T = Math.max(0, t0 + h0 / 2 - Ho / 2);
+      // 同一列：上面的往上推、下面的往下推，碰到原有的空隙就停；推到顶了就让卡片整体往下挪一点
+      var col = cells.filter(function(c){ return c !== slot && ci(c) === i; });
+      var up = col.filter(function(c){ return c.offsetTop < t0; }).sort(function(a, b){ return b.offsetTop - a.offsetTop; });
+      var dn = col.filter(function(c){ return c.offsetTop > t0; }).sort(function(a, b){ return a.offsetTop - b.offsetTop; });
+      for (var pass = 0; pass < 2; pass++) {
+        var lim = T - g, minTop = 0; moves.clear();
+        up.forEach(function(c){ var t = c.offsetTop, h = c.offsetHeight, nb = Math.min(t + h, lim); if (nb < t + h) moves.set(c, {y: nb - t - h}); lim = Math.min(t, nb - h) - g; minTop = Math.min(minTop, nb - h); });
+        if (minTop >= 0) break;
+        T -= minTop;
+      }
+      var lim2 = T + Ho + g;
+      dn.forEach(function(c){ var t = c.offsetTop, h = c.offsetHeight, nt = Math.max(t, lim2); if (nt > t) moves.set(c, {y: nt - t}); lim2 = nt + h + g; });
+      // 别的列：和卡片上下有重叠的格子挤窄、往两边让
+      cells.forEach(function(c){
+        var k = ci(c);
+        if (k === i || c.offsetTop >= T + Ho + g || c.offsetTop + c.offsetHeight <= T - g) return;
+        var s = k < i ? eL / i : eR / (6 - i); if (!(s > 0.5)) return;
+        var nl = k < i ? colX[0] + k * (bw - s + g) : L + Wo + g + (k - i - 1) * (bw - s + g);
+        moves.set(c, {x: nl - colX[k], w: bw - s});
+      });
+      // 放大的卡片
+      if (!big) {
+        big = document.createElement('div');
+        big.className = 'rs-c rs-big st-' + ST[x.code] + (bought(x.code) ? ' bought' : '') + ' sel';
+        big.dataset.c = x.code;
+        big.innerHTML = bigHtml(x);
+        lane.appendChild(big);
+        place(big, x0, t0, bw, h0);
+        slot.classList.add('rs-hide');
+        if (!still) void big.offsetWidth;  // 从原格子的位置和大小开始过渡
+        big.classList.add('open');
+      }
+      place(big, L, T, Wo, Ho);
     }
-    if (old && prev !== SEL) {
-      old.classList.remove('open');
-      var inner = old.querySelector('.rs-det');
-      setTimeout(function(){ if (!old.classList.contains('open')) inner.innerHTML = ''; }, 480);
-    }
-    if (el && !el.classList.contains('open')) {
-      el.querySelector('.rs-det').innerHTML = detHtml(byCode[SEL], true);
-      if (anim) void el.offsetHeight;  // 先按收起的样子排一次，过渡才有起点
-      el.classList.add('open');
-    }
-    setCols();
-    animLinks(anim ? 620 : 0, lock);
-    if (el && anim && anim !== 'jump') setTimeout(function(){
-      var r = el.getBoundingClientRect(), h = innerHeight;
-      if (!lock) el.scrollIntoView({block: 'center', behavior: 'smooth'});
-      else if (r.top < 60 || r.bottom > h - 8) el.scrollIntoView({block: r.height > h - 120 ? 'start' : 'nearest', behavior: 'smooth'});  // 放大后超出屏幕才挪
+    cells.forEach(function(c){
+      var m = moves.get(c);
+      c.style.transform = m ? 'translate(' + (m.x || 0) + 'px,' + (m.y || 0) + 'px)' : '';
+      c.style.width = m && m.w ? m.w + 'px' : '';
+      c.classList.toggle('sq', !!(m && m.w));
+    });
+    if (still) { void lane.offsetWidth; lane.classList.remove('rs-still'); }
+    animLinks(anim ? 620 : 0);
+    if (big && anim && anim !== 'jump') setTimeout(function(){
+      if (!big) return;
+      var r = big.getBoundingClientRect(), h = innerHeight;
+      if (r.top < 60 || r.bottom > h - 8) big.scrollIntoView({block: r.height > h - 120 ? 'start' : 'nearest', behavior: 'smooth'});  // 放大后超出屏幕才挪
     }, 480);
   }
   var linkRaf = 0;
-  function animLinks(ms, lock){
+  function animLinks(ms){
     cancelAnimationFrame(linkRaf);
-    var end = performance.now() + ms, sc = lock && rgScroller();
-    (function f(){
-      if (lock && lock.el.isConnected) { var r = lock.el.getBoundingClientRect(); sc.scrollTop += r.top + r.height / 2 - lock.y; }
-      drawLaneLinks();
-      if (performance.now() < end) linkRaf = requestAnimationFrame(f);
-    })();
+    var end = performance.now() + ms;
+    (function f(){ drawLaneLinks(); if (performance.now() < end) linkRaf = requestAnimationFrame(f); })();
   }
+  // 连线：两头都接在格子边的中点；左右的接左右边，同一列的接上下边
   function drawLaneLinks(){
     var lane = $('v-lane'), svg = lane.querySelector('.rs-lsvg'); if (!svg) return;
     var el = laneEl(SEL), s = '';
     if (el) {
       var lr = lane.getBoundingClientRect(), a = el.getBoundingClientRect(), x = byCode[SEL];
-      var ay = a.top - lr.top + 16;
+      var P = function(r, side){ return side === 'l' ? [r.left - lr.left, r.top - lr.top + r.height / 2] : side === 'r' ? [r.right - lr.left, r.top - lr.top + r.height / 2]
+        : side === 't' ? [r.left - lr.left + r.width / 2, r.top - lr.top] : [r.left - lr.left + r.width / 2, r.bottom - lr.top]; };
       var one = function(c, color){
-        var e = laneEl(c); if (!e) return;
-        var b = e.getBoundingClientRect(), by = b.top - lr.top + b.height / 2, x1, x2, d;
-        if (b.right <= a.left + 1) { x1 = b.right - lr.left; x2 = a.left - lr.left; }
-        else if (b.left >= a.right - 1) { x1 = b.left - lr.left; x2 = a.right - lr.left; }
-        else {  // 同一列：从左边绕出去
-          x1 = b.left - lr.left; x2 = a.left - lr.left;
-          d = 'M' + x1 + ' ' + by + ' C' + (x1 - 34) + ' ' + by + ',' + (x2 - 34) + ' ' + ay + ',' + x2 + ' ' + ay;
+        var e = laneEl(c); if (!e || e === el) return;
+        var b = e.getBoundingClientRect(), p, q, d, hz = true;
+        if (b.right <= a.left + 1) { p = P(b, 'r'); q = P(a, 'l'); }
+        else if (b.left >= a.right - 1) { p = P(b, 'l'); q = P(a, 'r'); }
+        else if (b.bottom <= a.top + 1) { p = P(b, 'b'); q = P(a, 't'); hz = false; }
+        else { p = P(b, 't'); q = P(a, 'b'); hz = false; }
+        if (hz) {
+          var m = (p[0] + q[0]) / 2; d = 'M' + p[0] + ' ' + p[1] + ' C' + m + ' ' + p[1] + ',' + m + ' ' + q[1] + ',' + q[0] + ' ' + q[1];
+        } else {
+          var my = (p[1] + q[1]) / 2; d = 'M' + p[0] + ' ' + p[1] + ' C' + p[0] + ' ' + my + ',' + q[0] + ' ' + my + ',' + q[0] + ' ' + q[1];
         }
-        if (!d) { var m = (x1 + x2) / 2; d = 'M' + x1 + ' ' + by + ' C' + m + ' ' + by + ',' + m + ' ' + ay + ',' + x2 + ' ' + ay; }
         s += '<path class="rs-lnk" d="' + d + '" fill="none" stroke="' + color + '" stroke-width="2.2"/>' +
-          '<circle cx="' + x1 + '" cy="' + by + '" r="3.5" fill="' + color + '"/><circle cx="' + x2 + '" cy="' + ay + '" r="3.5" fill="' + color + '"/>';
+          '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="3.5" fill="' + color + '"/><circle cx="' + q[0] + '" cy="' + q[1] + '" r="3.5" fill="' + color + '"/>';
       };
       x.pre.forEach(function(c){ one(c, '#f59e0b'); });
       x.post.forEach(function(c){ one(c, '#2563eb'); });
@@ -1232,7 +1278,7 @@ td.flash{outline:3px solid #f59e0b;outline-offset:-2px;background:var(--flash)!i
 .rs-rp-bar{height:8px;background:rgba(20,40,90,.08);border-radius:99px;overflow:hidden}
 .rs-rp-bar i{display:block;height:100%;background:var(--blue);border-radius:99px;transition:width .5s cubic-bezier(.2,.8,.2,1)}
 .rs-c{position:relative;border:1px solid var(--line);border-radius:12px;padding:5px 9px 6px;cursor:pointer;font-size:12.5px;line-height:1.45;color:#3d4a5f;background:#fff;
-  scroll-margin:90px;transition:border-color .2s,background 1.5s,opacity .25s,box-shadow .3s,padding .45s cubic-bezier(.2,.8,.2,1)}
+  scroll-margin:90px;transition:border-color .2s,background 1.5s,opacity .25s,box-shadow .3s,padding .45s cubic-bezier(.2,.8,.2,1),transform .45s cubic-bezier(.2,.8,.2,1),width .45s cubic-bezier(.2,.8,.2,1)}
 .rs-c:hover{border-color:#cdd9ee}
 .rs-cd{display:flex;align-items:center;gap:4px;margin-bottom:1px}
 .rs-cd em{font-style:normal;font-size:11px;color:#1d4ed8;background:var(--soft);border-radius:6px;padding:0 6px;white-space:nowrap}
@@ -1243,13 +1289,11 @@ td.flash{outline:3px solid #f59e0b;outline-offset:-2px;background:var(--flash)!i
 .rs-c.st-no{opacity:.5}
 .rs-c.st-no:hover{opacity:1}
 .rs-c.flash{background:var(--flash);border-color:#f59e0b}
-/* 展开：列变宽、格子变高（0fr→1fr），名字放大，详情淡入 */
+/* 放大的卡片：盖在原格子上，从原格子的位置和大小过渡到放大后的；名字放大，详情淡入 */
 .rs-nm{transition:font-size .45s cubic-bezier(.2,.8,.2,1),color .3s}
-.rs-more{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s cubic-bezier(.2,.8,.2,1)}
 .rs-det{min-height:0;overflow:hidden;opacity:0;transition:opacity .2s}
 .rs-c.open{cursor:default;opacity:1;background:#fff;border-color:var(--blue);padding:10px 14px 14px;z-index:1;box-shadow:0 10px 30px rgba(20,40,90,.16),0 0 0 3px rgba(37,99,235,.12)}
 .rs-c.open .rs-nm{font-size:18px;font-weight:600;color:var(--fg);margin-top:4px}
-.rs-c.open .rs-more{grid-template-rows:1fr}
 .rs-c.open .rs-det{opacity:1;transition:opacity .3s .15s}
 .rs-c .rs-x{position:static;flex:none;width:22px;height:22px;margin-left:6px;display:none}
 .rs-c:not(.st-own) .rs-x{margin-right:0}
@@ -1257,6 +1301,14 @@ td.flash{outline:3px solid #f59e0b;outline-offset:-2px;background:var(--flash)!i
 .rs-c.open .rs-cd span{margin-left:auto}
 .rs-c.open .rs-cd em{font-size:12px}
 .rs-c.open.st-own::after{right:-6px;top:-6px}
+.rs-col .rs-c{box-sizing:border-box;width:100%}
+.rs-c.rs-hide{visibility:hidden}
+.rs-big.st-own::after{display:none}  /* 放大后卡片里有「已解锁」标签，角上的勾会被裁掉 */
+.rs-big{position:absolute;margin:0;box-sizing:border-box;overflow:hidden;z-index:3;
+  transition:left .45s cubic-bezier(.2,.8,.2,1),top .45s cubic-bezier(.2,.8,.2,1),width .45s cubic-bezier(.2,.8,.2,1),height .45s cubic-bezier(.2,.8,.2,1),padding .45s cubic-bezier(.2,.8,.2,1),box-shadow .3s,border-color .2s}
+.rs-still .rs-c{transition:none!important}
+.rs-c.sq .rs-nm{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rs-c.sq .rs-cd span{display:none}
 /* 前置橙、后续蓝；其余变淡 */
 .rs-c.rel-pre{opacity:1;border-color:#f59e0b;box-shadow:0 0 0 3px rgba(245,158,11,.2)}
 .rs-c.rel-post{opacity:1;border-color:var(--blue);box-shadow:0 0 0 3px rgba(37,99,235,.15)}
@@ -1264,7 +1316,6 @@ td.flash{outline:3px solid #f59e0b;outline-offset:-2px;background:var(--flash)!i
 .rs-lsvg{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible;pointer-events:none}
 .rs-lsvg .rs-lnk{animation:rs-dash .6s linear infinite,rg-in .3s ease-out}
 .rs-lh,.rs-lr{display:grid;grid-template-columns:var(--cols,1fr 1fr 1fr 1fr 1fr 1fr 1fr);gap:8px;transition:grid-template-columns .45s cubic-bezier(.2,.8,.2,1)}
-.rs-col.wide>.rs-c:not(.open){width:var(--bw);max-width:100%;box-sizing:border-box}
 .rs-lh{font-size:12px;color:var(--muted);padding:0 0 8px;border-bottom:1px solid var(--line);margin-bottom:8px}
 .rs-lh span{display:flex;align-items:center;gap:6px;white-space:nowrap}
 .rs-lr{padding:4px 0}
@@ -1314,7 +1365,7 @@ td.flash{outline:3px solid #f59e0b;outline-offset:-2px;background:var(--flash)!i
 .rs-pc.st-own i{color:var(--blue)}
 .rs-empty{border:1px dashed var(--line);border-radius:16px;padding:28px 16px;text-align:center;color:#9aa5b8;font-size:13px}
 .rs-tip{position:fixed;pointer-events:none;background:var(--fg);color:#fff;font-size:12px;padding:3px 10px;border-radius:999px;z-index:50;display:none;white-space:nowrap;box-shadow:0 6px 20px rgba(20,40,90,.25)}
-@media (prefers-reduced-motion:reduce){.rs-view.on,.rs-lnk,.rs-lsvg .rs-lnk{animation:none}.rs-c,.rs-nm,.rs-more,.rs-det,.rs-lh,.rs-lr{transition:none!important}}
+@media (prefers-reduced-motion:reduce){.rs-view.on,.rs-lnk,.rs-lsvg .rs-lnk{animation:none}.rs-c,.rs-nm,.rs-det{transition:none!important}}
 /* 建筑升级：选建筑看一列 */
 .bd-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px}
 .bd-tabs button{font:inherit;font-size:13px;border:none;background:#e6ecf5;color:#3d4a5f;padding:4px 13px;border-radius:999px;cursor:pointer;transition:background .15s,color .15s}
