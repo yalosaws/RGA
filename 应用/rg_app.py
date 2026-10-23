@@ -20,6 +20,7 @@ import zlib
 
 import webview
 from auto_click import AutoClicker
+import template_store
 
 TITLE = 'RGA'
 PAGE = 'RGA.html'
@@ -135,6 +136,18 @@ class Api:
             self._clicker.close()
 
     # ---- 存档 ----
+    def read_templates(self):
+        try:
+            return {'ok': True, 'templates': template_store.read_templates()}
+        except Exception as e:
+            return {'ok': False, 'error': str(e)}
+
+    def add_template(self, category, name, code):
+        try:
+            return template_store.add_template(category, name, code)
+        except Exception as e:
+            return {'ok': False, 'error': str(e)}
+
     def read_save(self):
         """返回最新的存档字符串和文件修改时间（毫秒）"""
         files = find_saves()

@@ -27,7 +27,7 @@ import rg_app  # noqa: E402  只用它的 seal()
 
 
 # PyArmor 混淆后的代码里看不出 import 了什么，PyInstaller 要靠这里列出来
-HIDDEN = ['webview', 'auto_click', 'ctypes', 'ctypes.wintypes', 'glob', 'hashlib', 'http.server',
+HIDDEN = ['webview', 'auto_click', 'template_store', 'pathlib', 'struct', 'datetime', 'ctypes', 'ctypes.wintypes', 'glob', 'hashlib', 'http.server',
           'secrets', 'threading', 'zlib', 'json', 'queue', 'time']
 
 
@@ -47,7 +47,9 @@ def build(pack):
     obf = os.path.join(pack, 'obf')
     click_script = os.path.join(pack, 'auto_click.py')
     shutil.copyfile(os.path.join(APP, 'auto_click.py'), click_script)
-    subprocess.check_call([sys.executable, '-m', 'pyarmor.cli', 'gen', '-O', obf, script, click_script], cwd=pack)
+    template_script = os.path.join(pack, 'template_store.py')
+    shutil.copyfile(os.path.join(APP, 'template_store.py'), template_script)
+    subprocess.check_call([sys.executable, '-m', 'pyarmor.cli', 'gen', '-O', obf, script, click_script, template_script], cwd=pack)
     work = os.path.join(ROOT, 'build')
     cmd = [sys.executable, '-m', 'PyInstaller', '--noconfirm', '--onefile', '--windowed', '--name', 'RGA',
            '--paths', obf, '--hidden-import', next(d for d in os.listdir(obf) if d.startswith('pyarmor_runtime')),

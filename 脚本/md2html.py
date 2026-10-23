@@ -7,7 +7,8 @@ import re, html, sys
 
 # 专名分类上色：md 里写 {法:仙灵吟唱}，类别见 TAGS
 TAGS = {'阵': ('fa', '阵营'), '法': ('sp', '法术'), '升': ('up', '升级'), '建': ('bd', '建筑'), '奖': ('tr', '奖杯'),
-        '隐': ('ht', '隐藏奖杯'), '研': ('rs', '研究'), '挑': ('ch', '挑战'), '遗': ('ar', '遗物')}
+        '隐': ('ht', '隐藏奖杯'), '研': ('rs', '研究'), '挑': ('ch', '挑战'), '遗': ('ar', '遗物'),
+        '模': ('bl', '模板')}  # 模板：{模:显示文字|模板原名}，链接到 A0 模板库的卡片
 
 CSS = """@page{size:A4;margin:16mm 15mm}
 body{font-family:"Microsoft YaHei","PingFang SC",sans-serif;font-size:10.5pt;line-height:1.65;color:#222}
@@ -27,8 +28,8 @@ th:first-child,td:first-child{white-space:nowrap}
 th{background:#ede6f8;white-space:nowrap}
 ul,ol{margin:4px 0 10px;padding-left:24px} li{margin:2px 0}
 strong{color:#000}
-.t-fa{color:#c62828}.t-sp{color:#1565c0}.t-up{color:#00838f}.t-bd{color:#a0522d}.t-tr{color:#d4a000}
-.t-ht{color:#8e24aa}.t-rs{color:#2e7d32}.t-ch{color:#ef6c00}.t-ar{color:#c2185b}
+.t-sp{color:#1565c0}.t-up{color:#00838f}.t-bd{color:#a0522d}.t-tr{color:#d4a000}
+.t-ht{color:#8e24aa}.t-rs{color:#2e7d32}.t-ch{color:#ef6c00}.t-ar{color:#c2185b}.t-bl{color:#c62828}
 [class^="t-"]{font-weight:600}
 .legend{font-size:9pt;margin:-4px 0 12px}
 .legend span{margin-right:14px;white-space:nowrap}
@@ -42,9 +43,12 @@ def convert(text, link=None):
 
     def color_tag(m):
         k, name = m.group(1), m.group(2)
+        name, _, target = name.partition('|')  # {类:显示文字|链接目标}
+        if k == '阵':  # 阵营不再单独标色，按普通文字显示
+            return name
         if k not in used:
             used.append(k)
-        href = link(k, html.unescape(name)) if link else None
+        href = link(k, html.unescape(target or name)) if link else None
         if href:
             return '<a class="t-%s" href="%s">%s</a>' % (TAGS[k][0], href, name)
         return '<span class="t-%s">%s</span>' % (TAGS[k][0], name)

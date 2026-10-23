@@ -1,0 +1,176 @@
+<section id="sec-builds" class="table" hidden>
+<style>
+/* A0 模板库：和遗物、挑战页同一套卡片；顶上是浮动胶囊（类型、R、搜索） */
+#sec-builds .own-bar{padding-right:4px}
+.bt-rbar{gap:2px;padding:0 6px 0 16px!important;font-size:13px;color:var(--muted);cursor:text}
+.bt-rbar input{width:44px;border:0;background:none;font:inherit;font-size:13px;color:var(--fg);padding:0 2px}
+.bt-rbar input:focus{outline:none}
+.bt-rbar input::-webkit-inner-spin-button{display:none}
+.bt-rbar input::placeholder{color:var(--muted)}
+.bt-cur{font:inherit;font-size:12px;border:none;border-radius:999px;background:#fff;color:var(--blue);padding:3px 10px;cursor:pointer;box-shadow:0 1px 3px rgba(20,40,90,.08)}
+.bt-cur.on{background:var(--blue);color:#fff}
+.bt-sync{display:flex;align-items:center;gap:10px;margin:8px 4px 0;font-size:12.5px;color:var(--muted)}
+.bt-sync.err{color:#dc2626}
+.bt-sync button{font:inherit;font-size:12.5px;border:none;background:none;color:var(--blue);padding:0;cursor:pointer}
+.bt-sync button:disabled{color:var(--muted);cursor:default}
+.bt-card .art-h{margin-bottom:0}
+#sec-builds .art-h em.no{background:var(--blue)}
+.bt-en{font-size:12px;color:#9aa5b8;margin:2px 0 0;overflow-wrap:anywhere}
+.bt-note{margin:8px 0 0;font-size:13px;color:#526079;line-height:1.7}
+.bt-act{margin-left:auto;display:flex;align-items:center;gap:6px;align-self:center}
+.bt-btn{font:inherit;font-size:12.5px;border:none;border-radius:999px;padding:3px 12px;background:var(--soft);color:var(--fg);cursor:pointer;transition:background .15s}
+.bt-btn:hover{background:#e3ebfa}
+.bt-btn.pri{background:var(--blue);color:#fff}
+.bt-btn.pri:hover{background:#1d4ed8}
+.bt-btn:disabled{opacity:.5;cursor:default}
+.bt-state{font-size:12px;color:var(--muted)}
+.bt-state.err{color:#dc2626}
+.bt-card textarea{width:100%;box-sizing:border-box;margin-top:10px;font:12px Consolas,monospace;padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:var(--soft);resize:vertical}
+/* 升级、研究：代号 + 中文名 */
+.bt-i{display:block;font-size:13px;line-height:1.85;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-decoration:none!important}
+.bt-i code{display:inline-block;min-width:38px;font:500 11.5px Consolas,monospace;color:#9aa5b8;margin-right:4px}
+a.bt-i:hover{text-decoration:underline dotted!important;text-underline-offset:3px}
+.bt-card small{display:block;font-size:11.5px;color:#9aa5b8;margin-bottom:2px}
+.bt-m{display:grid;grid-template-columns:minmax(0,1fr) 150px;gap:6px 28px;margin-top:12px}
+.bt-ups{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:0 16px}
+.bt-card{container-type:inline-size}
+.bt-rs{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px 16px;margin-top:12px}
+.bt-br small span{color:#c2cad6;margin-left:2px}
+.bt-nil{color:#c9d1dd;font-size:13px}
+.bt-i.lock{color:#b6bfcc;font-weight:normal}
+.bt-i.lock code{color:#cfd6e0}
+.bt-remind{background:#fff8eb;border-color:#f6e2b8}
+.bt-remind:hover{border-color:#efcf8c}
+.bt-remind .art-h b{color:#a16207}
+.bt-cnt{color:var(--muted)!important;background:none!important;padding:0!important}
+.bt-empty{text-align:center;padding:40px 0;color:var(--muted);font-size:13px}
+@container (max-width:680px){.bt-rs{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:700px){.bt-m{grid-template-columns:1fr}.bt-act{margin-left:0;width:100%}}
+</style>
+<div class="cl" data-ok="1">
+<div class="cl-top bt-top">
+  <div class="own-bar"><div class="own-seg"><button class="on" data-kind="mercenary">佣兵<b>%%NM%%</b></button><button data-kind="research">研究<b>%%NR%%</b></button></div></div>
+  <label class="own-bar bt-rbar">R<input type="number" min="0" max="99" placeholder="全部" aria-label="按重生次数筛选"><button class="bt-cur" type="button" hidden></button></label>
+  <input class="cl-q" type="search" placeholder="搜索名字、升级、研究或法术">
+</div>
+<p class="cl-note">套用前先选好对应的立场、阵营和血统，各模板什么时候用见 <a href="#a0">A0 攻略要点</a>。研究模板读到存档后，还没解锁的研究会变灰。</p>
+<div class="bt-sync" hidden><span></span><button type="button">重新读取</button></div>
+<div class="art-list" data-k="mercenary">%%MERC%%</div>
+<div class="art-list" data-k="research" hidden>%%RES%%</div>
+<p class="bt-empty" hidden>没有符合条件的模板</p>
+</div>
+<script>
+(function(){
+  var DATA = %%DATA%%, root = document.getElementById('sec-builds');
+  var top = root.querySelector('.bt-top'), q = root.querySelector('.cl-q'), rIn = root.querySelector('.bt-rbar input'), cur = root.querySelector('.bt-cur');
+  var lists = [].slice.call(root.querySelectorAll('.art-list')), cards = [].slice.call(root.querySelectorAll('.bt-card'));
+  var sync = root.querySelector('.bt-sync'), syncText = sync.querySelector('span'), syncBtn = sync.querySelector('button');
+  var kind = 'mercenary', game = null, busy = false, myR = null;
+  function api(){ return window.pywebview && window.pywebview.api; }
+  function row(card){ return DATA[+card.dataset.i]; }
+
+  // 筛选：类型、R（没写 R 的模板一直显示）、搜索；两种类型的胶囊上显示各自符合条件的条数
+  function run(){
+    var k = q.value.trim().toLowerCase(), r = rIn.value === '' ? null : +rIn.value, n = {mercenary: 0, research: 0};
+    cards.forEach(function(c){
+      var d = row(c), ok = (!k || c.dataset.q.indexOf(k) >= 0) && (r === null || d.low === null || (r >= d.low && r <= d.high));
+      c.hidden = !ok || d.category !== kind;
+      if (ok && !d.reminder) n[d.category]++;
+    });
+    root.querySelectorAll('[data-kind]').forEach(function(b){ b.classList.toggle('on', b.dataset.kind === kind); b.querySelector('b').textContent = n[b.dataset.kind]; });
+    lists.forEach(function(l){ l.hidden = l.dataset.k !== kind; });
+    root.querySelector('.bt-empty').hidden = cards.some(function(c){ return !c.hidden; });
+    cur.classList.toggle('on', myR !== null && r === myR);
+  }
+  root.querySelector('.own-seg').addEventListener('click', function(e){ var b = e.target.closest('button'); if (b) { kind = b.dataset.kind; run(); } });
+  q.addEventListener('input', run);
+  rIn.addEventListener('input', run);
+  cur.addEventListener('click', function(e){ e.preventDefault(); rIn.value = rIn.value === String(myR) ? '' : myR; run(); });
+
+  // 读到存档：R 胶囊里出现「当前 R」，研究模板里还没解锁的研究变灰
+  window.addEventListener('researchsave', function(e){
+    var d = e.detail;
+    myR = d ? d.r : null;
+    cur.hidden = myR === null;
+    if (d) cur.textContent = '当前 R' + d.r;
+    root.querySelectorAll('[data-k=research] .bt-i').forEach(function(a){
+      var lock = !!d && !(a.dataset.c in d.own);
+      a.classList.toggle('lock', lock);
+      a.title = lock ? '还没解锁' : '';
+    });
+    run();
+  });
+
+  // 程序里：读游戏的模板文件，已有的标出来，没有的可以添加
+  function buttons(){
+    cards.forEach(function(c){
+      var d = row(c), add = c.querySelector('[data-action=add]');
+      if (!add) return;
+      var has = !!game && Object.keys(game[d.category] || {}).some(function(k){ return game[d.category][k].tp === d.code; });
+      var tag = c.querySelector('.bt-has');
+      if (!tag) { tag = document.createElement('em'); tag.className = 'sure bt-has'; tag.textContent = '游戏里已有'; tag.hidden = true; c.querySelector('.bt-act').before(tag); }
+      tag.hidden = !has;
+      add.hidden = !game || has;
+      add.disabled = busy;
+    });
+  }
+  function refresh(){
+    if (!api() || syncBtn.disabled) return Promise.resolve();
+    sync.hidden = false; syncBtn.disabled = true; sync.classList.remove('err');
+    syncText.textContent = '正在读取游戏模板…';
+    return api().read_templates().then(function(res){
+      if (!res.ok) throw Error(res.error);
+      game = res.templates;
+      var m = Object.keys(game.mercenary || {}).length, r = Object.keys(game.research || {}).length;
+      syncText.textContent = '游戏里现有模板：佣兵 ' + m + ' 条，研究 ' + r + ' 条';
+    }).catch(function(err){
+      game = null; sync.classList.add('err');
+      syncText.textContent = '读取游戏模板失败：' + err.message;
+    }).then(function(){ syncBtn.disabled = false; buttons(); });
+  }
+  syncBtn.addEventListener('click', refresh);
+
+  function say(card, text, err){ var s = card.querySelector('.bt-state'); s.textContent = text; s.classList.toggle('err', !!err); }
+  root.addEventListener('click', function(e){
+    var b = e.target.closest('[data-action]');
+    if (!b || b.disabled) return;
+    var card = b.closest('.bt-card'), d = row(card);
+    if (b.dataset.action === 'copy') {
+      navigator.clipboard.writeText(d.code).then(function(){ say(card, '已复制'); }, function(){
+        say(card, '没能自动复制，请从下面选中复制', true);
+        var t = card.querySelector('textarea');
+        if (!t) { t = document.createElement('textarea'); t.rows = 2; t.readOnly = true; card.querySelector('.art-b').appendChild(t); }
+        t.value = d.code; t.focus(); t.select();
+      });
+      return;
+    }
+    if (busy || !api()) return;
+    busy = true; buttons(); say(card, '正在添加…');
+    api().add_template(d.category, d.name, d.code).then(function(res){
+      if (!res.ok) throw Error(res.error);
+      say(card, res.message + (res.name && res.name !== d.name ? '（名为「' + res.name + '」）' : ''));
+      return refresh();
+    }).catch(function(err){ say(card, '添加失败：' + err.message, true); })
+      .then(function(){ busy = false; buttons(); });
+  });
+
+  // 胶囊离开原位、浮在内容上面时加阴影
+  var home = document.createElement('div');
+  top.parentNode.insertBefore(home, top);
+  document.addEventListener('scroll', function(){ top.classList.toggle('float', top.getBoundingClientRect().top - home.getBoundingClientRect().top > 12); }, true);
+  // 从攻略链接到某个模板：切到它的类型、清掉筛选（捕获阶段，赶在页面路由滚动和高亮之前）
+  function jump(){
+    var el = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if (!el || !root.contains(el) || !el.classList.contains('bt-card')) return;
+    kind = row(el).category; q.value = ''; rIn.value = '';
+    run();
+  }
+  window.addEventListener('hashchange', jump, true);
+  jump();
+  window.addEventListener('pywebviewready', refresh);
+  window.addEventListener('subpage', function(e){ if (e.detail.sec === 'builds') refresh(); });
+  run();
+  if (api()) refresh();
+})();
+</script>
+</section>

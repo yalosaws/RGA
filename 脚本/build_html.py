@@ -18,6 +18,7 @@ from openpyxl.utils import get_column_letter
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import md2html
 import save_tools
+import build_templates
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = sys.argv[1] if len(sys.argv) > 1 else os.path.join(ROOT, '表格', 'RG综合列表（4.3.14）.xlsx')
@@ -36,9 +37,16 @@ ALIAS = {'TC': '征税', 'CtA': '动员令', 'HoL': '传说圣殿', 'BF': '嗜�
 # 遗物表里阵营遗物按全阶英豪奖杯的顺序排，每个阵营两个
 ART_FACTIONS = ['仙灵', '精灵', '天使', '地精', '亡灵', '恶魔', '泰坦', '德鲁伊', '无面者', '矮人', '卓尔', '佣兵']
 # 程序版本：改了功能就加版本号，在 CHANGES 最前面写这一版改了什么
-VERSION = '0.4.0'  # 还没到正式发布，用 0.x（用户要求）
+VERSION = '0.4.1'  # 还没到正式发布，用 0.x（用户要求）
 AUTHOR = 'Yalosaws'
 CHANGES = [
+    ('0.4.1', '2026-10-23', [
+        '新增 A0 模板库：佣兵与研究配置分类查看、搜索、按 R 筛选，支持复制代码和添加到本地游戏模板；写入前自动备份，保留已有模板',
+        'A0 模板库重写成和遗物、挑战页一样的卡片：升级、研究、法术直接显示中文名（点了跳到表格），研究按六个分支分列；佣兵模板写上攻略里的叫法和用途；R 筛选可一键选当前 R，读到存档后还没解锁的研究变灰；游戏里已有的模板标出来',
+        '攻略里的 build 加上「模板」颜色（图例里也有），点了跳到 A0 模板库里对应的模板，自动切到佣兵或研究、清掉筛选',
+        '攻略和卡片说明里的阵营不再单独染色（图例里也去掉），红色改给 build（模板）',
+        'A0 模板库新增「天使挑战 3」研究模板（R18，照 A0 攻略原文），攻略里那一步改成链接到它',
+    ]),
     ('0.4.0', '2026-10-23', [
         '法术预报、遗物预测从存档页里拿出来，放到侧栏「工具」里单独两页，界面重做：法术预报每个法术一张卡片（标出下一次，点建筑高亮），不能预报的集中列在下面；遗物预测上面是考古次数等数字，接下来的考古改成时间线（一定拿到的蓝色，达到数值才拿到的浅色），旁边列出参与抽取、固定获得的遗物，随机数分布图加了刻度',
         '研究页重做：时间线（按最早能解锁的 R 排，七个分支各一列，标出「你在这里」），铺满整个宽度；研究点数一条进度条显示这个 R 的上限 / 当前 Ascension 的上限',
@@ -287,6 +295,8 @@ class Terms:
         for m in self.rx.finditer(text) if self.rx else ():
             kind, target = self.names[m.group(1)] if m.group(1) else self.codes.get(m.group(2), (None, None))
             if not kind:
+                continue
+            if kind == '阵':  # 阵营仍登记（免得被当成别类染色），但按普通文字显示
                 continue
             out.append(html.escape(text[last:m.start()]))
             cls, s = md2html.TAGS[kind][0], html.escape(m.group(0))
@@ -1003,7 +1013,11 @@ def main():
             del index[k]
     missing = []
 
+    template_ids = build_templates.ids()
+
     def find(kind, name):
+        if kind == '模':
+            return template_ids.get(name)
         key = ALIAS.get(name, name)
         hit = None
         # 攻略按 4.3.9 改号后的新代号写；表里只有「原 xxx」注记的旧代号不算
@@ -1025,6 +1039,8 @@ def main():
         return '#' + hit
 
     for kind, name in guide_tags:
+        if kind == '模':  # 模板只在攻略里链接，卡片说明里不染
+            continue
         hit = find(kind, name)
         if hit:
             TERMS.add(kind, name, hit, short=True)
@@ -1039,8 +1055,10 @@ def main():
         guides[gid] = re.sub(r'(<p class="legend">.*?</p>)\s*<blockquote>.*?</blockquote>\s*(<hr>)?', lambda m: m.group(1), body, count=1, flags=re.S)
     item = lambda h, label: '<a href="#%s" data-sec="%s">%s</a>' % (h, h, label)
     nav = '<div class="grp">攻略</div>' + ''.join(item(g, l) for g, l, _ in GUIDES)
+    nav += item('builds', 'A0 模板库')
     nav += '<div class="grp">资料表</div>' + ''.join(item('t%d' % n, SHEETS[n][0]) for n in sections)
     body = ''.join('<section id="sec-%s" class="guide" hidden>%s</section>' % (g, guides[g]) for g, _, _ in GUIDES)
+    body += build_templates.build(find, lambda c: name_of(cells[research.get(c) or upgrade[c]]) if (research.get(c) or upgrade.get(c)) in cells else '', TERMS.render)
     body += ''.join('<section id="sec-t%d" class="table" hidden>%s</section>' % (n, sections[n]) for n in sections)
     body += CL_JS + RS_JS  # 卡片列表（遗物、隐藏奖杯）的搜索和已获得切换
     body += open(os.path.join(ROOT, '脚本', 'guide_progress.html'), encoding='utf-8').read()
@@ -1072,7 +1090,7 @@ def main():
     nav = '<div class="grp">工具</div>' + nav
     nav += '<div class="grp">关于</div>' + item('ver', '版本 ' + VERSION)
     body += version_page()
-    page = TEMPLATE.replace('%%NAV%%', nav).replace('%%BODY%%', body).replace('%%TCOLORS%%', md2html.CSS[md2html.CSS.index('.t-fa'):md2html.CSS.index('[class^')])
+    page = TEMPLATE.replace('%%NAV%%', nav).replace('%%BODY%%', body).replace('%%TCOLORS%%', md2html.CSS[md2html.CSS.index('.t-sp'):md2html.CSS.index('[class^')])
     page = page.replace('%%APPBAR%%', appbar()).replace('%%ICON%%', icon_img())
     page = page.replace('%%SAVEJS%%', save_js)  # 最后替换：脚本里可能有别的 %% 记号
     os.makedirs(os.path.dirname(DST), exist_ok=True)
@@ -1458,7 +1476,7 @@ html.app.max .grip{display:none}
   window.addEventListener('pagehide', remember);
   document.addEventListener('visibilitychange', function(){ if (document.hidden) remember(); });
   document.addEventListener('click', function(e){
-    var a = e.target.closest('a[href^="#t"]');
+    var a = e.target.closest('a[href^="#t"], a[href^="#builds-"]');
     if (a && a.closest('section.guide, section.table, section.savesec, #res')) fromLink = true;
   });
   back.addEventListener('click', function(){ history.back(); });
