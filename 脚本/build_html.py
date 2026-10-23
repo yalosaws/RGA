@@ -623,9 +623,10 @@ RS_JS = r"""<script>(function(){
   function slotEl(c){ return c ? $('v-lane').querySelector('.rs-col .rs-c[data-c="' + c + '"]') : null; }
   function laneEl(c){ return !c ? null : big && big.dataset.c === c && big.isConnected ? big : slotEl(c); }
   function bigHtml(x){
-    return '<div class="rs-cd"><em>' + x.code + '</em>' + (x.pre.length ? '<span>组合</span>' : '') +
+    // 内容包一层 rs-bi 来裁剪（高度过渡时不漏出来），卡片本身不裁，角上的勾才能一直露在外面
+    return '<div class="rs-bi"><div class="rs-cd"><em>' + x.code + '</em>' + (x.pre.length ? '<span>组合</span>' : '') +
       '<button class="rs-x" title="收起"><svg viewBox="0 0 10 10"><path d="M0 0l10 10M10 0L0 10"/></svg></button></div>' +
-      '<div class="rs-nm">' + esc(x.zh) + '</div><div class="rs-det">' + detHtml(x, true) + '</div>';
+      '<div class="rs-nm">' + esc(x.zh) + '</div><div class="rs-det">' + detHtml(x, true) + '</div></div>';
   }
   function place(el, x, y, w, h){ el.style.left = x + 'px'; el.style.top = y + 'px'; el.style.width = w + 'px'; el.style.height = h + 'px'; }
   // 收起：缩回原格子。原格子这时可能正被新展开的卡片推开，所以缩到它推开后的位置和宽度（moves 里有），不然缩完会跳一下
@@ -704,6 +705,9 @@ RS_JS = r"""<script>(function(){
       c.classList.toggle('sq', !!(m && m.w));
     });
     if (still) { void lane.offsetWidth; lane.classList.remove('rs-still'); }
+    // 连线每帧重画；淡入只在整层上做一次，跟着卡片一起长出来
+    var svg = lane.querySelector('.rs-lsvg');
+    if (anim && SEL && SEL !== prev && svg && svg.animate) svg.animate([{opacity: 0}, {opacity: 1}], {duration: 280, easing: 'ease-out'});
     animLinks(anim ? 620 : 0);
     if (big && anim && anim !== 'jump') setTimeout(function(){
       if (!big) return;
@@ -1340,11 +1344,11 @@ td.flash{outline:3px solid #f59e0b;outline-offset:-2px;background:var(--flash)!i
 .rs-c.open.st-own::after{right:-6px;top:-6px}
 .rs-col .rs-c{box-sizing:border-box;width:100%}
 .rs-c.rs-hide{visibility:hidden}
-.rs-big.st-own::after{display:none}  /* 放大后卡片里有「已解锁」标签，角上的勾会被裁掉 */
-.rs-big{position:absolute;margin:0;box-sizing:border-box;overflow:hidden;z-index:3;
+.rs-big{position:absolute;margin:0;box-sizing:border-box;z-index:3;
   transition:left .45s cubic-bezier(.2,.8,.2,1),top .45s cubic-bezier(.2,.8,.2,1),width .45s cubic-bezier(.2,.8,.2,1),height .45s cubic-bezier(.2,.8,.2,1),padding .45s cubic-bezier(.2,.8,.2,1),box-shadow .3s,border-color .2s}
 .rs-still .rs-c{transition:none!important}
 .rs-big.closing{z-index:2}
+.rs-bi{height:100%;overflow:hidden}
 .rs-c.sq .rs-nm{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .rs-c.sq .rs-cd span{display:none}
 /* 前置橙、后续蓝；其余变淡 */
@@ -1352,7 +1356,7 @@ td.flash{outline:3px solid #f59e0b;outline-offset:-2px;background:var(--flash)!i
 .rs-c.rel-post{opacity:1;border-color:var(--blue);box-shadow:0 0 0 3px rgba(37,99,235,.15)}
 .rs-view.focus .rs-c:not(.sel):not(.rel-pre):not(.rel-post){opacity:.28}
 .rs-lsvg{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible;pointer-events:none}
-.rs-lsvg .rs-lnk{animation:rs-dash .6s linear infinite,rg-in .3s ease-out}
+.rs-lsvg .rs-lnk{animation:rs-dash .6s linear infinite}
 .rs-lh,.rs-lr{display:grid;grid-template-columns:var(--cols,1fr 1fr 1fr 1fr 1fr 1fr 1fr);gap:8px;transition:grid-template-columns .45s cubic-bezier(.2,.8,.2,1)}
 .rs-lh{font-size:12px;color:var(--muted);padding:0 0 8px;border-bottom:1px solid var(--line);margin-bottom:8px}
 .rs-lh span{display:flex;align-items:center;gap:6px;white-space:nowrap}
