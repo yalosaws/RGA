@@ -41,7 +41,7 @@ AUTHOR = 'Yalosaws'
 CHANGES = [
     ('0.4.0', '2026-10-23', [
         '研究页重做：时间线（按最早能解锁的 R 排，七个分支各一列，标出「你在这里」），铺满整个宽度；研究点数一条进度条显示这个 R 的上限 / 当前 Ascension 的上限',
-        '研究页读到存档后按存档的 R 标出已解锁、可解锁（点数够了）、本局已购买；点研究以中心向四周放大成详情卡：同一列上下让开、旁边几列挤窄，不留空，显示解锁条件、绑定阵营（和你现在用的阵营对比）、组合研究的前置和后续；前置（橙）和后续（蓝）用连线连上并加强调，其余变淡',
+        '研究页读到存档后按存档的 R 标出已解锁、可解锁（点数够了）、本局已购买；点研究以中心向四周放大成详情卡：同一列上下让开、旁边几列挤窄，不留空，显示解锁条件、绑定阵营（和你现在用的阵营对比）、组合研究的前置和后续；前置（已解锁绿、未解锁红）和后续（蓝）用连线连上并加强调，其余变淡',
     ]),
     ('0.3.5', '2026-10-22', [
         '新布局：侧栏和内容区贴着窗口边、互相挨着，外侧的角和窗口圆角贴合；窗口按钮做成小胶囊放在卡片右上角，和顶上的浮动胶囊对齐',
@@ -722,19 +722,19 @@ RS_JS = r"""<script>(function(){
         s += '<path class="rs-lnk" d="' + d + '" fill="none" stroke="' + color + '" stroke-width="2.2"/>' +
           '<circle cx="' + best.p[0] + '" cy="' + best.p[1] + '" r="3.5" fill="' + color + '"/><circle cx="' + best.q[0] + '" cy="' + best.q[1] + '" r="3.5" fill="' + color + '"/>';
       };
-      x.pre.forEach(function(c){ one(c, '#f59e0b'); });
+      x.pre.forEach(function(c){ one(c, ST[c] === 'own' ? '#16a34a' : '#dc2626'); });  // 前置：已解锁绿、未解锁红
       x.post.forEach(function(c){ one(c, '#2563eb'); });
     }
     svg.innerHTML = s;
   }
 
-  // 选中的、前置（橙）、后续（蓝）加强调，其余变淡
+  // 选中的、前置（已解锁绿、未解锁红）、后续（蓝）加强调，其余变淡
   function highlight(){
     var x = SEL && byCode[SEL], pre = {}, post = {};
     if (x) { x.pre.forEach(function(k){ pre[k] = 1; }); x.post.forEach(function(k){ post[k] = 1; }); }
     root.querySelectorAll('.rs-c').forEach(function(e){
       var c = e.dataset.c;
-      e.classList.toggle('sel', c === SEL); e.classList.toggle('rel-pre', !!pre[c]); e.classList.toggle('rel-post', !!post[c]);
+      e.classList.toggle('sel', c === SEL); e.classList.toggle('rel-pre', !!pre[c]); e.classList.toggle('rel-ok', !!pre[c] && ST[c] === 'own'); e.classList.toggle('rel-post', !!post[c]);
     });
     $('v-lane').classList.toggle('focus', !!SEL);
   }
@@ -1254,8 +1254,9 @@ td.flash{outline:3px solid #f59e0b;outline-offset:-2px;background:var(--flash)!i
 .rs-bi{height:100%;overflow:hidden}
 .rs-c.sq .rs-nm{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .rs-c.sq .rs-cd span{display:none}
-/* 前置橙、后续蓝；其余变淡 */
-.rs-c.rel-pre{opacity:1;border-color:#f59e0b;box-shadow:0 0 0 3px rgba(245,158,11,.2)}
+/* 前置：已解锁绿、未解锁红；后续蓝；其余变淡 */
+.rs-c.rel-pre{opacity:1;border-color:#dc2626;box-shadow:0 0 0 3px rgba(220,38,38,.16)}
+.rs-c.rel-pre.rel-ok{border-color:#16a34a;box-shadow:0 0 0 3px rgba(22,163,74,.18)}
 .rs-c.rel-post{opacity:1;border-color:var(--blue);box-shadow:0 0 0 3px rgba(37,99,235,.15)}
 .rs-view.focus .rs-c:not(.sel):not(.rel-pre):not(.rel-post){opacity:.28}
 .rs-lsvg{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible;pointer-events:none}
