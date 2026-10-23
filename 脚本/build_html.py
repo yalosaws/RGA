@@ -6,6 +6,7 @@ openpyxl 只用来读取（不能用它保存这个表，见 CLAUDE.md）。
 """
 import base64
 import html
+import json
 import os
 import re
 import sys
@@ -39,6 +40,8 @@ VERSION = '0.3.5'  # 还没到正式发布，用 0.x（用户要求）
 AUTHOR = 'Yalosaws'
 CHANGES = [
     ('0.3.5', '2026-10-22', [
+        '研究页重做：时间线（按最早能解锁的 R 排，七个分支各一列，标出「你在这里」）和星盘两种看法；顶上拖动 R 预览以后能解锁什么，研究点数一条进度条显示这个 R 的上限 / 当前 Ascension 的上限',
+        '研究页读到存档后标出已解锁、可解锁（点数够了）、本局已购买；点研究在右边看详情：解锁条件、绑定阵营（和你现在用的阵营对比）、组合研究的前置和后续，星盘上用连线标出',
         '新布局：侧栏和内容区贴着窗口边、互相挨着，外侧的角和窗口圆角贴合；窗口按钮做成小胶囊放在卡片右上角，和顶上的浮动胶囊对齐',
         '拖动窗口：侧栏和菜单的空白处、内容区顶上一条都能拖，双击最大化；滚动条从窗口按钮下面开始',
         '侧栏菜单项间距加大，选中块的阴影改小改淡，不再压到相邻一项',
@@ -416,46 +419,281 @@ def build_challenges(ws):
     return card_list('challengeowned', '搜索名字、条件、目标或效果', items, '完成', note=m.group(1) + '。' if m else '')
 
 
+def rs_cap(r):
+    """R 时每个分支最多能有的研究点数（A0/A1 是 R(R+1)/2，A2 封顶 5000，A3 每 R +125 到 7000，A4 是 125(R-134) 到 14000）"""
+    if r < 16: return 0
+    if r < 100: return r * (r + 1) // 2
+    if r < 175: return 5000
+    if r < 220: return min(5000 + 125 * (r - 174), 7000)
+    return min(125 * (r - 134), 14000)
+
+
 def build_research(ws):
-    """研究表 → 按分支分组的卡片（名字、代号、解锁 R、绑定阵营 / 解锁条件 / 效果），同一分支按解锁 R 排。
-    4.3.9 改号的研究：代号格写着「新代号（原旧代号，……解锁晚 n 个 R）」，R 按列头加上 n。卡片 id 是原名称格（t5-C4 这样）；
-    data-en 是代号（和存档编辑器研究行里的代号对上，改号的再带上旧代号）。"""
+    """研究表 → 研究页：时间线（按最早能解锁的 R 排，七个分支一列一个）和星盘，点研究在右边看详情。
+    代号的数字就是需要的研究点数，最早的 R 按每个分支的点数上限算（和表头的 R、「解锁晚 n 个 R」都对得上）。
+    组合研究（解锁条件里写了别的研究代号）：前置都解锁、点数到位就自动解锁；绑定阵营的还要正在用那个阵营。
+    格子 id 是原名称格（t5-C4 这样），专名链接和全表搜索照旧跳过来；读到存档后用 researchsave 事件里的 R、阵营、点数和已解锁记录。"""
     val = merged_value(ws)
-    head = {}  # 列 → (Ascension, R)
-    last = ('', '')
-    for c in range(3, ws.max_column + 1):
-        a, rr = val(1, c) or last[0], val(2, c) or last[1]
-        head[c] = last = (a, rr)
     items = []
     for r in range(4, ws.max_row + 1, 5):
         if val(r + 1, 2) != '代号':
             continue
-        bzh, ben = (SPLIT.split(val(r, 1)) + [''])[1], SPLIT.split(val(r, 1))[0]
-        cards = []
         for c in range(3, ws.max_column + 1):
             if (r, c) in val.covered or not ws.cell(r, c).value:
                 continue
             zh, en = split_name(val(r, c))
-            code_lines = SPLIT.split(val(r + 1, c))
-            code, note = code_lines[0].strip(), ''.join(code_lines[1:]).strip()
-            rr = head[c][1]
-            m = re.match(r'^(\d+)$', rr)
-            sort_r = int(re.match(r'\d+', rr).group()) if re.match(r'\d+', rr) else 0
-            d = re.search(r'解锁(晚|早)(\d+)个R', note)
-            if m and d:
-                sort_r = int(rr) + (1 if d.group(1) == '晚' else -1) * int(d.group(2))
-                rr = str(sort_r)
-            fac = val(r + 2, c)
-            badge = '<em class="no">%s</em><em>R%s</em>' % (html.escape(code), html.escape(rr)) + (
-                '<em class="fac">%s</em>' % html.escape(fac) if fac else '')
+            lines = SPLIT.split(val(r + 1, c))
+            code, note = lines[0].strip(), ''.join(lines[1:]).strip()
+            old = re.search(r'原([SCDEAWF]\d+)', note)
+            n = int(re.sub(r'\D', '', code))
             cid = 't5-%s%d' % (get_column_letter(c), r)
-            cards.append((sort_r, c, card(cid, code, None, None, zh, en, badge,
-                                          [('解锁条件', val(r + 3, c)), ('效果', val(r + 4, c))], note=note, group=bzh,
-                                          kind='研')))
-        items.append('<h2 class="art-g" data-g="%s">%s <span>%s</span></h2>' % (html.escape(bzh), html.escape(bzh), html.escape(ben)))
-        items += [x[2] for x in sorted(cards)]
+            TERMS.add('研', zh, cid)
+            cond, eff = val(r + 3, c), val(r + 4, c)
+            items.append(dict(id=cid, b=code[0], code=code, old=old.group(1) if old else '', n=n, zh=zh, en=en, fac=val(r + 2, c),
+                              r=next(x for x in range(16, 300) if rs_cap(x) >= n), cond=cond, eff=eff,
+                              ch=TERMS.render(cond, cid), eh=TERMS.render(eff, cid), note=re.sub(r'^[（(]|[）)]$', '', note)))
+    codes = {x['code']: x['code'] for x in items}
+    codes.update({x['old']: x['code'] for x in items if x['old']})
+    for x in items:  # 解锁条件里提到的研究代号（旧代号换成新的）就是前置
+        pre = []
+        for m in re.finditer(r'(?<![A-Za-z0-9])([SCDEAWF]\d+)(?!\d)', x['cond']):
+            k = codes.get(m.group(1))
+            if k and k != x['code'] and k not in pre:
+                pre.append(k)
+        x['pre'] = pre
+        x['q'] = ' '.join([x['code'], x['old'], x['zh'], x['en'], x['cond'], x['eff']]).lower()
+        del x['cond'], x['eff']
     note = re.sub(r'^说明[（(][^）)]*[）)][：:]\s*', '', val(40, 1))  # A40 的总说明（A3 起移除低点数研究等）
-    return card_list('researchowned', '搜索名字、代号或效果', items, '解锁', note=note)
+    data = json.dumps(items, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
+    # 全表搜索用的隐藏索引（格子是脚本画的，换视图、筛选时会不见）
+    idx = ''.join('<i class="rs-s" data-id="%s">%s %s %s</i>' % (x['id'], x['code'], html.escape(x['zh']), html.escape(x['en'])) for x in items)
+    return RS_HTML.replace('%%NOTE%%', TERMS.render(note)).replace('%%IDX%%', idx).replace('%%DATA%%', data)
+
+
+RS_HTML = """<div class="cl rs" data-ok="1"><div class="cl-top">
+<div class="own-bar" hidden><div class="own-seg" id="rs-own"><button class="on" data-o="">全部<b></b></button><button data-o="1">已解锁<b></b></button><button data-o="0">未解锁<b></b></button></div><div class="own-prog"><i id="rs-prog"></i></div></div>
+<div class="own-bar tight"><div class="own-seg" id="rs-views"><button data-v="lane" class="on">时间线</button><button data-v="dial">星盘</button></div></div>
+<input class="cl-q" id="rs-q" type="search" placeholder="搜索名字、代号或效果"></div>
+<p class="cl-note"><span id="rs-note"></span>%%NOTE%%</p>
+<div class="rs-page"><div>
+<div class="rs-rp"><div class="rs-rp-h"><b>研究点数</b><div class="rs-rbar"><span>重生</span><b id="rs-rnum"></b><input type="range" id="rs-r" min="16" max="246" step="1"><span id="rs-asc"></span><button id="rs-back" hidden>回到存档</button></div><span id="rs-rpn"></span></div><div class="rs-rp-bar"><i id="rs-rpbar"></i></div><div class="rs-rp-s" id="rs-rps"></div></div>
+<div class="rs-view on" id="rs-v-lane"></div>
+<div class="rs-view" id="rs-v-dial"><div class="rs-dial" id="rs-dial"></div></div>
+</div><div class="rs-det" id="rs-det"></div></div>
+<div class="rs-tip" id="rs-tip"></div><div hidden>%%IDX%%</div></div>
+<script>window.RS_DATA = %%DATA%%;</script>
+"""
+
+# 研究页的脚本：时间线、星盘、详情，读到存档后按 researchsave 事件标状态
+RS_JS = r"""<script>(function(){
+  var root = document.querySelector('.rs'); if (!root) return;
+  var DATA = window.RS_DATA;
+  var BR = [['S','法术学'],['C','工艺'],['D','神圣'],['E','经济学'],['A','炼金术'],['W','战术'],['F','禁忌']];
+  var BN = {}; BR.forEach(function(b){ BN[b[0]] = b[1]; });
+  var HEX = {S:'#7c5cd6',C:'#d0622b',D:'#c9930a',E:'#1f9d55',A:'#0e8aa8',W:'#d9434b',F:'#5b6b82'};
+  var FNAME = ['仙灵','精灵','天使','地精','亡灵','恶魔','泰坦','德鲁伊','无面者','矮人','卓尔','佣兵'];
+  var ERA = [[16,'ASCENSION 0'],[40,'ASCENSION 1'],[100,'ASCENSION 2'],[160,'ASCENSION 3'],[220,'ASCENSION 4']];
+  var byCode = {}; DATA.forEach(function(x){ byCode[x.code] = x; x.post = []; });
+  DATA.forEach(function(x){ x.pre.forEach(function(p){ if (byCode[p]) byCode[p].post.push(x.code); }); });
+  function cap(r){ return r < 16 ? 0 : r < 100 ? r * (r + 1) / 2 : r < 175 ? 5000 : r < 220 ? Math.min(5000 + 125 * (r - 174), 7000) : Math.min(125 * (r - 134), 14000); }
+  function ascOf(r){ return r < 40 ? 0 : r < 100 ? 1 : r < 160 ? 2 : r < 220 ? 3 : 4; }
+  function hash(s){ var h = 7; for (var i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0; return h; }
+  function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  function $(id){ return document.getElementById('rs-' + id); }
+  function each(list, f){ return list.map(f).join(''); }
+  function uniqR(list){ var rs = []; list.forEach(function(x){ if (rs.indexOf(x.r) < 0) rs.push(x.r); }); return rs.sort(function(a, b){ return a - b; }); }
+  var SAVE = null, MYF = [], R = 16, VIEW = 'lane', SEL = null, OWNF = '', Q = '', ST = {}, RP = {};
+  try { VIEW = localStorage.getItem('rg-rs-view') === 'dial' ? 'dial' : 'lane'; R = Math.min(246, Math.max(16, +localStorage.getItem('rg-rs-r') || 16)); } catch (e) {}
+  function own(c){ return !!SAVE && c in SAVE.own; }
+  function bought(c){ return !!SAVE && SAVE.own[c] === true; }
+  function facBad(x){ return !!x.fac && MYF.length > 0 && x.fac.split('+').some(function(f){ return FNAME.indexOf(f) >= 0 && MYF.indexOf(f) < 0; }); }
+
+  // 状态：gone A3 起移除（400 点及以下），own 存档里已解锁，can 点数够、R 也到了，no 还不行
+  function compute(){
+    var A = ascOf(R), c = cap(R), atSave = SAVE && R === SAVE.r;
+    BR.forEach(function(b){
+      var k = b[0], s = SAVE ? SAVE.rp[k] || 0 : 0;
+      RP[k] = atSave ? s : (k === 'F' && R < 180 ? 0 : Math.max(s, c));
+    });
+    DATA.forEach(function(x){
+      ST[x.code] = A >= 3 && x.n <= 400 ? 'gone' : own(x.code) ? 'own' : (x.n <= RP[x.b] && R >= x.r && !(x.b === 'F' && R < 180)) ? 'can' : 'no';
+    });
+  }
+  function visible(x){ return ST[x.code] !== 'gone'; }
+  function match(x){ return (!OWNF || (OWNF === '1') === (ST[x.code] === 'own')) && (!Q || x.q.indexOf(Q) >= 0); }
+  function rel(c){ var s = {}; if (c) byCode[c].pre.concat(byCode[c].post).forEach(function(k){ s[k] = 1; }); return s; }
+
+  // 研究点数：这个 R 每个分支最多能有的点数 / 这个 Ascension 的上限
+  function renderRP(){
+    var A = ascOf(R), c = cap(R), top = [780, 4950, 5000, 7000, 14000][A], endR = [39, 99, 159, 219, 246][A];
+    $('rpn').innerHTML = '<b>' + c.toLocaleString() + '</b> / ' + top.toLocaleString();
+    $('rpbar').style.width = (c / top * 100) + '%';
+    $('rps').textContent = 'R' + R + ' 每个分支最多买到 ' + c.toLocaleString() + ' 点 · A' + A + ' 的上限是 ' + top.toLocaleString() + ' 点（R' + endR + '）';
+  }
+  function cell(x){
+    return '<div class="rs-c st-' + ST[x.code] + (bought(x.code) ? ' bought' : '') + '" id="' + x.id + '" data-c="' + x.code + '"><div class="rs-cd"><em>' + x.code + '</em>' +
+      (x.pre.length ? '<span>组合</span>' : '') + '</div>' + esc(x.zh) + '</div>';
+  }
+  // 时间线：一行一个 R（最早能解锁的 R），七个分支一列一个
+  function renderLane(){
+    var list = DATA.filter(function(x){ return visible(x) && match(x); }), rs = uniqR(list);
+    var h = '<div class="rs-lh"><span></span>' + each(BR, function(b){ return '<span><i class="rs-dot" style="background:' + HEX[b[0]] + '"></i>' + b[1] + '</span>'; }) + '</div>';
+    var era = -1, placed = false, here = '<div class="rs-here"><span>你在这里 · R' + R + '</span></div>';
+    rs.forEach(function(r){
+      var e = ERA.filter(function(z){ return r >= z[0]; }).length - 1;
+      if (!placed && r > R) { placed = true; h += here; }
+      if (e !== era) { era = e; h += '<div class="rs-era">' + ERA[e][1] + '</div>'; }
+      h += '<div class="rs-lr' + (r <= R ? ' past' : '') + '"><div class="rs-rl">R' + r + '</div>' + each(BR, function(b){
+        return '<div class="rs-col">' + each(list.filter(function(x){ return x.b === b[0] && x.r === r; }).sort(function(a, c){ return a.n - c.n; }), cell) + '</div>';
+      }) + '</div>';
+    });
+    if (!placed) h += here;
+    if (!rs.length) h += '<div class="rs-empty">没有符合的研究</div>';
+    $('v-lane').innerHTML = h;
+  }
+  function station(x, cx, cy, r){
+    var st = ST[x.code], c = HEX[x.b];
+    return '<g class="rs-st" data-c="' + x.code + '" data-t="' + x.code + ' ' + esc(x.zh) + ' · R' + x.r + '" opacity="' + (match(x) ? 1 : .18) + '">' +
+      '<circle class="p" cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="' + (st === 'own' ? c : '#fff') + '" stroke="' + (st === 'no' ? '#d5dce7' : c) + '" stroke-width="2"/>' +
+      (x.pre.length ? '<circle cx="' + cx + '" cy="' + cy + '" r="2" fill="' + (st === 'own' ? '#fff' : c) + '" pointer-events="none"/>' : '') + '</g>';
+  }
+  // 星盘：七个分支各占一块扇区，越往外 R 越大；浅蓝圆是现在的 R
+  var dialPos = {}, dialPath = null;
+  function renderDial(){
+    var items = DATA.filter(visible), rs = uniqR(items);
+    var S = 640, C = S / 2, R0 = 66, R1 = C - 40;
+    var rad = function(r){ return R0 + (R1 - R0) * Math.sqrt(rs.indexOf(r) / (rs.length - 1 || 1)); };
+    var radAt = function(r){ var k = rs.filter(function(z){ return z <= r; }).length; if (!k) return R0 - 10; return k >= rs.length ? R1 + 10 : (rad(rs[k - 1]) + rad(rs[k])) / 2; };
+    var sec = 2 * Math.PI / BR.length, pos = {};
+    BR.forEach(function(b, i){
+      var groups = {};
+      items.filter(function(x){ return x.b === b[0]; }).forEach(function(x){ (groups[x.r] = groups[x.r] || []).push(x); });
+      Object.keys(groups).forEach(function(k0){ var g = groups[k0]; g.forEach(function(x, k){
+        var step = Math.min(0.11, sec * 0.78 / g.length), jit = g.length === 1 ? ((hash(x.code) % 100) / 100 - .5) * sec * .55 : 0;
+        var a = -Math.PI / 2 + i * sec + sec / 2 + (k - (g.length - 1) / 2) * step + jit, rr = rad(x.r) + (g.length > 3 ? (k % 2) * 7 : 0);
+        pos[x.code] = [C + rr * Math.cos(a), C + rr * Math.sin(a)];
+      }); });
+    });
+    var s = '<svg viewBox="0 0 ' + S + ' ' + S + '" font-family="Microsoft YaHei UI">';
+    s += '<circle cx="' + C + '" cy="' + C + '" r="' + radAt(R) + '" fill="#eef3fc" stroke="#bcd0f7" stroke-width="1.5"/>';
+    ERA.forEach(function(z){ var r = rs.filter(function(r){ return r >= z[0]; })[0]; if (r === undefined) return; var rr = rad(r) - 6;
+      if (z[0] > 16) s += '<circle cx="' + C + '" cy="' + C + '" r="' + rr + '" fill="none" stroke="#e6ebf3"/><text x="' + (C + 4) + '" y="' + (C - rr + 13) + '" font-size="10" fill="#9aa5b8">' + z[1].replace('ASCENSION ', 'A') + '</text>'; });
+    BR.forEach(function(b, i){ var a = -Math.PI / 2 + i * sec, am = a + sec / 2;
+      s += '<line x1="' + (C + R0 * .7 * Math.cos(a)) + '" y1="' + (C + R0 * .7 * Math.sin(a)) + '" x2="' + (C + (R1 + 22) * Math.cos(a)) + '" y2="' + (C + (R1 + 22) * Math.sin(a)) + '" stroke="#eef1f6"/>';
+      s += '<text x="' + (C + (R1 + 26) * Math.cos(am)) + '" y="' + (C + (R1 + 26) * Math.sin(am) + 4) + '" font-size="13" fill="#3d4a5f" text-anchor="middle">' + b[1] + '</text>'; });
+    s += '<g class="rs-links"></g>';
+    var no = items.filter(function(x){ return ST[x.code] === 'own'; }).length, nc = items.filter(function(x){ return ST[x.code] === 'can'; }).length;
+    s += '<text x="' + C + '" y="' + (C - 2) + '" font-size="24" font-weight="700" fill="#2563eb" text-anchor="middle">R' + R + '</text>' +
+      '<text x="' + C + '" y="' + (C + 18) + '" font-size="11.5" fill="#6b7689" text-anchor="middle">' + (SAVE ? '已解锁 ' + no + ' · ' : '') + '可解锁 ' + nc + '</text>';
+    items.forEach(function(x){ s += station(x, pos[x.code][0], pos[x.code][1], x.pre.length ? 6 : 5); });
+    $('dial').innerHTML = s + '</svg>';
+    dialPos = pos;
+    dialPath = function(a, b){ return 'M' + a[0] + ' ' + a[1] + ' Q' + (C + ((a[0] + b[0]) / 2 - C) * .35) + ' ' + (C + ((a[1] + b[1]) / 2 - C) * .35) + ' ' + b[0] + ' ' + b[1]; };
+  }
+  // 星盘上选中的研究：橙线连前置，蓝线连后续
+  function drawLinks(){
+    var g = root.querySelector('.rs-links'); if (!g) return;
+    var s = '', pos = dialPos;
+    if (SEL && pos[SEL]) {
+      var x = byCode[SEL];
+      x.pre.forEach(function(p){ if (pos[p]) s += '<path class="rs-lnk" d="' + dialPath(pos[p], pos[SEL]) + '" fill="none" stroke="#f59e0b" stroke-width="2.2"/>'; });
+      x.post.forEach(function(p){ if (pos[p]) s += '<path class="rs-lnk" d="' + dialPath(pos[SEL], pos[p]) + '" fill="none" stroke="#2563eb" stroke-width="2.2"/>'; });
+      s += '<circle cx="' + pos[SEL][0] + '" cy="' + pos[SEL][1] + '" r="11" fill="#ffe58a" fill-opacity=".6" stroke="#f59e0b" stroke-width="2"/>';
+    }
+    g.innerHTML = s;
+  }
+  function renderDet(){
+    var el = $('det');
+    if (!SEL) { el.innerHTML = '<div class="rs-empty">点一个研究看详情</div>'; return; }
+    var x = byCode[SEL], st = ST[SEL];
+    var stt = {own: ['已解锁', 'no'], can: ['可解锁', ''], no: ['还没到', 'gray'], gone: ['A3 起已移除', 'gray']}[st];
+    var chip = function(c){ var y = byCode[c]; return '<span class="rs-pc st-' + ST[c] + '" data-c="' + c + '"><i class="rs-dot" style="background:' + HEX[y.b] + '"></i>' + c + ' ' + esc(y.zh) +
+      (SAVE ? '<i>' + (ST[c] === 'own' ? '已解锁' : '未解锁') + '</i>' : '') + '</span>'; };
+    var bad = facBad(x) && st !== 'own';
+    el.innerHTML = '<div class="rs-card"><div class="rs-top"><span class="rs-dot" style="background:' + HEX[x.b] + '"></span>' + BN[x.b] + ' · ' + x.n.toLocaleString() + ' 点</div>' +
+      '<h3>' + esc(x.zh) + '</h3><div class="en">' + esc(x.en) + '</div>' +
+      '<div class="rs-tags"><em class="' + stt[1] + '">' + stt[0] + '</em>' + (bought(x.code) ? '<em class="no">本局已购买</em>' : '') + '<em>' + x.code + '</em><em>R' + x.r + '</em>' +
+      (x.fac ? '<em class="fac">' + esc(x.fac) + '</em>' : '') + '</div>' +
+      '<div class="rs-f"><small>解锁条件</small>' + (x.ch || '<span class="nil">—</span>') + '</div>' +
+      (x.fac ? '<div class="rs-f"><small>阵营</small>需要使用' + esc(x.fac) + (MYF.length ? ' <em class="' + (bad ? 'warn' : 'gray') + '">你现在是' + MYF.join('+') + '</em>' : '') + '</div>' : '') +
+      (x.pre.length ? '<div class="rs-f"><small>前置</small>' + each(x.pre, chip) + '<div class="rs-hint">前置都解锁、点数到 ' + x.n + (x.fac ? '、用着' + esc(x.fac) : '') + '就自动解锁</div></div>' : '') +
+      (x.post.length ? '<div class="rs-f"><small>后续（需要它的研究）</small>' + each(x.post, chip) + '</div>' : '') +
+      '<div class="rs-f"><small>效果</small>' + (x.eh || '—') + '</div>' +
+      (x.note ? '<div class="rs-f"><small>备注</small><span class="rs-mut">' + esc(x.note) + '</span></div>' : '') + '</div>';
+  }
+  function highlight(){
+    var rl = rel(SEL), any = Object.keys(rl).length > 0;
+    $('v-lane').querySelectorAll('[data-c]').forEach(function(e){ e.classList.toggle('sel', e.dataset.c === SEL); e.classList.toggle('rel', !!rl[e.dataset.c]); });
+    $('v-lane').classList.toggle('focus', !!SEL && any);
+    if (VIEW === 'dial') drawLinks();
+  }
+  function counts(){
+    var v = DATA.filter(visible), o = v.filter(function(x){ return ST[x.code] === 'own'; }).length;
+    var b = $('own').querySelectorAll('b'); b[0].textContent = v.length; b[1].textContent = o; b[2].textContent = v.length - o;
+    $('prog').style.width = (o / v.length * 100) + '%';
+  }
+  var RULE = '研究代号就是需要的研究点数；组合研究在前置都解锁、点数到位后自动解锁，绑定阵营的还要正在用那个阵营。';
+  function render(){
+    compute();
+    $('rnum').textContent = 'R' + R; $('asc').textContent = 'A' + ascOf(R); $('back').hidden = !SAVE || R === SAVE.r;
+    $('note').textContent = !SAVE ? '没有读到存档：按所选 R 的研究点数上限预览。' + RULE
+      : R === SAVE.r ? '按存档：R' + SAVE.r + '，' + (MYF.join('+') || '未结盟') + '，研究点数和已解锁记录来自存档。' + RULE
+      : '预览 R' + R + '：研究点数按这个 R 的上限算，已解锁的还是存档里的记录。' + RULE;
+    root.querySelector('.own-bar').hidden = !SAVE;
+    counts(); renderRP();
+    if (VIEW === 'lane') renderLane(); else renderDial();
+    renderDet(); highlight();
+  }
+  function select(c, keep){
+    SEL = SEL === c && !keep ? null : c; renderDet(); highlight();
+    if (SEL && VIEW === 'lane' && !keep) {
+      var e = $('v-lane').querySelector('[data-c="' + SEL + '"]');
+      if (e) { var r = e.getBoundingClientRect(); if (r.top < 70 || r.bottom > innerHeight) e.scrollIntoView({block: 'center', behavior: 'smooth'}); }
+    }
+  }
+  function setView(v){
+    VIEW = v;
+    $('views').querySelectorAll('button').forEach(function(x){ x.classList.toggle('on', x.dataset.v === v); });
+    root.querySelectorAll('.rs-view').forEach(function(x){ x.classList.toggle('on', x.id === 'rs-v-' + v); });
+    try { localStorage.setItem('rg-rs-view', v); } catch (e) {}
+  }
+  root.addEventListener('click', function(e){ var t = e.target.closest('[data-c]'); if (t) select(t.dataset.c); });
+  var tip = $('tip');
+  root.addEventListener('mousemove', function(e){ var t = e.target.closest('[data-t]'); if (!t) { tip.style.display = 'none'; return; }
+    tip.textContent = t.dataset.t; tip.style.display = 'block'; tip.style.left = (e.clientX + 12) + 'px'; tip.style.top = (e.clientY + 16) + 'px'; });
+  root.addEventListener('mouseleave', function(){ tip.style.display = 'none'; });
+  function setR(r){ R = r; $('r').value = R; try { localStorage.setItem('rg-rs-r', R); } catch (e) {} render(); }
+  $('r').addEventListener('input', function(e){ setR(+e.target.value); });
+  $('back').addEventListener('click', function(){ setR(SAVE.r); });
+  $('q').addEventListener('input', function(e){ Q = e.target.value.trim().toLowerCase(); render(); });
+  function seg(id, fn){ $(id).addEventListener('click', function(e){ var b = e.target.closest('button'); if (!b) return;
+    $(id).querySelectorAll('button').forEach(function(x){ x.classList.toggle('on', x === b); }); fn(b); }); }
+  seg('own', function(b){ OWNF = b.dataset.o; render(); });
+  seg('views', function(b){ setView(b.dataset.v); render(); });
+  // 胶囊离开原位、浮在内容上面时加阴影（和其他卡片页一样）
+  var top = root.querySelector('.cl-top'), home = document.createElement('div');
+  top.parentNode.insertBefore(home, top);
+  document.addEventListener('scroll', function(){ top.classList.toggle('float', top.getBoundingClientRect().top - home.getBoundingClientRect().top > 12); }, true);
+  // 读到存档：R 跳到存档的 R（自动同步时只在存档的 R 变了才跳）
+  window.addEventListener('researchsave', function(e){
+    var d = e.detail, oldR = SAVE && SAVE.r;
+    SAVE = d;
+    MYF = d ? d.fac.map(function(i){ return FNAME[i]; }).filter(Boolean) : [];
+    if (d && d.r !== oldR) { R = d.r; $('r').value = R; }
+    if (!d) OWNF = '';
+    render();
+  });
+  // 从别处链接到某个研究：清掉筛选、切到时间线并选中它（捕获阶段，赶在页面路由滚动之前把格子画出来）
+  function jump(){
+    var id = decodeURIComponent(location.hash.slice(1)), x = DATA.filter(function(y){ return y.id === id; })[0];
+    if (!x) return;
+    Q = ''; $('q').value = ''; OWNF = ''; $('own').querySelectorAll('button').forEach(function(b){ b.classList.toggle('on', !b.dataset.o); });
+    setView('lane'); render(); select(x.code, true);
+  }
+  window.addEventListener('hashchange', jump, true);
+  setView(VIEW); $('r').value = R;
+  render(); jump();
+})();</script>"""
 
 
 def build_buildings(ws):
@@ -708,7 +946,7 @@ def main():
     nav += '<div class="grp">资料表</div>' + ''.join(item('t%d' % n, SHEETS[n][0]) for n in sections)
     body = ''.join('<section id="sec-%s" class="guide" hidden>%s</section>' % (g, guides[g]) for g, _, _ in GUIDES)
     body += ''.join('<section id="sec-t%d" class="table" hidden>%s</section>' % (n, sections[n]) for n in sections)
-    body += CL_JS  # 卡片列表（遗物、隐藏奖杯）的搜索和已获得切换
+    body += CL_JS + RS_JS  # 卡片列表（遗物、隐藏奖杯）的搜索和已获得切换
     body += open(os.path.join(ROOT, '脚本', 'guide_progress.html'), encoding='utf-8').read()
     # 攻略图例离开原位、浮在内容上面时加阴影
     body += """<script>document.querySelectorAll('.guide .legend').forEach(function(el){
@@ -883,6 +1121,83 @@ td.flash{outline:3px solid #f59e0b;outline-offset:-2px;background:var(--flash)!i
 .ch-sp b{font-size:14px;color:var(--fg)}.ch-sp .en{font-size:12px;color:#9aa5b8;margin-left:8px}
 .ch-sp p{margin:4px 0 0}
 .ch-sp.flash{background:var(--flash)}
+/* 研究：时间线 / 星盘 + 右边详情 */
+.rs .own-bar[hidden]{display:none}
+.rs .cl-q{width:220px}  /* 顶上多一个视图胶囊，1280 宽的窗口里也排得下一行 */
+.rs .own-bar.tight{padding:0 4px}
+.rs-rbar{display:flex;align-items:center;gap:10px;height:32px;box-sizing:border-box;padding:0 14px;margin:0 auto 0 16px;background:#e6ecf5;border-radius:999px;font-size:13px;color:var(--muted)}
+.rs-rbar b{font-size:14px;color:var(--blue);min-width:38px;font-variant-numeric:tabular-nums}
+.rs-rbar input{width:180px;accent-color:var(--blue)}
+.rs-rbar button{border:none;background:#fff;color:var(--blue);font:inherit;font-size:12px;border-radius:999px;padding:1px 10px;cursor:pointer;box-shadow:0 2px 8px rgba(20,40,90,.1)}
+.rs-page{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:22px;align-items:start}
+.rs-det{position:sticky;top:68px;margin-top:22px}
+.rs-dot{width:8px;height:8px;border-radius:50%;flex:none;display:inline-block}
+.rs-rp{margin:22px 2px 18px}
+.rs-rp-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.rs-rp-h>b{font-size:16px}
+.rs-rp-h span{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.rs-rp-h span b{font-size:15px;color:var(--blue)}
+.rs-rp-bar{height:8px;background:rgba(20,40,90,.08);border-radius:99px;overflow:hidden}
+.rs-rp-bar i{display:block;height:100%;background:var(--blue);border-radius:99px;transition:width .5s cubic-bezier(.2,.8,.2,1)}
+.rs-rp-s{margin-top:6px;font-size:12px;color:#9aa5b8}
+.rs-c{position:relative;border:1px solid var(--line);border-radius:12px;padding:5px 9px 6px;cursor:pointer;font-size:12.5px;line-height:1.45;color:#3d4a5f;background:#fff;
+  scroll-margin:90px;transition:border-color .2s,background 1.5s,opacity .2s}
+.rs-c:hover{border-color:#cdd9ee}
+.rs-cd{display:flex;align-items:center;gap:4px;margin-bottom:1px}
+.rs-cd em{font-style:normal;font-size:11px;color:#1d4ed8;background:var(--soft);border-radius:6px;padding:0 6px;white-space:nowrap}
+.rs-cd span{font-size:10.5px;color:#9aa5b8;margin-left:auto;white-space:nowrap}
+.rs-c.bought .rs-cd em{color:#fff;background:var(--blue)}
+.rs-c.st-own::after{content:"✓";position:absolute;right:-5px;top:-5px;width:15px;height:15px;border-radius:50%;background:var(--blue);color:#fff;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 2px #fff}
+.rs-c.st-can{border-color:#bcd0f7;background:#f8faff}
+.rs-c.st-no{opacity:.5}
+.rs-c.st-no:hover{opacity:1}
+.rs-c.sel,.rs-c.flash{background:var(--flash);border-color:#f59e0b;opacity:1}
+.rs-c.rel{border-color:#f59e0b;opacity:1}
+.rs-view.focus .rs-c:not(.sel):not(.rel){opacity:.28}
+.rs-lh,.rs-lr{display:grid;grid-template-columns:44px repeat(7,minmax(0,1fr));gap:8px}
+.rs-lh{font-size:12px;color:var(--muted);padding:0 0 8px;border-bottom:1px solid var(--line);margin-bottom:8px}
+.rs-lh span{display:flex;align-items:center;gap:6px;white-space:nowrap}
+.rs-lr{padding:4px 0}
+.rs-rl{font-size:12px;color:#9aa5b8;padding-top:6px;text-align:right;font-variant-numeric:tabular-nums}
+.rs-lr.past .rs-rl{color:var(--blue);font-weight:600}
+.rs-col{display:flex;flex-direction:column;gap:6px;min-width:0}
+.rs-era{margin:14px 0 6px;font-size:11px;color:#9aa5b8;letter-spacing:.12em;display:flex;align-items:center;gap:10px}
+.rs-era:after{content:"";flex:1;height:1px;background:var(--line)}
+.rs-here{display:flex;align-items:center;gap:10px;margin:8px 0}
+.rs-here span{font-size:12px;font-weight:600;color:#fff;background:var(--blue);border-radius:999px;padding:1px 12px;box-shadow:0 4px 12px rgba(37,99,235,.25)}
+.rs-here:after{content:"";flex:1;height:2px;border-radius:2px;background:var(--blue);opacity:.35}
+.rs-dial{border:1px solid var(--line);border-radius:16px;padding:10px;display:flex;justify-content:center}
+.rs-dial svg{display:block;width:100%;max-width:640px;height:auto}
+.rs-st{cursor:pointer}
+.rs-st circle.p{transition:r .15s cubic-bezier(.2,.8,.2,1)}
+.rs-st:hover circle.p{r:8}
+.rs-lnk{stroke-dasharray:5 4;animation:rs-dash .6s linear infinite}
+@keyframes rs-dash{to{stroke-dashoffset:-9}}
+.rs-view{display:none}
+.rs-view.on{display:block;animation:rg-in .3s cubic-bezier(.2,.8,.2,1)}
+.rs-card{border:1px solid var(--line);border-radius:16px;padding:14px 16px;animation:rg-in .3s cubic-bezier(.2,.8,.2,1)}
+.rs-top{display:flex;align-items:center;gap:8px;font-size:12px;color:#9aa5b8}
+.rs-card h3{margin:4px 0 0;font-size:17px}
+.rs-card .en{font-size:12.5px;color:#9aa5b8}
+.rs-tags{display:flex;flex-wrap:wrap;gap:5px;margin:8px 0 4px}
+.rs-card em{font-style:normal;font-size:11.5px;color:#1d4ed8;background:var(--soft);border-radius:6px;padding:0 7px;white-space:nowrap}
+.rs-card em.no{color:#fff;background:var(--blue)}
+.rs-card em.fac{color:#6b4fa0;background:#f2edfb}
+.rs-card em.warn{color:#b45309;background:#fdf3e1}
+.rs-card em.gray{color:var(--muted);background:#f1f4f8}
+.rs-f{margin-top:10px;font-size:13.5px;color:#3d4a5f}
+.rs-f small{display:block;font-size:11.5px;color:#9aa5b8}
+.rs-f .nil{color:#c9d1dd}
+.rs-hint{font-size:12px;color:#9aa5b8;margin-top:4px}
+.rs-mut{font-size:12.5px;color:var(--muted)}
+.rs-pc{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--line);border-radius:999px;padding:1px 10px;margin:3px 4px 0 0;cursor:pointer;font-size:12.5px;background:#fff;transition:border-color .2s}
+.rs-pc:hover{border-color:#cdd9ee}
+.rs-pc i{font-style:normal;font-size:11.5px;color:#9aa5b8}
+.rs-pc.st-own i{color:var(--blue)}
+.rs-empty{border:1px dashed var(--line);border-radius:16px;padding:28px 16px;text-align:center;color:#9aa5b8;font-size:13px}
+.rs-tip{position:fixed;pointer-events:none;background:var(--fg);color:#fff;font-size:12px;padding:3px 10px;border-radius:999px;z-index:50;display:none;white-space:nowrap;box-shadow:0 6px 20px rgba(20,40,90,.25)}
+@media (prefers-reduced-motion:reduce){.rs-view.on,.rs-card,.rs-lnk{animation:none}}
+@media (max-width:1100px){.rs-page{grid-template-columns:1fr}.rs-det{position:static;margin-top:14px}}
 /* 建筑升级：选建筑看一列 */
 .bd-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px}
 .bd-tabs button{font:inherit;font-size:13px;border:none;background:#e6ecf5;color:#3d4a5f;padding:4px 13px;border-radius:999px;cursor:pointer;transition:background .15s,color .15s}
@@ -1062,7 +1377,7 @@ html.app.max .grip{display:none}
   show();
   // 全表搜索
   var q = document.getElementById('q'), res = document.getElementById('res'), timer;
-  var tds = Array.prototype.slice.call(document.querySelectorAll('table.sheet td[id], .art[id], .ch-sp[id], .bd-r[id]'));
+  var tds = Array.prototype.slice.call(document.querySelectorAll('table.sheet td[id], .art[id], .ch-sp[id], .bd-r[id], .rs-s[data-id]'));
   var names = {}; navs.forEach(function(a){ names[a.dataset.sec] = a.textContent.trim(); });
   q.addEventListener('input', function(){
     clearTimeout(timer);
@@ -1071,14 +1386,14 @@ html.app.max .grip{display:none}
       if (!k) { res.hidden = true; return; }
       var out = [];
       for (var i = 0; i < tds.length && out.length < 80; i++) {
-        var t = tds[i].textContent;
+        var t = tds[i].textContent, tid = tds[i].id || tds[i].dataset.id;
         var p = t.toLowerCase().indexOf(k);
         if (p < 0) continue;
         var s = t.slice(Math.max(0, p - 20), p + 50);
         var a = document.createElement('a');
-        a.href = '#' + tds[i].id;
+        a.href = '#' + tid;
         a.innerHTML = '<small></small>';
-        a.firstChild.textContent = names[tds[i].id.split('-')[0]] + ' ' + tds[i].id.split('-')[1];
+        a.firstChild.textContent = names[tid.split('-')[0]] + ' ' + tid.split('-')[1];
         a.appendChild(document.createTextNode(s));
         out.push(a);
       }

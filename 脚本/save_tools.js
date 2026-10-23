@@ -130,6 +130,18 @@
     }
     window.dispatchEvent(new CustomEvent('challengeowned', {detail: ch}));
     window.dispatchEvent(new CustomEvent('researchowned', {detail: rs}));
+    // 研究页：重生次数、在用的阵营、各分支研究点数（统计 90–95 是 S C D E A W，154 是 F），已解锁的研究（值是本局有没有买）
+    var rsv = null;
+    if (s) {
+      var rp = {}, own = {};
+      [['S', 90], ['C', 91], ['D', 92], ['E', 93], ['A', 94], ['W', 95], ['F', 154]].forEach(function (b) {
+        var x = s.stats[b[1]] || {};
+        rp[b[0]] = Math.round((x.stats || 0) + (x.statsReset || 0) + (x.statsRei || 0));
+      });
+      Object.keys(D.research).forEach(function (id) { var u = s.upgrades[id]; if (u) own[D.research[id].code] = !!u.u1; });
+      rsv = {r: s.reincarnation, fac: [s.faction, s.prestigeFaction, s.elitePrestigeFaction], rp: rp, own: own};
+    }
+    window.dispatchEvent(new CustomEvent('researchsave', {detail: rsv}));
     window.dispatchEvent(new CustomEvent('artowned', {detail: art}));
     window.dispatchEvent(new CustomEvent('trophyowned', {detail: tro}));
     guideUnlocked(s);
