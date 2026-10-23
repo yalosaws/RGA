@@ -13,29 +13,44 @@
 </div>
 <div id="sv-main" hidden>
   <div id="sv-cards" class="sv-cards"></div>
-  <div class="sv-tabs" id="sv-tabs"><button data-t="view" class="on">存档查看</button><button data-t="rws">法术预报</button><button data-t="arch">遗物预测</button></div>
   <div id="sv-view">
     <div class="sv-tools"><input id="sv-filter" type="search" placeholder="筛选项目，例如：雷击、考古、仙灵"><div id="sv-vtabs" class="sv-tabs2"></div></div>
     <div id="sv-vbody" class="sv-card"></div>
     <p class="sv-hint">✓ 表示存档里有这一项（升级、奖杯）；传承的勾，鼠标停上去能看名字。研究：<span class="rs-own">绿色</span>已购买，<span class="rs-unl">黄色</span>已解锁未购买，<span class="rs-lock">灰色</span>未解锁。带虚线的名字点了跳到表格。</p>
   </div>
-  <div id="sv-rws" class="sv-card" hidden></div>
-  <div id="sv-arch" hidden>
-    <div class="sv-card">
-      <p class="sv-warn" id="sv-aguess">有些遗物的条件用到存档里没有的数据，只能给出需要达到的数值，要自己和游戏里的数值对比。</p>
-      <div class="sv-row">往后计算 <input id="sv-alim" type="number" min="1" step="1000" value="10000"> 个随机数</div>
+</div>
+<p class="sv-note">查看页的项目来自社区工具 Royal Advisory Board 的存档编辑器（MIT 许可，本地副本在 工具/RG-tools）。</p>
+</section>
+<section id="sec-rws" class="savesec fcsec" hidden>
+<div class="fc-empty">还没有读到存档。到 <a href="#save">我的存档</a> 读取后，这里会自动预报。</div>
+<div class="fc-body" hidden>
+  <div class="fc-src"></div>
+  <div class="sv-card fc-bld"><div class="fc-lab">拥有的建筑<small>点一下高亮，预报里同一建筑一起变色</small></div><div id="sv-rbld" class="fc-chips"></div></div>
+  <div id="sv-rgrid" class="fc-grid"></div>
+  <div id="sv-roff"></div>
+</div>
+<p class="sv-note">改写自社区工具 Realm Weather Service（Royal Advisory Board，MIT 许可）。游戏更新后预报可能不准，以游戏内为准。</p>
+</section>
+<section id="sec-arch" class="savesec fcsec" hidden>
+<div class="fc-empty">还没有读到存档。到 <a href="#save">我的存档</a> 读取后，这里会自动预测。</div>
+<div class="fc-body" hidden>
+  <div class="fc-src"></div>
+  <div id="sv-astats" class="ar-stats"></div>
+  <div class="ar-cols">
+    <div class="sv-card ar-time">
+      <div class="ar-h"><h3>接下来的考古</h3><label>往后计算 <input id="sv-alim" type="number" min="1" step="1000" value="10000"> 个随机数</label></div>
       <div id="sv-aout"></div>
     </div>
-    <div class="sv-card">
-      <h3>小随机数分布</h3>
-      <p class="sv-hint">每个点是往后某一个很小的随机数，<b>越小越好</b>。点一下看用上这个数能拿到哪些遗物。</p>
-      <canvas id="sv-achart"></canvas>
-      <div class="sv-row"><label><input type="checkbox" id="sv-aovc"> 按指定的重生次数看</label> <input id="sv-aover" type="number" value="125" disabled></div>
-      <div id="sv-adetail"></div>
-    </div>
+    <div class="sv-card ar-pool" id="sv-apool"></div>
+  </div>
+  <div class="sv-card ar-chart">
+    <div class="ar-h"><h3>小随机数分布</h3><label class="ar-ov"><input type="checkbox" id="sv-aovc"> 按重生次数 <input id="sv-aover" type="number" value="125" disabled> 看</label></div>
+    <p class="sv-hint">每个点是往后某一个很小的随机数，<b>越低越好</b>。点一下看用上这个数能拿到哪些遗物。</p>
+    <canvas id="sv-achart"></canvas>
+    <div id="sv-adetail"></div>
   </div>
 </div>
-<p class="sv-note">法术预报和遗物预测改写自社区工具 Royal Advisory Board（Realm Weather Service、Lara Crypt，MIT 许可，本地副本在 工具/RG-tools），查看页的项目来自它的存档编辑器。游戏更新后预报可能不准，以游戏内为准。</p>
+<p class="sv-note">改写自社区工具 Lara Crypt（Royal Advisory Board，MIT 许可）。游戏更新后预测可能不准，以游戏内为准。</p>
 </section>
 <style>
 [hidden]{display:none!important}
@@ -76,10 +91,6 @@ html.app .sv-bar{display:none}
 .sv-cards div:first-child{background:var(--blue);color:#fff;box-shadow:0 10px 28px rgba(37,99,235,.3)}
 .sv-cards div:first-child small{color:rgba(255,255,255,.75)}
 .sv-cards div:first-child b{font-size:34px;line-height:1.2}
-/* 分段切换 */
-.sv-tabs{display:inline-flex;gap:2px;background:#e6ecf5;border-radius:12px;padding:4px;margin-bottom:14px}
-.sv-tabs button{background:none!important;color:var(--muted)!important;border-radius:9px;padding:6px 20px}
-.sv-tabs button.on{background:#fff!important;color:var(--fg)!important;font-weight:600;box-shadow:0 2px 8px rgba(20,40,90,.1)}
 .sv-tools{margin-bottom:12px}
 .sv-tools #sv-filter{margin-bottom:10px}
 .sv-tabs2{display:flex;flex-wrap:wrap;gap:6px}
@@ -108,11 +119,85 @@ a.tl{color:inherit;text-decoration:underline dotted;text-underline-offset:3px}
 a.tl:hover{color:var(--blue)}
 .sv-hint{font-size:13px;color:var(--muted);margin:4px 2px}
 .sv-warn{font-size:13px;background:#fff7e6;color:#8a5a00;border-radius:12px;padding:10px 14px;margin:0 0 10px}
-.sv-tabs2+.sv-fc,.sv-fc{margin-top:6px}
-.sv-fc ol,.sv-ex{padding-left:28px;margin:6px 0} .sv-fc li,.sv-ex li{margin:3px 0}
-.bd{cursor:pointer;border-radius:6px;padding:1px 4px} .bd:hover{background:var(--soft)} .bd.hl{background:#dbe7ff;color:#1d4ed8;font-weight:600}
-.br0{color:#dc2626}.br1{color:#16a34a}.br2{color:#2563eb}.br3{color:#6b7689}.br4{color:#111;font-weight:600}.br5{color:#ca8a04}
-#sv-achart{width:100%;border:1px solid var(--line);border-radius:14px;cursor:crosshair;background:#fbfcfe}
+/* ---- 法术预报、遗物预测 ---- */
+.fc-empty{background:var(--soft);border-radius:18px;padding:40px 20px;text-align:center;color:var(--muted);font-size:14px}
+.fc-src{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);background:var(--soft);border-radius:999px;padding:4px 14px;margin:0 0 14px}
+.fc-src b{color:var(--fg);font-weight:600}
+.fc-lab{font-size:13px;font-weight:600;margin-bottom:10px}
+.fc-lab small{font-weight:normal;color:var(--muted);margin-left:10px}
+.fc-chips{display:flex;flex-wrap:wrap;gap:6px}
+.fc-chips .bd{background:var(--soft);padding:3px 12px;border-radius:999px;font-size:13px}
+.bd{cursor:pointer;border-radius:6px;padding:1px 6px;transition:background .15s,color .15s}
+.bd:hover{background:#e3ebfa}
+.bd.hl,.fc-chips .bd.hl{background:var(--blue);color:#fff;font-weight:600}
+.fc-grid{columns:300px;column-gap:16px}  /* 卡片高矮不一，按列排不留空 */
+.fc-grid .sv-card{break-inside:avoid;margin:0 0 16px}
+.fc-h{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.fc-h b{font-size:16px}
+.fc-seed{font-size:11.5px;color:#9aa5b8;font-variant-numeric:tabular-nums}
+.fc-note{font-size:12.5px;color:var(--muted);margin:6px 0 0}
+.fc-list{list-style:none;margin:12px 0 10px;padding:0;font-size:13.5px}
+.fc-list li{display:flex;gap:10px;align-items:baseline;padding:5px 8px;border-radius:10px}
+.fc-list li:nth-child(even){background:#f8fafd}
+.fc-list li>i{font-style:normal;color:#9aa5b8;font-size:12px;min-width:18px;text-align:right;font-variant-numeric:tabular-nums}
+.fc-list li>div{flex:1;min-width:0}
+.fc-list li>em{font-style:normal;font-size:11px;color:var(--blue);background:#fff;border-radius:999px;padding:0 8px;white-space:nowrap}
+.fc-list li.next{background:#eaf1ff}
+.fc-list li.next>i{color:var(--blue);font-weight:700}
+.savesec button.fc-more{width:100%}
+.br{display:inline-flex;align-items:center;gap:5px;margin-right:12px;white-space:nowrap}
+.br i{width:9px;height:9px;border-radius:50%;display:inline-block}
+.br0 i{background:#dc2626}.br1 i{background:#16a34a}.br2 i{background:#2563eb}.br3 i{background:#fff;box-shadow:inset 0 0 0 1.5px #b8c2d3}.br4 i{background:#111827}.br5 i{background:#eab308}
+.fc-off{background:var(--soft);border-radius:18px;padding:14px 20px;font-size:13px}
+.fc-off-h{font-weight:600;margin-bottom:6px;color:var(--muted)}
+.fc-off p{display:flex;gap:12px;margin:3px 0}
+.fc-off p b{font-weight:600;min-width:96px}
+.fc-off p span{color:var(--muted)}
+/* 遗物预测 */
+.ar-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:16px}
+.ar-stats div{background:var(--card);border-radius:18px;box-shadow:var(--shadow);padding:14px 18px;min-width:0}
+.ar-stats small{display:block;color:var(--muted);font-size:12px}
+.ar-stats b{display:block;font-size:24px;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ar-stats b span{font-size:14px;font-weight:500;color:var(--muted);margin-left:4px}
+.ar-stats div:first-child{background:var(--blue);color:#fff;box-shadow:0 10px 28px rgba(37,99,235,.3)}
+.ar-stats div:first-child small,.ar-stats div:first-child b span{color:rgba(255,255,255,.75)}
+.ar-cols{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:16px;align-items:start;margin-bottom:16px}
+.ar-cols .sv-card{margin:0}
+.ar-h{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:4px}
+.savesec .ar-h h3{margin:0}
+.ar-h label{font-size:13px;color:var(--muted);display:inline-flex;align-items:center;gap:6px}
+.ar-seed{font-size:12px;color:#9aa5b8;margin:0 0 4px}
+.ar-tl{list-style:none;margin:8px 0 0;padding:0;position:relative}
+.ar-tl:before{content:"";position:absolute;left:7px;top:14px;bottom:14px;width:2px;background:var(--line);border-radius:2px}
+.ar-tl li{display:flex;gap:14px;padding:8px 0 8px 28px;position:relative}
+.ar-tl li:before{content:"";position:absolute;left:2px;top:14px;width:12px;height:12px;border-radius:50%;background:#fff;box-shadow:inset 0 0 0 2px #c3cfe2}
+.ar-tl li.got:before{background:var(--blue);box-shadow:0 0 0 3px #dbe7ff}
+.ar-n{width:108px;flex:none}
+.ar-n b{display:block;font-size:14px;font-variant-numeric:tabular-nums}
+.ar-n small{color:var(--muted);font-size:12px}
+.ar-ev{flex:1;display:flex;flex-wrap:wrap;gap:6px;align-content:flex-start;padding-top:1px}
+.ar-get,.ar-may{display:inline-flex;align-items:baseline;gap:6px;border-radius:10px;padding:3px 11px;font-size:13.5px}
+.ar-get{background:var(--blue);color:#fff;font-weight:600}
+.ar-get a.tl{color:#fff;text-decoration-color:rgba(255,255,255,.6)}
+.ar-may{background:var(--soft)}
+.ar-may small{color:var(--muted);font-size:12px}
+.ar-none{color:var(--muted);font-size:13.5px;margin:12px 0 4px}
+.ar-pool h4{font-size:13px;margin:16px 0 8px;display:flex;align-items:center;gap:6px}
+.ar-pool h4:first-child{margin-top:0}
+.ar-pool h4 small{background:var(--soft);color:var(--muted);border-radius:999px;padding:0 8px;font-weight:normal}
+.ar-chip{display:inline-block;background:var(--soft);border-radius:999px;padding:2px 10px;font-size:12.5px;margin:0 4px 6px 0}
+.ar-chip small{color:var(--muted);margin-left:4px}
+.ar-chip.x{background:none;box-shadow:inset 0 0 0 1px var(--line);color:#a0aabb}
+.ar-chip.x a.tl{color:#a0aabb}
+.ar-pool .sv-hint{margin:0 0 4px;font-size:12px}
+.ar-pool details summary{cursor:pointer;font-size:13px;font-weight:600;margin:16px 0 8px}
+.ar-pool .sv-warn{margin:14px 0 0;font-size:12.5px}
+.ar-ov input[type=number]{width:80px}
+#sv-achart{width:100%;border-radius:14px;cursor:crosshair;background:#f8fafd;margin-top:8px;display:block}
+.ar-pick{display:flex;flex-wrap:wrap;gap:8px 22px;margin:14px 2px 6px;font-size:13px;color:var(--muted)}
+#sv-adetail .sv-tb tr.hd th{text-align:left}
+.ar-pick b{color:var(--fg);font-variant-numeric:tabular-nums;margin-left:4px}
+@media (max-width:1000px){.ar-cols{grid-template-columns:1fr}.ar-stats{grid-template-columns:repeat(2,1fr)}}
 .sv-note{font-size:12px;color:#9aa5b8;margin:20px 4px 0}
 @media (max-width:1000px){.sv-cards{grid-template-columns:repeat(3,1fr)}}
 @media (max-width:640px){.sv-cards{grid-template-columns:repeat(2,1fr)}.sv-tb tr>th:first-child{min-width:120px}.sv-paste{flex-direction:column}#sv-in{width:100%}}

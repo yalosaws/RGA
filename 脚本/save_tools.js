@@ -100,11 +100,22 @@
     $('sv-in').value = '';
     var y = rgScroller().scrollTop;  // 自动更新时不要跳回页首
     renderView(save);
+    forecastPages(save);
     rws.run(save);
     arch.run(save);
     ownedArtifacts(save);
     if (store === 'game') rgScroller().scrollTop = y;
     return true;
+  }
+
+  // 法术预报、遗物预测两页：没有存档时显示提示，有存档时顶上标出用的是哪份存档
+  function forecastPages(s) {
+    ['sec-rws', 'sec-arch'].forEach(function (id) {
+      var sec = $(id);
+      sec.querySelector('.fc-empty').hidden = !!s;
+      sec.querySelector('.fc-body').hidden = !s;
+      if (s) sec.querySelector('.fc-src').innerHTML = '按 <b>' + esc(summary(s)) + '</b> 的存档 · 存档时间 ' + when(s.lastsave * 1000);
+    });
   }
 
   // 遗物页、隐藏奖杯页：告诉它们哪些已经拿到（按英文名对上卡片的 data-en；奖杯的编号和英文名来自编辑器的奖杯行）
@@ -409,7 +420,7 @@
     $('sv-vtabs').classList.toggle('dim', !!k);
   }
 
-  // ---------- 法术预报（Realm Weather Service） ----------
+  // ---------- 法术预报（Realm Weather Service），侧栏「工具 → 法术预报」#rws ----------
   var rws = (function () {
     var BN = util.save.building_names, BIDS = util.save.building_ids;
     var BREATH = ['红色', '绿色', '蓝色', '白色', '黑色', '黄色'];
@@ -420,16 +431,17 @@
     var DJC4 = [[88, 88, 888], [88, 888, 88], [88, 88, 888], [88, 888, 88], [888, 88, 88], [888, 88, 88]];
     var LINEAGE = ['Fairy', 'Elven', 'Angel', 'Goblin', 'Undead', 'Demon', 'Titan', 'Druid', 'Faceless', 'Dwarven', 'Drow', null, 'Dragon', 'Archon', 'Djinn', 'Makers'];
     var hl = {};  // 高亮的建筑 id
-    var F = {};   // 各预报：{name, msg, more()}
+    var F = {};   // 各预报：{name, seed, note, gen, items} 或 {name, why}（不能预报）
     var owned = [], avail = [];
     var bname = function (id) { return zh(BN[id]); };
     var bspan = function (id) { return '<span class="bd' + (hl[id] ? ' hl' : '') + '" data-b="' + id + '">' + esc(bname(id)) + '</span>'; };
     var has = function (s, n) { return util.save.hasSpell(s, n); };
 
-    function add(key, name, msg, gen) {
-      F[key] = {name: name, msg: msg, gen: gen, items: []};
-      if (gen) more(key, 10);
+    function add(key, name, rng, note, gen) {
+      F[key] = {name: name, seed: rng.state, note: note, gen: gen, items: []};
+      more(key, 10);
     }
+    function no(key, name, why) { F[key] = {name: name, why: why}; }
     function more(key, n) {
       var f = F[key];
       for (var k = 0; k < n; k++) f.items.push(f.gen());
@@ -441,15 +453,14 @@
         if (s.buildings[i] && s.buildings[i].q > 0) owned.push(i);
         if (util.save.building_alignment[i] == 0 || util.save.building_alignment[i] == s.alignment) avail.push(i);
       });
-      var no = function (key, name, why) { add(key, name, why, null); };
 
       // 雷击
-      if (!has(s, 'Lightning Strike')) no('ls', '雷击', '没有雷击。');
-      else if (s.alignment != 3 && !util.save.upgrade_owned(s, 688)) no('ls', '雷击', '不是中立立场。');
-      else if (owned.length < 2) no('ls', '雷击', owned.length ? '只有' + bname(owned[0]) + '，每次都打它。' : '没有建筑。');
+      if (!has(s, 'Lightning Strike')) no('ls', '雷击', '没有雷击');
+      else if (s.alignment != 3 && !util.save.upgrade_owned(s, 688)) no('ls', '雷击', '不是中立立场');
+      else if (owned.length < 2) no('ls', '雷击', owned.length ? '只有' + bname(owned[0]) + '，每次都打它' : '没有建筑');
       else (function () {
         var rng = new PM_PRNG(s.spells[13].s), rod = util.save.upgrade_owned(s, 143018);
-        add('ls', '雷击', '随机数状态 ' + rng.state + '。' + (rod ? '有避雷针（不会打到传说圣殿）。' : ''), function () {
+        add('ls', '雷击', rng, rod ? '有避雷针，不会打到传说圣殿。' : '', function () {
           var len = owned.length;
           if (rod && owned[owned.length - 1] == 10) len -= 1;
           return bspan(owned[rng.strikeTier(len)]);
@@ -458,19 +469,19 @@
 
       // 奇迹（研究 D400）
       var mir = s.upgrades[143719];
-      if (!mir || !mir.u1) no('mir', '奇迹', '还没有奇迹（研究 D400）。');
-      else if (owned.length < 2) no('mir', '奇迹', owned.length ? '只有' + bname(owned[0]) + '。' : '没有建筑。');
+      if (!mir || !mir.u1) no('mir', '奇迹', '还没有奇迹（研究 D400）');
+      else if (owned.length < 2) no('mir', '奇迹', owned.length ? '只有' + bname(owned[0]) : '没有建筑');
       else (function () {
         var rng = new PM_PRNG(mir.s);
-        add('mir', '奇迹', '随机数状态 ' + rng.state + '。', function () { return bspan(owned[rng.strikeTier(owned.length)]); });
+        add('mir', '奇迹', rng, '', function () { return bspan(owned[rng.strikeTier(owned.length)]); });
       })();
 
       // 龙息
-      if (!has(s, "Dragon's Breath")) no('db', '龙息', '没有龙息。');
+      if (!has(s, "Dragon's Breath")) no('db', '龙息', '没有龙息');
       else (function () {
         var rng = new PM_PRNG(s.spells[21].s), tier = s.spells[21].activeTiers + 1, asc = s.ascension > 0 ? s.ascension : 1;
         if (util.save.upgrade_owned(s, 796)) tier *= 2;  // 龙族能力 4
-        add('db', '龙息', '随机数状态 ' + rng.state + '，每次 ' + tier + ' 道龙息。', function () {
+        add('db', '龙息', rng, '每次 ' + tier + ' 道龙息。', function () {
           var hits = [0, 0, 0, 0, 0, 0], el = BREATH.slice();
           if (asc == 1) { hits.pop(); el.pop(); }
           for (var c = 0; c < tier; c++) {
@@ -478,16 +489,16 @@
             if (!el.length) el = BREATH.slice();
             hits[BREATH.indexOf(hit)]++;
           }
-          return hits.map(function (h, c) { return h ? '<span class="br' + c + '">' + BREATH[c] + (h > 1 ? '×' + h : '') + '</span>' : ''; }).filter(Boolean).join('，');
+          return hits.map(function (h, c) { return h ? '<span class="br br' + c + '"><i></i>' + BREATH[c] + (h > 1 ? ' ×' + h : '') + '</span>' : ''; }).join('');
         });
       })();
 
       // 混沌涡流
-      if (!has(s, 'Maelstrom')) no('ms', '混沌涡流', '没有混沌涡流。');
+      if (!has(s, 'Maelstrom')) no('ms', '混沌涡流', '没有混沌涡流');
       else (function () {
         var rng = new PM_PRNG(s.spells[27].s), n = 2;
         for (var k = 0; k < 4; k++) n += util.save.upgrade_owned(s, 402701 + k) ? 1 : 0;
-        add('ms', '混沌涡流', '随机数状态 ' + rng.state + '，每次 ' + n + ' 个目标。前提：每次持续时间结束就用最高阶重新施放，中间不施放其他阶层，否则预报不准。', function () {
+        add('ms', '混沌涡流', rng, '每次 ' + n + ' 个目标。每次持续时间结束就用最高阶重新施放、中间不施放其他阶层，预报才准。', function () {
           var el = avail.slice(), t = [], out = [];
           for (var c = 0; c < n; c++) { var loc = rng.nextIntRange(0, el.length - 1); t.push(el[loc]); el.splice(loc, 1); }
           for (c = 0; c < n; c++) out.push(bspan(t[c]) + '：' + MAEL[rng.nextIntRange(0, MAEL.length - 1)]);
@@ -496,7 +507,7 @@
       })();
 
       // 有限祈愿
-      if (!has(s, 'Limited Wish')) no('lw', '有限祈愿', '没有有限祈愿。');
+      if (!has(s, 'Limited Wish')) no('lw', '有限祈愿', '没有有限祈愿');
       else (function () {
         var rng = new PM_PRNG(s.spells[29].s), cnt = s.spells[29].c, base = 1, el = [];
         var lt = Math.pow(Math.log(1 + s.spells[29].active0), 1.75);  // 本纪元有限祈愿生效时间，用当前值估算
@@ -508,78 +519,83 @@
         if (s.alignment == 1) el.push(WISH[1], WISH[6], WISH[5]);
         else if (s.alignment == 2) el.push(WISH[3], WISH[5], WISH[4]);
         else if (s.alignment == 3) el.push(WISH[2], WISH[6], WISH[4]);
-        add('lw', '有限祈愿', '随机数状态 ' + rng.state + '。加成按现在的生效时间估算，施放时会更高；巨灵能力 3 也会影响强度，只是近似值。', function () {
+        add('lw', '有限祈愿', rng, '加成按现在的生效时间估算，施放时会更高；巨灵能力 3 也会影响强度，只是近似值。', function () {
           var type = el[rng.nextIntRange(0, el.length - 1)];
           var v = Math.floor(rng.nextDoubleRange(base, cnt + 1));
           // 4.3 公式：产能 (50 + 5·ln(1+x)^1.75·y^0.25)%，其他 (250 + 2.5·ln(1+x)^1.75·y^0.5)%
           var pct = type === WISH[0] ? 50 + 5 * lt * Math.pow(v, 0.25) : 250 + 2.5 * lt * Math.pow(v, 0.5);
-          var txt = '提升' + type + '，随机值 ' + v.toLocaleString() + ' / ' + cnt.toLocaleString() + '（加成约 ' + pct.toPrecision(4) + '%）';
+          var txt = '<b>' + type + '</b> 约 +' + pct.toPrecision(4) + '%<br><span class="sv-hint">随机值 ' + v.toLocaleString() + ' / ' + cnt.toLocaleString() + '</span>';
           cnt++;
           return txt;
         });
       })();
 
       // 催化
-      if (!has(s, 'Catalyst')) no('cata', '催化', '没有催化。');
+      if (!has(s, 'Catalyst')) no('cata', '催化', '没有催化');
       else (function () {
         var rng = new PM_PRNG(s.spells[31].s);
         var el = CATA.filter(function (sp) { return !has(s, sp); });
         var now = (s.catalystTargets || []).map(function (t) { return zh(CATA_ID[t.targetspell]); }).filter(Boolean);
-        add('cata', '催化', '随机数状态 ' + rng.state + '。' + (now.length ? '当前法术：' + now.join('，') + '。' : ''), function () {
+        add('cata', '催化', rng, now.length ? '当前法术：' + now.join('，') + '。' : '', function () {
           var tmp = el.slice(), out = [];
-          for (var j = 0; j < 2 && tmp.length; j++) out.push(zh(tmp.splice(rng.nextIntRange(0, tmp.length - 1), 1)[0]));
+          for (var j = 0; j < 2 && tmp.length; j++) out.push(nm(zh(tmp.splice(rng.nextIntRange(0, tmp.length - 1), 1)[0])));
           return out.join('，');
         });
       })();
 
       // 巨灵挑战 4：尘世之欲
-      if (!util.save.challenge_active(s, 992)) no('djc4', zh('Worldly Desires'), '没有在进行巨灵挑战 4。');
+      if (!util.save.challenge_active(s, 992)) no('djc4', zh('Worldly Desires'), '没有在进行巨灵挑战 4');
       else (function () {
         var rng = new PM_PRNG(s.upgrades[992].s);
-        add('djc4', zh('Worldly Desires'), '随机数状态 ' + rng.state + '。', function () {
+        add('djc4', zh('Worldly Desires'), rng, '', function () {
           var h = DJC4[rng.nextIntRange(0, DJC4.length - 1)];
           return '助手 +' + h[0] + '%，宝石产量加成 +' + h[1] + '%，法力上限 +' + h[2] + '%';
         });
       })();
 
-      // 混乱挑战 2：混沌疯狂
-      if (!util.save.challenge_active(s, 1064)) no('mcc2', zh('Chaos Madness'), '没有在进行佣兵挑战 2。');
+      // 佣兵挑战 2：混沌疯狂
+      if (!util.save.challenge_active(s, 1064)) no('mcc2', zh('Chaos Madness'), '没有在进行佣兵挑战 2');
       else (function () {
         var rng = new PM_PRNG(s.spells[32].s), ok = [];
         [0, 1, 2, 3, 5, 4, 6, 8, 7, 9, 10, 12, 13, 14, 15].forEach(function (i) {
           if (s.lineageFaction == i || s.combinationBL == i) return;
           ok.push(zh(LINEAGE[i] + ' Lineage'));
         });
-        add('mcc2', zh('Chaos Madness'), '随机数状态 ' + rng.state + '。', function () { return esc(ok[rng.nextIntRange(0, ok.length - 1)]); });
+        add('mcc2', zh('Chaos Madness'), rng, '', function () { return nm(ok[rng.nextIntRange(0, ok.length - 1)]); });
       })();
 
       draw();
     }
 
-    var curTab = 'ls';
+    function card(k) {
+      var f = F[k];
+      return '<div class="sv-card fc"><div class="fc-h"><b>' + esc(f.name) + '</b><span class="fc-seed" title="随机数状态">随机数 ' + f.seed + '</span></div>' +
+        (f.note ? '<p class="fc-note">' + esc(f.note) + '</p>' : '') +
+        '<ol class="fc-list">' + f.items.map(function (x, i) {
+          return '<li' + (i ? '' : ' class="next"') + '><i>' + (i + 1) + '</i><div>' + x + '</div>' + (i ? '' : '<em>下一次</em>') + '</li>';
+        }).join('') + '</ol><button class="sv-lite fc-more" data-more="' + k + '">再预报 10 次</button></div>';
+    }
     function draw() {
-      var box = $('sv-rws');
-      var bar = Object.keys(F).map(function (k) {
-        return '<button data-f="' + k + '" class="' + (k === curTab ? 'on' : '') + (F[k].gen ? '' : ' off') + '">' + esc(F[k].name) + '</button>';
-      }).join('');
-      var f = F[curTab];
-      var list = f.gen ? '<ol>' + f.items.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ol><button class="sv-more" data-more="' + curTab + '">再预报 10 次</button>' : '';
-      box.innerHTML = '<p class="sv-hint">拥有的建筑（点一下高亮，预报里同一建筑一起变色）：' +
-        (owned.length ? owned.map(bspan).join('、') : '无') + '</p>' +
-        '<div class="sv-tabs2">' + bar + '</div><div class="sv-fc"><p>' + esc(f.msg) + '</p>' + list + '</div>';
+      var on = Object.keys(F).filter(function (k) { return F[k].gen; }), off = Object.keys(F).filter(function (k) { return !F[k].gen; });
+      $('sv-rbld').innerHTML = owned.length ? owned.map(bspan).join('') : '<span class="sv-hint">没有建筑</span>';
+      $('sv-rgrid').innerHTML = on.length ? on.map(card).join('') : '';
+      $('sv-roff').className = off.length ? 'fc-off' : '';
+      $('sv-roff').innerHTML = off.length ? '<div class="fc-off-h">' + (on.length ? '暂时不能预报' : '现在没有能预报的法术') + '</div>' +
+        off.map(function (k) { return '<p><b>' + esc(F[k].name) + '</b><span>' + esc(F[k].why) + '</span></p>'; }).join('') : '';
+      // 预报结果是生成时就拼好的文字，高亮要画完再按 data-b 补上
+      $('sec-rws').querySelectorAll('[data-b]').forEach(function (x) { x.classList.toggle('hl', !!hl[x.dataset.b]); });
     }
     document.addEventListener('click', function (e) {
       var t = e.target;
-      if (!t.closest || !t.closest('#sv-rws')) return;
-      var b = t.closest('[data-f]'), m = t.closest('[data-more]'), bd = t.closest('[data-b]');
-      if (b) { curTab = b.dataset.f; draw(); }
-      else if (m) { more(m.dataset.more, 10); draw(); }
+      if (!t.closest || !t.closest('#sec-rws')) return;
+      var m = t.closest('[data-more]'), bd = t.closest('[data-b]');
+      if (m) { more(m.dataset.more, 10); draw(); }
       else if (bd) { hl[bd.dataset.b] = !hl[bd.dataset.b]; draw(); }
     });
     return {run: run};
   })();
 
-  // ---------- 遗物预测（Lara Crypt） ----------
+  // ---------- 遗物预测（Lara Crypt），侧栏「工具 → 遗物预测」#arch ----------
   var arch = (function () {
     var save, eligible, unobtain, nonrandom, raw, smalls, chartPts, sel = null;
     function copy(a) {
@@ -589,27 +605,29 @@
     }
     function an(a) { return nm(zh(a.name)); }
 
+    // raw 里存 {h: 名字 HTML, note: 补充说明, x: 本次拿不到}
     function classify() {
-      raw = {owned: [], eligible: [], unobtain: [], nonrandom: [], ineligible: [], unowned: []};
+      raw = {owned: 0, eligible: [], nonrandom: [], ineligible: [], unowned: []};
       eligible = []; unobtain = []; nonrandom = [];
       var excav = save.excavations, num0 = util.save.stat(save, 35), ue = [], ui = [];
       Artifacts.forEach(function (a) {
         var fixed = !a.fixed || a.fixed(save), fail = !a.fail || !a.fail(save, num0 + 1);
         var ok = a.precheck ? a.precheck(save) : fixed;
-        if (util.save.trophy_owned(save, a.id)) raw.owned.push(an(a));
+        if (util.save.trophy_owned(save, a.id)) raw.owned++;
         else if (ok && fail) {
           if (a.random) {
             ue.push(a);
             var c = copy(a);
             if (!c.nocache) c.random = c.random(save);
             eligible.push(c);
-            raw.eligible.push(an(a) + (excav < a.excav ? '（第 ' + a.excav + ' 次考古后）' : ''));
-            if (a.notry && a.notry(save)) { raw.unobtain.push(an(a)); unobtain.push(a.id); }
+            var x = !!(a.notry && a.notry(save));
+            if (x) unobtain.push(a.id);
+            raw.eligible.push({h: an(a), note: excav < a.excav ? '第 ' + a.excav + ' 次起' : '', x: x});
           } else {
             nonrandom.push(copy(a));
-            raw.nonrandom.push(an(a) + (excav < a.excav ? '（第 ' + a.excav + ' 次考古时）' : ''));
+            raw.nonrandom.push({h: an(a), note: excav < a.excav ? '第 ' + a.excav + ' 次' : ''});
           }
-        } else { raw.ineligible.push(an(a)); ui.push(a); }
+        } else { raw.ineligible.push({h: an(a)}); ui.push(a); }
       });
       raw.unowned = ue.concat(ui);
     }
@@ -660,50 +678,69 @@
       if (!inp.dataset.user) inp.value = def;
       draw();
     }
+    function chips(list, empty) {
+      if (!list.length) return '<span class="sv-hint">' + (empty || '无') + '</span>';
+      return list.map(function (c) {
+        return '<span class="ar-chip' + (c.x ? ' x' : '') + '"' + (c.x ? ' title="本次退位拿不到"' : '') + '>' + c.h + (c.note ? '<small>' + esc(c.note) + '</small>' : '') + '</span>';
+      }).join('');
+    }
     function draw() {
       if (!save) return;
       classify();
       var limit = Math.max(1, Math.min(5000000, +$('sv-alim').value || 10000));
       var events = forecast(limit);
+      var st = function (k, v, u) { return '<div><small>' + k + '</small><b>' + v + (u ? '<span>' + u + '</span>' : '') + '</b></div>'; };
+      $('sv-astats').innerHTML = st('当前考古次数', num(save.excavations)) + st('参与抽取', raw.eligible.length, '个') +
+        st('固定获得', raw.nonrandom.length, '个') + st('已拥有遗物', raw.owned, '/ ' + Artifacts.length);
       var list = events.map(function (ex) {
+        var got = false;
         var evs = ex.slice(2).map(function (e) {
-          return e[0] === 'find' ? '<b>获得</b> ' + an(e[1]) : '可以获得 ' + an(e[2]) + '（需要 ' + esc(e[2].display(e[1])) + '）';
+          if (e[0] === 'find') { got = true; return '<span class="ar-get">获得 ' + an(e[1]) + '</span>'; }
+          return '<span class="ar-may">' + an(e[2]) + '<small>需要 ' + esc(e[2].display(e[1])) + '</small></span>';
         });
-        return '<li>第 ' + ex[0] + ' 次考古（再挖 ' + ex[1] + ' 次）：' + evs.join('；') + '</li>';
+        return '<li' + (got ? ' class="got"' : '') + '><div class="ar-n"><b>第 ' + num(ex[0]) + ' 次</b><small>再挖 ' + num(ex[1]) + ' 次</small></div><div class="ar-ev">' + evs.join('') + '</div></li>';
       }).join('');
-      var j = function (a) { return a.length ? a.join('、') : '无'; };
-      $('sv-aguess').innerHTML = '有些遗物的条件用到存档里没有的数据，只给出需要达到的数值（「可以获得（需要…）」），不判断能不能拿到，要自己和游戏里的数值对比：' +
-        Artifacts.filter(function (a) { return a.guess; }).map(an).join('、') + '。';
-      $('sv-aout').innerHTML =
-        '<table class="sv-tb sv-kv">' +
-        '<tr><th>遗物随机数状态</th><td>' + save.artifactRngState + '</td></tr>' +
-        '<tr><th>当前考古次数</th><td>' + save.excavations + '</td></tr>' +
-        '<tr><th>参与抽取的遗物</th><td>' + j(raw.eligible) + '<div class="sv-hint">每次考古，这些遗物各消耗一个随机数；本次退位拿不到的也可能在里面。</div></td></tr>' +
-        '<tr><th>其中本次拿不到的</th><td>' + j(raw.unobtain) + '</td></tr>' +
-        '<tr><th>固定获得的遗物</th><td>' + j(raw.nonrandom) + '</td></tr>' +
-        '<tr><th>已拥有</th><td>' + raw.owned.length + ' 个</td></tr>' +
-        '<tr><th>暂不满足条件</th><td><details><summary>' + raw.ineligible.length + ' 个</summary>' + j(raw.ineligible) + '</details></td></tr>' +
-        '</table><h3>接下来的考古</h3>' + (list ? '<ol class="sv-ex">' + list + '</ol>' : '<p>在计算范围内没有会发生的事件。</p>');
+      $('sv-aout').innerHTML = '<p class="ar-seed">遗物随机数状态 ' + save.artifactRngState + '。蓝色是一定能拿到；浅色是这次考古的随机数够好，达到括号里的数值就能拿到。</p>' +
+        (list ? '<ol class="ar-tl">' + list + '</ol>' : '<p class="ar-none">在计算范围内没有会发生的事件。</p>');
+      var guess = Artifacts.filter(function (a) { return a.guess; }).map(an);
+      $('sv-apool').innerHTML =
+        '<h4>参与抽取<small>' + raw.eligible.length + '</small></h4>' +
+        '<p class="sv-hint">每次考古，这些遗物各消耗一个随机数。灰框的本次退位拿不到，但也会消耗。</p>' + chips(raw.eligible) +
+        '<h4>固定获得<small>' + raw.nonrandom.length + '</small></h4>' + chips(raw.nonrandom) +
+        '<details><summary>暂不满足条件（' + raw.ineligible.length + ' 个）</summary>' + chips(raw.ineligible) + '</details>' +
+        (guess.length ? '<p class="sv-warn">这些遗物的条件用到存档里没有的数据，只给出需要达到的数值，要自己和游戏里对比：' + guess.join('、') + '。</p>' : '');
       chart();
+      if (sel) detail(sel); else $('sv-adetail').innerHTML = '';
     }
 
-    // 小随机数散点图：横轴是往后第几个随机数，纵轴是数值（越小越好），点一下看能拿哪些遗物
+    // 小随机数散点图：横轴是往后第几个随机数，纵轴是数值（越低越好），点一下看能拿哪些遗物
     function chart() {
-      var cv = $('sv-achart'), w = cv.clientWidth || 800, h = 220, dpr = window.devicePixelRatio || 1;
+      var cv = $('sv-achart'), w = cv.clientWidth || 800, h = 240, dpr = window.devicePixelRatio || 1;
       cv.width = w * dpr; cv.height = h * dpr; cv.style.height = h + 'px';
       var g = cv.getContext('2d'); g.scale(dpr, dpr);
       g.clearRect(0, 0, w, h);
-      var L = 56, R = 10, T = 10, B = 28, limit = Math.max(1, +$('sv-alim').value || 10000), ymax = 100 / limit;
-      g.strokeStyle = '#bbb'; g.fillStyle = '#666'; g.font = '11px sans-serif';
-      g.beginPath(); g.moveTo(L, T); g.lineTo(L, h - B); g.lineTo(w - R, h - B); g.stroke();
-      g.fillText('0', L - 12, h - B + 4); g.fillText(ymax.toExponential(1), 4, T + 8);
-      g.fillText('往后第几个随机数 →', w / 2 - 50, h - 8); g.fillText(String(limit), w - R - 40, h - B + 14);
+      var L = 64, R = 16, T = 16, B = 30, limit = Math.max(1, +$('sv-alim').value || 10000), ymax = 100 / limit;
+      g.font = '11px "Microsoft YaHei UI",sans-serif'; g.textBaseline = 'middle';
+      for (var k = 0; k <= 4; k++) {  // 横向网格
+        var y = T + (h - T - B) * k / 4;
+        g.strokeStyle = k === 4 ? '#c3cfe2' : '#e6ebf3'; g.beginPath(); g.moveTo(L, y); g.lineTo(w - R, y); g.stroke();
+        g.fillStyle = '#9aa5b8'; g.textAlign = 'right';
+        g.fillText(k === 4 ? '0' : (ymax * (4 - k) / 4).toExponential(1), L - 8, y);
+      }
+      g.textAlign = 'left'; g.fillText('1', L, h - B + 14);
+      g.textAlign = 'right'; g.fillText(num(limit), w - R, h - B + 14);
+      g.textAlign = 'center'; g.fillText('往后第几个随机数 →', (L + w - R) / 2, h - B + 14);
       chartPts = smalls.map(function (p) {
         return {p: p, x: L + (w - L - R) * p.x / limit, y: h - B - (h - T - B) * p.y / ymax};
       });
       chartPts.forEach(function (c) {
-        g.fillStyle = sel === c.p ? 'rgba(220,0,0,.85)' : 'rgba(91,110,225,.7)';
-        g.beginPath(); g.arc(c.x, c.y, sel === c.p ? 5 : 3, 0, 7); g.fill();
+        if (sel === c.p) return;
+        g.fillStyle = 'rgba(37,99,235,.55)'; g.beginPath(); g.arc(c.x, c.y, 3, 0, 7); g.fill();
+      });
+      chartPts.forEach(function (c) {
+        if (sel !== c.p) return;
+        g.fillStyle = '#dc2626'; g.strokeStyle = '#fff'; g.lineWidth = 2;
+        g.beginPath(); g.arc(c.x, c.y, 6, 0, 7); g.fill(); g.stroke(); g.lineWidth = 1;
       });
     }
     function pick(e) {
@@ -717,8 +754,8 @@
       var ne = raw.eligible.length, reinc = save.reincarnation;
       var ov = $('sv-aover').value;
       if ($('sv-aovc').checked && !isNaN(parseInt(ov))) reinc = parseInt(ov);
-      var out = '<p><b>考古次数：</b>' + (ne ? Math.ceil(sv.x / ne) + '（假设可抽遗物数不变）' : '没有可抽遗物，没法挪动随机数') +
-        '<br><b>位置：</b>往后第 ' + sv.x + ' 个随机数，<b>数值：</b>' + sv.y + '</p>';
+      var out = '<div class="ar-pick"><span>位置<b>往后第 ' + num(sv.x) + ' 个</b></span><span>数值<b>' + sv.y.toExponential(3) + '</b></span>' +
+        '<span>大约在<b>' + (ne ? '再挖 ' + num(Math.ceil(sv.x / ne)) + ' 次</b>（假设可抽遗物数不变）' : '—</b>（没有可抽遗物，没法挪动随机数）') + '</span></div>';
       var rows = [];
       raw.unowned.forEach(function (a, i) {
         if (a.reincarnation && reinc < a.reincarnation) return;
@@ -726,13 +763,13 @@
         p = p === true ? '可以获得' : p === false ? '拿不到' : p;
         if (!p) return;
         var sh = '';
-        if (i < ne && ne > 1) {
-          var k = sv.x % ne; k = (i >= k ? ne : 0) + k - i - 1;
-          sh = '<td>' + (k === 0 ? '用的就是这个数' : '要错开 ' + k + ' 位') + '</td>';
+        if (ne > 1) {
+          if (i < ne) { var k = sv.x % ne; k = (i >= k ? ne : 0) + k - i - 1; sh = k === 0 ? '用的就是这个数' : '要错开 ' + k + ' 位'; }
+          sh = '<td>' + sh + '</td>';
         }
-        rows.push('<tr><td>' + an(a) + '</td><td>' + esc(p) + '</td>' + sh + '</tr>');
+        rows.push('<tr><th>' + an(a) + '</th><td>' + esc(p) + '</td>' + sh + '</tr>');
       });
-      if (rows.length) out += '<table class="sv-tb"><tr class="hd"><th>遗物</th><th>条件</th>' + (ne > 1 ? '<th title="每次考古每个可抽遗物各用一个随机数。想让某个遗物用上这个好数，可以在可抽遗物更少（至少一个）的时候考古来错开，通常是在另一局。注意：遗物在 2000 这种整数考古次数变成可抽时，那一次也会错开一位。">需要错开（?）</th>' : '') + '</tr>' + rows.join('') + '</table>';
+      if (rows.length) out += '<table class="sv-tb sv-kv"><tr class="hd"><th>遗物</th><th>条件</th>' + (ne > 1 ? '<th title="每次考古每个可抽遗物各用一个随机数。想让某个遗物用上这个好数，可以在可抽遗物更少（至少一个）的时候考古来错开，通常是在另一局。注意：遗物在 2000 这种整数考古次数变成可抽时，那一次也会错开一位。">需要错开（?）</th>' : '') + '</tr>' + rows.join('') + '</table>';
       $('sv-adetail').innerHTML = out;
     }
     return {run: run, draw: draw, pick: pick, detail: function () { if (sel) detail(sel); }};
@@ -751,22 +788,15 @@
       if (!list[k] || !confirm('从这个浏览器里删除这份存档记录？')) return;
       list.splice(k, 1); saveList(list);
       if (list.length) use(list[0].s, false);
-      else { cur = null; refreshHist([], -1); $('sv-main').hidden = true; $('sv-msg').textContent = '已删除。'; ownedArtifacts(null); }
+      else { cur = null; refreshHist([], -1); $('sv-main').hidden = true; $('sv-msg').textContent = '已删除。'; ownedArtifacts(null); forecastPages(null); }
     });
-    // 三个子页对应侧栏的「我的存档 / 法术预报 / 遗物预测」，地址是 #save、#save/rws、#save/arch
-    $('sv-tabs').addEventListener('click', function (e) {
-      var b = e.target.closest('button'); if (!b) return;
-      location.hash = b.dataset.t === 'view' ? 'save' : 'save/' + b.dataset.t;
+    // 法术预报、遗物预测是侧栏「工具」里单独的两页（#rws、#arch）；旧地址 #save/rws、#save/arch 转过去
+    window.addEventListener('subpage', function (e) {
+      if (e.detail.sec === 'save' && (e.detail.sub === 'rws' || e.detail.sub === 'arch')) location.replace('#' + e.detail.sub);
+      if (e.detail.sec === 'arch') arch.draw();  // 图表要在页面显示出来后才知道宽度
     });
-    var pane = function (t) {
-      if (['view', 'rws', 'arch'].indexOf(t) < 0) t = 'view';
-      $('sv-tabs').querySelectorAll('button').forEach(function (x) { x.classList.toggle('on', x.dataset.t === t); });
-      ['view', 'rws', 'arch'].forEach(function (k) { $('sv-' + k).hidden = k !== t; });
-      if (t === 'arch') arch.draw();
-    };
-    window.addEventListener('subpage', function (e) { if (e.detail.sec === 'save') pane(e.detail.sub); });
-    var h = location.hash.slice(1);
-    if (h.indexOf('save/') === 0) pane(h.split('/')[1]);
+    var old = /^#save\/(rws|arch)/.exec(location.hash);  // 打开时的 subpage 事件比这里早
+    if (old) location.replace('#' + old[1]);
     $('sv-vtabs').addEventListener('click', function (e) {
       var b = e.target.closest('button'); if (!b) return;
       $('sv-filter').value = '';

@@ -40,6 +40,7 @@ VERSION = '0.4.0'  # 还没到正式发布，用 0.x（用户要求）
 AUTHOR = 'Yalosaws'
 CHANGES = [
     ('0.4.0', '2026-10-23', [
+        '法术预报、遗物预测从存档页里拿出来，放到侧栏「工具」里单独两页，界面重做：法术预报每个法术一张卡片（标出下一次，点建筑高亮），不能预报的集中列在下面；遗物预测上面是考古次数等数字，接下来的考古改成时间线（一定拿到的蓝色，达到数值才拿到的浅色），旁边列出参与抽取、固定获得的遗物，随机数分布图加了刻度',
         '研究页重做：时间线（按最早能解锁的 R 排，七个分支各一列，标出「你在这里」），铺满整个宽度；研究点数一条进度条显示这个 R 的上限 / 当前 Ascension 的上限',
         '研究页读到存档后按存档的 R 标出已解锁、可解锁（点数够了）、本局已购买；点研究以中心向四周放大成详情卡：同一列上下让开、旁边几列挤窄，不留空，显示解锁条件、绑定阵营（和你现在用的阵营对比）、组合研究的前置和后续；前置（已解锁绿、未解锁红）和后续（蓝）用连线连上并加强调，其余变淡',
     ]),
@@ -1064,7 +1065,7 @@ def main():
     save_js, save_miss = '', []
     if os.path.isdir(save_tools.RG):
         save_html, save_js, save_miss = save_tools.build(find, {'t%d-%s' % c: code for code, c in research.items()})
-        nav = item('save', '我的存档') + nav  # 法术预报、遗物预测在存档页里切换
+        nav = item('save', '我的存档') + item('rws', '法术预报') + item('arch', '遗物预测') + nav
         body += save_html
     else:
         print('没有 工具/RG-tools，跳过「我的存档」（git clone https://github.com/shadowgull/dox4242.github.io 工具/RG-tools）')
@@ -1135,8 +1136,8 @@ nav .ind{position:absolute;left:4px;right:4px;top:0;border-radius:12px;backgroun
 nav.slide a.on{background:none;box-shadow:none}
 /* 切换页面、子页、分页时淡入上移 */
 @keyframes rg-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-main>section:not([hidden]),#sv-view:not([hidden]),#sv-rws:not([hidden]),#sv-arch:not([hidden]),.sv-vt:not([hidden]){animation:rg-in .3s cubic-bezier(.2,.8,.2,1)}
-@media (prefers-reduced-motion:reduce){nav .ind{transition:none}main>section,#sv-view,#sv-rws,#sv-arch,.sv-vt{animation:none!important}}
+main>section:not([hidden]),.sv-vt:not([hidden]){animation:rg-in .3s cubic-bezier(.2,.8,.2,1)}
+@media (prefers-reduced-motion:reduce){nav .ind{transition:none}main>section,.sv-vt{animation:none!important}}
 #res{position:fixed;left:264px;top:16px;width:min(480px,calc(100vw - 290px));max-height:75vh;overflow:auto;background:#fff;border-radius:16px;box-shadow:0 12px 40px rgba(20,40,90,.16);z-index:6}
 #res a{display:block;padding:8px 14px;border-bottom:1px solid var(--line);color:var(--fg);text-decoration:none;font-size:13px}
 #res a:hover{background:var(--soft)} #res small{color:var(--muted);margin-right:6px}
