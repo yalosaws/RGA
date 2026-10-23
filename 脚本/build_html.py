@@ -523,7 +523,7 @@ RS_JS = r"""<script>(function(){
   }
   function cell(x){
     return '<div class="rs-c st-' + ST[x.code] + (bought(x.code) ? ' bought' : '') + '" id="' + x.id + '" data-c="' + x.code + '"><div class="rs-cd"><em>' + x.code + '</em>' +
-      (x.pre.length ? '<span>组合</span>' : '') + '</div><div class="rs-nm">' + esc(x.zh) + '</div></div>';
+      '</div><div class="rs-nm">' + esc(x.zh) + '</div></div>';
   }
   // 时间线：一行一个 R（最早能解锁的 R），七个分支一列一个；R 不单独标，看 Ascension 分隔线和「你在这里」
   function renderLane(){
@@ -568,7 +568,7 @@ RS_JS = r"""<script>(function(){
   function laneEl(c){ return !c ? null : big && big.dataset.c === c && big.isConnected ? big : slotEl(c); }
   function bigHtml(x){
     // 内容包一层 rs-bi 来裁剪（高度过渡时不漏出来），卡片本身不裁，角上的勾才能一直露在外面
-    return '<div class="rs-bi"><div class="rs-cd"><em>' + x.code + '</em>' + (x.pre.length ? '<span>组合</span>' : '') +
+    return '<div class="rs-bi"><div class="rs-cd"><em>' + x.code + '</em>' +
       '<button class="rs-x" title="收起"><svg viewBox="0 0 10 10"><path d="M0 0l10 10M10 0L0 10"/></svg></button></div>' +
       '<div class="rs-nm">' + esc(x.zh) + '</div><div class="rs-det">' + detHtml(x) + '</div></div>';
   }
@@ -1227,7 +1227,6 @@ td.flash{outline:3px solid #f59e0b;outline-offset:-2px;background:var(--flash)!i
 .rs-c:hover{border-color:#cdd9ee}
 .rs-cd{display:flex;align-items:center;gap:4px;margin-bottom:1px}
 .rs-cd em{font-style:normal;font-size:11px;color:#1d4ed8;background:var(--soft);border-radius:6px;padding:0 6px;white-space:nowrap}
-.rs-cd span{font-size:10.5px;color:#9aa5b8;margin-left:auto;white-space:nowrap}
 .rs-c.bought .rs-cd em{color:#fff;background:var(--blue)}
 .rs-c.st-own::after{content:"✓";position:absolute;right:-5px;top:-5px;width:15px;height:15px;border-radius:50%;background:var(--blue);color:#fff;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 2px #fff}
 .rs-c.st-can{border-color:#bcd0f7;background:#f8faff}
@@ -1240,10 +1239,9 @@ td.flash{outline:3px solid #f59e0b;outline-offset:-2px;background:var(--flash)!i
 .rs-c.open{cursor:default;opacity:1;background:#fff;border-color:var(--blue);padding:10px 14px 14px;z-index:1;box-shadow:0 10px 30px rgba(20,40,90,.16),0 0 0 3px rgba(37,99,235,.12)}
 .rs-c.open .rs-nm{font-size:18px;font-weight:600;color:var(--fg);margin-top:4px}
 .rs-c.open .rs-det{opacity:1;transition:opacity .3s .15s}
-.rs-c .rs-x{position:static;flex:none;width:22px;height:22px;margin-left:6px;display:none}
+.rs-c .rs-x{position:static;flex:none;width:22px;height:22px;margin-left:auto;display:none}
 .rs-c:not(.st-own) .rs-x{margin-right:0}
 .rs-c.open .rs-x{display:flex}
-.rs-c.open .rs-cd span{margin-left:auto}
 .rs-c.open .rs-cd em{font-size:12px}
 .rs-c.open.st-own::after{right:-6px;top:-6px}
 .rs-col .rs-c{box-sizing:border-box;width:100%}
@@ -1253,7 +1251,6 @@ td.flash{outline:3px solid #f59e0b;outline-offset:-2px;background:var(--flash)!i
 .rs-big.closing{z-index:2}
 .rs-bi{height:100%;overflow:hidden}
 .rs-c.sq .rs-nm{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.rs-c.sq .rs-cd span{display:none}
 /* 前置：已解锁绿、未解锁红；后续蓝；其余变淡 */
 .rs-c.rel-pre{opacity:1;border-color:#dc2626;box-shadow:0 0 0 3px rgba(220,38,38,.16)}
 .rs-c.rel-pre.rel-ok{border-color:#16a34a;box-shadow:0 0 0 3px rgba(22,163,74,.18)}
