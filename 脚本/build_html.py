@@ -40,8 +40,8 @@ VERSION = '0.3.5'  # 还没到正式发布，用 0.x（用户要求）
 AUTHOR = 'Yalosaws'
 CHANGES = [
     ('0.3.5', '2026-10-22', [
-        '研究页重做：时间线（按最早能解锁的 R 排，七个分支各一列，标出「你在这里」）和星盘两种看法；顶上拖动 R 预览以后能解锁什么，研究点数一条进度条显示这个 R 的上限 / 当前 Ascension 的上限',
-        '研究页读到存档后标出已解锁、可解锁（点数够了）、本局已购买；点研究在右边看详情：解锁条件、绑定阵营（和你现在用的阵营对比）、组合研究的前置和后续，星盘上用连线标出',
+        '研究页重做：时间线（按最早能解锁的 R 排，七个分支各一列，标出「你在这里」）和星盘两种看法，铺满整个宽度；研究点数一条进度条显示这个 R 的上限 / 当前 Ascension 的上限',
+        '研究页读到存档后按存档的 R 标出已解锁、可解锁（点数够了）、本局已购买；点研究在原地变大：同一行的其他研究被挤到两边、下面的往下让开，显示解锁条件、绑定阵营（和你现在用的阵营对比）、组合研究的前置和后续；前置（橙）和后续（蓝）用连线连上并加强调，其余变淡',
         '新布局：侧栏和内容区贴着窗口边、互相挨着，外侧的角和窗口圆角贴合；窗口按钮做成小胶囊放在卡片右上角，和顶上的浮动胶囊对齐',
         '拖动窗口：侧栏和菜单的空白处、内容区顶上一条都能拖，双击最大化；滚动条从窗口按钮下面开始',
         '侧栏菜单项间距加大，选中块的阴影改小改淡，不再压到相邻一项',
@@ -429,7 +429,7 @@ def rs_cap(r):
 
 
 def build_research(ws):
-    """研究表 → 研究页：时间线（按最早能解锁的 R 排，七个分支一列一个）和星盘，点研究在右边看详情。
+    """研究表 → 研究页：时间线（按最早能解锁的 R 排，七个分支一列一个）和星盘，点研究在原地展开成详情卡。
     代号的数字就是需要的研究点数，最早的 R 按每个分支的点数上限算（和表头的 R、「解锁晚 n 个 R」都对得上）。
     组合研究（解锁条件里写了别的研究代号）：前置都解锁、点数到位就自动解锁；绑定阵营的还要正在用那个阵营。
     格子 id 是原名称格（t5-C4 这样），专名链接和全表搜索照旧跳过来；读到存档后用 researchsave 事件里的 R、阵营、点数和已解锁记录。"""
@@ -463,23 +463,18 @@ def build_research(ws):
         x['pre'] = pre
         x['q'] = ' '.join([x['code'], x['old'], x['zh'], x['en'], x['cond'], x['eff']]).lower()
         del x['cond'], x['eff']
-    note = re.sub(r'^说明[（(][^）)]*[）)][：:]\s*', '', val(40, 1))  # A40 的总说明（A3 起移除低点数研究等）
     data = json.dumps(items, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
     # 全表搜索用的隐藏索引（格子是脚本画的，换视图、筛选时会不见）
     idx = ''.join('<i class="rs-s" data-id="%s">%s %s %s</i>' % (x['id'], x['code'], html.escape(x['zh']), html.escape(x['en'])) for x in items)
-    return RS_HTML.replace('%%NOTE%%', TERMS.render(note)).replace('%%IDX%%', idx).replace('%%DATA%%', data)
+    return RS_HTML.replace('%%IDX%%', idx).replace('%%DATA%%', data)
 
 
 RS_HTML = """<div class="cl rs" data-ok="1"><div class="cl-top">
-<div class="own-bar" hidden><div class="own-seg" id="rs-own"><button class="on" data-o="">全部<b></b></button><button data-o="1">已解锁<b></b></button><button data-o="0">未解锁<b></b></button></div><div class="own-prog"><i id="rs-prog"></i></div></div>
 <div class="own-bar tight"><div class="own-seg" id="rs-views"><button data-v="lane" class="on">时间线</button><button data-v="dial">星盘</button></div></div>
 <input class="cl-q" id="rs-q" type="search" placeholder="搜索名字、代号或效果"></div>
-<p class="cl-note"><span id="rs-note"></span>%%NOTE%%</p>
-<div class="rs-page"><div>
-<div class="rs-rp"><div class="rs-rp-h"><b>研究点数</b><div class="rs-rbar"><span>重生</span><b id="rs-rnum"></b><input type="range" id="rs-r" min="16" max="246" step="1"><span id="rs-asc"></span><button id="rs-back" hidden>回到存档</button></div><span id="rs-rpn"></span></div><div class="rs-rp-bar"><i id="rs-rpbar"></i></div><div class="rs-rp-s" id="rs-rps"></div></div>
+<div class="rs-rp"><div class="rs-rp-h"><b>研究点数</b><span id="rs-rpn"></span></div><div class="rs-rp-bar"><i id="rs-rpbar"></i></div></div>
 <div class="rs-view on" id="rs-v-lane"></div>
 <div class="rs-view" id="rs-v-dial"><div class="rs-dial" id="rs-dial"></div></div>
-</div><div class="rs-det" id="rs-det"></div></div>
 <div class="rs-tip" id="rs-tip"></div><div hidden>%%IDX%%</div></div>
 <script>window.RS_DATA = %%DATA%%;</script>
 """
@@ -502,8 +497,8 @@ RS_JS = r"""<script>(function(){
   function $(id){ return document.getElementById('rs-' + id); }
   function each(list, f){ return list.map(f).join(''); }
   function uniqR(list){ var rs = []; list.forEach(function(x){ if (rs.indexOf(x.r) < 0) rs.push(x.r); }); return rs.sort(function(a, b){ return a - b; }); }
-  var SAVE = null, MYF = [], R = 16, VIEW = 'lane', SEL = null, OWNF = '', Q = '', ST = {}, RP = {};
-  try { VIEW = localStorage.getItem('rg-rs-view') === 'dial' ? 'dial' : 'lane'; R = Math.min(246, Math.max(16, +localStorage.getItem('rg-rs-r') || 16)); } catch (e) {}
+  var SAVE = null, MYF = [], R = 16, VIEW = 'lane', SEL = null, Q = '', ST = {}, RP = {};
+  try { VIEW = localStorage.getItem('rg-rs-view') === 'dial' ? 'dial' : 'lane'; } catch (e) {}
   function own(c){ return !!SAVE && c in SAVE.own; }
   function bought(c){ return !!SAVE && SAVE.own[c] === true; }
   function facBad(x){ return !!x.fac && MYF.length > 0 && x.fac.split('+').some(function(f){ return FNAME.indexOf(f) >= 0 && MYF.indexOf(f) < 0; }); }
@@ -520,36 +515,35 @@ RS_JS = r"""<script>(function(){
     });
   }
   function visible(x){ return ST[x.code] !== 'gone'; }
-  function match(x){ return (!OWNF || (OWNF === '1') === (ST[x.code] === 'own')) && (!Q || x.q.indexOf(Q) >= 0); }
-  function rel(c){ var s = {}; if (c) byCode[c].pre.concat(byCode[c].post).forEach(function(k){ s[k] = 1; }); return s; }
+  function match(x){ return !Q || x.q.indexOf(Q) >= 0; }
 
   // 研究点数：这个 R 每个分支最多能有的点数 / 这个 Ascension 的上限
   function renderRP(){
-    var A = ascOf(R), c = cap(R), top = [780, 4950, 5000, 7000, 14000][A], endR = [39, 99, 159, 219, 246][A];
+    var A = ascOf(R), c = cap(R), top = [780, 4950, 5000, 7000, 14000][A];
     $('rpn').innerHTML = '<b>' + c.toLocaleString() + '</b> / ' + top.toLocaleString();
     $('rpbar').style.width = (c / top * 100) + '%';
-    $('rps').textContent = 'R' + R + ' 每个分支最多买到 ' + c.toLocaleString() + ' 点 · A' + A + ' 的上限是 ' + top.toLocaleString() + ' 点（R' + endR + '）';
   }
   function cell(x){
     return '<div class="rs-c st-' + ST[x.code] + (bought(x.code) ? ' bought' : '') + '" id="' + x.id + '" data-c="' + x.code + '"><div class="rs-cd"><em>' + x.code + '</em>' +
-      (x.pre.length ? '<span>组合</span>' : '') + '</div>' + esc(x.zh) + '</div>';
+      (x.pre.length ? '<span>组合</span>' : '') + '<button class="rs-x" title="收起"><svg viewBox="0 0 10 10"><path d="M0 0l10 10M10 0L0 10"/></svg></button></div>' +
+      '<div class="rs-nm">' + esc(x.zh) + '</div><div class="rs-more"><div class="rs-det"></div></div></div>';
   }
-  // 时间线：一行一个 R（最早能解锁的 R），七个分支一列一个
+  // 时间线：一行一个 R（最早能解锁的 R），七个分支一列一个；R 不单独标，看 Ascension 分隔线和「你在这里」
   function renderLane(){
     var list = DATA.filter(function(x){ return visible(x) && match(x); }), rs = uniqR(list);
-    var h = '<div class="rs-lh"><span></span>' + each(BR, function(b){ return '<span><i class="rs-dot" style="background:' + HEX[b[0]] + '"></i>' + b[1] + '</span>'; }) + '</div>';
+    var h = '<div class="rs-lh">' + each(BR, function(b){ return '<span><i class="rs-dot" style="background:' + HEX[b[0]] + '"></i>' + b[1] + '</span>'; }) + '</div>';
     var era = -1, placed = false, here = '<div class="rs-here"><span>你在这里 · R' + R + '</span></div>';
     rs.forEach(function(r){
       var e = ERA.filter(function(z){ return r >= z[0]; }).length - 1;
       if (!placed && r > R) { placed = true; h += here; }
       if (e !== era) { era = e; h += '<div class="rs-era">' + ERA[e][1] + '</div>'; }
-      h += '<div class="rs-lr' + (r <= R ? ' past' : '') + '"><div class="rs-rl">R' + r + '</div>' + each(BR, function(b){
+      h += '<div class="rs-lr">' + each(BR, function(b){
         return '<div class="rs-col">' + each(list.filter(function(x){ return x.b === b[0] && x.r === r; }).sort(function(a, c){ return a.n - c.n; }), cell) + '</div>';
       }) + '</div>';
     });
     if (!placed) h += here;
     if (!rs.length) h += '<div class="rs-empty">没有符合的研究</div>';
-    $('v-lane').innerHTML = h;
+    $('v-lane').innerHTML = '<svg class="rs-lsvg"></svg>' + h;
   }
   function station(x, cx, cy, r){
     var st = ST[x.code], c = HEX[x.b];
@@ -602,54 +596,153 @@ RS_JS = r"""<script>(function(){
     }
     g.innerHTML = s;
   }
-  function renderDet(){
-    var el = $('det');
-    if (!SEL) { el.innerHTML = '<div class="rs-empty">点一个研究看详情</div>'; return; }
-    var x = byCode[SEL], st = ST[SEL];
+  // 详情：时间线里在格子本身展开（inCell），星盘上是点旁边的卡片
+  function detHtml(x, inCell){
+    var st = ST[x.code];
     var stt = {own: ['已解锁', 'no'], can: ['可解锁', ''], no: ['还没到', 'gray'], gone: ['A3 起已移除', 'gray']}[st];
     var chip = function(c){ var y = byCode[c]; return '<span class="rs-pc st-' + ST[c] + '" data-c="' + c + '"><i class="rs-dot" style="background:' + HEX[y.b] + '"></i>' + c + ' ' + esc(y.zh) +
       (SAVE ? '<i>' + (ST[c] === 'own' ? '已解锁' : '未解锁') + '</i>' : '') + '</span>'; };
     var bad = facBad(x) && st !== 'own';
-    el.innerHTML = '<div class="rs-card"><div class="rs-top"><span class="rs-dot" style="background:' + HEX[x.b] + '"></span>' + BN[x.b] + ' · ' + x.n.toLocaleString() + ' 点</div>' +
-      '<h3>' + esc(x.zh) + '</h3><div class="en">' + esc(x.en) + '</div>' +
-      '<div class="rs-tags"><em class="' + stt[1] + '">' + stt[0] + '</em>' + (bought(x.code) ? '<em class="no">本局已购买</em>' : '') + '<em>' + x.code + '</em><em>R' + x.r + '</em>' +
+    return (inCell ? '<div class="en">' + esc(x.en) + ' · ' + BN[x.b] + ' ' + x.n.toLocaleString() + ' 点</div>' :
+      '<button class="rs-x" title="收起"><svg viewBox="0 0 10 10"><path d="M0 0l10 10M10 0L0 10"/></svg></button>' +
+      '<div class="rs-top"><span class="rs-dot" style="background:' + HEX[x.b] + '"></span>' + BN[x.b] + ' · ' + x.n.toLocaleString() + ' 点</div>' +
+      '<h3>' + esc(x.zh) + '</h3><div class="en">' + esc(x.en) + '</div>') +
+      '<div class="rs-tags"><em class="' + stt[1] + '">' + stt[0] + '</em>' + (bought(x.code) ? '<em class="no">本局已购买</em>' : '') + (inCell ? '' : '<em>' + x.code + '</em>') + '<em>R' + x.r + '</em>' +
       (x.fac ? '<em class="fac">' + esc(x.fac) + '</em>' : '') + '</div>' +
       '<div class="rs-f"><small>解锁条件</small>' + (x.ch || '<span class="nil">—</span>') + '</div>' +
       (x.fac ? '<div class="rs-f"><small>阵营</small>需要使用' + esc(x.fac) + (MYF.length ? ' <em class="' + (bad ? 'warn' : 'gray') + '">你现在是' + MYF.join('+') + '</em>' : '') + '</div>' : '') +
       (x.pre.length ? '<div class="rs-f"><small>前置</small>' + each(x.pre, chip) + '<div class="rs-hint">前置都解锁、点数到 ' + x.n + (x.fac ? '、用着' + esc(x.fac) : '') + '就自动解锁</div></div>' : '') +
       (x.post.length ? '<div class="rs-f"><small>后续（需要它的研究）</small>' + each(x.post, chip) + '</div>' : '') +
       '<div class="rs-f"><small>效果</small>' + (x.eh || '—') + '</div>' +
-      (x.note ? '<div class="rs-f"><small>备注</small><span class="rs-mut">' + esc(x.note) + '</span></div>' : '') + '</div>';
+      (x.note ? '<div class="rs-f"><small>备注</small><span class="rs-mut">' + esc(x.note) + '</span></div>' : '');
   }
+
+  // 时间线：选中的格子原地变大——只在它这一行里变宽，同一行的其他格子被挤窄；格子变高，下面的往下挤；
+  // 再画线连到前置（橙）和后续（蓝）。宽高都是 CSS 过渡，连线在过渡期间逐帧跟着重画。
+  function laneEl(c){ return c ? $('v-lane').querySelector('.rs-c[data-c="' + c + '"]') : null; }
+  function setCols(){
+    var el = laneEl(SEL), row = el && el.closest('.rs-lr'), col = el && el.parentNode;
+    $('v-lane').querySelectorAll('.rs-lr.wide').forEach(function(r){ if (r !== row) { r.classList.remove('wide'); r.style.removeProperty('--cols'); } });
+    $('v-lane').querySelectorAll('.rs-col.wide').forEach(function(c){ if (c !== col) c.classList.remove('wide'); });
+    if (!row) return;
+    var i = [].indexOf.call(row.children, col);
+    // 以格子为中心向两边撑开：左右两边各让出一半（每边的格子最窄 64px，一边让不动了再由另一边让）
+    var b = (row.clientWidth - 6 * 8) / 7, Wo = Math.min(Math.max(300, b * 2.2), row.clientWidth * .5), E = Wo - b, m = Math.min(b, 64);
+    var nl = i, nr = 6 - i, capL = nl * (b - m), capR = nr * (b - m);
+    var sL = Math.min(E / 2, capL), sR = Math.min(E - sL, capR); sL = Math.min(E - sR, capL);
+    Wo = b + sL + sR;
+    row.style.setProperty('--bw', b + 'px');  // 同一格里其他研究保持原来的宽度
+    // 都用 fr（和平时的 1fr 能连续过渡）：权重 = 想要的宽度 / 原来的宽度，总和还是 7
+    row.style.setProperty('--cols', BR.map(function(x, k){ var w = k < i ? b - sL / nl : k > i ? b - sR / nr : Wo; return (w / b).toFixed(4) + 'fr'; }).join(' '));
+    row.classList.add('wide'); col.classList.add('wide');
+  }
+  function openCell(prev, anim){
+    var old = laneEl(prev), el = laneEl(SEL);
+    // 中心不动：展开过程中跟着滚动，让格子中心一直停在屏幕上原来的位置（格子不在屏幕里、或者是从链接跳来的就不锁）
+    var anchor = el || (prev !== SEL ? old : null), lock = null;
+    if (anim && anchor && anim !== 'jump') {
+      var r0 = anchor.getBoundingClientRect();
+      if (r0.top >= 60 && r0.bottom <= innerHeight) lock = {el: anchor, y: r0.top + r0.height / 2};
+    }
+    if (old && prev !== SEL) {
+      old.classList.remove('open');
+      var inner = old.querySelector('.rs-det');
+      setTimeout(function(){ if (!old.classList.contains('open')) inner.innerHTML = ''; }, 480);
+    }
+    if (el && !el.classList.contains('open')) {
+      el.querySelector('.rs-det').innerHTML = detHtml(byCode[SEL], true);
+      if (anim) void el.offsetHeight;  // 先按收起的样子排一次，过渡才有起点
+      el.classList.add('open');
+    }
+    setCols();
+    animLinks(anim ? 620 : 0, lock);
+    if (el && anim && anim !== 'jump') setTimeout(function(){
+      var r = el.getBoundingClientRect(), h = innerHeight;
+      if (!lock) el.scrollIntoView({block: 'center', behavior: 'smooth'});
+      else if (r.top < 60 || r.bottom > h - 8) el.scrollIntoView({block: r.height > h - 120 ? 'start' : 'nearest', behavior: 'smooth'});  // 放大后超出屏幕才挪
+    }, 480);
+  }
+  var linkRaf = 0;
+  function animLinks(ms, lock){
+    cancelAnimationFrame(linkRaf);
+    var end = performance.now() + ms, sc = lock && rgScroller();
+    (function f(){
+      if (lock && lock.el.isConnected) { var r = lock.el.getBoundingClientRect(); sc.scrollTop += r.top + r.height / 2 - lock.y; }
+      drawLaneLinks();
+      if (performance.now() < end) linkRaf = requestAnimationFrame(f);
+    })();
+  }
+  function drawLaneLinks(){
+    var lane = $('v-lane'), svg = lane.querySelector('.rs-lsvg'); if (!svg) return;
+    var el = laneEl(SEL), s = '';
+    if (el) {
+      var lr = lane.getBoundingClientRect(), a = el.getBoundingClientRect(), x = byCode[SEL];
+      var ay = a.top - lr.top + 16;
+      var one = function(c, color){
+        var e = laneEl(c); if (!e) return;
+        var b = e.getBoundingClientRect(), by = b.top - lr.top + b.height / 2, x1, x2, d;
+        if (b.right <= a.left + 1) { x1 = b.right - lr.left; x2 = a.left - lr.left; }
+        else if (b.left >= a.right - 1) { x1 = b.left - lr.left; x2 = a.right - lr.left; }
+        else {  // 同一列：从左边绕出去
+          x1 = b.left - lr.left; x2 = a.left - lr.left;
+          d = 'M' + x1 + ' ' + by + ' C' + (x1 - 34) + ' ' + by + ',' + (x2 - 34) + ' ' + ay + ',' + x2 + ' ' + ay;
+        }
+        if (!d) { var m = (x1 + x2) / 2; d = 'M' + x1 + ' ' + by + ' C' + m + ' ' + by + ',' + m + ' ' + ay + ',' + x2 + ' ' + ay; }
+        s += '<path class="rs-lnk" d="' + d + '" fill="none" stroke="' + color + '" stroke-width="2.2"/>' +
+          '<circle cx="' + x1 + '" cy="' + by + '" r="3.5" fill="' + color + '"/><circle cx="' + x2 + '" cy="' + ay + '" r="3.5" fill="' + color + '"/>';
+      };
+      x.pre.forEach(function(c){ one(c, '#f59e0b'); });
+      x.post.forEach(function(c){ one(c, '#2563eb'); });
+    }
+    svg.innerHTML = s;
+  }
+
+  var pop = null;
+  function openPop(anim){
+    if (pop) { pop.remove(); pop = null; }
+    if (!SEL || VIEW !== 'dial') return;
+    var box = $('dial'), a = box.querySelector('.rs-st[data-c="' + SEL + '"] circle.p');
+    if (!a) return;
+    var br = box.getBoundingClientRect(), r = a.getBoundingClientRect(), W = Math.min(340, br.width);
+    pop = document.createElement('div');
+    pop.className = 'rs-pop';
+    pop.innerHTML = detHtml(byCode[SEL]);
+    pop.style.width = W + 'px';
+    box.appendChild(pop);
+    // 放在点朝外的一侧（连线都往圆心走），放不下再换另一侧
+    var H = pop.offsetHeight, cx = r.left + r.width / 2 - br.left, roomR = br.width - (r.right - br.left) - 14 >= W, roomL = r.left - br.left - 14 >= W;
+    var side = cx < br.width / 2 ? (roomL ? -1 : 1) : (roomR ? 1 : -1);
+    var x0 = side > 0 ? r.right - br.left + 14 : r.left - br.left - 14 - W, y0 = r.top - br.top - 40;
+    var L = Math.max(0, Math.min(x0, br.width - W)), T = Math.max(0, Math.min(y0, br.height - H));
+    pop.style.left = L + 'px'; pop.style.top = T + 'px';
+    if (!anim || !pop.animate || matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+    pop.style.transformOrigin = (side > 0 ? '0' : '100%') + ' ' + (r.top + r.height / 2 - br.top - T) + 'px';
+    pop.animate([{opacity: 0, transform: 'scale(.6)'}, {opacity: 1, transform: 'none'}], {duration: 300, easing: 'cubic-bezier(.2,.8,.2,1)'});
+  }
+  // 选中的、前置（橙）、后续（蓝）加强调，其余变淡
   function highlight(){
-    var rl = rel(SEL), any = Object.keys(rl).length > 0;
-    $('v-lane').querySelectorAll('[data-c]').forEach(function(e){ e.classList.toggle('sel', e.dataset.c === SEL); e.classList.toggle('rel', !!rl[e.dataset.c]); });
-    $('v-lane').classList.toggle('focus', !!SEL && any);
+    var x = SEL && byCode[SEL], pre = {}, post = {};
+    if (x) { x.pre.forEach(function(k){ pre[k] = 1; }); x.post.forEach(function(k){ post[k] = 1; }); }
+    root.querySelectorAll('.rs-c, .rs-st').forEach(function(e){
+      var c = e.dataset.c;
+      e.classList.toggle('sel', c === SEL); e.classList.toggle('rel-pre', !!pre[c]); e.classList.toggle('rel-post', !!post[c]);
+    });
+    $('v-lane').classList.toggle('focus', !!SEL);
+    $('dial').classList.toggle('focus', !!SEL);
     if (VIEW === 'dial') drawLinks();
   }
-  function counts(){
-    var v = DATA.filter(visible), o = v.filter(function(x){ return ST[x.code] === 'own'; }).length;
-    var b = $('own').querySelectorAll('b'); b[0].textContent = v.length; b[1].textContent = o; b[2].textContent = v.length - o;
-    $('prog').style.width = (o / v.length * 100) + '%';
-  }
-  var RULE = '研究代号就是需要的研究点数；组合研究在前置都解锁、点数到位后自动解锁，绑定阵营的还要正在用那个阵营。';
   function render(){
     compute();
-    $('rnum').textContent = 'R' + R; $('asc').textContent = 'A' + ascOf(R); $('back').hidden = !SAVE || R === SAVE.r;
-    $('note').textContent = !SAVE ? '没有读到存档：按所选 R 的研究点数上限预览。' + RULE
-      : R === SAVE.r ? '按存档：R' + SAVE.r + '，' + (MYF.join('+') || '未结盟') + '，研究点数和已解锁记录来自存档。' + RULE
-      : '预览 R' + R + '：研究点数按这个 R 的上限算，已解锁的还是存档里的记录。' + RULE;
-    root.querySelector('.own-bar').hidden = !SAVE;
-    counts(); renderRP();
+    renderRP();
     if (VIEW === 'lane') renderLane(); else renderDial();
-    renderDet(); highlight();
+    highlight();
+    if (VIEW === 'lane') openCell(null, false); else openPop(false);
   }
   function select(c, keep){
-    SEL = SEL === c && !keep ? null : c; renderDet(); highlight();
-    if (SEL && VIEW === 'lane' && !keep) {
-      var e = $('v-lane').querySelector('[data-c="' + SEL + '"]');
-      if (e) { var r = e.getBoundingClientRect(); if (r.top < 70 || r.bottom > innerHeight) e.scrollIntoView({block: 'center', behavior: 'smooth'}); }
-    }
+    var prev = SEL;
+    SEL = !c || (SEL === c && !keep) ? null : c;
+    highlight();
+    if (VIEW === 'lane') openCell(prev, keep === 'jump' ? 'jump' : true); else openPop(true);
   }
   function setView(v){
     VIEW = v;
@@ -657,41 +750,47 @@ RS_JS = r"""<script>(function(){
     root.querySelectorAll('.rs-view').forEach(function(x){ x.classList.toggle('on', x.id === 'rs-v-' + v); });
     try { localStorage.setItem('rg-rs-view', v); } catch (e) {}
   }
-  root.addEventListener('click', function(e){ var t = e.target.closest('[data-c]'); if (t) select(t.dataset.c); });
+  // 点格子展开 / 收起；点详情里的前置、后续换成那一个；点空白处、叉或按 Esc 收起
+  root.addEventListener('click', function(e){
+    if (e.target.closest('.rs-x')) { select(null); return; }
+    var chip = e.target.closest('.rs-pc');
+    if (chip) { select(chip.dataset.c, true); return; }
+    if (e.target.closest('.rs-det, .rs-pop')) return;  // 详情里的文字、链接
+    var t = e.target.closest('[data-c]');
+    if (t) { select(t.dataset.c); return; }
+    if (SEL && e.target.closest('.rs-view')) select(null);
+  });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && SEL && !root.closest('section').hidden) select(null); });
+  window.addEventListener('resize', function(){ if (VIEW === 'dial') { if (pop) openPop(false); } else drawLaneLinks(); });
   var tip = $('tip');
   root.addEventListener('mousemove', function(e){ var t = e.target.closest('[data-t]'); if (!t) { tip.style.display = 'none'; return; }
     tip.textContent = t.dataset.t; tip.style.display = 'block'; tip.style.left = (e.clientX + 12) + 'px'; tip.style.top = (e.clientY + 16) + 'px'; });
   root.addEventListener('mouseleave', function(){ tip.style.display = 'none'; });
-  function setR(r){ R = r; $('r').value = R; try { localStorage.setItem('rg-rs-r', R); } catch (e) {} render(); }
-  $('r').addEventListener('input', function(e){ setR(+e.target.value); });
-  $('back').addEventListener('click', function(){ setR(SAVE.r); });
   $('q').addEventListener('input', function(e){ Q = e.target.value.trim().toLowerCase(); render(); });
   function seg(id, fn){ $(id).addEventListener('click', function(e){ var b = e.target.closest('button'); if (!b) return;
     $(id).querySelectorAll('button').forEach(function(x){ x.classList.toggle('on', x === b); }); fn(b); }); }
-  seg('own', function(b){ OWNF = b.dataset.o; render(); });
   seg('views', function(b){ setView(b.dataset.v); render(); });
   // 胶囊离开原位、浮在内容上面时加阴影（和其他卡片页一样）
   var top = root.querySelector('.cl-top'), home = document.createElement('div');
   top.parentNode.insertBefore(home, top);
   document.addEventListener('scroll', function(){ top.classList.toggle('float', top.getBoundingClientRect().top - home.getBoundingClientRect().top > 12); }, true);
-  // 读到存档：R 跳到存档的 R（自动同步时只在存档的 R 变了才跳）
+  // 读到存档：按存档的 R、点数和已解锁记录标状态（没有存档时按 R16 的点数上限）
   window.addEventListener('researchsave', function(e){
-    var d = e.detail, oldR = SAVE && SAVE.r;
+    var d = e.detail;
     SAVE = d;
     MYF = d ? d.fac.map(function(i){ return FNAME[i]; }).filter(Boolean) : [];
-    if (d && d.r !== oldR) { R = d.r; $('r').value = R; }
-    if (!d) OWNF = '';
+    R = d ? d.r : 16;
     render();
   });
   // 从别处链接到某个研究：清掉筛选、切到时间线并选中它（捕获阶段，赶在页面路由滚动之前把格子画出来）
   function jump(){
     var id = decodeURIComponent(location.hash.slice(1)), x = DATA.filter(function(y){ return y.id === id; })[0];
     if (!x) return;
-    Q = ''; $('q').value = ''; OWNF = ''; $('own').querySelectorAll('button').forEach(function(b){ b.classList.toggle('on', !b.dataset.o); });
-    setView('lane'); render(); select(x.code, true);
+    Q = ''; $('q').value = '';
+    setView('lane'); render(); select(x.code, 'jump');
   }
   window.addEventListener('hashchange', jump, true);
-  setView(VIEW); $('r').value = R;
+  setView(VIEW);
   render(); jump();
 })();</script>"""
 
@@ -1122,26 +1221,18 @@ td.flash{outline:3px solid #f59e0b;outline-offset:-2px;background:var(--flash)!i
 .ch-sp p{margin:4px 0 0}
 .ch-sp.flash{background:var(--flash)}
 /* 研究：时间线 / 星盘 + 右边详情 */
-.rs .own-bar[hidden]{display:none}
 .rs .cl-q{width:220px}  /* 顶上多一个视图胶囊，1280 宽的窗口里也排得下一行 */
 .rs .own-bar.tight{padding:0 4px}
-.rs-rbar{display:flex;align-items:center;gap:10px;height:32px;box-sizing:border-box;padding:0 14px;margin:0 auto 0 16px;background:#e6ecf5;border-radius:999px;font-size:13px;color:var(--muted)}
-.rs-rbar b{font-size:14px;color:var(--blue);min-width:38px;font-variant-numeric:tabular-nums}
-.rs-rbar input{width:180px;accent-color:var(--blue)}
-.rs-rbar button{border:none;background:#fff;color:var(--blue);font:inherit;font-size:12px;border-radius:999px;padding:1px 10px;cursor:pointer;box-shadow:0 2px 8px rgba(20,40,90,.1)}
-.rs-page{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:22px;align-items:start}
-.rs-det{position:sticky;top:68px;margin-top:22px}
 .rs-dot{width:8px;height:8px;border-radius:50%;flex:none;display:inline-block}
-.rs-rp{margin:22px 2px 18px}
+.rs-rp{margin:18px 2px 18px}
 .rs-rp-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
 .rs-rp-h>b{font-size:16px}
 .rs-rp-h span{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
 .rs-rp-h span b{font-size:15px;color:var(--blue)}
 .rs-rp-bar{height:8px;background:rgba(20,40,90,.08);border-radius:99px;overflow:hidden}
 .rs-rp-bar i{display:block;height:100%;background:var(--blue);border-radius:99px;transition:width .5s cubic-bezier(.2,.8,.2,1)}
-.rs-rp-s{margin-top:6px;font-size:12px;color:#9aa5b8}
 .rs-c{position:relative;border:1px solid var(--line);border-radius:12px;padding:5px 9px 6px;cursor:pointer;font-size:12.5px;line-height:1.45;color:#3d4a5f;background:#fff;
-  scroll-margin:90px;transition:border-color .2s,background 1.5s,opacity .2s}
+  scroll-margin:90px;transition:border-color .2s,background 1.5s,opacity .25s,box-shadow .3s,padding .45s cubic-bezier(.2,.8,.2,1)}
 .rs-c:hover{border-color:#cdd9ee}
 .rs-cd{display:flex;align-items:center;gap:4px;margin-bottom:1px}
 .rs-cd em{font-style:normal;font-size:11px;color:#1d4ed8;background:var(--soft);border-radius:6px;padding:0 6px;white-space:nowrap}
@@ -1151,40 +1242,67 @@ td.flash{outline:3px solid #f59e0b;outline-offset:-2px;background:var(--flash)!i
 .rs-c.st-can{border-color:#bcd0f7;background:#f8faff}
 .rs-c.st-no{opacity:.5}
 .rs-c.st-no:hover{opacity:1}
-.rs-c.sel,.rs-c.flash{background:var(--flash);border-color:#f59e0b;opacity:1}
-.rs-c.rel{border-color:#f59e0b;opacity:1}
-.rs-view.focus .rs-c:not(.sel):not(.rel){opacity:.28}
-.rs-lh,.rs-lr{display:grid;grid-template-columns:44px repeat(7,minmax(0,1fr));gap:8px}
+.rs-c.flash{background:var(--flash);border-color:#f59e0b}
+/* 展开：列变宽、格子变高（0fr→1fr），名字放大，详情淡入 */
+.rs-nm{transition:font-size .45s cubic-bezier(.2,.8,.2,1),color .3s}
+.rs-more{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s cubic-bezier(.2,.8,.2,1)}
+.rs-det{min-height:0;overflow:hidden;opacity:0;transition:opacity .2s}
+.rs-c.open{cursor:default;opacity:1;background:#fff;border-color:var(--blue);padding:10px 14px 14px;z-index:1;box-shadow:0 10px 30px rgba(20,40,90,.16),0 0 0 3px rgba(37,99,235,.12)}
+.rs-c.open .rs-nm{font-size:18px;font-weight:600;color:var(--fg);margin-top:4px}
+.rs-c.open .rs-more{grid-template-rows:1fr}
+.rs-c.open .rs-det{opacity:1;transition:opacity .3s .15s}
+.rs-c .rs-x{position:static;flex:none;width:22px;height:22px;margin-left:6px;display:none}
+.rs-c:not(.st-own) .rs-x{margin-right:0}
+.rs-c.open .rs-x{display:flex}
+.rs-c.open .rs-cd span{margin-left:auto}
+.rs-c.open .rs-cd em{font-size:12px}
+.rs-c.open.st-own::after{right:-6px;top:-6px}
+/* 前置橙、后续蓝；其余变淡 */
+.rs-c.rel-pre{opacity:1;border-color:#f59e0b;box-shadow:0 0 0 3px rgba(245,158,11,.2)}
+.rs-c.rel-post{opacity:1;border-color:var(--blue);box-shadow:0 0 0 3px rgba(37,99,235,.15)}
+.rs-view.focus .rs-c:not(.sel):not(.rel-pre):not(.rel-post){opacity:.28}
+.rs-lsvg{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.rs-lsvg .rs-lnk{animation:rs-dash .6s linear infinite,rg-in .3s ease-out}
+.rs-lh,.rs-lr{display:grid;grid-template-columns:var(--cols,1fr 1fr 1fr 1fr 1fr 1fr 1fr);gap:8px;transition:grid-template-columns .45s cubic-bezier(.2,.8,.2,1)}
+.rs-col.wide>.rs-c:not(.open){width:var(--bw);max-width:100%;box-sizing:border-box}
 .rs-lh{font-size:12px;color:var(--muted);padding:0 0 8px;border-bottom:1px solid var(--line);margin-bottom:8px}
 .rs-lh span{display:flex;align-items:center;gap:6px;white-space:nowrap}
 .rs-lr{padding:4px 0}
-.rs-rl{font-size:12px;color:#9aa5b8;padding-top:6px;text-align:right;font-variant-numeric:tabular-nums}
-.rs-lr.past .rs-rl{color:var(--blue);font-weight:600}
 .rs-col{display:flex;flex-direction:column;gap:6px;min-width:0}
 .rs-era{margin:14px 0 6px;font-size:11px;color:#9aa5b8;letter-spacing:.12em;display:flex;align-items:center;gap:10px}
 .rs-era:after{content:"";flex:1;height:1px;background:var(--line)}
 .rs-here{display:flex;align-items:center;gap:10px;margin:8px 0}
 .rs-here span{font-size:12px;font-weight:600;color:#fff;background:var(--blue);border-radius:999px;padding:1px 12px;box-shadow:0 4px 12px rgba(37,99,235,.25)}
 .rs-here:after{content:"";flex:1;height:2px;border-radius:2px;background:var(--blue);opacity:.35}
-.rs-dial{border:1px solid var(--line);border-radius:16px;padding:10px;display:flex;justify-content:center}
-.rs-dial svg{display:block;width:100%;max-width:640px;height:auto}
+.rs-dial{position:relative;border:1px solid var(--line);border-radius:16px;padding:10px;display:flex;justify-content:center}
+.rs-dial svg{display:block;width:100%;max-width:760px;height:auto}
 .rs-st{cursor:pointer}
 .rs-st circle.p{transition:r .15s cubic-bezier(.2,.8,.2,1)}
 .rs-st:hover circle.p{r:8}
+.rs-st.rel-pre circle.p{stroke:#f59e0b;stroke-width:3;r:7}
+.rs-st.rel-post circle.p{stroke:var(--blue);stroke-width:3;r:7}
+.rs-st{transition:opacity .25s}
+.rs-dial.focus .rs-st:not(.sel):not(.rel-pre):not(.rel-post){opacity:.25}
 .rs-lnk{stroke-dasharray:5 4;animation:rs-dash .6s linear infinite}
 @keyframes rs-dash{to{stroke-dashoffset:-9}}
-.rs-view{display:none}
+.rs-view{display:none;position:relative}
 .rs-view.on{display:block;animation:rg-in .3s cubic-bezier(.2,.8,.2,1)}
-.rs-card{border:1px solid var(--line);border-radius:16px;padding:14px 16px;animation:rg-in .3s cubic-bezier(.2,.8,.2,1)}
+.rs-pop{position:absolute;z-index:4;box-sizing:border-box;background:#fff;border:1px solid #cdd9ee;border-radius:16px;padding:12px 16px 14px;box-shadow:0 8px 28px rgba(20,40,90,.16),0 0 0 1px rgba(20,40,90,.05)}
+.rs-x{position:absolute;top:10px;right:10px;width:26px;height:26px;border:none;border-radius:999px;background:#e6ecf5;color:#4b5569;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s}
+.rs-x:hover{background:#d8e0ec}
+.rs-pop .rs-top{padding-right:30px}
+.rs-x svg{width:9px;height:9px;stroke:currentColor;fill:none;stroke-width:1.4}
 .rs-top{display:flex;align-items:center;gap:8px;font-size:12px;color:#9aa5b8}
-.rs-card h3{margin:4px 0 0;font-size:17px}
-.rs-card .en{font-size:12.5px;color:#9aa5b8}
+.rs-pop h3,.rs-det h3{margin:4px 0 0;font-size:17px}
+.rs-pop .en,.rs-det .en{font-size:12.5px;color:#9aa5b8}
+.rs-det .en{margin-top:2px}
+.rs-det .rs-tags{margin-top:6px}
 .rs-tags{display:flex;flex-wrap:wrap;gap:5px;margin:8px 0 4px}
-.rs-card em{font-style:normal;font-size:11.5px;color:#1d4ed8;background:var(--soft);border-radius:6px;padding:0 7px;white-space:nowrap}
-.rs-card em.no{color:#fff;background:var(--blue)}
-.rs-card em.fac{color:#6b4fa0;background:#f2edfb}
-.rs-card em.warn{color:#b45309;background:#fdf3e1}
-.rs-card em.gray{color:var(--muted);background:#f1f4f8}
+.rs-pop em,.rs-det em{font-style:normal;font-size:11.5px;color:#1d4ed8;background:var(--soft);border-radius:6px;padding:0 7px;white-space:nowrap}
+.rs-pop em.no,.rs-det em.no{color:#fff;background:var(--blue)}
+.rs-pop em.fac,.rs-det em.fac{color:#6b4fa0;background:#f2edfb}
+.rs-pop em.warn,.rs-det em.warn{color:#b45309;background:#fdf3e1}
+.rs-pop em.gray,.rs-det em.gray{color:var(--muted);background:#f1f4f8}
 .rs-f{margin-top:10px;font-size:13.5px;color:#3d4a5f}
 .rs-f small{display:block;font-size:11.5px;color:#9aa5b8}
 .rs-f .nil{color:#c9d1dd}
@@ -1196,8 +1314,7 @@ td.flash{outline:3px solid #f59e0b;outline-offset:-2px;background:var(--flash)!i
 .rs-pc.st-own i{color:var(--blue)}
 .rs-empty{border:1px dashed var(--line);border-radius:16px;padding:28px 16px;text-align:center;color:#9aa5b8;font-size:13px}
 .rs-tip{position:fixed;pointer-events:none;background:var(--fg);color:#fff;font-size:12px;padding:3px 10px;border-radius:999px;z-index:50;display:none;white-space:nowrap;box-shadow:0 6px 20px rgba(20,40,90,.25)}
-@media (prefers-reduced-motion:reduce){.rs-view.on,.rs-card,.rs-lnk{animation:none}}
-@media (max-width:1100px){.rs-page{grid-template-columns:1fr}.rs-det{position:static;margin-top:14px}}
+@media (prefers-reduced-motion:reduce){.rs-view.on,.rs-lnk,.rs-lsvg .rs-lnk{animation:none}.rs-c,.rs-nm,.rs-more,.rs-det,.rs-lh,.rs-lr{transition:none!important}}
 /* 建筑升级：选建筑看一列 */
 .bd-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px}
 .bd-tabs button{font:inherit;font-size:13px;border:none;background:#e6ecf5;color:#3d4a5f;padding:4px 13px;border-radius:999px;cursor:pointer;transition:background .15s,color .15s}
