@@ -769,8 +769,11 @@ RS_JS = r"""<script>(function(){
   top.parentNode.insertBefore(home, top);
   document.addEventListener('scroll', function(){ top.classList.toggle('float', top.getBoundingClientRect().top - home.getBoundingClientRect().top > 12); }, true);
   // 读到存档：按存档的 R、点数和已解锁记录标状态（没有存档时按 R16 的点数上限）
+  var lastSave;
   window.addEventListener('researchsave', function(e){
-    var d = e.detail;
+    var d = e.detail, k = JSON.stringify(d);
+    if (k === lastSave) return;  // 自动同步读到的存档和上次一样：不重画
+    lastSave = k;
     SAVE = d;
     MYF = d ? d.fac.map(function(i){ return FNAME[i]; }).filter(Boolean) : [];
     R = d ? d.r : 16;
@@ -1245,6 +1248,7 @@ td.flash{outline:3px solid #f59e0b;outline-offset:-2px;background:var(--flash)!i
 .rs-c.open .rs-cd em{font-size:12px}
 .rs-c.open.st-own::after{right:-6px;top:-6px}
 .rs-col .rs-c{box-sizing:border-box;width:100%}
+.rs-still .rs-c{transition:none!important}  /* 重画时直接到位，不重播放大和挤开 */
 .rs-c.rs-hide{visibility:hidden}
 .rs-big{position:absolute;margin:0;box-sizing:border-box;z-index:3;
   transition:left .45s cubic-bezier(.2,.8,.2,1),top .45s cubic-bezier(.2,.8,.2,1),width .45s cubic-bezier(.2,.8,.2,1),height .45s cubic-bezier(.2,.8,.2,1),padding .45s cubic-bezier(.2,.8,.2,1),box-shadow .3s,border-color .2s}
