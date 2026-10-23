@@ -40,7 +40,7 @@ VERSION = '0.4.0'  # 还没到正式发布，用 0.x（用户要求）
 AUTHOR = 'Yalosaws'
 CHANGES = [
     ('0.4.0', '2026-10-23', [
-        '研究页重做：时间线（按最早能解锁的 R 排，七个分支各一列，标出「你在这里」）和星盘两种看法，铺满整个宽度；研究点数一条进度条显示这个 R 的上限 / 当前 Ascension 的上限',
+        '研究页重做：时间线（按最早能解锁的 R 排，七个分支各一列，标出「你在这里」），铺满整个宽度；研究点数一条进度条显示这个 R 的上限 / 当前 Ascension 的上限',
         '研究页读到存档后按存档的 R 标出已解锁、可解锁（点数够了）、本局已购买；点研究以中心向四周放大成详情卡：同一列上下让开、旁边几列挤窄，不留空，显示解锁条件、绑定阵营（和你现在用的阵营对比）、组合研究的前置和后续；前置（橙）和后续（蓝）用连线连上并加强调，其余变淡',
     ]),
     ('0.3.5', '2026-10-22', [
@@ -431,7 +431,7 @@ def rs_cap(r):
 
 
 def build_research(ws):
-    """研究表 → 研究页：时间线（按最早能解锁的 R 排，七个分支一列一个）和星盘，点研究在原地展开成详情卡。
+    """研究表 → 研究页：时间线（按最早能解锁的 R 排，七个分支一列一个），点研究在原地展开成详情卡。
     代号的数字就是需要的研究点数，最早的 R 按每个分支的点数上限算（和表头的 R、「解锁晚 n 个 R」都对得上）。
     组合研究（解锁条件里写了别的研究代号）：前置都解锁、点数到位就自动解锁；绑定阵营的还要正在用那个阵营。
     格子 id 是原名称格（t5-C4 这样），专名链接和全表搜索照旧跳过来；读到存档后用 researchsave 事件里的 R、阵营、点数和已解锁记录。"""
@@ -472,16 +472,14 @@ def build_research(ws):
 
 
 RS_HTML = """<div class="cl rs" data-ok="1"><div class="cl-top">
-<div class="own-bar tight"><div class="own-seg" id="rs-views"><button data-v="lane" class="on">时间线</button><button data-v="dial">星盘</button></div></div>
 <input class="cl-q" id="rs-q" type="search" placeholder="搜索名字、代号或效果"></div>
 <div class="rs-rp"><div class="rs-rp-h"><b>研究点数</b><span id="rs-rpn"></span></div><div class="rs-rp-bar"><i id="rs-rpbar"></i></div></div>
 <div class="rs-view on" id="rs-v-lane"></div>
-<div class="rs-view" id="rs-v-dial"><div class="rs-dial" id="rs-dial"></div></div>
-<div class="rs-tip" id="rs-tip"></div><div hidden>%%IDX%%</div></div>
+<div hidden>%%IDX%%</div></div>
 <script>window.RS_DATA = %%DATA%%;</script>
 """
 
-# 研究页的脚本：时间线、星盘、详情，读到存档后按 researchsave 事件标状态
+# 研究页的脚本：时间线和详情，读到存档后按 researchsave 事件标状态
 RS_JS = r"""<script>(function(){
   var root = document.querySelector('.rs'); if (!root) return;
   var DATA = window.RS_DATA;
@@ -494,13 +492,11 @@ RS_JS = r"""<script>(function(){
   DATA.forEach(function(x){ x.pre.forEach(function(p){ if (byCode[p]) byCode[p].post.push(x.code); }); });
   function cap(r){ return r < 16 ? 0 : r < 100 ? r * (r + 1) / 2 : r < 175 ? 5000 : r < 220 ? Math.min(5000 + 125 * (r - 174), 7000) : Math.min(125 * (r - 134), 14000); }
   function ascOf(r){ return r < 40 ? 0 : r < 100 ? 1 : r < 160 ? 2 : r < 220 ? 3 : 4; }
-  function hash(s){ var h = 7; for (var i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0; return h; }
   function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
   function $(id){ return document.getElementById('rs-' + id); }
   function each(list, f){ return list.map(f).join(''); }
   function uniqR(list){ var rs = []; list.forEach(function(x){ if (rs.indexOf(x.r) < 0) rs.push(x.r); }); return rs.sort(function(a, b){ return a - b; }); }
-  var SAVE = null, MYF = [], R = 16, VIEW = 'lane', SEL = null, Q = '', ST = {}, RP = {};
-  try { VIEW = localStorage.getItem('rg-rs-view') === 'dial' ? 'dial' : 'lane'; } catch (e) {}
+  var SAVE = null, MYF = [], R = 16, SEL = null, Q = '', ST = {}, RP = {};
   function own(c){ return !!SAVE && c in SAVE.own; }
   function bought(c){ return !!SAVE && SAVE.own[c] === true; }
   function facBad(x){ return !!x.fac && MYF.length > 0 && x.fac.split('+').some(function(f){ return FNAME.indexOf(f) >= 0 && MYF.indexOf(f) < 0; }); }
@@ -546,69 +542,15 @@ RS_JS = r"""<script>(function(){
     if (!rs.length) h += '<div class="rs-empty">没有符合的研究</div>';
     $('v-lane').innerHTML = '<svg class="rs-lsvg"></svg>' + h;
   }
-  function station(x, cx, cy, r){
-    var st = ST[x.code], c = HEX[x.b];
-    return '<g class="rs-st" data-c="' + x.code + '" data-t="' + x.code + ' ' + esc(x.zh) + ' · R' + x.r + '" opacity="' + (match(x) ? 1 : .18) + '">' +
-      '<circle class="p" cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="' + (st === 'own' ? c : '#fff') + '" stroke="' + (st === 'no' ? '#d5dce7' : c) + '" stroke-width="2"/>' +
-      (x.pre.length ? '<circle cx="' + cx + '" cy="' + cy + '" r="2" fill="' + (st === 'own' ? '#fff' : c) + '" pointer-events="none"/>' : '') + '</g>';
-  }
-  // 星盘：七个分支各占一块扇区，越往外 R 越大；浅蓝圆是现在的 R
-  var dialPos = {}, dialPath = null;
-  function renderDial(){
-    var items = DATA.filter(visible), rs = uniqR(items);
-    var S = 640, C = S / 2, R0 = 66, R1 = C - 40;
-    var rad = function(r){ return R0 + (R1 - R0) * Math.sqrt(rs.indexOf(r) / (rs.length - 1 || 1)); };
-    var radAt = function(r){ var k = rs.filter(function(z){ return z <= r; }).length; if (!k) return R0 - 10; return k >= rs.length ? R1 + 10 : (rad(rs[k - 1]) + rad(rs[k])) / 2; };
-    var sec = 2 * Math.PI / BR.length, pos = {};
-    BR.forEach(function(b, i){
-      var groups = {};
-      items.filter(function(x){ return x.b === b[0]; }).forEach(function(x){ (groups[x.r] = groups[x.r] || []).push(x); });
-      Object.keys(groups).forEach(function(k0){ var g = groups[k0]; g.forEach(function(x, k){
-        var step = Math.min(0.11, sec * 0.78 / g.length), jit = g.length === 1 ? ((hash(x.code) % 100) / 100 - .5) * sec * .55 : 0;
-        var a = -Math.PI / 2 + i * sec + sec / 2 + (k - (g.length - 1) / 2) * step + jit, rr = rad(x.r) + (g.length > 3 ? (k % 2) * 7 : 0);
-        pos[x.code] = [C + rr * Math.cos(a), C + rr * Math.sin(a)];
-      }); });
-    });
-    var s = '<svg viewBox="0 0 ' + S + ' ' + S + '" font-family="Microsoft YaHei UI">';
-    s += '<circle cx="' + C + '" cy="' + C + '" r="' + radAt(R) + '" fill="#eef3fc" stroke="#bcd0f7" stroke-width="1.5"/>';
-    ERA.forEach(function(z){ var r = rs.filter(function(r){ return r >= z[0]; })[0]; if (r === undefined) return; var rr = rad(r) - 6;
-      if (z[0] > 16) s += '<circle cx="' + C + '" cy="' + C + '" r="' + rr + '" fill="none" stroke="#e6ebf3"/><text x="' + (C + 4) + '" y="' + (C - rr + 13) + '" font-size="10" fill="#9aa5b8">' + z[1].replace('ASCENSION ', 'A') + '</text>'; });
-    BR.forEach(function(b, i){ var a = -Math.PI / 2 + i * sec, am = a + sec / 2;
-      s += '<line x1="' + (C + R0 * .7 * Math.cos(a)) + '" y1="' + (C + R0 * .7 * Math.sin(a)) + '" x2="' + (C + (R1 + 22) * Math.cos(a)) + '" y2="' + (C + (R1 + 22) * Math.sin(a)) + '" stroke="#eef1f6"/>';
-      s += '<text x="' + (C + (R1 + 26) * Math.cos(am)) + '" y="' + (C + (R1 + 26) * Math.sin(am) + 4) + '" font-size="13" fill="#3d4a5f" text-anchor="middle">' + b[1] + '</text>'; });
-    s += '<g class="rs-links"></g>';
-    var no = items.filter(function(x){ return ST[x.code] === 'own'; }).length, nc = items.filter(function(x){ return ST[x.code] === 'can'; }).length;
-    s += '<text x="' + C + '" y="' + (C - 2) + '" font-size="24" font-weight="700" fill="#2563eb" text-anchor="middle">R' + R + '</text>' +
-      '<text x="' + C + '" y="' + (C + 18) + '" font-size="11.5" fill="#6b7689" text-anchor="middle">' + (SAVE ? '已解锁 ' + no + ' · ' : '') + '可解锁 ' + nc + '</text>';
-    items.forEach(function(x){ s += station(x, pos[x.code][0], pos[x.code][1], x.pre.length ? 6 : 5); });
-    $('dial').innerHTML = s + '</svg>';
-    dialPos = pos;
-    dialPath = function(a, b){ return 'M' + a[0] + ' ' + a[1] + ' Q' + (C + ((a[0] + b[0]) / 2 - C) * .35) + ' ' + (C + ((a[1] + b[1]) / 2 - C) * .35) + ' ' + b[0] + ' ' + b[1]; };
-  }
-  // 星盘上选中的研究：橙线连前置，蓝线连后续
-  function drawLinks(){
-    var g = root.querySelector('.rs-links'); if (!g) return;
-    var s = '', pos = dialPos;
-    if (SEL && pos[SEL]) {
-      var x = byCode[SEL];
-      x.pre.forEach(function(p){ if (pos[p]) s += '<path class="rs-lnk" d="' + dialPath(pos[p], pos[SEL]) + '" fill="none" stroke="#f59e0b" stroke-width="2.2"/>'; });
-      x.post.forEach(function(p){ if (pos[p]) s += '<path class="rs-lnk" d="' + dialPath(pos[SEL], pos[p]) + '" fill="none" stroke="#2563eb" stroke-width="2.2"/>'; });
-      s += '<circle cx="' + pos[SEL][0] + '" cy="' + pos[SEL][1] + '" r="11" fill="#ffe58a" fill-opacity=".6" stroke="#f59e0b" stroke-width="2"/>';
-    }
-    g.innerHTML = s;
-  }
-  // 详情：时间线里在格子本身展开（inCell），星盘上是点旁边的卡片
-  function detHtml(x, inCell){
+  // 详情：在放大的格子里显示
+  function detHtml(x){
     var st = ST[x.code];
     var stt = {own: ['已解锁', 'no'], can: ['可解锁', ''], no: ['还没到', 'gray'], gone: ['A3 起已移除', 'gray']}[st];
     var chip = function(c){ var y = byCode[c]; return '<span class="rs-pc st-' + ST[c] + '" data-c="' + c + '"><i class="rs-dot" style="background:' + HEX[y.b] + '"></i>' + c + ' ' + esc(y.zh) +
       (SAVE ? '<i>' + (ST[c] === 'own' ? '已解锁' : '未解锁') + '</i>' : '') + '</span>'; };
     var bad = facBad(x) && st !== 'own';
-    return (inCell ? '<div class="en">' + esc(x.en) + ' · ' + BN[x.b] + ' ' + x.n.toLocaleString() + ' 点</div>' :
-      '<button class="rs-x" title="收起"><svg viewBox="0 0 10 10"><path d="M0 0l10 10M10 0L0 10"/></svg></button>' +
-      '<div class="rs-top"><span class="rs-dot" style="background:' + HEX[x.b] + '"></span>' + BN[x.b] + ' · ' + x.n.toLocaleString() + ' 点</div>' +
-      '<h3>' + esc(x.zh) + '</h3><div class="en">' + esc(x.en) + '</div>') +
-      '<div class="rs-tags"><em class="' + stt[1] + '">' + stt[0] + '</em>' + (bought(x.code) ? '<em class="no">本局已购买</em>' : '') + (inCell ? '' : '<em>' + x.code + '</em>') + '<em>R' + x.r + '</em>' +
+    return '<div class="en">' + esc(x.en) + ' · ' + BN[x.b] + ' ' + x.n.toLocaleString() + ' 点</div>' +
+      '<div class="rs-tags"><em class="' + stt[1] + '">' + stt[0] + '</em>' + (bought(x.code) ? '<em class="no">本局已购买</em>' : '') + '<em>R' + x.r + '</em>' +
       (x.fac ? '<em class="fac">' + esc(x.fac) + '</em>' : '') + '</div>' +
       '<div class="rs-f"><small>解锁条件</small>' + (x.ch || '<span class="nil">—</span>') + '</div>' +
       (x.fac ? '<div class="rs-f"><small>阵营</small>需要使用' + esc(x.fac) + (MYF.length ? ' <em class="' + (bad ? 'warn' : 'gray') + '">你现在是' + MYF.join('+') + '</em>' : '') + '</div>' : '') +
@@ -628,7 +570,7 @@ RS_JS = r"""<script>(function(){
     // 内容包一层 rs-bi 来裁剪（高度过渡时不漏出来），卡片本身不裁，角上的勾才能一直露在外面
     return '<div class="rs-bi"><div class="rs-cd"><em>' + x.code + '</em>' + (x.pre.length ? '<span>组合</span>' : '') +
       '<button class="rs-x" title="收起"><svg viewBox="0 0 10 10"><path d="M0 0l10 10M10 0L0 10"/></svg></button></div>' +
-      '<div class="rs-nm">' + esc(x.zh) + '</div><div class="rs-det">' + detHtml(x, true) + '</div></div>';
+      '<div class="rs-nm">' + esc(x.zh) + '</div><div class="rs-det">' + detHtml(x) + '</div></div>';
   }
   function place(el, x, y, w, h){ el.style.left = x + 'px'; el.style.top = y + 'px'; el.style.width = w + 'px'; el.style.height = h + 'px'; }
   // 收起：缩回原格子。原格子这时可能正被新展开的卡片推开，所以缩到它推开后的位置和宽度（moves 里有），不然缩完会跳一下
@@ -786,79 +728,42 @@ RS_JS = r"""<script>(function(){
     svg.innerHTML = s;
   }
 
-  var pop = null;
-  function openPop(anim){
-    if (pop) { pop.remove(); pop = null; }
-    if (!SEL || VIEW !== 'dial') return;
-    var box = $('dial'), a = box.querySelector('.rs-st[data-c="' + SEL + '"] circle.p');
-    if (!a) return;
-    var br = box.getBoundingClientRect(), r = a.getBoundingClientRect(), W = Math.min(340, br.width);
-    pop = document.createElement('div');
-    pop.className = 'rs-pop';
-    pop.innerHTML = detHtml(byCode[SEL]);
-    pop.style.width = W + 'px';
-    box.appendChild(pop);
-    // 放在点朝外的一侧（连线都往圆心走），放不下再换另一侧
-    var H = pop.offsetHeight, cx = r.left + r.width / 2 - br.left, roomR = br.width - (r.right - br.left) - 14 >= W, roomL = r.left - br.left - 14 >= W;
-    var side = cx < br.width / 2 ? (roomL ? -1 : 1) : (roomR ? 1 : -1);
-    var x0 = side > 0 ? r.right - br.left + 14 : r.left - br.left - 14 - W, y0 = r.top - br.top - 40;
-    var L = Math.max(0, Math.min(x0, br.width - W)), T = Math.max(0, Math.min(y0, br.height - H));
-    pop.style.left = L + 'px'; pop.style.top = T + 'px';
-    if (!anim || !pop.animate || matchMedia('(prefers-reduced-motion:reduce)').matches) return;
-    pop.style.transformOrigin = (side > 0 ? '0' : '100%') + ' ' + (r.top + r.height / 2 - br.top - T) + 'px';
-    pop.animate([{opacity: 0, transform: 'scale(.6)'}, {opacity: 1, transform: 'none'}], {duration: 300, easing: 'cubic-bezier(.2,.8,.2,1)'});
-  }
   // 选中的、前置（橙）、后续（蓝）加强调，其余变淡
   function highlight(){
     var x = SEL && byCode[SEL], pre = {}, post = {};
     if (x) { x.pre.forEach(function(k){ pre[k] = 1; }); x.post.forEach(function(k){ post[k] = 1; }); }
-    root.querySelectorAll('.rs-c, .rs-st').forEach(function(e){
+    root.querySelectorAll('.rs-c').forEach(function(e){
       var c = e.dataset.c;
       e.classList.toggle('sel', c === SEL); e.classList.toggle('rel-pre', !!pre[c]); e.classList.toggle('rel-post', !!post[c]);
     });
     $('v-lane').classList.toggle('focus', !!SEL);
-    $('dial').classList.toggle('focus', !!SEL);
-    if (VIEW === 'dial') drawLinks();
   }
   function render(){
     compute();
     renderRP();
-    if (VIEW === 'lane') renderLane(); else renderDial();
+    renderLane();
     highlight();
-    if (VIEW === 'lane') openCell(null, false); else openPop(false);
+    openCell(null, false);
   }
   function select(c, keep){
     var prev = SEL;
     SEL = !c || (SEL === c && !keep) ? null : c;
     highlight();
-    if (VIEW === 'lane') openCell(prev, keep === 'jump' ? 'jump' : true); else openPop(true);
-  }
-  function setView(v){
-    VIEW = v;
-    $('views').querySelectorAll('button').forEach(function(x){ x.classList.toggle('on', x.dataset.v === v); });
-    root.querySelectorAll('.rs-view').forEach(function(x){ x.classList.toggle('on', x.id === 'rs-v-' + v); });
-    try { localStorage.setItem('rg-rs-view', v); } catch (e) {}
+    openCell(prev, keep === 'jump' ? 'jump' : true);
   }
   // 点格子展开 / 收起；点详情里的前置、后续换成那一个；点空白处、叉或按 Esc 收起
   root.addEventListener('click', function(e){
     if (e.target.closest('.rs-x')) { select(null); return; }
     var chip = e.target.closest('.rs-pc');
     if (chip) { select(chip.dataset.c, true); return; }
-    if (e.target.closest('.rs-det, .rs-pop')) return;  // 详情里的文字、链接
+    if (e.target.closest('.rs-det')) return;  // 详情里的文字、链接
     var t = e.target.closest('[data-c]');
     if (t) { select(t.dataset.c); return; }
     if (SEL && e.target.closest('.rs-view')) select(null);
   });
   document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && SEL && !root.closest('section').hidden) select(null); });
-  window.addEventListener('resize', function(){ if (VIEW === 'dial') { if (pop) openPop(false); } else drawLaneLinks(); });
-  var tip = $('tip');
-  root.addEventListener('mousemove', function(e){ var t = e.target.closest('[data-t]'); if (!t) { tip.style.display = 'none'; return; }
-    tip.textContent = t.dataset.t; tip.style.display = 'block'; tip.style.left = (e.clientX + 12) + 'px'; tip.style.top = (e.clientY + 16) + 'px'; });
-  root.addEventListener('mouseleave', function(){ tip.style.display = 'none'; });
+  window.addEventListener('resize', drawLaneLinks);
   $('q').addEventListener('input', function(e){ Q = e.target.value.trim().toLowerCase(); render(); });
-  function seg(id, fn){ $(id).addEventListener('click', function(e){ var b = e.target.closest('button'); if (!b) return;
-    $(id).querySelectorAll('button').forEach(function(x){ x.classList.toggle('on', x === b); }); fn(b); }); }
-  seg('views', function(b){ setView(b.dataset.v); render(); });
   // 胶囊离开原位、浮在内容上面时加阴影（和其他卡片页一样）
   var top = root.querySelector('.cl-top'), home = document.createElement('div');
   top.parentNode.insertBefore(home, top);
@@ -871,15 +776,14 @@ RS_JS = r"""<script>(function(){
     R = d ? d.r : 16;
     render();
   });
-  // 从别处链接到某个研究：清掉筛选、切到时间线并选中它（捕获阶段，赶在页面路由滚动之前把格子画出来）
+  // 从别处链接到某个研究：清掉筛选并选中它（捕获阶段，赶在页面路由滚动之前把格子画出来）
   function jump(){
     var id = decodeURIComponent(location.hash.slice(1)), x = DATA.filter(function(y){ return y.id === id; })[0];
     if (!x) return;
     Q = ''; $('q').value = '';
-    setView('lane'); render(); select(x.code, 'jump');
+    render(); select(x.code, 'jump');
   }
   window.addEventListener('hashchange', jump, true);
-  setView(VIEW);
   render(); jump();
 })();</script>"""
 
@@ -1309,9 +1213,7 @@ td.flash{outline:3px solid #f59e0b;outline-offset:-2px;background:var(--flash)!i
 .ch-sp b{font-size:14px;color:var(--fg)}.ch-sp .en{font-size:12px;color:#9aa5b8;margin-left:8px}
 .ch-sp p{margin:4px 0 0}
 .ch-sp.flash{background:var(--flash)}
-/* 研究：时间线 / 星盘 + 右边详情 */
-.rs .cl-q{width:220px}  /* 顶上多一个视图胶囊，1280 宽的窗口里也排得下一行 */
-.rs .own-bar.tight{padding:0 4px}
+/* 研究：时间线，点研究原地放大成详情 */
 .rs-dot{width:8px;height:8px;border-radius:50%;flex:none;display:inline-block}
 .rs-rp{margin:18px 2px 18px}
 .rs-rp-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
@@ -1348,7 +1250,6 @@ td.flash{outline:3px solid #f59e0b;outline-offset:-2px;background:var(--flash)!i
 .rs-c.rs-hide{visibility:hidden}
 .rs-big{position:absolute;margin:0;box-sizing:border-box;z-index:3;
   transition:left .45s cubic-bezier(.2,.8,.2,1),top .45s cubic-bezier(.2,.8,.2,1),width .45s cubic-bezier(.2,.8,.2,1),height .45s cubic-bezier(.2,.8,.2,1),padding .45s cubic-bezier(.2,.8,.2,1),box-shadow .3s,border-color .2s}
-.rs-still .rs-c{transition:none!important}
 .rs-big.closing{z-index:2}
 .rs-bi{height:100%;overflow:hidden}
 .rs-c.sq .rs-nm{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -1369,35 +1270,22 @@ td.flash{outline:3px solid #f59e0b;outline-offset:-2px;background:var(--flash)!i
 .rs-here{display:flex;align-items:center;gap:10px;margin:8px 0}
 .rs-here span{font-size:12px;font-weight:600;color:#fff;background:var(--blue);border-radius:999px;padding:1px 12px;box-shadow:0 4px 12px rgba(37,99,235,.25)}
 .rs-here:after{content:"";flex:1;height:2px;border-radius:2px;background:var(--blue);opacity:.35}
-.rs-dial{position:relative;border:1px solid var(--line);border-radius:16px;padding:10px;display:flex;justify-content:center}
-.rs-dial svg{display:block;width:100%;max-width:760px;height:auto}
-.rs-st{cursor:pointer}
-.rs-st circle.p{transition:r .15s cubic-bezier(.2,.8,.2,1)}
-.rs-st:hover circle.p{r:8}
-.rs-st.rel-pre circle.p{stroke:#f59e0b;stroke-width:3;r:7}
-.rs-st.rel-post circle.p{stroke:var(--blue);stroke-width:3;r:7}
-.rs-st{transition:opacity .25s}
-.rs-dial.focus .rs-st:not(.sel):not(.rel-pre):not(.rel-post){opacity:.25}
 .rs-lnk{stroke-dasharray:5 4;animation:rs-dash .6s linear infinite}
 @keyframes rs-dash{to{stroke-dashoffset:-9}}
 .rs-view{display:none;position:relative}
 .rs-view.on{display:block;animation:rg-in .3s cubic-bezier(.2,.8,.2,1)}
-.rs-pop{position:absolute;z-index:4;box-sizing:border-box;background:#fff;border:1px solid #cdd9ee;border-radius:16px;padding:12px 16px 14px;box-shadow:0 8px 28px rgba(20,40,90,.16),0 0 0 1px rgba(20,40,90,.05)}
 .rs-x{position:absolute;top:10px;right:10px;width:26px;height:26px;border:none;border-radius:999px;background:#e6ecf5;color:#4b5569;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s}
 .rs-x:hover{background:#d8e0ec}
-.rs-pop .rs-top{padding-right:30px}
 .rs-x svg{width:9px;height:9px;stroke:currentColor;fill:none;stroke-width:1.4}
-.rs-top{display:flex;align-items:center;gap:8px;font-size:12px;color:#9aa5b8}
-.rs-pop h3,.rs-det h3{margin:4px 0 0;font-size:17px}
-.rs-pop .en,.rs-det .en{font-size:12.5px;color:#9aa5b8}
+.rs-det .en{font-size:12.5px;color:#9aa5b8}
 .rs-det .en{margin-top:2px}
 .rs-det .rs-tags{margin-top:6px}
 .rs-tags{display:flex;flex-wrap:wrap;gap:5px;margin:8px 0 4px}
-.rs-pop em,.rs-det em{font-style:normal;font-size:11.5px;color:#1d4ed8;background:var(--soft);border-radius:6px;padding:0 7px;white-space:nowrap}
-.rs-pop em.no,.rs-det em.no{color:#fff;background:var(--blue)}
-.rs-pop em.fac,.rs-det em.fac{color:#6b4fa0;background:#f2edfb}
-.rs-pop em.warn,.rs-det em.warn{color:#b45309;background:#fdf3e1}
-.rs-pop em.gray,.rs-det em.gray{color:var(--muted);background:#f1f4f8}
+.rs-det em{font-style:normal;font-size:11.5px;color:#1d4ed8;background:var(--soft);border-radius:6px;padding:0 7px;white-space:nowrap}
+.rs-det em.no{color:#fff;background:var(--blue)}
+.rs-det em.fac{color:#6b4fa0;background:#f2edfb}
+.rs-det em.warn{color:#b45309;background:#fdf3e1}
+.rs-det em.gray{color:var(--muted);background:#f1f4f8}
 .rs-f{margin-top:10px;font-size:13.5px;color:#3d4a5f}
 .rs-f small{display:block;font-size:11.5px;color:#9aa5b8}
 .rs-f .nil{color:#c9d1dd}
@@ -1408,7 +1296,6 @@ td.flash{outline:3px solid #f59e0b;outline-offset:-2px;background:var(--flash)!i
 .rs-pc i{font-style:normal;font-size:11.5px;color:#9aa5b8}
 .rs-pc.st-own i{color:var(--blue)}
 .rs-empty{border:1px dashed var(--line);border-radius:16px;padding:28px 16px;text-align:center;color:#9aa5b8;font-size:13px}
-.rs-tip{position:fixed;pointer-events:none;background:var(--fg);color:#fff;font-size:12px;padding:3px 10px;border-radius:999px;z-index:50;display:none;white-space:nowrap;box-shadow:0 6px 20px rgba(20,40,90,.25)}
 @media (prefers-reduced-motion:reduce){.rs-view.on,.rs-lnk,.rs-lsvg .rs-lnk{animation:none}.rs-c,.rs-nm,.rs-det{transition:none!important}}
 /* 建筑升级：选建筑看一列 */
 .bd-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px}
