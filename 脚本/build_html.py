@@ -23,7 +23,8 @@ import build_templates
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = sys.argv[1] if len(sys.argv) > 1 else os.path.join(ROOT, '表格', 'RG综合列表（4.3.14）.xlsx')
 DST = sys.argv[2] if len(sys.argv) > 2 else os.path.join(ROOT, 'build', 'RGA.html')
-GUIDES = [('r0', 'R0 攻略', '攻略/Realm-Grinder-R0攻略.md'), ('a0', 'A0 攻略要点', '攻略/A0攻略要点.md')]
+GUIDES = [('r0', 'R0 攻略', '攻略/Realm-Grinder-R0攻略.md'), ('a0', 'A0 攻略要点', '攻略/A0攻略要点.md'),
+          ('a1', 'A1 攻略要点', '攻略/A1攻略要点.md')]
 # 工作表序号（按工作簿顺序，从 1 起）→ 导航名、标题；9 是 WPS 隐藏的图片表
 SHEETS = {1: ('阵营', '阵营升级、遗产、UB、血统、世系、契印、法术'), 2: ('传承', '传承组合（Legacy Combo）'),
           3: ('挑战', '挑战（Challenge）'), 4: ('UB 分布', 'UB 分布'), 5: ('研究', '研究（Research）'),
@@ -41,6 +42,7 @@ VERSION = '0.4.1'  # 还没到正式发布，用 0.x（用户要求）
 AUTHOR = 'Yalosaws'
 CHANGES = [
     ('0.4.1', '2026-10-23', [
+        '新增 A1 攻略要点（R40–R99）：按 Discord #ascension-1 置顶、路线图和频道问答整理，专名可点击跳到资料',
         '新增 A0 模板库：佣兵与研究配置分类查看、搜索、按 R 筛选，支持复制代码和添加到本地游戏模板；写入前自动备份，保留已有模板',
         'A0 模板库重写成和遗物、挑战页一样的卡片：升级、研究、法术直接显示中文名（点了跳到表格），研究按六个分支分列；佣兵模板写上攻略里的叫法和用途；R 筛选可一键选当前 R，读到存档后还没解锁的研究变灰；游戏里已有的模板标出来',
         '攻略里的 build 加上「模板」颜色（图例里也有），点了跳到 A0 模板库里对应的模板，自动切到佣兵或研究、清掉筛选',
@@ -169,8 +171,11 @@ def name_of(text):
     lines = [l.strip() for l in SPLIT.split(text) if l.strip()]
     if len(lines) >= 2 and any(not CJK.search(l) for l in lines):
         zh = next((l for l in lines if CJK.search(l)), '')
-        if zh.startswith(('（', '(')):  # 只有括注（glho kohhl snod）：用英文名
-            return next(l for l in lines if not CJK.search(l))
+        if zh.startswith(('（', '(')):
+            rest = re.sub(r'^[（(][^）)]*[）)]', '', zh).strip()
+            if not CJK.search(rest):  # 只有括注（glho kohhl snod）：用英文名
+                return next(l for l in lines if not CJK.search(l))
+            zh = rest  # 「（一块）下颌骨」：括注后面才是中文名
     elif len(lines) == 1:
         m = re.match(r"^[A-Za-z][A-Za-z0-9 '’\-,.!&:]+?([一-鿿].*)$", lines[0])
         zh = m.group(1) if m else ''
@@ -1420,7 +1425,7 @@ html.app.max .grip{display:none}
   // 每页独立记位置；两篇攻略还要保存到本机，关掉程序后也能接着读。
   var cur = null, pos = {}, fromLink = false, restoring = false, frame = 0;
   if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-  var guideIds = ['r0', 'a0'];
+  var guideIds = ['r0', 'a0', 'a1'];
   try {
     var saved = JSON.parse(localStorage.getItem('rg-guide-pos') || '{}');
     guideIds.forEach(function(id){
