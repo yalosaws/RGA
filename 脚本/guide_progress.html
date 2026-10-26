@@ -13,7 +13,7 @@
 </style>
 <script>
 (function(){
-  var sections = Array.from(document.querySelectorAll('#sec-r0, #gd-a0, #gd-a1'));
+  var sections = Array.from(document.querySelectorAll('#gd-r0, #gd-a0, #gd-a1'));
   var buttons = [], entries = [], known = new Set(), hasSave = false, enabled = false;
   try { enabled = localStorage.getItem('rg-guide-gray') === '1'; } catch (e) {}
   sections.forEach(function(sec){

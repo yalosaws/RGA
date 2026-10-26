@@ -29,7 +29,7 @@ SRC = sys.argv[1] if len(sys.argv) > 1 else os.path.join(ROOT, '表格', 'RG综�
 DST = sys.argv[2] if len(sys.argv) > 2 else os.path.join(ROOT, 'build', 'app')
 GUIDES = [('r0', 'R0 攻略', '攻略/Realm-Grinder-R0攻略.md'), ('a0', 'A0 攻略要点', '攻略/A0攻略要点.md'),
           ('a1', 'A1 攻略要点', '攻略/A1攻略要点.md')]
-TIPS = ['a0', 'a1']  # 合在「攻略要点」一页里的几篇
+TIPS = ['r0', 'a0', 'a1']  # 合在「攻略要点」一页里的几篇
 # 工作表序号（按工作簿顺序，从 1 起）→ 导航名、标题；9 是 WPS 隐藏的图片表
 SHEETS = {1: ('阵营', '阵营升级、遗产、UB、血统、世系、契印、法术'), 2: ('传承', '传承组合（Legacy Combo）'),
           3: ('挑战', '挑战（Challenge）'), 4: ('UB 分布', 'UB 分布'), 5: ('研究', '研究（Research）'),
@@ -43,9 +43,13 @@ ALIAS = {'TC': '征税', 'CtA': '动员令', 'HoL': '传说圣殿', 'BF': '嗜�
 # 遗物表里阵营遗物按全阶英豪奖杯的顺序排，每个阵营两个
 ART_FACTIONS = ['仙灵', '精灵', '天使', '地精', '亡灵', '恶魔', '泰坦', '德鲁伊', '无面者', '矮人', '卓尔', '佣兵']
 # 程序版本：改了功能就加版本号，在 CHANGES 最前面写这一版改了什么
-VERSION = '0.5.0'  # 还没到正式发布，用 0.x（用户要求）
+VERSION = '0.5.1'  # 还没到正式发布，用 0.x（用户要求）
 AUTHOR = 'Yalosaws'
 CHANGES = [
+    ('0.5.1', '2026-10-26', [
+        'R0 攻略并进「攻略要点」，和 A0、A1 一起切换，侧栏不再单列',
+        '攻略要点的 R0 / A0 / A1 切换、模板库的 R 筛选平时只显示当前选的，点一下展开选别的，选好自动收回',
+    ]),
     ('0.5.0', '2026-10-26', [
         '自动更新：程序每 15 分钟检查一次 yalosaws.com/rga，有新版本就在后台下载，下好后右下角提示「刷新」；程序本身有新版时自动换好，提示「立即重启」',
         '更新只下载改过的部分：界面拆成一个个文件（各页、脚本、样式、图标分开存），不再整个重新下载',
@@ -1083,17 +1087,16 @@ def main():
         body = re.sub(r'<h1>.*?</h1>\s*', '', body, count=1, flags=re.S)  # 网页里不要标题（用户要求）
         guides[gid] = re.sub(r'(<p class="legend">.*?</p>)\s*<blockquote>.*?</blockquote>\s*(<hr>)?', lambda m: m.group(1), body, count=1, flags=re.S)
     item = lambda h, label: '<a href="#%s" data-sec="%s">%s</a>' % (h, h, label)
-    nav = '<div class="grp">攻略</div>' + item('r0', 'R0 攻略') + item('tips', '攻略要点') + item('builds', '模板库')
+    nav = '<div class="grp">攻略</div>' + item('tips', '攻略要点') + item('builds', '模板库')
     nav += '<div class="grp">资料表</div>' + ''.join(item('t%d' % n, SHEETS[n][0]) for n in sections)
-    # A0、A1 攻略要点合成一页（#tips/a0、#tips/a1），切换按钮放在图例最前面
+    # R0 攻略和 A0、A1 攻略要点合成一页（#tips/r0、#tips/a0、#tips/a1），切换胶囊放在图例最前面：平时只显示当前这篇，点开再选
     def tip(g):
-        sw = '<b class="gd-sw">%s</b>' % ''.join('<a href="#tips/%s"%s>%s</a>' % (x, ' class="on"' if x == g else '', x.upper()) for x in TIPS)
+        sw = '<b class="gd-sw" title="切换攻略">%s</b>' % ''.join('<a href="#tips/%s"%s>%s</a>' % (x, ' class="on"' if x == g else '', x.upper()) for x in TIPS)
         return '<div id="gd-%s" class="guide gd-p"%s>%s</div>' % (g, '' if g == TIPS[0] else ' hidden', guides[g].replace('<p class="legend">', '<p class="legend">' + sw, 1))
     # 程序界面拆成一个个文件（见 write_app）：每页一个 pages/*.html，由本地服务按顺序嵌进 index.html；脚本是 js/*.js
     parts = []
     page = lambda name, h: parts.append(('pages/%s.html' % name, h))
     script = lambda name, js: parts.append(('js/%s.js' % name, unwrap(js)))
-    page('r0', '<section id="sec-r0" class="guide" hidden>%s</section>' % guides['r0'])
     page('tips', '<section id="sec-tips" class="guide" hidden>%s</section>' % ''.join(tip(g) for g in TIPS))
     page('builds', build_templates.build(find, lambda c: name_of(cells[research.get(c) or upgrade[c]]) if (research.get(c) or upgrade.get(c)) in cells else '', TERMS.render))
     for n in sections:
@@ -1295,8 +1298,13 @@ a[class^="t-"]:hover{text-decoration-style:solid}
 .legend span{display:inline-block;margin:0 1px;padding:1px 7px;border-radius:999px;white-space:nowrap;transition:background .15s,opacity .15s}
 .legend span.hl{background:color-mix(in srgb,currentColor 16%,transparent)}
 .legend.act span:not(.hl){opacity:.35}
-.legend .gd-sw{display:inline-flex;gap:2px;margin:0 8px 0 -10px;padding-right:8px;border-right:1px solid #cfd8e6;font-weight:600}
-.legend .gd-sw a{padding:1px 10px;border-radius:999px;color:var(--muted);text-decoration:none}
+.legend .gd-sw{display:inline-flex;margin:0 8px 0 -10px;padding-right:8px;border-right:1px solid #cfd8e6;font-weight:600}
+.legend .gd-sw a{padding:1px 10px;margin:0 1px;max-width:4em;overflow:hidden;white-space:nowrap;border-radius:999px;color:var(--muted);text-decoration:none;
+  transition:max-width .28s ease,padding .28s ease,margin .28s ease,opacity .2s ease,background .15s}
+/* 切换胶囊平时只显示当前这篇，点开（.open）其余几篇从旁边展开 */
+.legend .gd-sw:not(.open) a:not(.on){max-width:0;padding-left:0;padding-right:0;margin:0;opacity:0}
+.legend .gd-sw.now a{transition:none}
+.legend .gd-sw a.on{cursor:pointer}
 .legend .gd-sw a:hover{color:var(--fg)}
 .legend .gd-sw a.on{background:var(--blue);color:#fff}
 .legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:3px;background:currentColor;margin-right:4px}
@@ -1525,16 +1533,15 @@ APP_JS = r"""(function(){
   // 每页独立记位置；两篇攻略还要保存到本机，关掉程序后也能接着读。
   var cur = null, pos = {}, fromLink = false, restoring = false, frame = 0;
   if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-  var guideIds = ['r0', 'tips/a0', 'tips/a1'], lastTip = 'a0';
+  var TIPS = ['r0', 'a0', 'a1'], guideIds = TIPS.map(function(t){ return 'tips/' + t; }), lastTip = 'r0';
   try {
     var saved = JSON.parse(localStorage.getItem('rg-guide-pos') || '{}') || {};
-    if (saved.a0 !== undefined && saved['tips/a0'] === undefined) saved['tips/a0'] = saved.a0;  // 合并前的位置
-    if (saved.a1 !== undefined && saved['tips/a1'] === undefined) saved['tips/a1'] = saved.a1;
+    TIPS.forEach(function(t){ if (saved[t] !== undefined && saved['tips/' + t] === undefined) saved['tips/' + t] = saved[t]; });  // 合并前的位置
     guideIds.forEach(function(id){
       if (typeof saved[id] === 'number' && Number.isFinite(saved[id]) && saved[id] >= 0) pos[id] = saved[id];
     });
     var t = localStorage.getItem('rg-tips-tab');
-    if (t === 'a0' || t === 'a1') lastTip = t;
+    if (TIPS.indexOf(t) >= 0) lastTip = t;
   } catch (e) {}
   // 网页里滚动的是整页，程序里（html.app）滚动的是 main
   window.rgScroller = function(){ return document.documentElement.classList.contains('app') ? document.querySelector('main') : document.scrollingElement; };
@@ -1556,19 +1563,24 @@ APP_JS = r"""(function(){
     remember();
     restoring = true;
     cancelAnimationFrame(frame);
-    var h = decodeURIComponent(location.hash.slice(1)) || 'r0';
-    if (h === 'a0' || h === 'a1') { h = 'tips/' + h; history.replaceState(null, '', '#' + h); }  // 合并前的地址
+    var h = decodeURIComponent(location.hash.slice(1)) || 'tips';
+    if (TIPS.indexOf(h) >= 0) { h = 'tips/' + h; history.replaceState(null, '', '#' + h); }  // 合并前的地址
     var sec = h.split(/[-\/]/)[0], sub = h.indexOf('/') > 0 ? h.split('/')[1] : '';  // 「save/rws」：存档栏里的子页
+    if (!document.getElementById('sec-' + sec)) { sec = 'tips'; h = 'tips'; sub = ''; }
     if (sec === 'tips') {  // 攻略要点：没指定哪篇时打开上次看的那篇
-      if (sub !== 'a0' && sub !== 'a1') sub = lastTip;
+      if (TIPS.indexOf(sub) < 0) sub = lastTip;
       lastTip = sub;
       try { localStorage.setItem('rg-tips-tab', sub); } catch (e) {}
       document.querySelectorAll('#sec-tips > .gd-p').forEach(function(p){ p.hidden = p.id !== 'gd-' + sub; });
     }
-    if (!document.getElementById('sec-' + sec)) { sec = 'r0'; h = 'r0'; sub = ''; }
     secs.forEach(function(s){ s.hidden = s.id !== 'sec-' + sec; });
     navs.forEach(function(a){ a.classList.toggle('on', a.dataset.sec === sec); });  // 存档子页（save/rws）也算「我的存档」
     slide();
+    if (swPick && sec === 'tips') {
+      var sw = document.querySelector('#gd-' + sub + ' .gd-sw');
+      if (sw) { sw.classList.add('open', 'now'); void sw.offsetWidth; sw.classList.remove('now'); void sw.offsetWidth; sw.classList.remove('open'); }
+    }
+    swPick = false;
     if (sub) h = sec;
     window.dispatchEvent(new CustomEvent('subpage', {detail: {sec: sec, sub: sub}}));
     var el = h !== sec && document.getElementById(h);
@@ -1596,6 +1608,15 @@ APP_JS = r"""(function(){
     if (a && a.closest('section.guide, section.table, section.savesec, #res')) fromLink = true;
   });
   back.addEventListener('click', function(){ history.back(); });
+  // 攻略切换胶囊：点当前这篇展开 / 收起，点别的就切过去（新的那篇的胶囊从展开收回），点别处收起
+  var swPick = false;
+  document.addEventListener('click', function(e){
+    var a = e.target.closest('.gd-sw a'), sw = a && a.parentNode;
+    document.querySelectorAll('.gd-sw.open').forEach(function(x){ if (x !== sw) x.classList.remove('open'); });
+    if (!a) return;
+    if (a.classList.contains('on')) { e.preventDefault(); sw.classList.toggle('open'); }
+    else { sw.classList.remove('open'); swPick = true; }
+  });
   // 侧栏选中块从上一项滑到当前项
   var navEl = document.querySelector('nav'), ind = document.createElement('div'), slid = false;
   ind.className = 'ind'; navEl.insertBefore(ind, navEl.firstChild);

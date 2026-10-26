@@ -7,7 +7,12 @@
 .bt-rbar input:focus{outline:none}
 .bt-rbar input::-webkit-inner-spin-button{display:none}
 .bt-rbar input::placeholder{color:var(--muted)}
-.bt-cur{font:inherit;font-size:12px;border:none;border-radius:999px;background:#fff;color:var(--blue);padding:3px 10px;cursor:pointer;box-shadow:0 1px 3px rgba(20,40,90,.08)}
+.bt-cur{font:inherit;font-size:12px;border:none;border-radius:999px;background:#fff;color:var(--blue);padding:3px 10px;cursor:pointer;box-shadow:0 1px 3px rgba(20,40,90,.08);
+  max-width:8em;overflow:hidden;white-space:nowrap;transition:max-width .28s ease,padding .28s ease,opacity .2s ease,box-shadow .2s}
+/* R 胶囊平时只显示选的 R（或「全部」），点开才露出「当前 R」，选好收回 */
+.bt-rbar:not(.open){cursor:pointer}
+.bt-rbar:not(.open) input{cursor:pointer}
+.bt-rbar:not(.open) .bt-cur{max-width:0;padding-left:0;padding-right:0;opacity:0;box-shadow:none}
 .bt-cur.on{background:var(--blue);color:#fff}
 .bt-sync{display:flex;align-items:center;gap:10px;margin:8px 4px 0;font-size:12.5px;color:var(--muted)}
 .bt-sync.err{color:#dc2626}
@@ -102,7 +107,13 @@ a.bt-i:hover{text-decoration:underline dotted!important;text-underline-offset:3p
   q.addEventListener('input', run);
   // 输入的 R 属于哪个 A 就切到哪个 A
   rIn.addEventListener('input', function(){ if (rIn.value !== '') setAsc(ascOf(+rIn.value)); run(); });
-  cur.addEventListener('click', function(e){ e.preventDefault(); rIn.value = rIn.value === String(myR) ? '' : myR; if (rIn.value !== '') setAsc(ascOf(myR)); run(); });
+  cur.addEventListener('click', function(e){ e.preventDefault(); rIn.value = rIn.value === String(myR) ? '' : myR; if (rIn.value !== '') setAsc(ascOf(myR)); run(); fold(); });
+  // R 胶囊：点进去展开，选了「当前 R」、按回车或点别处收回
+  var rbar = root.querySelector('.bt-rbar');
+  function fold(){ rbar.classList.remove('open'); if (rbar.contains(document.activeElement)) document.activeElement.blur(); }
+  rbar.addEventListener('focusin', function(){ rbar.classList.add('open'); });
+  rbar.addEventListener('focusout', function(e){ if (!rbar.contains(e.relatedTarget)) rbar.classList.remove('open'); });
+  rIn.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === 'Escape') fold(); });
 
   // 读到存档：R 胶囊里出现「当前 R」，研究模板里还没解锁的研究变灰
   window.addEventListener('researchsave', function(e){
