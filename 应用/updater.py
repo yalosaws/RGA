@@ -6,12 +6,13 @@
   update/o/<对象 id>     加密的界面文件（见 content.py），文件名就是内容的 sha256，永不改动
   download/RGA-<版本>.exe
 
-- 界面更新：只下载本地没有的对象，逐个核对 sha256，齐了再换上清单；界面弹出提示，点「刷新」生效（下次启动也会直接用）。
+- 界面更新：正在用的版本（exe 自带的或上次下载的）里已有的对象直接复用，只下载改过的，8 个一起下；逐个核对 sha256，齐了再换上清单；界面弹出提示，点「刷新」生效（下次启动也会直接用）。
 - 程序（exe）更新：清单里 exe 的版本比自己新时下载新 exe，核对 sha256 后把正在运行的 RGA.exe 改名成 RGA.exe.old、
   新的放到原位，提示「重启」；放不进去（目录没有写权限）时提示到主页下载。
 - 清单要求的 shell_api 比本程序高时（新界面要用新程序的功能），只更新 exe，不换界面。
 签名不对、下载出错都当没有更新，下次再试；不会影响正在用的版本。
 """
+import concurrent.futures
 import hashlib
 import json
 import os
@@ -89,15 +90,28 @@ class Updater:
     def _download(self, raw, sig, m):
         odir = os.path.join(self.cache, 'o')
         os.makedirs(odir, exist_ok=True)
-        for f in m['files'].values():
-            path = os.path.join(odir, f['o'])
-            if os.path.exists(path):
-                continue
-            blob = fetch(BASE + 'update/o/' + f['o'], 60)
-            if hashlib.sha256(blob).hexdigest() != f['o']:
-                raise ValueError('下载的文件校验不对')
+
+        def save(oid, blob):
+            if hashlib.sha256(blob).hexdigest() != oid:
+                return False
+            path = os.path.join(odir, oid)
             open(path + '.tmp', 'wb').write(blob)
             os.replace(path + '.tmp', path)
+            return True
+
+        need = []
+        for oid in {f['o'] for f in m['files'].values()}:
+            if os.path.exists(os.path.join(odir, oid)):
+                continue
+            blob = self.server.store.blob(oid)  # 没改过的文件：现在用的版本里就有（加密结果固定，id 相同）
+            if not (blob and save(oid, blob)):
+                need.append(oid)
+
+        def get(oid):
+            if not save(oid, fetch(BASE + 'update/o/' + oid, 60)):
+                raise ValueError('下载的文件校验不对')
+        with concurrent.futures.ThreadPoolExecutor(8) as ex:
+            list(ex.map(get, need))  # 有一个出错就整体当没更新，下次再试
         for name, data in (('manifest.sig', sig.hex().encode()), ('manifest.json', raw)):
             p = os.path.join(self.cache, name)
             open(p + '.tmp', 'wb').write(data)

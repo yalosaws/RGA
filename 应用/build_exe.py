@@ -30,7 +30,7 @@ import content  # noqa: E402
 # PyArmor 混淆后的代码里看不出 import 了什么，PyInstaller 要靠这里列出来
 HIDDEN = MODULES[1:] + ['webview', 'pathlib', 'struct', 'datetime', 'ctypes', 'ctypes.wintypes', 'glob', 'hashlib', 'http.server',
                         'secrets', 'threading', 'zlib', 'json', 'queue', 'time', 'zipfile', 'mimetypes', 'urllib.request', 'ssl',
-                        'subprocess', 'webbrowser']
+                        'subprocess', 'webbrowser', 'concurrent.futures']
 
 
 def inject(name, pattern, value, pack):

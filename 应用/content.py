@@ -105,6 +105,15 @@ class Store:
             self._cache[path] = data
         return data
 
+    def blob(self, oid):
+        """这个版本里已有的加密对象（更新时拿来复用，不用重新下载）；没有就 None"""
+        if self._plain:
+            return None
+        try:
+            return self._reader(oid)
+        except (KeyError, OSError):
+            return None
+
     def index(self):
         """index.html 里的 <!--#include pages/x.html--> 换成那一页"""
         if self._index is None:
