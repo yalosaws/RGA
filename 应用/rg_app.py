@@ -1,91 +1,49 @@
-"""RGA（Realm Grinder 助手）：把界面「RGA.html」（build_html.py 生成到 build/）装进无边框圆角窗口，并直接读取本机游戏存档。
+"""RGA（Realm Grinder 助手）：把界面装进无边框圆角窗口，直接读取本机游戏存档，并自动更新。
 
-运行：python 应用/rg_app.py（需要 pywebview）；打包成 exe：python 应用/build_exe.py
-网页通过 window.pywebview.api 调用下面 Api 的方法：读存档（只读，不会改动存档）和窗口按钮。
+运行：python 应用/rg_app.py（需要 pywebview，先跑 脚本/build_html.py 生成 build/app/）；打包成 exe：python 应用/build_exe.py
+界面是一组文件（见 content.py），由本地服务按一次性的随机路径提供；网页通过 window.pywebview.api 调用下面 Api 的方法：
+读存档（只读，不会改动存档）、窗口按钮、自动更新（见 updater.py）。
 标题栏是网页自己画的（.appbar），带 pywebview-drag-region 的部分可以拖动窗口。
-
-打包版（内测）：界面加密成 RGA.dat 装进 exe，启动时在内存里解密，由下面的本地服务按一次性的随机路径提供，
-别的路径一律 404（直接在浏览器里开 127.0.0.1:42001 看不到内容）；程序本身再由 PyArmor 混淆，见 build_exe.py。
+打包版的程序代码由 PyArmor 混淆，界面文件加密存放，见 build_exe.py。
 """
 import ctypes
 import glob
-import hashlib
-import http.server
+import json
 import os
 import re
-import secrets
 import sys
-import threading
-import zlib
+import webbrowser
 
 import webview
 from auto_click import AutoClicker
+import content
 import template_store
+import updater
 
 TITLE = 'RGA'
-PAGE = 'RGA.html'
 DATA = 'RGA.dat'
 PORT = 42001  # 和以前 pywebview 内置服务的端口一样，网页的 localStorage（同一个来源）才能接着用
-_K = None  # 打包时由 build_exe.py 填入密钥（源码里永远是 None）
-MAGIC = b'RGA1'
 SAVE_RE = re.compile(rb'\$\d{2}s[A-Za-z0-9+/=]+\$e')
 
 
 def res_path(name):
     if getattr(sys, 'frozen', False):  # PyInstaller 打包后，资源在临时解压目录里
         return os.path.join(sys._MEIPASS, name)
-    here = os.path.dirname(os.path.abspath(__file__))
-    # 直接用源码运行时：界面在 build/（先跑 脚本/build_html.py），图标在 应用/
-    return os.path.join(os.path.dirname(here), 'build', name) if name == PAGE else os.path.join(here, name)
+    return os.path.join(os.path.dirname(os.path.abspath(__file__)), name)
 
 
-def crypt(data, key):
-    """SHA-256 计数器生成密钥流，和数据异或（加密、解密是同一个操作）"""
-    n = len(data)
-    stream = b''.join(hashlib.sha256(key + i.to_bytes(8, 'little')).digest() for i in range((n + 31) // 32))[:n]
-    return (int.from_bytes(data, 'little') ^ int.from_bytes(stream, 'little')).to_bytes(n, 'little')
-
-
-def seal(html, key):
-    """打包时用：界面 HTML → 加密数据"""
-    return crypt(MAGIC + zlib.compress(html, 9), key)
-
-
-def load_page():
-    """打包版：解密 RGA.dat；源码运行：读 build/RGA.html"""
-    if _K is None:
-        with open(res_path(PAGE), 'rb') as f:
-            return f.read()
-    with open(res_path(DATA), 'rb') as f:
-        plain = crypt(f.read(), _K)
-    if not plain.startswith(MAGIC):
-        raise SystemExit('界面数据损坏')
-    return zlib.decompress(plain[len(MAGIC):])
-
-
-def serve(page):
-    """只在本机、只按随机路径提供界面；返回网址"""
-    token = '/%s/' % secrets.token_urlsafe(24)
-
-    class Handler(http.server.BaseHTTPRequestHandler):
-        def do_GET(self):
-            ok = self.path.split('?')[0] == token
-            body = page if ok else b''
-            self.send_response(200 if ok else 404)
-            self.send_header('Content-Type', 'text/html; charset=utf-8')
-            self.send_header('Content-Length', str(len(body)))
-            self.send_header('Cache-Control', 'no-store')
-            self.end_headers()
-            self.wfile.write(body)
-
-        def log_message(self, *a):
-            pass
-    try:
-        srv = http.server.ThreadingHTTPServer(('127.0.0.1', PORT), Handler)
-    except OSError:  # 端口被占用：换一个（这次的 localStorage 会是空的）
-        srv = http.server.ThreadingHTTPServer(('127.0.0.1', 0), Handler)
-    threading.Thread(target=srv.serve_forever, daemon=True).start()
-    return 'http://127.0.0.1:%d%s' % (srv.server_address[1], token)
+def pick_store(cache_dir):
+    """源码运行用 build/app/（设了 RGA_UPDATE_URL 时也看下载的版本，用来测试自动更新）；打包版用自带和下载的里面版本新的"""
+    frozen = getattr(sys, 'frozen', False)
+    if frozen:
+        cands = [content.bundled_store(res_path(DATA))]
+    else:
+        cands = [content.dev_store(os.path.join(content.ROOT, 'build', 'app'))]
+    if frozen or os.environ.get('RGA_UPDATE_URL'):
+        c = content.cache_store(cache_dir, updater.verify)
+        if c and c.manifest.get('shell_api', 1) <= updater.SHELL_API:
+            cands.append(c)
+    return max(cands, key=lambda s: content.version_tuple(s.version))
 
 
 def find_saves():
@@ -130,6 +88,27 @@ class Api:
         self._win = None
         self._max = False
         self._clicker = clicker
+        self._upd = None
+
+    # ---- 自动更新 ----
+    def update_state(self):
+        return dict(self._upd.state) if self._upd else {'off': True}
+
+    def check_update(self):
+        if self._upd:
+            self._upd.check_now()
+
+    def use_update(self):
+        """换上下载好的新界面，网页随后自己刷新"""
+        return bool(self._upd and self._upd.use_pending())
+
+    def restart(self):
+        """exe 已换成新版：启动新的，关掉自己"""
+        updater.restart()
+        self.close()
+
+    def open_home(self):
+        webbrowser.open(updater.HOME)
 
     def shutdown(self):
         if self._clicker:
@@ -216,15 +195,30 @@ def main():
             os.rename(old, storage)
         except OSError:  # 被占用搬不动时先接着用旧目录，下次再搬
             storage = old
-    if _K is not None:  # 打包版不允许外部调试端口连进来读页面
+    if getattr(sys, 'frozen', False):  # 打包版不允许外部调试端口连进来读页面
         os.environ.pop('WEBVIEW2_ADDITIONAL_BROWSER_ARGUMENTS', None)
+    cache = os.path.join(storage, 'update')
+    updater.cleanup_old_exe()
+    store = pick_store(cache)
+    if getattr(sys, 'frozen', False):
+        content.clean_cache(cache, store)
+    server = content.Server(store, PORT)
     api = Api(AutoClicker())  # 固定 F8 启停、35 毫秒间隔，没有设置页
-    win = webview.create_window(TITLE, serve(load_page()), js_api=api, width=1280, height=860, min_size=(640, 420),
+    win = webview.create_window(TITLE, server.url, js_api=api, width=1280, height=860, min_size=(640, 420),
                                 frameless=True, easy_drag=False, shadow=True, text_select=True, zoomable=True,
                                 background_color='#F5F3FA')
     api._win = win
     win.events.shown += lambda: (center(win), round_corners(win))
     win.events.closed += api.shutdown
+
+    def notify(state):  # 有更新时告诉界面（界面也可以随时问 update_state）
+        try:
+            win.evaluate_js('window.dispatchEvent(new CustomEvent("rgaupdate",{detail:%s}))' % json.dumps(state, ensure_ascii=False))
+        except Exception:
+            pass
+    if getattr(sys, 'frozen', False) or os.environ.get('RGA_UPDATE_URL'):
+        api._upd = updater.Updater(server, cache, notify)
+        api._upd.start()  # 界面打开后也会自己问一次 update_state，错过通知也没关系
     # private_mode=False + storage_path：网页的 localStorage（保存过的存档、页面设置）在关掉程序后还在
     try:
         webview.start(private_mode=False, storage_path=storage, icon=res_path('icon.ico'))

@@ -71,7 +71,11 @@ def main():
     with zipfile.ZipFile(ROOT / '表格' / '旧版' / 'RG综合列表（4.2.0.1）.xlsx') as z:
         old_media = {n: hashlib.sha256(z.read(n)).hexdigest() for n in z.namelist() if n.startswith('xl/media/')}
         images_unchanged = image_xml == z.read('xl/cellimages.xml') and media == old_media
-    src = (ROOT / 'build' / 'RGA.html').read_text(encoding='utf-8')
+    import sys
+    sys.path.insert(0, str(ROOT / '应用'))
+    import content  # 界面拆成了文件，按程序的方式拼回整页
+    store = content.dev_store(str(ROOT / 'build' / 'app'))
+    src = store.index().decode('utf-8') + ''.join('<script>%s</script>' % store.get(f).decode('utf-8') for f in store.manifest['files'] if f.startswith('js/'))
     page = Page()
     page.feed(src)
     counts = Counter(page.ids)

@@ -1,8 +1,6 @@
 <section id="sec-save" class="savesec" hidden>
 <div class="sv-head">
   <div><p id="sv-msg" class="sv-msg">存档只保存在这台电脑上（最近 10 份），不会上传。工具只读取存档，不能修改。</p></div>
-  <span id="sv-game" class="sv-grp" hidden><label class="sv-switch"><input type="checkbox" id="sv-gauto" checked><i></i>自动同步</label>
-    <button id="sv-gread">立即读取</button></span>
 </div>
 <div class="sv-bar">
   <span id="sv-histbox" class="sv-grp" hidden><select id="sv-hist" title="已保存的存档"></select><button id="sv-del" class="sv-lite">删除</button></span>
@@ -14,7 +12,7 @@
 <div id="sv-main" hidden>
   <div id="sv-cards" class="sv-cards"></div>
   <div id="sv-view">
-    <div class="sv-tools"><input id="sv-filter" type="search" placeholder="筛选项目，例如：雷击、考古、仙灵"><div id="sv-vtabs" class="sv-tabs2"></div></div>
+    <div class="sv-tools"><div class="sv-tools-r"><input id="sv-filter" type="search" placeholder="筛选项目，例如：雷击、考古、仙灵"><span id="sv-when" class="sv-when"></span></div><div id="sv-vtabs" class="sv-tabs2"></div></div>
     <div id="sv-vbody" class="sv-card"></div>
     <p class="sv-hint">✓ 表示存档里有这一项（升级、奖杯）；传承的勾，鼠标停上去能看名字。研究：<span class="rs-own">绿色</span>已购买，<span class="rs-unl">黄色</span>已解锁未购买，<span class="rs-lock">灰色</span>未解锁。带虚线的名字点了跳到表格。</p>
   </div>
@@ -24,7 +22,6 @@
 <section id="sec-rws" class="savesec fcsec" hidden>
 <div class="fc-empty">还没有读到存档。到 <a href="#save">我的存档</a> 读取后，这里会自动预报。</div>
 <div class="fc-body" hidden>
-  <div class="fc-src"></div>
   <div class="sv-card fc-bld"><div class="fc-lab">拥有的建筑<small>点一下高亮，预报里同一建筑一起变色</small></div><div id="sv-rbld" class="fc-chips"></div></div>
   <div id="sv-rgrid" class="fc-grid"></div>
   <div id="sv-roff"></div>
@@ -34,7 +31,6 @@
 <section id="sec-arch" class="savesec fcsec" hidden>
 <div class="fc-empty">还没有读到存档。到 <a href="#save">我的存档</a> 读取后，这里会自动预测。</div>
 <div class="fc-body" hidden>
-  <div class="fc-src"></div>
   <div id="sv-astats" class="ar-stats"></div>
   <div class="ar-cols">
     <div class="sv-card ar-time">
@@ -57,7 +53,6 @@
 main>section.savesec{background:none;box-shadow:none;padding:8px 6px;max-width:1180px;margin:0 auto}
 .sv-head{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin:0 0 20px}
 .sv-head h1{font-size:26px;margin:0}
-.sv-head .sv-grp{gap:14px}
 /* 程序里存档直接从游戏读，不需要历史记录和粘贴 */
 html.app .sv-bar{display:none}
 .sv-msg{margin:2px 0 0;font-size:13px;color:var(--muted)} .sv-msg.err,.sv-hint.err{color:#dc2626}
@@ -77,12 +72,6 @@ html.app .sv-bar{display:none}
 #sv-filter:focus,.savesec select:focus,.savesec input[type=number]:focus{outline:none;border-color:#bcd0f7}
 #sv-hist{max-width:300px} #sv-alim{width:120px} #sv-aover{width:90px}
 /* 开关 */
-.sv-switch{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;cursor:pointer;user-select:none}
-.sv-switch input{display:none}
-.sv-switch i{width:34px;height:20px;border-radius:999px;background:#cfd8e6;position:relative;transition:background .2s}
-.sv-switch i:after{content:"";position:absolute;left:2px;top:2px;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.2);transition:left .2s}
-.sv-switch input:checked+i{background:var(--blue)}
-.sv-switch input:checked+i:after{left:16px}
 /* 数字卡片：第一张纯蓝 */
 .sv-cards{display:grid;grid-template-columns:1.5fr repeat(5,1fr);gap:14px;margin-bottom:18px}
 .sv-cards div{background:var(--card);border-radius:18px;box-shadow:var(--shadow);padding:16px 18px;min-width:0}
@@ -92,7 +81,8 @@ html.app .sv-bar{display:none}
 .sv-cards div:first-child small{color:rgba(255,255,255,.75)}
 .sv-cards div:first-child b{font-size:34px;line-height:1.2}
 .sv-tools{margin-bottom:12px}
-.sv-tools #sv-filter{margin-bottom:10px}
+.sv-tools-r{display:flex;align-items:center;gap:8px 18px;flex-wrap:wrap;margin-bottom:10px}
+.sv-when{font-size:13px;color:var(--muted)} .sv-when b{color:var(--fg)}
 .sv-tabs2{display:flex;flex-wrap:wrap;gap:6px}
 .sv-tabs2 button{background:#fff!important;color:#4b5569!important;font-size:13px;padding:4px 13px;border-radius:999px;box-shadow:0 1px 2px rgba(20,40,90,.06)}
 .sv-tabs2 button.on{background:var(--fg)!important;color:#fff!important}
@@ -121,8 +111,6 @@ a.tl:hover{color:var(--blue)}
 .sv-warn{font-size:13px;background:#fff7e6;color:#8a5a00;border-radius:12px;padding:10px 14px;margin:0 0 10px}
 /* ---- 法术预报、遗物预测 ---- */
 .fc-empty{background:var(--soft);border-radius:18px;padding:40px 20px;text-align:center;color:var(--muted);font-size:14px}
-.fc-src{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);background:var(--soft);border-radius:999px;padding:4px 14px;margin:0 0 14px}
-.fc-src b{color:var(--fg);font-weight:600}
 .fc-lab{font-size:13px;font-weight:600;margin-bottom:10px}
 .fc-lab small{font-weight:normal;color:var(--muted);margin-left:10px}
 .fc-chips{display:flex;flex-wrap:wrap;gap:6px}

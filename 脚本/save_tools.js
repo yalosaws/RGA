@@ -77,24 +77,22 @@
   function use(str, store) {
     var save;
     try { save = decode(str); } catch (e) {
-      $('sv-msg').textContent = '读不出这个存档：' + e.message + '。请在游戏里重新导出，整段粘贴（以 $00s 开头、$e 结尾）。';
-      $('sv-msg').className = 'sv-msg err';
+      msg('读不出这个存档：' + e.message + '。请在游戏里重新导出，整段粘贴（以 $00s 开头、$e 结尾）。', true);
       return false;
     }
     cur = {str: str.trim(), save: save};
-    var list = loadList(), idx = 0;
+    var list = loadList(), idx = 0, warn = '';
     if (store) {
       list = list.filter(function (it) { return it.s !== cur.str && !(store === 'game' && it.src === 'game'); });
       list.unshift({s: cur.str, saved: save.lastsave, label: summary(save), src: store === 'game' ? 'game' : 'paste'});
       list = list.slice(0, MAXKEEP);
-      if (!saveList(list)) $('sv-msg').textContent = '（浏览器不让保存，这次关掉页面后需要重新粘贴）';
+      if (!saveList(list)) warn = '（浏览器不让保存，这次关掉页面后需要重新粘贴）';
     } else {
       idx = list.findIndex(function (it) { return it.s === cur.str; });
     }
     refreshHist(list, idx);
-    var age = Date.now() / 1000 - save.lastsave;
-    $('sv-msg').className = 'sv-msg';
-    $('sv-msg').innerHTML = '存档时间 <b>' + when(save.lastsave * 1000) + '</b>（' + dur(age) + '前）· 存档版本 ' + save.saveVersion;
+    msg(warn);
+    showWhen();
     cards(save);
     $('sv-main').hidden = false;
     $('sv-in').value = '';
@@ -108,13 +106,25 @@
     return true;
   }
 
-  // 法术预报、遗物预测两页：没有存档时显示提示，有存档时顶上标出用的是哪份存档
+  // 顶上的提示行：读到存档后收起，出错时显示（红字）
+  function msg(text, err) {
+    $('sv-msg').textContent = text;
+    $('sv-msg').className = err ? 'sv-msg err' : 'sv-msg';
+    document.querySelector('#sec-save .sv-head').hidden = !text;
+  }
+  // 筛选框右边的存档时间；「几秒前」每 10 秒走一次
+  function showWhen() {
+    if (!cur) { $('sv-when').innerHTML = ''; return; }
+    var s = cur.save;
+    $('sv-when').innerHTML = '存档时间 <b>' + when(s.lastsave * 1000) + '</b>（' + dur(Date.now() / 1000 - s.lastsave) + '前）· 存档版本 ' + esc(s.saveVersion);
+  }
+  setInterval(showWhen, 10000);
+  // 法术预报、遗物预测两页：没有存档时显示提示
   function forecastPages(s) {
     ['sec-rws', 'sec-arch'].forEach(function (id) {
       var sec = $(id);
       sec.querySelector('.fc-empty').hidden = !!s;
       sec.querySelector('.fc-body').hidden = !s;
-      if (s) sec.querySelector('.fc-src').innerHTML = '按 <b>' + esc(summary(s)) + '</b> 的存档 · 存档时间 ' + when(s.lastsave * 1000);
     });
   }
 
@@ -788,7 +798,7 @@
       if (!list[k] || !confirm('从这个浏览器里删除这份存档记录？')) return;
       list.splice(k, 1); saveList(list);
       if (list.length) use(list[0].s, false);
-      else { cur = null; refreshHist([], -1); $('sv-main').hidden = true; $('sv-msg').textContent = '已删除。'; ownedArtifacts(null); forecastPages(null); }
+      else { cur = null; refreshHist([], -1); $('sv-main').hidden = true; msg('已删除。'); showWhen(); ownedArtifacts(null); forecastPages(null); }
     });
     // 法术预报、遗物预测是侧栏「工具」里单独的两页（#rws、#arch）；旧地址 #save/rws、#save/arch 转过去
     window.addEventListener('subpage', function (e) {
@@ -822,16 +832,9 @@
     app.on = true;
     windowControls();
     if (!location.hash) location.hash = 'save';
-    $('sv-game').hidden = false;
     $('sv-pastebox').hidden = true;
-    try { $('sv-gauto').checked = localStorage.getItem('rg-auto') !== '0'; } catch (e) { /* 默认开 */ }
-    $('sv-gread').addEventListener('click', function () { readGame(true); });
-    $('sv-gauto').addEventListener('change', function () {
-      try { localStorage.setItem('rg-auto', this.checked ? '1' : '0'); } catch (e) { /* 忽略 */ }
-      tick();
-    });
     readGame(true);
-    tick();
+    app.timer = setInterval(function () { readGame(false); }, 10000);  // 一直自动同步（用户要求去掉开关）
   }
   // 无边框窗口：标题栏按钮、双击标题栏最大化、右下角拖动改大小
   function windowControls() {
@@ -869,13 +872,9 @@
       });
     });
   }
-  function tick() {
-    clearInterval(app.timer);
-    if ($('sv-gauto').checked) app.timer = setInterval(function () { readGame(false); }, 10000);
-  }
   function readGame(force) {
     window.pywebview.api.read_save().then(function (r) {
-      if (!r.ok) { if (force || !cur) { $('sv-msg').textContent = r.error; $('sv-msg').className = 'sv-msg err'; } return; }
+      if (!r.ok) { if (force || !cur) msg(r.error, true); return; }
       if (!force && r.mtime === app.mtime) return;
       app.mtime = r.mtime;
       if (cur && cur.str === r.save.trim() && !force) return;

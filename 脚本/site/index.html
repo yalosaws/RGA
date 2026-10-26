@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RGA · Realm Grinder 助手</title>
+<meta name="description" content="RGA：Realm Grinder（汉化版）桌面助手。自动读取本机存档，法术预报、遗物预测，中文攻略、模板库和 4.3 资料表，自动更新。">
+<link rel="icon" href="icon.png">
+<style>
+:root{--blue:#2563eb;--bg:#f3f6fb;--card:#fff;--fg:#1b2433;--muted:#6b7689;--line:#e6ebf3;--soft:#eef3fc;--shadow:0 4px 24px rgba(20,40,90,.06)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.7 "Microsoft YaHei UI","Microsoft YaHei","PingFang SC","Noto Sans SC",sans-serif}
+a{color:var(--blue);text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+/* 顶栏：悬浮圆角胶囊 */
+.top{position:sticky;top:12px;z-index:5;margin:12px auto 0;max-width:1120px;padding:0 20px}
+.top-in{display:flex;align-items:center;gap:20px;background:var(--card);border-radius:999px;box-shadow:0 6px 30px rgba(20,40,90,.08);padding:8px 8px 8px 18px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;color:var(--fg)}
+.brand img{width:28px;height:28px;image-rendering:pixelated}
+.top nav{display:flex;gap:4px;margin-left:auto}
+.top nav a{color:#4b5569;font-size:14px;padding:6px 14px;border-radius:999px}
+.top nav a:hover{background:var(--soft)}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:#fff;border-radius:999px;padding:8px 20px;font-weight:600;font-size:15px;white-space:nowrap}
+.btn:hover{background:#1d4fd8}
+.btn.off,.dl .btn.off{background:#cfd8e6;pointer-events:none;box-shadow:none}
+.btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+/* 首屏 */
+.hero{display:grid;grid-template-columns:1fr 1.25fr;gap:48px;align-items:center;padding:72px 0 56px}
+.hero h1{font-size:46px;line-height:1.2;margin:0 0 16px;letter-spacing:.01em}
+.hero h1 span{color:var(--blue)}
+.hero p.lead{font-size:18px;color:#4b5569;margin:0 0 28px}
+.dl{display:flex;flex-wrap:wrap;align-items:center;gap:14px 18px}
+.dl .btn{padding:14px 30px;font-size:17px;box-shadow:0 10px 28px rgba(37,99,235,.28)}
+.dl small{color:var(--muted);font-size:13px;line-height:1.5}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+.tags span{background:var(--card);border-radius:999px;padding:4px 14px;font-size:13px;color:#4b5569;box-shadow:0 1px 3px rgba(20,40,90,.06)}
+/* 截图：白色圆角卡片 + 切换胶囊 */
+.shot{background:var(--card);border-radius:22px;box-shadow:0 20px 60px rgba(20,40,90,.12);padding:10px}
+.shot img{display:block;width:100%;border-radius:14px;aspect-ratio:1440/900;object-fit:cover;object-position:top left}
+.shot-tabs{display:flex;gap:6px;justify-content:center;margin-top:14px;flex-wrap:wrap}
+.shot-tabs button{font:inherit;font-size:13px;border:none;background:var(--card);color:#4b5569;border-radius:999px;padding:4px 14px;cursor:pointer;box-shadow:0 1px 3px rgba(20,40,90,.06)}
+.shot-tabs button.on{background:var(--fg);color:#fff}
+/* 功能 */
+section{padding:48px 0}
+h2{font-size:30px;margin:0 0 8px}
+.sub{color:var(--muted);margin:0 0 28px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.feat{background:var(--card);border-radius:20px;box-shadow:var(--shadow);padding:22px 24px}
+.feat i{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:12px;background:var(--soft);color:var(--blue);margin-bottom:12px}
+.feat i svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.feat h3{margin:0 0 6px;font-size:17px}
+.feat p{margin:0;color:#4b5569;font-size:14.5px}
+/* 使用步骤 */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;counter-reset:s}
+.step{background:var(--card);border-radius:20px;box-shadow:var(--shadow);padding:22px 24px}
+.step:before{counter-increment:s;content:counter(s);display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:var(--blue);color:#fff;font-weight:700;margin-bottom:10px}
+.step h3{margin:0 0 4px;font-size:16px}
+.step p{margin:0;color:#4b5569;font-size:14.5px}
+/* 更新记录 */
+.log{background:var(--card);border-radius:20px;box-shadow:var(--shadow);padding:8px 28px}
+.log details{border-bottom:1px solid var(--line);padding:14px 0}
+.log details:last-child{border-bottom:none}
+.log summary{cursor:pointer;font-weight:700;list-style:none;display:flex;align-items:baseline;gap:10px}
+.log summary::-webkit-details-marker{display:none}
+.log summary:after{content:"＋";margin-left:auto;color:var(--muted);font-weight:400}
+.log details[open] summary:after{content:"－"}
+.log summary small{color:var(--muted);font-weight:400;font-size:13px}
+.log ul{margin:10px 0 2px;padding-left:20px;color:#4b5569;font-size:14.5px}
+.log li{margin:3px 0}
+.note{background:var(--soft);border-radius:16px;padding:14px 20px;color:#4b5569;font-size:14px;margin-top:18px}
+footer{padding:36px 0 48px;color:var(--muted);font-size:13px;text-align:center}
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr;padding:48px 0 32px;gap:32px}
+  .hero h1{font-size:36px}
+  .grid,.steps{grid-template-columns:1fr 1fr}
+  .top nav{display:none}
+  .top .btn{margin-left:auto}
+}
+@media (max-width:560px){
+  .grid,.steps{grid-template-columns:1fr}
+  .hero h1{font-size:30px}
+  .log{padding:4px 18px}
+}
+</style></head><body>
+<div class="top"><div class="top-in">
+  <a class="brand" href="#"><img src="icon.png" alt="">RGA</a>
+  <nav><a href="#features">功能</a><a href="#start">使用</a><a href="#log">更新记录</a></nav>
+  <a class="btn%%OFF%%" href="%%EXE%%" download><svg viewBox="0 0 24 24"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg>下载</a>
+</div></div>
+
+<div class="wrap">
+<div class="hero">
+  <div>
+    <h1>Realm Grinder<br><span>中文助手</span></h1>
+    <p class="lead">打开就自动读取本机存档：法术预报、遗物预测、研究和收集进度一目了然；配上中文攻略、模板库和 4.3 版资料表，专名一点就跳到对应资料。</p>
+    <div class="dl">
+      <a class="btn%%OFF%%" href="%%EXE%%" download><svg viewBox="0 0 24 24"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg>%%DLTEXT%%</a>
+      <small>版本 %%VERSION%% · %%DATE%%%%SIZE%%<br>Windows 10 / 11 · 免安装，下载即用</small>
+    </div>
+    <div class="tags"><span>自动同步存档</span><span>自动更新</span><span>只读，不改存档</span><span>游戏汉化译名</span></div>
+  </div>
+  <div>
+    <div class="shot"><img id="shot" src="shot-save.png" alt="RGA 程序截图"></div>
+    <div class="shot-tabs" id="tabs">
+      <button class="on" data-s="shot-save.png">我的存档</button><button data-s="shot-research.png">研究</button>
+      <button data-s="shot-guide.png">攻略要点</button><button data-s="shot-cards.png">遗物</button>
+    </div>
+  </div>
+</div>
+
+<section id="features">
+  <h2>功能</h2>
+  <p class="sub">面向汉化版玩家，阵营、法术、研究都用游戏里的译名。</p>
+  <div class="grid">
+    <div class="feat"><i><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/><circle cx="19" cy="17" r="2"/></svg></i><h3>我的存档</h3><p>直接读取本机 Steam 版存档，游戏一保存就自动同步。重生、宝石、各项统计、升级和研究一页看完。</p></div>
+    <div class="feat"><i><svg viewBox="0 0 24 24"><path d="M7 16a4 4 0 1 1 1-7.9A5 5 0 0 1 18 9a3.5 3.5 0 0 1-1 7H7z"/><path d="M11 19l-1 2M15 19l-1 2"/></svg></i><h3>法术预报</h3><p>按存档推算接下来每次施法的随机结果，标出下一次能触发什么，点建筑一起高亮。</p></div>
+    <div class="feat"><i><svg viewBox="0 0 24 24"><path d="M12 3l2.5 5 5.5.8-4 3.9.9 5.5L12 15.6 7.1 18.2l.9-5.5-4-3.9 5.5-.8z"/></svg></i><h3>遗物预测</h3><p>算出接下来几次考古会挖到哪些遗物，哪些一定能拿、哪些要先达到数值，附随机数分布图。</p></div>
+    <div class="feat"><i><svg viewBox="0 0 24 24"><path d="M5 4h10l4 4v12H5z"/><path d="M9 12h6M9 16h6"/></svg></i><h3>中文攻略</h3><p>R0 新手攻略、A0 / A1 攻略要点，整理自官方 Discord。专名按类别上色，一点就跳到资料，已解锁的自动变灰。</p></div>
+    <div class="feat"><i><svg viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="7" height="7" rx="2"/><rect x="13" y="13" width="7" height="7" rx="2"/></svg></i><h3>模板库</h3><p>A0 / A1 佣兵和研究模板，中文标题和说明；按 R 筛选，一键复制或直接加进游戏的模板里。</p></div>
+    <div class="feat"><i><svg viewBox="0 0 24 24"><path d="M4 5h16v14H4z"/><path d="M4 10h16M10 10v9"/></svg></i><h3>4.3 资料表</h3><p>阵营、挑战、研究、建筑升级、隐藏奖杯、遗物等，按 4.3.14 补丁核对。读到存档后标出已获得，带收集进度。</p></div>
+  </div>
+</section>
+
+<section id="start">
+  <h2>使用</h2>
+  <p class="sub">不用安装，也不用登录。</p>
+  <div class="steps">
+    <div class="step"><h3>下载 RGA.exe</h3><p>放在任意文件夹（建议桌面或自己的工具目录，方便自动更新替换）。</p></div>
+    <div class="step"><h3>打开游戏玩一会儿</h3><p>RGA 读取 Steam 版的本地存档，游戏保存一次后就能读到，之后每 10 秒自动同步。</p></div>
+    <div class="step"><h3>保持打开即可</h3><p>新版本会在后台自动下载，右下角提示「刷新」或「立即重启」就是更新好了。</p></div>
+  </div>
+  <div class="note">Windows 11 自带运行所需的 WebView2；Windows 10 上如果提示缺少，按提示装一下微软的 WebView2 运行时即可。另有自动点击：在游戏窗口里按 F8 开始 / 停止。</div>
+</section>
+
+<section id="log">
+  <h2>更新记录</h2>
+  <p class="sub">当前版本 %%VERSION%%。</p>
+  <div class="log">%%CHANGES%%</div>
+</section>
+</div>
+
+<footer>RGA 由 Yalosaws 制作，是玩家自制的非官方工具，与 Divine Games 无关。存档工具改写自社区的 Royal Advisory Board 工具（MIT 许可）。</footer>
+<script>
+document.getElementById('tabs').addEventListener('click', function(e){
+  var b = e.target.closest('button'); if (!b) return;
+  this.querySelectorAll('button').forEach(function(x){ x.classList.toggle('on', x === b); });
+  document.getElementById('shot').src = b.dataset.s;
+});
+</script>
+</body></html>

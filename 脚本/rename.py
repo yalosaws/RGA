@@ -137,6 +137,10 @@ def name_part(zh, g, digits=False):
         return None
     if re.fullmatch(r'[一-鿿]{1,6}，[一-鿿]{1,6}', zh):  # 「兵书，第一卷」这种带逗号的名字
         return g
+    lead = re.match(r'^((?:[（(][^）)]*[）)])+)(?=[一-鿿])(.+)$', zh)  # 「（一块）下颌骨」：括注在前
+    if lead:
+        n = name_part(lead.group(2), g, digits)
+        return free(lead.group(1)) + n if n else None
     chars = r'[^（(\[【：:，,；;。、%％+*]' if digits else r'[^（(\[【：:，,；;。、%％+*0-9]'
     m = re.match(r'^(%s{0,16}?)(系列)?((?:[（(][^）)]*[）)])*)$' % chars, zh)  # 只有括注时在前面补名字
     if not m:

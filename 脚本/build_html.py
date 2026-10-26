@@ -1,7 +1,11 @@
-"""把综合列表和两篇攻略合成一个 HTML：攻略里的 {类:名} 专名链接到表格里对应的格子。
+"""生成程序界面：综合列表、攻略、模板库、存档工具，攻略里的 {类:名} 专名链接到表格里对应的格子。
 
-用法：python 脚本/build_html.py [综合列表.xlsx] [输出.html]
-默认读 表格/RG综合列表（4.3.14）.xlsx，写到 build/RGA.html（程序界面，打包时装进 exe；不进 git）。
+用法：python 脚本/build_html.py [综合列表.xlsx] [输出目录]
+默认读 表格/RG综合列表（4.3.14）.xlsx，写到 build/app/（不进 git）。界面拆成一个个文件，自动更新时只下载改过的：
+  index.html      外壳（侧栏、标题栏），里面的 <!--#include pages/x.html--> 由程序的本地服务原地嵌入
+  pages/*.html    每页一个（攻略、模板库、各资料表、存档工具、版本页）
+  css/ js/        样式和脚本；img/ 表格里的图标（按内容命名）
+  manifest.json   版本号和每个文件的 sha256（打包、发布时据此加密上传，见 应用/content.py）
 openpyxl 只用来读取（不能用它保存这个表，见 CLAUDE.md）。
 """
 import base64
@@ -22,9 +26,10 @@ import build_templates
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = sys.argv[1] if len(sys.argv) > 1 else os.path.join(ROOT, '表格', 'RG综合列表（4.3.14）.xlsx')
-DST = sys.argv[2] if len(sys.argv) > 2 else os.path.join(ROOT, 'build', 'RGA.html')
+DST = sys.argv[2] if len(sys.argv) > 2 else os.path.join(ROOT, 'build', 'app')
 GUIDES = [('r0', 'R0 攻略', '攻略/Realm-Grinder-R0攻略.md'), ('a0', 'A0 攻略要点', '攻略/A0攻略要点.md'),
           ('a1', 'A1 攻略要点', '攻略/A1攻略要点.md')]
+TIPS = ['a0', 'a1']  # 合在「攻略要点」一页里的几篇
 # 工作表序号（按工作簿顺序，从 1 起）→ 导航名、标题；9 是 WPS 隐藏的图片表
 SHEETS = {1: ('阵营', '阵营升级、遗产、UB、血统、世系、契印、法术'), 2: ('传承', '传承组合（Legacy Combo）'),
           3: ('挑战', '挑战（Challenge）'), 4: ('UB 分布', 'UB 分布'), 5: ('研究', '研究（Research）'),
@@ -38,11 +43,28 @@ ALIAS = {'TC': '征税', 'CtA': '动员令', 'HoL': '传说圣殿', 'BF': '嗜�
 # 遗物表里阵营遗物按全阶英豪奖杯的顺序排，每个阵营两个
 ART_FACTIONS = ['仙灵', '精灵', '天使', '地精', '亡灵', '恶魔', '泰坦', '德鲁伊', '无面者', '矮人', '卓尔', '佣兵']
 # 程序版本：改了功能就加版本号，在 CHANGES 最前面写这一版改了什么
-VERSION = '0.4.1'  # 还没到正式发布，用 0.x（用户要求）
+VERSION = '0.5.0'  # 还没到正式发布，用 0.x（用户要求）
 AUTHOR = 'Yalosaws'
 CHANGES = [
-    ('0.4.1', '2026-10-23', [
+    ('0.5.0', '2026-10-26', [
+        '自动更新：程序每 15 分钟检查一次 yalosaws.com/rga，有新版本就在后台下载，下好后右下角提示「刷新」；程序本身有新版时自动换好，提示「立即重启」',
+        '更新只下载改过的部分：界面拆成一个个文件（各页、脚本、样式、图标分开存），不再整个重新下载',
+        '更新清单带签名，下载的每个文件都核对校验值，对不上的一律不用',
+        '版本页显示更新状态，可以手动「检查更新」',
+        '新增项目主页 yalosaws.com/rga：功能介绍和下载',
+        '我的存档：去掉「自动同步」开关和「立即读取」按钮，一直自动同步；存档时间挪到筛选框右边，「几秒前」会自己走',
+        '法术预报、遗物预测页去掉顶上「按……的存档」一行',
+    ]),
+    ('0.4.2', '2026-10-26', [
         '新增 A1 攻略要点（R40–R99）：按 Discord #ascension-1 置顶、路线图和频道问答整理，专名可点击跳到资料',
+        '攻略里的「下颌骨」等表格里带括注的专名也能点击跳到资料了',
+        'A0、A1 攻略要点合成侧栏里的一项「攻略要点」，图例最前面切换 A0 / A1，两篇各记各的阅读位置',
+        '模板库加入 A1 模板（15 条佣兵、52 条研究，和游戏里导入的 A1Templates.txt 一致）：顶上切换 A0 / A1，读到存档后按 R 自动选；每条写上中文标题、用途标签和说明，佣兵研究 build 的佣兵模板和同名研究模板互相链接',
+        'A1 攻略要点里的 build 名都能点击，跳到模板库里对应的那一条',
+        '遗物「下颌骨」改用游戏译名「颚骨」，攻略和亡灵契印说明里的「颚骨」能点击跳到遗物卡片了',
+        '修正从攻略等页面点研究链接时，研究页里放大的卡片缩成左上角一个点、原格子空着的问题（如 A0 攻略里的 A305）',
+    ]),
+    ('0.4.1', '2026-10-23', [
         '新增 A0 模板库：佣兵与研究配置分类查看、搜索、按 R 筛选，支持复制代码和添加到本地游戏模板；写入前自动备份，保留已有模板',
         'A0 模板库重写成和遗物、挑战页一样的卡片：升级、研究、法术直接显示中文名（点了跳到表格），研究按六个分支分列；佣兵模板写上攻略里的叫法和用途；R 筛选可一键选当前 R，读到存档后还没解锁的研究变灰；游戏里已有的模板标出来',
         '攻略里的 build 加上「模板」颜色（图例里也有），点了跳到 A0 模板库里对应的模板，自动切到佣兵或研究、清掉筛选',
@@ -803,6 +825,8 @@ RS_JS = r"""<script>(function(){
     render(); select(x.code, 'jump');
   }
   window.addEventListener('hashchange', jump, true);
+  // 研究页藏着时量不到格子大小（全是 0），放大的卡片会缩成左上角一个点：页面显示出来后按实际大小重摆一次
+  window.addEventListener('subpage', function(e){ if (e.detail.sec === 't5' && SEL) openCell(SEL, false); });
   render(); jump();
 })();</script>"""
 
@@ -1059,20 +1083,60 @@ def main():
         body = re.sub(r'<h1>.*?</h1>\s*', '', body, count=1, flags=re.S)  # 网页里不要标题（用户要求）
         guides[gid] = re.sub(r'(<p class="legend">.*?</p>)\s*<blockquote>.*?</blockquote>\s*(<hr>)?', lambda m: m.group(1), body, count=1, flags=re.S)
     item = lambda h, label: '<a href="#%s" data-sec="%s">%s</a>' % (h, h, label)
-    nav = '<div class="grp">攻略</div>' + ''.join(item(g, l) for g, l, _ in GUIDES)
-    nav += item('builds', 'A0 模板库')
+    nav = '<div class="grp">攻略</div>' + item('r0', 'R0 攻略') + item('tips', '攻略要点') + item('builds', '模板库')
     nav += '<div class="grp">资料表</div>' + ''.join(item('t%d' % n, SHEETS[n][0]) for n in sections)
-    body = ''.join('<section id="sec-%s" class="guide" hidden>%s</section>' % (g, guides[g]) for g, _, _ in GUIDES)
-    body += build_templates.build(find, lambda c: name_of(cells[research.get(c) or upgrade[c]]) if (research.get(c) or upgrade.get(c)) in cells else '', TERMS.render)
-    body += ''.join('<section id="sec-t%d" class="table" hidden>%s</section>' % (n, sections[n]) for n in sections)
-    body += CL_JS + RS_JS  # 卡片列表（遗物、隐藏奖杯）的搜索和已获得切换
-    body += open(os.path.join(ROOT, '脚本', 'guide_progress.html'), encoding='utf-8').read()
-    # 攻略图例离开原位、浮在内容上面时加阴影
-    body += """<script>document.querySelectorAll('.guide .legend').forEach(function(el){
+    # A0、A1 攻略要点合成一页（#tips/a0、#tips/a1），切换按钮放在图例最前面
+    def tip(g):
+        sw = '<b class="gd-sw">%s</b>' % ''.join('<a href="#tips/%s"%s>%s</a>' % (x, ' class="on"' if x == g else '', x.upper()) for x in TIPS)
+        return '<div id="gd-%s" class="guide gd-p"%s>%s</div>' % (g, '' if g == TIPS[0] else ' hidden', guides[g].replace('<p class="legend">', '<p class="legend">' + sw, 1))
+    # 程序界面拆成一个个文件（见 write_app）：每页一个 pages/*.html，由本地服务按顺序嵌进 index.html；脚本是 js/*.js
+    parts = []
+    page = lambda name, h: parts.append(('pages/%s.html' % name, h))
+    script = lambda name, js: parts.append(('js/%s.js' % name, unwrap(js)))
+    page('r0', '<section id="sec-r0" class="guide" hidden>%s</section>' % guides['r0'])
+    page('tips', '<section id="sec-tips" class="guide" hidden>%s</section>' % ''.join(tip(g) for g in TIPS))
+    page('builds', build_templates.build(find, lambda c: name_of(cells[research.get(c) or upgrade[c]]) if (research.get(c) or upgrade.get(c)) in cells else '', TERMS.render))
+    for n in sections:
+        page('t%d' % n, '<section id="sec-t%d" class="table" hidden>%s</section>' % (n, sections[n]))
+    script('cards', CL_JS)  # 卡片列表（遗物、隐藏奖杯）的搜索和已获得切换
+    script('research', RS_JS)
+    page('guide-progress', open(os.path.join(ROOT, '脚本', 'guide_progress.html'), encoding='utf-8').read())
+    script('legend', LEGEND_JS)
+    # 存档工具：只读存档查看、法术预报、遗物预测（数据和库来自 工具/RG-tools）
+    save_js, save_miss = '', []
+    if os.path.isdir(save_tools.RG):
+        save_html, save_js, save_miss = save_tools.build(find, {'t%d-%s' % c: code for code, c in research.items()})
+        nav = item('save', '我的存档') + item('rws', '法术预报') + item('arch', '遗物预测') + nav
+        page('save', save_html)
+    else:
+        print('没有 工具/RG-tools，跳过「我的存档」（git clone https://github.com/shadowgull/dox4242.github.io 工具/RG-tools）')
+    nav = '<div class="grp">工具</div>' + nav
+    nav += '<div class="grp">关于</div>' + item('ver', '版本 ' + VERSION)
+    page('ver', version_page())
+    body = ''.join('<!--#include %s-->' % f if f.startswith('pages/') else '<script src="%s"></script>' % f for f, _ in parts)
+    shell = TEMPLATE.replace('%%NAV%%', nav).replace('%%BODY%%', body)
+    parts.append(('css/app.css', APP_CSS.replace('%%TCOLORS%%', md2html.CSS[md2html.CSS.index('.t-sp'):md2html.CSS.index('[class^')])))
+    parts.append(('js/app.js', APP_JS))
+    shell = shell.replace('%%APPBAR%%', appbar()).replace('%%ICON%%', icon_img()).replace('%%VERSION%%', VERSION)
+    if save_js:
+        parts.append(('js/save.js', save_js))
+    else:
+        shell = shell.replace('<script src="js/save.js"></script>', '')
+    n, size = write_app(DST, shell, parts)
+    print('写入', DST, '%d 个文件，%.1f MB' % (n, size / 1e6))
+    print('专名链接：%d 个没找到对应格子' % len(missing))
+    for x in sorted(set(missing)):
+        print('  ', x)
+    if save_miss:
+        print('存档工具：%d 个名字没翻译，显示英文：' % len(save_miss), '、'.join(save_miss))
+
+
+# 攻略图例离开原位、浮在内容上面时加阴影；鼠标放在专名上时点亮图例里的这一类
+LEGEND_JS = """<script>document.querySelectorAll('.guide .legend').forEach(function(el){
   var home = document.createElement('div'); el.parentNode.insertBefore(home, el);
   document.addEventListener('scroll', function(){ el.classList.toggle('float', el.getBoundingClientRect().top - home.getBoundingClientRect().top > 12); }, true);
   // 鼠标放在专名上：图例里点亮这一类，其余变淡
-  var sec = el.closest('section'), cur = null;
+  var sec = el.closest('.gd-p') || el.closest('section'), cur = null;
   function show(c){
     if (c === cur) return; cur = c;
     el.querySelectorAll('span').forEach(function(x){ x.classList.toggle('hl', !!c && x.classList.contains(c)); });
@@ -1084,33 +1148,48 @@ def main():
   });
   sec.addEventListener('mouseleave', function(){ show(null); });
 });</script>"""
-    # 存档工具：只读存档查看、法术预报、遗物预测（数据和库来自 工具/RG-tools）
-    save_js, save_miss = '', []
-    if os.path.isdir(save_tools.RG):
-        save_html, save_js, save_miss = save_tools.build(find, {'t%d-%s' % c: code for code, c in research.items()})
-        nav = item('save', '我的存档') + item('rws', '法术预报') + item('arch', '遗物预测') + nav
-        body += save_html
-    else:
-        print('没有 工具/RG-tools，跳过「我的存档」（git clone https://github.com/shadowgull/dox4242.github.io 工具/RG-tools）')
-    nav = '<div class="grp">工具</div>' + nav
-    nav += '<div class="grp">关于</div>' + item('ver', '版本 ' + VERSION)
-    body += version_page()
-    page = TEMPLATE.replace('%%NAV%%', nav).replace('%%BODY%%', body).replace('%%TCOLORS%%', md2html.CSS[md2html.CSS.index('.t-sp'):md2html.CSS.index('[class^')])
-    page = page.replace('%%APPBAR%%', appbar()).replace('%%ICON%%', icon_img())
-    page = page.replace('%%SAVEJS%%', save_js)  # 最后替换：脚本里可能有别的 %% 记号
-    os.makedirs(os.path.dirname(DST), exist_ok=True)
-    open(DST, 'w', encoding='utf-8').write(page)
-    print('写入', DST, '%.1f MB' % (len(page.encode()) / 1e6))
-    print('专名链接：%d 个没找到对应格子' % len(missing))
-    for x in sorted(set(missing)):
-        print('  ', x)
-    if save_miss:
-        print('存档工具：%d 个名字没翻译，显示英文：' % len(save_miss), '、'.join(save_miss))
+
+
+def unwrap(js):
+    """「<script>…</script>」→ 里面的代码"""
+    m = re.fullmatch(r'\s*<script>(.*)</script>\s*', js, re.S)
+    return m.group(1) if m else js
+
+
+IMG = re.compile(r'data:image/(png|jpeg|gif|webp|svg\+xml);base64,([A-Za-z0-9+/=]+)')
+
+
+def write_app(dst, shell, parts):
+    """写出界面目录：表格图标从 data URI 拆成 img/ 下按内容命名的文件；最后写 manifest.json。返回 (文件数, 总字节)"""
+    import hashlib
+    import shutil
+    files = {}
+
+    def images(text, prefix):
+        def one(m):
+            data = base64.b64decode(m.group(2))
+            name = 'img/%s.%s' % (hashlib.sha256(data).hexdigest()[:16], m.group(1).replace('+xml', '').replace('jpeg', 'jpg'))
+            files[name] = data
+            return prefix + name
+        return IMG.sub(one, text)
+    files['index.html'] = images(shell, '').encode()
+    for name, text in parts:
+        files[name] = (images(text, '' if name.startswith('pages/') else '../') if not name.endswith('.js') else text).encode()
+    shutil.rmtree(dst, ignore_errors=True)
+    for name, data in files.items():
+        path = os.path.join(dst, *name.split('/'))
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        open(path, 'wb').write(data)
+    manifest = {'version': VERSION, 'date': CHANGES[0][1], 'notes': CHANGES[0][2],
+                'files': {k: {'sha256': hashlib.sha256(v).hexdigest(), 'size': len(v)} for k, v in sorted(files.items())}}
+    open(os.path.join(dst, 'manifest.json'), 'w', encoding='utf-8').write(json.dumps(manifest, ensure_ascii=False, indent=1))
+    return len(files), sum(map(len, files.values()))
 
 
 def version_page():
     """「版本」页：版本号和更新记录"""
     out = ['<div class="ver-hero">%s<div><h1>RGA</h1><p>Realm Grinder 助手 · 版本 <b>%s</b></p><p class="ver-by">作者 %s</p></div></div>' % (icon_img(), VERSION, AUTHOR)]
+    out.append('<div class="ver-upd" id="ver-upd" hidden><span></span><button type="button">检查更新</button></div>')
     out.append('<h2>更新记录</h2>')
     for v, d, items in CHANGES:
         out.append('<h3>%s <small>%s</small></h3><ul>%s</ul>' % (v, d, ''.join('<li>%s</li>' % html.escape(x) for x in items)))
@@ -1135,8 +1214,20 @@ def appbar():
 TEMPLATE = r"""<!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>RGA</title>
-<style>
-:root{--blue:#2563eb;--accent:#2563eb;--bg:#f3f6fb;--card:#fff;--fg:#1b2433;--muted:#6b7689;--line:#e6ebf3;--soft:#eef3fc;--head:#1b2433;--flash:#ffe58a;
+<link rel="stylesheet" href="css/app.css">
+</head><body>
+%%APPBAR%%
+<aside class="side pywebview-drag-region"><div class="brand">%%ICON%%RGA</div><input id="q" type="search" placeholder="搜索表格…"><nav class="pywebview-drag-region">%%NAV%%</nav></aside>
+<div id="res" hidden></div>
+<main>%%BODY%%</main>
+<button id="back" hidden>← 返回</button>
+<script src="js/app.js"></script>
+<script src="js/save.js"></script>
+</body></html>
+"""
+
+# 程序界面的样式（css/app.css）
+APP_CSS = r""":root{--blue:#2563eb;--accent:#2563eb;--bg:#f3f6fb;--card:#fff;--fg:#1b2433;--muted:#6b7689;--line:#e6ebf3;--soft:#eef3fc;--head:#1b2433;--flash:#ffe58a;
   --shadow:0 4px 24px rgba(20,40,90,.06)}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.65 "Microsoft YaHei UI","Microsoft YaHei","PingFang SC",sans-serif}
@@ -1183,6 +1274,15 @@ section.guide{max-width:960px;margin:0 auto}
 .ver-hero img{width:64px;height:64px;image-rendering:pixelated}
 .ver-hero h1{margin:0;font-size:30px;letter-spacing:.02em}
 .ver-hero p{margin:0;color:var(--muted)} .ver-hero b{color:var(--blue)} .ver-hero .ver-by{font-size:13px;margin-top:2px}
+.ver-upd{display:inline-flex;align-items:center;gap:12px;margin:10px 0 4px;padding:6px 8px 6px 16px;background:var(--soft);border-radius:999px;font-size:13px;color:var(--muted)}
+.ver-upd button,#upd button{font:inherit;font-size:13px;border:none;border-radius:999px;padding:4px 14px;background:var(--fg);color:#fff;cursor:pointer}
+.ver-upd button:hover,#upd button:hover{opacity:.88}
+/* 自动更新提示：右下角白色小卡片 */
+#upd{position:fixed;right:24px;bottom:24px;z-index:20;display:flex;align-items:center;gap:12px;background:var(--card);border-radius:16px;
+  box-shadow:0 10px 40px rgba(20,40,90,.16);padding:12px 12px 12px 18px;font-size:14px;animation:upd-in .3s ease}
+#upd b{color:var(--blue)}
+#upd button.x{background:none;color:var(--muted);padding:2px 8px;font-size:16px}
+@keyframes upd-in{from{opacity:0;transform:translateY(8px)}}
 #sec-ver h3 small{font-weight:normal;color:var(--muted);font-size:13px;margin-left:8px}
 %%TCOLORS%%
 [class^="t-"]{font-weight:600}
@@ -1195,6 +1295,10 @@ a[class^="t-"]:hover{text-decoration-style:solid}
 .legend span{display:inline-block;margin:0 1px;padding:1px 7px;border-radius:999px;white-space:nowrap;transition:background .15s,opacity .15s}
 .legend span.hl{background:color-mix(in srgb,currentColor 16%,transparent)}
 .legend.act span:not(.hl){opacity:.35}
+.legend .gd-sw{display:inline-flex;gap:2px;margin:0 8px 0 -10px;padding-right:8px;border-right:1px solid #cfd8e6;font-weight:600}
+.legend .gd-sw a{padding:1px 10px;border-radius:999px;color:var(--muted);text-decoration:none}
+.legend .gd-sw a:hover{color:var(--fg)}
+.legend .gd-sw a.on{background:var(--blue);color:#fff}
 .legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:3px;background:currentColor;margin-right:4px}
 section.table h1{font-size:20px;margin:0 0 14px}
 .wrap{overflow:auto;max-height:calc(100vh - 110px);border:1px solid var(--line);border-radius:14px}
@@ -1381,7 +1485,7 @@ html.app.max main{border-radius:0}
 html.app main>section{background:none;border-radius:0;box-shadow:none;padding-top:68px}  /* 顶上留出窗口按钮胶囊的位置 */
 html.app main>section.savesec{padding:68px 24px 20px}
 /* 顶上就是浮动胶囊（攻略图例、卡片页的筛选和搜索）的页面：胶囊和窗口按钮排在同一行，不留空 */
-html.app main>section:has(>.legend),html.app main>section:has(>.cl:first-child>.cl-top){padding-top:16px}
+html.app main>section:has(>.legend),html.app main>section:has(>.gd-p>.legend),html.app main>section:has(>.cl:first-child>.cl-top){padding-top:16px}
 html.app .legend,html.app .cl-top{top:16px}  /* 浮动胶囊离卡片上边 16px，和窗口按钮离右边一样 */
 html.app .legend{display:flex;align-items:center;height:36px;padding-top:0;padding-bottom:0}  /* 和窗口按钮胶囊一样高，中线对齐 */
 html.app main::-webkit-scrollbar-track{margin:60px 0 12px}  /* 滚动条从窗口按钮下面开始 */
@@ -1413,24 +1517,24 @@ html.app .brand{display:none}
 .grip{display:none}
 html.app .grip{display:block;position:fixed;right:0;bottom:0;width:18px;height:18px;cursor:nwse-resize;z-index:9}  /* 看不见，鼠标移到角上才变成调整大小 */
 html.app.max .grip{display:none}
-</style></head><body>
-%%APPBAR%%
-<aside class="side pywebview-drag-region"><div class="brand">%%ICON%%RGA</div><input id="q" type="search" placeholder="搜索表格…"><nav class="pywebview-drag-region">%%NAV%%</nav></aside>
-<div id="res" hidden></div>
-<main>%%BODY%%</main>
-<button id="back" hidden>← 返回</button>
-<script>
-(function(){
+"""
+
+# 外壳脚本（js/app.js）：页面切换、记住阅读位置、全表搜索
+APP_JS = r"""(function(){
   var secs = document.querySelectorAll('main > section'), navs = document.querySelectorAll('nav a'), back = document.getElementById('back');
   // 每页独立记位置；两篇攻略还要保存到本机，关掉程序后也能接着读。
   var cur = null, pos = {}, fromLink = false, restoring = false, frame = 0;
   if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-  var guideIds = ['r0', 'a0', 'a1'];
+  var guideIds = ['r0', 'tips/a0', 'tips/a1'], lastTip = 'a0';
   try {
-    var saved = JSON.parse(localStorage.getItem('rg-guide-pos') || '{}');
+    var saved = JSON.parse(localStorage.getItem('rg-guide-pos') || '{}') || {};
+    if (saved.a0 !== undefined && saved['tips/a0'] === undefined) saved['tips/a0'] = saved.a0;  // 合并前的位置
+    if (saved.a1 !== undefined && saved['tips/a1'] === undefined) saved['tips/a1'] = saved.a1;
     guideIds.forEach(function(id){
-      if (saved && typeof saved[id] === 'number' && Number.isFinite(saved[id]) && saved[id] >= 0) pos[id] = saved[id];
+      if (typeof saved[id] === 'number' && Number.isFinite(saved[id]) && saved[id] >= 0) pos[id] = saved[id];
     });
+    var t = localStorage.getItem('rg-tips-tab');
+    if (t === 'a0' || t === 'a1') lastTip = t;
   } catch (e) {}
   // 网页里滚动的是整页，程序里（html.app）滚动的是 main
   window.rgScroller = function(){ return document.documentElement.classList.contains('app') ? document.querySelector('main') : document.scrollingElement; };
@@ -1453,7 +1557,14 @@ html.app.max .grip{display:none}
     restoring = true;
     cancelAnimationFrame(frame);
     var h = decodeURIComponent(location.hash.slice(1)) || 'r0';
+    if (h === 'a0' || h === 'a1') { h = 'tips/' + h; history.replaceState(null, '', '#' + h); }  // 合并前的地址
     var sec = h.split(/[-\/]/)[0], sub = h.indexOf('/') > 0 ? h.split('/')[1] : '';  // 「save/rws」：存档栏里的子页
+    if (sec === 'tips') {  // 攻略要点：没指定哪篇时打开上次看的那篇
+      if (sub !== 'a0' && sub !== 'a1') sub = lastTip;
+      lastTip = sub;
+      try { localStorage.setItem('rg-tips-tab', sub); } catch (e) {}
+      document.querySelectorAll('#sec-tips > .gd-p').forEach(function(p){ p.hidden = p.id !== 'gd-' + sub; });
+    }
     if (!document.getElementById('sec-' + sec)) { sec = 'r0'; h = 'r0'; sub = ''; }
     secs.forEach(function(s){ s.hidden = s.id !== 'sec-' + sec; });
     navs.forEach(function(a){ a.classList.toggle('on', a.dataset.sec === sec); });  // 存档子页（save/rws）也算「我的存档」
@@ -1465,7 +1576,7 @@ html.app.max .grip{display:none}
       el.classList.add('flash');
       setTimeout(function(){ el.classList.remove('flash'); }, 2500);
     }
-    var y = pos[sec] || 0;
+    var key = sec === 'tips' ? 'tips/' + sub : sec, y = pos[key] || 0;
     frame = requestAnimationFrame(function(){
       if (el) el.scrollIntoView({block:'center', inline:'center'});
       else rgScroller().scrollTop = y;  // 盖过浏览器自己的锚点滚动
@@ -1473,7 +1584,7 @@ html.app.max .grip{display:none}
     });
     back.hidden = !(fromLink && el);
     if (!el) fromLink = false;
-    cur = sec;
+    cur = key;
   }
   document.addEventListener('scroll', function(e){
     if (e.target === document || e.target === rgScroller()) remember();
@@ -1531,11 +1642,47 @@ html.app.max .grip{display:none}
   res.addEventListener('click', function(e){ if (e.target.closest('a')) res.hidden = true; });
   document.addEventListener('keydown', function(e){ if (e.key === 'Escape') res.hidden = true; });
 })();
-</script>
-<script>
-%%SAVEJS%%
-</script>
-</body></html>
+
+// 自动更新：程序在后台下载好新版本后发 rgaupdate 事件，右下角提示；版本页显示检查状态
+(function(){
+  var box = document.createElement('div'), ver = document.getElementById('ver-upd'), dismissed = '', key = '';
+  box.id = 'upd'; box.hidden = true; document.body.appendChild(box);
+  function api(){ return window.pywebview && window.pywebview.api && window.pywebview.api.update_state ? window.pywebview.api : null; }
+  function hm(t){ var d = new Date(t); return ('0' + d.getHours()).slice(-2) + ':' + ('0' + d.getMinutes()).slice(-2); }
+  function render(st){
+    if (!st || st.off) return;
+    var html = '';
+    key = '';
+    if (st.exe === 'ready') { key = 'e' + st.exe_new; html = 'RGA <b>' + st.exe_new + '</b> 已下载好，重启后生效<button data-u="restart">立即重启</button>'; }
+    else if (st.exe === 'manual') { key = 'm' + st.exe_new; html = '有新版本 <b>' + st.exe_new + '</b>，这个位置没法自动替换，请到主页下载<button data-u="home">打开主页</button>'; }
+    else if (st.content) { key = 'c' + st.content; html = '新版本 <b>' + st.content + '</b> 已下载好<button data-u="reload">刷新</button>'; }
+    box.hidden = !key || key === dismissed;
+    if (key) box.innerHTML = html + '<button class="x" data-u="x" title="稍后">×</button>';
+    if (ver) {
+      ver.hidden = false;
+      ver.querySelector('span').textContent = key ? '新版本已下载好' :
+        !st.checked ? '正在检查更新…' :
+        st.error && !st.latest ? '连不上更新服务器（' + hm(st.checked) + '），稍后自动再试' :
+        '已是最新版本 · 上次检查 ' + hm(st.checked);
+    }
+  }
+  box.addEventListener('click', function(e){
+    var b = e.target.closest('button'), a = api(); if (!b || !a) return;
+    if (b.dataset.u === 'reload') a.use_update().then(function(){ location.reload(); });
+    else if (b.dataset.u === 'restart') a.restart();
+    else if (b.dataset.u === 'home') a.open_home();
+    else { dismissed = key; box.hidden = true; }
+  });
+  if (ver) ver.querySelector('button').addEventListener('click', function(){
+    var a = api(); if (!a) return;
+    ver.querySelector('span').textContent = '正在检查更新…';
+    a.check_update();
+  });
+  window.addEventListener('rgaupdate', function(e){ render(e.detail); });
+  function first(){ var a = api(); if (a) a.update_state().then(render); }
+  window.addEventListener('pywebviewready', first);
+  first();
+})();
 """
 
 if __name__ == '__main__':

@@ -8,7 +8,7 @@ import re, html, sys
 # 专名分类上色：md 里写 {法:仙灵吟唱}，类别见 TAGS
 TAGS = {'阵': ('fa', '阵营'), '法': ('sp', '法术'), '升': ('up', '升级'), '建': ('bd', '建筑'), '奖': ('tr', '奖杯'),
         '隐': ('ht', '隐藏奖杯'), '研': ('rs', '研究'), '挑': ('ch', '挑战'), '遗': ('ar', '遗物'),
-        '模': ('bl', '模板')}  # 模板：{模:显示文字|模板原名}，链接到 A0 模板库的卡片
+        '模': ('bl', '模板')}  # 模板：{模:显示文字|模板原名}，链接到模板库的卡片
 
 CSS = """@page{size:A4;margin:16mm 15mm}
 body{font-family:"Microsoft YaHei","PingFang SC",sans-serif;font-size:10.5pt;line-height:1.65;color:#222}
@@ -92,7 +92,7 @@ def convert(text, link=None):
         elif l.startswith('|'):
             rows = []
             while i < len(lines) and lines[i].startswith('|'):
-                rows.append([c.strip() for c in lines[i].strip().strip('|').split('|')]); i += 1
+                rows.append([c.strip() for c in re.split(r'\|(?![^{}]*\})', lines[i].strip().strip('|'))]); i += 1  # {模:显示|原名} 里的 | 不分列
             t = ['<table><thead><tr>' + ''.join('<th>%s</th>' % inl(c) for c in rows[0]) + '</tr></thead><tbody>']
             for r in rows[2:]: t.append('<tr>' + ''.join('<td>%s</td>' % inl(c) for c in r) + '</tr>')
             out.append(''.join(t) + '</tbody></table>'); continue
