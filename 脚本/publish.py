@@ -100,7 +100,7 @@ def main():
     page = open(os.path.join(SITE, 'index.html'), encoding='utf-8').read()
     page = (page.replace('%%VERSION%%', m['version']).replace('%%DATE%%', m['date']).replace('%%CHANGES%%', changes_html())
             .replace('%%EXE%%', exe['url'] if exe else '#').replace('%%OFF%%', '' if exe else ' off')
-            .replace('%%DLTEXT%%', '下载 RGA %s' % exe['version'] if exe else '即将开放下载')
+            .replace('%%DLTEXT%%', '下载 RGA %s' % m['version'] if exe else '即将开放下载')  # exe 启动后几秒就自动更新到最新界面，按钮写最新版本
             .replace('%%SIZE%%', ' · %.1f MB' % (exe['size'] / 1e6) if exe else ''))
     open(os.path.join(OUT, 'index.html'), 'w', encoding='utf-8').write(page)
     print('生成', OUT, '版本', m['version'], '，exe', exe['version'] if exe else '无')
