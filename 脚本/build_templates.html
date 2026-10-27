@@ -16,8 +16,13 @@
 .bt-cur.on{background:var(--blue);color:#fff}
 .bt-sync{display:flex;align-items:center;gap:10px;margin:8px 4px 0;font-size:12.5px;color:var(--muted)}
 .bt-sync.err{color:#dc2626}
-.bt-sync button{font:inherit;font-size:12.5px;border:none;background:none;color:var(--blue);padding:0;cursor:pointer}
-.bt-sync button:disabled{color:var(--muted);cursor:default}
+.bt-sync{flex-wrap:wrap}
+.bt-stage{margin-left:auto;white-space:nowrap}
+.bt-stage-msg{flex-basis:100%;text-align:right}
+.bt-stage-msg:empty{display:none}
+.bt-stage-msg.err{color:#dc2626}
+.bt-sync .bt-re{font:inherit;font-size:12.5px;border:none;background:none;color:var(--blue);padding:0;cursor:pointer}
+.bt-sync .bt-re:disabled{color:var(--muted);cursor:default}
 .bt-card .art-h{margin-bottom:0}
 #sec-builds .art-h em.no{background:var(--blue)}
 .bt-en{font-size:12px;color:#9aa5b8;margin:2px 0 0;overflow-wrap:anywhere}
@@ -62,7 +67,7 @@ a.bt-i:hover{text-decoration:underline dotted!important;text-underline-offset:3p
   <input class="cl-q" type="search" placeholder="搜索名字、升级、研究或法术">
 </div>
 <p class="cl-note">套用前先选好对应的立场、阵营和血统，各模板什么时候用见<a href="#tips/a0" data-for="A0">A0 攻略要点</a><a href="#tips/a1" data-for="A1" hidden>A1 攻略要点</a>。<span data-for="A1" hidden>A1 的佣兵研究 build 由同名的佣兵模板和研究模板组成，两个都要用。</span>研究模板读到存档后，还没解锁的研究会变灰。</p>
-<div class="bt-sync" hidden><span></span><button type="button">重新读取</button></div>
+<div class="bt-sync" hidden><span></span><button type="button" class="bt-re">重新读取</button><button type="button" class="bt-btn pri bt-stage" hidden></button><span class="bt-stage-msg"></span></div>
 <div class="art-list" data-k="mercenary">%%MERC%%</div>
 <div class="art-list" data-k="research" hidden>%%RES%%</div>
 <p class="bt-empty" hidden>没有符合条件的模板</p>
@@ -72,7 +77,8 @@ a.bt-i:hover{text-decoration:underline dotted!important;text-underline-offset:3p
   var DATA = %%DATA%%, root = document.getElementById('sec-builds');
   var top = root.querySelector('.bt-top'), q = root.querySelector('.cl-q'), rIn = root.querySelector('.bt-rbar input'), cur = root.querySelector('.bt-cur');
   var lists = [].slice.call(root.querySelectorAll('.art-list')), cards = [].slice.call(root.querySelectorAll('.bt-card'));
-  var sync = root.querySelector('.bt-sync'), syncText = sync.querySelector('span'), syncBtn = sync.querySelector('button');
+  var sync = root.querySelector('.bt-sync'), syncText = sync.querySelector('span'), syncBtn = sync.querySelector('.bt-re');
+  var stageBtn = sync.querySelector('.bt-stage'), stageMsg = sync.querySelector('.bt-stage-msg');
   var kind = 'mercenary', game = null, busy = false, myR = null, asc = 'A0', picked = false;
   try { var a = localStorage.getItem('rg-builds-asc'); if (a === 'A0' || a === 'A1') { asc = a; picked = true; } } catch (e) {}
   function setAsc(a, manual){
@@ -97,6 +103,7 @@ a.bt-i:hover{text-decoration:underline dotted!important;text-underline-offset:3p
     lists.forEach(function(l){ l.hidden = l.dataset.k !== kind; });
     root.querySelector('.bt-empty').hidden = cards.some(function(c){ return !c.hidden; });
     cur.classList.toggle('on', myR !== null && r === myR);
+    stage();
   }
   top.addEventListener('click', function(e){
     var b = e.target.closest('button[data-kind], button[data-asc]');
@@ -142,6 +149,7 @@ a.bt-i:hover{text-decoration:underline dotted!important;text-underline-offset:3p
       add.hidden = !game || has;
       add.disabled = busy;
     });
+    stage();
   }
   function refresh(){
     if (!api() || syncBtn.disabled) return Promise.resolve();
@@ -158,6 +166,45 @@ a.bt-i:hover{text-decoration:underline dotted!important;text-underline-offset:3p
     }).then(function(){ syncBtn.disabled = false; buttons(); });
   }
   syncBtn.addEventListener('click', refresh);
+
+  // 按阶段一键导入：筛选框里填了 R 就用它，否则用存档的当前 R；只取写了 R 段、包含这个 R 的模板（提醒不算），跳过游戏里已有相同配置的
+  function inGame(d){ return Object.keys(game[d.category] || {}).some(function(k){ return game[d.category][k].tp === d.code; }); }
+  function stageR(){ return rIn.value !== '' ? +rIn.value : myR; }
+  function missing(r){
+    var seen = {};
+    return DATA.filter(function(d){
+      if (d.reminder || d.low === null || d.asc !== ascOf(r) || r < d.low || r > d.high || inGame(d)) return false;
+      var k = d.category + '\n' + d.code;
+      return seen[k] ? false : (seen[k] = true);
+    });
+  }
+  function stage(){
+    var r = stageR();
+    stageBtn.hidden = !game || r === null;
+    if (stageBtn.hidden) return;
+    var n = missing(r).length;
+    stageBtn.textContent = n ? '一键导入 R' + r + ' 的模板（' + n + ' 条）' : 'R' + r + ' 的模板游戏里都有了';
+    stageBtn.disabled = busy || !n;
+  }
+  stageBtn.addEventListener('click', function(){
+    var r = stageR(), list = missing(r), done = 0, fail = [];
+    if (busy || !list.length || !api()) return;
+    busy = true; buttons(); stageMsg.classList.remove('err');
+    list.reduce(function(p, d){
+      return p.then(function(){
+        stageMsg.textContent = '正在导入 ' + (done + fail.length + 1) + ' / ' + list.length + '…';
+        return api().add_template(d.category, d.name, d.code).then(function(res){
+          if (!res.ok) throw Error(res.error);
+          done++;
+        }).catch(function(err){ fail.push(d.name + '：' + err.message); });
+      });
+    }, Promise.resolve()).then(function(){
+      stageMsg.textContent = '已导入 R' + r + ' 的 ' + done + ' 条模板' + (fail.length ? '，' + fail.length + ' 条失败：' + fail.join('；') : '');
+      stageMsg.classList.toggle('err', !!fail.length);
+      busy = false;
+      return refresh();
+    });
+  });
 
   function say(card, text, err){ var s = card.querySelector('.bt-state'); s.textContent = text; s.classList.toggle('err', !!err); }
   root.addEventListener('click', function(e){
