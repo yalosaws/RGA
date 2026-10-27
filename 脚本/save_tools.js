@@ -224,9 +224,8 @@
   function cards(s) {
     var f = function (id) { var x = util.assoc.faction.find(function (y) { return y.id == id; }); return x && id >= 0 ? zh(x.name) : ''; };
     var fac = [f(s.faction), f(s.prestigeFaction), f(s.elitePrestigeFaction)].filter(Boolean).join(' / ') || '未结盟';
-    var ab = s.stats[28] ? s.stats[28].stats + s.stats[28].statsReset + s.stats[28].statsRei : null;
     var items = [['重生', 'R' + s.reincarnation], ['飞升', 'A' + (s.ascension || 0)], ['阵营', fac],
-      ['宝石', s.gems >= 1e6 ? s.gems.toExponential(2).replace('e+', 'e') : num(s.gems)], ['退位次数', num(ab)], ['考古', num(s.excavations)]];
+      ['宝石', s.gems >= 1e6 ? s.gems.toExponential(2).replace('e+', 'e') : num(s.gems)], ['考古', num(s.excavations)]];
     $('sv-cards').innerHTML = items.map(function (x) { return '<div><small>' + x[0] + '</small><b title="' + esc(x[1]) + '">' + esc(x[1]) + '</b></div>'; }).join('');
   }
 

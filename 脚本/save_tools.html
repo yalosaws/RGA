@@ -14,10 +14,8 @@
   <div id="sv-view">
     <div class="sv-tools"><div class="sv-tools-r"><input id="sv-filter" type="search" placeholder="筛选项目，例如：雷击、考古、仙灵"><span id="sv-when" class="sv-when"></span></div><div id="sv-vtabs" class="sv-tabs2"></div></div>
     <div id="sv-vbody" class="sv-card"></div>
-    <p class="sv-hint">✓ 表示存档里有这一项（升级、奖杯）；传承的勾，鼠标停上去能看名字。研究：<span class="rs-own">绿色</span>已购买，<span class="rs-unl">黄色</span>已解锁未购买，<span class="rs-lock">灰色</span>未解锁。带虚线的名字点了跳到表格。</p>
   </div>
 </div>
-<p class="sv-note">查看页的项目来自社区工具 Royal Advisory Board 的存档编辑器（MIT 许可，本地副本在 工具/RG-tools）。</p>
 </section>
 <section id="sec-rws" class="savesec fcsec" hidden>
 <div class="fc-empty">还没有读到存档。到 <a href="#save">我的存档</a> 读取后，这里会自动预报。</div>
@@ -26,7 +24,6 @@
   <div id="sv-rgrid" class="fc-grid"></div>
   <div id="sv-roff"></div>
 </div>
-<p class="sv-note">改写自社区工具 Realm Weather Service（Royal Advisory Board，MIT 许可）。游戏更新后预报可能不准，以游戏内为准。</p>
 </section>
 <section id="sec-arch" class="savesec fcsec" hidden>
 <div class="fc-empty">还没有读到存档。到 <a href="#save">我的存档</a> 读取后，这里会自动预测。</div>
@@ -46,7 +43,6 @@
     <div id="sv-adetail"></div>
   </div>
 </div>
-<p class="sv-note">改写自社区工具 Lara Crypt（Royal Advisory Board，MIT 许可）。游戏更新后预测可能不准，以游戏内为准。</p>
 </section>
 <style>
 [hidden]{display:none!important}
@@ -73,7 +69,7 @@ html.app .sv-bar{display:none}
 #sv-hist{max-width:300px} #sv-alim{width:120px} #sv-aover{width:90px}
 /* 开关 */
 /* 数字卡片：第一张纯蓝 */
-.sv-cards{display:grid;grid-template-columns:1.5fr repeat(5,1fr);gap:14px;margin-bottom:18px}
+.sv-cards{display:grid;grid-template-columns:1.3fr 1fr minmax(0,2.6fr) 1fr 1fr;gap:14px;margin-bottom:18px}
 .sv-cards div{background:var(--card);border-radius:18px;box-shadow:var(--shadow);padding:16px 18px;min-width:0}
 .sv-cards small{display:block;color:var(--muted);font-size:12px}
 .sv-cards b{display:block;font-size:22px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-variant-numeric:tabular-nums}
@@ -187,6 +183,6 @@ a.tl:hover{color:var(--blue)}
 .ar-pick b{color:var(--fg);font-variant-numeric:tabular-nums;margin-left:4px}
 @media (max-width:1000px){.ar-cols{grid-template-columns:1fr}.ar-stats{grid-template-columns:repeat(2,1fr)}}
 .sv-note{font-size:12px;color:#9aa5b8;margin:20px 4px 0}
-@media (max-width:1000px){.sv-cards{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:1000px){.sv-cards{grid-template-columns:repeat(2,1fr)}.sv-cards div:nth-child(3){grid-column:1/-1;order:-1}}
 @media (max-width:640px){.sv-cards{grid-template-columns:repeat(2,1fr)}.sv-tb tr>th:first-child{min-width:120px}.sv-paste{flex-direction:column}#sv-in{width:100%}}
 </style>

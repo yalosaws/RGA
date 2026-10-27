@@ -60,8 +60,9 @@ def changes_html():
     import build_html
     out = []
     for i, (v, d, items) in enumerate(build_html.CHANGES):
-        out.append('<details%s><summary>%s <small>%s</small></summary><ul>%s</ul></details>' % (
-            ' open' if i == 0 else '', v, d, ''.join('<li>%s</li>' % html.escape(x) for x in items)))
+        out.append('<div class="ver%s"><button aria-expanded="%s"><b class="num">%s</b><small class="num">%s</small></button>'
+                   '<div class="body"><div><ul>%s</ul></div></div></div>' % (
+            ' open' if i == 0 else '', 'true' if i == 0 else 'false', v, d, ''.join('<li>%s</li>' % html.escape(x) for x in items)))
     return ''.join(out)
 
 
