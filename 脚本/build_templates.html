@@ -167,13 +167,13 @@ a.bt-i:hover{text-decoration:underline dotted!important;text-underline-offset:3p
   }
   syncBtn.addEventListener('click', refresh);
 
-  // 按阶段一键导入：筛选框里填了 R 就用它，否则用存档的当前 R；只取写了 R 段、包含这个 R 的模板（提醒不算），跳过游戏里已有相同配置的
+  // 按阶段一键导入：筛选框里填了 R 就用它，否则用存档的当前 R；取这个 R 所在 A 的模板：写了 R 段的要包含这个 R，没写 R 的都算（提醒不算），跳过游戏里已有相同配置的
   function inGame(d){ return Object.keys(game[d.category] || {}).some(function(k){ return game[d.category][k].tp === d.code; }); }
   function stageR(){ return rIn.value !== '' ? +rIn.value : myR; }
   function missing(r){
     var seen = {};
     return DATA.filter(function(d){
-      if (d.reminder || d.low === null || d.asc !== ascOf(r) || r < d.low || r > d.high || inGame(d)) return false;
+      if (d.reminder || d.asc !== ascOf(r) || (d.low !== null && (r < d.low || r > d.high)) || inGame(d)) return false;
       var k = d.category + '\n' + d.code;
       return seen[k] ? false : (seen[k] = true);
     });
