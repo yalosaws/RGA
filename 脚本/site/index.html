@@ -134,6 +134,84 @@ kbd{font-size:12px;border:1px solid var(--line2);border-bottom-width:2px;border-
 .rsg span.lock{color:#b6bfcc}
 .rsg span.lock code{color:#cfd6e0}
 
+/* 示意界面里能点的东西 */
+.app{position:relative}
+.app button{all:unset;cursor:pointer;box-sizing:border-box}
+.app button:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.chips button{border-radius:999px;padding:2px 11px;background:#fff;font-size:12px;color:#4b5569;box-shadow:0 1px 2px rgba(20,40,90,.06);transition:background .25s,color .25s}
+.chips button:hover{color:#1b2433}
+.chips button.on{background:#1b2433;color:#fff}
+.swap .tb{animation:fadein .4s var(--ease)}
+@keyframes fadein{from{opacity:0;transform:translateY(4px)}}
+.legend button{display:inline-flex;align-items:center;gap:4px;border-radius:999px;padding:1px 9px 1px 7px;transition:background .2s,color .2s}
+.legend button:hover{background:var(--app-soft)}
+.legend button.on{background:var(--app-soft);color:#1b2433}
+.legend button.own{margin-left:auto;border:1px solid var(--app-line)}
+.legend button.own.on{background:var(--blue);color:#fff;border-color:var(--blue)}
+.gd .t{cursor:pointer;transition:opacity .3s,color .3s}
+#m-guide.only .t:not(.hit){opacity:.25}
+#m-guide.owned .t[data-has]{color:#aab3c2!important;font-weight:400}
+.tip{position:absolute;left:0;top:0;pointer-events:none;background:#1b2433;color:#fff;font-size:12px;border-radius:8px;padding:4px 10px;white-space:nowrap;opacity:0;transform:translateY(4px);transition:opacity .2s,transform .25s var(--ease)}
+.tip.on{opacity:1;transform:none}
+.bar2 .re{color:var(--blue)}
+.bar2 .go{position:relative;overflow:hidden;margin-left:auto;background:var(--blue);color:#fff;border-radius:999px;padding:3px 12px;font-size:12px;white-space:nowrap;transition:background .3s}
+.bar2 .go span{position:relative}
+.bar2 .go i{position:absolute;left:0;top:0;bottom:0;width:0;background:rgba(255,255,255,.3);transition:width .14s linear}
+.bar2 .go.busy,.bar2 .go.done{background:#8eaaf0;cursor:default}
+.bar2 .cnt b{font-weight:600;color:#1b2433}
+.acts button{border-radius:999px;padding:2px 11px;font-size:11.5px;background:var(--app-soft);transition:background .2s,transform .2s var(--ease)}
+.acts button:hover{background:#e3ebfa}
+.acts button:active{transform:scale(.96)}
+.acts button.pri{background:var(--blue);color:#fff}
+.acts button.pri:hover{background:#1d4ed8}
+.acts button[hidden]{display:none}
+.acts .say{font-size:11.5px;color:var(--app-muted);align-self:center}
+.tag.has{background:#e7f6ec;color:#1f7a3f}
+/* 研究页 */
+.rs-top{display:flex;align-items:center;gap:12px;margin:0 2px 8px}
+.rs-top>b{font-size:14px}
+.rs-top span{color:var(--app-muted);font-size:12px}
+.rs-top .rp{color:var(--blue);font-size:15px}
+.rs-top input{margin-left:auto;width:200px;height:28px;border:0;border-radius:999px;background:#fff;padding:0 12px;font:inherit;font-size:12px;box-shadow:0 1px 2px rgba(20,40,90,.06);outline:none;transition:box-shadow .2s}
+.rs-top input:focus{box-shadow:0 0 0 2px rgba(37,99,235,.25)}
+.rs-bar{height:6px;border-radius:99px;background:rgba(20,40,90,.08);overflow:hidden}
+.rs-bar i{display:block;height:100%;width:0;background:var(--blue);border-radius:99px;transition:width 1.4s var(--ease) .3s}
+.rs-leg{display:flex;flex-wrap:wrap;gap:4px 6px;margin:10px 0 4px}
+.rs-leg button{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--app-muted);border-radius:999px;padding:1px 9px 1px 7px;transition:background .2s,color .2s}
+.rs-leg button:hover,.rs-leg button.on{background:#fff;color:#1b2433}
+.rs-leg i{width:7px;height:7px;border-radius:50%}
+.rs-det{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s var(--ease)}
+.rs-det.on{grid-template-rows:1fr}
+.rs-det>div{overflow:hidden}
+.rs-in{margin:8px 0 6px;background:#fff;border-radius:12px;padding:12px 16px;box-shadow:0 2px 12px rgba(20,40,90,.06)}
+.rs-in .h{display:flex;align-items:center;gap:8px}
+.rs-in .h>b:nth-child(2){font-size:16px}
+.rs-in .x{margin-left:auto;width:22px;height:22px;border-radius:50%;background:var(--app-soft);display:flex;align-items:center;justify-content:center;color:#4b5569}
+.rs-in dl{display:grid;grid-template-columns:auto 1fr;gap:2px 14px;margin:8px 0 0;font-size:12.5px}
+.rs-in dt{color:#9aa5b8}
+.rs-in dd{margin:0;color:#3d4a5f}
+.rs-in .pre button{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--app-line);border-radius:999px;padding:1px 9px 1px 4px;margin-right:4px;font-size:12px;transition:border-color .2s}
+.rs-in .pre button:hover{border-color:var(--blue)}
+.code{font:600 11px/1 "Segoe UI",sans-serif;padding:3px 6px;border-radius:5px;background:var(--app-soft);color:#3d5a99}
+.rs-era{display:flex;align-items:center;gap:10px;margin:12px 0 6px;font-size:10.5px;color:#9aa5b8;letter-spacing:.12em}
+.rs-era:after{content:"";flex:1;height:1px;background:var(--app-line)}
+.rs-row{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px;align-items:start}
+.rs-col{display:flex;flex-direction:column;gap:6px;min-width:0}
+.app .rs-c{position:relative;display:block;background:#fff;border:1px solid var(--app-line);border-radius:10px;padding:5px 9px 6px;transition:border-color .2s,transform .3s var(--ease),box-shadow .3s var(--ease),opacity .3s}
+.app .rs-c:hover{transform:translateY(-1px);box-shadow:0 6px 14px -8px rgba(20,40,90,.3)}
+.rs-c .code{font-size:10px;padding:2px 5px}
+.rs-c span{display:block;font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:3px}
+.rs-c:after{content:"";position:absolute;top:-5px;right:-5px;width:14px;height:14px;border-radius:50%}
+.rs-c.own:after{background:var(--blue) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.5l2.5 2.5L12 5.5' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/12px no-repeat}
+.rs-c.unl:after{width:9px;height:9px;top:-3px;right:-3px;background:#e0a100;box-shadow:0 0 0 2px #fff}
+.app .rs-c.lock{background:#f7f9fc}
+.rs-c.lock span{color:#aab3c2}
+.rs-c.lock .code{background:#eef1f5;color:#aab3c2!important}
+.app .rs-c.sel{border-color:var(--blue);box-shadow:0 0 0 2px rgba(37,99,235,.18)}
+.app .rs-c.pre{border-color:#e0a100;box-shadow:0 0 0 2px rgba(224,161,0,.2)}
+.app .rs-c.dim{opacity:.22}
+@media (max-width:900px){.rs-row{grid-template-columns:repeat(3,minmax(0,1fr))}.rs-top input{width:120px}}
+
 .tbl{border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:14px 0 0}
 .tbl table{width:100%;border-collapse:collapse;font-size:14px}
 .tbl th{text-align:left;font-weight:600;font-size:13px;padding:9px 14px;background:var(--bg2);color:var(--fg2)}
@@ -212,7 +290,7 @@ details p{margin:0 0 14px}
   <h4>开始</h4>
   <a href="#overview">概览</a><a href="#install">下载与安装</a><a href="#first">第一次使用</a>
   <h4>功能</h4>
-  <a href="#save">我的存档</a><a href="#forecast">法术预报与遗物预测</a><a href="#guide">攻略要点</a><a href="#builds">模板库</a><a href="#sheets">资料表</a><a href="#click">自动点击</a>
+  <a href="#save">我的存档</a><a href="#forecast">法术预报与遗物预测</a><a href="#guide">攻略要点</a><a href="#builds">模板库</a><a href="#research">研究</a><a href="#sheets">资料表</a><a href="#click">自动点击</a>
   <h4>其他</h4>
   <a href="#update">自动更新</a><a href="#faq">常见问题</a><a href="#changelog">更新记录</a>
   <div class="none">没有找到</div>
@@ -243,7 +321,7 @@ details p{margin:0 0 14px}
 
   <h2 id="save">我的存档<a href="#save">#</a></h2>
   <p>直接读取本机 Steam 版存档，按分页显示重生、产出、法术、阵营、研究等各项数据。RGA <b>只读</b>，不会修改存档。</p>
-  <div class="app" aria-hidden="true">
+  <div class="app" id="m-save">
     <div class="stats">
       <div class="st" style="--k:0"><small>重生</small><b>R75</b></div>
       <div class="st" style="--k:1"><small>飞升</small><b>A1</b></div>
@@ -251,40 +329,62 @@ details p{margin:0 0 14px}
       <div class="st" style="--k:3"><small>宝石</small><b>4.12e88</b></div>
       <div class="st" style="--k:4"><small>考古</small><b data-n="18204">18,204</b></div>
     </div>
-    <div class="chips st" style="--k:5"><span class="on">概况</span><span>产出</span><span>时间</span><span>法术</span><span>阵营</span><span>考古</span><span>研究</span><span>世系</span><span>传承</span></div>
-    <div class="c st" style="--k:6"><table class="tb">
-      <tr><th>项目</th><th>本纪元</th><th>本次重生</th><th>总计</th></tr>
-      <tr><td>退位次数</td><td>3</td><td>41</td><td>2,318</td></tr>
-      <tr><td>黄金</td><td class="d">—</td><td class="d">—</td><td>7.904e231</td></tr>
-      <tr><td>立场</td><td class="d">—</td><td class="d">—</td><td>中立</td></tr>
-      <tr><td>存档距今</td><td class="d">—</td><td class="d">—</td><td>6 秒</td></tr>
-    </table></div>
+    <div class="chips st" style="--k:5" role="tablist"><button class="on" data-t="0">概况</button><button data-t="1">法术</button><button data-t="2">考古</button><button data-t="3">时间</button></div>
+    <div class="c st swap" style="--k:6">
+      <table class="tb" data-t="0">
+        <tr><th>项目</th><th>本纪元</th><th>本次重生</th><th>总计</th></tr>
+        <tr><td>退位次数</td><td>3</td><td>41</td><td>2,318</td></tr>
+        <tr><td>黄金</td><td class="d">—</td><td class="d">—</td><td>7.904e231</td></tr>
+        <tr><td>立场</td><td class="d">—</td><td class="d">—</td><td>中立</td></tr>
+        <tr><td>存档距今</td><td class="d">—</td><td class="d">—</td><td>6 秒</td></tr>
+      </table>
+      <table class="tb" data-t="1" hidden>
+        <tr><th>法术</th><th>本纪元</th><th>本次重生</th><th>总计</th></tr>
+        <tr><td>龙息</td><td>212</td><td>3,904</td><td>88,410</td></tr>
+        <tr><td>雷击</td><td>640</td><td>11,287</td><td>402,215</td></tr>
+        <tr><td>地狱火冲击</td><td>0</td><td>18</td><td>51,930</td></tr>
+        <tr><td>仙灵吟唱</td><td>96</td><td>1,733</td><td>63,008</td></tr>
+      </table>
+      <table class="tb" data-t="2" hidden>
+        <tr><th>项目</th><th>本纪元</th><th>本次重生</th><th>总计</th></tr>
+        <tr><td>考古次数</td><td>118</td><td>1,402</td><td>18,204</td></tr>
+        <tr><td>考古重置</td><td class="d">—</td><td>5</td><td>311</td></tr>
+        <tr><td>遗物</td><td class="d">—</td><td class="d">—</td><td>163</td></tr>
+      </table>
+      <table class="tb" data-t="3" hidden>
+        <tr><th>项目</th><th>本纪元</th><th>本次重生</th><th>总计</th></tr>
+        <tr><td>游戏时间</td><td>42 分</td><td>9 小时 12 分</td><td>2,140 小时</td></tr>
+        <tr><td>离线时间</td><td>0</td><td>1 小时 5 分</td><td>812 小时</td></tr>
+      </table>
+    </div>
   </div>
-  <p class="cap">示意，数字是举例。</p>
+  <p class="cap">示意，数字是举例；上面的分页可以点。</p>
 
   <h2 id="forecast">法术预报与遗物预测<a href="#forecast">#</a></h2>
   <p><b>法术预报</b>按存档推算接下来每次施法的随机结果，标出下一次能触发什么；<b>遗物预测</b>算出接下来几次考古会挖到哪些遗物，哪些一定能拿、哪些要先达到数值。游戏更新后可能不准，以游戏内为准。</p>
 
   <h2 id="guide">攻略要点<a href="#guide">#</a></h2>
   <p>R0 新手攻略和 A0、A1 攻略要点，整理自官方 Discord。专名按类别上色，点一下跳到对应资料；读到存档后，已经解锁的会变灰。</p>
-  <div class="app" aria-hidden="true">
-    <div class="c legend st" style="--k:0"><span><i class="up">■</i> 升级</span><span><i class="sp">■</i> 法术</span><span><i class="ar">■</i> 遗物</span><span><i class="ht">■</i> 隐藏奖杯</span><span><i class="rs">■</i> 研究</span><span><i class="bl">■</i> 模板</span></div>
+  <div class="app" id="m-guide">
+    <div class="c legend st" style="--k:0"><button data-k="up"><i class="up">■</i> 升级</button><button data-k="sp"><i class="sp">■</i> 法术</button><button data-k="ar"><i class="ar">■</i> 遗物</button><button data-k="rs"><i class="rs">■</i> 研究</button><button class="own" data-own>已解锁</button></div>
     <div class="c gd st" style="--k:1;margin-top:10px">
       <h5>龙族解锁（R42–48）</h5>
       <ol>
-        <li class="st" style="--k:2"><b>蛋</b>：挖<span class="t ar">尖刺粗砺蛋</span>（R42+，考古深度 1500，2%）。</li>
-        <li class="st" style="--k:3"><b class="t up">孵化！</b>：挖到蛋后固定等 2 小时。买下后<span class="t sp">动员令</span>、<span class="t sp">灵能奔涌</span>能升阶，<span class="t up">分阶自动施法</span>也随之解锁。</li>
-        <li class="st" style="--k:4"><b class="t up">小龙</b>（R44）：<span class="t sp">地狱火冲击</span>生效时间累计 2 小时。第一个小时用佣兵，带<span class="t sp">地精贪婪</span>和<span class="t sp">地狱火冲击</span>。</li>
+        <li class="st" style="--k:2"><b>蛋</b>：挖<a class="t ar" data-w="遗物 · 尖刺粗砺蛋">尖刺粗砺蛋</a>（R42+，考古深度 1500，2%）。</li>
+        <li class="st" style="--k:3"><b class="t up" data-w="升级 · 孵化！" data-has>孵化！</b>：挖到蛋后固定等 2 小时。买下后<a class="t sp" data-w="法术 · 动员令" data-has>动员令</a>、<a class="t sp" data-w="法术 · 灵能奔涌" data-has>灵能奔涌</a>能升阶，<a class="t up" data-w="升级 · 分阶自动施法">分阶自动施法</a>也随之解锁。</li>
+        <li class="st" style="--k:4"><b class="t up" data-w="升级 · 小龙">小龙</b>（R44）：<a class="t sp" data-w="法术 · 地狱火冲击" data-has>地狱火冲击</a>生效时间累计 2 小时。第一个小时用佣兵，带<a class="t sp" data-w="法术 · 地精贪婪" data-has>地精贪婪</a>和<a class="t sp" data-w="法术 · 地狱火冲击" data-has>地狱火冲击</a>。</li>
       </ol>
     </div>
+    <div class="tip" role="status"></div>
   </div>
+  <p class="cap">点图例只看这一类，点「已解锁」把存档里已有的变灰；点专名看它链接到哪。</p>
 
   <h2 id="builds">模板库<a href="#builds">#</a></h2>
   <p>A0、A1 的佣兵和研究模板，配中文标题和用法说明。可以复制代码，也可以直接加进游戏的模板里；读到存档后，还能按当前 R 一键导入这个阶段要用的全部模板。研究模板里还没解锁的研究会变灰。</p>
-  <div class="app" aria-hidden="true">
-    <div class="bar2 st" style="--k:0">游戏里现有模板：佣兵 14 条，研究 31 条 <a>重新读取</a><span class="go">一键导入 R75 的模板（10 条）</span></div>
-    <div class="c tp st" style="--k:1">
-      <div class="tp-h"><b>中立佣兵 · 泰坦血统</b><em class="tag no">R75</em><em class="tag">产能</em><span class="acts"><span>复制代码</span><span class="pri">添加到游戏</span></span></div>
+  <div class="app" id="m-builds">
+    <div class="bar2 st" style="--k:0"><span class="cnt">游戏里现有模板：佣兵 <b>14</b> 条，研究 <b>31</b> 条</span><button class="re">重新读取</button><button class="go"><span>一键导入 R75 的模板（10 条）</span><i></i></button></div>
+    <div class="c tp st" style="--k:1" data-code="m">
+      <div class="tp-h"><b>中立佣兵 · 泰坦血统</b><em class="tag no">R75</em><em class="tag">产能</em><span class="acts"><span class="say"></span><button data-a="copy">复制代码</button><button class="pri" data-a="add">添加到游戏</button><em class="tag has" hidden>游戏里已有</em></span></div>
       <div class="en">R75 N-TT (prod)</div>
       <p>R75 解锁佣兵研究后的产能 build。刚解锁时只快一点；挂离线很久的话无面者反而更强。</p>
       <div class="ups"><small>阵营升级 · 12</small>
@@ -294,8 +394,8 @@ details p{margin:0 0 14px}
       </div>
       <div class="sps"><small>阵营法术</small><span class="sp">龙息</span><span class="sp">仙灵吟唱</span></div>
     </div>
-    <div class="c tp st" style="--k:2;margin-top:10px">
-      <div class="tp-h"><b>矮人血统 · 泰坦</b><em class="tag no">R48</em><em class="tag">产能</em><em class="tag plain">32 项</em></div>
+    <div class="c tp st" style="--k:2;margin-top:10px" data-code="r">
+      <div class="tp-h"><b>矮人血统 · 泰坦</b><em class="tag no">R48</em><em class="tag">产能</em><em class="tag plain">32 项</em><span class="acts"><span class="say"></span><button data-a="copy">复制代码</button><button class="pri" data-a="add">添加到游戏</button><em class="tag has" hidden>游戏里已有</em></span></div>
       <div class="en">R48 DNTT (prod)</div>
       <div class="rsg">
         <div><small>法术学</small><span class="rs"><code>S135</code>增强</span><span class="rs"><code>S200</code>冰系法术</span><span class="rs"><code>S215</code>投影</span></div>
@@ -307,7 +407,18 @@ details p{margin:0 0 14px}
       </div>
     </div>
   </div>
-  <p class="cap">示意：研究模板只列出了每类的前三项，灰色是还没解锁的研究。</p>
+  <p class="cap">「复制代码」复制的是真的模板代码，可以直接粘进游戏；「添加到游戏」和「一键导入」在这里只是演示，点「重新读取」复原。研究模板只列出每类前三项，灰色是还没解锁的研究。</p>
+
+  <h2 id="research">研究<a href="#research">#</a></h2>
+  <p>研究表按存档上色：<b>打勾</b>是已经买了，<b>黄点</b>是已解锁还没买，<b>灰色</b>是还没解锁。点一项看解锁条件和效果，组合研究会标出它要的两项。</p>
+  <div class="app" id="m-rs">
+    <div class="rs-top st" style="--k:0"><b>研究点数</b><span class="num"><b class="rp">0</b> / 780</span><input type="search" placeholder="搜索名字、代号或效果"></div>
+    <div class="rs-bar st" style="--k:1"><i></i></div>
+    <div class="rs-leg st" style="--k:2"></div>
+    <div class="rs-det"><div><div class="rs-in"></div></div></div>
+    <div class="rs-grid st" style="--k:3"></div>
+  </div>
+  <p class="cap">数据是程序里 A0 前两段的真实研究，购买状态是举例。可以点格子、搜索，点图例只看一个分支。</p>
 
   <h2 id="sheets">资料表<a href="#sheets">#</a></h2>
   <p>按 4.3.14 补丁说明核对，阵营、法术、术语都用游戏里的译名。</p>
@@ -407,6 +518,111 @@ details p{margin:0 0 14px}
     if (e.key === 'Escape') { q.value = ''; q.dispatchEvent(new Event('input')); q.blur(); }
   });
   addEventListener('keydown', function(e){ if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); q.focus(); q.select(); } });
+
+var RS = [{"c":"S1","b":"S","n":"灵附","r":16,"f":"仙灵","ch":"买下S分支第1个研究点数","e":"根据本局魔产量提升灵附原野产能","p":[]},{"c":"S10","b":"S","n":"导引","r":16,"f":"天使","ch":"使用天使本局拥有2000个天堂圣域","e":"根据天堂圣域数量提升其余建筑产能（线性，每个天堂圣域增加固定比例）","p":[]},{"c":"S30","b":"S","n":"真空术","r":16,"f":"","ch":"本局拥有5000点魔上限","e":"根据本局时间增加魔上限和回魔","p":[]},{"c":"S50","b":"S","n":"咒法","r":16,"f":"地精","ch":"使用仙灵本局拥有10000魔上限","e":"每次施放法术时附加施放免费TC，免费TC施放次数由地精银行数量决定；离线施法次数*2.5","p":[]},{"c":"S105","b":"S","n":"神秘主义","r":16,"f":"","ch":"各研究分支研究点数总和达到600","e":"根据各研究分支已获得研究点数总和增加回魔","p":[]},{"c":"S135","b":"S","n":"增强","r":16,"f":"","ch":"使用仙灵本局拥有3000个灵附原野","e":"根据魔上限提升UB产能","p":[]},{"c":"S150","b":"S","n":"火系法术","r":17,"f":"","ch":"D10+A105","e":"根据回魔提升建筑层级最高的两个建筑产能","p":["D10","A105"]},{"c":"C1","b":"C","n":"练习目标","r":16,"f":"精灵","ch":"买下C分支第1个研究点数","e":"根据本局fc获得量提升训练场产能","p":[]},{"c":"C10","b":"C","n":"耕作","r":16,"f":"仙灵","ch":"本局拥有2500个灵附原野","e":"根据灵附原野数量提升旅馆和铁匠铺产能（线性，每个灵附原野提升固定比例）","p":[]},{"c":"C25","b":"C","n":"聚光器","r":16,"f":"天使","ch":"本R施法12000次","e":"根据本局施法次数提升回魔","p":[]},{"c":"C50","b":"C","n":"精炼","r":16,"f":"恶魔","ch":"使用精灵本局fc获得量达到1e9","e":"根据本局恶魔fc获得量提升焚烬之域产能","p":[]},{"c":"C80","b":"C","n":"学徒制","r":16,"f":"","ch":"本局善良立场或邪恶立场建筑总数达到16000","e":"根据本局fc获得量提升所有建筑产能，建筑层级越低加成越高","p":[]},{"c":"C105","b":"C","n":"木工","r":16,"f":"","ch":"本局点击25000次","e":"根据UB数量提升fc获得率","p":[]},{"c":"C120","b":"C","n":"打孔","r":16,"f":"","ch":"本R点击100000次","e":"根据当前拥有gem数量提升点击收益","p":[]},{"c":"C135","b":"C","n":"加固","r":16,"f":"","ch":"使用精灵本局触发100次精灵幸运","e":"根据本R内点击次数提升非UB建筑产能","p":[]},{"c":"C150","b":"C","n":"修补","r":17,"f":"","ch":"E10+C135","e":"根据研究点数提升所有建筑产能","p":["E10","C135"]},{"c":"D1","b":"D","n":"祝福","r":16,"f":"天使","ch":"买下D分支第1个研究点数","e":"根据本R内至少1个法术活跃的时间段提升天堂圣域产能","p":[]},{"c":"D10","b":"D","n":"激怒","r":16,"f":"恶魔","ch":"本局拥有2000个焚烬之域","e":"根据焚烬之域数量提升其余建筑产能（线性，每个焚烬之域提升固定比例）","p":[]},{"c":"D25","b":"D","n":"诅咒","r":16,"f":"亡灵","ch":"本R离线时间达到1小时","e":"根据离线产能加成提升所有建筑产能","p":[]},{"c":"D50","b":"D","n":"崇敬","r":16,"f":"精灵","ch":"使用天使本局拥有15000个善良立场建筑","e":"根据训练场数量提升fc获得率","p":[]},{"c":"D55","b":"D","n":"贯穿","r":16,"f":"","ch":"本局魔产量达到3e6","e":"根据本局施法次数提升点击收益","p":[]},{"c":"D135","b":"D","n":"照明","r":16,"f":"","ch":"使用天使本局回魔达到4000/秒","e":"根据当前gem数量提升回魔","p":[]},{"c":"D150","b":"D","n":"果报","r":17,"f":"","ch":"W120+D55","e":"根据研究点数增加fc获得率，fc获得率*1.5","p":["W120","D55"]},{"c":"E1","b":"E","n":"铸币","r":16,"f":"地精","ch":"买下E分支第1个研究点数","e":"根据当前建筑总数提升地精银行产能","p":[]},{"c":"E10","b":"E","n":"循环","r":16,"f":"亡灵","ch":"本局拥有2000个幽暗城","e":"根据幽暗城数量提升其余建筑产能（线性，每个幽暗城提升固定比例）","p":[]},{"c":"E25","b":"E","n":"商贸","r":16,"f":"精灵","ch":"本局获得1e8个fc","e":"根据当前拥有RE数量增加助手数量","p":[]},{"c":"E30","b":"E","n":"外交","r":16,"f":"","ch":"本局拥有1000个RE","e":"根据本局时间提升RE产能加成和fc获得率","p":[]},{"c":"E50","b":"E","n":"以物易物","r":16,"f":"仙灵","ch":"使用地精本局拥有1250个RE","e":"降低灵附原野价格上涨倍率","p":[]},{"c":"E80","b":"E","n":"普通商务","r":16,"f":"","ch":"本局拥有9000个中立立场建筑","e":"根据中立立场建筑数量提升善良/邪恶立场建筑产能","p":[]},{"c":"E135","b":"E","n":"贿赂","r":16,"f":"","ch":"使用地精本局拥有24000个建筑","e":"降低UB价格上涨倍率","p":[]},{"c":"E145","b":"E","n":"皇家需求","r":17,"f":"","ch":"本R施放50000次征税 C10+C105","e":"TC作用时间范围增加30秒","p":["C10","C105"]},{"c":"E150","b":"E","n":"转换","r":17,"f":"","ch":"E135+E25","e":"根据RE产能加成增加gem产能加成","p":["E135","E25"]},{"c":"A1","b":"A","n":"瘟疫","r":16,"f":"亡灵","ch":"买下A分支第1个研究点数","e":"根据助手数量提升幽暗城产能","p":[]},{"c":"A10","b":"A","n":"转化","r":16,"f":"地精","ch":"本局拥有2250个地精银行","e":"根据地精银行数量提升其余建筑产能","p":[]},{"c":"A25","b":"A","n":"爆燃","r":16,"f":"恶魔","ch":"本R地狱火冲击活跃时间达到6666秒","e":"地狱火冲击持续时间固定为4秒，其施法成本-400，其加成效果提升固定比例","p":[]},{"c":"A30","b":"A","n":"延迟反应","r":16,"f":"","ch":"本R仙灵吟唱活跃时间达到5000秒","e":"根据灵附原野、旅馆、铁匠铺数量总和提升仙灵吟唱持续时间；根据本局仙灵吟唱活跃时间提升自身加成效果","p":[]},{"c":"A50","b":"A","n":"镀金","r":16,"f":"天使","ch":"使用亡灵本局回魔达到750点/秒","e":"回魔高于魔上限时，根据回魔与魔上限之比提升天堂圣域产能","p":[]},{"c":"A55","b":"A","n":"折射","r":16,"f":"","ch":"本局施法25000次","e":"根据本R施法总次数提升离线产能加成","p":[]},{"c":"A105","b":"A","n":"融合","r":16,"f":"","ch":"本局拥有2750个铁匠铺","e":"根据本局fc获得量提升所有建筑产能","p":[]},{"c":"A120","b":"A","n":"苏醒","r":16,"f":"","ch":"本局魔上限达到15000","e":"根据魔上限增加助手数量","p":[]},{"c":"A135","b":"A","n":"衰变","r":16,"f":"","ch":"使用亡灵本R时间达到1小时","e":"根据本R时间提升所有建筑产能","p":[]},{"c":"A150","b":"A","n":"合成","r":17,"f":"","ch":"A25+A30","e":"根据本局fc获得量延长所有法术持续时间","p":["A25","A30"]},{"c":"W1","b":"W","n":"突击","r":16,"f":"恶魔","ch":"买下W分支第1个研究点数","e":"根据本局地狱火冲击施法次数提升焚烬之域产能","p":[]},{"c":"W10","b":"W","n":"决斗","r":16,"f":"精灵","ch":"本局拥有2000个训练场","e":"根据训练场数量提升其余建筑产能","p":[]},{"c":"W25","b":"W","n":"战争基金","r":16,"f":"地精","ch":"使用地精本局拥有1e132个钱币","e":"根据本局TC施法次数提升所有建筑产能","p":[]},{"c":"W50","b":"W","n":"努力","r":16,"f":"亡灵","ch":"使用恶魔本R邪恶立场使用时间达到1小时","e":"根据幽暗城数量提升fc获得率","p":[]},{"c":"W120","b":"W","n":"背叛","r":16,"f":"","ch":"本局获得500个基础助手","e":"根据助手数量提升非UB建筑产能","p":[]},{"c":"W135","b":"W","n":"暴走","r":16,"f":"","ch":"使用恶魔获得580个奖杯","e":"根据已获得奖杯数量增加魔上限","p":[]},{"c":"W150","b":"W","n":"侵略","r":17,"f":"","ch":"W25+W135","e":"根据助手数量提升所有建筑产能","p":["W25","W135"]}];
+var CODE = {"m": "FR1,FR5,AN5,GB3,GB7,UD7,DN2,DN4,DN9,DG2,DG4,DG8,SP:Dragon's Breath,SP:Fairy Chanting", "r": "S135,S200,S215,S330,S400,C105,C250,C330,C340,C375,C400,D250,D270,D320,D350,D1175,E145,E150,E300,E320,E425,A105,A150,A270,A305,A400,W150,W180,W200,W250,W290,W400"};
+  // 存档：切分页
+  var ms = document.getElementById('m-save');
+  ms.querySelectorAll('.chips button').forEach(function(b){ b.onclick = function(){
+    ms.querySelectorAll('.chips button').forEach(function(x){ x.classList.toggle('on', x === b); });
+    ms.querySelectorAll('.tb').forEach(function(t){ t.hidden = t.dataset.t !== b.dataset.t; });
+  }; });
+
+  // 攻略：图例筛选、已解锁、点专名
+  var mg = document.getElementById('m-guide'), tip = mg.querySelector('.tip'), tipT;
+  mg.querySelectorAll('.legend button').forEach(function(b){ b.onclick = function(){
+    if (b.hasAttribute('data-own')) { b.classList.toggle('on', mg.classList.toggle('owned')); return; }
+    var on = !b.classList.contains('on');
+    mg.querySelectorAll('.legend button[data-k]').forEach(function(x){ x.classList.toggle('on', on && x === b); });
+    mg.classList.toggle('only', on);
+    mg.querySelectorAll('.t').forEach(function(t){ t.classList.toggle('hit', on && t.classList.contains(b.dataset.k)); });
+  }; });
+  mg.querySelectorAll('.t').forEach(function(t){ t.onclick = function(){
+    tip.textContent = '程序里点它会跳到资料表：' + t.dataset.w;
+    var r = t.getBoundingClientRect(), a = mg.getBoundingClientRect();
+    tip.style.left = Math.max(8, Math.min(r.left - a.left, a.width - tip.offsetWidth - 8)) + 'px';
+    tip.style.top = (r.top - a.top - 32) + 'px';
+    tip.classList.add('on'); clearTimeout(tipT); tipT = setTimeout(function(){ tip.classList.remove('on'); }, 2000);
+  }; });
+
+  // 模板库：复制真的代码；添加、一键导入只是演示
+  var mb = document.getElementById('m-builds'), go = mb.querySelector('.go'), goT = go.querySelector('span'), goBar = go.querySelector('i'), cnt = mb.querySelectorAll('.cnt b');
+  function say(card, t){ var s = card.querySelector('.say'); s.textContent = t; clearTimeout(s._t); s._t = setTimeout(function(){ s.textContent = ''; }, 1800); }
+  function setHas(card, has){ card.querySelector('[data-a=add]').hidden = has; card.querySelector('.has').hidden = !has; }
+  mb.querySelectorAll('[data-a]').forEach(function(b){ b.onclick = function(){
+    var card = b.closest('.tp');
+    if (b.dataset.a === 'copy') {
+      var code = CODE[card.dataset.code];
+      (navigator.clipboard ? navigator.clipboard.writeText(code) : Promise.reject()).then(function(){ say(card, '已复制'); }, function(){ say(card, '没能复制'); });
+    } else { say(card, '已添加'); setHas(card, true); var c = cnt[card.dataset.code === 'm' ? 0 : 1]; c.textContent = +c.textContent + 1; }
+  }; });
+  go.onclick = function(){
+    if (go.classList.contains('busy') || go.classList.contains('done')) return;
+    go.classList.add('busy'); var n = 0;
+    (function step(){
+      n++; goT.textContent = '正在导入 ' + n + ' / 10…'; goBar.style.width = n * 10 + '%';
+      if (n < 10) return setTimeout(step, 150);
+      setTimeout(function(){
+        go.classList.remove('busy'); go.classList.add('done'); goBar.style.width = 0;
+        goT.textContent = 'R75 的模板游戏里都有了';
+        cnt[0].textContent = 20; cnt[1].textContent = 35;
+        mb.querySelectorAll('.tp').forEach(function(c){ setHas(c, true); });
+      }, 250);
+    })();
+  };
+  mb.querySelector('.re').onclick = function(){
+    if (go.classList.contains('busy')) return;
+    go.classList.remove('done'); goT.textContent = '一键导入 R75 的模板（10 条）';
+    cnt[0].textContent = 14; cnt[1].textContent = 31;
+    mb.querySelectorAll('.tp').forEach(function(c){ setHas(c, false); });
+  };
+
+  // 研究页
+  var mr = document.getElementById('m-rs'), BR = [['S','法术学','#7c5cd6'],['C','工艺','#d0622b'],['D','神圣','#c9930a'],['E','经济学','#1f9d55'],['A','炼金术','#0e8aa8'],['W','战术','#d9434b']];
+  var LOCK = {C150: 1, D150: 1, W150: 1, A150: 1}, UNL = {E150: 1, S150: 1, A135: 1};
+  function st(d){ return LOCK[d.c] ? 'lock' : UNL[d.c] ? 'unl' : 'own'; }
+  var leg = mr.querySelector('.rs-leg'), grid = mr.querySelector('.rs-grid'), det = mr.querySelector('.rs-det'), inn = mr.querySelector('.rs-in'), rq = mr.querySelector('input');
+  var only = null, sel = null, cells = {}, byC = {};
+  RS.forEach(function(d){ byC[d.c] = d; });
+  function color(b){ return BR.filter(function(x){ return x[0] === b; })[0]; }
+  leg.innerHTML = BR.map(function(b){ return '<button data-b="' + b[0] + '"><i style="background:' + b[2] + '"></i>' + b[1] + '</button>'; }).join('');
+  [[16, 'ASCENSION 0'], [17, 'R17 · 组合研究']].forEach(function(e){
+    var html = '<div class="rs-era">' + e[1] + '</div><div class="rs-row">';
+    BR.forEach(function(b){
+      html += '<div class="rs-col">' + RS.filter(function(d){ return d.r === e[0] && d.b === b[0]; }).map(function(d){
+        return '<button class="rs-c ' + st(d) + '" data-c="' + d.c + '"><b class="code" style="color:' + b[2] + '">' + d.c + '</b><span>' + d.n + '</span></button>';
+      }).join('') + '</div>';
+    });
+    grid.insertAdjacentHTML('beforeend', html + '</div>');
+  });
+  grid.querySelectorAll('.rs-c').forEach(function(c){ cells[c.dataset.c] = c; });
+  function filt(){
+    var k = rq.value.trim().toLowerCase();
+    RS.forEach(function(d){
+      var ok = (!only || d.b === only) && (!k || (d.c + d.n + d.ch + d.e + d.f).toLowerCase().indexOf(k) >= 0);
+      cells[d.c].classList.toggle('dim', !ok);
+    });
+  }
+  var STATE = {own: '已购买', unl: '已解锁，还没买', lock: '还没解锁'};
+  function pick(c){
+    Object.keys(cells).forEach(function(k){ cells[k].classList.remove('sel', 'pre'); });
+    if (!c || c === sel) { sel = null; det.classList.remove('on'); return; }
+    sel = c; var d = byC[c], b = color(d.b);
+    cells[c].classList.add('sel'); d.p.forEach(function(p){ cells[p] && cells[p].classList.add('pre'); });
+    inn.innerHTML = '<div class="h"><b class="code" style="color:' + b[2] + '">' + d.c + '</b><b>' + d.n + '</b><span style="color:#9aa5b8;font-size:12px">' + b[1] + (d.f ? ' · ' + d.f : '') + ' · ' + STATE[st(d)] + '</span><button class="x" aria-label="关闭">×</button></div>' +
+      '<dl><dt>条件</dt><dd>' + d.ch + '</dd><dt>效果</dt><dd>' + d.e + '</dd>' +
+      (d.p.length ? '<dt>组合</dt><dd class="pre">' + d.p.map(function(p){ return '<button data-c="' + p + '"><b class="code" style="color:' + color(byC[p].b)[2] + '">' + p + '</b>' + byC[p].n + '</button>'; }).join('') + '</dd>' : '') + '</dl>';
+    det.classList.add('on');
+  }
+  grid.onclick = function(e){ var c = e.target.closest('.rs-c'); if (c) pick(c.dataset.c); };
+  inn.onclick = function(e){ var b = e.target.closest('button'); if (!b) return; if (b.classList.contains('x')) pick(null); else { sel = null; pick(b.dataset.c); } };
+  leg.onclick = function(e){ var b = e.target.closest('button'); if (!b) return; only = only === b.dataset.b ? null : b.dataset.b; leg.querySelectorAll('button').forEach(function(x){ x.classList.toggle('on', x.dataset.b === only); }); filt(); };
+  rq.oninput = filt;
+  // 滚到时进度条和点数一起涨
+  var rp = mr.querySelector('.rp'), rsSeen = false;
+  function rsGo(){ if (rsSeen) return; rsSeen = true; mr.querySelector('.rs-bar i').style.width = (528 / 780 * 100) + '%'; rp.dataset.n = 528; count(rp); }
+  if (mr.classList.contains('seen')) rsGo();
+  else new MutationObserver(function(){ if (mr.classList.contains('seen')) rsGo(); }).observe(mr, {attributes: true, attributeFilter: ['class']});
 
   document.getElementById('menu').onclick = function(){ document.body.classList.toggle('nav'); };
   var log = document.getElementById('log'), more = document.getElementById('more');
