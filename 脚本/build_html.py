@@ -35,7 +35,7 @@ SHEETS = {1: ('阵营', '阵营升级、遗产、UB、血统、世系、契印�
           3: ('挑战', '挑战（Challenge）'), 4: ('UB 分布', 'UB 分布'), 5: ('研究', '研究（Research）'),
           6: ('建筑升级', '建筑升级（产能加成部分忽略 Ascension 惩罚）'), 7: ('隐藏奖杯', '隐藏奖杯（Secret Trophy）'),
           8: ('活动', '活动（Event）'), 10: ('遗物', '遗物（Artifact）')}
-BARE_SHEETS = {2, 4, 8}  # 不套滚动框的表格页
+BARE_SHEETS = {2, 4}  # 不套滚动框的表格页
 # 各类专名优先在哪些表里找
 PREFER = {'阵': [1, 3], '法': [1, 8], '升': [1, 6, 3, 5, 2], '建': [6, 4, 1], '隐': [7], '奖': [7, 1, 3],
           '研': [5], '挑': [3], '遗': [10]}
@@ -43,9 +43,20 @@ ALIAS = {'TC': '征税', 'CtA': '动员令', 'HoL': '传说圣殿', 'BF': '嗜�
 # 遗物表里阵营遗物按全阶英豪奖杯的顺序排，每个阵营两个
 ART_FACTIONS = ['仙灵', '精灵', '天使', '地精', '亡灵', '恶魔', '泰坦', '德鲁伊', '无面者', '矮人', '卓尔', '佣兵']
 # 程序版本：改了功能就加版本号，在 CHANGES 最前面写这一版改了什么
-VERSION = '0.5.2'  # 还没到正式发布，用 0.x（用户要求）
+VERSION = '0.5.4'  # 还没到正式发布，用 0.x（用户要求）
 AUTHOR = 'Yalosaws'
 CHANGES = [
+    ('0.5.4', '2026-10-29', [
+        '活动页重做：顶上选活动，下面分资源、法术、升级、任务奖杯、壮举奖杯、特殊升级几段；活动阵营升级排成「阶层 × 阵营」的格子，4.2.1 起新增的壮举归到各自活动里',
+    ]),
+    ('0.5.3', '2026-10-27', [
+        '构筑辅助可读取游戏计算快照：同步研究、升级、统计、建筑与法术状态，每次实时试算前重新读取；沿用客户端缓存与游戏帧时钟',
+        '新增实时读数验证入口：只读游戏进程中的金币、魔力、建筑数量与法术状态，可手动开始、停止，离开页面自动停止',
+        '存档改用文件变化通知，游戏保存后立即同步；合并重复通知并校验写入完整性，不再额外等待 10 秒轮询',
+        '新增构筑辅助：按当前存档查询升级自身效果，并在内存副本中试买建筑、升级和施放法术，比较实际产出变化',
+        '构筑试算复用内存状态和客户端缓存，避免每次重建整个游戏；同一存档的重复查询与试算直接复用结果',
+        '研究页的代号标签按分支着色，和存档页的标记颜色统一；已解锁只显示右上角的勾，不再把标签染成蓝底',
+    ]),
     ('0.5.2', '2026-10-27', [
         '模板库可以按阶段一键导入：按当前 R（或筛选里填的 R）把这个阶段游戏里还没有的佣兵和研究模板一次加进游戏（名字没写 R 的也算）',
         'A1 攻略要点改正龙族解锁的条件：孵化！只是固定等 2 小时，地狱火冲击 2 小时是下一步小龙的要求',
@@ -570,7 +581,7 @@ RS_JS = r"""<script>(function(){
     $('rpbar').style.width = (c / top * 100) + '%';
   }
   function cell(x){
-    return '<div class="rs-c st-' + ST[x.code] + (bought(x.code) ? ' bought' : '') + '" id="' + x.id + '" data-c="' + x.code + '"><div class="rs-cd"><em>' + x.code + '</em>' +
+    return '<div class="rs-c st-' + ST[x.code] + (bought(x.code) ? ' bought' : '') + '" id="' + x.id + '" data-c="' + x.code + '"><div class="rs-cd"><em style="--bc:' + HEX[x.b] + '">' + x.code + '</em>' +
       '</div><div class="rs-nm">' + esc(x.zh) + '</div></div>';
   }
   // 时间线：一行一个 R（最早能解锁的 R），七个分支一列一个；R 不单独标，看 Ascension 分隔线和「你在这里」
@@ -616,7 +627,7 @@ RS_JS = r"""<script>(function(){
   function laneEl(c){ return !c ? null : big && big.dataset.c === c && big.isConnected ? big : slotEl(c); }
   function bigHtml(x){
     // 内容包一层 rs-bi 来裁剪（高度过渡时不漏出来），卡片本身不裁，角上的勾才能一直露在外面
-    return '<div class="rs-bi"><div class="rs-cd"><em>' + x.code + '</em>' +
+    return '<div class="rs-bi"><div class="rs-cd"><em style="--bc:' + HEX[x.b] + '">' + x.code + '</em>' +
       '<button class="rs-x" title="收起"><svg viewBox="0 0 10 10"><path d="M0 0l10 10M10 0L0 10"/></svg></button></div>' +
       '<div class="rs-nm">' + esc(x.zh) + '</div><div class="rs-det">' + detHtml(x) + '</div></div>';
   }
@@ -907,6 +918,232 @@ BD_JS = """<script>(function(){
 })();</script>"""
 
 
+# 活动表的各段（行号范围）：资源、法术、升级、任务奖杯、壮举奖杯、特殊升级；表末尾是 4.2.1 起新增的壮举
+EV_BANDS = [('活动资源', 2, 9), ('活动法术', 10, 12), ('活动升级', 13, 28), ('任务奖杯', 29, 46), ('壮举奖杯', 47, 57), ('活动特殊升级', 58, 60)]
+
+
+def build_events(ws, imgs):
+    """活动表 → 顶上选活动，下面只看这个活动：资源、法术、升级、任务奖杯、壮举奖杯、特殊升级几段。
+    表里每个活动占几列、各段格局不一样：阵营类升级排成「阶层 × 阵营」的格子，其余按行读成标题 / 说明 / 小表。
+    带名字的元素 id 仍是原格子（t8-C29 这样），存档页、攻略的链接照旧能跳过来。"""
+    cov = merged_value(ws).covered
+    span = {(rg.min_row, rg.min_col): (rg.max_row, rg.max_col) for rg in ws.merged_cells.ranges}
+    raw = lambda r, c: '' if (r, c) in cov else text_of(ws.cell(r, c).value).strip()
+    ref = lambda r, c: 't8-%s%d' % (get_column_letter(c), r)
+    esc = lambda v, cid='': TERMS.render(v, cid)
+
+    def pic(v):
+        m = re.match(r'^=_xlfn\.DISPIMG\("(ID_[0-9A-F]+)"', v)
+        return '<img alt="" src="%s">' % imgs[m.group(1)] if m and m.group(1) in imgs else ''
+
+    def zh_en(v):
+        """「English\\n中文（括注）」→（中文, 英文, 括注）"""
+        ls = [l.strip() for l in SPLIT.split(v) if l.strip()]
+        if len(ls) >= 2 and not CJK.search(ls[0]):
+            en, zh = ls[0], ' '.join(ls[1:])
+        elif ls and not CJK.search(ls[0]):
+            en, zh = ls[0], ls[0]
+        else:
+            en, zh = '', ' '.join(ls)
+        m = re.match(r'^(.+?)[（(]([^）)]*)[）)]$', zh)
+        return (m.group(1), en, m.group(2)) if m else (zh, en, '')
+
+    def is_name(v):
+        ls = [l for l in SPLIT.split(v) if l.strip()]  # 名称格都是「English↵中文」
+        if re.fullmatch(r"[A-Z][A-Za-z '’!-]{2,40}", v):  # 只有英文名（Spare Green Hands）
+            return True
+        return bool(ls) and bool(SPLIT.search(v)) and not CJK.search(ls[0]) and len(v) < 60 and not re.search(r'[：:，,。]', v)
+
+    def head(v, tag='b'):
+        zh, en, note = zh_en(v)
+        return '<%s>%s</%s>%s%s' % (tag, html.escape(zh), tag, '<span class="en">%s</span>' % html.escape(en) if en and en != zh else '',
+                                    '<em>%s</em>' % html.escape(note) if note else '')
+
+    def tile(r, c, desc_rc, icon=''):
+        cid = ref(r, c)
+        d = raw(*desc_rc) if desc_rc else ''
+        return '<div class="ev-t ev-i" id="%s">%s<div><div class="ev-th">%s</div>%s</div></div>' % (
+            cid, icon or '<i></i>', head(raw(r, c)), '<p>%s</p>' % esc(d, cid) if d else '')
+
+    def walk(r0, r1, c0, c1, skip=()):
+        """按行读：一格的行是标题或说明，几格的行是小表（全是短中文的那行当表头）"""
+        out, rows = [], []
+
+        def flush():
+            if rows:
+                n = max(len(x[1]) for x in rows)
+                cols = 'grid-template-columns:minmax(0,.8fr)' + ' minmax(0,1.4fr)' * (n - 1)
+                out.append('<div class="ev-tb">%s</div>' % ''.join(
+                    '<div class="ev-tr%s" style="%s"%s>%s</div>' % (' ev-th' if th else ' ev-i', cols, '' if th else ' id="%s"' % rid,
+                                                       ''.join('<span>%s%s</span>' % (ic if k == 0 else '', html.escape(v) if th else (head(v) if k == 0 and is_name(v) else esc(v, rid)))
+                                                               for k, v in enumerate(vals)))
+                    for th, vals, rid, ic in rows))
+                rows.clear()
+        for r in range(r0, r1 + 1):
+            cells = [(c, raw(r, c)) for c in range(c0, c1 + 1) if (r, c) not in skip and raw(r, c)]
+            texts = [(c, v) for c, v in cells if not v.startswith('=_xlfn.DISPIMG')]
+            ic = ''.join(pic(v) for _, v in cells if v.startswith('=_xlfn.DISPIMG'))
+            if not texts:
+                continue
+            if len(texts) == 1 and not ic:
+                flush()
+                c, v = texts[0]
+                if is_name(v) or (len(v) <= 12 and not re.search(r'[：:，,。；]', v)):
+                    out.append('<h4 class="ev-h4 ev-i" id="%s">%s</h4>' % (ref(r, c), head(v)))
+                else:
+                    out.append('<p class="ev-note">%s</p>' % esc(v))
+                continue
+            th = not ic and all(len(v) <= 6 and CJK.search(v) and not re.search(r'\d', v) for _, v in texts)
+            if th:
+                flush()
+            rows.append((th, [v for _, v in texts], ref(r, texts[0][0]), ic))
+        flush()
+        return ''.join(out)
+
+    def item(v, cid):
+        if is_name(v):
+            return '<div class="ev-nm" id="%s">%s</div>' % (cid, head(v))
+        m = re.match(r'^(价格|要求|条件)[：:]\s*(.*)$', v, re.S)
+        if m:
+            return '<div class="ev-req"><small>%s</small>%s</div>' % (m.group(1), esc(m.group(2)))
+        return '<div class="ev-fx">%s</div>' % esc(v, cid)
+
+    def matrix(r0, r1, c0, c1):
+        """阵营类升级：左边是阶层，每个阵营一列；跨几个阵营的合并格每列都显示"""
+        hr = next((r for r in (r0, r0 + 1) if sum(1 for c in range(c0 + 1, c1 + 1) if is_name(raw(r, c))) >= 2), None)
+        if hr is None and not any(re.search('阶', raw(r, c0)) for r in range(r0, r1 + 1)):
+            return None
+        facs = [c for c in range(c0 + 1, c1 + 1) if raw(hr, c)] if hr else [c0 + 1]
+        bounds = [(c, (facs[k + 1] - 1) if k + 1 < len(facs) else c1) for k, c in enumerate(facs)]
+        corner = raw(hr, c0) if hr else ''
+        starts = [r for r in range((hr or r0 - 1) + 1, r1 + 1) if raw(r, c0)]
+        blocks = []
+        for k, r in enumerate(starts):
+            end = (starts[k + 1] - 1) if k + 1 < len(starts) else r1
+            blocks.append([r, end, raw(r, c0)])
+        # 紧挨着下一阶、只有名字的一行（理想墟的「秩序残骸加成」）归到下一阶
+        for k in range(len(blocks) - 1):
+            r = blocks[k][1]
+            vals = [raw(r, c) for c in range(c0 + 1, c1 + 1) if raw(r, c)]
+            if vals and r > blocks[k][0] and all(is_name(v) for v in vals):
+                blocks[k][1] -= 1
+                blocks[k + 1][0] = r
+        out = ['<div class="ev-mx" style="grid-template-columns:76px repeat(%d,minmax(0,1fr))">' % len(facs)]
+        if hr:
+            out.append('<div class="ev-mc ev-corner">%s</div>' % html.escape(corner))
+            out.extend('<div class="ev-mc ev-fh ev-i" id="%s">%s</div>' % (ref(hr, c), head(raw(hr, c))) for c in facs)
+        notes = []
+        for b0, b1, label in blocks:
+            per = [[] for _ in facs]
+            for r in range(b0, b1 + 1):
+                for c in range(c0 + 1, c1 + 1):
+                    v = raw(r, c)
+                    if not v:
+                        continue
+                    ce = span.get((r, c), (r, c))[1]
+                    for k, (fa, fb) in enumerate(bounds):
+                        if c <= fb and ce >= fa:
+                            per[k].append(item(v, ref(r, c)))
+            if not any(per):
+                notes.append(label)
+                continue
+            if re.fullmatch(r'\d+', label):
+                label = '等级 ' + label
+            elif re.fullmatch(r'[一二三四五]', label):
+                label += '阶'
+            out.append('<div class="ev-mc ev-tier">%s</div>' % html.escape(label))
+            out.extend('<div class="ev-mc">%s</div>' % (''.join(p) or '<span class="nil">—</span>') for p in per)
+        out.append('</div>')
+        return ''.join(out) + ''.join('<p class="ev-note">%s</p>' % esc(n) for n in notes)
+
+    def quests(r0, r1, c0, c1):
+        out = []
+        for r in range(r0, r1 + 1):
+            for c in range(c0, c1 + 1):
+                if raw(r, c) != '阶段':
+                    continue
+                cols = {raw(r, x): x for x in range(c, c1 + 1) if raw(r, x)}
+                lines = []
+                rr = r + 1
+                while rr <= r1 and re.fullmatch(r'\d+', raw(rr, c)):
+                    bonus = ws.cell(rr, cols.get('永久产能加成', c)).value
+                    bonus = '+%g%%' % (bonus * 100) if isinstance(bonus, (int, float)) else text_of(bonus)
+                    lines.append('<div class="ev-qr"><b>%s</b><span>%s</span><em>%s</em></div>' % (
+                        raw(rr, c), esc(raw(rr, cols.get('目标', c + 1))), html.escape(bonus)))
+                    rr += 1
+                out.append('<div class="ev-q ev-i" id="%s"><div class="ev-th">%s</div>%s</div>' % (ref(r - 1, c), head(raw(r - 1, c)), ''.join(lines)))
+        return '<div class="ev-qs">%s</div>' % ''.join(out) if out else ''
+
+    def feats(r0, r1, c0, c1, extra):
+        groups, last = {}, None
+        for r in range(r0, r1 + 1):
+            cells = [(c, raw(r, c)) for c in range(c0, c1 + 1) if raw(r, c)]
+            if not cells:
+                continue
+            texts = [(c, v) for c, v in cells if not v.startswith('=_xlfn.DISPIMG')]
+            if texts and texts[0][1].startswith('同名升级效果') and last:
+                last[2].append(('同名升级', re.sub(r'^同名升级效果[：:]\s*', '', texts[0][1])))
+                continue
+            if not texts or not is_name(texts[0][1]):
+                continue
+            img = next((v for _, v in cells if v.startswith('=_xlfn.DISPIMG')), None)
+            g = text_of(ws.cell(*next(((rg.min_row, rg.min_col) for rg in ws.merged_cells.ranges
+                                         if rg.min_col == 2 and rg.min_row <= r <= rg.max_row), (r, 2))).value).strip()
+            last = [ref(r, texts[0][0]), img, [('条件', texts[1][1] if len(texts) > 1 else '')], texts[0][1]]
+            groups.setdefault(g, []).append(last)
+        for x in extra:
+            groups.setdefault('4.2.1 起新增', []).append(x)
+        out = []
+        for g, xs in groups.items():
+            if g:
+                out.append('<h4 class="ev-h4">%s</h4>' % html.escape(g))
+            out.append('<div class="ev-fs">%s</div>' % ''.join(card(cid, en, img, imgs, zh, en if en != zh else '', '', fields, note)
+                                                           for cid, img, fields, name in xs for zh, en, note in [zh_en(name)]))
+        return ''.join(out)
+
+    starts = [c for c in range(3, ws.max_column + 1) if raw(1, c)]
+    extra_rows = [r for r in range(64, ws.max_row + 1) if raw(r, 1) and raw(r, 3)]
+    tail = next((raw(r, 1) for r in range(ws.max_row, 60, -1) if raw(r, 1).startswith('注')), '')
+    tabs, panels = [], []
+    for k, c0 in enumerate(starts):
+        c1 = (starts[k + 1] - 1) if k + 1 < len(starts) else ws.max_column
+        zh, en, _ = zh_en(raw(1, c0))
+        cid = ref(1, c0)
+        secs = []
+        for title, r0, r1 in EV_BANDS:
+            body = ''
+            if title == '活动资源':
+                res = [c for c in range(c0, c1 + 1) if raw(2, c)]
+                body = '<div class="ev-ts">%s</div>' % ''.join(tile(2, c, (4, c), pic(raw(3, c))) for c in res) if res else ''
+                body += walk(5, r1, c0, c1)
+            elif title in ('活动法术', '活动特殊升级'):
+                ns = [c for c in range(c0, c1 + 1) if raw(r0, c)]
+                body = '<div class="ev-ts">%s</div>' % ''.join(tile(r0, c, (r0 + 2, c), pic(raw(r0 + 1, c))) for c in ns) if ns else ''
+            elif title == '活动升级':
+                body = matrix(r0, r1, c0, c1)
+                if body is None:
+                    body = walk(r0, r1, c0, c1)
+            elif title == '任务奖杯':
+                body = quests(r0, r1, c0, c1)
+            else:
+                extra = [(ref(r, 3), None, [('条件', raw(r, 8)), ('解锁', raw(r, 17))], raw(r, 3)) for r in extra_rows
+                         if zh_en(raw(r, 1))[1] == en]
+                body = feats(r0, r1, c0, c1, extra)
+            if body:
+                secs.append((title, body))
+        icon = next((pic(raw(r, c)) for r in (3, 59) for c in range(c0, c1 + 1) if pic(raw(r, c))), '')
+        tabs.append('<button data-p="%s">%s%s</button>' % (cid, icon, html.escape(zh)))
+        panels.append('<div class="bd-p ev-p" id="%s" hidden><div class="bd-h ev-hd"><b>%s</b><span class="en">%s</span></div>%s</div>' % (
+            cid, html.escape(zh), html.escape(en),
+            ''.join('<div class="ev-sec" data-s="%d"><h3 class="ev-st">%s</h3>%s</div>' % (i, t, b) for i, (t, b) in enumerate(secs))))
+    return ('<div class="bd-page ev-page"><div class="bd-tabs ev-tabs">%s</div>%s%s</div>' % (''.join(tabs), ''.join(panels),
+            '<p class="bd-note">%s</p>' % esc(tail) if tail else '') + EV_JS)
+
+
+# 活动页：和建筑升级页一样点活动切换（记住上次看的活动）
+EV_JS = BD_JS.replace("'.bd-page'", "'.ev-page'").replace("'rg-bd'", "'rg-ev'")
+
+
 def build_sheet(n, ws, imgs, index, cells):
     merged, covered = {}, set()
     for rg in ws.merged_cells.ranges:
@@ -970,7 +1207,7 @@ def build_sheet(n, ws, imgs, index, cells):
             tds.append('<td%s>%s</td>' % (attrs, body))
         rows.append('<tr>' + ''.join(tds) + '</tr>')
     # 固定列宽的表要给出总宽度，否则会被压到窗口宽
-    # 传承、UB 分布、活动不套带边框的滚动框：上下跟着页面滚，表格太宽时只在表格这一块里左右滚（用户要求）
+    # 传承、UB 分布不套带边框的滚动框：上下跟着页面滚，表格太宽时只在表格这一块里左右滚（用户要求）
     wrap = 'wrap bare' if n in BARE_SHEETS else 'wrap'
     return '<div class="%s"><table class="sheet" style="width:%dpx"><colgroup>%s</colgroup>%s</table></div>' % (wrap, total, ''.join(cols), ''.join(rows))
 
@@ -1037,7 +1274,8 @@ def main():
     for code, (n, ref) in challenge.items():
         if re.fullmatch(r'[A-Z]{2}C\d', code):
             TERMS.codes[code] = ('挑', 't%d-%s' % (n, ref))
-    card_pages = {10: lambda ws: build_artifacts(ws, imgs), 7: lambda ws: build_trophies(ws, imgs), 3: build_challenges, 5: build_research, 6: build_buildings}
+    card_pages = {10: lambda ws: build_artifacts(ws, imgs), 7: lambda ws: build_trophies(ws, imgs), 3: build_challenges, 5: build_research, 6: build_buildings,
+                  8: lambda ws: build_events(ws, imgs)}
     for n, f in card_pages.items():
         sections[n] = f(wb.worksheets[n - 1])  # 第一遍只登记卡片名（还没染色）
     # 攻略里标过的专名（两个字的也算）；指向卡片页的等卡片 id 定下来以后再登记，见下面 find
@@ -1115,14 +1353,23 @@ def main():
     save_js, save_miss = '', []
     if os.path.isdir(save_tools.RG):
         save_html, save_js, save_miss = save_tools.build(find, {'t%d-%s' % c: code for code, c in research.items()})
-        nav = item('save', '我的存档') + item('rws', '法术预报') + item('arch', '遗物预测') + nav
+        nav = item('save', '我的存档') + item('live', '实时读数') + item('calc', '构筑辅助') + item('rws', '法术预报') + item('arch', '遗物预测') + nav
         page('save', save_html)
     else:
+        # 实时读数和构筑辅助的游戏快照不依赖存档库，页面照常生成，入口也要保留。
+        nav = item('live', '实时读数') + item('calc', '构筑辅助') + nav
         print('没有 工具/RG-tools，跳过「我的存档」（git clone https://github.com/shadowgull/dox4242.github.io 工具/RG-tools）')
     nav = '<div class="grp">工具</div>' + nav
+    page('calc', open(os.path.join(ROOT, '脚本', 'build_tools.html'), encoding='utf-8').read())
+    page('live', open(os.path.join(ROOT, '脚本', 'live_tools.html'), encoding='utf-8').read())
+    parts.append(('js/live.js', open(os.path.join(ROOT, '脚本', 'live_tools.js'), encoding='utf-8').read()))
+    parts.append(('css/build.css', open(os.path.join(ROOT, '脚本', 'build_tools.css'), encoding='utf-8').read()))
+    parts.append(('js/build.js', open(os.path.join(ROOT, '脚本', 'build_tools.js'), encoding='utf-8').read()))
     nav += '<div class="grp">关于</div>' + item('ver', '版本 ' + VERSION)
     page('ver', version_page())
-    body = ''.join('<!--#include %s-->' % f if f.startswith('pages/') else '<script src="%s"></script>' % f for f, _ in parts)
+    # 构筑与实时脚本在外壳末尾（存档库之后）载入一次；CSS 不能作为脚本插入正文。
+    body = ''.join('<!--#include %s-->' % f if f.startswith('pages/') else '<script src="%s"></script>' % f
+                   for f, _ in parts if f.startswith('pages/') or (f.endswith('.js') and f not in ('js/build.js', 'js/live.js')))
     shell = TEMPLATE.replace('%%NAV%%', nav).replace('%%BODY%%', body)
     parts.append(('css/app.css', APP_CSS.replace('%%TCOLORS%%', md2html.CSS[md2html.CSS.index('.t-sp'):md2html.CSS.index('[class^')])))
     parts.append(('js/app.js', APP_JS))
@@ -1224,6 +1471,7 @@ TEMPLATE = r"""<!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>RGA</title>
 <link rel="stylesheet" href="css/app.css">
+<link rel="stylesheet" href="css/build.css">
 </head><body>
 %%APPBAR%%
 <aside class="side pywebview-drag-region"><div class="brand">%%ICON%%RGA</div><input id="q" type="search" placeholder="搜索表格…"><nav class="pywebview-drag-region">%%NAV%%</nav></aside>
@@ -1232,6 +1480,8 @@ TEMPLATE = r"""<!doctype html>
 <button id="back" hidden>← 返回</button>
 <script src="js/app.js"></script>
 <script src="js/save.js"></script>
+<script src="js/build.js"></script>
+<script src="js/live.js"></script>
 </body></html>
 """
 
@@ -1371,8 +1621,7 @@ td.flash{outline:3px solid #f59e0b;outline-offset:-2px;background:var(--flash)!i
   scroll-margin:90px;transition:border-color .2s,background 1.5s,opacity .25s,box-shadow .3s,padding .45s cubic-bezier(.2,.8,.2,1),transform .45s cubic-bezier(.2,.8,.2,1),width .45s cubic-bezier(.2,.8,.2,1)}
 .rs-c:hover{border-color:#cdd9ee}
 .rs-cd{display:flex;align-items:center;gap:4px;margin-bottom:1px}
-.rs-cd em{font-style:normal;font-size:11px;color:#1d4ed8;background:var(--soft);border-radius:6px;padding:0 6px;white-space:nowrap}
-.rs-c.bought .rs-cd em{color:#fff;background:var(--blue)}
+.rs-cd em{font-style:normal;font-size:11px;font-weight:600;color:var(--bc,#1d4ed8);background:color-mix(in srgb,var(--bc,#2563eb) 12%,#fff);border-radius:6px;padding:0 6px;white-space:nowrap}
 .rs-c.st-own::after{content:"✓";position:absolute;right:-5px;top:-5px;width:15px;height:15px;border-radius:50%;background:var(--blue);color:#fff;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 2px #fff}
 .rs-c.st-can{border-color:#bcd0f7;background:#f8faff}
 .rs-c.st-no{opacity:.5}
@@ -1459,6 +1708,52 @@ td.flash{outline:3px solid #f59e0b;outline-offset:-2px;background:var(--flash)!i
 .bd-sub{font-size:15px;font-weight:600;margin:24px 2px 6px}
 .bd-note{margin:18px 2px 0;font-size:12.5px;color:var(--muted)}
 .bd-page .nil{color:#c9d1dd}
+/* 活动：选活动看一个，分段（资源 / 法术 / 升级 / 任务 / 壮举 / 特殊升级） */
+.ev-tabs button{display:inline-flex;align-items:center;gap:6px}
+.ev-tabs button img{width:20px;height:20px;object-fit:contain;margin-left:-7px}
+.ev-sec{margin-top:24px}
+.ev-st{font-size:15.5px;margin:0 2px 10px;padding-left:10px;border-left:3px solid var(--blue);line-height:1.3}
+.ev-page em{font-style:normal;font-size:11.5px;color:#1d4ed8;background:var(--soft);border-radius:6px;padding:0 7px}
+.ev-page .en{font-size:12px;color:#9aa5b8}
+.ev-th,.ev-nm,.ev-fh,.ev-h4{display:flex;align-items:baseline;flex-wrap:wrap;gap:2px 8px}
+.ev-ts{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:10px}
+.ev-qs{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px}
+.ev-t,.ev-q{border:1px solid var(--line);border-radius:16px;padding:12px 14px;scroll-margin:80px;transition:background 1.5s,border-color .2s}
+.ev-t:hover,.ev-q:hover{border-color:#cdd9ee}
+.ev-t{display:flex;gap:14px}
+.ev-t>img,.ev-t>i{width:44px;height:44px;flex:none;object-fit:contain;border-radius:10px;background:var(--soft)}
+.ev-t>div{min-width:0}
+.ev-th b{font-size:14.5px}
+.ev-t p{margin:4px 0 0;font-size:13px;color:#3d4a5f}
+.ev-h4{font-size:13.5px;margin:16px 2px 8px;scroll-margin:80px}
+.ev-note{font-size:12.5px;color:var(--muted);margin:10px 0 0;padding:8px 14px;background:var(--soft);border-radius:12px}
+.ev-tb{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:8px}
+.ev-tr{display:grid;gap:16px;align-items:center;padding:7px 14px;border-bottom:1px solid var(--line);font-size:13px;color:#3d4a5f;scroll-margin:80px;transition:background 1.5s}
+.ev-tr:last-child{border-bottom:none}
+.ev-tr.ev-th{display:grid;background:var(--soft);font-size:11.5px;color:var(--muted);padding:5px 14px}
+.ev-tr>span{display:flex;align-items:center;flex-wrap:wrap;gap:2px 8px;min-width:0}
+.ev-tr b{color:var(--fg)}
+.ev-tr img{width:24px;height:24px;object-fit:contain}
+.ev-mx{display:grid;gap:8px}
+.ev-mc{border:1px solid var(--line);border-radius:14px;padding:10px 12px;font-size:13px;color:#3d4a5f;min-width:0}
+.ev-corner,.ev-tier{border:none;padding:10px 2px;font-size:12px;color:#9aa5b8}
+.ev-tier{color:var(--fg);font-weight:600;font-size:13px}
+.ev-fh{background:var(--soft);border-color:transparent;scroll-margin:80px;transition:background 1.5s}
+.ev-fh b{font-size:14px}.ev-fh em{background:#fff}
+.ev-nm{scroll-margin:80px;transition:background 1.5s;border-radius:6px}
+.ev-nm b{font-size:13.5px;color:var(--fg)}
+.ev-nm~.ev-nm{margin-top:8px}
+.ev-req{margin-top:4px;font-size:12.5px}.ev-req small{color:#9aa5b8;margin-right:6px}
+.ev-fx{margin-top:4px}
+.ev-qr{display:grid;grid-template-columns:20px minmax(0,1fr) auto;gap:10px;align-items:baseline;font-size:13px;color:#3d4a5f;padding:5px 0 0;margin-top:5px;border-top:1px dashed var(--line)}
+.ev-qr b{width:20px;height:20px;border-radius:50%;background:var(--soft);color:#1d4ed8;font-size:11.5px;display:flex;align-items:center;justify-content:center;align-self:center}
+.ev-qr em{background:#e8f7ee!important;color:#15803d!important}
+.ev-fs{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:10px}
+.ev-fs .art{margin:0;padding:12px 14px;gap:14px}.ev-fs .art>img,.ev-fs .art>i{width:44px;height:44px}
+.ev-fs .art-f{grid-template-columns:1fr!important;gap:4px}
+.ev-fs .art-f>div{position:relative;padding-left:60px}.ev-fs .art-f small{position:absolute;left:0;top:2px}
+.ev-i.flash,.ev-nm.flash,.ev-fh.flash{background:var(--flash)}
+@media (max-width:900px){.ev-mx,.ev-tr{grid-template-columns:1fr!important}.ev-corner{display:none}}
 /* 已获得 / 未获得（读到存档后才出现）：已获得图标描蓝边带勾，未获得变灰，鼠标移上去恢复 */
 /* 一个小胶囊，往下滚时浮在内容上面（带阴影），不占满整行 */
 .own-bar{display:flex;align-items:center;gap:14px;height:36px;box-sizing:border-box;padding:0 16px 0 4px;
@@ -1640,7 +1935,7 @@ APP_JS = r"""(function(){
   show();
   // 全表搜索
   var q = document.getElementById('q'), res = document.getElementById('res'), timer;
-  var tds = Array.prototype.slice.call(document.querySelectorAll('table.sheet td[id], .art[id], .ch-sp[id], .bd-r[id], .rs-s[data-id]'));
+  var tds = Array.prototype.slice.call(document.querySelectorAll('table.sheet td[id], .art[id], .ch-sp[id], .bd-r[id], .rs-s[data-id], .ev-i[id], .ev-nm[id]'));
   var names = {}; navs.forEach(function(a){ names[a.dataset.sec] = a.textContent.trim(); });
   q.addEventListener('input', function(){
     clearTimeout(timer);

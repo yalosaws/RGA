@@ -4,6 +4,8 @@
 
 这个文件夹是 Claude 回答 Realm Grinder 问题的资料库，同时是桌面程序 RGA（Realm Grinder 助手）的源码。回答游戏问题时先查 `资料/`、`表格/`、`攻略/`，按下面的可信度作答，不凭记忆；查不到或过时的要说明，并去官方补丁说明或 Discord 核实。新查到的可靠资料存进 `资料/`。
 
+客户端计算、构筑辅助和实时快照的会话交付总入口：[本会话交付文档（20261029）](<C:/Users/yalosaws/Desktop/realm grinder/资料/本会话交付文档（20261029）.md>)，包含当前状态、源码与验证资料、运行方式及未完成工作。
+
 ## 目录
 
 | 路径 | 内容 |
@@ -57,19 +59,20 @@
 
 ## 程序 RGA
 
-用户只用程序，不单独打开网页，说明改动时说「程序里」。**改完不自动打包**，等用户说；打包前先关掉正在运行的 RGA。
+用户只用程序，不单独打开网页，说明改动时说「程序里」。**本地程序始终是最新版**：每次改动（界面或程序代码）做完就重新生成到本地，不用等用户说。只改界面跑 `build_html.py` 就够：`发布/RGA.exe` 在源码目录下运行时，`build/app` 不比自带、下载的版本旧就直接读它（`rg_app.pick_store`），重开程序即可；改了 `应用/` 的再 `build_exe.py` 出 `发布/RGA.exe`，打包前先关掉正在运行的 RGA（打不开文件时请用户关）。**提交和发布绑在一起**：用户说「提交」时，一次做完 git commit + 升版本号 + `publish.py`（改了 `应用/` 代码加 `--exe`）；没说「提交」就只更新本地，不 commit、不发布。
 
 - **生成**：`脚本/build_html.py [xlsx] [目录]` → `build/app/`（会列出没对上格子的专名，目前约 28 个，都是表里没有的东西）。界面拆成文件：`index.html` 外壳里的 `<!--#include pages/x.html-->` 由程序本地服务嵌入，`pages/` 每页一个，`js/`、`css/`，`img/` 是表格图标（按内容命名），`manifest.json` 列出版本和各文件。`应用/build_exe.py` 先跑它，再把界面加密成 `RGA.dat` 用 PyInstaller 打成 `发布/RGA.exe`（并写 `RGA.exe.json`；pywebview 装在用户目录，不能用 `python -I`）。
-- **发布和自动更新**：`脚本/publish.py` 生成界面、加密成对象（文件名是 sha256，没改的文件不变）、写清单并用 `密钥/sign.key` 签名、生成主页，上传到 `ubuntu@124.222.182.40:~/workspace/pages/rga/`（Caddy 把 `yalosaws.com/rga/` 指到这里，配置在服务器 `~/workspace/ops/config/Caddyfile`）。只改了表格、攻略、界面就只跑 `publish.py`，已装的程序每 15 分钟检查、后台下载、提示「刷新」；改了 `应用/` 下的程序代码才要 `build_exe.py` 再 `publish.py --exe`，已装的程序会自动换 exe、提示「立即重启」。界面用到程序新功能时把 `updater.SHELL_API` 加一。**发布也算打包，等用户说。**
-- **版本**：`build_html.py` 开头的 `VERSION`、`CHANGES`（当前 0.5.2；2026-10-22 合并过一次旧版本号）。版本号用 0.x，改了功能在 `CHANGES` 最前面那版里写一条（用户说合并进哪版就写进哪版）。版本页只放版本号和更新记录。**每次发布都要升版本号**：已装的程序只在线上版本号比自己高时才更新，同版本号重发收不到。
+- **发布和自动更新**：`脚本/publish.py` 生成界面、加密成对象（文件名是 sha256，没改的文件不变）、写清单并用 `密钥/sign.key` 签名、生成主页，上传到 `ubuntu@124.222.182.40:~/workspace/pages/rga/`（Caddy 把 `yalosaws.com/rga/` 指到这里，配置在服务器 `~/workspace/ops/config/Caddyfile`）。只改了表格、攻略、界面就只跑 `publish.py`，已装的程序每 15 分钟检查、后台下载、提示「刷新」；改了 `应用/` 下的程序代码才要 `build_exe.py` 再 `publish.py --exe`，已装的程序会自动换 exe、提示「立即重启」。界面用到程序新功能时把 `updater.SHELL_API` 加一。**发布只在用户说「提交」时跟 commit 一起做，平时不发布。**
+- **版本**：`build_html.py` 开头的 `VERSION`、`CHANGES`（当前 0.5.4，未发布；2026-10-22 合并过一次旧版本号）。版本号用 0.x，改了功能在 `CHANGES` 最前面那版里写一条（用户说合并进哪版就写进哪版）。版本页只放版本号和更新记录。**每次发布都要升版本号**：已装的程序只在线上版本号比自己高时才更新，同版本号重发收不到。
 - **页面**：侧栏分工具（我的存档、法术预报、遗物预测）/ 攻略 / 资料表 / 关于。攻略里 R0 攻略和 A0、A1 攻略要点合成一页「攻略要点」（`#tips/r0`、`#tips/a0`、`#tips/a1`，图例最前面的切换胶囊平时只显示当前这篇，点开展开、选好收回；旧地址 `#r0`、`#a0`、`#a1` 会转过去）；模板库分 A0 / A1（`build_templates.py`，A1 的中文标签、说明和配对在 `a1_templates.py`）。遗物、隐藏奖杯、挑战、研究页是卡片（`card()`/`card_list()`），建筑升级页是「选建筑看一列」，其余工作表还是表格（用户在考虑换样式）。专名链接到表格格子，卡片说明里的专名按八类染色（`TERMS`，阵营和模板不染）。
 - **已获得标记**：读到存档后 `save_tools.js` 发事件（`artowned`、`trophyowned`、`challengeowned`、`researchowned`、`guideunlocked`），卡片页显示「全部 / 已获得 / 未获得」胶囊和进度条（已获得蓝边带勾，未获得变灰，不加多余文字）；攻略图例有「已解锁」胶囊，开启后已解锁的链接变灰。只按存档里有依据的记录标，不猜。
 - **我的存档**（`脚本/save_tools.py` + `save_tools.js` + `save_tools.html`）：嵌入 RG-tools 的库，中文只读。
   - 存档查看按编辑器分页显示；挑战分页、隐藏奖杯和遗物两段不显示（资料页已标出），自动施法分页暂时下线（`HIDE_TAB`/`HIDE_SEC`，数据仍保留给已获得标记用）。
   - 法术预报、遗物预测照搬 `rws/index.js`、`arch/index.js` 的计算，是侧栏「工具」里单独两页（`#rws`、`#arch`，代码仍在 save_tools 里），用「我的存档」读到的存档；旧地址 `#save/rws` 会转过去。`脚本/arch_fixes.js` 修正库里过时的遗物数据，库本身不改。
   - 名字翻译：`脚本/存档译名.py` → 游戏词典 → 汉化文本的统计标签。
-- **桌面程序**（`应用/rg_app.py`）：pywebview 无边框窗口（标题栏是网页画的 `.appbar`：侧栏和卡片贴窗口边，窗口按钮是卡片右上角的小胶囊；拖动只认正好点在带 `pywebview-drag-region` 的元素本身（侧栏、菜单空白、内容区顶上一条），不显示图标和标题），打开时居中；只读本机存档 `%APPDATA%\com.kongregate.mobile.realmgrinder.air\Local Store\#SharedObjects\RealmGrinderDesktop.swf\realm-grinder.sol`，一直自动同步（每 10 秒检查，没有开关；存档时间显示在存档查看筛选框右边）。程序里只有 `main` 滚动，脚本读写滚动位置用 `rgScroller()`。localStorage 在 `%LOCALAPPDATA%\RGA`。调试：设 `WEBVIEW2_ADDITIONAL_BROWSER_ARGUMENTS=--remote-debugging-port=9333` 再启动，用 CDP 读页面。
+- **桌面程序**（`应用/rg_app.py`）：pywebview 无边框窗口（标题栏是网页画的 `.appbar`：侧栏和卡片贴窗口边，窗口按钮是卡片右上角的小胶囊；拖动只认正好点在带 `pywebview-drag-region` 的元素本身（侧栏、菜单空白、内容区顶上一条），不显示图标和标题），打开时居中；只读本机存档 `%APPDATA%\com.kongregate.mobile.realmgrinder.air\Local Store\#SharedObjects\RealmGrinderDesktop.swf\realm-grinder.sol`，一直自动同步（`save_sync.py` 监听文件变化后立即推送，低频检查兜底，没有开关；仍受游戏保存间隔限制；存档时间显示在存档查看筛选框右边）。程序里只有 `main` 滚动，脚本读写滚动位置用 `rgScroller()`。localStorage 在 `%LOCALAPPDATA%\RGA`。调试：设 `WEBVIEW2_ADDITIONAL_BROWSER_ARGUMENTS=--remote-debugging-port=9333` 再启动，用 CDP 读页面。
 - **自动点击**（`应用/auto_click.py`）：F8 启停，每 35 毫秒一次，只在前台是游戏窗口时点；没有设置页，热键和速度暂不可改（用户要求）。`应用/test_auto_click.py` 用模拟点击测试。
+- **实时计算**：构筑辅助可点“读取游戏快照”，每次实时试算前重新采集研究、升级、统计、建筑、法术、缓存与帧时钟；不会被后台存档推送覆盖，可切回存档模式。`live_reader.py` 管理连接，`live_state.py` 采集，`live_snapshot.py` 严格载入独立对象；缺字段或活动服务器上下文未支持时拒绝试算。当前 `SHELL_API=5`。轻量“实时读数”是另一个入口；连续增长模拟尚未接入。验证范围见 `资料/实时计算快照接入与验证（20261028）.md`。
 - **风格**（用户选定）：浅灰蓝底 `#f3f6fb` + 白色圆角卡片，悬浮圆角侧栏（纯文字），主色 `#2563eb`，**不用渐变**；颜色用 `:root` 变量。各页不显示标题；切换页面有淡入动画。
 
 ## 已知未解决

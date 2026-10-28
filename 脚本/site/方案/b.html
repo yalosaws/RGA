@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RGA · Realm Grinder 助手</title>
+<link rel="icon" href="icon.png">
+<script>document.documentElement.className="js"</script>
+<style>
+/* 方案 B：暗色、跟着滚动讲。首屏截图带倾斜，往下滚慢慢放平；功能段左边文字滚动，右边截图固定并跟着切换 */
+:root{--bg:#0c0f15;--bg2:#141821;--fg:#eef0f4;--fg2:#a3aab8;--muted:#6b7385;--line:#232836;--ease:cubic-bezier(.22,.8,.24,1)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.75 "Microsoft YaHei UI","Microsoft YaHei","PingFang SC","Noto Sans SC",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1160px;margin:0 auto;padding:0 28px}
+.num{font-family:"Segoe UI",system-ui,sans-serif;font-variant-numeric:tabular-nums}
+
+header{position:fixed;inset:0 0 auto;z-index:10;transition:background .3s,border-color .3s;border-bottom:1px solid transparent}
+header.scrolled{background:rgba(12,15,21,.75);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-color:var(--line)}
+.bar{display:flex;align-items:center;height:64px;gap:28px;font-size:14px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700}
+.brand img{width:22px;height:22px;image-rendering:pixelated}
+.bar nav{margin-left:auto;display:flex;gap:28px;color:var(--fg2)}
+.bar nav a:hover{color:var(--fg)}
+
+.hero{padding:168px 0 0;text-align:center}
+.hero h1{font-size:clamp(40px,7.4vw,84px);line-height:1.05;letter-spacing:-.03em;margin:0;font-weight:700}
+.hero h1 span{color:var(--muted)}
+.hero p{max-width:520px;margin:24px auto 0;color:var(--fg2);font-size:18px}
+.cta{margin:40px 0 0;display:flex;flex-direction:column;align-items:center;gap:12px}
+.btn{display:inline-flex;align-items:center;gap:10px;height:50px;padding:0 28px;border-radius:12px;background:var(--fg);color:var(--bg);font-weight:600;transition:transform .3s var(--ease),background .2s}
+.btn:hover{transform:translateY(-2px);background:#fff}
+.btn.off{background:#3a4050;color:var(--muted);pointer-events:none}
+.btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.meta{font-size:13px;color:var(--muted)}
+
+.stage{perspective:1600px;margin:80px auto 0;max-width:1100px}
+.tilt{transform-origin:50% 0;transform:rotateX(var(--rx,22deg)) scale(var(--sc,.92));will-change:transform;border-radius:14px;overflow:hidden;
+  box-shadow:0 0 0 1px rgba(255,255,255,.08),0 60px 120px -40px rgba(0,0,0,.8)}
+.tilt img{display:block;width:100%}
+
+/* 功能：左文右图 */
+.story{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:64px;padding:160px 0 0}
+.steps{display:flex;flex-direction:column}
+.step{min-height:70vh;display:flex;flex-direction:column;justify-content:center;opacity:.25;transition:opacity .6s var(--ease)}
+.step.on{opacity:1}
+.step small{color:var(--muted);font-size:13px;letter-spacing:.06em}
+.step h3{font-size:30px;line-height:1.3;margin:10px 0 12px;letter-spacing:-.01em}
+.step p{margin:0;color:var(--fg2)}
+.pin{position:sticky;top:calc(50vh - 22vw);height:fit-content;align-self:start}
+.screen{position:relative;aspect-ratio:1440/900;border-radius:12px;overflow:hidden;background:var(--bg2);box-shadow:0 0 0 1px rgba(255,255,255,.08),0 40px 90px -40px rgba(0,0,0,.9)}
+.screen img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top left;opacity:0;transform:translateY(12px) scale(1.01);transition:opacity .7s var(--ease),transform .9s var(--ease)}
+.screen img.on{opacity:1;transform:none}
+
+.more-feats{display:grid;grid-template-columns:repeat(2,1fr);gap:0 64px;padding:120px 0 0;border-top:0}
+.more-feats div{padding:22px 0;border-top:1px solid var(--line)}
+.more-feats b{display:block;margin-bottom:4px}
+.more-feats span{color:var(--fg2);font-size:15px}
+
+.logsec{padding:140px 0 0;display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:64px}
+.logsec h2{margin:0;font-size:30px;letter-spacing:-.01em}
+.logsec h2+p{color:var(--muted);margin:8px 0 0;font-size:14px}
+.ver{border-top:1px solid var(--line)}
+.ver button{all:unset;box-sizing:border-box;display:flex;gap:14px;align-items:baseline;width:100%;padding:18px 0;cursor:pointer}
+.ver small{color:var(--muted)}
+.ver button:after{content:"+";margin-left:auto;color:var(--muted);font-size:20px;line-height:1;transition:transform .4s var(--ease)}
+.ver.open button:after{transform:rotate(45deg)}
+.body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s var(--ease)}
+.ver.open .body{grid-template-rows:1fr}
+.body>div{overflow:hidden}
+.body ul{margin:0;padding:0 0 22px 18px;color:var(--fg2);font-size:15px}
+.ver:nth-child(n+6){display:none}
+
+footer{margin-top:160px;padding:28px 0 48px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+
+.js .in{opacity:0;transform:translateY(16px);transition:opacity 1s var(--ease),transform 1s var(--ease);transition-delay:var(--d,0s)}
+.js .in.seen{opacity:1;transform:none}
+@media (max-width:860px){
+  .story,.logsec{grid-template-columns:1fr;gap:24px}
+  .pin{position:sticky;top:72px;z-index:2}
+  .step{min-height:55vh}
+  .more-feats{grid-template-columns:1fr}
+  .bar nav a.opt{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}.js .in{opacity:1;transform:none}.tilt{transform:none!important}}
+</style></head><body>
+
+<header id="hd"><div class="wrap bar">
+  <a class="brand" href="#"><img src="icon.png" alt="">RGA</a>
+  <nav><a class="opt" href="#story">功能</a><a class="opt" href="#log">更新记录</a><a href="%%EXE%%" download>下载</a></nav>
+</div></header>
+
+<div class="wrap">
+  <div class="hero">
+    <h1 class="in">Realm Grinder<br><span>中文助手</span></h1>
+    <p class="in" style="--d:.1s">读取本机存档，算法术、算遗物，攻略和资料都是中文。</p>
+    <div class="cta in" style="--d:.2s">
+      <a class="btn%%OFF%%" href="%%EXE%%" download><svg viewBox="0 0 24 24"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg>%%DLTEXT%%</a>
+      <span class="meta"><span class="num">%%DATE%%</span>%%SIZE%% · Windows 10 / 11 · 免安装</span>
+    </div>
+  </div>
+  <div class="stage in" style="--d:.3s"><div class="tilt" id="tilt"><img src="shot-save.png" alt="RGA 我的存档"></div></div>
+
+  <div class="story" id="story">
+    <div class="steps">
+      <div class="step" data-i="0"><small>01 · 我的存档</small><h3>游戏一保存，<br>这里就同步</h3><p>直接读本机 Steam 版存档，每 10 秒检查一次。重生、宝石、升级、研究都在一页。只读，不改存档。</p></div>
+      <div class="step" data-i="1"><small>02 · 研究</small><h3>哪些买了，<br>哪些还差一点</h3><p>研究表按存档上色：已购买、已解锁、未解锁分开显示，代号点一下看详情。</p></div>
+      <div class="step" data-i="2"><small>03 · 攻略</small><h3>攻略里的名字<br>都能点</h3><p>R0、A0、A1 攻略要点整理自官方 Discord。专名点一下跳到资料，已经解锁的会变灰。</p></div>
+      <div class="step" data-i="3"><small>04 · 收集</small><h3>遗物和奖杯，<br>还差几个</h3><p>遗物、隐藏奖杯、挑战按卡片列出，读到存档后标出已获得，带进度。</p></div>
+    </div>
+    <div class="pin"><div class="screen">
+      <img class="on" src="shot-save.png" alt=""><img src="shot-research.png" alt="" loading="lazy"><img src="shot-guide.png" alt="" loading="lazy"><img src="shot-cards.png" alt="" loading="lazy">
+    </div></div>
+  </div>
+
+  <div class="more-feats">
+    <div class="in"><b>法术预报</b><span>按存档推算接下来每次施法的随机结果。</span></div>
+    <div class="in"><b>遗物预测</b><span>算出接下来几次考古能挖到哪些遗物。</span></div>
+    <div class="in"><b>模板库</b><span>A0、A1 佣兵和研究模板，按当前 R 一键加进游戏。</span></div>
+    <div class="in"><b>自动更新</b><span>新版本后台下载，提示「刷新」时点一下。游戏里按 F8 开关自动点击。</span></div>
+  </div>
+
+  <div class="logsec" id="log">
+    <div class="in"><h2>更新记录</h2><p>当前版本 <span class="num">%%VERSION%%</span></p></div>
+    <div class="log in">%%CHANGES%%</div>
+  </div>
+</div>
+
+<footer><div class="wrap">Yalosaws 制作的非官方工具，与 Divine Games 无关。存档工具改写自 Royal Advisory Board（MIT 许可）。</div></footer>
+
+<script>
+(function(){
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hd = document.getElementById('hd'), tilt = document.getElementById('tilt');
+  // 首屏截图：滚动越多越平
+  var ticking = false;
+  function frame(){
+    ticking = false;
+    hd.classList.toggle('scrolled', scrollY > 10);
+    if (reduce) return;
+    var r = tilt.parentNode.getBoundingClientRect(), p = Math.min(Math.max(1 - (r.top - 80) / (innerHeight * .7), 0), 1);
+    tilt.style.setProperty('--rx', (22 * (1 - p)).toFixed(2) + 'deg');
+    tilt.style.setProperty('--sc', (.92 + .08 * p).toFixed(3));
+  }
+  addEventListener('scroll', function(){ if (!ticking) { ticking = true; requestAnimationFrame(frame); } }, {passive: true});
+  frame();
+
+  var io = 'IntersectionObserver' in window && new IntersectionObserver(function(l){
+    l.forEach(function(x){ if (x.isIntersecting) { x.target.classList.add('seen'); io.unobserve(x.target); } });
+  }, {rootMargin: '0px 0px -10% 0px'});
+  document.querySelectorAll('.in').forEach(function(e){ io ? io.observe(e) : e.classList.add('seen'); });
+
+  // 功能段：正中间的那段亮起，右边换成对应截图
+  var steps = document.querySelectorAll('.step'), imgs = document.querySelectorAll('.screen img');
+  function pick(i){ steps.forEach(function(s, k){ s.classList.toggle('on', k === i); }); imgs.forEach(function(m, k){ m.classList.toggle('on', k === i); }); }
+  pick(0);
+  if ('IntersectionObserver' in window) {
+    var mid = new IntersectionObserver(function(l){
+      l.forEach(function(x){ if (x.isIntersecting) pick(+x.target.dataset.i); });
+    }, {rootMargin: '-45% 0px -45% 0px'});
+    steps.forEach(function(s){ mid.observe(s); });
+  }
+
+  document.querySelectorAll('.ver button').forEach(function(b){
+    b.onclick = function(){ var v = b.parentNode; b.setAttribute('aria-expanded', v.classList.toggle('open')); };
+  });
+})();
+</script>
+</body></html>

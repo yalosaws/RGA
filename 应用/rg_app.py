@@ -7,23 +7,29 @@
 打包版的程序代码由 PyArmor 混淆，界面文件加密存放，见 build_exe.py。
 """
 import ctypes
-import glob
 import json
 import os
-import re
 import sys
 import webbrowser
+
+# 子进程只加载计算入口，不初始化窗口、热键或自动更新。
+if __name__ == '__main__' and '--build-worker' in sys.argv:
+    from build_engine import worker_main
+    worker_main()
+    raise SystemExit
 
 import webview
 from auto_click import AutoClicker
 import content
 import template_store
 import updater
+from build_engine import EngineClient
+from save_sync import SaveReader, SaveWatcher, find_saves
+from live_reader import LiveClient
 
 TITLE = 'RGA'
 DATA = 'RGA.dat'
 PORT = 42001  # 和以前 pywebview 内置服务的端口一样，网页的 localStorage（同一个来源）才能接着用
-SAVE_RE = re.compile(rb'\$\d{2}s[A-Za-z0-9+/=]+\$e')
 
 
 def res_path(name):
@@ -37,6 +43,16 @@ def pick_store(cache_dir):
     frozen = getattr(sys, 'frozen', False)
     if frozen:
         cands = [content.bundled_store(res_path(DATA))]
+        # 开发机上（exe 在源码目录的 发布/ 下）：build/app 不比别的旧就直接用它，改了界面跑 build_html.py 重开即可，不用重新打包
+        src = os.path.dirname(os.path.dirname(os.path.abspath(sys.executable)))
+        dev = os.path.join(src, 'build', 'app')
+        if os.path.isfile(os.path.join(src, '脚本', 'build_html.py')) and os.path.isfile(os.path.join(dev, 'manifest.json')):
+            try:
+                d = content.dev_store(dev)
+                if d.manifest.get('shell_api', 1) <= updater.SHELL_API:
+                    cands.insert(0, d)  # 版本一样时 max 取第一个，本机的优先
+            except Exception:
+                pass
     else:
         cands = [content.dev_store(os.path.join(content.ROOT, 'build', 'app'))]
     if frozen or os.environ.get('RGA_UPDATE_URL'):
@@ -44,15 +60,6 @@ def pick_store(cache_dir):
         if c and c.manifest.get('shell_api', 1) <= updater.SHELL_API:
             cands.append(c)
     return max(cands, key=lambda s: content.version_tuple(s.version))
-
-
-def find_saves():
-    """游戏（Adobe AIR）的本地存档：%APPDATA%\\<应用 id>\\Local Store\\#SharedObjects\\<swf>\\realm-grinder.sol，按修改时间新→旧"""
-    root = os.environ.get('APPDATA', '')
-    pats = [os.path.join(root, '*', 'Local Store', '#SharedObjects', '*', 'realm-grinder.sol'),
-            os.path.join(root, '*', 'Local Store', '#SharedObjects', '*', '*', 'realm-grinder.sol')]
-    files = {f for p in pats for f in glob.glob(p)}
-    return sorted(files, key=os.path.getmtime, reverse=True)
 
 
 def round_corners(window):
@@ -89,6 +96,10 @@ class Api:
         self._max = False
         self._clicker = clicker
         self._upd = None
+        self._engine = EngineClient()
+        self._save_reader = SaveReader()
+        self._save_watcher = SaveWatcher(self._save_reader, self._notify_save)
+        self._live_reader = LiveClient()
 
     # ---- 自动更新 ----
     def update_state(self):
@@ -111,10 +122,40 @@ class Api:
         webbrowser.open(updater.HOME)
 
     def shutdown(self):
+        self._save_watcher.close()
+        self._live_reader.close()
+        self._engine.close()
         if self._clicker:
             self._clicker.close()
 
     # ---- 存档 ----
+    def read_live(self):
+        return self._live_reader.read()
+
+    def close_live(self):
+        return self._live_reader.close()
+
+    def build_live(self, action=None):
+        if action is not None and (not isinstance(action, dict) or set(action) - {'key', 'count'}):
+            return {'ok': False, 'error': '实时试算操作格式错误'}
+        saved = self.read_save()
+        if not saved.get('ok'):
+            # 游戏写存档时会短暂读不到；界面会清掉旧结果，不必杀掉已初始化的计算进程。
+            return saved
+        snapshot = self._live_reader.snapshot()
+        if not snapshot.get('ok'):
+            # 立即使旧实时状态不可操作，不能在失败后继续使用旧状态。
+            self._engine.close()
+            return snapshot
+        return self._engine.request(dict(op='load_live', save=saved['save'], timestamp=snapshot['observed_at'],
+                                         live_snapshot=snapshot, action=action))
+
+    def build_calculate(self, request):
+        """只接受存档和已知计算操作，不接受脚本或文件路径。"""
+        if not isinstance(request, dict):
+            return {'ok': False, 'error': '计算请求格式错误'}
+        return self._engine.request(request)
+
     def read_templates(self):
         try:
             return {'ok': True, 'templates': template_store.read_templates()}
@@ -128,21 +169,21 @@ class Api:
             return {'ok': False, 'error': str(e)}
 
     def read_save(self):
-        """返回最新的存档字符串和文件修改时间（毫秒）"""
-        files = find_saves()
-        if not files:
-            return {'ok': False, 'error': '没有找到游戏存档。请先打开一次游戏（Steam 版 Realm Grinder），让它保存一次。'}
-        path = files[0]
+        """读取完整快照；未变化时复用校验过的结果。"""
+        return self._save_reader.read()
+
+    def watch_save(self):
+        """界面就绪后开始推送存档变化；刷新界面时可重复调用。"""
+        return {'ok': self._save_watcher.start(), 'mode': self._save_watcher.mode}
+
+    def _notify_save(self, result):
+        if self._win is None:
+            return False
         try:
-            with open(path, 'rb') as f:
-                data = f.read()
-        except OSError as e:
-            return {'ok': False, 'path': path, 'error': '读不了存档文件：%s' % e}
-        found = SAVE_RE.findall(data)
-        if not found:
-            return {'ok': False, 'path': path, 'error': '存档文件里没有找到存档数据（游戏可能正在写入，稍后再试）。'}
-        return {'ok': True, 'path': path, 'mtime': int(os.path.getmtime(path) * 1000),
-                'save': max(found, key=len).decode('ascii')}
+            self._win.evaluate_js('window.dispatchEvent(new CustomEvent("rgasave",{detail:%s}))' % json.dumps(result))
+            return True
+        except Exception:
+            return False
 
     # ---- 窗口按钮（无边框窗口自己画标题栏） ----
     def minimize(self):
@@ -189,6 +230,9 @@ def main():
         return
     base = os.environ.get('LOCALAPPDATA', os.path.expanduser('~'))
     storage = os.path.join(base, 'RGA')
+    preview = not getattr(sys, 'frozen', False) and os.environ.get('RGA_PREVIEW') == '1'
+    if preview:
+        storage = os.path.join(base, 'RGA-source-preview')
     old = os.path.join(base, 'RealmGrinder助手')  # 改名前的数据目录，搬过来以保留存档记录和设置
     if os.path.isdir(old) and not os.path.exists(storage):
         try:
@@ -200,11 +244,16 @@ def main():
     cache = os.path.join(storage, 'update')
     updater.cleanup_old_exe()
     store = pick_store(cache)
+    if preview:
+        store.index()  # 预览先验证页面资源，缺失时在启动日志中给出真实错误。
     if getattr(sys, 'frozen', False):
         content.clean_cache(cache, store)
     server = content.Server(store, PORT)
     api = Api(AutoClicker())  # 固定 F8 启停、35 毫秒间隔，没有设置页
-    win = webview.create_window(TITLE, server.url, js_api=api, width=1280, height=860, min_size=(640, 420),
+    preview_page = os.environ.get('RGA_PREVIEW_PAGE', 'calc')
+    if preview_page not in ('calc', 'live', 'save'):
+        preview_page = 'calc'
+    win = webview.create_window(TITLE + (' · 源码预览' if preview else ''), server.url + ('#' + preview_page if preview else ''), js_api=api, width=1280, height=860, min_size=(640, 420),
                                 frameless=True, easy_drag=False, shadow=True, text_select=True, zoomable=True,
                                 background_color='#F5F3FA')
     api._win = win

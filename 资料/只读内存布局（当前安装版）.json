@@ -1,0 +1,10 @@
+{
+  "schema": 1,
+  "status": "轻量读数、计算快照、持续法术计时及一次实际跨进程重启已验证",
+  "pointer_size": 4,
+  "swf_sha256": "5e6a5938efd52119f7bb647d88634811da198c455828861662d08c4e895940a2",
+  "air_sha256": "31fa6338c0433365e13a609274c399cd1ac9bff239769165537521a694f89f22",
+  "root_type": "8G$",
+  "root_fields": {"gold": 224, "mana": 264, "buildings": 156, "spells": 152},
+  "source_note": "按当前客户端 getter、构造参数、对象类型、向量 ID 与数值校验共同确认；不保存绝对地址。"
+}

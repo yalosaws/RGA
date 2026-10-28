@@ -28,7 +28,7 @@ import ed25519
 BASE = os.environ.get('RGA_UPDATE_URL', 'https://yalosaws.com/rga/')
 HOME = 'https://yalosaws.com/rga/'
 PUBKEY = bytes.fromhex('e7555a6a13a3c5b1f6da7f3ddcaf610b1394945feb61bfd2db15b4a2f3b05be7')
-SHELL_API = 1  # 程序提供给界面的功能版本；界面用到程序的新功能时加一，发布时清单里写上要求
+SHELL_API = 5  # 增加 build_live：实时计算快照与独立试算
 EXE_VERSION = None  # 打包时由 build_exe.py 填入；源码运行时是 None，不更新 exe
 INTERVAL = 15 * 60
 VER = lambda v: content.version_tuple(v)

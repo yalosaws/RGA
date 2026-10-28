@@ -22,7 +22,7 @@ APP_DIR = os.path.join(ROOT, 'build', 'app')  # build_html.py 生成，不进 gi
 ICON = os.path.join(APP, 'icon.ico')  # 由 应用/make_icon.py 生成
 PACK = os.path.join(ROOT, 'build', 'pack')  # 带密钥的程序副本和加密界面，不进 git
 DIST = os.path.join(ROOT, '发布')
-MODULES = ['rg_app', 'auto_click', 'template_store', 'content', 'updater', 'ed25519']
+MODULES = ['rg_app', 'auto_click', 'template_store', 'content', 'updater', 'ed25519', 'build_engine', 'save_sync', 'live_reader']
 
 sys.path.insert(0, APP)
 import content  # noqa: E402
@@ -30,7 +30,9 @@ import content  # noqa: E402
 # PyArmor 混淆后的代码里看不出 import 了什么，PyInstaller 要靠这里列出来
 HIDDEN = MODULES[1:] + ['webview', 'pathlib', 'struct', 'datetime', 'ctypes', 'ctypes.wintypes', 'glob', 'hashlib', 'http.server',
                         'secrets', 'threading', 'zlib', 'json', 'queue', 'time', 'zipfile', 'mimetypes', 'urllib.request', 'ssl',
-                        'subprocess', 'webbrowser', 'concurrent.futures']
+                        'subprocess', 'webbrowser', 'concurrent.futures', 'inspect', 'random', 'argparse',
+                        'collections', 'functools', 'traceback', 'base64', 're', 'math', 'html', 'importlib',
+                        'copy', 'contextlib', 'py_compile', 'importlib.machinery']
 
 
 def inject(name, pattern, value, pack):
@@ -58,6 +60,7 @@ def build(pack, version):
            '--paths', obf, '--hidden-import', next(d for d in os.listdir(obf) if d.startswith('pyarmor_runtime')),
            '--add-data', os.path.join(pack, 'RGA.dat') + os.pathsep + '.',
            '--add-data', ICON + os.pathsep + '.', '--icon', ICON,
+           '--add-data', os.path.join(ROOT, 'build', 'calculation') + os.pathsep + 'calculation',
            '--distpath', DIST, '--workpath', work, '--specpath', work]
     for m in HIDDEN:
         cmd += ['--hidden-import', m]
@@ -65,6 +68,7 @@ def build(pack, version):
 
 
 def main():
+    subprocess.check_call([sys.executable, '-X', 'utf8', os.path.join(ROOT, '脚本', 'prepare_engine.py')], cwd=ROOT)
     subprocess.check_call([sys.executable, '-X', 'utf8', os.path.join(ROOT, '脚本', 'build_html.py')], cwd=ROOT)
     version = json.load(open(os.path.join(APP_DIR, 'manifest.json'), encoding='utf-8'))['version']
     shutil.rmtree(PACK, ignore_errors=True)

@@ -1,0 +1,33 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "research-proto",
+      "runtimeExecutable": "python",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8765",
+        "--bind",
+        "127.0.0.1",
+        "--directory",
+        "C:/Users/yalosaws/Desktop/realm grinder/build/site-方案"
+      ],
+      "port": 8765
+    },
+    {
+      "name": "rga-build",
+      "runtimeExecutable": "python",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8766",
+        "--bind",
+        "127.0.0.1",
+        "--directory",
+        "C:/Users/yalosaws/Desktop/realm grinder/build"
+      ],
+      "port": 8766
+    }
+  ]
+}

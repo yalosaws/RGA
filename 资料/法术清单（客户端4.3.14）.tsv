@@ -1,0 +1,33 @@
+名称	立场	阵营编号	费用基数	时长(tick)	描述	加成公式
+Night Time	2	4	800	600		getTierRequirement=80000 * param1; getAssistantsMultiplier=(8G.7d(%s.id) ? (&c.%"-( !Z.id) ? ((!(8G.,!Y == 0)) ? (8G.7d(4!=.id) ?; getAssistantNumMultiplier=(8G.#N(this.id).-6 ? 5 * 8G.#N(this.id).`r : 5 * &c.""L())
+Limited Wish	5	14	800000	180	Production of all buildings. / Assistants.	
+Grand Balance	3	7	1000	600	Currently increasing: / Will increase:	getTierRequirement=200000 * param1; getMaxManaMultiplier=(8G.#N(this.id).-6 ? 5 * 8G.#N(this.id).`r : 5 * 8G.,P)
+Hailstorm			1000	3600		getProductionMultiplier=0.1 * Math.pow(1 + &c.7i(this.id), 0.6) * Math.pow(1 + 8G.#N(this.id).
+Brainwave	3	8	600	18000	based on time passed	getTierRequirement=3600 * param1 * 30; getProductionMultiplier=this. _; getSpecificBonus=(8G.7d(=r.id) ? 30 : 20)
+Maelstrom	5		700	600	Currently increasing: / Will increase:	
+Spiritual Surge			2500	600	Spectral Surge	getTierRequirement=60 * param1; getProductionMultiplier=(8G.7d(;"2.id) ? ((!(PlayFab.season == 0)) ? 2500 * Math.pow(#!!.8!H, ; getSpecificBonus=(8G.#N(this.id).-6 ? 5 * 8G.#N(this.id).`r : 5 * 8G.,P)
+Moon Blessing	1	1	700	600	Autoclick 15 times per second.	getTierRequirement=8000000000000 * param1; getProductionMultiplier=1.3 * Math.pow(&c.>!h(), 0.7)
+All Creation	6		1100	600		getTierRequirement=100 * param1; getProductionMultiplier=(&c.=!x(&"!.id, true, true) ? (&c.=!x(&"!.id, true, true) ? 0.5 * Math; getFCCChanceMultiplier=(4.5 * Math.pow(Math.log(1 + &c.57() * 30), 2.25) + 12.5 * Math.pow(&c; getGemMultiplier=(8G.#N(this.id).-6 ? 10 * 8G.#N(this.id).`r : 10 * 8G.,P)
+Catalyst	5	14	500000	1800	Will cast:	
+Fairy Chanting	1	0	800	300	 and temporarily triples your assistants for the duration	getTierRequirement=40000 * param1; getSpellDurationBonus=(8G.#N(this.id).-6 ? 10 * 8G.#N(this.id).`r : 10 * &c.""L()); getBuildingMultiplier=Math.pow(this.=b, 1 + 0.02 * Math.pow(8G.%Z(8!d.id) + 8G.%Z([!_.id) + 
+Twisting Nether			100000	600		
+Goblin's Greed	2	3	400	240		getTierRequirement=1000000 * param1; getProductionMultiplier=30 + 3 * Math.pow(Math.log(1 + &c.@![(!&c.%"-(9!9.id))), 3); getSpecificBonus=(8G.#N(this.id).-6 ? 1 * 8G.#N(this.id).`r : 1 * &c.""L()); getFactionBonus=80 + 2.25 * Math.pow(Math.log(10 + &c."!0), 2.25)
+Precognition	4	13	123456	600	Increases Trophies, Gems owned, and Faction Coins found.	
+Tax Collection			200		Share Benefits / Reap Interests	getSpecificBonus=(8G.7d(id) ? <循环/过长> : (8G.7d(9"M.id) ? <循环/过长> : (8G.7d(+">.id) ? <循环; getProductionMultiplier=(!(8G.,P < 3) ? 1 * Math.pow(80 + 1.6 * Math.pow(Math.log(1 + this.,!G
+Dragon's Breath	3	12	1500	600	GREEN: increase the production of all buildings based on spells cast in this Era. Higher bonuses are provided to lower building tiers. / Current Bonus: 	getBuildingMultiplier=1.75 * Math.pow(Math.log(1 + &c.@![(!8G.7d(]!p.id))), 1.75); getAssistantsNumBonus=30 * Math.pow(&c.-"!(0), 0.7); getManaRegenMultiplier=200; getProductionMultiplier=30 + 0.85 * Math.pow(&c.7i(this.id, false, !8G.7d(]!p.id)), 0.85); getGemMultiplier=1.75 * Math.pow(Math.log(1 +
+Heatwave			300	360		getProductionMultiplier=5 * Math.pow(&c.1!y(true), 0.85); getSpecificBonus=&c.0F() * Math.pow(&c. !;(126), 1.1)
+God's Hand	1	2	900	300	Increase duration bonus coefficient based on spell tier.	getTierRequirement=500000 * param1; getProductionMultiplier=(8G.<!B(2"!.id) ? (&c.%"-(]",.id) ? (1 + 0.01 * 2"!.,!G() * 3) * 10 * ; getSpellDurationBonus=Math.floor((0.5 + this.,!G()) * Math.pow(&c.-"!(1), 0.5 + this.,!G())); getSpecificBonus=(8G.#N(this.id).-6 ? 0.05 * 8G.#N(this.id).`r : 0.05 * &c
+Gem Grinder	3		1000	600		getTierRequirement=1e+30 * Math.pow(10, 3 * param1); getExchangeMultiplier=(8G.#N(this.id).-6 ? 10 * 8G.#N(this.id).`r : 10 * &c.""L())
+Diamond Pickaxe	1	9	1000	360		getTierRequirement=4000 * param1; getFCCChanceBonus=(8G.7d(,4.id) ? (8G.#N(this.id).-6 ? 300 * (8G.#N(this.id).`r + 1) : 3; getClickMultiplier=this.,!G() * &c.!!8(); getSpecificBonus=30; getFCCChanceMultiplier=(8G.#N(this.id).-6 ? 10 * 8G.#N(this.id).`r : 10 * 8G.,P)
+Infinite Spiral	6	15	505000	300		getAssistantsNumMultiplier=(&c.%"-(!"0.id) ? (&c.%"-(=",.id) ? 10 * Math.pow(Math.log(1 + &c.2!&(; getMaxManaMultiplier=(&c.%"-(=",.id) ? 1.5 * Math.pow(Math.log(1 + &c.0F()), 1.68) * Math.m; getFCCChanceMultiplier=(&c.%"-(=",.id) ? 10 + 0.1 * Math.pow(&c.!!8(), 0.84) * Math.max(1, 8G; getOfflineMul
+Holy Light	1		900	300		getTierRequirement=200000 * param1; getManaRegenMultiplier=(8G.#N(this.id).-6 ? 10 * 8G.#N(this.id).`r : 10 * &c.""L())
+Hellfire Blast	2	5	900	600	 and all Non-Unique Buildings	getTierRequirement=12 * param1; getSpecificBonus=(8G.#N(this.id).-6 ? 50 * 8G.#N(this.id).`r : 50 * &c.""L()); getBuildingMultiplier=(&c.%"-(id) ? (8G.7d("4.id) ? 120 * Math.pow(#!!.,!E() + 0.1 * &c.]!s(
+Temporal Flux	4		950	600		getTierRequirement=300 * param1; getBuildingMultiplier=Math.pow(&c."!B(1, false, true), 0.825); getSpecificBonus=(8G.#N(this.id).-6 ? 10 * 8G.#N(this.id).`r : 10 * 8G.,P); getManaRegenMultiplier=3.75 * Math.pow(&c."!B(1, false, true) / 60, 0.825) * Math.max(1, 8G.#; getMaxManaMultiplier=0.375 * Math
+Call to Arms			400	600	Call to Love	getTierRequirement=(!(8G.,P < 4) ? 10000 / 8G.,P * param1 : 60000 / 8G.,P * param1); getSpecificBonus=(8G.#N(this.id).-6 ? 5 * 8G.#N(this.id).`r : 5 * 8G.,P); getProductionMultiplier=25 + Math.pow(0.3 * this.0#(), 0.975)
+Cannibalize			500	600		
+Chaos Madness	5	11	500000	600	Will activate:	
+Combo Strike	2	10	800	480	Cast stat increases more when you cast higher tiers.	getTierRequirement=100 * param1; getProductionMultiplier=(8G.7d(7!s.id) ? (100 + 7!s.,!G()) * Math.pow(&c.'n(), 0.9) : 100 * Ma; getNextProductionMultiplier=(8G.7d(7!s.id) ? (100 + 7!s.,!G()) * Math.pow(&c.'n() + 1, 0.9) : 100 
+Shadow Embrace			1000	600		
+Lightning Strike	3	6	250	150	Currently targeting: / Will target:	getTierRequirement=15000 * param1; getFCCChanceMultiplier=(&c.%"-(#H.id) ? 50 + 2 * Math.pow(Math.log(1 + &c."!0), 1.5) * (1 + 0; getBuildingMultiplier=(8G.7d(,v.id) ? this.,!G() * (8G.%Z(8G.-e(9).id) * (1 + 0.75 * 8G.#N(t; getSpecificBonus=(8G.7d(1!<.id) ? 1350 : 900)
+Wail of the Banshee			750	600		getProductionMultiplier=0.2 * (#!!.8!H + 1) * Math.pow(&c.3"&(true), 0.45)
+Blood Frenzy	2		600	600		getTierRequirement=7200 * param1; getBuildingMultiplier=(8G.#N(this.id).-6 ? 500 * 8G.#N(this.id).`r : 500 * &c.""L())

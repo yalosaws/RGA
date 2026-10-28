@@ -300,7 +300,7 @@
 "col": "CI",
 "row": 4,
 "code": "S5875",
-"name": "Mirror\n镜像",
+"name": "Mirrors\n镜像",
 "fac": "",
 "req": "",
 "eff": "根据本局施法次数提升助手数量"
@@ -1452,7 +1452,7 @@
 "col": "CO",
 "row": 19,
 "code": "E11125",
-"name": "Grey Friday\n灰色星期五",
+"name": "Gray Friday\n灰色星期五",
 "fac": "",
 "req": "",
 "eff": "降低所有建筑价格上涨倍率"
@@ -2343,7 +2343,7 @@
 "col": "CV",
 "row": 34,
 "code": "F12000",
-"name": "Revelation\n揭露",
+"name": "Revelations\n揭露",
 "fac": "",
 "req": "",
 "eff": "额外选取1个Legacy Combo"

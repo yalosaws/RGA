@@ -1,0 +1,9 @@
+<section id="sec-live" class="build-tools live-tools" hidden>
+  <div class="bt-context"><span id="lv-status" role="status">实时读数 · 小范围验证</span><button type="button" id="lv-toggle">开始读取</button></div>
+  <p class="lv-note">直接读取正在运行的游戏。此处显示金币、魔力、建筑数量和法术状态；构筑辅助仍按存档试算。</p>
+  <div id="lv-error" class="bt-error" role="alert" hidden></div>
+  <div class="bt-stats"><div><span>当前金币</span><strong id="lv-gold">—</strong></div><div><span>当前魔力</span><strong id="lv-mana">—</strong></div><div><span>建筑总数</span><strong id="lv-building-total">—</strong></div><div><span>已激活法术</span><strong id="lv-active-total">—</strong></div></div>
+  <p id="lv-time" class="bt-meta">点击开始后首次定位，之后约每 200 毫秒读取一次。离开本页会停止。</p>
+  <div class="lv-columns"><div class="bt-query"><div class="lv-caption">建筑数量 · 基础分类</div><div class="bt-table-wrap"><table class="bt-table"><thead><tr><th>建筑</th><th>数量</th></tr></thead><tbody id="lv-buildings"><tr><td colspan="2">尚未读取</td></tr></tbody></table></div></div><div class="bt-query"><div class="lv-caption">已激活法术</div><div class="bt-table-wrap"><table class="bt-table"><thead><tr><th>法术</th><th>剩余时间</th></tr></thead><tbody id="lv-spells"><tr><td colspan="2">尚未读取</td></tr></tbody></table></div></div></div>
+  <details class="bt-precision lv-details"><summary>验证范围与精确读数</summary><p>当前验证了这份客户端的 32 位 AIR 对象布局、持续法术计时与一次游戏重启后的重新定位。每次连接都核对客户端文件；这里逐字段显示最新读数。构筑辅助中的“读取游戏快照”另行采集研究、升级和统计等计算上下文。</p><pre id="lv-precision">尚未读取</pre></details>
+</section>

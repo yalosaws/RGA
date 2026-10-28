@@ -102,6 +102,9 @@
     rws.run(save);
     arch.run(save);
     ownedArtifacts(save);
+    // 构筑计算复用当前查看的完整存档，历史记录和自动同步走同一条入口。
+    window.rgCalculationSave = {save: cur.str, timestamp: store === 'game' ? app.mtime : Number(save.lastsave) * 1000};
+    window.dispatchEvent(new CustomEvent('rgcalculationsave', {detail: window.rgCalculationSave}));
     if (store === 'game') rgScroller().scrollTop = y;
     return true;
   }
@@ -825,15 +828,23 @@
   }
 
   // ---------- 程序模式（RGA.exe）：直接读本机游戏存档 ----------
-  var app = {on: false, mtime: 0, timer: null};
+  var app = {on: false, mtime: 0, timer: null, reading: false, version: null, sequence: 0};
   function appMode() {
     if (app.on) return;
     app.on = true;
     windowControls();
     if (!location.hash) location.hash = 'save';
     $('sv-pastebox').hidden = true;
+    window.addEventListener('rgasave', function (event) { acceptGame(event.detail, false); });
     readGame(true);
-    app.timer = setInterval(function () { readGame(false); }, 10000);  // 一直自动同步（用户要求去掉开关）
+    // 保存通知立即同步；定时读取只兜底；文件未变化时复用已校验的结果，每 5 秒复核一次内容。
+    var fallback = 1000;
+    if (window.pywebview.api.watch_save) {
+      fallback = 2000;
+      window.pywebview.api.watch_save().catch(function () { readGame(false); });
+    }
+    app.timer = setInterval(function () { readGame(false); }, fallback);
+    window.addEventListener('beforeunload', function () { clearInterval(app.timer); });
   }
   // 无边框窗口：标题栏按钮、双击标题栏最大化、右下角拖动改大小
   function windowControls() {
@@ -872,13 +883,28 @@
     });
   }
   function readGame(force) {
+    if (app.reading) return;
+    app.reading = true;
     window.pywebview.api.read_save().then(function (r) {
-      if (!r.ok) { if (force || !cur) msg(r.error, true); return; }
-      if (!force && r.mtime === app.mtime) return;
-      app.mtime = r.mtime;
-      if (cur && cur.str === r.save.trim() && !force) return;
-      use(r.save, 'game');
-    });
+      acceptGame(r, force);
+    }).catch(function (error) {
+      if (!cur || (force && !app.version)) msg('读取存档暂未完成：' + error.message, true);
+    }).finally(function () { app.reading = false; });
+  }
+  function acceptGame(r, force) {
+    if (!r || !r.ok) { if (!cur || (force && !app.version)) msg(r && r.error || '没有收到完整存档', true); return; }
+    // 推送与初次读取可能交错；较早的返回不能覆盖新的快照。
+    if (r.sequence && r.sequence < app.sequence) return;
+    if (r.version && r.version === app.version) return;
+    if (!force && !r.version && r.mtime === app.mtime) return;
+    var previousTime = app.mtime;
+    app.mtime = r.mtime;
+    if (!(cur && cur.str === r.save.trim() && !force)) {
+      if (!use(r.save, 'game')) { app.mtime = previousTime; return; }
+    }
+    app.version = r.version || null;
+    app.sequence = r.sequence || 0;
+    showWhen();
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();

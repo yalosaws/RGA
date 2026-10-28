@@ -1,0 +1,24 @@
+<section id="sec-calc" class="build-tools" hidden>
+  <div class="bt-context"><span id="bt-status" role="status">等待读取存档…</span><div><button type="button" id="bt-live">读取游戏快照</button><button type="button" id="bt-refresh">使用存档计算</button></div></div>
+  <div id="bt-error" class="bt-error" role="alert" hidden></div>
+  <div class="bt-stats" id="bt-stats">
+    <div><span>总产出 / 秒</span><strong data-stat="total">—</strong></div>
+    <div><span>建筑产出 / 秒</span><strong data-stat="buildings">—</strong></div>
+    <div><span>助手收入 / 秒</span><strong data-stat="assistants">—</strong></div>
+    <div><span>回魔 / 秒</span><strong data-stat="mana_per_second">—</strong></div>
+  </div>
+  <div class="bt-meta" id="bt-meta">助手数 — · 最大魔力 —</div>
+  <details class="bt-precision"><summary>精确数值与计算范围</summary><pre id="bt-precision">尚未读取存档</pre><p id="bt-scope"></p></details>
+  <div class="bt-query">
+    <div class="bt-query-top"><div class="bt-pills" id="bt-mode"><button class="on" type="button" data-mode="search">查升级</button><button type="button" data-mode="related">找同类升级</button></div><input type="search" id="bt-search" aria-label="搜索升级" placeholder="中文名、英文名、研究代号…"></div>
+    <div class="bt-pills bt-categories" id="bt-categories" hidden></div>
+    <div class="bt-query-note"><span id="bt-count">等待读取计算目录</span><span>自身公式值与总产出收益分开显示</span></div>
+    <div class="bt-table-wrap"><table class="bt-table"><thead><tr><th>升级 / 研究</th><th>相关数值</th><th>自身公式值</th><th>状态</th><th></th></tr></thead><tbody id="bt-rows"><tr><td colspan="5">读取存档后显示</td></tr></tbody></table></div>
+    <div class="bt-pages"><button type="button" id="bt-prev">上一页</button><span id="bt-page">—</span><button type="button" id="bt-next">下一页</button></div>
+    <div class="bt-detail" id="bt-detail" hidden></div>
+  </div>
+  <div class="bt-trial">
+    <div class="bt-action"><b>即时试算</b><p>每次从上方存档重新开始</p><label>操作<select id="bt-kind"><option value="building">购买建筑</option><option value="upgrade">购买升级</option><option value="spell">施放法术</option></select></label><label>条目<select id="bt-target"></select></label><label id="bt-quantity-label">购买数量<input id="bt-quantity" type="number" min="1" max="10000" step="1" value="1"></label><button type="button" class="bt-primary" id="bt-run" disabled>试算一次</button><small>仅在独立内存副本中执行</small></div>
+    <div class="bt-result" id="bt-result" aria-live="polite"><p class="bt-placeholder">选择建筑、升级或法术，比较动作前后的真实产出。</p></div>
+  </div>
+</section>

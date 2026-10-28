@@ -1,0 +1,64 @@
+代号	英文名	位置	条件	表达式
+C200	Journeymen	core.getResourcePerTick	_loc9_ && Game.hasUpgrade(U<Journeymen>.id) && param1.§'<§() != -1	_loc17_ = Game.getUpgrade(param1.§9;§[param1.§'<§()])
+C200	Journeymen	core.getResourcePerTick	_loc9_ && Game.hasUpgrade(U<Journeymen>.id) && param1.§'<§() != -1 && _loc17_ != null	_loc15_ *= 1 + 0.01 * U<Journeymen>.getBuildingMultiplier_special(_loc17_.§,!Y§,_loc17_.§9!m§)
+C200	Journeymen	core.getResourcePerTick	_loc9_ && Game.hasUpgrade(U<Journeymen>.id) && !(param1.§'<§() != -1)	_loc15_ *= 1 + 0.01 * U<Journeymen>.getBuildingMultiplier_special(param1.§,!Y§)
+E50	Bartering	core.getBuildingCostReal	Game.hasUpgrade(U<Bartering>.id) && param1.id == U<Farm>.id	_loc9_ -= 0.02
+E135	Bribing	core.getBuildingCostReal	Game.hasUpgrade(U<Bribing>.id) && param1.§'<§() != -1	_loc9_ -= 0.01
+A400	Bloodspring	stats.hasBloodline	Game.hasUpgrade(U<Bloodspring>.id) && Game.§-!x§ == -1 && Game.§#3§ == -1 && _loc3_.§-!^§ == Game.§-!^§	return = true
+A400	Bloodspring	stats.hasBloodline	Game.hasUpgrade(U<Bloodspring>.id) && Game.§-!x§ == -1 && _loc3_.§-!^§ == Game.§#3§	return = true
+A400	Bloodspring	stats.hasBloodline	Game.hasUpgrade(U<Bloodspring>.id) && _loc3_.§-!^§ == Game.§-!x§ && Game.reincarnation >= 130	return = true
+A400	Bloodspring	stats.hasBloodline	Game.hasUpgrade(U<Bloodspring>.id) && _loc3_.§-!^§ == Game.§#3§ && Game.reincarnation >= 125 && Game.reincarnation < 130	return = true
+C375	Lightning Rod	core.getResourcePerTick	!param2 && Game.hasSpellActive(U<Lightning Strike>.id) && §@#§ != -1 && param1.§`r§ == §@#§ || param1.id == U<Hall of Legends>.id && Game.hasUpgrade(U<Lightning Rod>.id) || _loc9_ && Game.hasUpgrade(U	_loc15_ *= 1
+C375	Lightning Rod	core.getResourcePerTick	!param2 && Game.hasSpellActive(U<Lightning Strike>.id) && !(§@#§ != -1 && param1.§`r§ == §@#§ || param1.id == U<Hall of Legends>.id && Game.hasUpgrade(U<Lightning Rod>.id) || _loc9_ && Game.hasUpgrade	_loc15_ *= 1 + 0.01 * U<Chain Lightning>.getBuildingMultiplier()
+C375	Lightning Rod	core.getResourcePerTick	!param2 && Game.hasSpellActive(U<Lightning Strike>.id) && (§@#§ != -1 && param1.§`r§ == §@#§ || param1.id == U<Hall of Legends>.id && Game.hasUpgrade(U<Lightning Rod>.id) || _loc9_ && Game.hasUpgrade(	_loc15_ *= Core.applySpellMultiplier(1 + 0.01 * U<Lightning Strike>.getBuildingMultiplier(),U<Lightning Strike>.id)
+S375	Illusion	core.getAssistantsNumReal	!param1 && Game.hasUpgrade(U<Illusion>.id) && Game.hasSpellActive(U<Brainwave>.id)	_loc2_ += U<Brainwave>.§ S§
+W400	Siege	stats.applyBuildingBonuses	param1.§`r§ >= 9 && Game.hasUpgrade(U<Siege>.id)	param2 *= 2
+C425	Distribution	core.getGemMultiplier	Game.hasUpgrade(U<Distribution>.id)	_loc2_ *= 1 + 0.01 * U<Distribution>.getGemMultiplier_special()
+S550	Hierarchy	core.getResourcePerTick	Game.hasUpgrade(U<Hierarchy>.id)	_loc15_ *= 1 + 0.001 * Math.pow(Stats.getManaProduced(true),0.45) * Math.pow(12 - param1.§`r§,2)
+D1275	Solemnity	core.getResourcePerTick	param1.§'<§() != -1 && Game.hasUpgrade(U<Solemnity>.id)	_loc15_ *= 1 + 0.003 * Game.getBuildingNum(param1.id)
+D1275	Solemnity	core.getResourcePerTick	_loc24_ && Game.hasUpgrade(U<Solemnity>.id)	_loc15_ *= 1 + 0.3 * Game.getBuildingNum(param1.id)
+S1275	Sequence	core.getSpellCost	param1.§'a§ || param1.id == U<Tax Collection>.id && Game.hasUpgrade(U<Round Table>.id) || param1.id == U<Twisting Nether>.id && Game.hasUpgrade(U<Sequence>.id)	_loc3_ -= 0.5
+S1275	Sequence	core.getSpellCost	param1.§'a§ || param1.id == U<Tax Collection>.id && Game.hasUpgrade(U<Round Table>.id) || param1.id == U<Twisting Nether>.id && Game.hasUpgrade(U<Sequence>.id)	_loc4_ -= 0.1
+E3300	Estates	stats.hasUnique	!_loc2_ && Game.hasUpgrade(U<Estates>.id) && Game.ascension >= 3	_loc3_ = Game.getUpgrade(param1)
+E3300	Estates	stats.hasUnique	!_loc2_ && Game.hasUpgrade(U<Estates>.id) && Game.ascension >= 3 && _loc3_.§""+§	return = false
+E3300	Estates	stats.hasUnique	!_loc2_ && Game.hasUpgrade(U<Estates>.id) && Game.ascension >= 3 && (_loc3_.§,!Y§ == 0 && _loc3_.§9!m§ == Game.§9!m§ || _loc3_.§,!Y§ == Game.§,!Y§) && (Stats.getFactionAlignment2(_loc3_.§-!^§) == Game	return = true
+E3300	Estates	stats.hasUnique	!_loc2_ && Game.hasUpgrade(U<Estates>.id) && !(Game.ascension >= 3) && Game.§,!Y§ == 1 && (param1 == U<Enchanted Field>.id || param1 == U<Training Grounds>.id || param1 == U<Heaven's Domain>.id || par	return = true
+E3300	Estates	stats.hasUnique	!_loc2_ && Game.hasUpgrade(U<Estates>.id) && !(Game.ascension >= 3) && Game.§,!Y§ == 2 && (param1 == U<Goblin Bank>.id || param1 == U<Undercity>.id || param1 == U<Infernal Realm>.id || param1 == U<Spi	return = true
+E3300	Estates	stats.hasUnique	!_loc2_ && Game.hasUpgrade(U<Estates>.id) && !(Game.ascension >= 3) && Game.§,!Y§ == 3 && (param1 == U<Olympian Hall>.id || param1 == U<Stonehenge>.id || param1 == U<Sunken City>.id || param1 == U<Wyr	return = true
+W3150	Upheaval	core.getResourcePerTick	Game.hasUpgrade(U<Upheaval>.id)	_loc15_ *= 1 + 0.005 * Math.pow(60 + Stats.getMinMaxAlignment(true),0.75) * Math.pow(12 - param1.§`r§,2.15)
+A5625	Reduction	core.getSpellCost	Game.hasUpgrade(U<Reduction>.id) && param1.§>§ > 0	_loc2_ *= 1 + 0.01 * -Math.max(10,Math.min(90,Math.pow(Math.log(1 + param1.§>§ / param1.§+§),2)))
+D5875	Birthright	stats.hasBloodline	Game.hasUpgrade(U<Birthright>.id)	_loc4_ = U<Birthright>.getBloodline()
+D5875	Birthright	stats.hasBloodline	Game.hasUpgrade(U<Birthright>.id) && _loc4_ != null && _loc4_.id == param1	return = true
+E5125	Decentralization	core.getResourcePerTick	Game.hasUpgrade(U<Decentralization>.id)	_loc26_ *= 1 + 0.01 * (Math.pow(3 - 0.25 * param1.§`r§,4) * Math.pow(Stats.getBuildingNumber(),0.6))
+F5750	Corruption	stats.hasUnion	!_loc4_ && Game.hasUpgrade(U<Corruption>.id) && _loc6_.§-!^§ >= 0 && _loc6_.§-!^§ <= 8	_loc5_ = invertAlignment(getFactionAlignment(_loc6_.§-!^§))
+F5750	Corruption	stats.hasUnion	!_loc4_ && Game.hasUpgrade(U<Corruption>.id) && _loc6_.§-!^§ >= 0 && _loc6_.§-!^§ <= 8	_loc7_ = invertAlignment(getFactionAlignment2(_loc6_.§-!^§))
+F5750	Corruption	stats.hasUnion	!_loc4_ && Game.hasUpgrade(U<Corruption>.id) && _loc6_.§-!^§ >= 0 && _loc6_.§-!^§ <= 8	return = _loc5_ == Game.§,!Y§ && _loc7_ == Game.§9!m§
+C11125	Installation	core.getResourcePerTick	Game.hasUpgrade(U<Installation>.id)	_loc14_ *= 1 + 0.013000000000000001 * Math.pow(Game.getBuildingNum(param1.id),0.7)
+D10875	Scriptures	core.getSpellDuration	Game.hasUpgrade(U<Scriptures>.id)	_loc3_ = -1
+D10875	Scriptures	core.getSpellDuration	Game.hasUpgrade(U<Scriptures>.id) && param1.id == U<Cannibalize>.id || param1.id == U<Shadow Embrace>.id || param1.id == U<Wail of the Banshee>.id	_loc3_ = Stats.getTimeStat(1)
+D10875	Scriptures	core.getSpellDuration	Game.hasUpgrade(U<Scriptures>.id) && !(param1.id == U<Cannibalize>.id || param1.id == U<Shadow Embrace>.id || param1.id == U<Wail of the Banshee>.id) && param1.id == U<Hailstorm>.id	_loc3_ = Stats.getTimeStat(129)
+D10875	Scriptures	core.getSpellDuration	Game.hasUpgrade(U<Scriptures>.id) && !(param1.id == U<Cannibalize>.id || param1.id == U<Shadow Embrace>.id || param1.id == U<Wail of the Banshee>.id) && !(param1.id == U<Hailstorm>.id) && param1.id ==	_loc3_ = Stats.getTimeStat(128)
+D10875	Scriptures	core.getSpellDuration	Game.hasUpgrade(U<Scriptures>.id) && !(param1.id == U<Cannibalize>.id || param1.id == U<Shadow Embrace>.id || param1.id == U<Wail of the Banshee>.id) && !(param1.id == U<Hailstorm>.id) && !(param1.id 	_loc3_ = Stats.getTimeStat(1)
+D10875	Scriptures	core.getSpellDuration	Game.hasUpgrade(U<Scriptures>.id) && !(param1.id == U<Cannibalize>.id || param1.id == U<Shadow Embrace>.id || param1.id == U<Wail of the Banshee>.id) && !(param1.id == U<Hailstorm>.id) && !(param1.id 	_loc3_ = Stats.getTimeStat(Stats.getTimeConstant(param1.§-!^§))
+D10875	Scriptures	core.getSpellDuration	Game.hasUpgrade(U<Scriptures>.id) && !(param1.id == U<Cannibalize>.id || param1.id == U<Shadow Embrace>.id || param1.id == U<Wail of the Banshee>.id) && !(param1.id == U<Hailstorm>.id) && !(param1.id 	_loc3_ = Stats.getAlignmentTime(param1.§9!m§)
+D10875	Scriptures	core.getSpellDuration	Game.hasUpgrade(U<Scriptures>.id) && !(param1.id == U<Cannibalize>.id || param1.id == U<Shadow Embrace>.id || param1.id == U<Wail of the Banshee>.id) && !(param1.id == U<Hailstorm>.id) && !(param1.id 	_loc3_ = Stats.getAlignmentTime(param1.§,!Y§)
+D10875	Scriptures	core.getSpellDuration	Game.hasUpgrade(U<Scriptures>.id) && _loc3_ != -1	_loc2_ *= 1 + 0.01 * U<Scriptures>.getSpecificBonus_special(_loc3_)
+F11500	Paradox	stats.hasSet	!_loc2_ && Game.hasUpgrade(U<Paradox>.id)	_loc3_ = invertAlignment(getFactionAlignment(_loc5_))
+F11500	Paradox	stats.hasSet	!_loc2_ && Game.hasUpgrade(U<Paradox>.id)	_loc4_ = invertAlignment(getFactionAlignment2(_loc5_))
+F11500	Paradox	stats.hasSet	!_loc2_ && Game.hasUpgrade(U<Paradox>.id)	return = _loc3_ == Game.§,!Y§ && _loc4_ == Game.§9!m§
+C12250	Compression	core.getFactionCoinChance	!param2 && Game.hasUpgrade(U<Compression>.id) && Game.hasSpellActive(U<Brainwave>.id)	_loc4_ += U<Brainwave>.§^"E§
+S11875	Arcane Efficiency	core.getSpellCost	Game.hasUpgrade(U<Arcane Efficiency>.id) && Game.hasSpellActive(U<Holy Light>.id) && Game.hasSpellActive(U<Fairy Chanting>.id) && param1.id != U<Holy Light>.id && param1.id != U<Fairy Chanting>.id	_loc2_ *= 0.15
+D13125	Asceticism	stats.getBuildingNumber	FOR for each(var _loc4_:§`!;§ in Game.§%<§) && param1 == -1 || param1 == _loc4_.§,!Y§ || param1 == _loc6_ || !param2 && Game.hasUpgrade(U<Asceticism>.id) && (param1 == 2 || param1 == 1) && _loc4_.§,!Y	_loc3_ += _loc4_.§!a§
+D13125	Asceticism	stats.getBuildingNumber	FOR for each(var _loc4_:§`!;§ in Game.§%<§) && param1 == -1 || param1 == _loc4_.§,!Y§ || param1 == _loc6_ || !param2 && Game.hasUpgrade(U<Asceticism>.id) && (param1 == 2 || param1 == 1) && _loc4_.§,!Y	_loc5_ = applyBuildingBonuses(_loc4_,_loc4_.§!a§)
+D13125	Asceticism	stats.getBuildingNumber	FOR for each(var _loc4_:§`!;§ in Game.§%<§) && param1 == -1 || param1 == _loc4_.§,!Y§ || param1 == _loc6_ || !param2 && Game.hasUpgrade(U<Asceticism>.id) && (param1 == 2 || param1 == 1) && _loc4_.§,!Y	_loc3_ += Math.floor(_loc5_)
+D13125	Asceticism	stats.addFactionTime	Game.hasUpgrade(U<Asceticism>.id)	_loc2_ = 0
+D13125	Asceticism	stats.addFactionTime	Game.hasUpgrade(U<Asceticism>.id) && FOR while(_loc2_ <= 15) && !(_loc2_ == Game.§-!^§ || _loc2_ == Game.§#3§ || _loc2_ == Game.§-!x§)	_loc3_ = getTimeConstant(_loc2_)
+D13125	Asceticism	stats.addFactionTime	Game.hasUpgrade(U<Asceticism>.id) && FOR while(_loc2_ <= 15) && !(_loc2_ == Game.§-!^§ || _loc2_ == Game.§#3§ || _loc2_ == Game.§-!x§)	_loc4_ = Game.§5!V§[_loc3_] + 0.1 * param1
+D13125	Asceticism	stats.getUniqueBuildingNumber	FOR for each(var _loc3_:§`!;§ in Game.§%<§) && _loc3_.§'<§() != -1 || !param1 && Game.hasUpgrade(U<Asceticism>.id)	_loc4_ = _loc3_.§!a§
+D13125	Asceticism	stats.getUniqueBuildingNumber	FOR for each(var _loc3_:§`!;§ in Game.§%<§) && _loc3_.§'<§() != -1 || !param1 && Game.hasUpgrade(U<Asceticism>.id) && !param1	_loc4_ = applyBuildingBonuses(_loc3_,_loc4_)
+D13125	Asceticism	stats.getUniqueBuildingNumber	FOR for each(var _loc3_:§`!;§ in Game.§%<§) && _loc3_.§'<§() != -1 || !param1 && Game.hasUpgrade(U<Asceticism>.id)	_loc2_ += Math.floor(_loc4_)
+E13125	Discount	core.getBuildingCostReal	Game.hasUpgrade(U<Discount>.id)	_loc9_ -= U<Discount>.§1!S§
+E13125	Discount	core.getExcavationCost	Game.hasUpgrade(U<Discount>.id)	_loc9_ -= U<Discount>.§1!S§
+E13500	Recession	stats.applyLineageBonuses	!param3 && Game.hasUpgrade(U<Recession>.id) && !Stats.hasLineage(param2,false,true)	param1 = Math.min(param1,U<Recession>.§1"H§)
+E13500	Recession	stats.getBaseLineage	Game.hasUpgrade(U<Recession>.id) && !Stats.hasLineage(param2,false,true)	_loc3_ = Math.min(_loc3_,U<Recession>.§1"H§)
+E13500	Recession	stats.hasLineage	!param2 && !param3 && Game.hasUpgrade(U<Recession>.id) && getFactionAlignment(_loc4_) == getFactionAlignment(Game.§-!^§) || getFactionAlignment2(_loc4_) == getFactionAlignment2(Game.§-!^§)	return = true
