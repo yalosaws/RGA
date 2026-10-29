@@ -1,0 +1,2847 @@
+{
+ "note": "由 脚本/research_formulas.py 从游戏客户端（build/installed-as3-named）提取；html 是中文公式，unit 是游戏描述里的单位，asc 是百分比开始按 Ascension 折算的 A 数",
+ "formulas": {
+  "A200": [
+   {
+    "method": "getClickMultiplier",
+    "label": "点击产量",
+    "html": "3 × <i>本局时间</i><sup>0.7</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "AlchemyCorrosion.getClickMultiplier"
+   }
+  ],
+  "A135": [
+   {
+    "method": "getProductionMultiplier",
+    "label": "所有建筑产能",
+    "html": "0.3 × <i>本R时间</i><sup>0.7</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "AlchemyDecay.getProductionMultiplier"
+   }
+  ],
+  "A25": [
+   {
+    "method": "getSpellDurationFixed",
+    "label": "法术持续时间",
+    "html": "4",
+    "unit": "",
+    "asc": null,
+    "source": "AlchemyDeflagration.getSpellDurationFixed"
+   },
+   {
+    "method": "getSpellCostBonus",
+    "label": "法术消耗",
+    "html": "−400",
+    "unit": "",
+    "asc": null,
+    "source": "AlchemyDeflagration.getSpellCostBonus"
+   }
+  ],
+  "A30": [
+   {
+    "method": "getSpellDurationBonus",
+    "label": "法术持续时间",
+    "html": "0.2 × (<i>农场数量</i> + <i>旅馆数量</i> + <i>铁匠铺数量</i>)<sup>0.8</sup>",
+    "unit": "",
+    "asc": null,
+    "source": "AlchemyDelayedReaction.getSpellDurationBonus"
+   }
+  ],
+  "A150": [
+   {
+    "method": "getSpellDurationMultiplier",
+    "label": "法术持续时间",
+    "html": "1.5 × ln(1 + <i>本局 fc 总数</i>)<sup>1.5</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "AlchemySynthesis.getSpellDurationMultiplier"
+   }
+  ],
+  "A105": [
+   {
+    "method": "getProductionMultiplier",
+    "label": "所有建筑产能",
+    "html": "0.7 × ln(1 + <i>时间跳跃获得的 fc</i> ÷ 2 + <i>本局 fc 总数</i>)<sup>3</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "AlchemyFusion.getProductionMultiplier"
+   }
+  ],
+  "A50": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "90 × (<i>每秒回魔</i> ÷ <i>魔上限</i>)<sup>0.9</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "AlchemyGilding.getBuildingMultiplier",
+    "when": "<i>每秒回魔</i> > <i>魔上限</i> 时，否则为 0"
+   }
+  ],
+  "A250": [
+   {
+    "method": "getGemBonus",
+    "label": "宝石加成",
+    "html": "⌊<i>已花研究点数</i><sup>0.92</sup> ÷ 25⌋",
+    "unit": "%",
+    "asc": null,
+    "source": "AlchemyPhilosophersStone.getGemBonus"
+   }
+  ],
+  "A1": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "200 × <i>助手数</i><sup>0.9</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "AlchemyPlague.getBuildingMultiplier"
+   }
+  ],
+  "A55": [
+   {
+    "method": "getOfflineMultiplier",
+    "label": "离线产能",
+    "html": "5 × <i>本R施法次数</i><sup>0.85</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "AlchemyRefraction.getOfflineMultiplier"
+   }
+  ],
+  "A175": [
+   {
+    "method": "getProductionMultiplier",
+    "label": "所有建筑产能",
+    "html": "2.5 × <i>重生次数</i><sup>2.25</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "AlchemySoulweaving.getProductionMultiplier"
+   }
+  ],
+  "A10": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "90 × <i>女巫集会数量</i>",
+    "unit": "%",
+    "asc": 1,
+    "source": "AlchemyTransmutation.getBuildingMultiplier"
+   }
+  ],
+  "A120": [
+   {
+    "method": "getAssistantsNumBonus",
+    "label": "助手数量",
+    "html": "<i>魔上限</i><sup>0.5</sup>",
+    "unit": "",
+    "asc": null,
+    "source": "AlchemyVivification.getAssistantsNumBonus"
+   }
+  ],
+  "C80": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "7 × ln(1 + <i>本局 fc 总数</i>)<sup>1.4</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "CraftsmanshipApprenticeship.getBuildingMultiplier"
+   }
+  ],
+  "C225": [
+   {
+    "method": "getSpecificBonus",
+    "label": "",
+    "html": "20 × ln(1 + <i>助手数</i>)<sup>2</sup>",
+    "unit": "",
+    "asc": null,
+    "source": "CraftsmanshipAutomatons.getSpecificBonus"
+   }
+  ],
+  "C10": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "70 × <i>农场数量</i>",
+    "unit": "%",
+    "asc": 1,
+    "source": "CraftsmanshipCultivation.getBuildingMultiplier"
+   }
+  ],
+  "C1": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "3 × ln(1 + <i>本局 fc 总数</i>)<sup>3</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "CraftsmanshipDummyTargets.getBuildingMultiplier"
+   }
+  ],
+  "C175": [
+   {
+    "method": "getGemBonus",
+    "label": "宝石加成",
+    "html": "0.25 × <i>建筑总数</i><sup>0.5</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "CraftsmanshipGemcutting.getGemBonus"
+   }
+  ],
+  "C200": [
+   {
+    "method": "",
+    "label": "独特建筑产能",
+    "html": "25 + 1.25 × <i>该独特建筑所属立场的本R时间</i><sup>0.75</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "CraftsmanshipJourneymen.getBuildingMultiplier_special",
+    "note": "独特建筑属于两个立场时，两段时间相加"
+   }
+  ],
+  "C25": [
+   {
+    "method": "getManaRegenBonus",
+    "label": "回魔",
+    "html": "20 × ln(1 + <i>本局施法次数</i>)<sup>2</sup>",
+    "unit": "",
+    "asc": null,
+    "source": "CraftsmanshipLightCondenser.getManaRegenBonus"
+   }
+  ],
+  "C250": [
+   {
+    "method": "getFCCChanceBonus",
+    "label": "fc 获得率",
+    "html": "9 × <i>本R离线时间</i><sup>0.9</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "CraftsmanshipMagnetism.getFCCChanceBonus"
+   },
+   {
+    "method": "getFCCChanceMultiplier",
+    "label": "fc 获得率（乘算）",
+    "html": "50",
+    "unit": "%",
+    "asc": null,
+    "source": "CraftsmanshipMagnetism.getFCCChanceMultiplier"
+   }
+  ],
+  "C50": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "0.3 × ln(1 + <i>本局恶魔 fc</i>)<sup>3</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "CraftsmanshipRefining.getBuildingMultiplier"
+   }
+  ],
+  "C135": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "40 × <i>本局点击次数</i><sup>0.4</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "CraftsmanshipReinforcing.getBuildingMultiplier"
+   }
+  ],
+  "C120": [
+   {
+    "method": "getClickMultiplier",
+    "label": "点击产量",
+    "html": "5 × ln(1 + <i>宝石数</i>)<sup>1.5</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "CraftsmanshipSocketing.getClickMultiplier"
+   }
+  ],
+  "C150": [
+   {
+    "method": "getProductionMultiplier",
+    "label": "所有建筑产能",
+    "html": "18 × <i>已花研究点数</i><sup>0.6</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "CraftsmanshipTinkering.getProductionMultiplier"
+   }
+  ],
+  "C105": [
+   {
+    "method": "getFCCChanceMultiplier",
+    "label": "fc 获得率（乘算）",
+    "html": "1 × <i>独特建筑总数</i><sup>0.5</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "CraftsmanshipWoodcraft.getFCCChanceMultiplier"
+   }
+  ],
+  "D1": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "80 + 8 × <i>本R有法术生效的时间</i><sup>0.8</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "DivineBlessing.getBuildingMultiplier"
+   }
+  ],
+  "D205": [
+   {
+    "method": "getSpellDurationBonus",
+    "label": "法术持续时间",
+    "html": "2 × <i>本局时间</i><sup>0.7</sup>",
+    "unit": "秒",
+    "asc": null,
+    "source": "DivineCommunion.getSpellDurationBonus"
+   },
+   {
+    "method": "getNumClicksMultiplier",
+    "label": "点击次数",
+    "html": "10",
+    "unit": "%",
+    "asc": null,
+    "source": "DivineCommunion.getNumClicksMultiplier"
+   }
+  ],
+  "D25": [
+   {
+    "method": "getProductionMultiplier",
+    "label": "所有建筑产能",
+    "html": "ln(1 + <i>离线产能加成</i>)<sup>2.5</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "DivineCursing.getProductionMultiplier"
+   }
+  ],
+  "D250": [
+   {
+    "method": "getAssistantsNumMultiplier",
+    "label": "助手数量",
+    "html": "ln(1 + <i>本局 fc 总数</i>)<sup>1.5</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "DivineDemonology.getAssistantsNumMultiplier"
+   }
+  ],
+  "D50": [
+   {
+    "method": "getFCCChanceBonus",
+    "label": "fc 获得率",
+    "html": "2 × <i>战士营房数量</i><sup>1.5</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "DivineHallowing.getFCCChanceBonus"
+   }
+  ],
+  "D135": [
+   {
+    "method": "getManaRegenBonus",
+    "label": "回魔",
+    "html": "5 + 0.05 × ln(1 + <i>宝石数</i>)<sup>1.5</sup>",
+    "unit": "",
+    "asc": null,
+    "source": "DivineIllumination.getManaRegenBonus"
+   }
+  ],
+  "D10": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "160 × <i>深渊裂隙数量</i>",
+    "unit": "%",
+    "asc": 1,
+    "source": "DivineInflame.getBuildingMultiplier"
+   }
+  ],
+  "D175": [
+   {
+    "method": "getAssistantsNumBonus",
+    "label": "助手数量",
+    "html": "2.5 × <i>本R神之手生效时间</i><sup>0.75</sup>",
+    "unit": "",
+    "asc": null,
+    "source": "DivineResurrection.getAssistantsNumBonus"
+   }
+  ],
+  "D150": [
+   {
+    "method": "getFCCChanceBonus",
+    "label": "fc 获得率",
+    "html": "5 × <i>已花研究点数</i><sup>0.75</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "DivineRetribution.getFCCChanceBonus"
+   },
+   {
+    "method": "getFCCChanceMultiplier",
+    "label": "fc 获得率（乘算）",
+    "html": "50",
+    "unit": "%",
+    "asc": null,
+    "source": "DivineRetribution.getFCCChanceMultiplier"
+   }
+  ],
+  "D245": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "2.5 × <i>非独特建筑总数</i><sup>0.55</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "DivineSanctification.getBuildingMultiplier"
+   }
+  ],
+  "D200": [
+   {
+    "method": "getSpellDurationMultiplier",
+    "label": "法术持续时间",
+    "html": "20",
+    "unit": "%",
+    "asc": null,
+    "source": "DivineTranscendence.getSpellDurationMultiplier"
+   },
+   {
+    "method": "getSpellCostMultiplier",
+    "label": "法术消耗",
+    "html": "−20",
+    "unit": "%",
+    "asc": null,
+    "source": "DivineTranscendence.getSpellCostMultiplier"
+   }
+  ],
+  "D55": [
+   {
+    "method": "getClickMultiplier",
+    "label": "点击产量",
+    "html": "3 × <i>本局施法次数</i><sup>0.7</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "DivineTransfixion.getClickMultiplier"
+   }
+  ],
+  "D225": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "2.5 × <i>魔上限</i><sup>0.8</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "DivineWeatherControl.getBuildingMultiplier"
+   }
+  ],
+  "E200": [
+   {
+    "method": "getProductionMultiplier",
+    "label": "所有建筑产能",
+    "html": "0.0003 × (100 × <i>奖杯数</i> ÷ <i>奖杯总数</i>)<sup>3.35</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "EconomicsAcquisition.getProductionMultiplier"
+   }
+  ],
+  "E50": [
+   {
+    "method": "",
+    "label": "农场价格增长率",
+    "html": "−0.02",
+    "unit": "",
+    "asc": null,
+    "source": "Formulas.getBuildingCostReal"
+   }
+  ],
+  "E135": [
+   {
+    "method": "",
+    "label": "独特建筑价格增长率",
+    "html": "−0.01",
+    "unit": "",
+    "asc": null,
+    "source": "Formulas.getBuildingCostReal"
+   }
+  ],
+  "E230": [
+   {
+    "method": "getSpecificBonus",
+    "label": "",
+    "html": "25 + 0.25 × <i>本R邪恶立场时间</i><sup>0.5</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "EconomicsCoercion.getSpecificBonus"
+   }
+  ],
+  "E1": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "2 × <i>建筑总数</i><sup>0.8</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "EconomicsCoinage.getBuildingMultiplier"
+   }
+  ],
+  "E25": [
+   {
+    "method": "getAssistantsNumBonus",
+    "label": "助手数量",
+    "html": "4 × <i>本局皇家贸易令次数</i><sup>0.7</sup>",
+    "unit": "",
+    "asc": null,
+    "source": "EconomicsCommerce.getAssistantsNumBonus"
+   }
+  ],
+  "E80": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "(1.75 × <i>中立建筑总数</i>)<sup>0.8</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "EconomicsCommonBusiness.getBuildingMultiplier"
+   }
+  ],
+  "E30": [
+   {
+    "method": "getFCCChanceBonus",
+    "label": "fc 获得率",
+    "html": "3 × <i>本局时间</i><sup>0.7</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "EconomicsDiplomacy.getFCCChanceBonus"
+   },
+   {
+    "method": "getExchangeBonus",
+    "label": "皇家贸易令加成",
+    "html": "0.3 × <i>本局时间</i><sup>0.7</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "EconomicsDiplomacy.getExchangeBonus"
+   }
+  ],
+  "E225": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "1.5 × <i>女巫集会数量</i><sup>0.85</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "EconomicsForgery.getBuildingMultiplier"
+   }
+  ],
+  "E150": [
+   {
+    "method": "getGemBonus",
+    "label": "宝石加成",
+    "html": "2.5 × ⌊<i>皇家贸易令加成（%）</i><sup>0.5</sup>⌋",
+    "unit": "%",
+    "asc": null,
+    "source": "EconomicsConversion.getGemBonus"
+   }
+  ],
+  "E10": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "140 × <i>墓城数量</i>",
+    "unit": "%",
+    "asc": 1,
+    "source": "EconomicsRecycling.getBuildingMultiplier"
+   }
+  ],
+  "E145": [
+   {
+    "method": "",
+    "label": "征税奖励",
+    "html": "+30",
+    "unit": "秒的产量",
+    "asc": null,
+    "source": "TaxCollection.getSpecificBonus"
+   }
+  ],
+  "E250": [
+   {
+    "method": "getManaRegenBonus",
+    "label": "回魔",
+    "html": "⌊10 × <i>本局皇家贸易令次数</i><sup>0.55</sup>⌋ ÷ 10",
+    "unit": "",
+    "asc": null,
+    "source": "EconomicsTradeRoutes.getManaRegenBonus"
+   }
+  ],
+  "S250": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "0.5 × <i>本局产生的法力</i><sup>0.58</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "SpellcraftAeromancy.getBuildingMultiplier"
+   }
+  ],
+  "S135": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "2 × <i>魔上限</i><sup>0.8</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "SpellcraftAugmentation.getBuildingMultiplier"
+   }
+  ],
+  "S10": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "160 × <i>天堂之门数量</i>",
+    "unit": "%",
+    "asc": 1,
+    "source": "SpellcraftChanneling.getBuildingMultiplier"
+   }
+  ],
+  "S50": [
+   {
+    "method": "getSpecificBonus",
+    "label": "",
+    "html": "⌊(<i>女巫集会数量</i> ÷ 600)<sup>0.9</sup>⌋",
+    "unit": "",
+    "asc": null,
+    "source": "SpellcraftConjuration.getSpecificBonus"
+   },
+   {
+    "method": "getOfflineSPCast",
+    "label": "离线施法",
+    "html": "150",
+    "unit": "%",
+    "asc": null,
+    "source": "SpellcraftConjuration.getOfflineSPCast"
+   }
+  ],
+  "S200": [
+   {
+    "method": "getSpellDurationMultiplier",
+    "label": "法术持续时间",
+    "html": "5 × ln(1 + <i>本局产生的法力</i>)<sup>1.5</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "SpellcraftCryomancy.getSpellDurationMultiplier"
+   }
+  ],
+  "S175": [
+   {
+    "method": "getProductionMultiplier",
+    "label": "所有建筑产能",
+    "html": "5000 × <i>本局点击次数</i><sup>0.25</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "SpellcraftEmpoweredLuck.getProductionMultiplier"
+   },
+   {
+    "method": "getElvenChanceBonus",
+    "label": "精灵幸运触发率",
+    "html": "24",
+    "unit": "%",
+    "asc": null,
+    "source": "SpellcraftEmpoweredLuck.getElvenChanceBonus"
+   }
+  ],
+  "S1": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "1.2 × <i>本局产生的法力</i><sup>0.8</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "SpellcraftEnchanting.getBuildingMultiplier"
+   }
+  ],
+  "S180": [
+   {
+    "method": "getProductionMultiplier",
+    "label": "所有建筑产能",
+    "html": "50 + 3 × <i>每秒回魔</i><sup>0.7</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "SpellcraftIncantation.getProductionMultiplier"
+   }
+  ],
+  "S105": [
+   {
+    "method": "getManaRegenBonus",
+    "label": "回魔",
+    "html": "2.5 × <i>已花研究点数</i><sup>0.5</sup>",
+    "unit": "",
+    "asc": null,
+    "source": "SpellcraftMysticism.getManaRegenBonus"
+   }
+  ],
+  "S225": [
+   {
+    "method": "getAssistantsMultiplier",
+    "label": "助手产量",
+    "html": "5 × <i>墓城数量</i><sup>0.75</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "SpellcraftNecromancy.getAssistantsMultiplier"
+   }
+  ],
+  "S215": [
+   {
+    "method": "getProductionMultiplier",
+    "label": "所有建筑产能",
+    "html": "100 × (10 × max(0, <i>生效中的法术数（含阶层）</i>))<sup><i>灵能奔涌阶层</i> + 1</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "SpellcraftProjection.getProductionMultiplier"
+   }
+  ],
+  "S150": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "10 × <i>每秒回魔</i><sup>0.6</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "SpellcraftPyromancy.getBuildingMultiplier"
+   }
+  ],
+  "S30": [
+   {
+    "method": "getMaxManaBonus",
+    "label": "魔上限",
+    "html": "7 × <i>本局时间</i><sup>0.7</sup>",
+    "unit": "",
+    "asc": null,
+    "source": "SpellcraftVacuumancy.getMaxManaBonus"
+   },
+   {
+    "method": "getManaRegenBonus",
+    "label": "回魔",
+    "html": "0.4 × <i>本局时间</i><sup>0.6</sup>",
+    "unit": "",
+    "asc": null,
+    "source": "SpellcraftVacuumancy.getManaRegenBonus"
+   }
+  ],
+  "W1": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "160 + 80 × <i>本局地狱火冲击施放次数</i><sup>0.8</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "WarfareAssault.getBuildingMultiplier"
+   }
+  ],
+  "W205": [
+   {
+    "method": "getManaRegenBonus",
+    "label": "回魔",
+    "html": "3 × <i>助手数</i><sup>0.45</sup>",
+    "unit": "",
+    "asc": null,
+    "source": "WarfareBerserking.getManaRegenBonus"
+   },
+   {
+    "method": "getOfflineSPCast",
+    "label": "离线施法",
+    "html": "300",
+    "unit": "%",
+    "asc": null,
+    "source": "WarfareBerserking.getOfflineSPCast"
+   }
+  ],
+  "W120": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "9 × <i>助手数</i><sup>0.9</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "WarfareBetrayal.getBuildingMultiplier"
+   }
+  ],
+  "W225": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "5 × <i>本R圣光生效时间</i><sup>0.65</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "WarfareCriticalStrike.getBuildingMultiplier"
+   }
+  ],
+  "W200": [
+   {
+    "method": "getExchangeMultiplier",
+    "label": "皇家贸易令加成",
+    "html": "2 × <i>已花研究点数</i><sup>0.6</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "WarfareCrusade.getExchangeMultiplier"
+   }
+  ],
+  "W10": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "130 × <i>战士营房数量</i>",
+    "unit": "%",
+    "asc": 1,
+    "source": "WarfareDueling.getBuildingMultiplier"
+   }
+  ],
+  "W50": [
+   {
+    "method": "getFCCChanceBonus",
+    "label": "fc 获得率",
+    "html": "2 × <i>墓城数量</i><sup>1.2</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "WarfareExertion.getFCCChanceBonus"
+   }
+  ],
+  "W180": [
+   {
+    "method": "",
+    "label": "战争号令计算的建筑数",
+    "html": "× 15",
+    "unit": "",
+    "asc": null,
+    "source": "CallToArms.getBuildingNumber"
+   }
+  ],
+  "W150": [
+   {
+    "method": "getProductionMultiplier",
+    "label": "所有建筑产能",
+    "html": "15 × <i>助手数</i><sup>0.5</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "WarfareInvasion.getProductionMultiplier"
+   }
+  ],
+  "W175": [
+   {
+    "method": "getAssistantsNumBonus",
+    "label": "助手数量",
+    "html": "9 + 0.9 × <i>本R邪恶法术施法次数</i><sup>0.9</sup>",
+    "unit": "",
+    "asc": null,
+    "source": "WarfareOverwhelm.getAssistantsNumBonus"
+   }
+  ],
+  "W135": [
+   {
+    "method": "getMaxManaBonus",
+    "label": "魔上限",
+    "html": "1.3 × <i>奖杯数</i><sup>1.1</sup>",
+    "unit": "",
+    "asc": null,
+    "source": "WarfareRampage.getMaxManaBonus"
+   }
+  ],
+  "W250": [
+   {
+    "method": "getAssistantsNumBonus",
+    "label": "助手数量",
+    "html": "<i>奖杯数</i><sup>1.05</sup>",
+    "unit": "",
+    "asc": null,
+    "source": "WarfareSwarming.getAssistantsNumBonus"
+   },
+   {
+    "method": "getAssistantsNumMultiplier",
+    "label": "助手数量",
+    "html": "10",
+    "unit": "%",
+    "asc": null,
+    "source": "WarfareSwarming.getAssistantsNumMultiplier"
+   }
+  ],
+  "W25": [
+   {
+    "method": "getProductionMultiplier",
+    "label": "所有建筑产能",
+    "html": "10 × <i>本局征税施放次数</i><sup>0.4</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "WarfareWarFunds.getProductionMultiplier"
+   }
+  ],
+  "A330": [
+   {
+    "method": "getProductionMultiplier",
+    "label": "所有建筑产能",
+    "html": "0.05 × max(0, <i>全部时间</i> − <i>全部当前阵营时间</i>)<sup>0.7</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "AlchemyAdaptation.getProductionMultiplier"
+   }
+  ],
+  "A300": [
+   {
+    "method": "getManaRegenMultiplier",
+    "label": "回魔（乘算）",
+    "html": "3.5 × ln(1 + <i>本R产生的法力</i>)<sup>1.5</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "AlchemyCreeping.getManaRegenMultiplier"
+   }
+  ],
+  "A305": [
+   {
+    "method": "getFCCChanceBonus",
+    "label": "fc 获得率",
+    "html": "⌊3.5 × ln(1 + <i>本局施法次数</i>)<sup>3.5</sup>⌋",
+    "unit": "%",
+    "asc": null,
+    "source": "AlchemyEngraving.getFCCChanceBonus"
+   },
+   {
+    "method": "getFCCChanceMultiplier",
+    "label": "fc 获得率（乘算）",
+    "html": "100",
+    "unit": "%",
+    "asc": null,
+    "source": "AlchemyEngraving.getFCCChanceMultiplier"
+   }
+  ],
+  "A281": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "0.75 × <i>本R产生的法力</i><sup>0.75</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "AlchemyInfusion.getBuildingMultiplier"
+   }
+  ],
+  "A270": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "60 + 60 × <i>考古深度</i><sup>0.6</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "AlchemyExplosives.getBuildingMultiplier"
+   }
+  ],
+  "A375": [
+   {
+    "method": "getAssistantsNumMultiplier",
+    "label": "助手数量",
+    "html": "3 × ln(1 + <i>本局产生的法力</i>)<sup>1.5</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "AlchemyTransfusion.getAssistantsNumMultiplier"
+   },
+   {
+    "method": "getAssistantsNumBonus",
+    "label": "助手数量",
+    "html": "300",
+    "unit": "",
+    "asc": null,
+    "source": "AlchemyTransfusion.getAssistantsNumBonus"
+   }
+  ],
+  "C281": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "80 × <i>建筑总数</i><sup>0.8</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "CraftsmanshipArchitecture.getBuildingMultiplier"
+   }
+  ],
+  "C340": [
+   {
+    "method": "getGemMultiplier",
+    "label": "宝石获得量",
+    "html": "10 × <i>全部获得的红宝石</i>",
+    "unit": "%",
+    "asc": null,
+    "source": "CraftsmanshipGemDuster.getGemMultiplier"
+   }
+  ],
+  "C305": [
+   {
+    "method": "getAssistantsNumMultiplier",
+    "label": "助手数量",
+    "html": "0.7 × <i>本R离线时间</i><sup>0.7</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "CraftsmanshipGolemcraft.getAssistantsNumMultiplier"
+   }
+  ],
+  "C400": [
+   {
+    "method": "getFCCChanceBonus",
+    "label": "fc 获得率",
+    "html": "⌊3.5 × ln(1 + <i>本局 fc 总数</i>)<sup>3</sup>⌋",
+    "unit": "%",
+    "asc": null,
+    "source": "CraftsmanshipGravitation.getFCCChanceBonus"
+   },
+   {
+    "method": "getFCCChanceMultiplier",
+    "label": "fc 获得率（乘算）",
+    "html": "100",
+    "unit": "%",
+    "asc": null,
+    "source": "CraftsmanshipGravitation.getFCCChanceMultiplier"
+   }
+  ],
+  "C330": [
+   {
+    "method": "getMaxManaBonus",
+    "label": "魔上限",
+    "html": "15 × <i>已花研究点数</i><sup>0.75</sup>",
+    "unit": "",
+    "asc": null,
+    "source": "CraftsmanshipOverload.getMaxManaBonus"
+   }
+  ],
+  "C300": [
+   {
+    "method": "getSpecificBonus",
+    "label": "",
+    "html": "2000<sup><i>宏大平衡阶层</i> + 1</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "CraftsmanshipWeighting.getSpecificBonus"
+   },
+   {
+    "method": "getSpecificBonus2",
+    "label": "",
+    "html": "25 × ln(1 + <i>魔上限</i>)<sup>2.5</sup><sup><i>宏大平衡阶层</i> + 1</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "CraftsmanshipWeighting.getSpecificBonus2"
+   }
+  ],
+  "D320": [
+   {
+    "method": "getAssistantsMultiplier",
+    "label": "助手产量",
+    "html": "20 × <i>每秒回魔</i><sup>0.8</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "DivineDeliverance.getAssistantsMultiplier"
+   }
+  ],
+  "D350": [
+   {
+    "method": "getAssistantsNumMultiplier",
+    "label": "助手数量",
+    "html": "0.2 × <i>传说圣殿数量</i><sup>0.8</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "DivineDescent.getAssistantsNumMultiplier"
+   }
+  ],
+  "D330": [
+   {
+    "method": "getSpellDurationMultiplier",
+    "label": "法术持续时间",
+    "html": "100",
+    "unit": "",
+    "asc": null,
+    "source": "DivineEternity.getSpellDurationMultiplier"
+   }
+  ],
+  "D300": [
+   {
+    "method": "getManaRegenMultiplier",
+    "label": "回魔（乘算）",
+    "html": "0.35 × <i>魔上限</i><sup>0.35</sup> + 0.035 × ln(1 + <i>魔上限</i>)<sup>3.5</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "DivineMeditation.getManaRegenMultiplier"
+   },
+   {
+    "method": "getOfflineSPCast",
+    "label": "离线施法",
+    "html": "300",
+    "unit": "%",
+    "asc": null,
+    "source": "DivineMeditation.getOfflineSPCast"
+   }
+  ],
+  "D400": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "2.75 × ln(1 + <i>本局产生的法力</i>)<sup>2.75</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "DivineMiracle.getBuildingMultiplier"
+   }
+  ],
+  "D290": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "160 × <i>迷宫数量</i>",
+    "unit": "%",
+    "asc": 1,
+    "source": "DivineMutation.getBuildingMultiplier"
+   }
+  ],
+  "D270": [
+   {
+    "method": "getMaxManaBonus",
+    "label": "魔上限",
+    "html": "50 × <i>遗物数</i><sup>1.1</sup>",
+    "unit": "",
+    "asc": null,
+    "source": "DivineTransubstantiation.getMaxManaBonus"
+   },
+   {
+    "method": "getMaxManaMultiplier",
+    "label": "魔上限（乘算）",
+    "html": "<i>遗物数</i><sup>0.95</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "DivineTransubstantiation.getMaxManaMultiplier"
+   }
+  ],
+  "E330": [
+   {
+    "method": "getProductionMultiplier",
+    "label": "所有建筑产能",
+    "html": "50 × <i>遗物数</i><sup>1.1</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "EconomicsCollection.getProductionMultiplier"
+   }
+  ],
+  "E400": [
+   {
+    "method": "getSpecificBonus",
+    "label": "",
+    "html": "35 + <i>本局点击次数</i><sup>0.35</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "EconomicsInvestment.getSpecificBonus"
+   }
+  ],
+  "E300": [
+   {
+    "method": "getManaRegenBonus",
+    "label": "回魔",
+    "html": "7 × <i>皇家贸易令加成（%）</i><sup>0.7</sup>",
+    "unit": "",
+    "asc": null,
+    "source": "EconomicsOffering.getManaRegenBonus"
+   }
+  ],
+  "E350": [
+   {
+    "method": "getProductionMultiplier",
+    "label": "所有建筑产能",
+    "html": "2.5 × <i>重生次数</i><sup>2.25</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "EconomicsRepurpose.getProductionMultiplier"
+   }
+  ],
+  "E290": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "200 × <i>石柱数量</i>",
+    "unit": "%",
+    "asc": 1,
+    "source": "EconomicsSifting.getBuildingMultiplier"
+   }
+  ],
+  "E320": [
+   {
+    "method": "getFCCChanceBonus",
+    "label": "fc 获得率",
+    "html": "5 × <i>独特建筑总数</i><sup>0.9</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "EconomicsSmuggling.getFCCChanceBonus"
+   },
+   {
+    "method": "getFCCChanceMultiplier",
+    "label": "fc 获得率（乘算）",
+    "html": "100",
+    "unit": "%",
+    "asc": null,
+    "source": "EconomicsSmuggling.getFCCChanceMultiplier"
+   }
+  ],
+  "E270": [
+   {
+    "method": "getSpecificBonus",
+    "label": "",
+    "html": "0.02",
+    "unit": "",
+    "asc": null,
+    "source": "EconomicsSurveyorship.getSpecificBonus"
+   }
+  ],
+  "S281": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "80 + 0.8 × (<i>全部时间</i> − <i>全部无面者时间</i>)<sup>0.8</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "SpellcraftAssimilation.getBuildingMultiplier"
+   }
+  ],
+  "S400": [
+   {
+    "method": "getSpecificBonus",
+    "label": "",
+    "html": "ln(1 + <i>本R单局最高施法次数</i>)<sup>1.5</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "SpellcraftCapacity.getSpecificBonus"
+   }
+  ],
+  "S300": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "25 × <i>本局雷击生效时间</i><sup>0.9</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "SpellcraftChainLightning.getBuildingMultiplier"
+   }
+  ],
+  "S375": [
+   {
+    "method": "",
+    "label": "脑波提供的临时助手",
+    "html": "1 + 0.25 × <i>脑波已生效秒数（含起步时间）</i><sup>1.5</sup>",
+    "unit": "",
+    "asc": null,
+    "source": "Brainwave.onUpdate"
+   }
+  ],
+  "S305": [
+   {
+    "method": "getProductionMultiplier",
+    "label": "所有建筑产能",
+    "html": "ln(1 + <i>离线产能加成</i>)<sup>2.5</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "SpellcraftMesmerization.getProductionMultiplier"
+   }
+  ],
+  "S330": [
+   {
+    "method": "getProductionMultiplier",
+    "label": "所有建筑产能",
+    "html": "3000 × 2<sup>min(300, <i>生效中的法术数（含阶层）</i>) − 3</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "SpellcraftReverberation.getProductionMultiplier",
+    "when": "<i>生效中的法术数（含阶层）</i> ≥ 3 时，否则为 0"
+   }
+  ],
+  "S270": [
+   {
+    "method": "getProductionMultiplier",
+    "label": "所有建筑产能",
+    "html": "1.25 × (0.5 × ln(1 + <i>宝石数</i>))<sup>1.25</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "SpellcraftRunecarving.getProductionMultiplier"
+   }
+  ],
+  "W290": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "200 × <i>传说圣殿数量</i>",
+    "unit": "%",
+    "asc": 1,
+    "source": "WarfareAthletics.getBuildingMultiplier"
+   }
+  ],
+  "W300": [
+   {
+    "method": "getFCCChanceBonus",
+    "label": "fc 获得率",
+    "html": "100 × <i>本R单局最高助手数</i><sup>0.5</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "WarfareDomination.getFCCChanceBonus"
+   },
+   {
+    "method": "getFCCChanceMultiplier",
+    "label": "fc 获得率（乘算）",
+    "html": "100",
+    "unit": "%",
+    "asc": null,
+    "source": "WarfareDomination.getFCCChanceMultiplier"
+   }
+  ],
+  "W270": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "15 × <i>考古深度</i><sup>0.8</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "WarfareEntrench.getBuildingMultiplier"
+   }
+  ],
+  "W330": [
+   {
+    "method": "getClickMultiplier",
+    "label": "点击产量",
+    "html": "2.5 × <i>奖杯数</i>",
+    "unit": "%",
+    "asc": 1,
+    "source": "WarfareHeroism.getClickMultiplier"
+   }
+  ],
+  "W320": [
+   {
+    "method": "getOfflineMultiplier",
+    "label": "离线产能",
+    "html": "10 × <i>考古深度</i><sup>0.9</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "WarfareShattering.getOfflineMultiplier"
+   }
+  ],
+  "W400": [
+   {
+    "method": "",
+    "label": "第 9 档及以上建筑的数量",
+    "html": "× 2",
+    "unit": "",
+    "asc": null,
+    "source": "Utilities.applyBuildingBonuses"
+   }
+  ],
+  "W350": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "8 × ln(1 + <i>石柱每秒产量</i>)<sup>1.8</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "WarfareSurvival.getBuildingMultiplier"
+   }
+  ],
+  "C700": [
+   {
+    "method": "getNumClicks",
+    "label": "点击次数",
+    "html": "<i>⌊10⌋</i>",
+    "unit": "",
+    "asc": null,
+    "source": "CraftsmanshipAlloys.getNumClicks"
+   },
+   {
+    "method": "getClickMultiplier",
+    "label": "点击产量",
+    "html": "<i>fc 获得率（%）</i><sup>0.9</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "CraftsmanshipAlloys.getClickMultiplier"
+   }
+  ],
+  "C600": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "<i>遗物数</i><sup>2</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "CraftsmanshipBlacksmithing.getBuildingMultiplier"
+   }
+  ],
+  "C425": [
+   {
+    "method": "",
+    "label": "宝石加成（乘算）",
+    "html": "0.4 × <i>本R和当前立场不同的立场时间</i><sup>0.6</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "CraftsmanshipDistribution.getGemMultiplier_special",
+    "note": "善良、邪恶、中立三者里去掉当前立场；A2 起有第二立场时，再按秩序、混沌、平衡算一遍加上"
+   }
+  ],
+  "C501": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "60 × <i>铁匠铺数量</i><sup>0.8</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "CraftsmanshipMetallurgy.getBuildingMultiplier"
+   }
+  ],
+  "C475": [
+   {
+    "method": "getGemBonus",
+    "label": "宝石加成",
+    "html": "3 × <i>考古深度</i><sup>0.35</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "CraftsmanshipMinecrafting.getGemBonus"
+   }
+  ],
+  "A575": [
+   {
+    "method": "getMaxManaMultiplier",
+    "label": "魔上限（乘算）",
+    "html": "4.5 × <i>已花研究点数</i><sup>0.45</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "AlchemyElixirs.getMaxManaMultiplier"
+   }
+  ],
+  "A700": [
+   {
+    "method": "getProductionMultiplier",
+    "label": "所有建筑产能",
+    "html": "5 × <i>本局产生的法力</i><sup>0.55</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "AlchemyHexing.getProductionMultiplier"
+   }
+  ],
+  "A550": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "0.7 × <i>本R施法次数</i><sup>0.7</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "AlchemyMineralogy.getBuildingMultiplier"
+   }
+  ],
+  "A510": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "120 × <i>黑暗神殿数量</i>",
+    "unit": "%",
+    "asc": 1,
+    "source": "AlchemyPoisons.getBuildingMultiplier"
+   }
+  ],
+  "A450": [
+   {
+    "method": "getOfflineMultiplier",
+    "label": "离线产能",
+    "html": "120 × <i>本局皇家贸易令次数</i><sup>0.85</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "AlchemyWaste.getOfflineMultiplier"
+   }
+  ],
+  "D450": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "80 + 40 × <i>本R用得最少的立场的时间</i><sup>0.8</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "DivineMercy.getBuildingMultiplier"
+   }
+  ],
+  "D525": [
+   {
+    "method": "getCostReduction",
+    "label": "费用",
+    "html": "50",
+    "unit": "%",
+    "asc": null,
+    "source": "DivineDevotion.getCostReduction"
+   },
+   {
+    "method": "getGemMultiplier",
+    "label": "宝石获得量",
+    "html": "6 + 0.6 × <i>圣光持续时间（秒）</i><sup>0.6</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "DivineDevotion.getGemMultiplier"
+   }
+  ],
+  "D700": [
+   {
+    "method": "getExchangeMultiplier",
+    "label": "皇家贸易令加成",
+    "html": "2 × ln(1 + <i>每秒回魔</i>)<sup>2</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "DivineDispelling.getExchangeMultiplier"
+   }
+  ],
+  "D625": [
+   {
+    "method": "getProductionMultiplier",
+    "label": "所有建筑产能",
+    "html": "15 × <i>本局阵营法术施放次数</i><sup>0.75</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "DivinePurity.getProductionMultiplier"
+   }
+  ],
+  "D650": [
+   {
+    "method": "getManaRegenBonus",
+    "label": "回魔",
+    "html": "1.5 × <i>奖杯数</i><sup>0.85</sup>",
+    "unit": "",
+    "asc": null,
+    "source": "DivineRitualism.getManaRegenBonus"
+   }
+  ],
+  "E425": [
+   {
+    "method": "getExchangeBonus",
+    "label": "皇家贸易令加成",
+    "html": "2 × ln(1 + <i>本局 fc 总数</i>)<sup>2</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "EconomicsInflation.getExchangeBonus"
+   }
+  ],
+  "E575": [
+   {
+    "method": "getGemBonus",
+    "label": "宝石加成",
+    "html": "4 × <i>黑暗神殿数量</i><sup>0.8</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "EconomicsJewellery.getGemBonus"
+   }
+  ],
+  "E510": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "25 × <i>铁匠铺数量</i>",
+    "unit": "%",
+    "asc": 1,
+    "source": "EconomicsMarketing.getBuildingMultiplier"
+   }
+  ],
+  "E700": [
+   {
+    "method": "getAssistantsMultiplier",
+    "label": "助手产量",
+    "html": "0.4 × <i>非独特建筑总数</i><sup>0.8</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "EconomicsSlavery.getAssistantsMultiplier"
+   }
+  ],
+  "E450": [
+   {
+    "method": "getManaRegenMultiplier",
+    "label": "回魔（乘算）",
+    "html": "0.5 × ln(1 + <i>宝石数</i>)<sup>1.35</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "EconomicsUndercutting.getManaRegenMultiplier"
+   }
+  ],
+  "S425": [
+   {
+    "method": "getGemBonus",
+    "label": "宝石加成",
+    "html": "1.2 × <i>本局阵营法术生效时间</i><sup>0.6</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "SpellcraftFocus.getGemBonus"
+   }
+  ],
+  "S475": [
+   {
+    "method": "getMaxManaBonus",
+    "label": "魔上限",
+    "html": "75 × <i>遗物数</i><sup>1.1</sup>",
+    "unit": "",
+    "asc": null,
+    "source": "SpellcraftHeirlooms.getMaxManaBonus"
+   },
+   {
+    "method": "getManaRegenBonus",
+    "label": "回魔",
+    "html": "5 × <i>遗物数</i><sup>1.05</sup>",
+    "unit": "",
+    "asc": null,
+    "source": "SpellcraftHeirlooms.getManaRegenBonus"
+   }
+  ],
+  "S550": [
+   {
+    "method": "",
+    "label": "建筑产能（乘算）",
+    "html": "0.1 × <i>本局产生的法力</i><sup>0.45</sup> × (12 − <i>建筑档位</i>)<sup>2</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "Formulas 建筑产能"
+   }
+  ],
+  "S525": [
+   {
+    "method": "getCallToArmsBonus",
+    "label": "战争号令",
+    "html": "100 + 3 × <i>本R离线时间</i><sup>0.9</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "SpellcraftSpellbinding.getCallToArmsBonus"
+   },
+   {
+    "method": "getOfflineMultiplier",
+    "label": "离线产能",
+    "html": "1.2 × <i>本R连击生效时间</i><sup>0.8</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "SpellcraftSpellbinding.getOfflineMultiplier"
+   }
+  ],
+  "S700": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "0.5 × <i>魔上限</i><sup>0.9</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "SpellcraftTrickery.getBuildingMultiplier"
+   }
+  ],
+  "W501": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "3.5 × ln(1 + <i>离线产能加成</i>)<sup>3.5</sup>",
+    "unit": "%",
+    "asc": 2,
+    "source": "WarfareAmbush.getBuildingMultiplier"
+   }
+  ],
+  "W625": [
+   {
+    "method": "getProductionMultiplier",
+    "label": "所有建筑产能",
+    "html": "15 × <i>本局阵营法术施放次数</i><sup>0.75</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "WarfareBloodlust.getProductionMultiplier"
+   }
+  ],
+  "W650": [
+   {
+    "method": "getAssistantsNumMultiplier",
+    "label": "助手数量",
+    "html": "3.5 × <i>本局点击次数</i><sup>0.35</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "WarfareResilience.getAssistantsNumMultiplier"
+   }
+  ],
+  "W600": [
+   {
+    "method": "getAssistantsNumMultiplier",
+    "label": "助手数量",
+    "html": "<i>本R连击生效时间</i><sup>0.6</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "WarfareStalking.getAssistantsNumMultiplier"
+   }
+  ],
+  "W700": [
+   {
+    "method": "getAssistantsMultiplier",
+    "label": "助手产量",
+    "html": "8 × <i>本R时间</i><sup>0.8</sup>",
+    "unit": "%",
+    "asc": 1,
+    "source": "WarfareTorture.getAssistantsMultiplier"
+   }
+  ],
+  "A1325": [
+   {
+    "method": "getManaRegenBonus",
+    "label": "回魔",
+    "html": "0.15 × <i>考古深度</i><sup>1.15</sup>",
+    "unit": "",
+    "asc": null,
+    "source": "AlchemyCalefaction.getManaRegenBonus"
+   }
+  ],
+  "A1200": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "135 × <i>坚固要塞数量</i>",
+    "unit": "%",
+    "asc": 2,
+    "source": "AlchemyMelting.getBuildingMultiplier"
+   }
+  ],
+  "A1500": [
+   {
+    "method": "getManaRegenMultiplier",
+    "label": "回魔（乘算）",
+    "html": "0.8 × <i>独特建筑总数</i><sup>0.8</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "AlchemySublimation.getManaRegenMultiplier"
+   }
+  ],
+  "C1500": [
+   {
+    "method": "getProductionMultiplier",
+    "label": "所有建筑产能",
+    "html": "0.75 × (<i>时间跳跃时长</i> ÷ 2 + <i>本R中立立场时间</i>)<sup>0.75</sup>",
+    "unit": "%",
+    "asc": 2,
+    "source": "CraftsmanshipGargantuaness.getProductionMultiplier"
+   }
+  ],
+  "C1325": [
+   {
+    "method": "getAssistantsNumMultiplier",
+    "label": "助手数量",
+    "html": "1.75 × ln(1 + <i>本局产生的法力</i>)<sup>1.75</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "CraftsmanshipPlasmation.getAssistantsNumMultiplier"
+   }
+  ],
+  "C1300": [
+   {
+    "method": "getProductionMultiplier",
+    "label": "所有建筑产能",
+    "html": "1.5 × ln(1 + <i>魔上限</i>)<sup>0.8 × ln(1 + <i>宝石获得量倍数</i>)<sup>0.5</sup></sup>",
+    "unit": "%",
+    "asc": 2,
+    "source": "CraftsmanshipScintillation.getProductionMultiplier"
+   }
+  ],
+  "D1175": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "1.6 × <i>fc 获得率（%）</i><sup>0.6</sup>",
+    "unit": "%",
+    "asc": 2,
+    "source": "DivineOblation.getBuildingMultiplier"
+   }
+  ],
+  "D1375": [
+   {
+    "method": "getSpecificBonus",
+    "label": "",
+    "html": "50",
+    "unit": "%",
+    "asc": null,
+    "source": "DivineSoulrending.getSpecificBonus"
+   }
+  ],
+  "D1275": [
+   {
+    "method": "",
+    "label": "独特建筑产能（乘算）",
+    "html": "0.3 × <i>同种建筑数量</i>",
+    "unit": "%",
+    "asc": null,
+    "source": "Formulas 建筑产能"
+   },
+   {
+    "method": "",
+    "label": "非独特建筑产能（乘算）",
+    "html": "30 × <i>同种建筑数量</i>",
+    "unit": "%",
+    "asc": null,
+    "source": "Formulas 建筑产能"
+   }
+  ],
+  "E1225": [
+   {
+    "method": "getSpecificBonus",
+    "label": "",
+    "html": "0.7",
+    "unit": "",
+    "asc": null,
+    "source": "EconomicsHoarding.getSpecificBonus"
+   }
+  ],
+  "E1325": [
+   {
+    "method": "",
+    "label": "皇家贸易令价格增长率",
+    "html": "−0.025",
+    "unit": "",
+    "asc": null,
+    "source": "FactionExchangeUpgrade.costMultiplier"
+   }
+  ],
+  "E1425": [
+   {
+    "method": "getSpecificBonus",
+    "label": "",
+    "html": "1.25 × <i>遗物数</i><sup>1.25</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "EconomicsRarity.getSpecificBonus"
+   }
+  ],
+  "S1500": [
+   {
+    "method": "getSpecificBonus",
+    "label": "",
+    "html": "⌊1 + 0.25 × ln(1 + <i>助手数</i>)<sup>1.25</sup>⌋",
+    "unit": "",
+    "asc": null,
+    "source": "SpellcraftPsionics.getSpecificBonus"
+   }
+  ],
+  "S1275": [
+   {
+    "method": "",
+    "label": "法术阶层价格",
+    "html": "价格指数 1 + 0.6 × <i>阶层</i> 改成 1 + 0.5 × <i>阶层</i>",
+    "unit": "",
+    "asc": null,
+    "source": "Formulas.getSpellCost",
+    "note": "征税（配圆桌）、扭曲虚空按 3^(阶层) 涨价的，底数改成 2.5"
+   }
+  ],
+  "S1450": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "2.5 × <i>持续时间最长的法术的持续时间（秒）</i><sup>0.85</sup>",
+    "unit": "%",
+    "asc": 2,
+    "source": "SpellcraftSpellstorm.getBuildingMultiplier"
+   }
+  ],
+  "W1275": [
+   {
+    "method": "getSpellDurationMultiplier",
+    "label": "法术持续时间",
+    "html": "<i>本R动员令生效时间</i><sup>0.5</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "WarfareAuthority.getSpellDurationMultiplier"
+   }
+  ],
+  "W1400": [
+   {
+    "method": "getMaxManaMultiplier",
+    "label": "魔上限（乘算）",
+    "html": "25 + 0.5 × <i>本局点击次数</i><sup>0.5</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "WarfareCataclysm.getMaxManaMultiplier"
+   }
+  ],
+  "W1375": [
+   {
+    "method": "getFCCChanceBonus",
+    "label": "fc 获得率",
+    "html": "40 × <i>助手数</i><sup>0.4</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "WarfareScavenging.getFCCChanceBonus"
+   },
+   {
+    "method": "getFCCChanceMultiplier",
+    "label": "fc 获得率（乘算）",
+    "html": "160",
+    "unit": "%",
+    "asc": null,
+    "source": "WarfareScavenging.getFCCChanceMultiplier"
+   }
+  ],
+  "A3400": [
+   {
+    "method": "getFCCChanceBonus",
+    "label": "fc 获得率",
+    "html": "3 × <i>世系等级总和</i><sup>2.25</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "AlchemyChemistry.getFCCChanceBonus"
+   },
+   {
+    "method": "getFCCChanceMultiplier",
+    "label": "fc 获得率（乘算）",
+    "html": "300",
+    "unit": "%",
+    "asc": null,
+    "source": "AlchemyChemistry.getFCCChanceMultiplier"
+   }
+  ],
+  "C3000": [
+   {
+    "method": "getProductionMultiplier",
+    "label": "所有建筑产能",
+    "html": "2 × <i>遗物数</i><sup>2</sup>",
+    "unit": "%",
+    "asc": 2,
+    "source": "CraftsmanshipCustomizing.getProductionMultiplier"
+   }
+  ],
+  "C3100": [
+   {
+    "method": "getMaxManaMultiplier",
+    "label": "魔上限（乘算）",
+    "html": "1.5 × <i>本R点击次数</i><sup>0.35</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "CraftsmanshipEngineering.getMaxManaMultiplier"
+   }
+  ],
+  "D2850": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "80 + 2 × <i>全部佣兵时间</i><sup>0.8</sup>",
+    "unit": "%",
+    "asc": 2,
+    "source": "DivineIntervention.getBuildingMultiplier"
+   }
+  ],
+  "D3350": [
+   {
+    "method": "getAssistantsNumBonus",
+    "label": "助手数量",
+    "html": "2.5 × ln(1 + <i>离线产能加成</i>)<sup>2.5</sup>",
+    "unit": "",
+    "asc": null,
+    "source": "DivineVampirism.getAssistantsNumBonus"
+   },
+   {
+    "method": "getAssistantsNumMultiplier",
+    "label": "助手数量",
+    "html": "0.2 × ln(1 + <i>离线产能加成</i>)<sup>2</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "DivineVampirism.getAssistantsNumMultiplier"
+   }
+  ],
+  "E3250": [
+   {
+    "method": "getAssistantsNumBonus",
+    "label": "助手数量",
+    "html": "5 × ln(1 + <i>本局 fc 总数</i>)<sup>2.5</sup>",
+    "unit": "",
+    "asc": null,
+    "source": "EconomicsHirelings.getAssistantsNumBonus"
+   }
+  ],
+  "S3200": [
+   {
+    "method": "getManaRegenMultiplier",
+    "label": "回魔（乘算）",
+    "html": "12 × <i>生效中的法术数（含阶层）</i>",
+    "unit": "%",
+    "asc": null,
+    "source": "SpellcraftManipulation.getManaRegenMultiplier"
+   },
+   {
+    "method": "getOfflineSPCast",
+    "label": "离线施法",
+    "html": "1200",
+    "unit": "%",
+    "asc": null,
+    "source": "SpellcraftManipulation.getOfflineSPCast"
+   }
+  ],
+  "S2900": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "10 × <i>独特建筑总数</i><sup>1.05</sup>",
+    "unit": "%",
+    "asc": 2,
+    "source": "SpellcraftScholarship.getBuildingMultiplier"
+   }
+  ],
+  "W3050": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "2 × <i>助手数</i><sup>0.8</sup>",
+    "unit": "%",
+    "asc": 2,
+    "source": "WarfareFlanking.getBuildingMultiplier"
+   }
+  ],
+  "W3150": [
+   {
+    "method": "",
+    "label": "建筑产能（乘算）",
+    "html": "0.5 × (60 + <i>用得最少的立场编号</i>)<sup>0.75</sup> × (12 − <i>建筑档位</i>)<sup>2.15</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "Formulas 建筑产能",
+    "note": "代码里加的是立场编号（1–6），不是描述说的时间（已对照原始指令），效果基本只随建筑档位变"
+   }
+  ],
+  "A5375": [
+   {
+    "method": "getSpellDurationMultiplier",
+    "label": "法术持续时间",
+    "html": "ln(1 + <i>本局施法次数</i>)<sup>1.8</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "AlchemyAlbedo.getSpellDurationMultiplier"
+   }
+  ],
+  "A5875": [
+   {
+    "method": "getExchangeMultiplier",
+    "label": "皇家贸易令加成",
+    "html": "(0.5 × ln(1 + <i>本局 fc 总数</i>))<sup>1.5</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "AlchemyEquivalence.getExchangeMultiplier"
+   }
+  ],
+  "A5125": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "0.7 × max(<i>本局时间</i>, <i>本R之前几局最高时间</i>)<sup>0.7</sup>",
+    "unit": "%",
+    "asc": 4,
+    "source": "AlchemyPutrefaction.getBuildingMultiplier"
+   }
+  ],
+  "A5625": [
+   {
+    "method": "",
+    "label": "法术消耗",
+    "html": "−max(10, min(90, ln(1 + <i>持续时间</i> ÷ <i>基础持续时间</i>)<sup>2</sup>))",
+    "unit": "%",
+    "asc": null,
+    "source": "Formulas.getSpellCost",
+    "note": "只对有持续时间的法术"
+   }
+  ],
+  "C5625": [
+   {
+    "method": "getSpecificBonus",
+    "label": "",
+    "html": "0.5 × <i>考古深度</i><sup>0.5</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "CraftsmanshipDiscovery.getSpecificBonus"
+   }
+  ],
+  "C5875": [
+   {
+    "method": "getMaxManaMultiplier",
+    "label": "魔上限（乘算）",
+    "html": "50 + <i>最低世系等级</i><sup>0.95</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "CraftsmanshipGenuineness.getMaxManaMultiplier"
+   }
+  ],
+  "C5375": [
+   {
+    "method": "getFCCChanceBonus",
+    "label": "fc 获得率",
+    "html": "7.5 × <i>本局点击次数</i><sup>0.5</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "CraftsmanshipManufacture.getFCCChanceBonus"
+   },
+   {
+    "method": "getFCCChanceMultiplier",
+    "label": "fc 获得率（乘算）",
+    "html": "1.3 × <i>本局点击次数</i><sup>0.3</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "CraftsmanshipManufacture.getFCCChanceMultiplier"
+   }
+  ],
+  "C5125": [
+   {
+    "method": "getProductionMultiplier",
+    "label": "所有建筑产能",
+    "html": "0.8 × <i>助手数</i><sup>0.2</sup>",
+    "unit": "%",
+    "asc": 4,
+    "source": "CraftsmanshipRestauration.getProductionMultiplier"
+   }
+  ],
+  "D5625": [
+   {
+    "method": "getSpecificBonus",
+    "label": "",
+    "html": "50 + 0.25 × <i>本R用得最少的阵营的时间</i><sup>0.5</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "DivineProphecy.getSpecificBonus"
+   }
+  ],
+  "D5125": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "<i>本局点击次数</i><sup>0.5</sup>",
+    "unit": "%",
+    "asc": 4,
+    "source": "DivineSelection.getBuildingMultiplier"
+   }
+  ],
+  "D5375": [
+   {
+    "method": "getManaRegenMultiplier",
+    "label": "回魔（乘算）",
+    "html": "0.75 × <i>本局皇家贸易令次数</i><sup>0.75</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "DivineZealotry.getManaRegenMultiplier"
+   }
+  ],
+  "E5125": [
+   {
+    "method": "",
+    "label": "建筑产能",
+    "html": "(3 − 0.25 × <i>建筑档位</i>)<sup>4</sup> × <i>建筑总数</i><sup>0.6</sup>",
+    "unit": "%",
+    "asc": 4,
+    "source": "Formulas 建筑产能"
+   }
+  ],
+  "E5625": [
+   {
+    "method": "getSpecificBonus",
+    "label": "",
+    "html": "(0.5 × ln(1 + <i>金币</i>))<sup>1.25</sup>",
+    "unit": "",
+    "asc": null,
+    "source": "EconomicsLoanSharking.getSpecificBonus"
+   }
+  ],
+  "E5875": [
+   {
+    "method": "getFCCChanceMultiplier",
+    "label": "fc 获得率（乘算）",
+    "html": "0.4 × <i>本局阵营法术生效时间</i><sup>0.4</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "EconomicsProsperity.getFCCChanceMultiplier"
+   }
+  ],
+  "E5375": [
+   {
+    "method": "getExchangeBonus",
+    "label": "皇家贸易令加成",
+    "html": "<i>本局征税施放次数</i><sup>0.2</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "EconomicsWhipround.getExchangeBonus"
+   },
+   {
+    "method": "getExchangeMultiplier",
+    "label": "皇家贸易令加成",
+    "html": "0.5 × <i>本局征税施放次数</i><sup>0.15</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "EconomicsWhipround.getExchangeMultiplier"
+   }
+  ],
+  "F5250": [
+   {
+    "method": "getOfflineMultiplier",
+    "label": "离线产能",
+    "html": "2 × <i>本R离线时间</i><sup>0.8</sup>",
+    "unit": "%",
+    "asc": 4,
+    "source": "ForbiddenDreamwalking.getOfflineMultiplier"
+   }
+  ],
+  "F5500": [
+   {
+    "method": "getGemBonus",
+    "label": "宝石加成",
+    "html": "2.5 × (0.5 × ln(1 + <i>fc 获得率（%）</i>))<sup>2.5</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "ForbiddenGathering.getGemBonus"
+   }
+  ],
+  "F6000": [
+   {
+    "method": "getSpecificBonus",
+    "label": "",
+    "html": "10 × <i>本局时间</i><sup>0.5</sup>",
+    "unit": "秒",
+    "asc": null,
+    "source": "ForbiddenInevitability.getSpecificBonus"
+   }
+  ],
+  "S5375": [
+   {
+    "method": "getMaxManaBonus",
+    "label": "魔上限",
+    "html": "1000 + 80 × <i>本R生效时间最短的法术的生效时间</i><sup>0.8</sup>",
+    "unit": "",
+    "asc": null,
+    "source": "SpellcraftInvocation.getMaxManaBonus"
+   },
+   {
+    "method": "getMaxManaMultiplier",
+    "label": "魔上限（乘算）",
+    "html": "5.5 + 0.55 × <i>本R生效时间最短的法术的生效时间</i><sup>0.55</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "SpellcraftInvocation.getMaxManaMultiplier"
+   }
+  ],
+  "S5625": [
+   {
+    "method": "getManaRegenMultiplier",
+    "label": "回魔（乘算）",
+    "html": "0.75 × <i>助手数</i><sup>0.25</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "SpellcraftLeylines.getManaRegenMultiplier"
+   }
+  ],
+  "S5875": [
+   {
+    "method": "getAssistantsNumMultiplier",
+    "label": "助手数量",
+    "html": "ln(1 + <i>本R施法次数</i>)<sup>1.75</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "SpellcraftMirrors.getAssistantsNumMultiplier"
+   }
+  ],
+  "S5125": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "1.75 × ln(1 + <i>本局产生的法力</i>)<sup>1.75</sup>",
+    "unit": "%",
+    "asc": 4,
+    "source": "SpellcraftSpilling.getBuildingMultiplier"
+   }
+  ],
+  "W5625": [
+   {
+    "method": "getSpecificBonus",
+    "label": "",
+    "html": "50",
+    "unit": "%",
+    "asc": null,
+    "source": "WarfareConcealment.getSpecificBonus"
+   },
+   {
+    "method": "getGemBonus",
+    "label": "宝石加成",
+    "html": "ln(1 + <i>本局产生的法力</i>)<sup>1.7</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "WarfareConcealment.getGemBonus"
+   }
+  ],
+  "W5375": [
+   {
+    "method": "getAssistantsNumMultiplier",
+    "label": "助手数量",
+    "html": "2.5 × <i>奖杯数</i><sup>0.5</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "WarfareOfficers.getAssistantsNumMultiplier"
+   }
+  ],
+  "W5875": [
+   {
+    "method": "getFCCChanceMultiplier",
+    "label": "fc 获得率（乘算）",
+    "html": "500",
+    "unit": "%",
+    "asc": null,
+    "source": "WarfarePatience.getFCCChanceMultiplier"
+   }
+  ],
+  "W5125": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "0.5 × <i>助手数</i><sup>0.25</sup>",
+    "unit": "%",
+    "asc": 4,
+    "source": "WarfareSovereignty.getBuildingMultiplier"
+   }
+  ],
+  "A11125": [
+   {
+    "method": "getSpecificBonus",
+    "label": "",
+    "html": "<i>生效中的法术数（含阶层）</i><sup>1.5</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "AlchemyAlkahest.getSpecificBonus"
+   }
+  ],
+  "A11625": [
+   {
+    "method": "getMaxManaMultiplier",
+    "label": "魔上限（乘算）",
+    "html": "0.2 × ln(1 + <i>本R fc 总数</i>)<sup>1.8</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "AlchemyAnimaMundi.getMaxManaMultiplier"
+   }
+  ],
+  "A11375": [
+   {
+    "method": "getClickMultiplier",
+    "label": "点击产量",
+    "html": "ln(1 + <i>每秒回魔</i>)<sup>2</sup>",
+    "unit": "%",
+    "asc": 5,
+    "source": "AlchemyAzoth.getClickMultiplier"
+   }
+  ],
+  "A10875": [
+   {
+    "method": "getManaRegenMultiplier",
+    "label": "回魔（乘算）",
+    "html": "1.3 × <i>本R相反立场对应的阵营的时间</i><sup>0.7</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "AlchemyToxicity.getManaRegenMultiplier"
+   }
+  ],
+  "C11375": [
+   {
+    "method": "getSpecificBonus",
+    "label": "",
+    "html": "<i>建筑总数</i><sup>0.5</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "CraftsmanshipExhibition.getSpecificBonus"
+   }
+  ],
+  "C11125": [
+   {
+    "method": "",
+    "label": "建筑产能（乘算）",
+    "html": "1.3 × <i>该建筑数量</i><sup>0.7</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "Formulas 建筑产能"
+   }
+  ],
+  "C10875": [
+   {
+    "method": "getFCCChanceMultiplier",
+    "label": "fc 获得率（乘算）",
+    "html": "0.6 × <i>考古深度</i><sup>0.6</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "CraftsmanshipMasterpiece.getFCCChanceMultiplier"
+   }
+  ],
+  "C11625": [
+   {
+    "method": "getNumClicksMultiplier",
+    "label": "点击次数",
+    "html": "100",
+    "unit": "%",
+    "asc": null,
+    "source": "CraftsmanshipMotusPerpetuum.getNumClicksMultiplier"
+   }
+  ],
+  "D11625": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "50 + <i>本R用得最少的立场的时间</i><sup>0.75</sup>",
+    "unit": "%",
+    "asc": 5,
+    "source": "DivineCompassion.getBuildingMultiplier"
+   }
+  ],
+  "D11375": [
+   {
+    "method": "getSpecificBonus",
+    "label": "",
+    "html": "50",
+    "unit": "%",
+    "asc": null,
+    "source": "DivineRigor.getSpecificBonus"
+   }
+  ],
+  "D10875": [
+   {
+    "method": "getSpecificBonus_special",
+    "label": "",
+    "html": "0.3 × <i>该法术所需阵营（或立场）的本R时间</i><sup>0.7</sup>",
+    "unit": "",
+    "asc": null,
+    "source": "DivineScriptures.getSpecificBonus_special"
+   }
+  ],
+  "D11125": [
+   {
+    "method": "getSpecificBonus",
+    "label": "",
+    "html": "<i>遗物数</i><sup>0.7</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "DivineViriditas.getSpecificBonus"
+   }
+  ],
+  "E11125": [
+   {
+    "method": "getProductionMultiplier",
+    "label": "所有建筑产能",
+    "html": "1.2 × <i>皇家贸易令加成（%）</i><sup>0.8</sup>",
+    "unit": "%",
+    "asc": 5,
+    "source": "EconomicsGrayFriday.getProductionMultiplier"
+   }
+  ],
+  "E11375": [
+   {
+    "method": "getGemBonus",
+    "label": "宝石加成",
+    "html": "2.25 × ln(1 + <i>助手数</i>)<sup>2.25</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "EconomicsHeist.getGemBonus"
+   }
+  ],
+  "E10875": [
+   {
+    "method": "getExchangeBonus",
+    "label": "皇家贸易令加成",
+    "html": "ln(1 + <i>本R单局最高助手数</i>)<sup>2</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "EconomicsRigmarole.getExchangeBonus"
+   }
+  ],
+  "E11625": [
+   {
+    "method": "getAssistantsNumMultiplier",
+    "label": "助手数量",
+    "html": "25 + 0.25 × ln(1 + <i>宝石数</i>)<sup>1.5</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "EconomicsSurplus.getAssistantsNumMultiplier"
+   }
+  ],
+  "F11000": [
+   {
+    "method": "getSpecificBonus",
+    "label": "",
+    "html": "0.5 × <i>本R阵营法术生效时间</i><sup>0.5</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "ForbiddenGodslaying.getSpecificBonus"
+   }
+  ],
+  "F11250": [
+   {
+    "method": "getSpecificBonus",
+    "label": "",
+    "html": "<i>本局离线时间</i><sup>0.5</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "ForbiddenInanity.getSpecificBonus"
+   }
+  ],
+  "S11625": [
+   {
+    "method": "getFCCChanceMultiplier",
+    "label": "fc 获得率（乘算）",
+    "html": "1.5 × <i>奖杯数</i><sup>0.5</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "SpellcraftCompleteness.getFCCChanceMultiplier"
+   }
+  ],
+  "S11375": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "ln(1 + <i>本局施法次数</i>)<sup>2</sup>",
+    "unit": "%",
+    "asc": 5,
+    "source": "SpellcraftConcentration.getBuildingMultiplier"
+   }
+  ],
+  "S10875": [
+   {
+    "method": "getMaxManaBonus",
+    "label": "魔上限",
+    "html": "15 × ln(1 + <i>本R单局最高魔上限</i>)<sup>3</sup>",
+    "unit": "",
+    "asc": null,
+    "source": "SpellcraftEncompass.getMaxManaBonus"
+   }
+  ],
+  "S11125": [
+   {
+    "method": "getSpecificBonus",
+    "label": "",
+    "html": "ln(1 + <i>本局产生的法力</i>)<sup>1.5</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "SpellcraftMultiplication.getSpecificBonus"
+   }
+  ],
+  "W11625": [
+   {
+    "method": "getProductionMultiplier",
+    "label": "所有建筑产能",
+    "html": "85 + 1.85 × <i>本R用得最少的阵营的时间</i><sup>0.85</sup>",
+    "unit": "%",
+    "asc": 5,
+    "source": "WarfareEradication.getProductionMultiplier"
+   }
+  ],
+  "W11375": [
+   {
+    "method": "getSpellDurationMultiplier",
+    "label": "法术持续时间",
+    "html": "0.3 × <i>本局时间</i><sup>0.7</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "WarfarePacifism.getSpellDurationMultiplier"
+   }
+  ],
+  "W10875": [
+   {
+    "method": "getAssistantsNumBonus",
+    "label": "助手数量",
+    "html": "8 × <i>本局皇家贸易令次数</i><sup>0.8</sup>",
+    "unit": "",
+    "asc": null,
+    "source": "WarfareRevolution.getAssistantsNumBonus"
+   }
+  ],
+  "W11125": [
+   {
+    "method": "getOfflineMultiplier",
+    "label": "离线产能",
+    "html": "25 + 2.5 × <i>持续时间最长的法术的持续时间（秒）</i><sup>0.75</sup>",
+    "unit": "%",
+    "asc": 5,
+    "source": "WarfareVengeance.getOfflineMultiplier"
+   }
+  ],
+  "A12250": [
+   {
+    "method": "getManaRegenMultiplier",
+    "label": "回魔（乘算）",
+    "html": "15 + 3 × (<i>本R考古次数</i> × (1 + <i>本局免费考古重置次数</i> + <i>本R之前几局免费考古重置次数</i> + <i>本局考古重置次数</i> + <i>本R之前几局考古重置次数</i>))<sup>0.75</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "AlchemyFolgoration.getManaRegenMultiplier"
+   },
+   {
+    "method": "getFCCChanceMultiplier",
+    "label": "fc 获得率（乘算）",
+    "html": "15 + 3 × (<i>本R考古次数</i> × (1 + <i>本局免费考古重置次数</i> + <i>本R之前几局免费考古重置次数</i> + <i>本局考古重置次数</i> + <i>本R之前几局考古重置次数</i>))<sup>0.75</sup>",
+    "unit": "",
+    "asc": null,
+    "source": "AlchemyFolgoration.getFCCChanceMultiplier"
+   }
+  ],
+  "A11875": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "0.7 × <i>本R地狱火冲击生效时间</i><sup>0.7</sup>",
+    "unit": "%",
+    "asc": 5,
+    "source": "AlchemyLiquefaction.getBuildingMultiplier"
+   }
+  ],
+  "C12250": [
+   {
+    "method": "",
+    "label": "fc 获得率",
+    "html": "1.5 × (<i>脑波已生效秒数（含起步时间）</i> ÷ 60)<sup>2.25</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "Brainwave.onUpdate"
+   }
+  ],
+  "C11875": [
+   {
+    "method": "getSpecificBonus",
+    "label": "",
+    "html": "2 × <i>本R月之祝福生效时间</i><sup>0.8</sup>",
+    "unit": "",
+    "asc": null,
+    "source": "CraftsmanshipPlating.getSpecificBonus"
+   }
+  ],
+  "D12250": [
+   {
+    "method": "getSpecificBonus",
+    "label": "",
+    "html": "10 + 0.7 × <i>本R神之手生效时间</i><sup>0.7</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "DivineEnochian.getSpecificBonus"
+   }
+  ],
+  "D11875": [
+   {
+    "method": "getSpecificBonus",
+    "label": "",
+    "html": "2.5 × <i>幽深矿井最高等级</i><sup>0.5</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "DivineVirtues.getSpecificBonus"
+   }
+  ],
+  "E12250": [
+   {
+    "method": "getGemMultiplier",
+    "label": "宝石获得量",
+    "html": "0.8 × <i>持续时间最长的法术的持续时间（秒）</i><sup>0.8</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "EconomicsOilery.getGemMultiplier"
+   }
+  ],
+  "E11875": [
+   {
+    "method": "getSpecificBonus",
+    "label": "",
+    "html": "1.5 × ln(1 + <i>助手数</i>)<sup>1.5</sup>",
+    "unit": "",
+    "asc": null,
+    "source": "EconomicsOverworking.getSpecificBonus"
+   }
+  ],
+  "F12500": [
+   {
+    "method": "getAssistantsNumMultiplier",
+    "label": "助手数量",
+    "html": "50 × <i>不同阵营的传承数</i><sup>2.5</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "ForbiddenAvatars.getAssistantsNumMultiplier"
+   }
+  ],
+  "S11875": [
+   {
+    "method": "",
+    "label": "其他法术消耗",
+    "html": "× 0.15",
+    "unit": "",
+    "asc": null,
+    "source": "Formulas.getSpellCost",
+    "note": "神圣之光和仙灵吟唱都生效时"
+   }
+  ],
+  "S12250": [
+   {
+    "method": "getSpecificBonus",
+    "label": "",
+    "html": "20 + 0.4 × <i>本R亡灵时间</i><sup>0.4</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "SpellcraftNecrodoomancy.getSpecificBonus"
+   }
+  ],
+  "W12250": [
+   {
+    "method": "getProductionMultiplier",
+    "label": "所有建筑产能",
+    "html": "0.01 × ln(1 + <i>本R单局最高连击计数</i>)<sup>5</sup>",
+    "unit": "%",
+    "asc": 5,
+    "source": "WarfareRaiding.getProductionMultiplier"
+   }
+  ],
+  "W11875": [
+   {
+    "method": "getSpecificBonus",
+    "label": "",
+    "html": "<i>本R单局最高宏大平衡目标数</i><sup>0.9</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "WarfareScouting.getSpecificBonus"
+   }
+  ],
+  "A13125": [
+   {
+    "method": "getSpecificBonus",
+    "label": "",
+    "html": "2 × ln(1 + <i>本局征税施放次数</i>)<sup>2</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "AlchemyCinnabar.getSpecificBonus"
+   }
+  ],
+  "A13500": [
+   {
+    "method": "getOfflineMultiplier",
+    "label": "离线产能",
+    "html": "0.7 × <i>本R平衡立场时间</i><sup>0.7</sup>",
+    "unit": "%",
+    "asc": 5,
+    "source": "AlchemyLunafaction.getOfflineMultiplier"
+   }
+  ],
+  "C13500": [
+   {
+    "method": "getBuildingMultiplier",
+    "label": "建筑产能",
+    "html": "0.75 × <i>助手数</i><sup>0.25</sup>",
+    "unit": "%",
+    "asc": 5,
+    "source": "CraftsmanshipAssemblyLine.getBuildingMultiplier"
+   }
+  ],
+  "C13125": [
+   {
+    "method": "getFCCChanceMultiplier",
+    "label": "fc 获得率（乘算）",
+    "html": "9 × <i>生效中的法术数（含阶层）</i><sup>0.9</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "CraftsmanshipPottery.getFCCChanceMultiplier"
+   }
+  ],
+  "D13500": [
+   {
+    "method": "getManaRegenMultiplier",
+    "label": "回魔（乘算）",
+    "html": "2 × ln(1 + <i>单局最高回魔（本R）</i>)<sup>2</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "DivineAfterlife.getManaRegenMultiplier"
+   }
+  ],
+  "E13125": [
+   {
+    "method": "",
+    "label": "皇家贸易令、考古、建筑价格增长率",
+    "html": "−0.02",
+    "unit": "",
+    "asc": null,
+    "source": "Formulas.getBuildingCostReal 等"
+   }
+  ],
+  "F13250": [
+   {
+    "method": "getProductionMultiplier",
+    "label": "所有建筑产能",
+    "html": "1.2 × <i>其他阵营已买升级数</i><sup>1.2</sup>",
+    "unit": "%",
+    "asc": 5,
+    "source": "ForbiddenTaboo.getProductionMultiplier"
+   }
+  ],
+  "F13750": [
+   {
+    "method": "getOfflineMultiplier",
+    "label": "离线产能",
+    "html": "2 × ln(1 + <i>单局最高助手数（本R）</i>)<sup>2</sup>",
+    "unit": "%",
+    "asc": 5,
+    "source": "ForbiddenTheUnseen.getOfflineMultiplier"
+   }
+  ],
+  "S13125": [
+   {
+    "method": "getAssistantsNumMultiplier",
+    "label": "助手数量",
+    "html": "ln(1 + <i>本局产生的法力</i>)<sup>2</sup>",
+    "unit": "%",
+    "asc": null,
+    "source": "SpellcraftFantasia.getAssistantsNumMultiplier"
+   }
+  ],
+  "S13500": [
+   {
+    "method": "getProductionMultiplier",
+    "label": "所有建筑产能",
+    "html": "0.7 × <i>皇家贸易令加成（%）</i><sup>0.7</sup>",
+    "unit": "%",
+    "asc": 5,
+    "source": "SpellcraftLegerdemain.getProductionMultiplier"
+   }
+  ],
+  "W13125": [
+   {
+    "method": "getSpecificBonus",
+    "label": "",
+    "html": "⌊1 + 0.5 × ln(1 + <i>本R单局最高施法次数</i>)<sup>1.25</sup>⌋",
+    "unit": "",
+    "asc": null,
+    "source": "WarfareArtillery.getSpecificBonus"
+   }
+  ],
+  "W13500": [
+   {
+    "method": "getEvilBonus",
+    "label": "邪恶建筑",
+    "html": "0.75 × <i>本R善良立场时间</i><sup>0.75</sup>",
+    "unit": "%",
+    "asc": 5,
+    "source": "WarfareBackfire.getEvilBonus"
+   },
+   {
+    "method": "getChaosBonus",
+    "label": "混沌建筑",
+    "html": "0.75 × <i>本R秩序立场时间</i><sup>0.75</sup>",
+    "unit": "%",
+    "asc": 5,
+    "source": "WarfareBackfire.getChaosBonus"
+   },
+   {
+    "method": "getChaosEvilBonus",
+    "label": "混沌+邪恶建筑",
+    "html": "0.75 × (<i>本R善良立场时间</i> + <i>本R秩序立场时间</i>)<sup>0.75</sup>",
+    "unit": "%",
+    "asc": 5,
+    "source": "WarfareBackfire.getChaosEvilBonus"
+   },
+   {
+    "method": "getGoodBonus",
+    "label": "善良建筑",
+    "html": "0.75 × <i>本R邪恶立场时间</i><sup>0.75</sup>",
+    "unit": "%",
+    "asc": 5,
+    "source": "WarfareBackfire.getGoodBonus"
+   },
+   {
+    "method": "getOrderBonus",
+    "label": "秩序建筑",
+    "html": "0.75 × <i>本R混沌立场时间</i><sup>0.75</sup>",
+    "unit": "%",
+    "asc": 5,
+    "source": "WarfareBackfire.getOrderBonus"
+   },
+   {
+    "method": "getGoodOrderBonus",
+    "label": "善良+秩序建筑",
+    "html": "0.75 × (<i>本R邪恶立场时间</i> + <i>本R混沌立场时间</i>)<sup>0.75</sup>",
+    "unit": "%",
+    "asc": 5,
+    "source": "WarfareBackfire.getGoodOrderBonus"
+   }
+  ]
+ }
+}

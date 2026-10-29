@@ -128,6 +128,16 @@ class Api:
         if self._clicker:
             self._clicker.close()
 
+    # ---- 自动点击（右下角的悬浮胶囊） ----
+    def click_status(self):
+        return self._clicker.status() if self._clicker else {'ok': False, 'error': '自动点击不可用'}
+
+    def click_configure(self, settings):
+        return self._clicker.command('configure', settings) if self._clicker else {'ok': False}
+
+    def click_toggle(self):
+        return self._clicker.command('toggle') if self._clicker else {'ok': False}
+
     # ---- 存档 ----
     def read_live(self):
         return self._live_reader.read()
@@ -249,7 +259,7 @@ def main():
     if getattr(sys, 'frozen', False):
         content.clean_cache(cache, store)
     server = content.Server(store, PORT)
-    api = Api(AutoClicker())  # 固定 F8 启停、35 毫秒间隔，没有设置页
+    api = Api(AutoClicker(os.path.join(storage, 'autoclick.json')))  # 设置在界面右下角的悬浮胶囊里改
     preview_page = os.environ.get('RGA_PREVIEW_PAGE', 'calc')
     if preview_page not in ('calc', 'live', 'save'):
         preview_page = 'calc'

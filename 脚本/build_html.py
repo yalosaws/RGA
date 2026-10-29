@@ -31,7 +31,7 @@ GUIDES = [('r0', 'R0 攻略', '攻略/Realm-Grinder-R0攻略.md'), ('a0', 'A0 �
           ('a1', 'A1 攻略要点', '攻略/A1攻略要点.md')]
 TIPS = ['r0', 'a0', 'a1']  # 合在「攻略要点」一页里的几篇
 # 工作表序号（按工作簿顺序，从 1 起）→ 导航名、标题；9 是 WPS 隐藏的图片表
-SHEETS = {1: ('阵营', '阵营升级、遗产、UB、血统、世系、契印、法术'), 2: ('传承', '传承组合（Legacy Combo）'),
+SHEETS = {1: ('阵营', '阵营升级、遗产、UB、血统、世系、契印'), 2: ('传承', '传承组合（Legacy Combo）'),
           3: ('挑战', '挑战（Challenge）'), 4: ('UB 分布', 'UB 分布'), 5: ('研究', '研究（Research）'),
           6: ('建筑升级', '建筑升级（产能加成部分忽略 Ascension 惩罚）'), 7: ('隐藏奖杯', '隐藏奖杯（Secret Trophy）'),
           8: ('活动', '活动（Event）'), 10: ('遗物', '遗物（Artifact）')}
@@ -44,17 +44,17 @@ ALIAS = {'TC': '征税', 'CtA': '动员令', 'HoL': '传说圣殿', 'BF': '嗜�
 ART_FACTIONS = ['仙灵', '精灵', '天使', '地精', '亡灵', '恶魔', '泰坦', '德鲁伊', '无面者', '矮人', '卓尔', '佣兵']
 # 程序版本：改了功能就加版本号，在 CHANGES 最前面写这一版改了什么
 VERSION = '0.5.4'  # 还没到正式发布，用 0.x（用户要求）
+# 构筑辅助、实时读数暂时下线，测试完再进更新（用户要求）；本地测试用 RGA_BUILD_TOOLS=1 生成
+BUILD_TOOLS = os.environ.get('RGA_BUILD_TOOLS') == '1'
 AUTHOR = 'Yalosaws'
 CHANGES = [
     ('0.5.4', '2026-10-29', [
+        '研究详情卡加上「公式」：253 项研究的效果公式从游戏客户端代码里提取，翻成中文（变量标明本局 / 本R / 全部），写上单位和从第几次 Ascension 开始打折；效果写在游戏其他地方的也逐项找出来补上',
+        '新增法术页（资料表第一项）：每个法术一张卡片，写着效果、4.3 公式、法力和持续时间、法术奖杯、2 阶起每阶的附加效果、首次解锁条件和费用，另有阶层规则（上限、龙族解锁、费用、飞升惩罚、额外阶层、法术标签）；读到存档后显示阶层上限、龙族解锁进度，每张卡片下面显示已解锁 / 已买的阶层、下一阶的生效时间进度和条件、施放次数和生效时间，可筛「能用」「还能升阶」；阵营表的法术几列、「我的存档」的三个魔法分页都搬到这里',
+        '自动连点做成右下角的小胶囊：点开在原地展开设置，可开关、调点击间隔（对数刻度，35 毫秒最佳点有标记、拖到附近会吸住）、换启停快捷键，还能设成连点时同时按住一个键（默认 R）',
         '活动页重做：顶上选活动，下面分资源、法术、升级、任务奖杯、壮举奖杯、特殊升级几段；活动阵营升级排成「阶层 × 阵营」的格子，4.2.1 起新增的壮举归到各自活动里',
     ]),
     ('0.5.3', '2026-10-27', [
-        '构筑辅助可读取游戏计算快照：同步研究、升级、统计、建筑与法术状态，每次实时试算前重新读取；沿用客户端缓存与游戏帧时钟',
-        '新增实时读数验证入口：只读游戏进程中的金币、魔力、建筑数量与法术状态，可手动开始、停止，离开页面自动停止',
-        '存档改用文件变化通知，游戏保存后立即同步；合并重复通知并校验写入完整性，不再额外等待 10 秒轮询',
-        '新增构筑辅助：按当前存档查询升级自身效果，并在内存副本中试买建筑、升级和施放法术，比较实际产出变化',
-        '构筑试算复用内存状态和客户端缓存，避免每次重建整个游戏；同一存档的重复查询与试算直接复用结果',
         '研究页的代号标签按分支着色，和存档页的标记颜色统一；已解锁只显示右上角的勾，不再把标签染成蓝底',
     ]),
     ('0.5.2', '2026-10-27', [
@@ -513,6 +513,11 @@ def build_research(ws):
             items.append(dict(id=cid, b=code[0], code=code, old=old.group(1) if old else '', n=n, zh=zh, en=en, fac=val(r + 2, c),
                               r=next(x for x in range(16, 300) if rs_cap(x) >= n), cond=cond, eff=eff,
                               ch=TERMS.render(cond, cid), eh=TERMS.render(eff, cid), note=re.sub(r'^[（(]|[）)]$', '', note)))
+    # 效果公式：research_formulas.py 从游戏客户端提取（按当前代号）
+    fpath = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '资料', '研究公式（客户端）.json')
+    formulas = json.load(open(fpath, encoding='utf-8'))['formulas'] if os.path.exists(fpath) else {}
+    for x in items:
+        x['fm'] = [{k: f[k] for k in ('label', 'html', 'unit', 'asc', 'when', 'note') if f.get(k)} for f in formulas.get(x['code'], [])]
     codes = {x['code']: x['code'] for x in items}
     codes.update({x['old']: x['code'] for x in items if x['old']})
     for x in items:  # 解锁条件里提到的研究代号（旧代号换成新的）就是前置
@@ -537,6 +542,140 @@ RS_HTML = """<div class="cl rs" data-ok="1"><div class="cl-top">
 <div hidden>%%IDX%%</div></div>
 <script>window.RS_DATA = %%DATA%%;</script>
 """
+
+# 法术页的脚本：搜索、筛选；读到存档后（spellsave 事件，save_tools.js 发）显示阶层上限、龙族解锁和每个法术的阶层进度
+SP_JS = r"""<script>(function(){
+  var root = document.getElementById('sp-root'); if (!root) return;
+  var INFO = window.SP_DATA || {};
+  var cards = [].slice.call(root.querySelectorAll('.sp-c')), heads = [].slice.call(root.querySelectorAll('.art-g[data-g]'));
+  var q = document.getElementById('sp-q'), seg = document.getElementById('sp-seg'), bar = document.getElementById('sp-bar'), top = root.querySelector('.cl-top');
+  var STAGE = [['孵化！', '通用法术'], ['小龙', '邪恶法术'], ['龙族', '善良法术'], ['远古巨龙', '其余法术']];
+  var SV = null, sel = '', state = {};
+  function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  function num(v){
+    if (v == null || isNaN(v)) return '—';
+    var a = Math.abs(v);
+    if (a >= 1e9) return v.toExponential(2).replace('e+', 'e');
+    return v.toLocaleString('zh-CN', {maximumFractionDigits: a < 10 ? 2 : 0});
+  }
+  function dur(s){
+    if (s == null || isNaN(s)) return '—';
+    s = Math.floor(Math.max(0, s));
+    if (s < 1) return '0秒';
+    var d = Math.floor(s / 86400), h = Math.floor(s % 86400 / 3600), m = Math.floor(s % 3600 / 60), x = s % 60;
+    return (d ? d + '天' : '') + (h ? h + '小时' : '') + (m ? m + '分' : '') + (x && !d && !h ? x + '秒' : '') || '0秒';
+  }
+  // 哪一段龙族解锁开放这个法术的阶层
+  function gate(x){ return /通用法术/.test(x.tags) ? 0 : /邪恶法术/.test(x.tags) ? 1 : /善良法术/.test(x.tags) ? 2 : 3; }
+  function cap(x){ if (!SV || SV.asc < 1) return 1; return x.k === 'dragon' ? 5 : Math.min(SV.asc + 1, 5); }
+  function target(x, T){ try { return new Function('T', 'A', 'return ' + x.js)(T, Math.max(SV.asc, 1)); } catch (e) { return NaN; } }
+  function strip(id, x, p){
+    var c = cap(x), out = [], next = 0, hi = 1;
+    if (x.k !== 'normal' && x.k !== 'dragon') {
+      out.push('<div class="sp-row"><small>阶层</small>' + (x.k === 'self' ? '自有阶层，见上面说明' : '没有阶层') + '</div>');
+    } else if (SV.asc < 1) {
+      out.push('<div class="sp-row"><small>阶层</small>A0 没有阶层，A1 起开放 2 阶</div>');
+    } else {
+      var pills = '<span class="sp-t own" title="1 阶">1</span>';
+      for (var t = 2; t <= 5; t++) {
+        var st = p.tiers[t] || '', cls = t > c ? 'cap' : st || 'lock';
+        var tip = t > c ? '以后的飞升开放' : st === 'own' ? '已解锁，本次重生已购买' : st === 'unl' ? '已解锁，本次重生还没买' : '还没解锁';
+        if (t <= c && st) hi = t;
+        if (t <= c && !st && !next) next = t;
+        pills += '<span class="sp-t ' + cls + '" title="' + t + ' 阶：' + tip + '">' + t + '</span>';
+      }
+      var now = p.on ? '<span class="sp-on">生效中 · ' + (p.act + 1) + ' 阶</span>' : '';
+      out.push('<div class="sp-row"><small>阶层</small><span class="sp-ts">' + pills + '</span><span class="sp-cap">已解锁到 ' + hi + ' 阶 / 上限 ' + c + ' 阶</span>' + now + '</div>');
+      if (next) {
+        var T = next - 1, req = [];
+        if (!SV.stages[gate(x)]) req.push('<span class="sp-warn">先完成龙族「' + STAGE[gate(x)][0] + '」</span>');
+        if (x.k !== 'dragon') {
+          var have = p.a0 + p.a1, need = 3600 * T, pct = Math.min(100, have / need * 100);
+          req.push('生效时间 <span class="sp-pb"><i style="width:' + pct + '%"></i></span> ' + dur(have) + ' / ' + dur(need) + (have >= need ? ' <span class="ok">✓</span>' : ''));
+        }
+        var goal = target(x, T), cur = x.cur && SV.cur[x.cur], f = x.time ? dur : num;
+        var cond = '主题条件 ' + f(goal);
+        if (cur != null && x.cur) cond += '（现在 ' + f(cur) + (cur >= goal ? ' <span class="ok">✓</span>' : '') + '）';
+        req.push(cond);
+        out.push('<div class="sp-row sp-next"><small>解锁 ' + next + ' 阶</small>' + req.join('<span class="sp-sep"></span>') + '</div>');
+      }
+    }
+    if (p.has) {
+      out.push('<div class="sp-row"><small>施放次数</small>本纪元 ' + num(p.c) + '<span class="sp-sep"></span>本次重生 ' + num(p.c + p.r) + '<span class="sp-sep"></span>总计 ' + num(p.c + p.r + p.e) + '</div>');
+      out.push('<div class="sp-row"><small>生效时间</small>本纪元 ' + dur(p.a0) + '<span class="sp-sep"></span>本次重生 ' + dur(p.a0 + p.a1) + '<span class="sp-sep"></span>总计 ' + dur(p.a0 + p.a1 + p.a2) + '</div>');
+    }
+    state[id] = {avail: p.avail, up: !!next};
+    return out.join('');
+  }
+  function overview(){
+    var ov = document.getElementById('sp-ov');
+    if (!SV) { ov.querySelector('.sp-empty').hidden = false; var g = ov.querySelector('.sp-ovg'); if (g) g.remove(); return; }
+    var full = 0, tot = 0;
+    Object.keys(INFO).forEach(function(id){
+      var x = INFO[id], p = SV.sp[id];
+      if (!p || (x.k !== 'normal' && x.k !== 'dragon') || SV.asc < 1) return;
+      tot++;
+      var c = cap(x), ok = true;
+      for (var t = 2; t <= c; t++) if (!p.tiers[t]) ok = false;
+      if (ok) full++;
+    });
+    var st = STAGE.map(function(s, k){ return '<span class="sp-stg' + (SV.stages[k] ? ' ok' : '') + '" title="开放' + s[1] + '的阶层">' + (SV.stages[k] ? '✓ ' : '') + s[0] + '<small>' + s[1] + '</small></span>'; }).join('');
+    var html = '<div class="sp-ovg"><div class="sp-big"><small>阶层上限</small><b>' + (SV.asc < 1 ? '—' : cap({k: 'normal'}) + ' 阶') + '</b><span>A' + SV.asc + ' · R' + SV.r + '</span></div>' +
+      '<div><small>都解锁到上限的法术</small><b>' + (SV.asc < 1 ? '—' : full + ' / ' + tot) + '</b><span>奥术光辉 ' + SV.ab + ' / 5' + (SV.ta ? ' · 已有分阶自动施法' : ' · 还没有分阶自动施法') + '</span></div>' +
+      '<div class="sp-stgs"><small>龙族解锁</small><div>' + st + '</div></div></div>';
+    ov.querySelector('.sp-empty').hidden = true;
+    var old = ov.querySelector('.sp-ovg'); if (old) old.remove();
+    ov.insertAdjacentHTML('beforeend', html);
+  }
+  function paint(){
+    state = {};
+    cards.forEach(function(c){
+      var id = c.dataset.sid, x = INFO[id], box = c.querySelector('.sp-sv'), stl = c.querySelector('.sp-st');
+      var p = SV && id && SV.sp[id];
+      c.classList.toggle('off', !!(SV && p && !p.avail));
+      var tr = c.querySelector('.sp-tr');
+      if (tr) tr.classList.toggle('own', !!(SV && SV.tro[tr.dataset.tr]));
+      if (!p || !x) { box.hidden = true; box.innerHTML = ''; stl.innerHTML = ''; return; }
+      box.innerHTML = strip(id, x, p); box.hidden = false;
+      stl.innerHTML = p.avail ? '<em class="no">能用</em>' : '';
+    });
+    var b = seg.querySelectorAll('b'), n1 = 0, n2 = 0;
+    Object.keys(state).forEach(function(k){ if (state[k].avail) n1++; if (state[k].avail && state[k].up) n2++; });
+    b[0].textContent = cards.length; b[1].textContent = n1; b[2].textContent = n2;
+    bar.hidden = !SV;
+    if (!SV) sel = '';
+    overview(); run();
+  }
+  function run(){
+    var k = q.value.trim().toLowerCase();
+    cards.forEach(function(c){
+      var s = state[c.dataset.sid] || {};
+      var okSel = !sel || !SV || (sel === '1' ? s.avail : s.avail && s.up);
+      c.hidden = !((!k || c.textContent.toLowerCase().indexOf(k) >= 0) && okSel);
+    });
+    heads.forEach(function(h){
+      var g = h.dataset.g;
+      if (g === 'ev' || g === 'raw') { h.hidden = !!(k || sel); var n = h.nextElementSibling; if (n) n.hidden = !!(k || sel); return; }
+      h.hidden = !cards.some(function(c){ return !c.hidden && c.dataset.g === g; });
+    });
+  }
+  function pick(v){ sel = v; seg.querySelectorAll('button').forEach(function(x){ x.classList.toggle('on', x.dataset.o === v); }); run(); }
+  q.addEventListener('input', run);
+  seg.addEventListener('click', function(e){ var b = e.target.closest('button'); if (b) pick(b.dataset.o); });
+  var home = document.createElement('div'); top.parentNode.insertBefore(home, top);
+  document.addEventListener('scroll', function(){ top.classList.toggle('float', top.getBoundingClientRect().top - home.getBoundingClientRect().top > 12); }, true);
+  window.addEventListener('hashchange', function(){
+    var el = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if (el && root.contains(el) && (el.closest('.sp-c') || el).hidden) { q.value = ''; pick(''); }
+  }, true);
+  var last;
+  window.addEventListener('spellsave', function(e){
+    var k = JSON.stringify(e.detail);
+    if (k === last) return;  // 自动同步读到的和上次一样：不重画
+    last = k; SV = e.detail; paint();
+  });
+  paint();
+})();</script>"""
 
 # 研究页的脚本：时间线和详情，读到存档后按 researchsave 事件标状态
 RS_JS = r"""<script>(function(){
@@ -601,6 +740,20 @@ RS_JS = r"""<script>(function(){
     if (!rs.length) h += '<div class="rs-empty">没有符合的研究</div>';
     $('v-lane').innerHTML = '<svg class="rs-lsvg"></svg>' + h;
   }
+  // 公式：一行一项效果；html 是生成时转义过的中文公式（变量斜体、指数上标）。
+  // 带 asc 的是游戏用 bonusToText 显示的百分比：从 A{asc} 起按 Ascension 折算
+  function fmHtml(fm){
+    var asc = 0, h = fm.map(function(f){
+      if (f.asc) asc = f.asc;
+      var join = /^[×−+]|^价格指数/.test(f.html) ? ' ' : ' = ';
+      return '<div class="rs-fm">' + (f.label ? '<b>' + esc(f.label) + '</b>' + join : '') + f.html +
+        (f.unit ? ' <span class="rs-fu">' + esc(f.unit) + '</span>' : '') +
+        (f.when ? '<span class="rs-fu">（' + f.when + '）</span>' : '') +
+        (f.note ? '<div class="rs-hint">' + esc(f.note) + '</div>' : '') + '</div>';
+    }).join('');
+    return h + '<div class="rs-hint">本局＝这次退位以来，本R＝这次重生以来，全部＝含之前的 R' +
+      (asc ? '；A' + asc + ' 起实际百分比 = (1 + 值÷100)<sup>0.1<sup>A' + (asc > 1 ? '−' + (asc - 1) : '') + '</sup></sup> − 1' : '') + '</div>';
+  }
   // 详情：在放大的格子里显示
   function detHtml(x){
     var st = ST[x.code];
@@ -616,6 +769,7 @@ RS_JS = r"""<script>(function(){
       (x.pre.length ? '<div class="rs-f"><small>前置</small>' + each(x.pre, chip) + '<div class="rs-hint">前置都解锁、点数到 ' + x.n + (x.fac ? '、用着' + esc(x.fac) : '') + '就自动解锁</div></div>' : '') +
       (x.post.length ? '<div class="rs-f"><small>后续（需要它的研究）</small>' + each(x.post, chip) + '</div>' : '') +
       '<div class="rs-f"><small>效果</small>' + (x.eh || '—') + '</div>' +
+      (x.fm.length ? '<div class="rs-f"><small>公式（游戏客户端）</small>' + fmHtml(x.fm) + '</div>' : '') +
       (x.note ? '<div class="rs-f"><small>备注</small><span class="rs-mut">' + esc(x.note) + '</span></div>' : '');
   }
 
@@ -1144,6 +1298,171 @@ def build_events(ws, imgs):
 EV_JS = BD_JS.replace("'.bd-page'", "'.ev-page'").replace("'rg-bd'", "'rg-ev'")
 
 
+# ---------- 法术页（#sp）：阵营表 AF–AM 列的法术和法术奖杯 + spells.py 的公式、阶层条件；读到存档后显示阶层进度 ----------
+SP_COLS = set(range(32, 40))  # AF–AM：搬到法术页，阵营表里不再显示
+SPELL_LINKS = {}  # 中文名（法术、法术奖杯）→ 法术页卡片 id；find() 先查这里
+
+
+def spell_key(en):
+    return re.sub(r'[^a-z0-9]', '', en.lower())
+
+
+def client_spells():
+    """法术清单（客户端4.3.14）.tsv → {英文名: (法力消耗基数, 初始持续秒数)}"""
+    out = {}
+    for line in open(os.path.join(ROOT, '资料', '法术清单（客户端4.3.14）.tsv'), encoding='utf-8').read().splitlines()[1:]:
+        f = line.split('\t')
+        if len(f) >= 5:
+            out[f[0]] = (f[3], int(f[4]) // 30 if f[4].isdigit() else None)
+    return out
+
+
+def sheet_spells(ws):
+    """阵营表 → {英文名小写: {zh, desc, fac, tr:(英文, 中文, 目标, 效果)}}：AF 列是阵营法术，AJ 列是立场 / 通用法术"""
+    val = merged_value(ws)
+    out = {}
+    for col in (32, 36):
+        for r in range(3, 33, 2):
+            name = val(r, col)
+            if '\n' not in name:
+                continue
+            en, zh = [x.strip() for x in SPLIT.split(name)][:2]
+            m = re.search(r'[（(].*?([A-Z]{2,3})[）)]', zh)  # 「征税（通用法术，TC）」里的简称
+            zh = re.split(r'[（(]', zh)[0]
+            tr = None
+            if '\n' in val(r, col + 1):
+                ten, tzh = [x.strip() for x in SPLIT.split(val(r, col + 1))][:2]
+                tr = (ten, tzh, strip_label(val(r + 1, col + 1), '目标'), strip_label(val(r + 1, col + 2), '效果'))
+            fac = SPLIT.split(val(r, 3))[0] if col == 32 else ''
+            out[en.lower()] = dict(zh=zh, desc=val(r + 1, col), fac=fac, tr=tr, abbr=m.group(1) if m else '')
+    # 「法术阶层强化额外效果」（AI 列每个阵营法术一格，几格合并时按「法术名：」分行；AM3 是立场 / 通用法术的总表）
+    bonus = {}
+    for r in range(3, 33, 2):
+        v = val(r, 35)
+        if not v or (r, 35) in val.covered:
+            continue
+        lines = [l.strip() for l in SPLIT.split(v) if l.strip()]
+        if all(re.match(r'^[一-鿿]+：', l) for l in lines):
+            for l in lines:
+                k, t = l.split('：', 1)
+                bonus[k] = t
+        else:
+            bonus[SPLIT.split(val(r, 32))[1].strip()] = v
+    for l in SPLIT.split(val(3, 39)):
+        m = re.match(r'^([一-鿿]+)：(.+)$', l.strip())
+        if m:
+            bonus[m.group(1)] = m.group(2)
+    out['__bonus__'] = bonus
+    return out
+
+
+def build_spells(wb):
+    """法术页。卡片 id 是 sp-英文名，法术奖杯块是 sp-英文名-t；法术和法术奖杯的中文名登记进 SPELL_LINKS 和 TERMS。
+    要调用两遍（和卡片页一样）：第一遍登记名字，第二遍说明文字里的专名才能染色。"""
+    import spells as SD
+    cl, rows = client_spells(), sheet_spells(wb.worksheets[0])
+    bonus = rows.pop('__bonus__')
+    cards, info = {g: [] for g, _, _ in SD.GROUPS}, {}
+    esc, r = html.escape, TERMS.render
+
+    def one(en, zh, kind, grp, tags, desc, formula, note='', tr=None, d=None, src='', fac=''):
+        cid = 'sp-' + spell_key(en)
+        SPELL_LINKS[zh] = cid
+        TERMS.names[zh] = ('法', cid)
+        cost, dur = cl.get(en, (None, None))
+        meta = []
+        if cost and kind != 'self':
+            meta.append('法力 %s' % format(int(cost), ','))
+        if dur:
+            meta.append('持续 %s' % ('%d 分钟' % (dur // 60) if dur % 60 == 0 else '%d 秒' % dur))
+        elif kind == 'zero':
+            meta.append('立即生效')
+        meta.append(tags)
+        if d and d.get('abbr'):
+            meta.append('简称 ' + d['abbr'])
+        fx = '<ul class="sp-fx">%s</ul>' % ''.join('<li>%s</li>' % r(x, cid) for x in formula) if formula else ''
+        fields = ['<div><small>效果</small>%s%s</div>' % (r(desc, cid) if desc else '<span class="nil">—</span>', fx)]
+        if src:
+            fields.append('<div><small>来源</small>%s</div>' % r(src, cid))
+        if tr:
+            ten, tzh, target, eff = tr
+            tid = cid + '-t'
+            SPELL_LINKS[tzh] = tid
+            TERMS.names[tzh] = ('升', tid)
+            fields.append('<div id="%s" class="sp-tr" data-tr="%s"><small>法术奖杯</small><b>%s</b><span class="en">%s</span><p>目标：%s</p><p>效果：%s</p></div>' % (
+                tid, spell_key(ten), esc(tzh), esc(ten), r(target, tid), r(eff, tid)))
+        if kind in ('normal', 'dragon'):
+            time_req = '' if kind == 'dragon' else '本次重生生效 3,600 × T 秒；'
+            fields.append('<div class="sp-ti"><small>阶层（2 阶起每阶）</small><p>%s</p><small>首次解锁</small><p>%s%s</p><small>每次购买</small><p>金币 %s，阵营币 %s</p></div>' % (
+                r(bonus.get(zh) or d['bonus'], cid), time_req, r(d['req'], cid), d['cost'][0], d['cost'][1]))
+        elif note or zh in bonus:
+            fields.append('<div><small>阶层</small>%s</div>' % r(' '.join(x for x in (bonus.get(zh, ''), note) if x), cid))
+        sid = d['id'] if d else ''
+        if sid:
+            info[sid] = dict(k=kind, js=d.get('js', ''), cur=d.get('cur', ''), time=bool(d.get('time')), g=grp, tags=tags, tr=spell_key(tr[0]) if tr else '')
+        cards[grp].append(
+            '<div class="art noimg sp-c" id="%s" data-sid="%s" data-k="%s" data-g="%s" data-en="%s"><div class="art-b">'
+            '<div class="art-h"><b>%s</b><span class="en">%s</span>%s<span class="sp-st"></span></div>'
+            '<div class="sp-meta">%s</div><div class="sp-f">%s</div><div class="sp-sv" hidden></div></div></div>' % (
+                cid, sid, kind, grp, spell_key(en), esc(zh), esc(en), '<em class="fac">%s</em>' % esc(fac) if fac else '',
+                esc(' · '.join(meta)), ''.join(fields)))
+
+    for en, d in SD.SPELLS.items():
+        row = rows.get(en.lower())
+        if not row:
+            raise SystemExit('阵营表里找不到法术 ' + en)
+        one(en, row['zh'], d['kind'], d['grp'], d['tags'], row['desc'], d['formula'], d.get('note', ''), row['tr'], dict(d, abbr=row['abbr']), fac=row['fac'])
+    for x in SD.EXTRA:
+        one(x['en'], x['zh'], x['kind'], 'special', x['tags'], x['desc'], x['formula'], x['note'], src=x['src'],
+            d={'id': x['id']} if x.get('id') else None)
+    rules = []
+    for name, anchor in SD.RULE_LINKS.items():
+        SPELL_LINKS.setdefault(name, 'sp-r-' + anchor)
+    for title, anchor, paras in SD.RULES:
+        body, tab = [], []
+        for p in paras + ['']:
+            if p.startswith('|'):
+                tab.append(p[1:].split('|'))
+                continue
+            if tab:
+                body.append('<table class="sp-tb">%s</table>' % ''.join('<tr>%s</tr>' % ''.join(
+                    ('<th>%s</th>' if k == 0 else '<td>%s</td>') % r(c) for k, c in enumerate(row)) for row in tab))
+                tab = []
+            if p:
+                body.append('<p>%s</p>' % r(p))
+        rules.append('<div class="sp-rule"%s><h3>%s</h3>%s</div>' % (' id="sp-r-%s"' % anchor if anchor else '', esc(title), ''.join(body)))
+    groups = ''.join('<h2 class="art-g" data-g="%s">%s <span>%s</span></h2>%s' % (g, esc(t), esc(sub), ''.join(cards[g]))
+                     for g, t, sub in SD.GROUPS if cards[g])
+    # 活动法术留在活动页（第 10 行是法术名，第 12 行是说明），这里列出来链过去；时流涌动这类已有卡片的跳过
+    ws8, ev = wb.worksheets[7], []
+    v8 = merged_value(ws8)
+    for c in range(3, ws8.max_column + 1):
+        name = v8(10, c)
+        if (10, c) in v8.covered or not SPLIT.search(name):
+            continue
+        en, zh = [x.strip() for x in SPLIT.split(name)][:2]
+        if any(spell_key(en) == spell_key(k) for k in SD.SPELLS):
+            continue
+        ev.append('<a class="sp-ev" href="#t8-%s10"><b>%s</b><span>%s</span></a>' % (get_column_letter(c), esc(zh), esc(v8(12, c))))
+    data = json.dumps(info, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
+    return SP_HTML.replace('%%RULES%%', ''.join(rules)).replace('%%GROUPS%%', groups).replace('%%EV%%', ''.join(ev)).replace('%%DATA%%', data)
+
+
+SP_HTML = """<div class="sp" id="sp-root"><div class="cl-top">
+<div class="own-bar" id="sp-bar" hidden><div class="own-seg" id="sp-seg"><button class="on" data-o="">全部<b></b></button><button data-o="1">能用<b></b></button><button data-o="2">还能升阶<b></b></button></div></div>
+<input class="cl-q" id="sp-q" type="search" placeholder="搜索法术、效果、条件"></div>
+<div class="sp-ov" id="sp-ov"><p class="sp-empty">读到存档后，这里显示阶层上限和龙族解锁进度，各卡片下面显示阶层进度、施放次数和生效时间。到 <a href="#save">我的存档</a> 读取。</p></div>
+<details class="sp-rules"><summary>阶层规则</summary><div class="sp-rgrid">%%RULES%%</div></details>
+%%GROUPS%%
+<h2 class="art-g" data-g="ev">活动法术 <span>没有阶层；点开看活动页里的说明</span></h2><div class="sp-evs">%%EV%%</div>
+<h2 class="art-g" data-g="raw">存档里的法术数据 <span>魔力、施放次数、生效时间、已解锁阶层（原「我的存档」里的三个魔法分页）</span></h2>
+<div class="savesec sp-raw"><p class="sp-empty" id="sp-rawempty">还没有读到存档。</p><div id="sp-rawbox" hidden>
+<div class="sv-tools"><div class="sv-tools-r"><input id="sp-filter" type="search" placeholder="筛选项目，例如：雷击、魔上限"></div><div id="sp-vtabs" class="sv-tabs2"></div></div>
+<div id="sp-vbody" class="sv-card"></div></div></div></div>
+<script>window.SP_DATA = %%DATA%%;</script>
+"""
+
+
 def build_sheet(n, ws, imgs, index, cells):
     merged, covered = {}, set()
     for rg in ws.merged_cells.ranges:
@@ -1161,8 +1480,11 @@ def build_sheet(n, ws, imgs, index, cells):
                 last_c = max(last_c, c.column + span[1] - 1)
     # 放图标的列至少要装下 40px 的图片加内边距，否则图片会盖住右边一格的文字
     img_cols = {c.column for row in ws.iter_rows() for c in row if isinstance(c.value, str) and c.value.startswith('=_xlfn.DISPIMG')}
+    skip = SP_COLS if n == 1 else set()  # 阵营表的法术几列搬到了法术页
     cols, total = [], 0
     for c in range(1, last_c + 1):
+        if c in skip:
+            continue
         w = ws.column_dimensions[get_column_letter(c)].width or 9
         px = max(56 if c in img_cols else 36, min(int(w * 7.5), 420))
         cols.append('<col style="width:%dpx">' % px)
@@ -1171,7 +1493,7 @@ def build_sheet(n, ws, imgs, index, cells):
     for r in range(1, last_r + 1):
         tds = []
         for c in range(1, last_c + 1):
-            if (r, c) in covered:
+            if (r, c) in covered or c in skip:
                 continue
             cell = ws.cell(r, c)
             ref = '%s%d' % (get_column_letter(c), r)
@@ -1180,7 +1502,8 @@ def build_sheet(n, ws, imgs, index, cells):
             span = merged.get((r, c))
             if span:
                 if span[0] > 1: attrs += ' rowspan="%d"' % span[0]
-                if span[1] > 1: attrs += ' colspan="%d"' % span[1]
+                width = span[1] - len([x for x in range(c, c + span[1]) if x in skip])
+                if width > 1: attrs += ' colspan="%d"' % width
             style = []
             if cell.fill is not None and cell.fill.fill_type == 'solid':
                 rgb = cell.fill.fgColor.rgb if cell.fill.fgColor.type == 'rgb' else None
@@ -1278,6 +1601,7 @@ def main():
                   8: lambda ws: build_events(ws, imgs)}
     for n, f in card_pages.items():
         sections[n] = f(wb.worksheets[n - 1])  # 第一遍只登记卡片名（还没染色）
+    spell_page = build_spells(wb)
     # 攻略里标过的专名（两个字的也算）；指向卡片页的等卡片 id 定下来以后再登记，见下面 find
     guide_tags = set()
     for _, _, path in GUIDES:
@@ -1296,6 +1620,8 @@ def main():
         if kind == '模':
             return template_ids.get(name)
         key = ALIAS.get(name, name)
+        if kind in ('', '法', '升', '奖') and key in SPELL_LINKS:  # 法术和法术奖杯在法术页
+            return SPELL_LINKS[key]
         hit = None
         # 攻略按 4.3.9 改号后的新代号写；表里只有「原 xxx」注记的旧代号不算
         if kind == '研': hit = research.get(key)
@@ -1324,6 +1650,7 @@ def main():
     TERMS.ready()
     for n, f in card_pages.items():
         sections[n] = f(wb.worksheets[n - 1])  # 第二遍：说明文字里的专名染色
+    spell_page = build_spells(wb)
     guides = {}
     for gid, label, path in GUIDES:
         title, body = md2html.convert(open(os.path.join(ROOT, path), encoding='utf-8').read(), link)
@@ -1332,7 +1659,7 @@ def main():
         guides[gid] = re.sub(r'(<p class="legend">.*?</p>)\s*<blockquote>.*?</blockquote>\s*(<hr>)?', lambda m: m.group(1), body, count=1, flags=re.S)
     item = lambda h, label: '<a href="#%s" data-sec="%s">%s</a>' % (h, h, label)
     nav = '<div class="grp">攻略</div>' + item('tips', '攻略要点') + item('builds', '模板库')
-    nav += '<div class="grp">资料表</div>' + ''.join(item('t%d' % n, SHEETS[n][0]) for n in sections)
+    nav += '<div class="grp">资料表</div>' + item('sp', '法术') + ''.join(item('t%d' % n, SHEETS[n][0]) for n in sections)
     # R0 攻略和 A0、A1 攻略要点合成一页（#tips/r0、#tips/a0、#tips/a1），切换胶囊放在图例最前面：平时只显示当前这篇，点开再选
     def tip(g):
         sw = '<b class="gd-sw" title="切换攻略">%s</b>' % ''.join('<a href="#tips/%s"%s>%s</a>' % (x, ' class="on"' if x == g else '', x.upper()) for x in TIPS)
@@ -1343,28 +1670,31 @@ def main():
     script = lambda name, js: parts.append(('js/%s.js' % name, unwrap(js)))
     page('tips', '<section id="sec-tips" class="guide" hidden>%s</section>' % ''.join(tip(g) for g in TIPS))
     page('builds', build_templates.build(find, lambda c: name_of(cells[research.get(c) or upgrade[c]]) if (research.get(c) or upgrade.get(c)) in cells else '', TERMS.render))
+    page('sp', '<section id="sec-sp" class="table" hidden>%s</section>' % spell_page)
     for n in sections:
         page('t%d' % n, '<section id="sec-t%d" class="table" hidden>%s</section>' % (n, sections[n]))
     script('cards', CL_JS)  # 卡片列表（遗物、隐藏奖杯）的搜索和已获得切换
     script('research', RS_JS)
+    script('spells', SP_JS)
     page('guide-progress', open(os.path.join(ROOT, '脚本', 'guide_progress.html'), encoding='utf-8').read())
     script('legend', LEGEND_JS)
     # 存档工具：只读存档查看、法术预报、遗物预测（数据和库来自 工具/RG-tools）
     save_js, save_miss = '', []
     if os.path.isdir(save_tools.RG):
         save_html, save_js, save_miss = save_tools.build(find, {'t%d-%s' % c: code for code, c in research.items()})
-        nav = item('save', '我的存档') + item('live', '实时读数') + item('calc', '构筑辅助') + item('rws', '法术预报') + item('arch', '遗物预测') + nav
+        nav = item('save', '我的存档') + item('rws', '法术预报') + item('arch', '遗物预测') + nav
         page('save', save_html)
     else:
-        # 实时读数和构筑辅助的游戏快照不依赖存档库，页面照常生成，入口也要保留。
-        nav = item('live', '实时读数') + item('calc', '构筑辅助') + nav
         print('没有 工具/RG-tools，跳过「我的存档」（git clone https://github.com/shadowgull/dox4242.github.io 工具/RG-tools）')
+    if BUILD_TOOLS:
+        # 实时读数和构筑辅助的游戏快照不依赖存档库，没有 RG-tools 也照常生成。
+        nav = item('live', '实时读数') + item('calc', '构筑辅助') + nav
+        page('calc', open(os.path.join(ROOT, '脚本', 'build_tools.html'), encoding='utf-8').read())
+        page('live', open(os.path.join(ROOT, '脚本', 'live_tools.html'), encoding='utf-8').read())
+        parts.append(('js/live.js', open(os.path.join(ROOT, '脚本', 'live_tools.js'), encoding='utf-8').read()))
+        parts.append(('css/build.css', open(os.path.join(ROOT, '脚本', 'build_tools.css'), encoding='utf-8').read()))
+        parts.append(('js/build.js', open(os.path.join(ROOT, '脚本', 'build_tools.js'), encoding='utf-8').read()))
     nav = '<div class="grp">工具</div>' + nav
-    page('calc', open(os.path.join(ROOT, '脚本', 'build_tools.html'), encoding='utf-8').read())
-    page('live', open(os.path.join(ROOT, '脚本', 'live_tools.html'), encoding='utf-8').read())
-    parts.append(('js/live.js', open(os.path.join(ROOT, '脚本', 'live_tools.js'), encoding='utf-8').read()))
-    parts.append(('css/build.css', open(os.path.join(ROOT, '脚本', 'build_tools.css'), encoding='utf-8').read()))
-    parts.append(('js/build.js', open(os.path.join(ROOT, '脚本', 'build_tools.js'), encoding='utf-8').read()))
     nav += '<div class="grp">关于</div>' + item('ver', '版本 ' + VERSION)
     page('ver', version_page())
     # 构筑与实时脚本在外壳末尾（存档库之后）载入一次；CSS 不能作为脚本插入正文。
@@ -1373,6 +1703,9 @@ def main():
     shell = TEMPLATE.replace('%%NAV%%', nav).replace('%%BODY%%', body)
     parts.append(('css/app.css', APP_CSS.replace('%%TCOLORS%%', md2html.CSS[md2html.CSS.index('.t-sp'):md2html.CSS.index('[class^')])))
     parts.append(('js/app.js', APP_JS))
+    if not BUILD_TOOLS:
+        for tag in ('<link rel="stylesheet" href="css/build.css">', '<script src="js/build.js"></script>', '<script src="js/live.js"></script>'):
+            shell = shell.replace(tag + chr(10), '')
     shell = shell.replace('%%APPBAR%%', appbar()).replace('%%ICON%%', icon_img()).replace('%%VERSION%%', VERSION)
     if save_js:
         parts.append(('js/save.js', save_js))
@@ -1609,6 +1942,66 @@ td.flash{outline:3px solid #f59e0b;outline-offset:-2px;background:var(--flash)!i
 .ch-sp p{margin:4px 0 0}
 .ch-sp.flash{background:var(--flash)}
 /* 研究：时间线，点研究原地放大成详情 */
+/* 法术页 */
+.sp-c .art-b{display:flex;flex-direction:column}
+.sp-meta{font-size:12.5px;color:#8792a6;margin:-2px 0 8px}
+.sp-f{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px 20px;font-size:13.5px;color:#3d4a5f;line-height:1.65}
+.sp-f small{display:block;font-size:11.5px;color:#9aa5b8;margin-top:2px}
+.sp-f p{margin:0}
+.sp-f .en{font-size:12px;color:#9aa5b8;margin-left:6px}
+.sp-fx{margin:4px 0 0;padding-left:16px;font-size:12.5px;color:#5a6780}
+.sp-fx li{margin:1px 0}
+.sp-tr{scroll-margin:80px;border-radius:10px;transition:background 1.5s}
+.sp-tr.flash{background:var(--flash)}
+.sp-tr.own b::after{content:" ✓ 已获得";font-size:11.5px;font-weight:normal;color:var(--blue)}
+.sp-c.off{opacity:.55}
+.sp-st em{margin-left:2px}
+.sp-sv{margin-top:10px;padding:9px 14px;border-radius:12px;background:var(--soft);font-size:13px;color:#3d4a5f}
+.sp-row{display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px;padding:2px 0}
+.sp-row>small{flex:none;width:72px;font-size:11.5px;color:#8792a6}
+.sp-sep{display:inline-block;width:1px;height:12px;background:#cfd8e6;margin:0 2px}
+.sp-ts{display:inline-flex;gap:4px}
+.sp-t{width:22px;height:22px;border-radius:7px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;background:#fff;color:#a0aabb;border:1px solid #dbe3ef}
+.sp-t.own{background:var(--blue);border-color:var(--blue);color:#fff}
+.sp-t.unl{border-color:var(--blue);color:var(--blue)}
+.sp-t.cap{border-style:dashed;color:#c9d1dd;background:transparent}
+.sp-cap{color:#6b7689}
+.sp-on{font-size:12px;color:#15803d;background:#e8f7ee;border-radius:6px;padding:0 7px}
+.sp-pb{display:inline-block;width:110px;height:6px;border-radius:3px;background:#dbe3ef;overflow:hidden;vertical-align:middle}
+.sp-pb i{display:block;height:100%;background:var(--blue)}
+.sp-warn{color:#b45309}
+.sp-sv .ok{color:#15803d}
+.sp-ov{margin:14px 0 4px}
+.sp-empty{margin:0;padding:10px 14px;border-radius:14px;background:var(--soft);font-size:13px;color:#526079}
+.sp-ovg{display:grid;grid-template-columns:1fr 1.2fr 2.6fr;gap:12px}
+.sp-ovg>div{border:1px solid var(--line);border-radius:16px;padding:12px 16px;min-width:0}
+.sp-ovg small{display:block;font-size:11.5px;color:#8792a6}
+.sp-ovg b{display:block;font-size:22px;font-variant-numeric:tabular-nums}
+.sp-ovg span{font-size:12.5px;color:#6b7689}
+.sp-ovg .sp-big{background:var(--blue);border-color:var(--blue);color:#fff}
+.sp-ovg .sp-big small,.sp-ovg .sp-big span{color:rgba(255,255,255,.8)}
+.sp-stgs>div{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.sp-stg{display:inline-flex;flex-direction:column;padding:4px 12px;border-radius:12px;background:#f2f4f8;color:#8792a6!important;font-size:13px!important}
+.sp-stg small{font-size:11px!important}
+.sp-stg.ok{background:var(--soft);color:var(--blue)!important}
+.sp-rules{margin:12px 0 4px;border:1px solid var(--line);border-radius:16px;padding:10px 16px}
+.sp-rules summary{cursor:pointer;font-weight:600;font-size:14px}
+.sp-rgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:4px 26px;margin-top:6px}
+.sp-rule h3{font-size:13.5px;margin:12px 0 4px;color:var(--fg)}
+.sp-rule p{margin:4px 0;font-size:13px;line-height:1.7;color:#3d4a5f}
+.sp-tb{border-collapse:collapse;font-size:12.5px;margin:6px 0}
+.sp-tb th,.sp-tb td{border:1px solid var(--line);padding:3px 9px;text-align:left;vertical-align:top}
+.sp-tb th{background:var(--soft);font-weight:600}
+.sp-evs{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.sp-ev{display:block;border:1px solid var(--line);border-radius:14px;padding:10px 14px;color:inherit;text-decoration:none;font-size:12.5px;color:#5a6780}
+.sp-ev:hover{border-color:#cdd9ee}
+.sp-ev b{display:block;font-size:14px;color:var(--fg);margin-bottom:2px}
+.sp-ev span{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.sp-raw{margin-top:4px}
+#sp-filter{font:inherit;font-size:13.5px;border:1px solid var(--line);background:#fff;color:var(--fg);border-radius:999px;padding:6px 16px;width:260px}
+#sp-filter:focus{outline:none;border-color:#bcd0f7}
+#sp-vbody{padding:8px 10px}
+@media (max-width:900px){.sp-ovg{grid-template-columns:1fr}}
 .rs-dot{width:8px;height:8px;border-radius:50%;flex:none;display:inline-block}
 .rs-rp{margin:18px 2px 18px}
 .rs-rp-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
@@ -1683,6 +2076,11 @@ td.flash{outline:3px solid #f59e0b;outline-offset:-2px;background:var(--flash)!i
 .rs-f small{display:block;font-size:11.5px;color:#9aa5b8}
 .rs-f .nil{color:#c9d1dd}
 .rs-hint{font-size:12px;color:#9aa5b8;margin-top:4px}
+.rs-fm{margin-top:3px;line-height:1.7}
+.rs-fm b{font-weight:600;color:#2b3648}
+.rs-fm i{font-style:normal;color:var(--accent,#2563eb)}
+.rs-fm sup{font-size:.72em}
+.rs-fu{color:#9aa5b8}
 .rs-mut{font-size:12.5px;color:var(--muted)}
 .rs-pc{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--line);border-radius:999px;padding:1px 10px;margin:3px 4px 0 0;cursor:pointer;font-size:12.5px;background:#fff;transition:border-color .2s}
 .rs-pc:hover{border-color:#cdd9ee}
@@ -1826,6 +2224,55 @@ html.app .brand{display:none}
 .grip{display:none}
 html.app .grip{display:block;position:fixed;right:0;bottom:0;width:18px;height:18px;cursor:nwse-resize;z-index:9}  /* 看不见，鼠标移到角上才变成调整大小 */
 html.app.max .grip{display:none}
+/* 自动连点：右下角小胶囊，点开在原地展开成设置卡片 */
+#ac{position:fixed;right:22px;bottom:22px;z-index:21;overflow:hidden;border-radius:18px;background:var(--card);will-change:width,height;
+  box-shadow:0 8px 28px rgba(20,40,90,.14),0 0 0 1px rgba(20,40,90,.05);font-size:13px;color:var(--fg);user-select:none;
+  transition:width .36s cubic-bezier(.32,.72,0,1),height .36s cubic-bezier(.32,.72,0,1),box-shadow .36s}
+#ac.open{box-shadow:0 14px 44px rgba(20,40,90,.2),0 0 0 1px rgba(20,40,90,.05)}
+#ac .ac-pill{position:absolute;right:0;bottom:0;height:36px;display:flex;align-items:center;gap:8px;padding:0 14px 0 12px;white-space:nowrap;cursor:pointer;
+  transition:opacity .2s ease .12s}
+#ac.open .ac-pill{opacity:0;pointer-events:none;transition:opacity .1s ease}
+#ac .ac-dot{width:8px;height:8px;border-radius:50%;background:#c3cbd8;transition:background .2s}
+#ac.on .ac-dot{background:var(--blue)}
+#ac.clicking .ac-dot{animation:ac-pulse 1s ease-in-out infinite}
+@keyframes ac-pulse{50%{box-shadow:0 0 0 4px rgba(37,99,235,.18)}}
+#ac kbd{font:inherit;font-size:12px;color:var(--muted);background:var(--soft);border-radius:6px;padding:1px 6px}
+#ac.err .ac-dot{background:#e5484d}
+#ac .ac-panel{position:absolute;right:0;bottom:0;width:272px;padding:14px 16px 14px;opacity:0;pointer-events:none;
+  transform:translateY(8px) scale(.97);transform-origin:100% 100%;transition:opacity .14s ease,transform .3s cubic-bezier(.32,.72,0,1)}
+#ac.open .ac-panel{opacity:1;transform:none;pointer-events:auto;transition:opacity .24s ease .08s,transform .36s cubic-bezier(.32,.72,0,1) .04s}
+#ac .ac-head{display:flex;align-items:center;gap:8px;margin-bottom:12px;font-size:14px;font-weight:600}
+#ac .ac-head span{flex:1}
+#ac .ac-x{border:none;background:none;color:var(--muted);font-size:16px;line-height:1;padding:2px 4px;cursor:pointer;border-radius:6px}
+#ac .ac-x:hover{background:var(--soft)}
+#ac .ac-row{display:flex;align-items:center;gap:10px;min-height:32px}
+#ac .ac-row>label{flex:1;color:var(--muted)}
+#ac .ac-key{font:inherit;font-size:13px;min-width:54px;height:28px;padding:0 10px;border:none;border-radius:8px;background:var(--soft);color:var(--fg);cursor:pointer}
+#ac .ac-key:hover{background:#e2e9f6}
+#ac .ac-key.wait{background:var(--blue);color:#fff}
+#ac .ac-key:disabled{opacity:.45;cursor:default}
+#ac .ac-speed{display:flex;justify-content:space-between;color:var(--muted);margin-top:4px}
+#ac .ac-speed b{color:var(--fg);font-weight:600}
+/* 间隔滑条：对数刻度，最佳点（35 毫秒）在 1/3 处，有刻度标记，拖到附近会吸住 */
+#ac .ac-track{position:relative;height:28px;margin:2px 0 4px}
+#ac .ac-mark{position:absolute;top:50%;left:calc(8px + (100% - 16px) / 3);width:2px;height:12px;margin:-6px 0 0 -1px;border-radius:1px;background:#b9c4d6;transition:background .2s,height .2s,margin .2s}
+#ac .ac-track.best .ac-mark{background:var(--blue);height:16px;margin-top:-8px}
+#ac input[type=range]{-webkit-appearance:none;appearance:none;position:relative;width:100%;height:28px;margin:0;background:none;cursor:pointer}
+#ac input[type=range]::-webkit-slider-runnable-track{height:4px;border-radius:2px;background:#e3e8f1}
+#ac input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;margin-top:-6px;border-radius:50%;background:var(--blue);
+  border:2px solid #fff;box-shadow:0 1px 4px rgba(20,40,90,.3);transition:transform .15s}
+#ac input[type=range]:active::-webkit-slider-thumb{transform:scale(1.12)}
+#ac .ac-best{display:none;font-style:normal;margin-left:6px;padding:0 7px;border-radius:999px;background:var(--soft);color:var(--blue);font-size:12px;font-weight:600}
+#ac .ac-speed.best .ac-best{display:inline-block}
+#ac .ac-sw{position:relative;width:34px;height:20px;border:none;border-radius:999px;background:#d5dce8;cursor:pointer;padding:0;transition:background .2s;flex:none}
+#ac .ac-sw::after{content:"";position:absolute;left:2px;top:2px;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2);transition:transform .2s}
+#ac .ac-sw.on{background:var(--blue)}
+#ac .ac-sw.on::after{transform:translateX(14px)}
+#ac .ac-msg{margin-top:8px;font-size:12px;color:var(--muted);line-height:1.5}
+#ac .ac-msg.bad{color:#d13438}
+#ac .ac-msg:empty{display:none}
+body.has-ac #upd{bottom:72px}
+#upd[hidden],#ac[hidden]{display:none}
 """
 
 # 外壳脚本（js/app.js）：页面切换、记住阅读位置、全表搜索
@@ -1951,7 +2398,7 @@ APP_JS = r"""(function(){
         var a = document.createElement('a');
         a.href = '#' + tid;
         a.innerHTML = '<small></small>';
-        a.firstChild.textContent = names[tid.split('-')[0]] + ' ' + tid.split('-')[1];
+        a.firstChild.textContent = names[tid.split('-')[0]] + (tid.indexOf('sp-') === 0 ? '' : ' ' + tid.split('-')[1]);  // 法术页的 id 是英文名，不显示
         a.appendChild(document.createTextNode(s));
         out.push(a);
       }
@@ -2004,6 +2451,122 @@ APP_JS = r"""(function(){
   function first(){ var a = api(); if (a) a.update_state().then(render); }
   window.addEventListener('pywebviewready', first);
   first();
+})();
+
+// 自动连点：右下角小胶囊，点开在原地展开设置（开关、点击间隔、启停快捷键、连点时按住一个键），改了立即保存
+(function(){
+  var box, pill, panel, range, st = null, msg = '', capture = '', dragging = false;
+  function api(){ var a = window.pywebview && window.pywebview.api; return a && a.click_status ? a : null; }
+  function keyName(e){
+    var c = e.code || '';
+    if (/^F([1-9]|1[01])$/.test(c)) return c;
+    if (/^Key[A-Z]$/.test(c)) return c.slice(3);
+    if (/^Digit[0-9]$/.test(c)) return c.slice(5);
+    return ['Space', 'Home', 'End', 'Insert', 'Delete'].indexOf(c) >= 0 ? c : '';
+  }
+  function q(s){ return box.querySelector(s); }
+  function build(){
+    box = document.createElement('div'); box.id = 'ac';
+    box.innerHTML = '<div class="ac-pill" title="自动连点设置"><i class="ac-dot"></i><span>连点</span><kbd></kbd></div>' +
+      '<div class="ac-panel"><div class="ac-head"><i class="ac-dot"></i><span>自动连点</span>' +
+      '<button class="ac-sw" data-a="toggle" title="开启 / 关闭"></button><button class="ac-x" data-a="close" title="收起">×</button></div>' +
+      '<div class="ac-speed"><span>点击间隔</span><span><b class="ac-ms"></b> 毫秒 · 约 <b class="ac-cps"></b> 次/秒<em class="ac-best">最佳</em></span></div>' +
+      '<div class="ac-track"><i class="ac-mark" title="最佳：游戏每秒最多算 30 次点击"></i><input type="range" min="0" max="1000" step="1"></div>' +
+      '<div class="ac-row"><label>启停快捷键</label><button class="ac-key" data-k="key"></button></div>' +
+      '<div class="ac-row"><label>连点时按住</label><button class="ac-key" data-k="hold_key" title="换要按住的键"></button><button class="ac-sw" data-a="hold" title="开启 / 关闭"></button></div>' +
+      '<div class="ac-msg"></div></div>';
+    document.body.appendChild(box); document.body.classList.add('has-ac');
+    pill = q('.ac-pill'); panel = q('.ac-panel'); range = q('input');
+    pill.addEventListener('click', function(){ open(true); });
+    box.addEventListener('click', function(e){
+      var b = e.target.closest('button'), a = api(); if (!b || !a || !st) return;
+      if (b.dataset.a === 'close') open(false);
+      else if (b.dataset.a === 'toggle') a.click_toggle().then(accept);
+      else if (b.dataset.a === 'hold') save({hold: !st.settings.hold});
+      else if (b.dataset.k) { capture = capture === b.dataset.k ? '' : b.dataset.k; render(); }
+    });
+    range.addEventListener('input', function(){
+      dragging = true;
+      if (Math.abs(range.value - BP) < SNAP) range.value = BP;  // 拖到最佳点附近就吸住
+      speed(toMs(range.value));
+    });
+    range.addEventListener('change', function(){ dragging = false; save({interval: toMs(range.value)}); });
+    document.addEventListener('mousedown', function(e){ if (box.classList.contains('open') && !box.contains(e.target)) open(false); }, true);
+    document.addEventListener('keydown', function(e){
+      if (!box.classList.contains('open')) return;
+      if (!capture) { if (e.key === 'Escape') open(false); return; }
+      e.preventDefault(); e.stopPropagation();
+      if (e.key === 'Escape') { capture = ''; render(); return; }
+      var name = keyName(e); if (!name) return;  // 只按了 Ctrl/Alt/Shift，等主键
+      var k = capture; capture = '';
+      save(k === 'key' ? {key: name, ctrl: e.ctrlKey, alt: e.altKey, shift: e.shiftKey} : {hold_key: name});
+    }, true);
+    setInterval(refresh, 500);
+  }
+  function open(on){
+    capture = ''; msg = '';
+    box.classList.toggle('open', on);
+    render();
+  }
+  function fit(){
+    var el = box.classList.contains('open') ? panel : pill;
+    box.style.width = el.offsetWidth + 'px'; box.style.height = el.offsetHeight + 'px';
+  }
+  // 滑条 0–1000 对应 10–500 毫秒，两段对数刻度，最佳点 BEST 落在 1/3 处。
+  // 游戏手动点击每秒最多算 30 次（33 毫秒一次），35 毫秒约 29 次/秒，留一点计时误差的余量。
+  var MIN = 10, MAX = 500, BEST = 35, N = 1000, BP = N / 3, SNAP = 35, L = Math.log;
+  function toMs(v){
+    v = +v;
+    var t = v <= BP ? L(MIN) + (L(BEST) - L(MIN)) * v / BP : L(BEST) + (L(MAX) - L(BEST)) * (v - BP) / (N - BP);
+    return Math.round(Math.exp(t));
+  }
+  function toPos(ms){
+    ms = Math.max(MIN, Math.min(MAX, ms));
+    return ms <= BEST ? BP * (L(ms) - L(MIN)) / (L(BEST) - L(MIN)) : BP + (N - BP) * (L(ms) - L(BEST)) / (L(MAX) - L(BEST));
+  }
+  function speed(ms){
+    q('.ac-ms').textContent = ms; q('.ac-cps').textContent = Math.round(1000 / ms);
+    q('.ac-speed').classList.toggle('best', ms === BEST);
+    q('.ac-track').classList.toggle('best', ms === BEST);
+  }
+  function accept(r){
+    if (r && r.ok) { st = r; msg = ''; }
+    else msg = (r && r.error) || '设置没有保存成功。';
+    render();
+  }
+  function save(patch){
+    var a = api(); if (!a || !st) return;
+    a.click_configure(Object.assign({}, st.settings, patch)).then(accept);
+  }
+  function refresh(){
+    var a = api(); if (!a || capture || dragging) return;
+    a.click_status().then(function(r){ if (r && r.ok) { st = r; render(); } });
+  }
+  function render(){
+    if (!st) return;
+    var s = st.settings, err = st.error || (!st.registered ? '快捷键不可用，请换一个。' : '');
+    box.classList.toggle('on', st.enabled);
+    box.classList.toggle('clicking', st.clicking);
+    box.classList.toggle('err', !!err);
+    q('kbd').textContent = st.hotkey;
+    q('[data-a=toggle]').classList.toggle('on', st.enabled);
+    q('[data-a=hold]').classList.toggle('on', s.hold);
+    var kb = q('[data-k=key]'), hb = q('[data-k=hold_key]');
+    kb.textContent = capture === 'key' ? '按下新键…' : st.hotkey; kb.classList.toggle('wait', capture === 'key');
+    hb.textContent = capture === 'hold_key' ? '按下新键…' : s.hold_key; hb.classList.toggle('wait', capture === 'hold_key');
+    if (!dragging) { range.value = toPos(s.interval); speed(s.interval); }
+    var m = q('.ac-msg');
+    m.className = 'ac-msg' + (msg || err ? ' bad' : '');
+    m.textContent = msg || err || (capture ? '按 Esc 取消' : '');
+    fit();
+  }
+  function start(){
+    var a = api(); if (!a || box) return;
+    build();
+    a.click_status().then(function(r){ if (r && r.ok) { st = r; render(); } });
+  }
+  window.addEventListener('pywebviewready', start);
+  start();
 })();
 """
 

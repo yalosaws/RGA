@@ -168,7 +168,34 @@
     window.dispatchEvent(new CustomEvent('researchsave', {detail: rsv}));
     window.dispatchEvent(new CustomEvent('artowned', {detail: art}));
     window.dispatchEvent(new CustomEvent('trophyowned', {detail: tro}));
+    window.dispatchEvent(new CustomEvent('spellsave', {detail: s ? spellSave(s, tro) : null}));
     guideUnlocked(s);
+  }
+
+  // 法术页：每个法术的施放次数、生效时间、已解锁 / 已购买的阶层（升级 400000 + 法术编号 × 100 + 阶层 − 1，
+  // 有记录就是永久解锁了，u1 是本次重生买了），龙族解锁四段（604–607），奥术光辉（123200–123204）、分阶自动施法（200）
+  function spellSave(s, tro) {
+    var st = function (i) { return s.stats[i] || {}; }, sp = {}, evil = 0, set = {};
+    (tro || []).forEach(function (k) { set[k] = true; });
+    util.assoc.spells.forEach(function (x) {
+      var p = (s.spells || {})[x.id];
+      if (!p) return;
+      var tiers = {};
+      for (var t = 2; t <= 5; t++) {
+        var u = s.upgrades[400000 + x.id * 100 + t - 1];
+        tiers[t] = u ? (u.u1 ? 'own' : 'unl') : '';
+      }
+      if ([1, 8, 15, 11, 4].indexOf(x.id) >= 0) evil += p.active0 + p.active1;  // 邪恶法术：嗜血狂热和四个邪恶阵营法术
+      sp[x.id] = {c: p.c, r: p.r, e: p.e, a0: p.active0, a1: p.active1, a2: p.active2, on: p.t >= 0, act: p.activeTiers || 0,
+        avail: x.id === 18 || !!util.save.hasSpell(s, x.id), tiers: tiers, has: true};  // 征税谁都能用（库里的 hasSpell 漏了）
+    });
+    var clicks = st(4), mana = st(133), era = st(1), tc = (s.spells || {})[18] || {};
+    return {asc: s.ascension || 0, r: s.reincarnation, sp: sp, tro: set,
+      stages: [604, 605, 606, 607].map(function (id) { return !!s.upgrades[id]; }),
+      ab: [123200, 123201, 123202, 123203, 123204].filter(function (id) { return s.trophies[id]; }).length,
+      ta: !!s.trophies[200],
+      cur: {reinc: s.reincarnation, clicksR: (clicks.stats || 0) + (clicks.statsReset || 0), evilTime: evil, gems: s.gems,
+        eraTime: era.stats, maxMana: mana.stats, tcEra: tc.c}};
   }
 
   // 攻略进度：传递类别、中文名和链接目标，不把同名升级与奖杯混为一项。
@@ -368,15 +395,24 @@
   // 自动施法暂时下线；挑战、隐藏奖杯、遗物已在各自的资料页里标出；阵营升级、阵营币用户不需要
   var HIDE_TAB = {autocasting: 1, challenges: 1, 'faction-upgrades': 1, fc: 1};
   var HIDE_SEC = {'Secret Trophies': 1, 'Quest Artifacts': 1, 'Lore Artifacts': 1};
+  // 魔法相关的三个分页搬到了法术页（#sp）底下
+  var SPELL_TAB = {magic: 1, magictime: 1, 'magic-tiers': 1};
+  // 两处查看：我的存档（除去上面两类）、法术页（只放魔法分页）
+  var VIEWS = [{tabs: 'sv-vtabs', body: 'sv-vbody', filter: 'sv-filter', first: 'general', ok: function (id) { return !HIDE_TAB[id] && !SPELL_TAB[id]; }},
+               {tabs: 'sp-vtabs', body: 'sp-vbody', filter: 'sp-filter', first: 'magic', ok: function (id) { return !!SPELL_TAB[id]; }}];
 
   function renderView(save) {
-    var tabs = $('sv-vtabs'), body = $('sv-vbody');
+    VIEWS.forEach(function (v) { if ($(v.tabs)) renderOne(save, v); });
+    if ($('sp-rawbox')) { $('sp-rawbox').hidden = false; $('sp-rawempty').hidden = true; }
+  }
+  function renderOne(save, v) {
+    var tabs = $(v.tabs), body = $(v.body);
     var keep = tabs.querySelector('.on');
-    keep = keep ? keep.dataset.t : 'general';
+    keep = keep ? keep.dataset.t : v.first;
     tabs.innerHTML = ''; body.innerHTML = '';
-    if (HIDE_TAB[keep]) keep = 'general';
+    if (!v.ok(keep)) keep = v.first;
     D.tabs.forEach(function (t) {
-      if (HIDE_TAB[t.id]) return;
+      if (!v.ok(t.id)) return;
       var b = document.createElement('button');
       b.textContent = zh(t.name); b.dataset.t = t.id;
       if (t.id === keep) b.className = 'on';
@@ -414,12 +450,12 @@
       sec.innerHTML = '<h3>' + esc(zh(t.name)) + '</h3><table class="sv-tb">' + html.join('') + '</table>';
       body.appendChild(sec);
     });
-    filterView();
+    filterView(v);
   }
-  function filterView() {
-    var k = $('sv-filter').value.trim().toLowerCase();
-    var on = $('sv-vtabs').querySelector('.on');
-    document.querySelectorAll('#sv-vbody .sv-vt').forEach(function (sec) {
+  function filterView(v) {
+    var k = $(v.filter).value.trim().toLowerCase();
+    var on = $(v.tabs).querySelector('.on');
+    document.querySelectorAll('#' + v.body + ' .sv-vt').forEach(function (sec) {
       var any = false;
       sec.querySelectorAll('tr[data-k]').forEach(function (tr) {
         var hit = !k || tr.dataset.k.indexOf(k) >= 0;
@@ -429,7 +465,7 @@
       sec.hidden = k ? !any : !(on && on.dataset.t === sec.dataset.t);
       sec.querySelector('h3').hidden = !k;
     });
-    $('sv-vtabs').classList.toggle('dim', !!k);
+    $(v.tabs).classList.toggle('dim', !!k);
   }
 
   // ---------- 法术预报（Realm Weather Service），侧栏「工具 → 法术预报」#rws ----------
@@ -809,13 +845,16 @@
     });
     var old = /^#save\/(rws|arch)/.exec(location.hash);  // 打开时的 subpage 事件比这里早
     if (old) location.replace('#' + old[1]);
-    $('sv-vtabs').addEventListener('click', function (e) {
-      var b = e.target.closest('button'); if (!b) return;
-      $('sv-filter').value = '';
-      this.querySelectorAll('button').forEach(function (x) { x.classList.toggle('on', x === b); });
-      filterView();
+    VIEWS.forEach(function (v) {
+      if (!$(v.tabs)) return;
+      $(v.tabs).addEventListener('click', function (e) {
+        var b = e.target.closest('button'); if (!b) return;
+        $(v.filter).value = '';
+        this.querySelectorAll('button').forEach(function (x) { x.classList.toggle('on', x === b); });
+        filterView(v);
+      });
+      $(v.filter).addEventListener('input', function () { filterView(v); });
     });
-    $('sv-filter').addEventListener('input', filterView);
     $('sv-alim').addEventListener('change', function () { this.dataset.user = 1; arch.draw(); });
     $('sv-achart').addEventListener('click', arch.pick);
     $('sv-aovc').addEventListener('change', function () { $('sv-aover').disabled = !this.checked; arch.detail(); });
@@ -838,7 +877,7 @@
     window.addEventListener('rgasave', function (event) { acceptGame(event.detail, false); });
     readGame(true);
     // 保存通知立即同步；定时读取只兜底；文件未变化时复用已校验的结果，每 5 秒复核一次内容。
-    var fallback = 1000;
+    var fallback = 10000;  // 旧程序没有文件通知，沿用原来的 10 秒检查
     if (window.pywebview.api.watch_save) {
       fallback = 2000;
       window.pywebview.api.watch_save().catch(function () { readGame(false); });

@@ -1,9 +1,13 @@
 """连点器回归测试。模拟鼠标输入，绝不向游戏发送点击。"""
 import ctypes
+import json
 import queue
+import tempfile
 import time
 import unittest
+from pathlib import Path
 from types import SimpleNamespace
+from unittest.mock import patch
 
 from auto_click import AutoClicker, DEFAULTS, Input, WindowsInput, w
 
@@ -25,6 +29,7 @@ class FakeInput:
         self.game = False
         self.sent = []
         self.fail = False
+        self.keylog, self.key_time = [], []
 
     def register(self, ident, settings):
         if settings['key'] in self.blocked:
@@ -44,6 +49,11 @@ class FakeInput:
     def in_game(self):
         return self.game
 
+    def key(self, name, down):
+        self.keylog.append((name, down))
+        self.key_time.append(time.perf_counter())
+        return True
+
     def click(self):
         self.sent.append(time.perf_counter())
         return not self.fail
@@ -51,14 +61,18 @@ class FakeInput:
 
 class ClickerTest(unittest.TestCase):
     def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.path = str(Path(self.temp.name, 'settings.json'))
         self.native = FakeInput()
-        self.clicker = AutoClicker(self.native)
+        self.clicker = AutoClicker(self.path, self.native)
 
     def tearDown(self):
         self.clicker.close()
+        self.temp.cleanup()
 
     def test_defaults_and_hotkey_toggle(self):
-        self.assertEqual(self.clicker.status()['hotkey'], 'F8')
+        self.assertEqual(self.clicker.status()['settings'], DEFAULTS)
+        self.assertEqual(self.native.registrations, {1: 'F8'})
         self.assertFalse(self.clicker.status()['enabled'])
         self.native.keys.put(1)
         wait_for(lambda: self.clicker.status()['enabled'])
@@ -75,22 +89,90 @@ class ClickerTest(unittest.TestCase):
         self.native.keys.put(1)
         wait_for(lambda: not self.clicker.status()['enabled'])
 
-    def test_fixed_settings(self):
-        self.assertEqual(self.clicker.status()['settings'], DEFAULTS)
-        self.assertEqual(DEFAULTS['key'], 'F8')
-        self.assertEqual(DEFAULTS['interval'], 35)
-        self.assertEqual(self.native.registrations, {1: 'F8'})
-        self.assertFalse(hasattr(self.clicker, 'command'))
+    def test_ui_toggle(self):
+        self.assertTrue(self.clicker.command('toggle')['enabled'])
+        self.assertFalse(self.clicker.command('toggle')['enabled'])
 
-    def test_initial_hotkey_conflict_reports_error(self):
+    def test_settings_persist(self):
+        settings = dict(DEFAULTS, key='J', ctrl=True, shift=True, interval=70, hold=True, hold_key='Q')
+        self.clicker.command('toggle')
+        result = self.clicker.command('configure', settings)
+        self.assertTrue(result['ok'])
+        self.assertTrue(result['enabled'])  # 改设置不打断正在进行的连点
+        self.assertEqual(result['hotkey'], 'Ctrl+Shift+J')
+        self.assertEqual(json.loads(Path(self.path).read_text()), settings)
+        self.assertEqual(self.native.registrations, {2: 'J'})
+        self.clicker.close()
+        self.clicker = AutoClicker(self.path, self.native)
+        self.assertEqual(self.clicker.status()['settings'], settings)
+        self.assertFalse(self.clicker.status()['enabled'])
+
+    def test_old_settings_file_gets_hold_defaults(self):
+        self.clicker.close()
+        Path(self.path).write_text(json.dumps({'key': 'F9', 'ctrl': False, 'alt': False, 'shift': False, 'interval': 50}))
+        self.clicker = AutoClicker(self.path, self.native)
+        self.assertEqual(self.clicker.status()['settings'], dict(DEFAULTS, key='F9', interval=50))
+
+    def test_hold_key_pressed_only_while_clicking(self):
+        self.assertTrue(self.clicker.command('configure', dict(DEFAULTS, hold=True))['ok'])
+        self.clicker.command('toggle')
+        time.sleep(.05)
+        self.assertEqual(self.native.keylog, [])  # 不在游戏里：不按键也不点
+        self.native.game = True
+        wait_for(lambda: len(self.native.sent) >= 2)
+        self.assertEqual(self.native.keylog, [('R', True)])
+        self.assertLess(self.native.key_time[0], self.native.sent[0])  # 先按住键再点
+        self.native.game = False
+        wait_for(lambda: self.native.keylog[-1] == ('R', False))
+        self.native.game = True
+        wait_for(lambda: self.native.keylog[-1] == ('R', True))
+        self.clicker.command('configure', dict(DEFAULTS, hold=True, hold_key='T'))  # 换键：松开旧的再按新的
+        wait_for(lambda: self.native.keylog[-1] == ('T', True))
+        self.assertEqual(self.native.keylog[-2], ('R', False))
+        self.clicker.command('toggle')
+        wait_for(lambda: self.native.keylog[-1] == ('T', False))
+        self.clicker.command('toggle')
+        wait_for(lambda: self.native.keylog[-1] == ('T', True))
+        self.clicker.close()  # 关程序时一定松开
+        self.assertEqual(self.native.keylog[-1], ('T', False))
+
+    def test_hold_off_never_presses(self):
+        self.native.game = True
+        self.clicker.command('toggle')
+        wait_for(lambda: len(self.native.sent) >= 3)
+        self.assertEqual(self.native.keylog, [])
+
+    def test_conflict_keeps_old_hotkey_and_settings(self):
+        self.native.blocked.add('F9')
+        result = self.clicker.command('configure', dict(DEFAULTS, key='F9'))
+        self.assertFalse(result['ok'])
+        self.assertEqual(self.native.registrations, {1: 'F8'})
+        self.assertEqual(self.clicker.status()['hotkey'], 'F8')
+
+    def test_bad_settings_rejected(self):
+        for value in [0, -1, 9, 1001, 35.2, '35', True, float('nan'), float('inf')]:
+            self.assertFalse(self.clicker.command('configure', dict(DEFAULTS, interval=value))['ok'])
+        self.assertFalse(self.clicker.command('configure', dict(DEFAULTS, key='F12'))['ok'])
+        self.assertFalse(self.clicker.command('configure', dict(DEFAULTS, hold_key='Tab'))['ok'])
+        self.assertFalse(self.clicker.command('configure', dict(DEFAULTS, hold='yes'))['ok'])
+        self.assertFalse(self.clicker.command('configure', dict(DEFAULTS, hold=True, hold_key='F8'))['ok'])
+        self.assertTrue(self.clicker.command('configure', dict(DEFAULTS, ctrl=True, hold=True, hold_key='F8'))['ok'])
+
+    def test_write_failure_rolls_back_hotkey(self):
+        with patch.object(self.clicker, '_save', side_effect=OSError('disk')):
+            result = self.clicker.command('configure', dict(DEFAULTS, key='F9'))
+        self.assertFalse(result['ok'])
+        self.assertEqual(self.native.registrations, {1: 'F8'})
+        self.assertEqual(self.clicker.status()['hotkey'], 'F8')
+
+    def test_initial_hotkey_conflict_can_recover(self):
         self.clicker.close()
         self.native.blocked.add('F8')
-        self.clicker = AutoClicker(self.native)
+        self.clicker = AutoClicker(self.path, self.native)
         self.assertFalse(self.clicker.status()['registered'])
         self.assertTrue(self.clicker.status()['error'])
-        self.native.keys.put(1)
-        time.sleep(.05)
-        self.assertFalse(self.clicker.status()['enabled'])
+        self.assertTrue(self.clicker.command('configure', dict(DEFAULTS, key='F10'))['ok'])
+        self.assertTrue(self.clicker.status()['registered'])
 
     def test_send_failure_stops_and_shutdown_releases(self):
         self.native.game = self.native.fail = True
@@ -119,7 +201,7 @@ class ClickerTest(unittest.TestCase):
             def click(self):
                 raise AssertionError('测试中不应发送鼠标输入')
         real = NativeTest()
-        clicker = AutoClicker(real)
+        clicker = AutoClicker(None, real)
         try:
             self.assertTrue(clicker.status()['registered'])
             ctypes.windll.user32.PostThreadMessageW(real.tid, 0x0312, 1, 0)
@@ -161,6 +243,18 @@ class ClickerTest(unittest.TestCase):
         self.assertFalse(native.in_game())
         state.x, state.modifier = 50, 0x8000
         self.assertFalse(native.in_game())
+
+    def test_key_input_layout_without_real_keys(self):
+        native = WindowsInput()
+        calls = []
+        def send(count, pointer, size):
+            item = ctypes.cast(pointer, ctypes.POINTER(Input)).contents
+            calls.append((count, item.type, item.data.ki.wVk, item.data.ki.wScan, item.data.ki.dwFlags, size))
+            return 1
+        native.user = SimpleNamespace(SendInput=send, MapVirtualKeyW=lambda vk, kind: 0x13)
+        self.assertTrue(native.key('R', True))
+        self.assertTrue(native.key('R', False))
+        self.assertEqual(calls, [(1, 1, 0x52, 0x13, 0, ctypes.sizeof(Input)), (1, 1, 0x52, 0x13, 2, ctypes.sizeof(Input))])
 
     def test_partial_input_sends_release_without_real_clicks(self):
         native = WindowsInput()

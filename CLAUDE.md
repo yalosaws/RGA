@@ -45,7 +45,7 @@
 - 改完验证：XML 合法、改动格逐格读回、其他格不变、合并单元格和图片数量不变。
 - `脚本/apply.py` 把 `edits_sheet*.py`（`{单元格: 新文本}`；研究表按代号写，经 `research.json` 换算）打到旧版表上，输出 4.3.14 版并调用 `rename.py` 换译名。**会覆盖 4.3.14 版**，用户在 WPS 手改过就先备份。
 - `脚本/rename.py`：换游戏译名（规则在文件头和 `译名.py`）。**只能对没改过名的表跑一次**。
-- 其他：`fetch.py`（抓网页）、`fandom.py`（下 wikitext）、`hanhua.py`（从汉化包 swf 导出 tsv，汉化包更新后重跑、换日期名存进 `资料/`）、`client_research.py`（从游戏 swf 的 ffdec pcode 导出研究存档 ID ↔ 代号 ↔ 英文名，存成 `资料/客户端研究对照.json`；这是研究 ID 的权威对照，社区库 util.js 和编辑器标签都有错）。
+- 其他：`fetch.py`（抓网页）、`fandom.py`（下 wikitext）、`hanhua.py`（从汉化包 swf 导出 tsv，汉化包更新后重跑、换日期名存进 `资料/`）、`client_research.py`（从游戏 swf 的 ffdec pcode 导出研究存档 ID ↔ 代号 ↔ 英文名，存成 `资料/客户端研究对照.json`；这是研究 ID 的权威对照，社区库 util.js 和编辑器标签都有错）、`readable_client.py`（把 `build/installed-as3-deobf` 全部 AS3 的混淆名换回原名，输出到 `build/installed-as3-named/`，附 `names.json`、`summary.json`：类名和方法名来自字节码里留下的原名，字段只有只读写它的 getter/setter 能推断成 `_名字`，其余字段、包名保持混淆名；只供本地阅读，计算引擎仍用混淆名）、`research_formulas.py`（从上面的原名副本提取每项研究的效果公式，翻成中文存成 `资料/研究公式（客户端）.json`，研究页详情卡的「公式」读它；效果写在游戏其他地方的在脚本 `MANUAL` 里按代码手写、注明出处；游戏更新后先跑 `readable_client.py` 再跑它）。
 
 ## 攻略
 
@@ -64,15 +64,15 @@
 - **生成**：`脚本/build_html.py [xlsx] [目录]` → `build/app/`（会列出没对上格子的专名，目前约 28 个，都是表里没有的东西）。界面拆成文件：`index.html` 外壳里的 `<!--#include pages/x.html-->` 由程序本地服务嵌入，`pages/` 每页一个，`js/`、`css/`，`img/` 是表格图标（按内容命名），`manifest.json` 列出版本和各文件。`应用/build_exe.py` 先跑它，再把界面加密成 `RGA.dat` 用 PyInstaller 打成 `发布/RGA.exe`（并写 `RGA.exe.json`；pywebview 装在用户目录，不能用 `python -I`）。
 - **发布和自动更新**：`脚本/publish.py` 生成界面、加密成对象（文件名是 sha256，没改的文件不变）、写清单并用 `密钥/sign.key` 签名、生成主页，上传到 `ubuntu@124.222.182.40:~/workspace/pages/rga/`（Caddy 把 `yalosaws.com/rga/` 指到这里，配置在服务器 `~/workspace/ops/config/Caddyfile`）。只改了表格、攻略、界面就只跑 `publish.py`，已装的程序每 15 分钟检查、后台下载、提示「刷新」；改了 `应用/` 下的程序代码才要 `build_exe.py` 再 `publish.py --exe`，已装的程序会自动换 exe、提示「立即重启」。界面用到程序新功能时把 `updater.SHELL_API` 加一。**发布只在用户说「提交」时跟 commit 一起做，平时不发布。**
 - **版本**：`build_html.py` 开头的 `VERSION`、`CHANGES`（当前 0.5.4，未发布；2026-10-22 合并过一次旧版本号）。版本号用 0.x，改了功能在 `CHANGES` 最前面那版里写一条（用户说合并进哪版就写进哪版）。版本页只放版本号和更新记录。**每次发布都要升版本号**：已装的程序只在线上版本号比自己高时才更新，同版本号重发收不到。
-- **页面**：侧栏分工具（我的存档、法术预报、遗物预测）/ 攻略 / 资料表 / 关于。攻略里 R0 攻略和 A0、A1 攻略要点合成一页「攻略要点」（`#tips/r0`、`#tips/a0`、`#tips/a1`，图例最前面的切换胶囊平时只显示当前这篇，点开展开、选好收回；旧地址 `#r0`、`#a0`、`#a1` 会转过去）；模板库分 A0 / A1（`build_templates.py`，A1 的中文标签、说明和配对在 `a1_templates.py`）。遗物、隐藏奖杯、挑战、研究页是卡片（`card()`/`card_list()`），建筑升级页是「选建筑看一列」，其余工作表还是表格（用户在考虑换样式）。专名链接到表格格子，卡片说明里的专名按八类染色（`TERMS`，阵营和模板不染）。
+- **页面**：侧栏分工具（我的存档、法术预报、遗物预测）/ 攻略 / 资料表 / 关于。资料表第一项是法术页（`#sp`，`build_html.build_spells` + `脚本/spells.py` 的公式、阶层条件和规则）：阵营表 AF–AM 列（法术、法术奖杯）不再在阵营表里显示，卡片 id 是 `sp-英文名`、法术奖杯块 `sp-英文名-t`，`find()` 先查 `SPELL_LINKS`；存档的魔法 / 魔法时间 / 魔法阶层三个分页也在法术页底下（`save_tools.js` 的 `VIEWS`），阶层进度由 `spellsave` 事件传过去（阶层升级编号 400000 + 法术编号 × 100 + 阶层 − 1，有记录即永久解锁，u1 是本次重生已买；龙族解锁 604–607）。攻略里 R0 攻略和 A0、A1 攻略要点合成一页「攻略要点」（`#tips/r0`、`#tips/a0`、`#tips/a1`，图例最前面的切换胶囊平时只显示当前这篇，点开展开、选好收回；旧地址 `#r0`、`#a0`、`#a1` 会转过去）；模板库分 A0 / A1（`build_templates.py`，A1 的中文标签、说明和配对在 `a1_templates.py`）。遗物、隐藏奖杯、挑战、研究页是卡片（`card()`/`card_list()`），建筑升级页是「选建筑看一列」，其余工作表还是表格（用户在考虑换样式）。专名链接到表格格子，卡片说明里的专名按八类染色（`TERMS`，阵营和模板不染）。
 - **已获得标记**：读到存档后 `save_tools.js` 发事件（`artowned`、`trophyowned`、`challengeowned`、`researchowned`、`guideunlocked`），卡片页显示「全部 / 已获得 / 未获得」胶囊和进度条（已获得蓝边带勾，未获得变灰，不加多余文字）；攻略图例有「已解锁」胶囊，开启后已解锁的链接变灰。只按存档里有依据的记录标，不猜。
 - **我的存档**（`脚本/save_tools.py` + `save_tools.js` + `save_tools.html`）：嵌入 RG-tools 的库，中文只读。
   - 存档查看按编辑器分页显示；挑战分页、隐藏奖杯和遗物两段不显示（资料页已标出），自动施法分页暂时下线（`HIDE_TAB`/`HIDE_SEC`，数据仍保留给已获得标记用）。
   - 法术预报、遗物预测照搬 `rws/index.js`、`arch/index.js` 的计算，是侧栏「工具」里单独两页（`#rws`、`#arch`，代码仍在 save_tools 里），用「我的存档」读到的存档；旧地址 `#save/rws` 会转过去。`脚本/arch_fixes.js` 修正库里过时的遗物数据，库本身不改。
   - 名字翻译：`脚本/存档译名.py` → 游戏词典 → 汉化文本的统计标签。
 - **桌面程序**（`应用/rg_app.py`）：pywebview 无边框窗口（标题栏是网页画的 `.appbar`：侧栏和卡片贴窗口边，窗口按钮是卡片右上角的小胶囊；拖动只认正好点在带 `pywebview-drag-region` 的元素本身（侧栏、菜单空白、内容区顶上一条），不显示图标和标题），打开时居中；只读本机存档 `%APPDATA%\com.kongregate.mobile.realmgrinder.air\Local Store\#SharedObjects\RealmGrinderDesktop.swf\realm-grinder.sol`，一直自动同步（`save_sync.py` 监听文件变化后立即推送，低频检查兜底，没有开关；仍受游戏保存间隔限制；存档时间显示在存档查看筛选框右边）。程序里只有 `main` 滚动，脚本读写滚动位置用 `rgScroller()`。localStorage 在 `%LOCALAPPDATA%\RGA`。调试：设 `WEBVIEW2_ADDITIONAL_BROWSER_ARGUMENTS=--remote-debugging-port=9333` 再启动，用 CDP 读页面。
-- **自动点击**（`应用/auto_click.py`）：F8 启停，每 35 毫秒一次，只在前台是游戏窗口时点；没有设置页，热键和速度暂不可改（用户要求）。`应用/test_auto_click.py` 用模拟点击测试。
-- **实时计算**：构筑辅助可点“读取游戏快照”，每次实时试算前重新采集研究、升级、统计、建筑、法术、缓存与帧时钟；不会被后台存档推送覆盖，可切回存档模式。`live_reader.py` 管理连接，`live_state.py` 采集，`live_snapshot.py` 严格载入独立对象；缺字段或活动服务器上下文未支持时拒绝试算。当前 `SHELL_API=5`。轻量“实时读数”是另一个入口；连续增长模拟尚未接入。验证范围见 `资料/实时计算快照接入与验证（20261028）.md`。
+- **自动点击**（`应用/auto_click.py`）：默认 F8 启停、每 35 毫秒一次，只在前台是游戏窗口、鼠标在游戏画面上时点。设置在界面右下角的悬浮小胶囊里（`build_html.py` 的 `#ac`，点开原地展开）：开关、点击间隔（10–500 毫秒，两段对数刻度；最佳 35 毫秒≈29 次/秒落在 1/3 处，有标记、拖近吸附、显示「最佳」；依据：changelog「每秒最多算 30 次手动点击」）、启停快捷键、连点时同时按住一个键（默认 R，默认关；只在真正点击时按住，停下、离开游戏画面、关程序都会松开）；改了立即存到 `%LOCALAPPDATA%\RGA\autoclick.json`。接口 `click_status`/`click_configure`/`click_toggle`（`SHELL_API=6`）。`应用/test_auto_click.py` 用模拟点击测试。
+- **实时计算**（**暂时下线**，不进正式更新，测试完再上；`build_html.py` 的 `BUILD_TOOLS` 默认关，本地测试设 `RGA_BUILD_TOOLS=1` 再生成）：构筑辅助可点“读取游戏快照”，每次实时试算前重新采集研究、升级、统计、建筑、法术、缓存与帧时钟；不会被后台存档推送覆盖，可切回存档模式。`live_reader.py` 管理连接，`live_state.py` 采集，`live_snapshot.py` 严格载入独立对象；缺字段或活动服务器上下文未支持时拒绝试算。`SHELL_API` 见 `updater.py`。轻量“实时读数”是另一个入口；连续增长模拟尚未接入。验证范围见 `资料/实时计算快照接入与验证（20261028）.md`。
 - **风格**（用户选定）：浅灰蓝底 `#f3f6fb` + 白色圆角卡片，悬浮圆角侧栏（纯文字），主色 `#2563eb`，**不用渐变**；颜色用 `:root` 变量。各页不显示标题；切换页面有淡入动画。
 
 ## 已知未解决
