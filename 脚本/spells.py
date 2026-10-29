@@ -15,8 +15,8 @@ SPELLS = {
     'Call to Arms': dict(
         id=3, kind='normal', grp='common', tags='通用法术',
         formula=['所有建筑产能按建筑总数提升；只让部分建筑多算的效果（独特建筑、战士营房等）单独计算，不吃「所有建筑多算」的加成'],
-        req='本纪元建造 60,000 × T ÷ A 座建筑（A4 起改为 10,000 × T ÷ A）',
-        js='(A >= 4 ? 10000 : 60000) * T / A',
+        req='拥有 60,000 × T ÷ A 座建筑（A4 起改为 10,000 × T ÷ A）',
+        js='(A >= 4 ? 10000 : 60000) * T / A', cur='bldg',
         bonus='建筑数量结算值 +5%', cost=('5.1e52', '0')),
     'Spiritual Surge': dict(
         id=17, kind='normal', grp='common', tags='通用法术',
@@ -47,33 +47,33 @@ SPELLS = {
         id=27, kind='normal', grp='align2', tags='立场法术、混乱法术',
         formula=['随机两个建筑按随机一项本纪元数值提升产能：',
                  '魔产量 0.1 × ln(1+x)^5 %；奖杯数 5 × x^0.9 %；阵营币 0.01 × ln(1+x)^4 %；助手 0.1 × ln(1+x)^5 %'],
-        req='同时生效 4 × T 个法术', js='4 * T',
+        req='同时生效 4 × T 个法术', js='4 * T', cur='activeN',
         bonus='多影响 1 个随机建筑', cost=('7.5e76', '1e18')),
     'All Creation': dict(
         id=26, kind='normal', grp='align2', tags='立场法术、平衡法术',
         formula=['所有建筑产能提升 0.5 × ln(1+x)^3 + x^0.5 %，x 是回魔'],
-        req='本纪元购买 100 × T 个皇家贸易令', js='100 * T',
+        req='本纪元购买 100 × T 个皇家贸易令', js='100 * T', cur='exch',
         bonus='宝石产能加成 ×1.1（乘算）', cost=('7.5e76', '1e18')),
     'Fairy Chanting': dict(
         id=6, kind='normal', grp='faction', tags='善良法术、混乱法术、阵营法术',
         formula=['农场、旅馆、铁匠铺产能提升 20000^(1 + 0.02 × x^0.2) %，x 是三者总数'],
-        req='本纪元拥有 40,000 × T 个助手', js='40000 * T',
+        req='拥有 40,000 × T 个助手', js='40000 * T', cur='assist',
         bonus='仙灵吟唱持续时间 ×1.1（乘算）', cost=('5.7e58', '1e10')),
     'Moon Blessing': dict(
         id=14, kind='normal', grp='faction', tags='善良法术、平衡法术、阵营法术',
         formula=['所有建筑产能提升 1.3 × x^0.7 %，x 是本次重生点击次数'],
-        req='本纪元找到 8e12 × T 个阵营币', js='8e12 * T',
+        req='本纪元找到 8e12 × T 个阵营币', js='8e12 * T', cur='fcEra',
         bonus='每秒额外自动点击 2 次', cost=('5.7e58', '1e10')),
     "God's Hand": dict(
         id=9, kind='normal', grp='faction', tags='善良法术、秩序法术、阵营法术',
         formula=['所有建筑产能提升 10 × ln(1+x)^4 %，x 是回魔',
                  '持续时间 +(0.5 + 0.05 × (T−1)) × y^(0.5 + 0.05 × (T−1)) 秒，y 是本次重生善良立场时长，T 是阶层'],
-        req='回魔达到 500,000 × T', js='500000 * T',
+        req='回魔达到 500,000 × T', js='500000 * T', cur='regen',
         bonus='持续时间加成系数 +0.05', cost=('5.7e58', '1e10')),
     'Diamond Pickaxe': dict(
         id=5, kind='normal', grp='faction', tags='善良法术、阵营法术',
         formula=['点击收益提升 30 × x %，x 是考古深度；阵营币获得率 ×3'],
-        req='考古深度 4,000 × T', js='4000 * T',
+        req='考古深度 4,000 × T', js='4000 * T', cur='excav',
         bonus='阵营币获得率 ×1.1（乘算）', cost=('6.9e70', '1e12')),
     "Goblin's Greed": dict(
         id=8, kind='normal', grp='faction', tags='邪恶法术、平衡法术、阵营法术',
@@ -89,12 +89,12 @@ SPELLS = {
     'Hellfire Blast': dict(
         id=11, kind='normal', grp='faction', tags='邪恶法术、混乱法术、阵营法术',
         formula=['邪恶要塞、深渊裂隙产能提升 120 × x^0.8 %，x 是已获得奖杯数'],
-        req='纪元开始 5 分钟内施放地狱火冲击 12 × T 次', js='12 * T',
+        req='纪元开始 5 分钟内施放地狱火冲击 12 × T 次', js='12 * T', cur='hbCast',
         bonus='邪恶法术施法次数结算值 +50%', cost=('5.7e58', '1e10')),
     'Combo Strike': dict(
         id=4, kind='normal', grp='faction', tags='邪恶法术、阵营法术',
         formula=['所有建筑产能提升 100 × x^0.9 %，x 是连击计数'],
-        req='连击计数达到 100 × T', js='100 * T',
+        req='连击计数达到 100 × T', js='100 * T', cur='combo',
         bonus='每次施放让连击计数增加 T² 而不是 1', cost=('6.9e70', '1e12')),
     'Lightning Strike': dict(
         id=13, kind='normal', grp='faction', tags='中立法术、秩序法术、阵营法术',
@@ -138,12 +138,22 @@ SPELLS = {
         id=28, kind='normal', grp='faction', tags='平衡法术、阵营法术',
         formula=['阵营币获得率 +10 + 0.1 × x^0.75 %，x 是考古深度',
                  '魔上限 +1.5 × ln(1+y)^1.5 %，y 是阵营币获得率；再按魔上限提升助手'],
-        req='本纪元找到 1.6e41 × T 个阵营币', js='1.6e41 * T',
+        req='本纪元找到 1.6e41 × T 个阵营币', js='1.6e41 * T', cur='fcEra',
         bonus='离线加成 ×1.1（乘算）', cost=('1.2e122', '1e24')),
     'Tax Collection': dict(
         id=18, kind='zero', grp='common', tags='通用法术、征税类法术',
         formula=['立即获得 30 秒的产能（建筑和助手每秒产能之和）'],
         note='没有阶层，也不受飞升惩罚。'),
+}
+
+# 法术页「解锁 n 阶」里主题条件那一行的名字（和上面 req 对应）
+REQ_LAB = {
+    'Call to Arms': '建筑总数', 'Spiritual Surge': '累计重生', 'Holy Light': '本次重生点击', 'Blood Frenzy': '邪恶法术生效',
+    'Gem Grinder': '宝石', 'Temporal Flux': '本纪元时长', 'Maelstrom': '同时生效法术', 'All Creation': '本纪元买皇家贸易令',
+    'Fairy Chanting': '助手', 'Moon Blessing': '本纪元找到阵营币', "God's Hand": '回魔', 'Diamond Pickaxe': '考古深度',
+    "Goblin's Greed": '本纪元施放征税', 'Night Time': '离线产能', 'Hellfire Blast': '本纪元施放（限开局 5 分钟内）', 'Combo Strike': '连击计数',
+    'Lightning Strike': '皇家贸易令加成', 'Grand Balance': '魔上限', 'Brainwave': '脑波共振持续时间', "Dragon's Breath": '累计重生',
+    'Precognition': '预知持续时间', 'Limited Wish': '魔上限', 'Infinite Spiral': '本纪元找到阵营币',
 }
 
 # 表里没有的特殊法术：中文名、来源、说明
@@ -182,12 +192,12 @@ EXTRA = [
 ]
 
 # 分组：标题、说明
-GROUPS = [
-    ('common', '通用法术', '所有人都能用；阶层在龙族「孵化！」后开放'),
-    ('align', '立场法术', '善良、邪恶、中立；邪恶法术阶层在「小龙」后开放，善良在「龙族」后，其余在「远古巨龙」后'),
-    ('align2', '第二立场法术', '秩序、混乱、平衡，A1 起可选第二立场'),
-    ('faction', '阵营法术', '基础阵营、显赫阵营、星界阵营各一个；佣兵可以另选两个'),
-    ('special', '特殊法术', '征税的变体、传承和血统给的法术；阶层规则和普通法术不同'),
+GROUPS = [  # 龙族解锁对各组阶层的限制写在规则里，页面顶上的龙族解锁进度也标了
+    ('common', '通用法术', '所有人都能用'),
+    ('align', '立场法术', '善良 · 邪恶 · 中立'),
+    ('align2', '第二立场法术', '秩序 · 混乱 · 平衡，A1 起可选'),
+    ('faction', '阵营法术', '基础、显赫、星界阵营各一个，佣兵另选两个'),
+    ('special', '特殊法术', '征税的变体、传承和血统给的法术，阶层规则不同'),
 ]
 
 # 阶层规则（纯文字，专名由 TERMS 染色）。每项：(标题, 锚点, [段落])，锚点非空时块的 id 是 sp-r-锚点；段落以「|」开头的是表格行。

@@ -265,10 +265,20 @@ class Engine:
                     visible = bool(self.attribute(obj, 'visible'))
                 except Exception:
                     visible = None
+                spell = None
+                if kind == 'spell':
+                    # 法术页的剩余时间：载入存档时游戏给生效中的法术定好结束帧（§0n§ = duration），
+                    # §'!X§ 是施放后已过的帧数（存档里的 t），每秒 30 帧
+                    try:
+                        full = float(self.attribute(obj, 'duration'))
+                    except Exception:
+                        full = None
+                    spell = dict(active=bool(obj.S_23), elapsed=int(obj.S__27__21_X),
+                                 end=float(obj.S_0n) if obj.S_23 else None, duration=full)
                 catalog.append(dict(key=key, kind=kind, sid=sid, name=name, zh=self.translate(name),
                     code=code, labels=sorted(labels), owned=owned, visible=visible,
                     action_allowed=action_allowed,
-                    quantity=obj.S__21_a if kind == 'building' else None))
+                    quantity=obj.S__21_a if kind == 'building' else None, spell=spell))
         # 只有完整载入成功，后续请求才可使用这份状态。
         self.sim, self.catalog, self.objects = sim, catalog, objects
         self.baseline, self.checkpoint = baseline, checkpoint

@@ -123,7 +123,7 @@ MANUAL = {
 
 # 统计后缀（:name='i.name + " Cast"'），{} 是阵营/法术名
 SUFFIX = {
-    ' Cast': '{} 施放次数', ' RNG State': '{} 随机数状态', ' Time': '{} 生效时间', ' Remaining Duration': '{} 剩余时间',
+    ' Cast': '{} 施放次数', ' RNG State': '{} 随机数状态', ' Time': '{} 生效时间', ' Remaining Duration': '{} 已生效',
     ' Playtime': '{} 时间', ' Affiliations': '结盟 {} 次数', ' Upgrades Bought': '{} 升级购买数', ' Coins Gained': '{} 阵营币获得量',
     '': '{}',
 }

@@ -140,6 +140,11 @@ def build(find, cell_code):
     """返回 (section HTML, <script> 内容, 没翻出的名字)。
     find(类, 中文名) → 表格格子 id（不带 #）或 None；cell_code：研究名称格 id → 表里的新代号"""
     tabs = [t for t in parse_editor() if t['name'] != 'tab-' + t['id']]
+    # 魔法分页不显示（数据在法术页），只有「法术施放次数（最大值）」法术页没画：复制到产出分页「最大自动点击次数」后面
+    by = {t['id']: t for t in tabs}
+    mx = next(r for r in by['magic']['rows'] if r.get('name') == 'Max Spells Cast')
+    prod = by['production']['rows']
+    prod.insert(next(i for i, r in enumerate(prod) if r.get('name') == 'Max Auto Clicks') + 1, dict(mx))
     names = collect(tabs)
     # 法术预报里用到的名字（世系、巨灵挑战 4）
     names |= {x + ' Lineage' for x in ('Fairy', 'Elven', 'Angel', 'Goblin', 'Undead', 'Demon', 'Titan', 'Druid', 'Faceless',

@@ -22,4 +22,4 @@ R 范围、血统、阵营和立场取自模板名称；血统在前、阵营在
 - 研究分类里 4 条 `S1` 是提醒占位（`(delete them after their R range)`、两条 R65、一条 R75），页面显示为提示。
 - 佣兵研究 build 由同名的佣兵模板和研究模板组成（R75 起），卡片互相链接；`R77-80 E-GB-FR` 的佣兵模板对应 `R77-78`、`R79-80` 两条研究。龙族挑战 2 是先用佣兵 `R56 G-DD`，再换研究 `R56 DGDD (DGC2 V1 - check mercs!)`。`R75 N-GB`、`R75 N-DN`（解锁佣兵研究）只有佣兵模板。
 - 中文标题、用途标签和说明在 `脚本/a1_templates.py`，据 `攻略/A1攻略要点.md` 和 `资料/A1置顶原文.md`。模板包和原帖不一致的地方（如 `R85-89 N-DG-UD` 模板写 DN4、原帖写 DM4）在说明里注明，配置本身照原样保留。
-- 置顶里的 `R60+ Autoclicker Trophy` 不在模板包里，没有卡片。
+- 置顶里的 `R60+ Autoclicker Trophy` 不在模板包里，2026-10-30 照置顶原帖补进 JSON 的佣兵部分（放在 R56 G-DD 后面），名字写成 `R60+ Autoclicker Trophy (Elfline Neutral Merc)`，配置照抄原帖；中文标题在 `a1_templates.py` 的 `TITLE`。

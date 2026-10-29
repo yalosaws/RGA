@@ -124,7 +124,7 @@
   setInterval(showWhen, 10000);
   // 法术预报、遗物预测两页：没有存档时显示提示
   function forecastPages(s) {
-    ['sec-rws', 'sec-arch'].forEach(function (id) {
+    ['sp-fcw', 'sec-arch'].forEach(function (id) {
       var sec = $(id);
       sec.querySelector('.fc-empty').hidden = !!s;
       sec.querySelector('.fc-body').hidden = !s;
@@ -186,16 +186,31 @@
         tiers[t] = u ? (u.u1 ? 'own' : 'unl') : '';
       }
       if ([1, 8, 15, 11, 4].indexOf(x.id) >= 0) evil += p.active0 + p.active1;  // 邪恶法术：嗜血狂热和四个邪恶阵营法术
-      sp[x.id] = {c: p.c, r: p.r, e: p.e, a0: p.active0, a1: p.active1, a2: p.active2, on: p.t >= 0, act: p.activeTiers || 0,
-        avail: x.id === 18 || !!util.save.hasSpell(s, x.id), tiers: tiers, has: true};  // 征税谁都能用（库里的 hasSpell 漏了）
+      sp[x.id] = {c: p.c, r: p.r, e: p.e, a0: p.active0, a1: p.active1, a2: p.active2, on: p.t >= 0, el: p.t / 30, sid: x.id, act: p.activeTiers || 0,
+        avail: x.id === 18 || !!util.save.hasSpell(s, x.id), tiers: tiers, has: true, en: x.name};  // 征税谁都能用（库里的 hasSpell 漏了）
     });
     var clicks = st(4), mana = st(133), era = st(1), tc = (s.spells || {})[18] || {};
-    return {asc: s.ascension || 0, r: s.reincarnation, sp: sp, tro: set,
+    var r2 = function (i) { var x = st(i); return (x.stats || 0) + (x.statsReset || 0); };
+    var hi = function (i) { var x = st(i); return Math.max(x.stats || 0, x.statsReset || 0, x.statsRei || 0); };
+    // 原「魔法」分页里只跟一个法术有关的几项，放到那张卡片里
+    var ext = {13: [['当前目标层', nm(assocName('bTiers', s.strikeTier))], ['雷击次数（另一统计，本次重生）', num(r2(37))]],
+      10: [['最多同时影响建筑（最高）', num(hi(156))]],
+      4: [['连击计数', num(s.comboStrikeCont)], ['最高连击计数', num(hi(155))]],
+      8: [['连续施放次数', num(st(64).stats || 0)]]};
+    return {asc: s.ascension || 0, r: s.reincarnation, sp: sp, tro: set, ext: ext,
+      mana: {now: s.mana, max: mana.stats, regen: (st(146).stats || 0) * 30, prod: r2(16), spent: r2(27), casts: r2(15), time: r2(97), cont: s.contingencyValue || 0},
       stages: [604, 605, 606, 607].map(function (id) { return !!s.upgrades[id]; }),
       ab: [123200, 123201, 123202, 123203, 123204].filter(function (id) { return s.trophies[id]; }).length,
       ta: !!s.trophies[200],
       cur: {reinc: s.reincarnation, clicksR: (clicks.stats || 0) + (clicks.statsReset || 0), evilTime: evil, gems: s.gems,
-        eraTime: era.stats, maxMana: mana.stats, tcEra: tc.c}};
+        eraTime: era.stats, maxMana: mana.stats, tcEra: tc.c, excav: s.excavations,
+        // 下面几项按游戏判断阶层条件的口径（MultipleCasting）：建筑总数、本纪元贸易令、本纪元找到的阵营币（统计 6–11、41、42）、
+        // 同时生效的法术（每个算 1 + 阶层）、连击计数（游戏同步写进统计 155）、本纪元地狱火冲击施放次数
+        bldg: Object.keys(s.buildings || {}).reduce(function (a, i) { return a + ((s.buildings[i] || {}).q || 0); }, 0),
+        exch: st(24).stats || 0,
+        fcEra: [6, 7, 8, 9, 10, 11, 41, 42].reduce(function (a, i) { return a + (st(i).stats || 0); }, 0),
+        activeN: Object.keys(s.spells || {}).reduce(function (a, i) { var p = s.spells[i]; return a + (p && p.t >= 0 ? 1 + (p.activeTiers || 0) : 0); }, 0),
+        combo: st(155).stats || 0, hbCast: ((s.spells || {})[11] || {}).c || 0, regen: (st(146).stats || 0) * 30, assist: st(96).stats || 0}};
   }
 
   // 攻略进度：传递类别、中文名和链接目标，不把同名升级与奖杯混为一项。
@@ -337,7 +352,7 @@
       var p = ev(r.spell, s, i);
       return p ? [p.active0, p.active1, p.active0 + p.active1, p.active2, p.active0 + p.active1 + p.active2].map(dur) : [NUL];
     },
-    'spell-duration': function (r, s, i) { var p = ev(r.spell, s, i); return [p && p.t >= 0 ? dur(p.t) : NUL]; },
+    'spell-duration': function (r, s, i) { var p = ev(r.spell, s, i); return [p && p.t >= 0 ? dur(p.t / 30) : NUL]; },  // t：施放后已过的帧数（每秒 30 帧）
     'spell-autocasting': function (r, s, i) {
       var p = ev(r.spell, s, i); if (!p) return [NUL];
       var o = function (n) { return n >= 0 ? n : '–'; };
@@ -395,15 +410,12 @@
   // 自动施法暂时下线；挑战、隐藏奖杯、遗物已在各自的资料页里标出；阵营升级、阵营币用户不需要
   var HIDE_TAB = {autocasting: 1, challenges: 1, 'faction-upgrades': 1, fc: 1};
   var HIDE_SEC = {'Secret Trophies': 1, 'Quest Artifacts': 1, 'Lore Artifacts': 1};
-  // 魔法相关的三个分页搬到了法术页（#sp）底下
+  // 魔法相关的三个分页不在这里显示：数据都画在法术页（#sp）的卡片、总览和预报里（spellSave）
   var SPELL_TAB = {magic: 1, magictime: 1, 'magic-tiers': 1};
-  // 两处查看：我的存档（除去上面两类）、法术页（只放魔法分页）
-  var VIEWS = [{tabs: 'sv-vtabs', body: 'sv-vbody', filter: 'sv-filter', first: 'general', ok: function (id) { return !HIDE_TAB[id] && !SPELL_TAB[id]; }},
-               {tabs: 'sp-vtabs', body: 'sp-vbody', filter: 'sp-filter', first: 'magic', ok: function (id) { return !!SPELL_TAB[id]; }}];
+  var VIEWS = [{tabs: 'sv-vtabs', body: 'sv-vbody', filter: 'sv-filter', first: 'general', ok: function (id) { return !HIDE_TAB[id] && !SPELL_TAB[id]; }}];
 
   function renderView(save) {
     VIEWS.forEach(function (v) { if ($(v.tabs)) renderOne(save, v); });
-    if ($('sp-rawbox')) { $('sp-rawbox').hidden = false; $('sp-rawempty').hidden = true; }
   }
   function renderOne(save, v) {
     var tabs = $(v.tabs), body = $(v.body);
@@ -468,7 +480,7 @@
     $(v.tabs).classList.toggle('dim', !!k);
   }
 
-  // ---------- 法术预报（Realm Weather Service），侧栏「工具 → 法术预报」#rws ----------
+  // ---------- 法术预报（Realm Weather Service），在法术页里（#sp-fc）；下一次的结果也发给法术卡片（spellfc 事件） ----------
   var rws = (function () {
     var BN = util.save.building_names, BIDS = util.save.building_ids;
     var BREATH = ['红色', '绿色', '蓝色', '白色', '黑色', '黄色'];
@@ -615,9 +627,10 @@
       draw();
     }
 
+    var IC = {ls: 'lightningstrike', db: 'dragonsbreath', ms: 'maelstrom', lw: 'limitedwish', cata: 'catalyst', mcc2: 'chaosmadness'};
     function card(k) {
-      var f = F[k];
-      return '<div class="sv-card fc"><div class="fc-h"><b>' + esc(f.name) + '</b><span class="fc-seed" title="随机数状态">随机数 ' + f.seed + '</span></div>' +
+      var f = F[k], ic = (window.SP_ICON || {})[IC[k]];
+      return '<div class="sv-card fc"><div class="fc-h">' + (ic ? '<img class="fc-ic" src="' + ic + '" alt="">' : '<i class="fc-ic"></i>') + '<b>' + esc(f.name) + '</b><span class="fc-seed" title="随机数状态">随机数 ' + f.seed + '</span></div>' +
         (f.note ? '<p class="fc-note">' + esc(f.note) + '</p>' : '') +
         '<ol class="fc-list">' + f.items.map(function (x, i) {
           return '<li' + (i ? '' : ' class="next"') + '><i>' + (i + 1) + '</i><div>' + x + '</div>' + (i ? '' : '<em>下一次</em>') + '</li>';
@@ -625,17 +638,22 @@
     }
     function draw() {
       var on = Object.keys(F).filter(function (k) { return F[k].gen; }), off = Object.keys(F).filter(function (k) { return !F[k].gen; });
-      $('sv-rbld').innerHTML = owned.length ? owned.map(bspan).join('') : '<span class="sv-hint">没有建筑</span>';
+      if ($('sv-rbld')) $('sv-rbld').innerHTML = owned.length ? owned.map(bspan).join('') : '<span class="sv-hint">没有建筑</span>';
       $('sv-rgrid').innerHTML = on.length ? on.map(card).join('') : '';
-      $('sv-roff').className = off.length ? 'fc-off' : '';
-      $('sv-roff').innerHTML = off.length ? '<div class="fc-off-h">' + (on.length ? '暂时不能预报' : '现在没有能预报的法术') + '</div>' +
-        off.map(function (k) { return '<p><b>' + esc(F[k].name) + '</b><span>' + esc(F[k].why) + '</span></p>'; }).join('') : '';
+      if ($('sv-roff')) {
+        $('sv-roff').className = off.length ? 'fc-off' : '';
+        $('sv-roff').innerHTML = off.length ? '<div class="fc-off-h">' + (on.length ? '暂时不能预报' : '现在没有能预报的法术') + '</div>' +
+          off.map(function (k) { return '<p><b>' + esc(F[k].name) + '</b><span>' + esc(F[k].why) + '</span></p>'; }).join('') : '';
+      }
       // 预报结果是生成时就拼好的文字，高亮要画完再按 data-b 补上
-      $('sec-rws').querySelectorAll('[data-b]').forEach(function (x) { x.classList.toggle('hl', !!hl[x.dataset.b]); });
+      $('sp-fcw').querySelectorAll('[data-b]').forEach(function (x) { x.classList.toggle('hl', !!hl[x.dataset.b]); });
+      var next = {};
+      Object.keys(IC).forEach(function (k) { if (F[k] && F[k].gen) next[IC[k]] = F[k].items[0]; });
+      window.dispatchEvent(new CustomEvent('spellfc', {detail: next}));
     }
     document.addEventListener('click', function (e) {
       var t = e.target;
-      if (!t.closest || !t.closest('#sec-rws')) return;
+      if (!t.closest || !t.closest('#sp-fcw')) return;
       var m = t.closest('[data-more]'), bd = t.closest('[data-b]');
       if (m) { more(m.dataset.more, 10); draw(); }
       else if (bd) { hl[bd.dataset.b] = !hl[bd.dataset.b]; draw(); }
@@ -838,13 +856,12 @@
       if (list.length) use(list[0].s, false);
       else { cur = null; refreshHist([], -1); $('sv-main').hidden = true; msg('已删除。'); showWhen(); ownedArtifacts(null); forecastPages(null); }
     });
-    // 法术预报、遗物预测是侧栏「工具」里单独的两页（#rws、#arch）；旧地址 #save/rws、#save/arch 转过去
+    // 遗物预测是侧栏「工具」里单独的一页（#arch），旧地址 #save/arch 转过去；法术预报并进了法术页，旧地址 #rws、#save/rws 由 show() 转到 #sp-fc
     window.addEventListener('subpage', function (e) {
-      if (e.detail.sec === 'save' && (e.detail.sub === 'rws' || e.detail.sub === 'arch')) location.replace('#' + e.detail.sub);
+      if (e.detail.sec === 'save' && e.detail.sub === 'arch') location.replace('#arch');
       if (e.detail.sec === 'arch') arch.draw();  // 图表要在页面显示出来后才知道宽度
     });
-    var old = /^#save\/(rws|arch)/.exec(location.hash);  // 打开时的 subpage 事件比这里早
-    if (old) location.replace('#' + old[1]);
+    if (/^#save\/arch/.test(location.hash)) location.replace('#arch');  // 打开时的 subpage 事件比这里早
     VIEWS.forEach(function (v) {
       if (!$(v.tabs)) return;
       $(v.tabs).addEventListener('click', function (e) {

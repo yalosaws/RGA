@@ -4,6 +4,10 @@
       "text": "R56 G-DD (DGC2 V1, PB4 + tiering)",
       "tp": "EL1,GB3,GB5,GB7,UD7,DD3,DD4,DN4,DW7,DG3,DG4,DG7"
     },
+    "R60+ Autoclicker Trophy (Elfline Neutral Merc)": {
+      "text": "R60+ Autoclicker Trophy (Elfline Neutral Merc)",
+      "tp": "FR4,EL1,AN5,AN8,GB3,GB5,GB7,TT8,DD3,DN4,DG2,DG7,SP:Lightning Strike,SP:Dragon's Breath"
+    },
     "R75 G-UD (W300 buff)": {
       "text": "R75 G-UD (W300 buff)",
       "tp": "FR4,GB3,GB5,GB7,UD7,FC3,DN2,DN4,DW7,DG3,DG4,DG7,MA:EL7,SP:Fairy Chanting,SP:Combo Strike"

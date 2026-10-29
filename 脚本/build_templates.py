@@ -103,7 +103,10 @@ def build(find, code_name, render):
         m, combo = A1_MERC.match(name), re.search(r'\b([A-Z?]{2})([A-Z]{2})\b', name)
         paren = re.search(r'\((.+)\)$', name)
         words = [A1.TAG.get(paren[1], paren[1])] if paren else []
-        if m:
+        if name in A1.TITLE:
+            title, words = A1.TITLE[name]
+            words = list(words)
+        elif m:
             title = '%s佣兵 · %s血统' % (ALIGN[m[1]], FACTIONS.get(m[2], '任意'))
             if m[3]:
                 words.append('A2950 %s' % FACTIONS[m[3]])
