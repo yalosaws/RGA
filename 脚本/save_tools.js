@@ -169,6 +169,16 @@
     window.dispatchEvent(new CustomEvent('artowned', {detail: art}));
     window.dispatchEvent(new CustomEvent('trophyowned', {detail: tro}));
     window.dispatchEvent(new CustomEvent('spellsave', {detail: s ? spellSave(s, tro) : null}));
+    // 活动页：进行中的活动（season，0 是没有活动）、各资源格现有数量、累计统计、已有的升级（u1）和奖杯
+    var evs = null;
+    if (s) {
+      var eu = {}, et = {}, st = [];
+      Object.keys(s.upgrades).forEach(function (k) { if (s.upgrades[k] && s.upgrades[k].u1) eu[k] = 1; });
+      Object.keys(s.trophies).forEach(function (k) { if (s.trophies[k]) et[k] = 1; });
+      for (var i = 0; i < s.stats.length; i++) { var x = s.stats[i] || {}; st.push((x.stats || 0) + (x.statsReset || 0) + (x.statsRei || 0)); }
+      evs = {season: s.season || 0, res: (s.eventResources || []).map(function (x) { return x.res || 0; }), st: st, up: eu, tr: et};
+    }
+    window.dispatchEvent(new CustomEvent('eventsave', {detail: evs}));
     guideUnlocked(s);
   }
 

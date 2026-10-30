@@ -164,3 +164,6 @@ print('written', DST, 'new strings', len(new_si))
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import rename
 rename.main(DST, DST)
+# 活动表的译名补正（rename 全表规则跳过的词），见 fix_event_names.py
+import fix_event_names
+fix_event_names.main(DST)

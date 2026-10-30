@@ -44,7 +44,9 @@ class Simulation:
         out.update(coins=getattr(self.G, self.game_names['resource']),
                    mana=getattr(self.G, self.game_names['mana']),
                    max_mana=self.core_call('getMaxMana'),
-                   mana_per_second=30 * self.core_call('getManaPerTick'))
+                   mana_per_second=30 * self.core_call('getManaPerTick'),
+                   # 离线产能加成（%），和游戏判断黑夜阶层的口径一样：Formulas.getOfflineBonus() × 100
+                   offline_bonus=100 * self.core_call('getOfflineBonus'))
         return out
 
     def find(self, collection, name_or_sid):

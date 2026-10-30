@@ -9,7 +9,7 @@ from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import patch
 
-from auto_click import AutoClicker, DEFAULTS, Input, WindowsInput, w
+from auto_click import AutoClicker, DEFAULTS, Frame, Input, WindowsInput, find_buy_buttons, w
 
 
 def wait_for(predicate, timeout=1):
@@ -21,6 +21,32 @@ def wait_for(predicate, timeout=1):
     raise AssertionError('等待后台状态超时')
 
 
+def paint(width, height, top='left', bottom=True, header=True, dim=False):
+    """画一张假的游戏画面：退位 / 重生 / 全部购买 / 载入模板，右下的全部购买 + 购买最大。"""
+    data = bytearray(bytes((20, 20, 20, 255)) * width * height)
+    def box(x0, x1, y0, y1, rgb):
+        if dim:
+            rgb = tuple(c // 3 for c in rgb)
+        for y in range(y0, y1):
+            for x in range(x0, x1):
+                i = (y * width + x) * 4
+                data[i:i + 3] = bytes((rgb[2], rgb[1], rgb[0]))
+    red = (152, 12, 32)
+    if header:
+        box(131, 298, 7, 43, (5, 134, 127))
+        box(311, 478, 7, 43, (175, 164, 22))
+    box(85, 520, 46, 74, (220, 222, 223))
+    if top == 'left':
+        box(93, 221, 48, 72, red)
+        box(233, 361, 48, 72, red)
+    elif top == 'center':
+        box(233, 363, 48, 72, red)
+    if bottom:
+        box(width - 383, width - 340, height - 106, height - 63, red)
+        box(width - 333, width - 220, height - 106, height - 63, (15, 127, 32))
+    return Frame(width, height, bytes(data))
+
+
 class FakeInput:
     def __init__(self):
         self.registrations = {}
@@ -30,6 +56,22 @@ class FakeInput:
         self.sent = []
         self.fail = False
         self.keylog, self.key_time = [], []
+        self.fg = 0  # 游戏窗口句柄（0 表示没开）
+        self.frame = None
+        self.at = []
+
+    def game_window(self):
+        return self.fg
+
+    def find_game(self):
+        return self.fg
+
+    def capture(self, hwnd):
+        return self.frame
+
+    def post_click(self, hwnd, x, y):
+        self.at.append((hwnd, x, y, time.perf_counter()))
+        return not self.fail
 
     def register(self, ident, settings):
         if settings['key'] in self.blocked:
@@ -149,6 +191,71 @@ class ClickerTest(unittest.TestCase):
         self.assertEqual(self.native.registrations, {1: 'F8'})
         self.assertEqual(self.clicker.status()['hotkey'], 'F8')
 
+    def test_buy_clicks_found_buttons_every_second(self):
+        self.native.frame = paint(1113, 738, top='left')
+        self.native.fg = 7
+        self.assertTrue(self.clicker.command('configure', dict(DEFAULTS, cursor=False))['ok'])
+        self.clicker.command('toggle')
+        wait_for(lambda: len(self.native.at) == 2)
+        self.near([a[1:3] for a in self.native.at], [(157, 60), (751, 652)])
+        self.assertEqual(self.clicker.status()['found'], ['升级', '建筑'])
+        time.sleep(.4)
+        self.assertEqual(len(self.native.at), 2)  # 一秒一次
+        wait_for(lambda: len(self.native.at) == 4, 1.5)
+        self.assertGreaterEqual(self.native.at[2][3] - self.native.at[0][3], .99)
+        self.assertEqual(self.native.sent, [])  # cursor 关：不在鼠标处连点
+
+    def test_buy_skips_without_game_or_buttons_or_when_off(self):
+        self.clicker.command('toggle')
+        time.sleep(.05)
+        self.assertEqual(self.native.at, [])  # 游戏没开
+        self.native.fg, self.native.frame = 7, paint(1113, 738, top=None, bottom=False)
+        time.sleep(1.2)
+        self.assertEqual(self.native.at, [])  # 画面上没有按钮
+        self.assertEqual(self.clicker.status()['found'], [])
+        self.clicker.command('toggle')
+        self.native.frame = paint(1113, 738, top='left')
+        self.assertTrue(self.clicker.command('configure', dict(DEFAULTS, buy=False))['ok'])
+        self.clicker.command('toggle')
+        time.sleep(.2)
+        self.assertEqual(self.native.at, [])  # buy 关
+
+    def near(self, got, want):
+        self.assertEqual(len(got), len(want), got)
+        for (x, y), (a, b) in zip(got, want):
+            self.assertLessEqual(max(abs(x - a), abs(y - b)), 3, (got, want))
+
+    def found(self, frame, want):
+        got = find_buy_buttons(frame)
+        self.assertEqual([g[0] for g in got], [n for n, _, _ in want])
+        self.near([g[1:] for g in got], [w[1:] for w in want])
+
+    def test_find_buy_buttons(self):
+        self.found(paint(1113, 738, top='left'), [('升级', 157, 60), ('建筑', 751, 652)])
+        self.found(paint(1113, 738, top='center'), [('升级', 298, 60), ('建筑', 751, 652)])
+        self.found(paint(981, 688, top='center'), [('升级', 298, 60), ('建筑', 619, 602)])
+        self.found(paint(1113, 738, top='left', dim=True), [])  # 有弹窗，画面变暗
+        self.found(paint(1113, 738, top='left', header=False), [('建筑', 751, 652)])  # 不在升级页：只认建筑
+        self.found(paint(1113, 738, top=None, bottom=False), [])
+
+    def test_native_posts_messages_without_moving_mouse(self):
+        native = WindowsInput()
+        log, dpi = [], []
+        def rect(hwnd, pointer):
+            area = ctypes.cast(pointer, ctypes.POINTER(w.RECT)).contents
+            area.left, area.top, area.right, area.bottom = 0, 0, 1000, 500
+            return True
+        native.user = SimpleNamespace(GetClientRect=rect,
+            GetWindowDpiAwarenessContext=lambda h: 'unaware', SetThreadDpiAwarenessContext=lambda c: dpi.append(c) or 'old',
+            PostMessageW=lambda h, m, wp, lp: log.append((h, m, wp, lp & 0xffff, lp >> 16)) or True)
+        self.assertEqual(native.game_size(9), (1000, 500))
+        self.assertEqual(dpi, ['unaware', 'old'])  # 按游戏窗口的 DPI 取客户区，取完换回来
+        self.assertTrue(native.post_click(9, 250, 300))
+        self.assertEqual(dpi, ['unaware', 'old'] * 2)  # 发消息时也在游戏的 DPI 模式下
+        self.assertEqual(log, [(9, 0x200, 0, 250, 300), (9, 0x201, 1, 250, 300), (9, 0x202, 0, 250, 300)])
+        native.user.PostMessageW = lambda *a: False
+        self.assertFalse(native.post_click(9, 5, 5))
+
     def test_bad_settings_rejected(self):
         for value in [0, -1, 9, 1001, 35.2, '35', True, float('nan'), float('inf')]:
             self.assertFalse(self.clicker.command('configure', dict(DEFAULTS, interval=value))['ok'])
@@ -189,7 +296,6 @@ class ClickerTest(unittest.TestCase):
     def test_native_layout_and_message_routing_without_real_clicks(self):
         native = WindowsInput()
         self.assertEqual(ctypes.sizeof(Input), 40 if ctypes.sizeof(ctypes.c_void_p) == 8 else 28)
-        self.assertEqual([item.data.mi.dwFlags for item in native.inputs], [2,4])
         # 真正注册 Windows 热键，再向该线程投递 WM_HOTKEY；不注入键盘或鼠标事件。
         class NativeTest(WindowsInput):
             def register(self, ident, settings):
@@ -225,7 +331,10 @@ class ClickerTest(unittest.TestCase):
         def process_name(handle, flags, buffer, size):
             buffer.value = state.exe
             return True
-        native.user = SimpleNamespace(GetForegroundWindow=lambda:100,
+        def class_name(hwnd, buffer, size):
+            buffer.value = 'ApolloRuntimeContentWindow'
+            return 26
+        native.user = SimpleNamespace(GetForegroundWindow=lambda:100, GetClassNameW=class_name,
             GetWindowThreadProcessId=lambda *args:1, GetCursorPos=cursor,
             WindowFromPoint=lambda point:state.root, GetAncestor=lambda hwnd, flags:hwnd,
             ScreenToClient=lambda *args:True, GetClientRect=rect, GetAsyncKeyState=lambda vk:state.modifier)
@@ -255,16 +364,6 @@ class ClickerTest(unittest.TestCase):
         self.assertTrue(native.key('R', True))
         self.assertTrue(native.key('R', False))
         self.assertEqual(calls, [(1, 1, 0x52, 0x13, 0, ctypes.sizeof(Input)), (1, 1, 0x52, 0x13, 2, ctypes.sizeof(Input))])
-
-    def test_partial_input_sends_release_without_real_clicks(self):
-        native = WindowsInput()
-        calls = []
-        def send(count, inputs, size):
-            calls.append((count, size))
-            return 1
-        native.user = SimpleNamespace(SendInput=send)
-        self.assertFalse(native.click())
-        self.assertEqual(calls, [(2, ctypes.sizeof(Input)), (1, ctypes.sizeof(Input))])
 
 
 if __name__ == '__main__':

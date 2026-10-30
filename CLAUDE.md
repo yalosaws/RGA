@@ -45,7 +45,8 @@
 - 改完验证：XML 合法、改动格逐格读回、其他格不变、合并单元格和图片数量不变。
 - `脚本/apply.py` 把 `edits_sheet*.py`（`{单元格: 新文本}`；研究表按代号写，经 `research.json` 换算）打到旧版表上，输出 4.3.14 版并调用 `rename.py` 换译名。**会覆盖 4.3.14 版**，用户在 WPS 手改过就先备份。
 - `脚本/rename.py`：换游戏译名（规则在文件头和 `译名.py`）。**只能对没改过名的表跑一次**。
-- 其他：`fetch.py`（抓网页）、`fandom.py`（下 wikitext）、`hanhua.py`（从汉化包 swf 导出 tsv，汉化包更新后重跑、换日期名存进 `资料/`）、`client_research.py`（从游戏 swf 的 ffdec pcode 导出研究存档 ID ↔ 代号 ↔ 英文名，存成 `资料/客户端研究对照.json`；这是研究 ID 的权威对照，社区库 util.js 和编辑器标签都有错）、`readable_client.py`（把 `build/installed-as3-deobf` 全部 AS3 的混淆名换回原名，输出到 `build/installed-as3-named/`，附 `names.json`、`summary.json`：类名和方法名来自字节码里留下的原名，字段只有只读写它的 getter/setter 能推断成 `_名字`，其余字段、包名保持混淆名；只供本地阅读，计算引擎仍用混淆名）、`research_formulas.py`（从上面的原名副本提取每项研究的效果公式，翻成中文存成 `资料/研究公式（客户端）.json`，研究页详情卡的「公式」读它；效果写在游戏其他地方的在脚本 `MANUAL` 里按代码手写、注明出处；游戏更新后先跑 `readable_client.py` 再跑它）。
+- `脚本/fix_event_names.py`：活动表的译名补正（Ghost、Blood、Asmodean 等全表规则跳过或用了旧叫法的词，按格对照），只改活动表、可重复跑；`apply.py` 在 rename 之后自动调用。
+- 其他：`fetch.py`（抓网页）、`fandom.py`（下 wikitext）、`hanhua.py`（从汉化包 swf 导出 tsv，汉化包更新后重跑、换日期名存进 `资料/`）、`client_research.py`（从游戏 swf 的 ffdec pcode 导出研究存档 ID ↔ 代号 ↔ 英文名，存成 `资料/客户端研究对照.json`；这是研究 ID 的权威对照，社区库 util.js 和编辑器标签都有错）、`readable_client.py`（把 `build/installed-as3-deobf` 全部 AS3 的混淆名换回原名，输出到 `build/installed-as3-named/`，附 `names.json`、`summary.json`：类名和方法名来自字节码里留下的原名，字段只有只读写它的 getter/setter 能推断成 `_名字`，其余字段、包名保持混淆名；只供本地阅读，计算引擎仍用混淆名）、`research_formulas.py`（从上面的原名副本提取每项研究的效果公式，翻成中文存成 `资料/研究公式（客户端）.json`，研究页详情卡的「公式」读它；效果写在游戏其他地方的在脚本 `MANUAL` 里按代码手写、注明出处；游戏更新后先跑 `readable_client.py` 再跑它）、`event_ids.py`（同样读原名副本，导出活动页标记存档用的升级 / 奖杯 / 任务编号、各活动资源格和万圣节怪物等级，存成 `资料/活动编号（客户端4.3.14）.json`，`build_html.build_events` 读它；游戏更新后重跑）。
 
 ## 攻略
 

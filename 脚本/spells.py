@@ -84,7 +84,7 @@ SPELLS = {
     'Night Time': dict(
         id=15, kind='normal', grp='faction', tags='邪恶法术、秩序法术、阵营法术',
         formula=['助手产能提升 50 + 50 × x %，x 是墓城数量'],
-        req='离线产能达到 80,000 × T %', js='80000 * T',
+        req='离线产能达到 80,000 × T %', js='80000 * T', cur='offline',
         bonus='助手数量 ×1.05（乘算）', cost=('5.7e58', '1e10')),
     'Hellfire Blast': dict(
         id=11, kind='normal', grp='faction', tags='邪恶法术、混乱法术、阵营法术',

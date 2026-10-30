@@ -49,12 +49,17 @@ BUILD_TOOLS = os.environ.get('RGA_BUILD_TOOLS') == '1'
 AUTHOR = 'Yalosaws'
 CHANGES = [
     ('0.5.4', '2026-10-29', [
+        '挑战卡片的「效果」下面加上「当前数值」：读到存档后由游戏客户端的计算代入你的存档，显示每个挑战奖励现在的加成（和游戏说明里括号中的数一致）；还没解锁、游戏不显示效果的高级挑战按公式列出各项加成',
+        '自动连点加上「自动全部购买」：开启后每秒点一次升级和建筑的「全部购买」，点击直接发给游戏窗口，鼠标不动，游戏在后台也能点（不能最小化）；每次先看游戏画面，在升级页、按钮露在外面才点，有弹窗时不点；「在鼠标处连点」可以单独关掉，只用自动购买',
+        '自动连点不再模拟真实鼠标：鼠标处连点也改成直接给游戏窗口发点击',
         'A1 模板库补上置顶的自动点击器奖杯 build（中立佣兵 · 精灵血统），可以复制或添加到游戏；A1 攻略要点里的这个 build 链接到它',
-        '研究详情卡加上「按你的存档」：读到存档后由游戏客户端的计算代入你的存档，显示每项研究现在的加成（和游戏里鼠标悬停看到的一样，已按 Ascension 折算），另附公式原始值；按建筑分别计算的几项暂不显示',
-        '研究详情卡加上「公式」：253 项研究的效果公式从游戏客户端代码里提取，翻成中文（变量标明本局 / 本R / 全部），写上单位和从第几次 Ascension 开始打折；效果写在游戏其他地方的也逐项找出来补上',
-        '新增法术页（资料表第一项）：每个法术一张带游戏图标的卡片，按类别配色，平时只显示类别、法力和持续时间、两行效果和五格阶层条，点开（带展开动画）看 4.3 公式、每阶附加效果、首次解锁条件和费用、法术奖杯；读到存档后顶上显示法力、阶层上限和奥术光辉，卡片上显示已解锁 / 已买的阶层、到下一阶的进度，点开看每个条件的进度条、施放次数和生效时间，可筛「能用」「还能升阶」；阶层规则收在页面最下面。阵营表的法术几列、「我的存档」的三个魔法分页都并进来了；侧栏的「法术预报」也并进法术页，雷击、龙息等卡片上直接显示下一次的结果；卡片详情显示法术的持续时间（程序的计算模块按游戏代码算出），阶层条件尽量读出当前数值（助手、回魔、魔上限由计算模块算）',
+        '研究详情卡加上「实际数值」：读到存档后由游戏客户端的计算代入你的存档，显示每项研究现在的加成（和游戏里鼠标悬停看到的一样，已按 Ascension 折算），没折算的公式原始值用浅色跟在后面；按建筑分别计算的几项暂不显示',
+        '研究详情卡加上「公式」：253 项研究的效果公式从游戏客户端代码里提取，翻成中文（变量标明本局 / 本R / 全部），写上单位；效果写在游戏其他地方的也逐项找出来补上',
+        '新增法术页（资料表第一项）：每个法术一张带游戏图标的卡片，按类别配色，平时只显示类别、法力和持续时间、两行效果和五格阶层条，点开时卡片浮起来以原位置为中心向四周放大（其他卡片不动，点别处或按 Esc 收起）看 4.3 公式、每阶附加效果、首次解锁条件和费用、法术奖杯；读到存档后顶上显示法力、阶层上限和奥术光辉，卡片上显示已解锁 / 已买的阶层、到下一阶的进度，点开看每个条件的进度条、施放次数和生效时间；阶层规则收在页面最下面。阵营表的法术几列、「我的存档」的三个魔法分页都并进来了；侧栏的「法术预报」也并进法术页，雷击、龙息等卡片上直接显示下一次的结果；卡片详情显示法术的持续时间（程序的计算模块按游戏代码算出），阶层条件尽量读出当前数值（助手、回魔、魔上限、离线产能由计算模块算）；大数按游戏的科学计数法显示（如 2.273e10）',
         '自动连点做成右下角的小胶囊：点开在原地展开设置，可开关、调点击间隔（对数刻度，35 毫秒最佳点有标记、拖到附近会吸住）、换启停快捷键，还能设成连点时同时按住一个键（默认 R）',
         '活动页重做：顶上选活动，下面分资源、法术、升级、任务奖杯、壮举奖杯、特殊升级几段；活动阵营升级排成「阶层 × 阵营」的格子，4.2.1 起新增的壮举归到各自活动里',
+        '活动页读存档：正在进行的活动在选项卡上亮绿点、标「进行中」，打开活动页时直接切过去；资源格显示现有和累计数量；已拥有的活动升级、已拿到的任务阶段和壮举打勾；万圣节怪物显示等级（按游戏代码算），称号到级打勾。升级、奖杯编号从游戏客户端代码导出',
+        '活动页译名和游戏统一：幽灵（原「鬼」）、血液（原「鲜血」）、彩蛋 / 独特彩蛋、阿斯莫汀（原「恶魔之王」）、盛夏族 / 凛冬族、印记 / 印记特权（原「残骸」）、骇人怪物、暗夜佳节、多余绿手；说明里残留的英文（Vampire、Cannibalize、Christmas Present 等）换成游戏译名',
     ]),
     ('0.5.3', '2026-10-27', [
         '研究页的代号标签按分支着色，和存档页的标记颜色统一；已解锁只显示右上角的勾，不再把标签染成蓝底',
@@ -550,16 +555,15 @@ SP_JS = r"""<script>(function(){
   var root = document.getElementById('sp-root'); if (!root) return;
   var INFO = window.SP_DATA || {};
   var cards = [].slice.call(root.querySelectorAll('.sp-c')), heads = [].slice.call(root.querySelectorAll('.art-g[data-g]'));
-  var q = document.getElementById('sp-q'), seg = document.getElementById('sp-seg'), bar = document.getElementById('sp-bar'), top = root.querySelector('.cl-top');
   var rules = document.getElementById('sp-rules'), ov = document.getElementById('sp-ov');
   var evs = [].slice.call(root.querySelectorAll('.sp-ev[data-en]')), painted = false, NOFC = true;
   var STAGE = [['孵化！', '通用法术'], ['小龙', '邪恶法术'], ['龙族', '善良法术'], ['远古巨龙', '其余法术']];
-  var SV = null, FC = {}, CALC = null, CSP = {}, sel = '', state = {};  // CSP：计算模块给的各法术持续时间
-  var LIVE = {assist: 'assistant_count', regen: 'mana_per_second', maxMana: 'max_mana'};
+  var SV = null, FC = {}, CALC = null, CSP = {};  // CSP：计算模块给的各法术持续时间
+  var LIVE = {assist: 'assistant_count', regen: 'mana_per_second', maxMana: 'max_mana', offline: 'offline_bonus'};
   function num(v){
     if (v == null || isNaN(v)) return '—';
     var a = Math.abs(v);
-    if (a >= 1e9) return v.toExponential(2).replace('e+', 'e');
+    if (a >= 1e6) return big(v);
     return v.toLocaleString('zh-CN', {maximumFractionDigits: a < 10 ? 2 : 0});
   }
   function dur(s){
@@ -569,10 +573,14 @@ SP_JS = r"""<script>(function(){
     var d = Math.floor(s / 86400), h = Math.floor(s % 86400 / 3600), m = Math.floor(s % 3600 / 60), x = s % 60;
     return (d ? d + '天' : '') + (h ? h + '小时' : '') + (m ? m + '分' : '') + (x && !d && !h ? x + '秒' : '') || '0秒';
   }
-  function big(v){  // 总览里的大数：万、亿
+  function big(v){  // 游戏的科学计数法（Utilities.numberToText）：100 万以下取整带千位逗号，以上 4 位有效数字 + e 指数
     if (v == null || isNaN(v)) return '—';
-    var a = Math.abs(v);
-    return a >= 1e12 ? v.toExponential(2).replace('e+', 'e') : a >= 1e8 ? +(v / 1e8).toFixed(2) + '亿' : a >= 1e4 ? +(v / 1e4).toFixed(1) + '万' : num(v);
+    if (!isFinite(v)) return 'INF';
+    var a = Math.abs(v), sg = v < 0 ? '-' : '';
+    if (a < 1e6) return sg + Math.floor(a).toLocaleString('en-US');
+    var e = Math.floor(Math.log10(a)), m = a / Math.pow(10, e);
+    if (m >= 9.999) return sg + '1e' + (e + 1);
+    return sg + String(+m.toPrecision(4)) + 'e' + e;
   }
   function pb(pct, ok){ return '<span class="sp-pb' + (ok ? ' ok' : '') + '"><i data-w="' + Math.max(0, Math.min(100, pct)).toFixed(1) + '" style="width:0"></i></span>'; }
   function pct(n){ return '<em data-n="' + n + '" data-s="%">' + n + '%</em>'; }
@@ -604,7 +612,7 @@ SP_JS = r"""<script>(function(){
   function tiered(x){ return x.k === 'normal' || x.k === 'dragon'; }
   // 阶层状态：上限、已解锁到第几阶、下一个要解锁的阶层和条件
   function tierOf(x, p){
-    var c = cap(x), hi = 1, next = 0;
+    var c = cap(x), hi = p.avail ? 1 : 0, next = 0;  // 1 阶就是法术本身：这次重生用不了就算 0 阶；2 阶起的解锁是永久的，照样算
     for (var t = 2; t <= c; t++) { if (p.tiers[t]) hi = t; else if (!next) next = t; }
     var o = {c: c, hi: hi, next: next, req: [], pct: 100, gate: false};
     if (!next) return o;
@@ -614,7 +622,7 @@ SP_JS = r"""<script>(function(){
     // 助手数、当前回魔、当前魔上限存档里没有：用程序的计算模块（游戏客户端代码）载入存档算出的值；算不出时退回存档里的本纪元最高值
     var cur = null, lab = x.lab, live = CALC && LIVE[x.cur];
     if (live && typeof CALC[live] === 'number') cur = CALC[live];
-    else if (x.cur) { cur = SV.cur[x.cur]; if (LIVE[x.cur]) lab += '（本纪元最高）'; }
+    else if (x.cur) { cur = SV.cur[x.cur]; if (cur != null && LIVE[x.cur]) lab += '（本纪元最高）'; }  // 离线产能存档里没有，算不出时只显示目标
     o.req.push({l: lab, have: cur, need: target(x, T), f: x.time ? dur : num});
     o.req.forEach(function(r){ if (r.have != null) o.pct = Math.min(o.pct, r.need > 0 ? r.have / r.need * 100 : 100); });
     return o;
@@ -625,8 +633,8 @@ SP_JS = r"""<script>(function(){
     if (tiered(x) && SV.asc >= 1) {
       var segs = '';
       for (var t = 1; t <= 5; t++) {
-        var st = t === 1 ? 'own' : p.tiers[t] || '', cls = t > o.c ? 's-cap' : st === 'own' ? 's-own' : st === 'unl' ? 's-unl' : 's-lock';
-        var tip = t > o.c ? '以后的飞升开放' : t === 1 ? '1 阶' : st === 'own' ? '已解锁，本次重生已购买' : st === 'unl' ? '已解锁，本次重生还没买' : '还没解锁';
+        var st = t === 1 ? (p.avail ? 'own' : '') : p.tiers[t] || '', cls = t > o.c ? 's-cap' : st === 'own' ? 's-own' : st === 'unl' ? 's-unl' : 's-lock';
+        var tip = t > o.c ? '以后的飞升开放' : t === 1 ? (p.avail ? '1 阶' : '1 阶：这次重生用不了') : st === 'own' ? '已解锁，本次重生已购买' : st === 'unl' ? '已解锁，本次重生还没买' : '还没解锁';
         segs += '<i class="' + cls + '" title="' + t + ' 阶：' + tip + '"></i>';
       }
       out.push('<div class="sp-lv"><span class="sp-seg5">' + segs + '</span><span class="sp-lvt"><b>' + o.hi + '</b> / ' + o.c + ' 阶' + (o.next ? '' : ' <span class="ok">✓</span>') + '</span></div>');
@@ -687,7 +695,6 @@ SP_JS = r"""<script>(function(){
     ov.insertAdjacentHTML('beforeend', html);
   }
   function paint(){
-    state = {};
     cards.forEach(function(c){
       var id = c.dataset.sid, x = INFO[id], trk = c.querySelector('.sp-trk'), sv = c.querySelector('.sp-sv'), stl = c.querySelector('.sp-st');
       var p = SV && id && SV.sp[id];
@@ -700,7 +707,6 @@ SP_JS = r"""<script>(function(){
       trk.innerHTML = track(x, p, o); sv.innerHTML = detail(x, p, o);
       stl.innerHTML = p.avail ? '<em>可用</em>' : '';
       if (c.classList.contains('open')) fill(sv, false);
-      state[id] = {avail: p.avail, up: !!o.next};
     });
     // 活动法术：存档里有施放记录就在卡片上写一行
     var K = {};
@@ -709,11 +715,6 @@ SP_JS = r"""<script>(function(){
       var p = K[a.dataset.en], em = a.querySelector('.sp-evst'), tot = p ? p.c + p.r + p.e : 0;
       em.textContent = tot ? '共施放 ' + num(tot) + ' 次 · 生效 ' + dur(p.a0 + p.a1 + p.a2) : '';
     });
-    var b = seg.querySelectorAll('b'), n1 = 0, n2 = 0;
-    Object.keys(state).forEach(function(k){ if (state[k].avail) n1++; if (state[k].avail && state[k].up) n2++; });
-    b[0].textContent = cards.length; b[1].textContent = n1; b[2].textContent = n2;
-    bar.hidden = !SV;
-    if (!SV) sel = '';
     hero(); run();
     // 第一次读到存档：卡片上的进度条和总览从 0 走到位；之后自动同步重画时直接到位
     var anim = !!SV && !painted;
@@ -721,42 +722,103 @@ SP_JS = r"""<script>(function(){
     cards.forEach(function(c){ fill(c.querySelector('.sp-trk'), anim); });
     fill(ov, anim);
   }
-  function run(){
-    var k = q.value.trim().toLowerCase();
-    cards.forEach(function(c){
-      var s = state[c.dataset.sid] || {};
-      var okSel = !sel || !SV || (sel === '1' ? s.avail : s.avail && s.up);
-      c.hidden = !((!k || c.textContent.toLowerCase().indexOf(k) >= 0) && okSel);
-    });
+  function run(){  // 法术预报没有结果时整段藏起来
     heads.forEach(function(h){
-      var g = h.dataset.g, n = h.nextElementSibling;
-      if (g === 'ev' || g === 'fc') { var no = !!(k || sel) || (g === 'fc' && NOFC); h.hidden = no; if (n) n.hidden = no; return; }
-      h.hidden = !n.querySelector('.sp-c:not([hidden])');
+      if (h.dataset.g !== 'fc') return;
+      var n = h.nextElementSibling; h.hidden = NOFC; if (n) n.hidden = NOFC;
     });
-    rules.hidden = !!(k || sel);
+    if (cur && (cur._ph.offsetLeft !== cur._pl || cur._ph.offsetTop !== cur._pt)) place(cur, true);  // 上面的内容变了、格子换了位置：跟着占位走
   }
-  function pick(v){ sel = v; seg.querySelectorAll('button').forEach(function(x){ x.classList.toggle('on', x.dataset.o === v); }); run(); }
-  q.addEventListener('input', run);
-  seg.addEventListener('click', function(e){ var b = e.target.closest('button'); if (b) pick(b.dataset.o); });
   // 点卡片展开 / 收起（点链接、点开后的详情区不算）
-  // 展开：详情区从 0 高度展开，里面的进度条从 0 走
-  function toggle(c){ if (c.classList.toggle('open')) fill(c.querySelector('.sp-sv'), true); }
+  // 展开：卡片浮起来，以原位置的中心向四周放大，详情区从 0 高度展开、进度条从 0 走；
+  // 原位置留一个同样大小的占位，其他卡片都不动。同时只开一张，点别处或按 Esc 收起
+  // 展开后的卡片始终整张待在窗口可见区里（上面让出窗口按钮）：太高先加宽到整行，还放不下就卡片里面滚动；
+  // 滚动页面时卡片跟着推回可见区，原位置整个滚出窗口就收起
+  var cur = null, PW = 760, TOP = 64, BOT = 16;
+  function full(c, w){  // 宽 w 时展开后的高度（量完恢复原样，不触发动画）
+    var m = c.querySelector('.sp-more'), was = c.classList.contains('open'), ow = c.style.width, omh = c.style.maxHeight;
+    c.style.transition = m.style.transition = 'none';
+    c.style.width = w + 'px'; c.style.maxHeight = ''; c.classList.add('open');
+    var h = c.offsetHeight;
+    if (!was) c.classList.remove('open');
+    c.style.width = ow; c.style.maxHeight = omh; void c.offsetHeight;
+    c.style.transition = m.style.transition = '';
+    return h;
+  }
+  function band(c){  // 可见区在格子坐标里的上下界
+    var s = rgScroller(), gr = c._ph.parentNode.getBoundingClientRect();
+    var sr = s === document.scrollingElement ? {top: 0, bottom: innerHeight} : s.getBoundingClientRect();
+    return {lo: sr.top - gr.top + TOP, hi: sr.bottom - gr.top - BOT, top: sr.top, bottom: sr.bottom};
+  }
+  function place(c, wide){
+    var ph = c._ph, gw = ph.parentNode.clientWidth, w = ph.offsetWidth, l = ph.offsetLeft, t = ph.offsetTop;
+    c._pl = l; c._pt = t;
+    if (wide) {
+      var b = band(c), room = b.hi - b.lo, W = Math.min(gw, Math.max(PW, w)), H = full(c, W);
+      if (H > room && W < gw) { W = gw; H = full(c, W); }
+      if (H > room) { H = room; c.style.maxHeight = room + 'px'; } else c.style.maxHeight = '';
+      c._h = H;
+      l = Math.max(0, Math.min(gw - W, l + w / 2 - W / 2));
+      t = Math.max(b.lo, Math.min(b.hi - H, t + ph.offsetHeight / 2 - H / 2));
+      w = W;
+    } else c.style.maxHeight = '';
+    c.style.left = l + 'px'; c.style.top = t + 'px'; c.style.width = w + 'px';
+  }
+  function keep(e){  // 页面滚动时
+    if (!cur || e.target === cur || cur.contains(e.target)) return;
+    var b = band(cur), r = cur._ph.getBoundingClientRect();
+    if (r.bottom < b.top + TOP || r.top > b.bottom) return close(cur);
+    var t = parseFloat(cur.style.top), nt = Math.max(b.lo, Math.min(b.hi - cur._h, t));
+    if (nt === t) return;
+    cur.style.transition = 'none'; cur.style.top = nt + 'px'; void cur.offsetHeight; cur.style.transition = '';
+  }
+  document.addEventListener('scroll', keep, true);
+  function land(c){  // 回到格子里
+    clearTimeout(c._t);
+    c.classList.remove('pop');
+    c.style.left = c.style.top = c.style.width = c.style.minHeight = c.style.maxHeight = ''; c.scrollTop = 0;
+    if (c._ph) c._ph.remove();
+    c._ph = null;
+  }
+  function open(c){
+    if (cur && cur !== c) close(cur);
+    clearTimeout(c._t);
+    if (!c._ph) {
+      var h = c.offsetHeight, ph = document.createElement('div');
+      ph.className = 'sp-ph'; ph.style.height = h + 'px';
+      c.parentNode.insertBefore(ph, c); c._ph = ph;
+      c.style.transition = 'none'; c.style.minHeight = h + 'px';
+      c.classList.add('pop'); place(c, false);
+      void c.offsetWidth; c.style.transition = '';
+    }
+    place(c, true); c.classList.add('open'); cur = c;
+    fill(c.querySelector('.sp-sv'), true);
+  }
+  function close(c, now){
+    c.classList.remove('open');
+    if (cur === c) cur = null;
+    if (!c._ph) return;
+    if (now) return land(c);
+    place(c, false);
+    c._t = setTimeout(function(){ land(c); }, 400);
+  }
+  function toggle(c){ if (c.classList.contains('open')) close(c); else open(c); }
   root.addEventListener('click', function(e){
     var c = e.target.closest('.sp-c');
     if (!c || e.target.closest('a, .sp-more, .sp-tr')) return;
     toggle(c);
   });
+  document.addEventListener('click', function(e){ if (cur && !cur.contains(e.target)) close(cur); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && cur) close(cur); });
+  window.addEventListener('resize', function(){ if (cur) place(cur, true); });
   root.addEventListener('keydown', function(e){
     if ((e.key === 'Enter' || e.key === ' ') && e.target.classList.contains('sp-hd')) { e.preventDefault(); toggle(e.target.parentNode); }
   });
-  var home = document.createElement('div'); top.parentNode.insertBefore(home, top);
-  document.addEventListener('scroll', function(){ top.classList.toggle('float', top.getBoundingClientRect().top - home.getBoundingClientRect().top > 12); }, true);
-  // 链接到某个法术、法术奖杯、规则：展开对应的卡片或规则，被筛选藏起来的先取消筛选
+  // 链接到某个法术、法术奖杯、规则：展开对应的卡片或规则
   function reveal(){
     var el = document.getElementById(decodeURIComponent(location.hash.slice(1)));
     if (!el || !root.contains(el)) return;
     var c = el.closest('.sp-c');
-    if ((c || el).hidden || (el.closest('[hidden]') && el.closest('[hidden]') !== root.closest('[hidden]'))) { q.value = ''; pick(''); }
     if (c && !c.classList.contains('open')) toggle(c);
     if (rules.contains(el)) rules.open = true;
   }
@@ -792,6 +854,69 @@ SP_JS = r"""<script>(function(){
   window.addEventListener('rgcalculationsave', function(e){ onCalc(e.detail); });
   if (window.rgCalculationSave) onCalc(window.rgCalculationSave);
   paint(); reveal();
+})();</script>"""
+
+# 挑战页的脚本：读到存档后用计算模块算每个挑战奖励的当前数值，放在卡片「效果」下面。
+# 游戏说明里括号中的数就是游戏显示的当前值（照搬）；高级挑战没解锁时游戏不显示效果文字，改列各项加成公式算出的值；固定数值的不再重复
+CH_JS = r"""<script>(function(){
+  var root = document.getElementById('sec-t3'); if (!root) return;
+  var key = function(s){ return String(s).toLowerCase().replace(/[^a-z]/g, ''); };
+  var esc = function(v){ return String(v).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); };
+  function num(v){
+    var a = Math.abs(v);
+    if (a >= 1e9) return v.toExponential(2).replace('e+', 'e');
+    return v.toLocaleString('zh-CN', {maximumFractionDigits: a >= 100 ? 0 : 2});
+  }
+  // 说明的效果段（去掉开头引号里的故事和「需求」以后）
+  function body(d){ return d.split(/\n需求[:：]/)[0].replace(/^\s*[“"][\s\S]*?[”"]\s*/, '').trim(); }
+  function vals(it){
+    var b = body(it.description || ''), out = [], m, re = /[（(]([^()（）]*\d[^()（）]*)[)）]/g;
+    while ((m = re.exec(b))) if (/^[+\-−×]?\s*\d/.test(m[1].trim())) out.push(esc(m[1].trim()));  // 跳过 (EL8) 这类代号
+    if (out.length || b) return out;
+    out.formula = true;
+    (it.effects || []).forEach(function(e){
+      if (typeof e.value !== 'number' || /原始值/.test(e.label)) return;
+      // 皇家贸易令加成是加在百分数上的（游戏显示成 +163%）
+      var v = e.unit === '%' ? num(e.value) + '%' : (e.value >= 0 ? '+' : '') + num(e.value) + (/皇家贸易令加成/.test(e.label) ? '%' : '');
+      out.push('<b>' + esc(e.label) + '</b> ' + v);
+    });
+    return out;
+  }
+  function paint(map){
+    root.querySelectorAll('.ch-val').forEach(function(e){ e.remove(); });
+    if (!map) return;
+    root.querySelectorAll('.art[id^="t3-"]').forEach(function(c){
+      var it = map[(c.dataset.en || '').split(' ')[0]], v = it && vals(it);
+      if (!v || !v.length) return;
+      var f = c.querySelector('.art-f > div:last-child'); if (!f) return;
+      var d = document.createElement('div'); d.className = 'ch-val';
+      d.innerHTML = '<small>当前数值' + (v.formula ? '（按公式）' : '') + '</small>' + v.join('，');
+      if (v.formula) d.title = '游戏在挑战解锁前不显示效果，这是按游戏公式代入当前存档算出的值';
+      f.appendChild(d);
+    });
+  }
+  var seq = 0, last;
+  function calc(s){
+    var api = window.pywebview && window.pywebview.api;
+    if (!s || !s.save || !api || !api.build_calculate) return;
+    var k = s.save + '\n' + s.timestamp; if (k === last) return; last = k;
+    var my = ++seq, call = function(r){ return api.build_calculate(r).then(function(x){ if (!x || !x.ok) throw new Error(x && x.error || ''); return x; }); };
+    var names = {};
+    root.querySelectorAll('.art[id^="t3-"]').forEach(function(c){ names[(c.dataset.en || '').split(' ')[0]] = 1; });
+    call({op: 'load', save: s.save, timestamp: s.timestamp / 1000}).then(function(p){
+      var keys = [], name = {}, map = {}, chain = Promise.resolve();
+      p.catalog.forEach(function(c){ var n = key(c.name); if (c.kind === 'upgrade' && names[n] && !name[c.key]) { name[c.key] = n; keys.push(c.key); } });
+      for (var i = 0; i < keys.length; i += 40) (function(part){
+        chain = chain.then(function(){
+          if (my !== seq) throw new Error('');
+          return call({op: 'describe', revision: p.revision, keys: part}).then(function(r){ r.items.forEach(function(it){ map[name[it.key]] = it; }); });
+        });
+      })(keys.slice(i, i + 40));
+      return chain.then(function(){ if (my === seq) paint(map); });
+    }).catch(function(){ if (my === seq) paint(null); });  // 计算模块不可用、存档写到一半：不显示
+  }
+  window.addEventListener('rgcalculationsave', function(e){ calc(e.detail); });
+  if (window.rgCalculationSave) calc(window.rgCalculationSave);
 })();</script>"""
 
 # 研究页的脚本：时间线和详情，读到存档后按 researchsave 事件标状态
@@ -858,18 +983,14 @@ RS_JS = r"""<script>(function(){
     $('v-lane').innerHTML = '<svg class="rs-lsvg"></svg>' + h;
   }
   // 公式：一行一项效果；html 是生成时转义过的中文公式（变量斜体、指数上标）。
-  // 带 asc 的是游戏用 bonusToText 显示的百分比：从 A{asc} 起按 Ascension 折算
   function fmHtml(fm){
-    var asc = 0, h = fm.map(function(f){
-      if (f.asc) asc = f.asc;
+    return fm.map(function(f){
       var join = /^[×−+]|^价格指数/.test(f.html) ? ' ' : ' = ';
       return '<div class="rs-fm">' + (f.label ? '<b>' + esc(f.label) + '</b>' + join : '') + f.html +
         (f.unit ? ' <span class="rs-fu">' + esc(f.unit) + '</span>' : '') +
         (f.when ? '<span class="rs-fu">（' + f.when + '）</span>' : '') +
         (f.note ? '<div class="rs-hint">' + esc(f.note) + '</div>' : '') + '</div>';
     }).join('');
-    return h + '<div class="rs-hint">本局＝这次退位以来，本R＝这次重生以来，全部＝含之前的 R' +
-      (asc ? '；A' + asc + ' 起实际百分比 = (1 + 值÷100)<sup>0.1<sup>A' + (asc > 1 ? '−' + (asc - 1) : '') + '</sup></sup> − 1' : '') + '</div>';
   }
   // 按存档的数值：程序的计算引擎载入存档后取每项研究的游戏说明（游戏自己代入当前数值，已按 Ascension 折算）
   // 和效果方法的原始值。说明里括号中的数、「名称：数值」行就是游戏里鼠标悬停看到的当前加成
@@ -896,16 +1017,22 @@ RS_JS = r"""<script>(function(){
     if (!v) return '';
     var s = shown(v.description || ''), ev = (v.effects || []).filter(function(e){ return typeof e.value === 'number'; });
     var raw = ev.map(function(e){ return esc(e.label) + ' ' + num(e.value) + (e.unit ? esc(e.unit) : ''); });
-    // 原始值和游戏显示的数都对得上（没有折算）就不再列一遍
-    var nums = (s.join(' ').replace(/,/g, '').match(/\d+(?:\.\d+)?/g) || []).map(Number);
-    var differ = ev.some(function(e){ var a = Math.abs(e.value); return !nums.some(function(n){ return Math.abs(n - a) <= Math.max(1, a * .02); }); });
+    // 公式原始值（没按 Ascension 折算）跟在游戏显示的数后面，颜色暗一些；和显示的数对得上（没有折算）就不写
+    function same(t, e){
+      var a = Math.abs(e.value);
+      return (t.replace(/,/g, '').match(/\d+(?:\.\d+)?/g) || []).map(Number).some(function(n){ return Math.abs(n - a) <= Math.max(1, a * .02); });
+    }
+    function rawTag(e){ return '<span class="rs-raw" title="公式原始值：游戏显示的是代入后、按 Ascension 折算的数">' + num(e.value) + (e.unit ? esc(e.unit) : '') + '</span>'; }
+    var all = s.join(' '), pair = s.length === ev.length;
+    var rest = pair ? '' : ev.filter(function(e){ return !same(all, e); }).map(rawTag).join(' ');
     // 数值和公式一一对应时，标上公式那一行的名称
     var named = s.length === x.fm.length && x.fm.every(function(f){ return f.label; });
-    var h = s.length ? '<div class="rs-fm rs-val">' + s.map(function(t, i){ return (named && !/[:：]/.test(t) ? '<b>' + esc(x.fm[i].label) + '</b> ' : '') + esc(t); }).join('，') + '</div>' +
-        (raw.length && differ ? '<div class="rs-hint">公式原始值：' + raw.join('，') + '（游戏显示的是代入后、按 Ascension 折算的数）</div>' : '')
+    var h = s.length ? '<div class="rs-fm rs-val">' + s.map(function(t, i){
+          return (named && !/[:：]/.test(t) ? '<b>' + esc(x.fm[i].label) + '</b> ' : '') + esc(t) + (pair && !same(t, ev[i]) ? rawTag(ev[i]) : '');
+        }).join('，') + (rest ? ' ' + rest : '') + '</div>'
       : raw.length ? '<div class="rs-fm rs-val">' + raw.join('，') + '</div>'
       : x.fm.length ? '<span class="rs-mut">按建筑分别计算或在汇总时生效，这里暂不显示单个数值</span>' : '';
-    return h ? '<div class="rs-f"><small>按你的存档（游戏客户端计算）</small>' + h + '</div>' : '';
+    return h ? '<div class="rs-f"><small>实际数值</small>' + h + '</div>' : '';
   }
   function calc(save){
     var api = window.pywebview && window.pywebview.api;
@@ -927,20 +1054,17 @@ RS_JS = r"""<script>(function(){
   // 详情：在放大的格子里显示
   function detHtml(x){
     var st = ST[x.code];
-    var stt = {own: ['已解锁', 'no'], can: ['可解锁', ''], no: ['还没到', 'gray'], gone: ['A3 起已移除', 'gray']}[st];
     var chip = function(c){ var y = byCode[c]; return '<span class="rs-pc st-' + ST[c] + '" data-c="' + c + '"><i class="rs-dot" style="background:' + HEX[y.b] + '"></i>' + c + ' ' + esc(y.zh) +
       (SAVE ? '<i>' + (ST[c] === 'own' ? '已解锁' : '未解锁') + '</i>' : '') + '</span>'; };
     var bad = facBad(x) && st !== 'own';
     return '<div class="en">' + esc(x.en) + ' · ' + BN[x.b] + ' ' + x.n.toLocaleString() + ' 点</div>' +
-      '<div class="rs-tags"><em class="' + stt[1] + '">' + stt[0] + '</em>' + (bought(x.code) ? '<em class="no">本局已购买</em>' : '') + '<em>R' + x.r + '</em>' +
-      (x.fac ? '<em class="fac">' + esc(x.fac) + '</em>' : '') + '</div>' +
       '<div class="rs-f"><small>解锁条件</small>' + (x.ch || '<span class="nil">—</span>') + '</div>' +
       (x.fac ? '<div class="rs-f"><small>阵营</small>需要使用' + esc(x.fac) + (MYF.length ? ' <em class="' + (bad ? 'warn' : 'gray') + '">你现在是' + MYF.join('+') + '</em>' : '') + '</div>' : '') +
-      (x.pre.length ? '<div class="rs-f"><small>前置</small>' + each(x.pre, chip) + '<div class="rs-hint">前置都解锁、点数到 ' + x.n + (x.fac ? '、用着' + esc(x.fac) : '') + '就自动解锁</div></div>' : '') +
+      (x.pre.length ? '<div class="rs-f"><small>前置</small>' + each(x.pre, chip) + '</div>' : '') +
       (x.post.length ? '<div class="rs-f"><small>后续（需要它的研究）</small>' + each(x.post, chip) + '</div>' : '') +
       '<div class="rs-f"><small>效果</small>' + (x.eh || '—') + '</div>' +
       valHtml(x) +
-      (x.fm.length ? '<div class="rs-f"><small>公式（游戏客户端）</small>' + fmHtml(x.fm) + '</div>' : '') +
+      (x.fm.length ? '<div class="rs-f"><small>公式</small>' + fmHtml(x.fm) + '</div>' : '') +
       (x.note ? '<div class="rs-f"><small>备注</small><span class="rs-mut">' + esc(x.note) + '</span></div>' : '');
   }
 
@@ -1250,6 +1374,26 @@ BD_JS = """<script>(function(){
 
 # 活动表的各段（行号范围）：资源、法术、升级、任务奖杯、壮举奖杯、特殊升级；表末尾是 4.2.1 起新增的壮举
 EV_BANDS = [('活动资源', 2, 9), ('活动法术', 10, 12), ('活动升级', 13, 28), ('任务奖杯', 29, 46), ('壮举奖杯', 47, 57), ('活动特殊升级', 58, 60)]
+# 客户端导出的编号（脚本/event_ids.py）：名称格按英文名对上升级 / 奖杯编号，读到存档后标出已获得
+EV_IDS = json.load(open(os.path.join(ROOT, '资料', '活动编号（客户端4.3.14）.json'), encoding='utf-8'))
+ev_key = lambda en: re.sub(r'[^a-z0-9]', '', en.lower())
+
+
+def ev_attr(en, kinds=('up', 'tr')):
+    """英文名 → 元素上的 data 属性：data-u 升级编号、data-t 奖杯编号、data-q 任务各阶段、data-mon 怪物（data-lv 称号的等级门槛）"""
+    k = ev_key(en or '')
+    if not k:
+        return ''
+    for mid, mo in EV_IDS['monster'].items():
+        for t, lv in mo['tiers']:
+            if t == k:
+                return ' data-mon="%s" data-lv="%d"' % (mid, lv)
+    for kd in kinds:
+        ids = EV_IDS[kd].get(k)
+        if ids:
+            mon = ' data-mon="%s"' % ids[0] if kd == 'tr' and str(ids[0]) in EV_IDS['monster'] else ''
+            return ' data-%s="%s"%s' % ('q' if kd == 'quest' else kd[0], ' '.join(map(str, ids)), mon)
+    return ''
 
 
 def build_events(ws, imgs):
@@ -1289,11 +1433,14 @@ def build_events(ws, imgs):
         return '<%s>%s</%s>%s%s' % (tag, html.escape(zh), tag, '<span class="en">%s</span>' % html.escape(en) if en and en != zh else '',
                                     '<em>%s</em>' % html.escape(note) if note else '')
 
-    def tile(r, c, desc_rc, icon=''):
+    def tile(r, c, desc_rc, icon='', attr='', extra=''):
         cid = ref(r, c)
         d = raw(*desc_rc) if desc_rc else ''
-        return '<div class="ev-t ev-i" id="%s">%s<div><div class="ev-th">%s</div>%s</div></div>' % (
-            cid, icon or '<i></i>', head(raw(r, c)), '<p>%s</p>' % esc(d, cid) if d else '')
+        return '<div class="ev-t ev-i" id="%s"%s>%s<div><div class="ev-th">%s</div>%s%s</div></div>' % (
+            cid, attr, icon or '<i></i>', head(raw(r, c)), '<p>%s</p>' % esc(d, cid) if d else '', extra)
+
+    def name_attr(v, kinds=('up', 'tr')):
+        return ev_attr(zh_en(v)[1], kinds) if is_name(v) else ''
 
     def walk(r0, r1, c0, c1, skip=()):
         """按行读：一格的行是标题或说明，几格的行是小表（全是短中文的那行当表头）"""
@@ -1304,7 +1451,7 @@ def build_events(ws, imgs):
                 n = max(len(x[1]) for x in rows)
                 cols = 'grid-template-columns:minmax(0,.8fr)' + ' minmax(0,1.4fr)' * (n - 1)
                 out.append('<div class="ev-tb">%s</div>' % ''.join(
-                    '<div class="ev-tr%s" style="%s"%s>%s</div>' % (' ev-th' if th else ' ev-i', cols, '' if th else ' id="%s"' % rid,
+                    '<div class="ev-tr%s" style="%s"%s>%s</div>' % (' ev-th' if th else ' ev-i', cols, '' if th else ' id="%s"%s' % (rid, name_attr(vals[0])),
                                                        ''.join('<span>%s%s</span>' % (ic if k == 0 else '', html.escape(v) if th else (head(v) if k == 0 and is_name(v) else esc(v, rid)))
                                                                for k, v in enumerate(vals)))
                     for th, vals, rid, ic in rows))
@@ -1319,7 +1466,7 @@ def build_events(ws, imgs):
                 flush()
                 c, v = texts[0]
                 if is_name(v) or (len(v) <= 12 and not re.search(r'[：:，,。；]', v)):
-                    out.append('<h4 class="ev-h4 ev-i" id="%s">%s</h4>' % (ref(r, c), head(v)))
+                    out.append('<h4 class="ev-h4 ev-i" id="%s"%s>%s</h4>' % (ref(r, c), name_attr(v), head(v)))
                 else:
                     out.append('<p class="ev-note">%s</p>' % esc(v))
                 continue
@@ -1332,7 +1479,7 @@ def build_events(ws, imgs):
 
     def item(v, cid):
         if is_name(v):
-            return '<div class="ev-nm" id="%s">%s</div>' % (cid, head(v))
+            return '<div class="ev-nm" id="%s"%s>%s</div>' % (cid, name_attr(v), head(v))
         m = re.match(r'^(价格|要求|条件)[：:]\s*(.*)$', v, re.S)
         if m:
             return '<div class="ev-req"><small>%s</small>%s</div>' % (m.group(1), esc(m.group(2)))
@@ -1361,7 +1508,7 @@ def build_events(ws, imgs):
         out = ['<div class="ev-mx" style="grid-template-columns:76px repeat(%d,minmax(0,1fr))">' % len(facs)]
         if hr:
             out.append('<div class="ev-mc ev-corner">%s</div>' % html.escape(corner))
-            out.extend('<div class="ev-mc ev-fh ev-i" id="%s">%s</div>' % (ref(hr, c), head(raw(hr, c))) for c in facs)
+            out.extend('<div class="ev-mc ev-fh ev-i" id="%s"%s>%s</div>' % (ref(hr, c), name_attr(raw(hr, c)), head(raw(hr, c))) for c in facs)
         notes = []
         for b0, b1, label in blocks:
             per = [[] for _ in facs]
@@ -1394,14 +1541,17 @@ def build_events(ws, imgs):
                     continue
                 cols = {raw(r, x): x for x in range(c, c1 + 1) if raw(r, x)}
                 lines = []
+                qids = EV_IDS['quest'].get(ev_key(zh_en(raw(r - 1, c))[1]), [])
                 rr = r + 1
                 while rr <= r1 and re.fullmatch(r'\d+', raw(rr, c)):
                     bonus = ws.cell(rr, cols.get('永久产能加成', c)).value
                     bonus = '+%g%%' % (bonus * 100) if isinstance(bonus, (int, float)) else text_of(bonus)
-                    lines.append('<div class="ev-qr"><b>%s</b><span>%s</span><em>%s</em></div>' % (
-                        raw(rr, c), esc(raw(rr, cols.get('目标', c + 1))), html.escape(bonus)))
+                    k = len(lines)
+                    lines.append('<div class="ev-qr"%s><b>%s</b><span>%s</span><em>%s</em></div>' % (
+                        ' data-t="%d"' % qids[k] if k < len(qids) else '', raw(rr, c), esc(raw(rr, cols.get('目标', c + 1))), html.escape(bonus)))
                     rr += 1
-                out.append('<div class="ev-q ev-i" id="%s"><div class="ev-th">%s</div>%s</div>' % (ref(r - 1, c), head(raw(r - 1, c)), ''.join(lines)))
+                out.append('<div class="ev-q ev-i" id="%s"%s><div class="ev-th">%s</div>%s</div>' % (
+                    ref(r - 1, c), ' data-t="%d"' % qids[len(lines) - 1] if 0 < len(lines) <= len(qids) else '', head(raw(r - 1, c)), ''.join(lines)))
         return '<div class="ev-qs">%s</div>' % ''.join(out) if out else ''
 
     def feats(r0, r1, c0, c1, extra):
@@ -1427,8 +1577,8 @@ def build_events(ws, imgs):
         for g, xs in groups.items():
             if g:
                 out.append('<h4 class="ev-h4">%s</h4>' % html.escape(g))
-            out.append('<div class="ev-fs">%s</div>' % ''.join(card(cid, en, img, imgs, zh, en if en != zh else '', '', fields, note)
-                                                           for cid, img, fields, name in xs for zh, en, note in [zh_en(name)]))
+            out.append('<div class="ev-fs">%s</div>' % ''.join(card(cid, en, img, imgs, zh, en if en != zh else '', '', fields, note).replace(
+                ' data-en=', ev_attr(en, ('tr',)) + ' data-en=', 1) for cid, img, fields, name in xs for zh, en, note in [zh_en(name)]))
         return ''.join(out)
 
     starts = [c for c in range(3, ws.max_column + 1) if raw(1, c)]
@@ -1439,16 +1589,22 @@ def build_events(ws, imgs):
         c1 = (starts[k + 1] - 1) if k + 1 < len(starts) else ws.max_column
         zh, en, _ = zh_en(raw(1, c0))
         cid = ref(1, c0)
+        sid, sv = next(((k, x) for k, x in EV_IDS['season'].items() if x['name'] and ev_key(en).startswith(ev_key(x['name']))), ('', None))
+        rmap = {ev_key(x['icon'][:-8]): x for x in (sv['res'] if sv else [])}  # 图标名 BloodCurrency → blood
         secs = []
         for title, r0, r1 in EV_BANDS:
             body = ''
             if title == '活动资源':
                 res = [c for c in range(c0, c1 + 1) if raw(2, c)]
-                body = '<div class="ev-ts">%s</div>' % ''.join(tile(2, c, (4, c), pic(raw(3, c))) for c in res) if res else ''
+                body = '<div class="ev-ts">%s</div>' % ''.join(
+                    tile(2, c, (4, c), pic(raw(3, c)), *(lambda x: (' data-res="%d" data-stat="%d"' % (x['special'], x['stat']), '<div class="ev-have"></div>')
+                                                         if x else ('', ''))(rmap.get(ev_key(zh_en(raw(2, c))[1]))))
+                    for c in res) if res else ''
                 body += walk(5, r1, c0, c1)
             elif title in ('活动法术', '活动特殊升级'):
                 ns = [c for c in range(c0, c1 + 1) if raw(r0, c)]
-                body = '<div class="ev-ts">%s</div>' % ''.join(tile(r0, c, (r0 + 2, c), pic(raw(r0 + 1, c))) for c in ns) if ns else ''
+                body = '<div class="ev-ts">%s</div>' % ''.join(tile(r0, c, (r0 + 2, c), pic(raw(r0 + 1, c)),
+                                                                  '' if title == '活动法术' else name_attr(raw(r0, c))) for c in ns) if ns else ''
             elif title == '活动升级':
                 body = matrix(r0, r1, c0, c1)
                 if body is None:
@@ -1462,16 +1618,48 @@ def build_events(ws, imgs):
             if body:
                 secs.append((title, body))
         icon = next((pic(raw(r, c)) for r in (3, 59) for c in range(c0, c1 + 1) if pic(raw(r, c))), '')
-        tabs.append('<button data-p="%s">%s%s</button>' % (cid, icon, html.escape(zh)))
-        panels.append('<div class="bd-p ev-p" id="%s" hidden><div class="bd-h ev-hd"><b>%s</b><span class="en">%s</span></div>%s</div>' % (
-            cid, html.escape(zh), html.escape(en),
+        tabs.append('<button data-p="%s" data-season="%s">%s%s</button>' % (cid, sid, icon, html.escape(zh)))
+        panels.append('<div class="bd-p ev-p" id="%s" data-season="%s" hidden><div class="bd-h ev-hd"><b>%s</b><span class="en">%s</span><em class="ev-now">进行中</em></div>%s</div>' % (
+            cid, sid, html.escape(zh), html.escape(en),
             ''.join('<div class="ev-sec" data-s="%d"><h3 class="ev-st">%s</h3>%s</div>' % (i, t, b) for i, (t, b) in enumerate(secs))))
     return ('<div class="bd-page ev-page"><div class="bd-tabs ev-tabs">%s</div>%s%s</div>' % (''.join(tabs), ''.join(panels),
             '<p class="bd-note">%s</p>' % esc(tail) if tail else '') + EV_JS)
 
 
 # 活动页：和建筑升级页一样点活动切换（记住上次看的活动）
-EV_JS = BD_JS.replace("'.bd-page'", "'.ev-page'").replace("'rg-bd'", "'rg-ev'")
+EV_JS = BD_JS.replace("'.bd-page'", "'.ev-page'").replace("'rg-bd'", "'rg-ev'") + r"""<script>(function(){
+  // 读到存档后：进行中的活动标「进行中」（第一次读到时切过去），资源格写上现有 / 累计，已有的升级、奖杯、任务阶段打勾；
+  // 万圣节怪物按客户端 Utilities.getMonsterLevel 算等级（累计 − 现有），称号到等级就打勾
+  var root = document.querySelector('.ev-page'); if (!root) return;
+  var MON = %MON%, jumped = false;
+  function num(v){ return Math.round(v).toLocaleString('en-US'); }
+  function level(x){ return x < 198 ? Math.max(1, 1 + Math.floor(x / 22)) : x < 858 ? 10 + Math.floor((x - 198) / 44) : Math.min(50, 25 + Math.floor((x - 858) / 88)); }
+  function has(set, v){ return !!set && (v || '').split(' ').some(function(k){ return k && set[k]; }); }
+  window.addEventListener('eventsave', function(e){
+    var s = e.detail, live = s && s.season ? String(s.season) : '', lv = {};
+    if (s) Object.keys(MON).forEach(function(k){ var m = MON[k]; lv[k] = level((s.st[m.stat] || 0) - (s.res[m.special] || 0)); });
+    root.querySelectorAll('[data-season]').forEach(function(el){ el.classList.toggle('live', !!live && el.dataset.season === live); });
+    root.querySelectorAll('[data-res]').forEach(function(el){
+      var p = el.closest('.ev-p'), box = el.querySelector('.ev-have');
+      box.innerHTML = s && p.classList.contains('live') ? '现有 <b>' + num(s.res[+el.dataset.res] || 0) + '</b> · 累计 ' + num(s.st[+el.dataset.stat] || 0) : '';
+    });
+    root.querySelectorAll('[data-u],[data-t],[data-lv]').forEach(function(el){
+      var y = !!s && (has(s.up, el.dataset.u) || has(s.tr, el.dataset.t) ||
+        (el.dataset.lv && el.closest('.ev-p').classList.contains('live') && lv[el.dataset.mon] >= +el.dataset.lv));
+      el.classList.toggle(el.classList.contains('art') ? 'own' : 'got', y);
+    });
+    root.querySelectorAll('[data-mon]:not([data-lv])').forEach(function(el){
+      var t = el.querySelector('.ev-lv');
+      if (!t) { t = document.createElement('em'); t.className = 'ev-lv'; (el.querySelector('.ev-th') || el).appendChild(t); }
+      t.textContent = s ? '等级 ' + lv[el.dataset.mon] : ''; t.hidden = !s;
+    });
+    if (live && !jumped) {
+      jumped = true;
+      var b = root.querySelector('.ev-tabs button.live'), h = decodeURIComponent(location.hash.slice(1));
+      if (b && !(h && h.indexOf('t8-') === 0)) b.click();
+    }
+  });
+})();</script>""".replace('%MON%', json.dumps({k: {'stat': v['stat'], 'special': v['special']} for k, v in EV_IDS['monster'].items()}))
 
 
 # ---------- 法术页（#sp）：阵营表 AF–AM 列的法术和法术奖杯 + spells.py 的公式、阶层条件；读到存档后显示阶层进度 ----------
@@ -1667,9 +1855,7 @@ def build_spells(wb):
             .replace('%%DATA%%', data).replace('%%ICON%%', icons))
 
 
-SP_HTML = """<div class="sp" id="sp-root"><div class="cl-top">
-<div class="own-bar" id="sp-bar" hidden><div class="own-seg" id="sp-seg"><button class="on" data-o="">全部<b></b></button><button data-o="1">能用<b></b></button><button data-o="2">还能升阶<b></b></button></div></div>
-<input class="cl-q" id="sp-q" type="search" placeholder="搜索法术、效果、条件"></div>
+SP_HTML = """<div class="sp" id="sp-root">
 <div class="sp-hero" id="sp-ov"><p class="sp-empty">读到存档后，这里显示法力、阶层上限和龙族解锁进度，卡片上显示阶层进度。到 <a href="#save">我的存档</a> 读取。</p></div>
 %%GROUPS%%
 <h2 class="art-g" data-g="fc" id="sp-fc">法术预报 <span>按存档里的随机数推算以后每次施放的结果</span></h2>
@@ -1894,6 +2080,7 @@ def main():
         page('t%d' % n, '<section id="sec-t%d" class="table" hidden>%s</section>' % (n, sections[n]))
     script('cards', CL_JS)  # 卡片列表（遗物、隐藏奖杯）的搜索和已获得切换
     script('research', RS_JS)
+    script('challenges', CH_JS)
     script('spells', SP_JS)
     page('guide-progress', open(os.path.join(ROOT, '脚本', 'guide_progress.html'), encoding='utf-8').read())
     script('legend', LEGEND_JS)
@@ -2145,6 +2332,9 @@ td.flash{outline:3px solid #f59e0b;outline-offset:-2px;background:var(--flash)!i
 .art-f small{display:block;font-size:11.5px;color:#9aa5b8}
 .art-f .nil{color:#c9d1dd}
 .art-f .t-ch{white-space:nowrap}
+.ch-val{margin-top:6px;color:var(--accent,#2563eb);font-weight:600;font-variant-numeric:tabular-nums}
+.ch-val small{font-weight:400}
+.ch-val b{font-weight:400;color:#3d4a5f}
 .cl-note{margin:12px 2px 0;padding:9px 14px;border-radius:14px;background:var(--soft);font-size:13px;color:#526079;line-height:1.7}
 .art.flash{background:var(--flash);border-color:#f59e0b}
 /* 挑战、研究：没有图标的卡片 */
@@ -2170,9 +2360,14 @@ td.flash{outline:3px solid #f59e0b;outline-offset:-2px;background:var(--flash)!i
 .sp-c{position:relative;display:flex;flex-direction:column;gap:9px;min-width:0;padding:14px 16px;border:1px solid var(--line);border-radius:18px;background:#fff;
   cursor:pointer;scroll-margin:80px;transition:border-color .2s,box-shadow .2s,background 1.5s,opacity .2s}
 .sp-c:hover{border-color:#cfdaec;box-shadow:0 6px 22px rgba(20,40,90,.07)}
-.sp-c.open{grid-column:1/-1;cursor:default;box-shadow:0 10px 34px rgba(20,40,90,.09);border-color:#d7e0ee}
+.sp-grid{position:relative}
+.sp-ph{min-width:0}
+.sp-c.pop{position:absolute;z-index:2;box-sizing:border-box;
+  transition:left .38s cubic-bezier(.2,.8,.2,1),top .38s cubic-bezier(.2,.8,.2,1),width .38s cubic-bezier(.2,.8,.2,1),border-color .2s,box-shadow .3s,background 1.5s,opacity .2s}
+.sp-c.pop.open{overflow-y:auto;overscroll-behavior:contain}.sp-c.pop.open>*{flex-shrink:0}
+.sp-c.open{cursor:default;opacity:1!important;box-shadow:0 18px 50px rgba(20,40,90,.18),0 0 0 1px rgba(20,40,90,.04);border-color:#d7e0ee}
 .sp-c.flash{background:var(--flash)}
-.sp-c.off{opacity:.48}.sp-c.off:hover,.sp-c.off.open{opacity:.85}
+.sp-c.off{opacity:.48}.sp-c.off:hover{opacity:.85}
 .sp-hd{display:flex;align-items:center;gap:12px;outline:none}
 .sp-ic{flex:none;width:56px;height:56px;border-radius:16px;background:var(--tb);display:flex;align-items:center;justify-content:center;transition:box-shadow .3s}
 .sp-ic img{width:50px;height:50px}
@@ -2365,6 +2560,7 @@ td.flash{outline:3px solid #f59e0b;outline-offset:-2px;background:var(--flash)!i
 .rs-f small{display:block;font-size:11.5px;color:#9aa5b8}
 .rs-f .nil{color:#c9d1dd}
 .rs-hint{font-size:12px;color:#9aa5b8;margin-top:4px}
+.rs-raw{margin-left:6px;font-size:.9em;font-weight:400;color:#a8b2c3;font-variant-numeric:tabular-nums;cursor:help}
 .rs-fm{margin-top:3px;line-height:1.7}
 .rs-fm b{font-weight:600;color:#2b3648}
 .rs-fm i{font-style:normal;color:var(--accent,#2563eb)}
@@ -2441,6 +2637,17 @@ td.flash{outline:3px solid #f59e0b;outline-offset:-2px;background:var(--flash)!i
 .ev-fs .art-f{grid-template-columns:1fr!important;gap:4px}
 .ev-fs .art-f>div{position:relative;padding-left:60px}.ev-fs .art-f small{position:absolute;left:0;top:2px}
 .ev-i.flash,.ev-nm.flash,.ev-fh.flash{background:var(--flash)}
+/* 读到存档后：进行中的活动、资源现有量、已获得打勾（只加标记，不把没获得的变灰） */
+.ev-tabs button.live::after{content:"";width:7px;height:7px;border-radius:50%;background:#16a34a;box-shadow:0 0 0 3px rgba(22,163,74,.18);margin-left:2px}
+.ev-tabs button.live.on::after{background:#fff;box-shadow:0 0 0 3px rgba(255,255,255,.3)}
+.ev-hd .ev-now{display:none}.ev-p.live .ev-hd .ev-now{display:inline;background:#e8f7ee;color:#15803d;margin-left:8px}
+.ev-have{margin-top:6px;font-size:12.5px;color:var(--muted)}.ev-have:empty{display:none}.ev-have b{color:var(--blue);font-size:14px}
+.ev-page .ev-lv{background:#fff4e5;color:#b45309}
+.ev-nm.got>b::after,.ev-fh.got>b::after,.ev-h4.got>b::after,.ev-tr.got>span:first-child>b::after,.ev-t.got .ev-th>b::after,.ev-q.got>.ev-th>b::after{
+  content:"✓";display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;margin-left:6px;border-radius:50%;
+  background:var(--blue);color:#fff;font-size:10px;font-weight:700;vertical-align:1px}
+.ev-t.got,.ev-q.got,.ev-mc:has(>.ev-nm.got){border-color:#c4d6f8}
+.ev-qr.got b{background:var(--blue);color:#fff}
 @media (max-width:900px){.ev-mx,.ev-tr{grid-template-columns:1fr!important}.ev-corner{display:none}}
 /* 已获得 / 未获得（读到存档后才出现）：已获得图标描蓝边带勾，未获得变灰，鼠标移上去恢复 */
 /* 一个小胶囊，往下滚时浮在内容上面（带阴影），不占满整行 */
@@ -2744,7 +2951,7 @@ APP_JS = r"""(function(){
   first();
 })();
 
-// 自动连点：右下角小胶囊，点开在原地展开设置（开关、点击间隔、启停快捷键、连点时按住一个键），改了立即保存
+// 自动连点：右下角小胶囊，点开在原地展开设置（开关、点击间隔、启停快捷键、连点时按住一个键、自动全部购买），改了立即保存
 (function(){
   var box, pill, panel, range, st = null, msg = '', capture = '', dragging = false;
   function api(){ var a = window.pywebview && window.pywebview.api; return a && a.click_status ? a : null; }
@@ -2765,6 +2972,8 @@ APP_JS = r"""(function(){
       '<div class="ac-track"><i class="ac-mark" title="最佳：游戏每秒最多算 30 次点击"></i><input type="range" min="0" max="1000" step="1"></div>' +
       '<div class="ac-row"><label>启停快捷键</label><button class="ac-key" data-k="key"></button></div>' +
       '<div class="ac-row"><label>连点时按住</label><button class="ac-key" data-k="hold_key" title="换要按住的键"></button><button class="ac-sw" data-a="hold" title="开启 / 关闭"></button></div>' +
+      '<div class="ac-row"><label>在鼠标处连点</label><button class="ac-sw" data-a="cursor" title="开启 / 关闭"></button></div>' +
+      '<div class="ac-row ac-buy"><label>自动全部购买</label><button class="ac-sw" data-a="buy" title="开启 / 关闭"></button></div>' +
       '<div class="ac-msg"></div></div>';
     document.body.appendChild(box); document.body.classList.add('has-ac');
     pill = q('.ac-pill'); panel = q('.ac-panel'); range = q('input');
@@ -2774,6 +2983,8 @@ APP_JS = r"""(function(){
       if (b.dataset.a === 'close') open(false);
       else if (b.dataset.a === 'toggle') a.click_toggle().then(accept);
       else if (b.dataset.a === 'hold') save({hold: !st.settings.hold});
+      else if (b.dataset.a === 'cursor') save({cursor: !st.settings.cursor});
+      else if (b.dataset.a === 'buy') save({buy: !st.settings.buy});
       else if (b.dataset.k) { capture = capture === b.dataset.k ? '' : b.dataset.k; render(); }
     });
     range.addEventListener('input', function(){
@@ -2846,9 +3057,14 @@ APP_JS = r"""(function(){
     kb.textContent = capture === 'key' ? '按下新键…' : st.hotkey; kb.classList.toggle('wait', capture === 'key');
     hb.textContent = capture === 'hold_key' ? '按下新键…' : s.hold_key; hb.classList.toggle('wait', capture === 'hold_key');
     if (!dragging) { range.value = toPos(s.interval); speed(s.interval); }
+    q('[data-a=cursor]').classList.toggle('on', s.cursor);
+    q('.ac-buy').hidden = !('buy' in s);  // 旧版程序没有这项
+    q('[data-a=buy]').classList.toggle('on', !!s.buy);
     var m = q('.ac-msg');
     m.className = 'ac-msg' + (msg || err ? ' bad' : '');
-    m.textContent = msg || err || (capture ? '按 Esc 取消' : '');
+    m.textContent = msg || err || (capture ? '按 Esc 取消' : !s.buy ? '' : !st.enabled ?
+      '开启后每秒点一次升级和建筑的「全部购买」，游戏在后台也行（不能最小化）' :
+      st.found && st.found.length ? '正在点：' + st.found.join('、') + '的全部购买' : '画面上没找到「全部购买」（不在升级页或有弹窗时不点）');
     fit();
   }
   function start(){
