@@ -19,7 +19,6 @@ if __name__ == '__main__' and '--build-worker' in sys.argv:
     raise SystemExit
 
 import webview
-from auto_click import AutoClicker
 import content
 import template_store
 import updater
@@ -28,6 +27,9 @@ from save_sync import SaveReader, SaveWatcher, find_saves
 from live_reader import LiveClient
 
 TITLE = 'RGA'
+# 自用版（作者本机）：带自动点击、不自动更新，免得被发布版覆盖。build_exe.py --public 打发布版时改成 False，
+# 并删掉所有 # <private> … # </private> 之间的代码（自动点击已从发布版永久移除）
+PRIVATE = True
 DATA = 'RGA.dat'
 PORT = 42001  # 和以前 pywebview 内置服务的端口一样，网页的 localStorage（同一个来源）才能接着用
 
@@ -55,7 +57,7 @@ def pick_store(cache_dir):
                 pass
     else:
         cands = [content.dev_store(os.path.join(content.ROOT, 'build', 'app'))]
-    if frozen or os.environ.get('RGA_UPDATE_URL'):
+    if (frozen and not PRIVATE) or os.environ.get('RGA_UPDATE_URL'):  # 自用版不用下载的（发布版）界面
         c = content.cache_store(cache_dir, updater.verify)
         if c and c.manifest.get('shell_api', 1) <= updater.SHELL_API:
             cands.append(c)
@@ -125,10 +127,13 @@ class Api:
         self._save_watcher.close()
         self._live_reader.close()
         self._engine.close()
+        # <private>
         if self._clicker:
             self._clicker.close()
+        # </private>
 
-    # ---- 自动点击（右下角的悬浮胶囊） ----
+    # <private>
+    # ---- 自动点击（右下角的悬浮胶囊，只在自用版） ----
     def click_status(self):
         return self._clicker.status() if self._clicker else {'ok': False, 'error': '自动点击不可用'}
 
@@ -137,6 +142,7 @@ class Api:
 
     def click_toggle(self):
         return self._clicker.command('toggle') if self._clicker else {'ok': False}
+    # </private>
 
     # ---- 存档 ----
     def read_live(self):
@@ -259,7 +265,17 @@ def main():
     if getattr(sys, 'frozen', False):
         content.clean_cache(cache, store)
     server = content.Server(store, PORT)
-    api = Api(AutoClicker(os.path.join(storage, 'autoclick.json')))  # 设置在界面右下角的悬浮胶囊里改
+    clicker = None
+    # <private>
+    from auto_click import AutoClicker
+    clicker = AutoClicker(os.path.join(storage, 'autoclick.json'))  # 设置在界面右下角的悬浮胶囊里改
+    # </private>
+    if not PRIVATE:  # 发布版：清掉旧版留下的自动点击设置
+        try:
+            os.remove(os.path.join(storage, 'autoclick.json'))
+        except OSError:
+            pass
+    api = Api(clicker)
     preview_page = os.environ.get('RGA_PREVIEW_PAGE', 'calc')
     if preview_page not in ('calc', 'live', 'save'):
         preview_page = 'calc'
@@ -275,7 +291,7 @@ def main():
             win.evaluate_js('window.dispatchEvent(new CustomEvent("rgaupdate",{detail:%s}))' % json.dumps(state, ensure_ascii=False))
         except Exception:
             pass
-    if getattr(sys, 'frozen', False) or os.environ.get('RGA_UPDATE_URL'):
+    if (getattr(sys, 'frozen', False) and not PRIVATE) or os.environ.get('RGA_UPDATE_URL'):  # 自用版不自动更新
         api._upd = updater.Updater(server, cache, notify)
         api._upd.start()  # 界面打开后也会自己问一次 update_state，错过通知也没关系
     # private_mode=False + storage_path：网页的 localStorage（保存过的存档、页面设置）在关掉程序后还在

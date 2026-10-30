@@ -2,7 +2,8 @@
 
 用法：python 脚本/publish.py [--exe] [--no-upload]
   默认：重新生成界面（build_html.py），加密成对象，写清单并签名，生成主页，上传到服务器。
-  --exe       同时发布 发布/RGA.exe（先用 应用/build_exe.py 打包；它写的 RGA.exe.json 记着版本和校验值）。
+  界面一律按发布版生成（RGA_PUBLIC=1，不带自动点击），做完再把 build/app 换回本机自用版。
+  --exe       同时发布 发布/公开版/RGA.exe（先用 应用/build_exe.py --public 打包；它写的 RGA.exe.json 记着版本和校验值）。
               不加时沿用服务器上现有清单里的 exe，只更新界面。
   --no-upload 只生成到 build/site/，不上传（用来检查）。
 
@@ -35,7 +36,7 @@ REMOTE = '/home/ubuntu/workspace/pages/rga'
 APP_DIR = os.path.join(ROOT, 'build', 'app')
 OUT = os.path.join(ROOT, 'build', 'site')
 SITE = os.path.join(ROOT, '脚本', 'site')
-EXE = os.path.join(ROOT, '发布', 'RGA.exe')
+EXE = os.path.join(ROOT, '发布', '公开版', 'RGA.exe')  # build_exe.py --public 的输出；发布/RGA.exe 是自用版，不发布
 
 
 def sign(raw):
@@ -75,7 +76,20 @@ def main():
     ap.add_argument('--exe', action='store_true')
     ap.add_argument('--no-upload', action='store_true')
     a = ap.parse_args()
-    subprocess.check_call([sys.executable, '-X', 'utf8', os.path.join(ROOT, '脚本', 'build_html.py')], cwd=ROOT)
+    try:
+        publish(a)
+    finally:  # build/app 换回本机自用版
+        subprocess.check_call([sys.executable, '-X', 'utf8', os.path.join(ROOT, '脚本', 'build_html.py')], cwd=ROOT,
+                              env={k: v for k, v in os.environ.items() if k != 'RGA_PUBLIC'})
+
+
+def publish(a):
+    subprocess.check_call([sys.executable, '-X', 'utf8', os.path.join(ROOT, '脚本', 'build_html.py')], cwd=ROOT,
+                          env=dict(os.environ, RGA_PUBLIC='1'))
+    for root, _, files in os.walk(APP_DIR):  # 自动点击不能进发布版
+        for f in files:
+            if f.endswith(('.js', '.html', '.css')):
+                assert 'click_status' not in open(os.path.join(root, f), encoding='utf-8').read(), '发布版界面里有自动点击：' + f
     shutil.rmtree(OUT, ignore_errors=True)
     shutil.copytree(SITE, OUT)
     k = content.key()
@@ -84,7 +98,7 @@ def main():
     if a.exe:
         info = json.load(open(EXE + '.json', encoding='utf-8'))
         data = open(EXE, 'rb').read()
-        assert hashlib.sha256(data).hexdigest() == info['sha256'], 'RGA.exe 和 RGA.exe.json 对不上，重新跑 build_exe.py'
+        assert hashlib.sha256(data).hexdigest() == info['sha256'], 'RGA.exe 和 RGA.exe.json 对不上，重新跑 build_exe.py --public'
         assert info['version'] == m['version'], 'exe 是 %s 打的，界面是 %s；先重新打包' % (info['version'], m['version'])
         url = 'download/RGA-%s.exe' % info['version']
         os.makedirs(os.path.join(OUT, 'download'))

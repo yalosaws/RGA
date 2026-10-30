@@ -43,11 +43,16 @@ ALIAS = {'TC': '征税', 'CtA': '动员令', 'HoL': '传说圣殿', 'BF': '嗜�
 # 遗物表里阵营遗物按全阶英豪奖杯的顺序排，每个阵营两个
 ART_FACTIONS = ['仙灵', '精灵', '天使', '地精', '亡灵', '恶魔', '泰坦', '德鲁伊', '无面者', '矮人', '卓尔', '佣兵']
 # 程序版本：改了功能就加版本号，在 CHANGES 最前面写这一版改了什么
-VERSION = '0.5.4'  # 还没到正式发布，用 0.x（用户要求）
+VERSION = '0.5.5'  # 还没到正式发布，用 0.x（用户要求）
 # 构筑辅助、实时读数暂时下线，测试完再进更新（用户要求）；本地测试用 RGA_BUILD_TOOLS=1 生成
 BUILD_TOOLS = os.environ.get('RGA_BUILD_TOOLS') == '1'
+# 自动点击已从发布版永久移除（0.5.5），只留在作者本机自用版里：默认生成自用版界面，publish.py 设 RGA_PUBLIC=1 生成发布版
+PRIVATE = os.environ.get('RGA_PUBLIC') != '1'
 AUTHOR = 'Yalosaws'
 CHANGES = [
+    ('0.5.5', '2026-10-30', [
+        '根据建议永久移除自动点击功能',
+    ]),
     ('0.5.4', '2026-10-29', [
         '挑战卡片的「效果」下面加上「当前数值」：读到存档后由游戏客户端的计算代入你的存档，显示每个挑战奖励现在的加成（和游戏说明里括号中的数一致）；还没解锁、游戏不显示效果的高级挑战按公式列出各项加成',
         '自动连点加上「自动全部购买」：开启后每秒点一次升级和建筑的「全部购买」，点击直接发给游戏窗口，鼠标不动，游戏在后台也能点（不能最小化）；每次先看游戏画面，在升级页、按钮露在外面才点，有弹窗时不点；「在鼠标处连点」可以单独关掉，只用自动购买',
@@ -2107,8 +2112,8 @@ def main():
     body = ''.join('<!--#include %s-->' % f if f.startswith('pages/') else '<script src="%s"></script>' % f
                    for f, _ in parts if f.startswith('pages/') or (f.endswith('.js') and f not in ('js/build.js', 'js/live.js')))
     shell = TEMPLATE.replace('%%NAV%%', nav).replace('%%BODY%%', body)
-    parts.append(('css/app.css', APP_CSS.replace('%%TCOLORS%%', md2html.CSS[md2html.CSS.index('.t-sp'):md2html.CSS.index('[class^')])))
-    parts.append(('js/app.js', APP_JS))
+    parts.append(('css/app.css', (APP_CSS + (AC_CSS if PRIVATE else '')).replace('%%TCOLORS%%', md2html.CSS[md2html.CSS.index('.t-sp'):md2html.CSS.index('[class^')])))
+    parts.append(('js/app.js', APP_JS + (AC_JS if PRIVATE else '')))
     if not BUILD_TOOLS:
         for tag in ('<link rel="stylesheet" href="css/build.css">', '<script src="js/build.js"></script>', '<script src="js/live.js"></script>'):
             shell = shell.replace(tag + chr(10), '')
@@ -2721,55 +2726,7 @@ html.app .brand{display:none}
 .grip{display:none}
 html.app .grip{display:block;position:fixed;right:0;bottom:0;width:18px;height:18px;cursor:nwse-resize;z-index:9}  /* 看不见，鼠标移到角上才变成调整大小 */
 html.app.max .grip{display:none}
-/* 自动连点：右下角小胶囊，点开在原地展开成设置卡片 */
-#ac{position:fixed;right:22px;bottom:22px;z-index:21;overflow:hidden;border-radius:18px;background:var(--card);will-change:width,height;
-  box-shadow:0 8px 28px rgba(20,40,90,.14),0 0 0 1px rgba(20,40,90,.05);font-size:13px;color:var(--fg);user-select:none;
-  transition:width .36s cubic-bezier(.32,.72,0,1),height .36s cubic-bezier(.32,.72,0,1),box-shadow .36s}
-#ac.open{box-shadow:0 14px 44px rgba(20,40,90,.2),0 0 0 1px rgba(20,40,90,.05)}
-#ac .ac-pill{position:absolute;right:0;bottom:0;height:36px;display:flex;align-items:center;gap:8px;padding:0 14px 0 12px;white-space:nowrap;cursor:pointer;
-  transition:opacity .2s ease .12s}
-#ac.open .ac-pill{opacity:0;pointer-events:none;transition:opacity .1s ease}
-#ac .ac-dot{width:8px;height:8px;border-radius:50%;background:#c3cbd8;transition:background .2s}
-#ac.on .ac-dot{background:var(--blue)}
-#ac.clicking .ac-dot{animation:ac-pulse 1s ease-in-out infinite}
-@keyframes ac-pulse{50%{box-shadow:0 0 0 4px rgba(37,99,235,.18)}}
-#ac kbd{font:inherit;font-size:12px;color:var(--muted);background:var(--soft);border-radius:6px;padding:1px 6px}
-#ac.err .ac-dot{background:#e5484d}
-#ac .ac-panel{position:absolute;right:0;bottom:0;width:272px;padding:14px 16px 14px;opacity:0;pointer-events:none;
-  transform:translateY(8px) scale(.97);transform-origin:100% 100%;transition:opacity .14s ease,transform .3s cubic-bezier(.32,.72,0,1)}
-#ac.open .ac-panel{opacity:1;transform:none;pointer-events:auto;transition:opacity .24s ease .08s,transform .36s cubic-bezier(.32,.72,0,1) .04s}
-#ac .ac-head{display:flex;align-items:center;gap:8px;margin-bottom:12px;font-size:14px;font-weight:600}
-#ac .ac-head span{flex:1}
-#ac .ac-x{border:none;background:none;color:var(--muted);font-size:16px;line-height:1;padding:2px 4px;cursor:pointer;border-radius:6px}
-#ac .ac-x:hover{background:var(--soft)}
-#ac .ac-row{display:flex;align-items:center;gap:10px;min-height:32px}
-#ac .ac-row>label{flex:1;color:var(--muted)}
-#ac .ac-key{font:inherit;font-size:13px;min-width:54px;height:28px;padding:0 10px;border:none;border-radius:8px;background:var(--soft);color:var(--fg);cursor:pointer}
-#ac .ac-key:hover{background:#e2e9f6}
-#ac .ac-key.wait{background:var(--blue);color:#fff}
-#ac .ac-key:disabled{opacity:.45;cursor:default}
-#ac .ac-speed{display:flex;justify-content:space-between;color:var(--muted);margin-top:4px}
-#ac .ac-speed b{color:var(--fg);font-weight:600}
-/* 间隔滑条：对数刻度，最佳点（35 毫秒）在 1/3 处，有刻度标记，拖到附近会吸住 */
-#ac .ac-track{position:relative;height:28px;margin:2px 0 4px}
-#ac .ac-mark{position:absolute;top:50%;left:calc(8px + (100% - 16px) / 3);width:2px;height:12px;margin:-6px 0 0 -1px;border-radius:1px;background:#b9c4d6;transition:background .2s,height .2s,margin .2s}
-#ac .ac-track.best .ac-mark{background:var(--blue);height:16px;margin-top:-8px}
-#ac input[type=range]{-webkit-appearance:none;appearance:none;position:relative;width:100%;height:28px;margin:0;background:none;cursor:pointer}
-#ac input[type=range]::-webkit-slider-runnable-track{height:4px;border-radius:2px;background:#e3e8f1}
-#ac input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;margin-top:-6px;border-radius:50%;background:var(--blue);
-  border:2px solid #fff;box-shadow:0 1px 4px rgba(20,40,90,.3);transition:transform .15s}
-#ac input[type=range]:active::-webkit-slider-thumb{transform:scale(1.12)}
-#ac .ac-best{display:none;font-style:normal;margin-left:6px;padding:0 7px;border-radius:999px;background:var(--soft);color:var(--blue);font-size:12px;font-weight:600}
-#ac .ac-speed.best .ac-best{display:inline-block}
-#ac .ac-sw{position:relative;width:34px;height:20px;border:none;border-radius:999px;background:#d5dce8;cursor:pointer;padding:0;transition:background .2s;flex:none}
-#ac .ac-sw::after{content:"";position:absolute;left:2px;top:2px;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2);transition:transform .2s}
-#ac .ac-sw.on{background:var(--blue)}
-#ac .ac-sw.on::after{transform:translateX(14px)}
-#ac .ac-msg{margin-top:8px;font-size:12px;color:var(--muted);line-height:1.5}
-#ac .ac-msg.bad{color:#d13438}
-#ac .ac-msg:empty{display:none}
-body.has-ac #upd{bottom:72px}
-#upd[hidden],#ac[hidden]{display:none}
+#upd[hidden]{display:none}
 """
 
 # 外壳脚本（js/app.js）：页面切换、记住阅读位置、全表搜索
@@ -2951,7 +2908,61 @@ APP_JS = r"""(function(){
   first();
 })();
 
-// 自动连点：右下角小胶囊，点开在原地展开设置（开关、点击间隔、启停快捷键、连点时按住一个键、自动全部购买），改了立即保存
+"""
+
+# 自动连点（只进自用版）：右下角小胶囊
+AC_CSS = r"""/* 自动连点：右下角小胶囊，点开在原地展开成设置卡片 */
+#ac{position:fixed;right:22px;bottom:22px;z-index:21;overflow:hidden;border-radius:18px;background:var(--card);will-change:width,height;
+  box-shadow:0 8px 28px rgba(20,40,90,.14),0 0 0 1px rgba(20,40,90,.05);font-size:13px;color:var(--fg);user-select:none;
+  transition:width .36s cubic-bezier(.32,.72,0,1),height .36s cubic-bezier(.32,.72,0,1),box-shadow .36s}
+#ac.open{box-shadow:0 14px 44px rgba(20,40,90,.2),0 0 0 1px rgba(20,40,90,.05)}
+#ac .ac-pill{position:absolute;right:0;bottom:0;height:36px;display:flex;align-items:center;gap:8px;padding:0 14px 0 12px;white-space:nowrap;cursor:pointer;
+  transition:opacity .2s ease .12s}
+#ac.open .ac-pill{opacity:0;pointer-events:none;transition:opacity .1s ease}
+#ac .ac-dot{width:8px;height:8px;border-radius:50%;background:#c3cbd8;transition:background .2s}
+#ac.on .ac-dot{background:var(--blue)}
+#ac.clicking .ac-dot{animation:ac-pulse 1s ease-in-out infinite}
+@keyframes ac-pulse{50%{box-shadow:0 0 0 4px rgba(37,99,235,.18)}}
+#ac kbd{font:inherit;font-size:12px;color:var(--muted);background:var(--soft);border-radius:6px;padding:1px 6px}
+#ac.err .ac-dot{background:#e5484d}
+#ac .ac-panel{position:absolute;right:0;bottom:0;width:272px;padding:14px 16px 14px;opacity:0;pointer-events:none;
+  transform:translateY(8px) scale(.97);transform-origin:100% 100%;transition:opacity .14s ease,transform .3s cubic-bezier(.32,.72,0,1)}
+#ac.open .ac-panel{opacity:1;transform:none;pointer-events:auto;transition:opacity .24s ease .08s,transform .36s cubic-bezier(.32,.72,0,1) .04s}
+#ac .ac-head{display:flex;align-items:center;gap:8px;margin-bottom:12px;font-size:14px;font-weight:600}
+#ac .ac-head span{flex:1}
+#ac .ac-x{border:none;background:none;color:var(--muted);font-size:16px;line-height:1;padding:2px 4px;cursor:pointer;border-radius:6px}
+#ac .ac-x:hover{background:var(--soft)}
+#ac .ac-row{display:flex;align-items:center;gap:10px;min-height:32px}
+#ac .ac-row>label{flex:1;color:var(--muted)}
+#ac .ac-key{font:inherit;font-size:13px;min-width:54px;height:28px;padding:0 10px;border:none;border-radius:8px;background:var(--soft);color:var(--fg);cursor:pointer}
+#ac .ac-key:hover{background:#e2e9f6}
+#ac .ac-key.wait{background:var(--blue);color:#fff}
+#ac .ac-key:disabled{opacity:.45;cursor:default}
+#ac .ac-speed{display:flex;justify-content:space-between;color:var(--muted);margin-top:4px}
+#ac .ac-speed b{color:var(--fg);font-weight:600}
+/* 间隔滑条：对数刻度，最佳点（35 毫秒）在 1/3 处，有刻度标记，拖到附近会吸住 */
+#ac .ac-track{position:relative;height:28px;margin:2px 0 4px}
+#ac .ac-mark{position:absolute;top:50%;left:calc(8px + (100% - 16px) / 3);width:2px;height:12px;margin:-6px 0 0 -1px;border-radius:1px;background:#b9c4d6;transition:background .2s,height .2s,margin .2s}
+#ac .ac-track.best .ac-mark{background:var(--blue);height:16px;margin-top:-8px}
+#ac input[type=range]{-webkit-appearance:none;appearance:none;position:relative;width:100%;height:28px;margin:0;background:none;cursor:pointer}
+#ac input[type=range]::-webkit-slider-runnable-track{height:4px;border-radius:2px;background:#e3e8f1}
+#ac input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;margin-top:-6px;border-radius:50%;background:var(--blue);
+  border:2px solid #fff;box-shadow:0 1px 4px rgba(20,40,90,.3);transition:transform .15s}
+#ac input[type=range]:active::-webkit-slider-thumb{transform:scale(1.12)}
+#ac .ac-best{display:none;font-style:normal;margin-left:6px;padding:0 7px;border-radius:999px;background:var(--soft);color:var(--blue);font-size:12px;font-weight:600}
+#ac .ac-speed.best .ac-best{display:inline-block}
+#ac .ac-sw{position:relative;width:34px;height:20px;border:none;border-radius:999px;background:#d5dce8;cursor:pointer;padding:0;transition:background .2s;flex:none}
+#ac .ac-sw::after{content:"";position:absolute;left:2px;top:2px;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2);transition:transform .2s}
+#ac .ac-sw.on{background:var(--blue)}
+#ac .ac-sw.on::after{transform:translateX(14px)}
+#ac .ac-msg{margin-top:8px;font-size:12px;color:var(--muted);line-height:1.5}
+#ac .ac-msg.bad{color:#d13438}
+#ac .ac-msg:empty{display:none}
+body.has-ac #upd{bottom:72px}
+#ac[hidden]{display:none}
+"""
+
+AC_JS = r"""// 自动连点：右下角小胶囊，点开在原地展开设置（开关、点击间隔、启停快捷键、连点时按住一个键、自动全部购买），改了立即保存
 (function(){
   var box, pill, panel, range, st = null, msg = '', capture = '', dragging = false;
   function api(){ var a = window.pywebview && window.pywebview.api; return a && a.click_status ? a : null; }
