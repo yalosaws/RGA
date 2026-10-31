@@ -1,0 +1,4673 @@
+{
+"monster": {
+"216": {
+"name": "Ghost",
+"special": 13,
+"stat": 83,
+"tiers": [
+[
+"spectre",
+50
+],
+[
+"wraith",
+25
+],
+[
+"banshee",
+10
+]
+]
+},
+"217": {
+"name": "Skeleton",
+"special": 14,
+"stat": 84,
+"tiers": [
+[
+"giantskeleton",
+50
+],
+[
+"hugeskeleton",
+25
+],
+[
+"bigskeleton",
+10
+]
+]
+},
+"218": {
+"name": "Vampire",
+"special": 12,
+"stat": 82,
+"tiers": [
+[
+"vampireking",
+50
+],
+[
+"vampirelord",
+25
+],
+[
+"vampiresire",
+10
+]
+]
+}
+},
+"note": "由 scripts/event_ids.py 从客户端代码导出，名字只留小写字母数字",
+"quest": {
+"asmodeanchampion": [
+124700,
+124701,
+124702
+],
+"balancerestoration": [
+133700,
+133701,
+133702
+],
+"chaosrestoration": [
+133800,
+133801,
+133802
+],
+"eggcollection": [
+119600,
+119601,
+119602,
+119603
+],
+"egghunter": [
+119500,
+119501,
+119502,
+119503
+],
+"feelthelove": [
+117600,
+117601,
+117602
+],
+"giftcollector": [
+116700,
+116701,
+116702,
+116703
+],
+"goblinsbane": [
+125400,
+125401,
+125402
+],
+"goblinscommander": [
+125500,
+125501,
+125502
+],
+"monsterbreeder": [
+122400,
+122401,
+122402
+],
+"orderrestoration": [
+133900,
+133901,
+133902
+],
+"pumpkinsmasher": [
+122500,
+122501,
+122502,
+122503
+],
+"seraphimchampion": [
+124800,
+124801,
+124802
+],
+"snowpile": [
+116800,
+116801,
+116802,
+116803
+],
+"summeraanchampion": [
+120800,
+120801,
+120802
+],
+"winterlychampion": [
+120900,
+120901,
+120902
+]
+},
+"season": {
+"0": {
+"name": "",
+"res": []
+},
+"1": {
+"name": "Thanksgiving",
+"res": []
+},
+"10": {
+"name": "Ruby Shine",
+"res": []
+},
+"11": {
+"name": "Idillium",
+"res": [
+{
+"icon": "CrystalPrismCurrency",
+"special": 23,
+"stat": 150
+},
+{
+"icon": "EntropicDropCurrency",
+"special": 24,
+"stat": 151
+},
+{
+"icon": "EquilibriumFragmentCurrency",
+"special": 25,
+"stat": 152
+}
+]
+},
+"2": {
+"name": "Christmas",
+"res": [
+{
+"icon": "SnowballCurrency",
+"special": 0,
+"stat": 110
+}
+]
+},
+"3": {
+"name": "Valentine",
+"res": [
+{
+"icon": "HeartCurrency",
+"special": 2,
+"stat": 119
+}
+]
+},
+"4": {
+"name": "Easter",
+"res": [
+{
+"icon": "EggCurrency",
+"special": 4,
+"stat": 123
+},
+{
+"icon": "RareEggCurrency",
+"special": 5,
+"stat": 124
+}
+]
+},
+"6": {
+"name": "Summer",
+"res": [
+{
+"icon": "FlameOrbCurrency",
+"special": 8,
+"stat": 126
+},
+{
+"icon": "FrostOrbCurrency",
+"special": 9,
+"stat": 127
+}
+]
+},
+"7": {
+"name": "Halloween",
+"res": [
+{
+"icon": "BloodCurrency",
+"special": 12,
+"stat": 82
+},
+{
+"icon": "EctoplasmCurrency",
+"special": 13,
+"stat": 83
+},
+{
+"icon": "BoneCurrency",
+"special": 14,
+"stat": 84
+}
+]
+},
+"8": {
+"name": "Blood War",
+"res": [
+{
+"icon": "HolySymbolCurrency",
+"special": 18,
+"stat": 131
+},
+{
+"icon": "LavaStoneCurrency",
+"special": 19,
+"stat": 132
+}
+]
+},
+"9": {
+"name": "Goblin Invasion",
+"res": [
+{
+"icon": "GoblinCrownCurrency",
+"special": 21,
+"stat": 65
+}
+]
+}
+},
+"tr": {
+"10yearswar": [
+413
+],
+"advisorinsight": [
+201
+],
+"aggressivecollector": [
+334
+],
+"ancestralhourglass": [
+284
+],
+"ancientcocoabean": [
+269
+],
+"ancientcoinpiece": [
+129
+],
+"ancientdevice": [
+160
+],
+"ancientheirloom": [
+237
+],
+"ancientresearcher": [
+121
+],
+"ancientstoneslab1": [
+123
+],
+"ancientstoneslab2": [
+124
+],
+"antichristmas": [
+393
+],
+"apeiron": [
+346
+],
+"apothecary": [
+96
+],
+"arachnidfigurine": [
+130
+],
+"archeologyexpedition": [
+4
+],
+"artisan": [
+97
+],
+"artofthecrow": [
+290
+],
+"asmodeanchampion": [
+243
+],
+"assistantlove": [
+272
+],
+"assistantsquasher": [
+62
+],
+"astralchallenger": [
+328
+],
+"athanor": [
+347
+],
+"autoclicker": [
+238
+],
+"automaticcasting": [
+8
+],
+"balancedcollector": [
+359
+],
+"balancerestoration": [
+340
+],
+"battlefield": [
+348
+],
+"beardcarpet": [
+63
+],
+"beardhair": [
+273
+],
+"becauseiliketogrind": [
+180
+],
+"beyondthelookingglass": [
+391
+],
+"blacksword": [
+131
+],
+"bloodchalice": [
+371
+],
+"bloodstream": [
+64
+],
+"bloodthirsty": [
+219
+],
+"bloodycrown": [
+379
+],
+"bonefragment1": [
+125
+],
+"bonefragment2": [
+126
+],
+"bonepicker": [
+220
+],
+"bottledvoice": [
+132
+],
+"branchofthelifetree": [
+274
+],
+"bribedarmy": [
+414
+],
+"buildinghater": [
+65
+],
+"bunnyhelpers": [
+287
+],
+"burningpassion": [
+385
+],
+"businessman": [
+99
+],
+"ceremonialdagger": [
+133
+],
+"chaosrestoration": [
+341
+],
+"chillout": [
+204
+],
+"chocolatebox": [
+315
+],
+"chocolatecookie": [
+120
+],
+"chocolateegg": [
+324
+],
+"chronoloading": [
+321
+],
+"climateforecast": [
+299
+],
+"clouded": [
+42
+],
+"coinpillage": [
+66
+],
+"colorfulautocasting": [
+202
+],
+"colorfull": [
+387
+],
+"contingencyautocasting": [
+12
+],
+"crystallizedlava": [
+275
+],
+"curseofthefallen": [
+392
+],
+"darkestheresy": [
+244
+],
+"dawnstone": [
+233
+],
+"debtforlife": [
+397
+],
+"demigod": [
+100
+],
+"demonhorn": [
+140
+],
+"demonicfigurine": [
+134
+],
+"demontail": [
+372
+],
+"diabolicalevil": [
+67
+],
+"divinesword": [
+135
+],
+"doublebottom": [
+411
+],
+"dragonblood": [
+425
+],
+"dragonfang": [
+229
+],
+"dragonscale": [
+292
+],
+"dragonsoul": [
+230
+],
+"dragonsroar": [
+213
+],
+"dragontamer": [
+210
+],
+"duskstone": [
+234
+],
+"dustycoffin": [
+276
+],
+"dwarvenanvil": [
+361
+],
+"dwarvenbow": [
+136
+],
+"earthcore": [
+184
+],
+"efficientautocasting": [
+159
+],
+"eggcollection": [
+194
+],
+"egghunter": [
+191
+],
+"eggsceptional": [
+355
+],
+"eggsercise": [
+395
+],
+"equality": [
+68
+],
+"eternalbattle": [
+356
+],
+"eternalresearcher": [
+227
+],
+"excavatedmirage": [
+257
+],
+"exchangehighlord": [
+249
+],
+"exchangelord": [
+69
+],
+"exchangemaster": [
+70
+],
+"expertcombinator": [
+382
+],
+"expertresearcher": [
+188
+],
+"eyeofthedragon": [
+362
+],
+"facelessovermind": [
+71
+],
+"factiongrinder": [
+72
+],
+"factionruler": [
+297
+],
+"factionrun": [
+114
+],
+"factory": [
+349
+],
+"fairychoir": [
+73
+],
+"fairylove": [
+354
+],
+"fastforward": [
+74
+],
+"feelthelove": [
+174
+],
+"fieldsofconflict": [
+396
+],
+"firstcrystalfragment": [
+300
+],
+"firstironfragment": [
+301
+],
+"firststonefragment": [
+302
+],
+"flameofbondelnar": [
+185
+],
+"forgottenrelic": [
+344
+],
+"forscience": [
+75
+],
+"fortunetellermachine": [
+215
+],
+"fossilizedpieceofbark1": [
+127
+],
+"fossilizedpieceofbark2": [
+128
+],
+"fossilizedrodent": [
+137
+],
+"fossilizedwing": [
+277
+],
+"freezinghell": [
+314
+],
+"frenziedarmy": [
+377
+],
+"frostmelter": [
+333
+],
+"frozenlightning": [
+363
+],
+"fullspectrumcolor": [
+399
+],
+"futurelinkin": [
+320
+],
+"genealogist": [
+250
+],
+"generalwinter": [
+423
+],
+"gentlecollector": [
+335
+],
+"ghost": [
+216
+],
+"ghostbuster": [
+408
+],
+"giftcollector": [
+163
+],
+"glhokohhlsnod": [
+171
+],
+"glowingwing": [
+364
+],
+"glyphtable": [
+138
+],
+"goblinpurse": [
+139
+],
+"goblinsbane": [
+251
+],
+"goblinscommander": [
+252
+],
+"goblinseverywhere": [
+253
+],
+"godsfingers": [
+327
+],
+"godsrest": [
+76
+],
+"goldenage": [
+336
+],
+"goldenbones": [
+400
+],
+"goldenchicken": [
+192
+],
+"goldensnowballs": [
+384
+],
+"goldhunt": [
+298
+],
+"granddiplomat": [
+77
+],
+"grandmasterresearcher": [
+241
+],
+"greeddrive": [
+78
+],
+"greyeaster": [
+193
+],
+"halloweenmagic": [
+313
+],
+"hallsofbalance": [
+79
+],
+"harlequin": [
+80
+],
+"heartblessing": [
+419
+],
+"heatcore": [
+398
+],
+"heavenlyomelette": [
+420
+],
+"heldensterbennicht": [
+214
+],
+"hellrush": [
+81
+],
+"hiredchampions": [
+421
+],
+"holyfrenzy": [
+286
+],
+"hornofthekings": [
+186
+],
+"hugetitanstatue": [
+141
+],
+"idilliumexplorer": [
+381
+],
+"iloveyouineverylanguage": [
+175
+],
+"improvedautocasting": [
+9
+],
+"indifference": [
+293
+],
+"intermediateresearcher": [
+122
+],
+"ironrush": [
+198
+],
+"jawbone": [
+142
+],
+"jinglechoir": [
+401
+],
+"keytothelostcity": [
+161
+],
+"knowyourenemyparti": [
+178
+],
+"knowyourenemypartii": [
+242
+],
+"lanternofguidance": [
+294
+],
+"latespringtime": [
+358
+],
+"leet": [
+82
+],
+"lightningstorm": [
+83
+],
+"loyalty": [
+394
+],
+"lucifer": [
+84
+],
+"luckyclover": [
+143
+],
+"luckyneutral": [
+85
+],
+"madmasks": [
+312
+],
+"magician": [
+101
+],
+"manaloom": [
+350
+],
+"manamatrix": [
+173
+],
+"manawaste": [
+231
+],
+"maskofscorchrah": [
+386
+],
+"masterarcheologist": [
+86
+],
+"masterfulautocasting": [
+10
+],
+"masterresearcher": [
+228
+],
+"mathematician": [
+87
+],
+"mercenaryinsignia": [
+330
+],
+"mercenaryoath": [
+52
+],
+"mercenaryspirit": [
+88
+],
+"midsummernightsdream": [
+390
+],
+"minedwarf": [
+89
+],
+"minitreasure": [
+144
+],
+"monsterbreeder": [
+221
+],
+"monstrous": [
+383
+],
+"mummy": [
+417
+],
+"mythos": [
+351
+],
+"needaheadstart": [
+90
+],
+"neutralchallenger": [
+169
+],
+"nexusdescent": [
+424
+],
+"nightmarefigment": [
+278
+],
+"norecruiting": [
+157
+],
+"novicecombinator": [
+378
+],
+"noviceresearcher": [
+91
+],
+"obsidiancrown": [
+331
+],
+"obsidianshard": [
+240
+],
+"octopusshapedhelmet": [
+145
+],
+"oillamp": [
+295
+],
+"orcfangnecklace": [
+366
+],
+"orderrestoration": [
+342
+],
+"perfectcombo": [
+92
+],
+"perfectlygood": [
+93
+],
+"perfectsnowflake": [
+353
+],
+"persistententropy": [
+322
+],
+"pillarfragment": [
+146
+],
+"pinkcarrot": [
+147
+],
+"planartax": [
+388
+],
+"planetaryforce": [
+319
+],
+"plannedautocasting": [
+13
+],
+"platinumegg": [
+412
+],
+"platinumtrophy": [
+357
+],
+"poisonvial": [
+279
+],
+"powerorb": [
+148
+],
+"premeditation": [
+94
+],
+"prestigechallenger": [
+197
+],
+"primalleaf": [
+367
+],
+"priorityautocasting": [
+11
+],
+"prismaticmana": [
+236
+],
+"pumpkincollector": [
+360
+],
+"pumpkinsmasher": [
+222
+],
+"rawemerald": [
+280
+],
+"realitycrater": [
+323
+],
+"realmdigger": [
+95
+],
+"reverseautocasting": [
+326
+],
+"rewind": [
+103
+],
+"rottenegg": [
+376
+],
+"rottenorgan": [
+150
+],
+"roughstone": [
+151
+],
+"rubyshine": [
+271
+],
+"ruledis": [
+181
+],
+"sacredholiness": [
+245
+],
+"santashelpers": [
+164
+],
+"scaraboffortune": [
+119
+],
+"searingsummer": [
+380
+],
+"secondcrystalfragment": [
+303
+],
+"secondironfragment": [
+304
+],
+"secondstonefragment": [
+305
+],
+"seraphimchampion": [
+246
+],
+"silkcloth": [
+281
+],
+"skeleton": [
+217
+],
+"snowballfight": [
+374
+],
+"snowpile": [
+165
+],
+"solidcloud": [
+365
+],
+"sparkoflife": [
+296
+],
+"spectralsurge": [
+343
+],
+"speedrun": [
+105
+],
+"spellcataclysm": [
+203
+],
+"spellfury": [
+106
+],
+"spikedwhip": [
+282
+],
+"spikyroughegg": [
+211
+],
+"spooky": [
+223
+],
+"steelplate": [
+152
+],
+"stilettoheel": [
+368
+],
+"stilllightning": [
+406
+],
+"stoicresistance": [
+190
+],
+"stoneofbalance": [
+153
+],
+"stonetankard": [
+154
+],
+"streamofdreams": [
+416
+],
+"suggestionmaster": [
+172
+],
+"summeraanchampion": [
+205
+],
+"sunblessing": [
+107
+],
+"sweetbedtime": [
+402
+],
+"sylvanmirror": [
+369
+],
+"thanksgiving": [
+115
+],
+"thatexcavatedquickly": [
+158
+],
+"thearchitect": [
+329
+],
+"theblackestink": [
+370
+],
+"theperfectegg": [
+403
+],
+"theundecidedarmada": [
+332
+],
+"thirdcrystalfragment": [
+306
+],
+"thirdironfragment": [
+307
+],
+"thirdstonefragment": [
+308
+],
+"tieredautocasting": [
+200
+],
+"titanhelmet": [
+283
+],
+"titanshield": [
+155
+],
+"translucentgoo": [
+156
+],
+"treachery": [
+405
+],
+"tripleweirdness": [
+270
+],
+"trueharlequin": [
+345
+],
+"truenight": [
+108
+],
+"underagreensun": [
+389
+],
+"undergroundsnow": [
+409
+],
+"underhandedtactics": [
+422
+],
+"undertherainbow": [
+407
+],
+"underworldresearcher": [
+189
+],
+"unholidays": [
+166
+],
+"uniformity": [
+285
+],
+"unitary": [
+109
+],
+"unlimitedmana": [
+110
+],
+"unrequitedness": [
+375
+],
+"untildeathdouspart": [
+410
+],
+"unwantedtruce": [
+404
+],
+"vampire": [
+218
+],
+"vanillachallenger": [
+113
+],
+"vanillaflavorjuice": [
+179
+],
+"vanillaresearcher": [
+111
+],
+"vanshment": [
+199
+],
+"vault": [
+352
+],
+"veteranfigurine": [
+268
+],
+"voodoodoll": [
+187
+],
+"wallchunk": [
+256
+],
+"wallfragment": [
+177
+],
+"warlord": [
+102
+],
+"warmup": [
+206
+],
+"warriorresearcher": [
+267
+],
+"whitehotmagic": [
+415
+],
+"winterlychampion": [
+207
+],
+"worldrestoration": [
+325
+],
+"yuleoffering": [
+418
+]
+},
+"up": {
+"10yearswar": [
+1245
+],
+"1stanniversary": [
+580
+],
+"abominations": [
+180
+],
+"absentmindedness": [
+874
+],
+"absolutehierarchy": [
+875
+],
+"abyssalfurnace": [
+782
+],
+"abyssalgaze": [
+725
+],
+"academicprodigy": [
+890
+],
+"acquisition": [
+277
+],
+"adaptation": [
+419
+],
+"advancedangelicheritage": [
+861
+],
+"advancedcivilization": [
+86
+],
+"advanceddemonicheritage": [
+862
+],
+"advanceddragonheritage": [
+863
+],
+"advanceddrowheritage": [
+864
+],
+"advanceddruidheritage": [
+865
+],
+"advanceddwarvenheritage": [
+866
+],
+"advancedelvenheritage": [
+867
+],
+"advancedfacelessheritage": [
+868
+],
+"advancedfairyheritage": [
+869
+],
+"advancedgoblinheritage": [
+870
+],
+"advancedtitanheritage": [
+871
+],
+"advancedundeadheritage": [
+872
+],
+"advisorinsight": [
+583
+],
+"aeromancy": [
+297
+],
+"afterlife": [
+1176
+],
+"albedo": [
+1032
+],
+"alkahest": [
+1070
+],
+"alloys": [
+512
+],
+"altarofwishes": [
+993
+],
+"ambush": [
+541
+],
+"ancestralhourglass": [
+839
+],
+"ancientclickingarts": [
+177
+],
+"ancientdevicepower": [
+477
+],
+"ancientegg": [
+556
+],
+"ancientheirloom": [
+698
+],
+"ancienthunger": [
+595
+],
+"ancientincantation": [
+641
+],
+"ancientresearcher": [
+471
+],
+"ancillaeobscurae": [
+851
+],
+"angelbloodline": [
+39
+],
+"angelchallenge": [
+81
+],
+"angelfeathers": [
+43
+],
+"angelicdetermination": [
+44
+],
+"angelicdominance": [
+45
+],
+"angelicexchange": [
+46
+],
+"angelicfortitude": [
+806
+],
+"angelicheritage": [
+47
+],
+"angelicwisdom": [
+48
+],
+"angellineage": [
+649
+],
+"angelperk1": [
+650
+],
+"angelperk2": [
+651
+],
+"angelperk3": [
+652
+],
+"angelperk4": [
+794
+],
+"angelperk5": [
+941
+],
+"angelperk6": [
+1227
+],
+"angelsalliance": [
+42
+],
+"angelset": [
+824
+],
+"angelsfriendshippact": [
+41
+],
+"angelstradetreaty": [
+40
+],
+"angelsunion": [
+770
+],
+"animalcompanions": [
+133
+],
+"animamundi": [
+1071
+],
+"antipodes": [
+586
+],
+"anuntimelydeath": [
+984
+],
+"apeiron": [
+1031
+],
+"apothecary": [
+359
+],
+"apprenticeship": [
+250
+],
+"arborealcity": [
+757
+],
+"arborealcityquest": [
+758
+],
+"arcanebrilliance": [
+1203
+],
+"arcanecore": [
+876
+],
+"arcaneefficiency": [
+1164
+],
+"arcaneegg": [
+557
+],
+"archangelfeathers": [
+49
+],
+"archeology": [
+2
+],
+"architecture": [
+426
+],
+"archonalliance": [
+879
+],
+"archonbloodline": [
+939
+],
+"archonchallenge": [
+988
+],
+"archonfriendshippact": [
+878
+],
+"archonheritage": [
+922
+],
+"archonlineage": [
+955
+],
+"archonmask": [
+925
+],
+"archonperk1": [
+956
+],
+"archonperk2": [
+957
+],
+"archonperk3": [
+958
+],
+"archonperk4": [
+959
+],
+"archonperk5": [
+960
+],
+"archonperk6": [
+1228
+],
+"archonpride": [
+881
+],
+"archonquest": [
+928
+],
+"archontradetreaty": [
+877
+],
+"archonunion": [
+880
+],
+"artifactcaveau": [
+1149
+],
+"artifactset": [
+835
+],
+"artificialcurrency": [
+996
+],
+"artillery": [
+1184
+],
+"artisan": [
+360
+],
+"artofcommerce": [
+906
+],
+"artofthecrow": [
+854
+],
+"asceticism": [
+1177
+],
+"asmodeanalliance": [
+723
+],
+"assault": [
+310
+],
+"assemblyline": [
+1174
+],
+"assimilation": [
+447
+],
+"assistantsquasher": [
+324
+],
+"astralchallenger": [
+1003
+],
+"athanor": [
+1024
+],
+"athletics": [
+454
+],
+"augmentation": [
+298
+],
+"auraofmagic": [
+897
+],
+"authority": [
+631
+],
+"autoclicker": [
+700
+],
+"automaticcasting": [
+12
+],
+"automatons": [
+251
+],
+"avalanche": [
+483
+],
+"avatars": [
+1162
+],
+"azoth": [
+1072
+],
+"backfire": [
+1185
+],
+"balancedcurrent": [
+486
+],
+"balancedeconomy": [
+497
+],
+"balanceremnant": [
+1007,
+1011
+],
+"balanceremnantperk1": [
+1008
+],
+"balanceremnantperk2": [
+1009
+],
+"balanceremnantperk3": [
+1010
+],
+"bardicknowledge": [
+134
+],
+"barkscales": [
+638
+],
+"bartering": [
+278
+],
+"battlefield": [
+1030
+],
+"battlehammers": [
+147
+],
+"beardcarpet": [
+326
+],
+"beardedassistants": [
+148
+],
+"becauseiliketogrind": [
+510
+],
+"bedrockfoundations": [
+907
+],
+"berserking": [
+311
+],
+"betrayal": [
+312
+],
+"biasedarchitecture": [
+565
+],
+"birthright": [
+1040
+],
+"blackmail": [
+117
+],
+"blackmarket": [
+211
+],
+"blacksmithing": [
+513
+],
+"bladedance": [
+118
+],
+"blessing": [
+264
+],
+"bloodline": [
+13
+],
+"bloodlust": [
+542
+],
+"bloodsacrifices": [
+119
+],
+"bloodspring": [
+420
+],
+"bloodstream": [
+327
+],
+"bloodycrown": [
+1169
+],
+"blueomelette": [
+554
+],
+"bluepowder": [
+895
+],
+"boonofradiance": [
+731
+],
+"bountifulhoard": [
+596
+],
+"bribedarmy": [
+1246
+],
+"bribing": [
+279
+],
+"brokenmirror": [
+1022
+],
+"broodingabyss": [
+1147
+],
+"broodmothers": [
+724
+],
+"brothel": [
+842
+],
+"brothelquest": [
+843
+],
+"bubbleswarm": [
+777
+],
+"buildinghater": [
+328
+],
+"buildingjungle": [
+135
+],
+"buildingvines": [
+785
+],
+"burningabyss": [
+753
+],
+"burningabyssquest": [
+754
+],
+"burninglegion": [
+112
+],
+"burningrage": [
+590
+],
+"businessman": [
+361
+],
+"calefaction": [
+616
+],
+"camouflage": [
+812
+],
+"capacity": [
+448
+],
+"carpentry": [
+291
+],
+"cataclysm": [
+632
+],
+"chainlightning": [
+449
+],
+"challengepower": [
+1004
+],
+"channeling": [
+299
+],
+"chaosremnant": [
+1012,
+1016
+],
+"chaosremnantperk1": [
+1013
+],
+"chaosremnantperk2": [
+1014
+],
+"chaosremnantperk3": [
+1015
+],
+"chargedclicks": [
+374
+],
+"chargedstructures": [
+375
+],
+"cheapmaterials": [
+210
+],
+"chemistry": [
+709
+],
+"chocolatebox": [
+932
+],
+"chocolateegg": [
+977
+],
+"chocolateflavorsmoothie": [
+788
+],
+"chromaticscales": [
+597
+],
+"chronoloading": [
+974
+],
+"cinnabar": [
+1172
+],
+"cloakedshadyfiguresquest": [
+3
+],
+"coercion": [
+280
+],
+"coinage": [
+281
+],
+"coinpillage": [
+329
+],
+"coldblood": [
+594
+],
+"collection": [
+440
+],
+"colorfulautocasting": [
+584
+],
+"colossalforge": [
+376
+],
+"colossuskingdom": [
+820
+],
+"combination": [
+710
+],
+"combinationsbloodline": [
+732
+],
+"commerce": [
+282
+],
+"commonbusiness": [
+283
+],
+"communion": [
+265
+],
+"compassion": [
+1078
+],
+"completeness": [
+1090
+],
+"compression": [
+1156
+],
+"concealment": [
+1056
+],
+"concentration": [
+1091
+],
+"conjuration": [
+300
+],
+"constellation": [
+882
+],
+"contingencyautocasting": [
+18
+],
+"conversion": [
+286
+],
+"corpsesupply": [
+389
+],
+"corrosion": [
+237
+],
+"corruption": [
+1048
+],
+"corruptionzone": [
+1151
+],
+"cosmicresonance": [
+883
+],
+"creeping": [
+421
+],
+"criticalstrike": [
+313
+],
+"crucibleofdarkness": [
+636
+],
+"crusade": [
+314
+],
+"cryomancy": [
+301
+],
+"crystalegg": [
+558
+],
+"crystalservants": [
+852
+],
+"cultivation": [
+252
+],
+"cursing": [
+266
+],
+"customizing": [
+711
+],
+"cyclopeanarmy": [
+492
+],
+"cyclopeanstrength": [
+387
+],
+"darkcovenant": [
+701
+],
+"darkegg": [
+559
+],
+"darkelegance": [
+571
+],
+"darklightofbondelnar": [
+546
+],
+"darksanctum": [
+1141
+],
+"deadenedmuscles": [
+390
+],
+"deadfields": [
+391
+],
+"deadlyimpatience": [
+98
+],
+"deathknights": [
+100
+],
+"deathtemples": [
+392
+],
+"debtforlife": [
+1210
+],
+"decay": [
+238
+],
+"decentralization": [
+1044
+],
+"deepmemory": [
+181
+],
+"deflagration": [
+239
+],
+"delayedreaction": [
+240
+],
+"deliverance": [
+433
+],
+"demigod": [
+362
+],
+"demonbloodline": [
+103
+],
+"demonchallenge": [
+85
+],
+"demonicexchange": [
+107
+],
+"demonicfury": [
+808
+],
+"demonicheritage": [
+108
+],
+"demonicpresence": [
+109
+],
+"demonlineage": [
+666
+],
+"demonology": [
+267
+],
+"demonoverseers": [
+110
+],
+"demonperk1": [
+655
+],
+"demonperk2": [
+656
+],
+"demonperk3": [
+657
+],
+"demonperk4": [
+795
+],
+"demonperk5": [
+942
+],
+"demonperk6": [
+1229
+],
+"demonsalliance": [
+106
+],
+"demonset": [
+825
+],
+"demonsfriendshippact": [
+105
+],
+"demonstradetreaty": [
+104
+],
+"demonsunion": [
+772
+],
+"descent": [
+434
+],
+"devastation": [
+809
+],
+"deviltyrant": [
+113
+],
+"devotion": [
+527
+],
+"diabolicalevil": [
+330
+],
+"dimensiondoor": [
+814
+],
+"diplomacy": [
+284
+],
+"discount": [
+1178
+],
+"discountseason": [
+94
+],
+"discovery": [
+1036
+],
+"dispelling": [
+528
+],
+"distribution": [
+514
+],
+"djinnalliance": [
+893
+],
+"djinnbloodline": [
+940
+],
+"djinnchallenge": [
+994
+],
+"djinnfriendshippact": [
+892
+],
+"djinnheritage": [
+923
+],
+"djinnlineage": [
+961
+],
+"djinnmask": [
+926
+],
+"djinnperk1": [
+962
+],
+"djinnperk2": [
+963
+],
+"djinnperk3": [
+964
+],
+"djinnperk4": [
+965
+],
+"djinnperk5": [
+966
+],
+"djinnperk6": [
+1230
+],
+"djinnquest": [
+929
+],
+"djinntradetreaty": [
+891
+],
+"djinnunion": [
+894
+],
+"domination": [
+455
+],
+"donations": [
+91
+],
+"doublebottom": [
+1242
+],
+"dracometvault": [
+642
+],
+"draconicsupremacy": [
+858
+],
+"draconstellation": [
+640
+],
+"dragon": [
+606
+],
+"dragonblood": [
+1257
+],
+"dragonbloodline": [
+598
+],
+"dragonborn": [
+599
+],
+"dragonchallenge": [
+643
+],
+"dragonheritage": [
+603
+],
+"dragonlineage": [
+694
+],
+"dragonpasture": [
+856
+],
+"dragonpasturequest": [
+857
+],
+"dragonperk1": [
+695
+],
+"dragonperk2": [
+696
+],
+"dragonperk3": [
+697
+],
+"dragonperk4": [
+796
+],
+"dragonperk5": [
+943
+],
+"dragonperk6": [
+1231
+],
+"dragonsalliance": [
+602
+],
+"dragonscales": [
+608
+],
+"dragonset": [
+826
+],
+"dragonsfriendshippact": [
+601
+],
+"dragonsroar": [
+634
+],
+"dragonstradetreaty": [
+600
+],
+"dragontamer": [
+613
+],
+"dragonunion": [
+855
+],
+"drakeling": [
+605
+],
+"dreamcatchers": [
+816
+],
+"dreamrealm": [
+1150
+],
+"dreamwalking": [
+1049
+],
+"drowalliance": [
+124
+],
+"drowbloodline": [
+120
+],
+"drowchallenge": [
+575
+],
+"drowexchange": [
+121
+],
+"drowfriendshippact": [
+123
+],
+"drowheritage": [
+125
+],
+"drowlineage": [
+658
+],
+"drowperk1": [
+659
+],
+"drowperk2": [
+660
+],
+"drowperk3": [
+661
+],
+"drowperk4": [
+797
+],
+"drowperk5": [
+944
+],
+"drowperk6": [
+1232
+],
+"drowset": [
+827
+],
+"drowtradetreaty": [
+122
+],
+"drowunion": [
+846
+],
+"druidbloodline": [
+136
+],
+"druidchallenge": [
+489
+],
+"druidheritage": [
+140
+],
+"druidicrunestone": [
+4
+],
+"druidicvocabulary": [
+141
+],
+"druidlineage": [
+662
+],
+"druidperk1": [
+663
+],
+"druidperk2": [
+664
+],
+"druidperk3": [
+665
+],
+"druidperk4": [
+798
+],
+"druidperk5": [
+945
+],
+"druidperk6": [
+1233
+],
+"druidsalliance": [
+139
+],
+"druidset": [
+828
+],
+"druidsfriendshippact": [
+138
+],
+"druidstradetreaty": [
+137
+],
+"druidsunion": [
+773
+],
+"dueling": [
+315
+],
+"dummytargets": [
+253
+],
+"dwarvenale": [
+149
+],
+"dwarvenalliance": [
+154
+],
+"dwarvenbloodline": [
+150
+],
+"dwarvenchallenge": [
+569
+],
+"dwarvenexchange": [
+151
+],
+"dwarvenforge": [
+519
+],
+"dwarvenforgequest": [
+520
+],
+"dwarvenfriendshippact": [
+153
+],
+"dwarvenheritage": [
+155
+],
+"dwarvenlineage": [
+654
+],
+"dwarvenperk1": [
+667
+],
+"dwarvenperk2": [
+668
+],
+"dwarvenperk3": [
+669
+],
+"dwarvenperk4": [
+799
+],
+"dwarvenperk5": [
+946
+],
+"dwarvenperk6": [
+1234
+],
+"dwarvenset": [
+829
+],
+"dwarventradetreaty": [
+152
+],
+"dwarvenunion": [
+847
+],
+"earthlybond": [
+142
+],
+"earthlysoul": [
+143
+],
+"efficientautocasting": [
+476
+],
+"efficientmagic": [
+78
+],
+"eggsercise": [
+1208
+],
+"elderdragon": [
+607
+],
+"eldritcharchitecture": [
+487
+],
+"elitegoblins": [
+742
+],
+"elitewarriors": [
+95
+],
+"elixirs": [
+521
+],
+"elvenalliance": [
+171
+],
+"elvenbloodline": [
+164
+],
+"elvenchallenge": [
+89
+],
+"elvendiplomacy": [
+165
+],
+"elvendiscipline": [
+813
+],
+"elvenefficiency": [
+166
+],
+"elvenemissary": [
+167
+],
+"elvenexchange": [
+168
+],
+"elvenfriendshippact": [
+170
+],
+"elvenheritage": [
+172
+],
+"elvenlineage": [
+670
+],
+"elvenluck": [
+173
+],
+"elvenmint": [
+174
+],
+"elvenperk1": [
+671
+],
+"elvenperk2": [
+672
+],
+"elvenperk3": [
+673
+],
+"elvenperk4": [
+800
+],
+"elvenperk5": [
+947
+],
+"elvenperk6": [
+1235
+],
+"elvenset": [
+830
+],
+"elventradetreaty": [
+169
+],
+"elventreasurecasing": [
+163
+],
+"elvenunion": [
+774
+],
+"empoweredluck": [
+302
+],
+"enchantedcrystals": [
+564
+],
+"enchantedfield": [
+410
+],
+"enchantedfieldquest": [
+411
+],
+"enchantedlands": [
+92
+],
+"enchanting": [
+303
+],
+"encompass": [
+1092
+],
+"energyrecharge": [
+885
+],
+"engineering": [
+712
+],
+"engraving": [
+422
+],
+"enochian": [
+1158
+],
+"entrench": [
+456
+],
+"equality": [
+331
+],
+"equivalence": [
+1033
+],
+"eradication": [
+1094
+],
+"eruption": [
+589
+],
+"essenceextractor": [
+884
+],
+"estates": [
+715
+],
+"eternalbattlefield": [
+1139
+],
+"eternalresearcher": [
+644
+],
+"eternalservitude": [
+823
+],
+"eternalwisdom": [
+610
+],
+"eternity": [
+435
+],
+"everlastingmaterials": [
+911
+],
+"evilconquerors": [
+102
+],
+"evolutivemutation": [
+182
+],
+"excavatedmirage": [
+750
+],
+"excavation": [
+467
+],
+"excavationreset": [
+468
+],
+"exchangehighlord": [
+733
+],
+"exchangelord": [
+332
+],
+"exchangemaster": [
+333
+],
+"exchequer": [
+293
+],
+"exertion": [
+316
+],
+"exhibition": [
+1074
+],
+"experiencedhelpers": [
+99
+],
+"expertcombinator": [
+1186
+],
+"expertmasonry": [
+157
+],
+"expertresearcher": [
+550
+],
+"explosives": [
+424
+],
+"eyeoftheking": [
+737
+],
+"facelessalliance": [
+186
+],
+"facelessbloodline": [
+183
+],
+"facelesschallenge": [
+494
+],
+"facelessfriendshippact": [
+185
+],
+"facelessheritage": [
+187
+],
+"facelesslineage": [
+674
+],
+"facelessovermind": [
+334
+],
+"facelessperk1": [
+675
+],
+"facelessperk2": [
+676
+],
+"facelessperk3": [
+677
+],
+"facelessperk4": [
+801
+],
+"facelessperk5": [
+948
+],
+"facelessperk6": [
+1236
+],
+"facelessset": [
+831
+],
+"facelesstradetreaty": [
+184
+],
+"facelessunion": [
+776
+],
+"factiongrinder": [
+335
+],
+"factionruler": [
+873
+],
+"factionrun": [
+417
+],
+"factory": [
+1025
+],
+"fairiesalliance": [
+199
+],
+"fairiesfriendshippact": [
+198
+],
+"fairiestradetreaty": [
+197
+],
+"fairiesunion": [
+778
+],
+"fairybloodline": [
+194
+],
+"fairychallenge": [
+93
+],
+"fairychoir": [
+336
+],
+"fairycuisine": [
+203
+],
+"fairyexchange": [
+196
+],
+"fairyheritage": [
+200
+],
+"fairylineage": [
+678
+],
+"fairyperk1": [
+679
+],
+"fairyperk2": [
+680
+],
+"fairyperk3": [
+681
+],
+"fairyperk4": [
+802
+],
+"fairyperk5": [
+949
+],
+"fairyperk6": [
+1237
+],
+"fairyset": [
+832
+],
+"fairyworkers": [
+195
+],
+"fangfood": [
+859
+],
+"fantasia": [
+1182
+],
+"fastforward": [
+337
+],
+"fieldsofconflict": [
+1209
+],
+"fightthegoblinarmy": [
+735,
+739
+],
+"flanking": [
+719
+],
+"flashystorm": [
+900
+],
+"fleshservants": [
+784
+],
+"fleshworkshop": [
+767
+],
+"fleshworkshopquest": [
+768
+],
+"focus": [
+536
+],
+"folgoration": [
+1154
+],
+"foolsgems": [
+783
+],
+"foolsgold": [
+209
+],
+"forbiddengrove": [
+1143
+],
+"forbiddenlanguage": [
+815
+],
+"forbiddenlibrary": [
+759
+],
+"forbiddenlibraryquest": [
+760
+],
+"forbiddenwill": [
+896
+],
+"forgery": [
+285
+],
+"formation": [
+317
+],
+"forscience": [
+338
+],
+"fortunetellermachine": [
+790
+],
+"fossilizedrodent": [
+501
+],
+"fragmentofatitanstatue": [
+7
+],
+"freemasonshall": [
+707
+],
+"frenziedarmy": [
+1138
+],
+"frostmelter": [
+1006
+],
+"frozenwastes": [
+1153
+],
+"fullspectrumcolor": [
+1212
+],
+"fusion": [
+242
+],
+"futurelinkin": [
+973
+],
+"gargantuaness": [
+619
+],
+"gathering": [
+1050
+],
+"gemcutting": [
+254
+],
+"gemduster": [
+427
+],
+"gempower": [
+20
+],
+"genealogist": [
+734
+],
+"generalwinter": [
+1255
+],
+"genuineness": [
+1037
+],
+"ghostbuster": [
+1221
+],
+"giantegg": [
+560
+],
+"giantmarket": [
+787
+],
+"gilding": [
+243
+],
+"glaciality": [
+592
+],
+"glhokohhlsnod": [
+503
+],
+"goblinbank": [
+412
+],
+"goblinbankquest": [
+413
+],
+"goblinbloodline": [
+212
+],
+"goblincentralbank": [
+213
+],
+"goblinchallenge": [
+97
+],
+"goblincommandos": [
+743
+],
+"goblineconomists": [
+221
+],
+"goblinexchange": [
+215
+],
+"goblinheritage": [
+219
+],
+"goblinlineage": [
+682
+],
+"goblinperk1": [
+683
+],
+"goblinperk2": [
+684
+],
+"goblinperk3": [
+685
+],
+"goblinperk4": [
+803
+],
+"goblinperk5": [
+950
+],
+"goblinperk6": [
+1238
+],
+"goblinsalliance": [
+218
+],
+"goblinset": [
+833
+],
+"goblinsfriendshippact": [
+217
+],
+"goblinstradetreaty": [
+216
+],
+"goblinsunion": [
+779
+],
+"godschamber": [
+730
+],
+"godsfingers": [
+1061
+],
+"godslaying": [
+1086
+],
+"godsplan": [
+983
+],
+"godsrest": [
+339
+],
+"goldenbones": [
+1213
+],
+"goldenegg": [
+555
+],
+"goldenheaven": [
+1140
+],
+"goldenpots": [
+202
+],
+"goldensnowballs": [
+1200
+],
+"goldsynthesis": [
+188
+],
+"golemcraft": [
+428
+],
+"grandavalanche": [
+792
+],
+"granddiplomat": [
+340
+],
+"grandmasterresearcher": [
+722
+],
+"gravitation": [
+429
+],
+"grayfriday": [
+1082
+],
+"greatestinvention": [
+999
+],
+"greeddrive": [
+341
+],
+"greedfactory": [
+1144
+],
+"greenfingersdiscount": [
+220
+],
+"grindingdedication": [
+32
+],
+"grovefarming": [
+810
+],
+"guardianangels": [
+50
+],
+"halloforigination": [
+937
+],
+"halloforiginationquest": [
+938
+],
+"hallowing": [
+268
+],
+"hallsofbalance": [
+342
+],
+"handofthemakers": [
+909
+],
+"harlequin": [
+343
+],
+"harmonyofthought": [
+496
+],
+"hatch": [
+604
+],
+"heartblessing": [
+1251
+],
+"heartbonusreset": [
+648
+],
+"heatcore": [
+1211
+],
+"heavenlyfeathers": [
+729
+],
+"heavenlyomelette": [
+1252
+],
+"heavensbrilliance": [
+771
+],
+"heavensdomain": [
+404
+],
+"heavensdomainquest": [
+405
+],
+"heavyavalanche": [
+793
+],
+"heavycoins": [
+378
+],
+"heirlooms": [
+537
+],
+"heist": [
+1083
+],
+"heldensterbennicht": [
+635
+],
+"hellrush": [
+344
+],
+"heresiarchs": [
+226
+],
+"heroism": [
+457
+],
+"hexing": [
+522
+],
+"hierarchy": [
+538
+],
+"highbastion": [
+844
+],
+"highbastionquest": [
+845
+],
+"hiredchampions": [
+1253
+],
+"hirelings": [
+716
+],
+"hivemind": [
+189
+],
+"hoarding": [
+625
+],
+"hobgoblingladiators": [
+214
+],
+"holybells": [
+51
+],
+"holycrusaders": [
+227
+],
+"holyfrenzy": [
+841
+],
+"holysite": [
+751
+],
+"holysitequest": [
+752
+],
+"homunculuslab": [
+1152
+],
+"honoramongkillers": [
+127
+],
+"identityshaper": [
+991
+],
+"idilliumexplorer": [
+1171
+],
+"ifritignition": [
+990
+],
+"illumination": [
+269
+],
+"illusion": [
+450
+],
+"imposingpresence": [
+609
+],
+"improvedautocasting": [
+25
+],
+"inanity": [
+1089
+],
+"incantation": [
+304
+],
+"indestructibletreasure": [
+158
+],
+"inevitability": [
+1051
+],
+"infernalmagic": [
+111
+],
+"infernalrealm": [
+406
+],
+"infernalrealmquest": [
+407
+],
+"infiniteimprovements": [
+910
+],
+"inflame": [
+270
+],
+"inflation": [
+531
+],
+"infusion": [
+423
+],
+"installation": [
+1075
+],
+"intermediateresearcher": [
+472
+],
+"intervention": [
+713
+],
+"intimidation": [
+626
+],
+"invasion": [
+318
+],
+"investment": [
+441
+],
+"invocation": [
+1052
+],
+"ironflight": [
+611
+],
+"ironrush": [
+577
+],
+"jewellery": [
+532
+],
+"jinglechoir": [
+1214
+],
+"journeymen": [
+256
+],
+"kindhearts": [
+208
+],
+"knowyourenemyparti": [
+508
+],
+"knowyourenemypartii": [
+721
+],
+"laboratory": [
+290
+],
+"lanternofguidance": [
+1224
+],
+"lavapits": [
+114
+],
+"leet": [
+345
+],
+"legacyofthedwarvenkings": [
+547
+],
+"legendaryantics": [
+83
+],
+"legerdemain": [
+1183
+],
+"legionslimbs": [
+726
+],
+"leylines": [
+1053
+],
+"lightcollector": [
+87
+],
+"lightcondenser": [
+257
+],
+"lightningrod": [
+430
+],
+"lightningstorm": [
+346
+],
+"lineage": [
+653
+],
+"liquefaction": [
+1155
+],
+"loansharking": [
+1045
+],
+"lousyarchitecture": [
+818
+],
+"loyalty": [
+1202
+],
+"lucifer": [
+347
+],
+"luckyneutral": [
+348
+],
+"lunafaction": [
+1173
+],
+"lunarcycle": [
+811
+],
+"mabinogion": [
+144
+],
+"madmasks": [
+931
+],
+"magicalcircuit": [
+903
+],
+"magicalclicks": [
+736
+],
+"magicalgates": [
+52
+],
+"magicalshards": [
+908
+],
+"magicaltreasure": [
+190
+],
+"magician": [
+363
+],
+"magicresistance": [
+159
+],
+"magnetism": [
+258
+],
+"makersalliance": [
+914
+],
+"makersbloodline": [
+953
+],
+"makerschallenge": [
+1000
+],
+"makersfriendshippact": [
+913
+],
+"makersheritage": [
+924
+],
+"makerslineage": [
+967
+],
+"makersmask": [
+927
+],
+"makersperk1": [
+968
+],
+"makersperk2": [
+969
+],
+"makersperk3": [
+970
+],
+"makersperk4": [
+971
+],
+"makersperk5": [
+972
+],
+"makersperk6": [
+1239
+],
+"makersquest": [
+930
+],
+"makerstradetreaty": [
+912
+],
+"makersunion": [
+915
+],
+"manaaddicts": [
+128
+],
+"manacreatures": [
+902
+],
+"manacrypts": [
+79
+],
+"manaloom": [
+1028
+],
+"manamatrix": [
+505
+],
+"manawaste": [
+646
+],
+"manipulation": [
+717
+],
+"manufacture": [
+1038
+],
+"marketing": [
+533
+],
+"masterarcheologist": [
+349
+],
+"masterfulautocasting": [
+29
+],
+"masterpiece": [
+1076
+],
+"masterresearcher": [
+645
+],
+"mathematician": [
+350
+],
+"meditation": [
+436
+],
+"melting": [
+617
+],
+"menoftheworld": [
+1065
+],
+"mercenarybadge": [
+228
+],
+"mercenarybuildingcontract": [
+981
+],
+"mercenarycamp": [
+706
+],
+"mercenarychallenge": [
+1068
+],
+"mercenaryduel": [
+980
+],
+"mercenaryencampmentquest": [
+708
+],
+"mercenaryfirstcontract": [
+229
+],
+"mercenaryfourthcontract": [
+979
+],
+"mercenarymagiccontract": [
+233
+],
+"mercenarysecondcontract": [
+230
+],
+"mercenaryset": [
+834
+],
+"mercenarysorcerycontract": [
+234
+],
+"mercenaryspirit": [
+351
+],
+"mercenarythirdcontract": [
+231
+],
+"mercenarytribute": [
+232
+],
+"mercenaryunioncontract": [
+982
+],
+"mercenaryunioncontract2": [
+1069
+],
+"mercy": [
+526
+],
+"mesmerization": [
+451
+],
+"metallurgy": [
+515
+],
+"minecrafting": [
+516
+],
+"minedwarf": [
+352
+],
+"mineralogy": [
+523
+],
+"miniaturelamps": [
+989
+],
+"miningprodigies": [
+160
+],
+"miracle": [
+437
+],
+"mirrors": [
+1054
+],
+"mitosis": [
+191
+],
+"moneyismagic": [
+819
+],
+"monstrous": [
+1199
+],
+"motusperpetuum": [
+1077
+],
+"mountainpalace": [
+765
+],
+"mountainpalacequest": [
+766
+],
+"multiplication": [
+1093
+],
+"mummy": [
+1249
+],
+"mutation": [
+438
+],
+"mysticforest": [
+1148
+],
+"mysticism": [
+305
+],
+"mysticmaze": [
+491
+],
+"mythos": [
+1026
+],
+"naturalrecycling": [
+145
+],
+"necrodoomancy": [
+1165
+],
+"necromancy": [
+306
+],
+"needaheadstart": [
+353
+],
+"nephilimglory": [
+727
+],
+"nephilimsblessing": [
+80
+],
+"neutralchallenger": [
+500
+],
+"nexus": [
+933
+],
+"nexusdescent": [
+1256
+],
+"nexusquest": [
+934
+],
+"norecruiting": [
+474
+],
+"novicecombinator": [
+1168
+],
+"noviceresearcher": [
+354
+],
+"oathofthemercenaries": [
+235
+],
+"oblation": [
+622
+],
+"octopusshapedspine": [
+6
+],
+"offering": [
+442
+],
+"officers": [
+1057
+],
+"oilery": [
+1160
+],
+"oillamp": [
+1225
+],
+"olympianhall": [
+465
+],
+"olympianhallquest": [
+466
+],
+"omnipresence": [
+493
+],
+"orderremnant": [
+1017,
+1021
+],
+"orderremnantperk1": [
+1018
+],
+"orderremnantperk2": [
+1019
+],
+"orderremnantperk3": [
+1020
+],
+"organizedcrime": [
+570
+],
+"overflowingmagic": [
+488
+],
+"overgrowth": [
+192
+],
+"overload": [
+431
+],
+"oversizedlegends": [
+386
+],
+"overwatch": [
+161
+],
+"overwhelm": [
+319
+],
+"overworking": [
+1161
+],
+"pacifism": [
+1095
+],
+"paladins": [
+567
+],
+"pantheon": [
+292
+],
+"paradox": [
+1088
+],
+"passagetotartarus": [
+84
+],
+"passagetotheunderworld": [
+8
+],
+"pasttrade": [
+916
+],
+"patience": [
+1058
+],
+"pavilion": [
+935
+],
+"pavilionquest": [
+936
+],
+"perfectcombo": [
+355
+],
+"perfectlygood": [
+356
+],
+"perfectsnowflake": [
+1062
+],
+"permafrost": [
+593
+],
+"persistententropy": [
+975
+],
+"pheromones": [
+817
+],
+"philosophersstone": [
+244
+],
+"pillarsofcreation": [
+997
+],
+"pixiedustfertilizer": [
+204
+],
+"pixiemischief": [
+90
+],
+"plague": [
+245
+],
+"plaguedbuildings": [
+393
+],
+"planetaryforce": [
+954
+],
+"plannedautocasting": [
+34
+],
+"plasmation": [
+620
+],
+"plating": [
+1157
+],
+"platinumegg": [
+1244
+],
+"poisons": [
+524
+],
+"pottery": [
+1175
+],
+"powerorb": [
+502
+],
+"poweroverwhelming": [
+987
+],
+"premeditation": [
+357
+],
+"prestigechallenger": [
+576
+],
+"primalknowledge": [
+786
+],
+"priorityautocasting": [
+35
+],
+"prismaticmana": [
+699
+],
+"professionalassassins": [
+129
+],
+"projection": [
+307
+],
+"proofofbalance": [
+747
+],
+"proofofchaos": [
+748
+],
+"proofofevildeed": [
+178
+],
+"proofofgooddeed": [
+224
+],
+"proofofneutrality": [
+388
+],
+"proofoforder": [
+749
+],
+"prophecy": [
+1041
+],
+"prosperity": [
+1046
+],
+"psionics": [
+628
+],
+"purity": [
+529
+],
+"purityofform": [
+886
+],
+"putrefaction": [
+1034
+],
+"pyromancy": [
+308
+],
+"radiantegg": [
+561
+],
+"raiding": [
+1166
+],
+"rainbowlink": [
+205
+],
+"rampage": [
+320
+],
+"rarity": [
+627
+],
+"realitycrater": [
+976
+],
+"realitymarble": [
+917
+],
+"realmdigger": [
+358
+],
+"recession": [
+1179
+],
+"recruitment": [
+490
+],
+"recycling": [
+287
+],
+"reduction": [
+1035
+],
+"refinedminerals": [
+848
+],
+"refining": [
+259
+],
+"refraction": [
+246
+],
+"reincarnationpower1": [
+36
+],
+"reincarnationpower2": [
+1204
+],
+"reincarnationpower3": [
+1205
+],
+"reincarnationpower4": [
+1206
+],
+"reincarnationpower5": [
+1243
+],
+"reinforcing": [
+260
+],
+"relativity": [
+1087
+],
+"relativityslegacy": [
+1134
+],
+"repurpose": [
+443
+],
+"resilience": [
+543
+],
+"restauration": [
+1039
+],
+"resurrection": [
+271
+],
+"retribution": [
+272
+],
+"returnoftheking": [
+1066
+],
+"revelations": [
+1163
+],
+"reverberation": [
+452
+],
+"reverseautocasting": [
+1002
+],
+"revolution": [
+1096
+],
+"rewind": [
+365
+],
+"richfollowers": [
+495
+],
+"richminers": [
+566
+],
+"rigmarole": [
+1084
+],
+"rigor": [
+1079
+],
+"ritualism": [
+530
+],
+"rottenegg": [
+1137
+],
+"roundtable": [
+702
+],
+"royaldemand": [
+288
+],
+"royalmarket": [
+579
+],
+"rubybonusreset": [
+553
+],
+"rubypower": [
+480
+],
+"rubyshine": [
+791
+],
+"ruledis": [
+511
+],
+"runecarving": [
+453
+],
+"runicconversion": [
+88
+],
+"sacredglade": [
+1142
+],
+"sanctification": [
+273
+],
+"scaraboffortune": [
+366
+],
+"scavenging": [
+633
+],
+"scholarship": [
+718
+],
+"scintillation": [
+621
+],
+"scouting": [
+1167
+],
+"scriptures": [
+1080
+],
+"searingsummer": [
+1170
+],
+"secretclickingtechniques": [
+176
+],
+"secretexchange": [
+703
+],
+"secretsoftheancients": [
+470
+],
+"secretsoftheunderworld": [
+549
+],
+"secretsofthewarriors": [
+704
+],
+"seedoflife": [
+995
+],
+"selection": [
+1042
+],
+"sequence": [
+629
+],
+"seraphimalliance": [
+728
+],
+"seraphimwings": [
+807
+],
+"serpentqueller": [
+639
+],
+"shadowadvance": [
+130
+],
+"shadowmirage": [
+574
+],
+"shapeshifting": [
+146
+],
+"sharpclaws": [
+612
+],
+"shattering": [
+458
+],
+"siege": [
+459
+],
+"sifting": [
+444
+],
+"silentassistance": [
+485
+],
+"skymonarch": [
+637
+],
+"slavemarket": [
+763
+],
+"slavemarketquest": [
+764
+],
+"slavery": [
+534
+],
+"slavetrading": [
+222
+],
+"smuggledjewels": [
+96
+],
+"smuggling": [
+445
+],
+"socketing": [
+261
+],
+"solemnity": [
+624
+],
+"solidity": [
+849
+],
+"sorcererspact": [
+572
+],
+"soulrending": [
+623
+],
+"soulweaving": [
+247
+],
+"sovereignty": [
+1059
+],
+"sparegreenhands": [
+738
+],
+"sparkoflife": [
+1226
+],
+"spectralsurge": [
+1023
+],
+"speedrun": [
+367
+],
+"spellbinding": [
+539
+],
+"spellcataclysm": [
+585
+],
+"spellfury": [
+368
+],
+"spellsmith": [
+207
+],
+"spellstorm": [
+630
+],
+"spellweavery": [
+294
+],
+"spiderclerics": [
+853
+],
+"spidergods": [
+131
+],
+"spidersanctuary": [
+517
+],
+"spidersanctuaryquest": [
+518
+],
+"spilling": [
+1055
+],
+"spiritualbindings": [
+898
+],
+"stalking": [
+544
+],
+"starmetalalloys": [
+201
+],
+"startrading": [
+887
+],
+"stilllightning": [
+1219
+],
+"stoicresistance": [
+552
+],
+"stonecarving": [
+918
+],
+"stoneheart": [
+998
+],
+"stoneheartsset": [
+1001
+],
+"stonehenge": [
+461
+],
+"stonehengequest": [
+462
+],
+"stonetalking": [
+850
+],
+"stormofwealth": [
+498
+],
+"strangeattraction": [
+888
+],
+"strategyroom": [
+296
+],
+"streamofdreams": [
+1248
+],
+"strongcurrency": [
+223
+],
+"structuralstability": [
+919
+],
+"sturdybeardedmansquest": [
+5
+],
+"sublimation": [
+618
+],
+"suggestionmaster": [
+504
+],
+"summeraanalliance": [
+587
+],
+"sunbeams": [
+588
+],
+"sunblessing": [
+369
+],
+"sunforce": [
+647
+],
+"sunkencity": [
+463
+],
+"sunkencityquest": [
+464
+],
+"superiorconsciousness": [
+889
+],
+"supportthegoblinarmy": [
+740,
+741
+],
+"surplus": [
+1085
+],
+"surveyequipment": [
+469
+],
+"surveyorship": [
+446
+],
+"survival": [
+460
+],
+"swampofsorrows": [
+1145
+],
+"swarming": [
+321
+],
+"swarmingtower": [
+761
+],
+"swarmingtowerquest": [
+762
+],
+"swarmoffairies": [
+206
+],
+"sweetbedtime": [
+1215
+],
+"sylvantreasurefrills": [
+175
+],
+"synthesis": [
+241
+],
+"taboo": [
+1180
+],
+"territorialexpanse": [
+193
+],
+"thanksgiving": [
+418
+],
+"thatexcavatedquickly": [
+475
+],
+"thearchitect": [
+1201
+],
+"theartofwar": [
+1067
+],
+"thedesirewithin": [
+904
+],
+"thegreatestarmy": [
+745
+],
+"theperfectegg": [
+1216
+],
+"theslackking": [
+744
+],
+"thesourceofmagic": [
+1064
+],
+"theundecidedarmada": [
+1005
+],
+"theunseen": [
+1181
+],
+"thewalkingdead": [
+394
+],
+"tieredautocasting": [
+582
+],
+"timemerge": [
+986
+],
+"tinkering": [
+262
+],
+"tirelessworkers": [
+395
+],
+"titanbloodline": [
+380
+],
+"titanchallenge": [
+499
+],
+"titandrill": [
+381
+],
+"titanheritage": [
+385
+],
+"titanicauthority": [
+821
+],
+"titanlineage": [
+686
+],
+"titanobelisk": [
+379
+],
+"titanomachy": [
+985
+],
+"titanperk1": [
+687
+],
+"titanperk2": [
+688
+],
+"titanperk3": [
+689
+],
+"titanperk4": [
+804
+],
+"titanperk5": [
+951
+],
+"titanperk6": [
+1240
+],
+"titansalliance": [
+384
+],
+"titanset": [
+837
+],
+"titansfriendshippact": [
+383
+],
+"titansizedwalls": [
+377
+],
+"titanstradetreaty": [
+382
+],
+"titansunion": [
+780
+],
+"torture": [
+545
+],
+"torturechambers": [
+115
+],
+"toxicity": [
+1073
+],
+"tradelords": [
+236
+],
+"traderoutes": [
+289
+],
+"trainedassassins": [
+573
+],
+"traininggrounds": [
+408
+],
+"traininggroundsquest": [
+409
+],
+"transcendence": [
+274
+],
+"transfixion": [
+275
+],
+"transfusion": [
+425
+],
+"transmutation": [
+248
+],
+"transubstantiation": [
+439
+],
+"treachery": [
+1218
+],
+"treasuremosaic": [
+920
+],
+"trickery": [
+540
+],
+"tripleweirdness": [
+789
+],
+"trophycollectors": [
+82
+],
+"trueharlequin": [
+1060
+],
+"trueneutrality": [
+33
+],
+"truenight": [
+370
+],
+"twistingnether": [
+1146
+],
+"tyrantgarrison": [
+705
+],
+"undeadalliance": [
+400
+],
+"undeadbloodline": [
+396
+],
+"undeadchallenge": [
+101
+],
+"undeadexchange": [
+397
+],
+"undeadfriendshippact": [
+399
+],
+"undeadheritage": [
+401
+],
+"undeadlineage": [
+690
+],
+"undeadperk1": [
+691
+],
+"undeadperk2": [
+692
+],
+"undeadperk3": [
+693
+],
+"undeadperk4": [
+805
+],
+"undeadperk5": [
+952
+],
+"undeadperk6": [
+1241
+],
+"undeadresilience": [
+403
+],
+"undeadset": [
+838
+],
+"undeadtradetreaty": [
+398
+],
+"undeadunion": [
+781
+],
+"undercity": [
+414
+],
+"undercityquest": [
+415
+],
+"undercutting": [
+535
+],
+"undergroundcitadels": [
+162
+],
+"undergroundfoundations": [
+568
+],
+"undergroundsnow": [
+1222
+],
+"underhandedtactics": [
+1254
+],
+"undertherainbow": [
+1220
+],
+"underworlddiplomacy": [
+38
+],
+"underworldresearcher": [
+551
+],
+"underworldtyranny": [
+132
+],
+"unholyrituals": [
+402
+],
+"uniformity": [
+840
+],
+"unitary": [
+371
+],
+"unlimitedknowledge": [
+1063
+],
+"unlimitedmana": [
+372
+],
+"unrequitedness": [
+1136
+],
+"untildeathdouspart": [
+1223
+],
+"unwantedtruce": [
+1217
+],
+"upheaval": [
+720
+],
+"vacuumancy": [
+309
+],
+"valuableantiquity": [
+921
+],
+"vampirism": [
+714
+],
+"vanillachallenger": [
+416
+],
+"vanillaflavorjuice": [
+509
+],
+"vanillaresearcher": [
+373
+],
+"vanshment": [
+578
+],
+"vault": [
+1027
+],
+"vengeance": [
+1097
+],
+"verybadguys": [
+116
+],
+"viriditas": [
+1081
+],
+"virtues": [
+1159
+],
+"vivification": [
+249
+],
+"voodoodoll": [
+548
+],
+"wallchunk": [
+746
+],
+"wallfragment": [
+507
+],
+"warfunds": [
+322
+],
+"warlord": [
+364
+],
+"warriorresearcher": [
+769
+],
+"waste": [
+525
+],
+"weathercontrol": [
+276
+],
+"weighting": [
+432
+],
+"whipround": [
+1047
+],
+"whitehotmagic": [
+1247
+],
+"wildsurge": [
+899
+],
+"wingsofliberty": [
+53
+],
+"winterlyalliance": [
+591
+],
+"wishescometrue": [
+905
+],
+"wishingwell": [
+901
+],
+"woodcraft": [
+263
+],
+"woodendice": [
+775
+],
+"woodenegg": [
+562
+],
+"worldlydesires": [
+992
+],
+"worldrestoration": [
+978
+],
+"wyrmsden": [
+614
+],
+"wyrmsdenquest": [
+615
+],
+"wyrmsrest": [
+860
+],
+"yuleoffering": [
+1250
+],
+"zealotry": [
+1043
+],
+"ziggurat": [
+755
+],
+"zigguratquest": [
+756
+],
+"zombieapocalypse": [
+822
+]
+}
+}

@@ -1,5 +1,5 @@
 # 汉化包体积大（单个 swf 80MB+），不进 git
-汉化/
+localization/
 
 # Office/WPS 打开文件时产生的锁文件
 ~$*
@@ -9,11 +9,11 @@ __pycache__/
 *.pyc
 
 # 社区工具站源码（自带 git 仓库，git pull 更新）
-工具/RG-tools/
+tools/RG-tools/
 
-# exe 打包输出（python 应用/build_exe.py 生成）
-发布/
+# exe 打包输出（python app/build_exe.py 生成）
+release/
 build/
 
 # 发布用的密钥（签名私钥、界面加密密钥），丢了要换新 exe 才能继续推送更新；务必另外备份
-密钥/
+keys/
