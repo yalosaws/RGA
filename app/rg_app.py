@@ -18,6 +18,10 @@ if __name__ == '__main__' and '--build-worker' in sys.argv:
     worker_main()
     raise SystemExit
 # 按目标找 build 的并行试跑进程（由计算进程启动）
+if __name__ == '__main__' and '--search-worker' in sys.argv:
+    from build_engine import search_worker_main
+    search_worker_main()
+    raise SystemExit
 if __name__ == '__main__' and '--opt-worker' in sys.argv:
     from build_engine import opt_worker_main
     opt_worker_main()

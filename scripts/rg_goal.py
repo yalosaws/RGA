@@ -61,7 +61,7 @@ FACTIONS = {                                                        # *Faction01
 }
 MERC_PICK = 229                                                     # Mercenary First Contract：选佣兵
 PRESTIGE = {'Dwarven': 152, 'Drow': 122, 'Dragon': 600}            # changeActiveFaction 的显赫阵营
-LATE_PRESTIGE = {'Dragon'}       # 研究买完再选的显赫阵营
+LATE_PRESTIGE = {'Dragon'}       # 选阵营之后再选的显赫阵营（没有「地下世界的秘密」时要等研究买完）
 BLOODLINES = {
     'Fairy': 194, 'Elven': 164, 'Angel': 39, 'Goblin': 212, 'Undead': 396, 'Demon': 103,
     'Titan': 380, 'Druid': 136, 'Faceless': 183, 'Dwarven': 150, 'Drow': 120, 'Dragon': 598,
@@ -138,6 +138,8 @@ class Runner:
             bloodline=next((k for k, v in BLOODLINES.items() if self.ups[v].S__3c__21_7), None),
         )
         self.autocast = {s.S_6_21_Z: (s.S_3A, s.S__23__21_B, s.S_5_21_H, s.S_8_23_, s.S_6_21_A) for s in G.S_0_21_A}
+        # 有「地下世界的秘密」时选了显赫阵营还能买研究，龙族就不必等研究买完
+        self.underworld = next((u for u in G.S__2d__21_4 if u.S_1i == 'Secrets of the Underworld'), None)
         self.clock = dict(self.ns['_snapshot_clock'])
         self.random_state = sim.rng_state() if self.native else random.getstate()
         self.step = 1
@@ -190,15 +192,19 @@ class Runner:
 
     # ---- 一次试跑 ----
     def run(self, build, goal, target, limit, *, spell=None, buy_interval=2.0, sample_every=10.0,
-            probes=(), probe_fn=None, step=None, cutoff=None):
+            probes=(), probe_fn=None, step=None, cutoff=None, coarse=None):
         """返回 dict(ok, reached, time, value, curve, skipped, ...)。
 
         build：alignment / faction / prestige / bloodline（名字，可为 None）、research（代号列表，按顺序买）。
         spell：要求这个法术可用（例如仙灵吟唱只能在仙灵或带它的佣兵局用）。
         probes：在这些秒数调用 probe_fn(self, t)（研究优化用；调用前后不推进时间）。
         cutoff：当前最好那次的曲线 [(秒, 数值)]；同一时刻数值不到它的 CUTOFF_RATIO 就提前停（搜索用）。
+        coarse：粗跑（近似，只用原生引擎）。开局选完、研究佣兵都买好以后，每 coarse 秒只调用一次
+        advanceTicks(30·coarse)：产出、回魔、助手点击按游戏公式一次积分，每秒逻辑、自动施法、
+        「全部购买」都变成每 coarse 秒一次（见 _coarse_advance）。
         """
         self.reset()
+        self.n_runs = getattr(self, 'n_runs', 0) + 1
         G, sim, tl = self.G, self.sim, self.tl
         sim.game_call('softReset')
         sim.refresh()
@@ -237,6 +243,7 @@ class Runner:
                    time=None, value=None, curve=[], picks={}, skipped=[], note=None)
         pick_since = 0.0
         picks_done_at = None
+        buys_after_picks = 0
         spell_checked = False
         buy_ticks = max(1, round(buy_interval * 30))
         sample_ticks = max(30, round(sample_every * 30))
@@ -247,9 +254,23 @@ class Runner:
         total = round(limit * 30)
         n = 0
         clock = self.ns['_snapshot_clock']
+        settled = False
+        if coarse is None and os.environ.get('RGA_COARSE'):      # 实验用：整局跑全换成粗跑
+            coarse = int(os.environ['RGA_COARSE'])
+        if coarse and not self.native:
+            coarse = None
         while n < total:
             # 一次推进 step 个 tick：游戏卡顿时 onEnterFrame 也这样一次补多个（最多 10 个）
-            if self.native:
+            if coarse and settled:
+                m = min(total, (n // 30 + int(coarse)) * 30)
+                lim = self._coarse_limit()
+                if lim is not None:
+                    m = min(m, n + max(30, lim))
+                if probes:
+                    m = min(m, max(n + 1, math.ceil(probes[0] * 30 - 1e-9)))
+                self._coarse_advance(m - n)
+                prev, n = n, m
+            elif self.native:
                 # 原生引擎：一口气推进到下一个要处理的时刻（下一次「全部购买」或下一整秒），结果和逐次推进相同
                 m = n
                 while True:
@@ -269,6 +290,8 @@ class Runner:
             t = n * TICK
             if n // buy_ticks != prev // buy_ticks:
                 tl.press_buy_all()
+                if picks_done_at is not None:
+                    buys_after_picks += 1
             if n // 30 == prev // 30:
                 continue
             # ---- 每秒：选择、研究、自动施法、目标 ----
@@ -300,8 +323,8 @@ class Runner:
                     out['picks'][lineage.S_1i] = round(t, 1)
                     lineage = None
                 # 没选上（这一局该阵营的皇家贸易令还不到 400 次等）就下一秒再试
-            # 立场、阵营、血统选好后就能判断目标法术能不能用（血统也可能带来法术），不等显赫阵营
-            if target_spell is not None and not spell_checked and all(sid in PRESTIGE.values() for sid, _ in picks):
+            # 显赫阵营也能解锁法术（例如龙息），必须等结构选齐再判断。
+            if target_spell is not None and not spell_checked and not picks and late_prestige is None:
                 spell_checked = True
                 if not target_spell.S__2d_6:
                     out.update(ok=False, note='这个组合用不了' + target_spell.S_1i)
@@ -312,7 +335,12 @@ class Runner:
                 if pending_autocast:
                     pending_autocast = [sid for sid in pending_autocast
                                         if not (self.ups[sid].S__3c__21_7 or self._buy(sid))]
-                    self._restore_autocast(spell)
+                # 自动施法等选完阵营后按过一次「全部购买」（升级 + 建筑）再打开，和玩家的顺序一样。
+                # 退位后法术阶层归零、施放时按当时的条件定阶层；建筑太少时放出的是 0 阶，
+                # 设了「放到 1 阶」（Tiered Autocasting）的法术就一直在放又一直想重放，整轮自动施法停在它那里，
+                # 后面的大平衡、金牌的收税都轮不到（收税给的阵营币是买龙族协定的主要来源）
+                if buys_after_picks:
+                    self._restore_autocast(spell)     # 每秒：阶层升级买到了就恢复「放到第几阶」
                 if pending_merc:
                     # 一直试到时间上限：佣兵升级花各阵营的阵营币，要攒够才买得起
                     # 按模板顺序优先：前面的还在攒某种阵营币时，后面要花同一种币的先等着，
@@ -332,10 +360,21 @@ class Runner:
                 # 佣兵 / 中立 / 有显赫阵营时还要对应的 Secrets 升级）；买的函数本身不查这个，所以这里查
                 if out.get('research_ready') is None and self.ns['S__26_c'].S_9X():
                     out['research_ready'] = round(t, 1)
+                # 显赫阵营：有「地下世界的秘密」就一买得起就选（升华 A1500 等研究要先有龙族才能买）
+                if late_prestige is not None and (not pending_research or
+                                                  (self.underworld is not None and self.underworld.S__3c__21_7)):
+                    u = self.ups[late_prestige]
+                    late_since = t if late_since is None else late_since
+                    if u.S__3c__21_7 or self._buy(late_prestige):
+                        out['picks'][u.S_1i] = round(t, 1)
+                        late_prestige = None
+                    elif t - late_since > PICK_WAIT:
+                        out.update(ok=False, note=('%d 秒内没能选上：' % PICK_WAIT) + u.S_1i)
+                        return out
+                # 研究：和 Game.buyUpgrade 一样，看得见或已经解锁就能买（升华这类解锁了但列表里不显示的也算）
                 if pending_research and out.get('research_ready') is not None:
                     pending_research = [sid for sid in pending_research
-                                        if not (self.research[sid].S__3c__21_7
-                                                or (self.research[sid].S__2d_6 and self._buy(sid)))]
+                                        if not (self.research[sid].S__3c__21_7 or self._buy(sid))]
                     if pending_research and t - out['research_ready'] > RESEARCH_WAIT:
                         out['skipped'] = [self.codes[sid] for sid in pending_research]
                         pending_research = []
@@ -348,6 +387,12 @@ class Runner:
                     elif t - late_since > PICK_WAIT:
                         out.update(ok=False, note=('%d 秒内没能选上：' % PICK_WAIT) + u.S_1i)
                         return out
+            # 粗跑：选完、按过「全部购买」、研究佣兵和显赫阵营都处理完（买到或放弃）以后才开始
+            if coarse and not settled:
+                settled = (not picks and buys_after_picks > 0 and not pending_merc and not pending_research
+                           and late_prestige is None)
+                if settled:
+                    out['coarse_from'] = round(t, 1)
             while probes and t >= probes[0]:
                 probe_fn(self, probes.pop(0))
             # 产出、宝石要重算全部建筑，每 5 秒查一次；助手、魔力类每秒查
@@ -364,6 +409,9 @@ class Runner:
                     break
         if out['value'] is None:
             out['value'] = self.metric(goal) if picks_done_at is not None else 0
+        if late_prestige is not None and not out.get('reached') and not out.get('stopped_at'):
+            # 到时间上限都没选上显赫阵营：这套组合在这个时间内不成立（以前会照样按带显赫阵营的结果显示）
+            out.update(ok=False, note=out.get('note') or '到时间上限没能选上：' + self.ups[late_prestige].S_1i)
         if pending_research and out.get('research_ready') is None:   # 到最后研究都没显示出来（如 R75 前的佣兵）
             out['skipped'] = out.get('skipped', []) + [self.codes[sid] for sid in pending_research]
         out['research'] = [self.codes[sid] for sid in research if self.research[sid].S__3c__21_7]
@@ -430,12 +478,149 @@ class Runner:
             return False
         return False
 
+    def _coarse_limit(self):
+        """粗跑一大步最多走多少 tick（整秒）才不跨过会改变结果的时刻；没有限制返回 None。
+
+        - 生效中的法术结束：结束后的那一秒自动施法会重放，步子跨过去就少放了（向上取整到秒）；
+        - 有持续时间的法术在等魔力：攒够它的花费时就会放（向下取整到秒，至少 1 秒）。
+        瞬发法术（收税等）每秒都放、把魔力花掉，由 _coarse_repeat 按秒数补，不限制步子。"""
+        from as2py import mangle
+        G = self.G
+        spells = self.__dict__.get('_coarse_spells')
+        if spells is None:
+            spells = self._coarse_spells = list(G.S_0_21_A)
+            self._coarse_tick = mangle("§'!X§")
+        lim = None
+        mana, cap = None, None
+        for s in spells:
+            if s.S_23:
+                rem = s.S_0n - getattr(s, self._coarse_tick)
+                rem = max(30, -(-rem // 30) * 30)
+                lim = rem if lim is None else min(lim, rem)
+            elif s.S_3A and s.S__2d_6 and s.S__3e_ > 0:
+                if cap is None:
+                    mana, cap = getattr(G, self.sim.game_names['mana']), self.sim.core_call('getMaxMana')
+                cost = s.S_9_21_U
+                if cost <= cap:
+                    regen = self.sim.core_call('getManaPerTick')
+                    t = 0 if mana >= cost else (int((cost - mana) / regen) // 30 * 30 if regen > 0 else None)
+                    if t is not None:
+                        lim = t if lim is None else min(lim, t)
+        return lim
+
+    def _coarse_repeat(self, n):
+        """粗跑一大步里，advanceTicks 只在第一秒自动施法一次；剩下 n 秒的「补魔力 + 自动施法」用增量补：
+        先真做一秒（魔力按一秒的回魔补、封顶，再自动施法），记下金币、统计、待分配阵营币、各法术施放次数
+        的变化，再按剩下的 n − 1 秒乘上去。这一秒放出了有持续时间的法术（状态变了）就不补，
+        这时 _coarse_limit 下一步只走 1 秒。"""
+        from as2py import mangle
+        G, sim, U = self.G, self.sim, self.ns['S__26_c']
+        gn = sim.game_names
+        spells = self._coarse_spells
+        pend = mangle('§3!<§')
+        res = gn['resource']
+        counters = ('S_2_2d_', 'S_5_21_L', 'S__23_y')
+        stats = G.S_5_21_V
+
+        def snap():
+            return (getattr(G, res), list(stats), getattr(U, pend),
+                    [tuple(getattr(s, c) for c in counters) for s in spells])
+        active0 = [bool(s.S_23) for s in spells]
+        x0 = snap()
+        mana = getattr(G, gn['mana'])
+        cap, regen = sim.core_call('getMaxMana'), sim.core_call('getManaPerTick')
+        add = min(max(0.0, cap - mana), regen * 30)
+        if add > 0:
+            stats[16] += add
+            stats[145] = max(stats[16], stats[145])
+            setattr(G, gn['mana'], mana + add)
+        getattr(sim.g, gn['autocast'])()
+        if [bool(s.S_23) for s in spells] != active0 or n <= 1:
+            return
+        x1 = snap()
+        m = n - 1
+        setattr(G, res, x1[0] + (x1[0] - x0[0]) * m)
+        for i, (a, b) in enumerate(zip(x0[1], x1[1])):
+            if b != a:
+                stats[i] = b + (b - a) * m
+        stats[145] = max(stats[16], stats[145])
+        if x1[2] != x0[2]:
+            setattr(U, pend, x1[2] + (x1[2] - x0[2]) * m)
+        for s, c0, c1 in zip(spells, x0[3], x1[3]):
+            for c, a, b in zip(counters, c0, c1):
+                if b != a:
+                    setattr(s, c, b + (b - a) * m)
+
+    def _coarse_advance(self, k):
+        """一次 advanceTicks(k)，再补上游戏里「每调用一次只走一步」的地方，使它近似等于 k 次 advanceTicks(1)。
+
+        advanceTicks 自己就按 k 处理：魔力按 k 倍加并封顶，产出乘 k，助手点击按秒数乘，法术逐 tick 走。
+        要补的（Game.advanceTicks、GiftOfTheKings.specialUpdate）：
+        - Formulas 的三个按 tick 倒数的计时（充能、泰坦契印冻结闪电、法术工艺幸运）只减 1；
+        - 自动点击（精灵等）和国王的赠礼每满 30 tick 才点一次，一次调用最多点一次；
+        - 产出缓存每 150 次调用才清，这里每次都清（游戏是每 5 秒清一次）。
+        另外大平衡生效时每 15 tick 重算一次各建筑的分配（GrandBalance.setVars，同时清产出缓存），
+        这是逐 tick 的主要开销；粗跑时让它在这一大步的最后一个 tick 只算一次，之后恢复原来的相位。"""
+        from as2py import mangle
+        g, F, U = self.sim.g, self.ns['S__23__21__21_'], self.ns['S__26_c']
+        names = self.__dict__.get('_coarse_names')
+        if names is None:
+            gn = self.sim.game_names
+            names = self._coarse_names = dict(
+                timers=[mangle(x) for x in ('§&!N§', '§,"B§', '§@!W§')], ac=mangle('§#"L§'),
+                power=rg_sim._real2obf('§&c§')['getAutoClickPower'], auto=gn['autoClick'],
+                inv=(gn['invalidateCache'], gn['invalidateSpellCache']),
+                kings=next((u for u in self.G.S__2d__21_4 if u.S_1i == 'Gift of the Kings'), None),
+                kc=mangle('§=!%§'),
+                gb=next((s for s in self.G.S_0_21_A if s.S_1i == 'Grand Balance'), None), gbc=mangle('§+!<§'))
+        gb = names['gb'] if names['gb'] is not None and names['gb'].S_23 else None
+        if gb is not None:
+            gb0 = getattr(gb, names['gbc'])
+            setattr(gb, names['gbc'], 15 - k)
+        timers = [getattr(F, a) for a in names['timers']]
+        ac0 = getattr(g, names['ac'])
+        kings = names['kings'] if names['kings'] is not None and names['kings'].S__3c__21_7 else None
+        kc0 = getattr(kings, names['kc']) if kings is not None else 0
+        for m in names['inv']:
+            getattr(g, m)()
+        self.tl.advance(k, k)
+        if gb is not None:
+            setattr(gb, names['gbc'], (gb0 + k) % 15)
+        for a, x0 in zip(names['timers'], timers):
+            if x0 > 0:
+                setattr(F, a, max(0, x0 - k))
+        total = ac0 + k
+        if total >= 30:
+            extra = total // 30 - 1
+            setattr(g, names['ac'], total % 30)
+            if extra > 0:
+                power = getattr(U, names['power'])(False)
+                if power > 0:
+                    getattr(g, names['auto'])(power * extra)
+        if kings is not None:
+            total = kc0 + k
+            if total >= 30:
+                extra = total // 30 - 1
+                setattr(kings, names['kc'], total % 30)
+                if extra > 0 and self.G.S_4P[14] == 0:
+                    getattr(g, names['auto'])(extra, False)
+        if k >= 60:
+            self._coarse_repeat(k // 30 - 1)
+
     def _restore_autocast(self, spell):
         """退位会清掉自动施法设置；恢复成退位前的样子，目标法术另外打开。"""
         for s in self.G.S_0_21_A:
             cfg = self.autocast.get(s.S_6_21_Z)
-            if cfg and cfg[0] and not s.S_3A:
-                s.S_3A, s.S__23__21_B, s.S_5_21_H, s.S_8_23_, s.S_6_21_A = cfg
+            if cfg and cfg[0]:
+                if not s.S_3A:
+                    s.S_3A, s.S__23__21_B, s.S_5_21_H, s.S_8_23_, s.S_6_21_A = cfg
+                # 「放到第几阶」（Tiered Autocasting）只在这一阶的阶层升级已经买到时才设。退位清掉了阶层升级
+                # （「宝石研磨机 2」要 8 种阵营币各 50 亿），没买到时放出的是低阶、还被当成「要重放」，
+                # Game.useSpell 对在放且到了最高阶的法术返回 false，整轮自动施法就停在它那里，金牌的收税放不出来
+                target = cfg[4]
+                if target >= 0 and self.sim.core_call('getMaxSpellTier', s.id) < target:
+                    target = -1
+                s.S_6_21_A = target
             if spell and s.S_1i == spell:
                 s.S_3A = True
 

@@ -542,7 +542,7 @@ class Engine:
 
     # ---- 按目标找 build：另起几个试跑进程，在后台线程里搜索，界面轮询 goal_status。
     def goal_start(self, request):
-        """按目标求最优 build（rg_optimize）：另起 3 个低优先级进程，在后台线程里协调，界面轮询 goal_status。"""
+        """新种群求解器：完整方案响应学习与精确回放，6 个低优先级进程。"""
         import importlib
         import math
         self.require(request)
@@ -550,7 +550,7 @@ class Engine:
             raise ValueError('按目标找 build 要从存档退位重开，请先点「使用存档计算」')
         self.goal_stop(dict(request, quiet=True))
         rg_goal = importlib.import_module('rg_goal')
-        rg_optimize = importlib.import_module('rg_optimize')
+        rg_search = importlib.import_module('rg_search')
         options = request.get('options')
         if not isinstance(options, dict):
             raise ValueError('搜索设置格式错误')
@@ -569,12 +569,12 @@ class Engine:
         if spell is not None and (not isinstance(spell, str) or spell not in {s.S_1i for s in self.sim.G.S_0_21_A}):
             raise ValueError('未知法术')
         init = dict(game_py=str(self.assets / 'game.py'), save=self.save, timestamp=self.timestamp,
-                    research_json=str(self.assets / 'research.json'), graph=str(self.assets / 'depgraph.json'))
-        self.goal = rg_optimize.Optimize(_worker_command('--opt-worker'), init, goal=goal, T=float(limit),
+                    research_json=str(self.assets / 'research.json'), model=str(self.assets / 'build-model.json'))
+        self.goal = rg_search.Search(_worker_command('--search-worker'), init, goal=goal, T=float(limit),
                                          target=float(target) if target is not None else None, spell=spell,
-                                         workers=rg_goal.WORKERS)
+                                         workers=rg_goal.WORKERS, **rg_search.search_budget(options))
         self.goal_revision = self.revision
-        self.goal_options = dict(goal=goal, mode=mode, target=target, limit=limit, spell=spell, workers=rg_goal.WORKERS)
+        self.goal_options = dict(goal=goal, mode=mode, target=target, limit=limit, spell=spell, workers=rg_goal.WORKERS, depth=options.get('depth'))
         return self.goal_status(dict(revision=self.revision))
 
     def goal_status(self, request):
@@ -585,7 +585,8 @@ class Engine:
         if not hasattr(self, 'research_names'):
             rows = json.loads((self.assets / 'research.json').read_text(encoding='utf-8'))
             self.research_names = {row['code']: self.translate(row['name']) for row in rows}
-        out = rg_optimize_module().ui_status(status, request, self.translate, self.research_names, self.goal_options, self.goal_revision)
+        from rg_search_ui import ui_status
+        out = ui_status(status, request, self.translate, self.research_names, self.goal_options, self.goal_revision)
         if status['finished']:
             self.goal = None
         return out
@@ -601,11 +602,6 @@ class Engine:
             self.goal = None
             return {}
         return self.goal_status(request)
-
-
-def rg_optimize_module():
-    import importlib
-    return importlib.import_module('rg_optimize')
 
 
 def _calculation_assets():
@@ -631,6 +627,16 @@ def opt_worker_main():
     import rg_optimize
     source, sink = _std_pipes()
     rg_optimize.worker_main(source, sink)
+
+
+def search_worker_main():
+    assets = _calculation_assets()
+    import rg_sim
+    rg_sim._real2obf.cache_clear()
+    rg_sim.MEMBER_NAMES = assets / 'member-names.json'
+    import rg_search
+    source, sink = _std_pipes()
+    rg_search.worker_main(source, sink)
 
 
 def goal_worker_main():

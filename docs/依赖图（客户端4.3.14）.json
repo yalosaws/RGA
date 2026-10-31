@@ -1088,11 +1088,11 @@
    "cls": "AlchemyVivification",
    "kind": "升级",
    "op": "加",
-   "intermediates": [],
-   "drivers": [],
-   "others": [
-    "Utilities.getMaxMana"
+   "intermediates": [
+    "max_mana"
    ],
+   "drivers": [],
+   "others": [],
    "notes": [],
    "sid": 124907
   },
@@ -2117,14 +2117,14 @@
    "kind": "法术生效",
    "op": "乘",
    "intermediates": [
-    "mana_regen"
+    "mana_regen",
+    "max_mana"
    ],
    "drivers": [
     "spells"
    ],
    "others": [
-    "Game.getSpell",
-    "Utilities.getMaxMana"
+    "Game.getSpell"
    ],
    "notes": [
     "不计入实际上限"
@@ -2382,11 +2382,11 @@
    "cls": "DruidUpgrade6",
    "kind": "升级",
    "op": "加",
-   "intermediates": [],
-   "drivers": [],
-   "others": [
-    "Utilities.getAssistantsNum"
+   "intermediates": [
+    "assistants"
    ],
+   "drivers": [],
+   "others": [],
    "notes": [],
    "sid": 146
   },
@@ -2394,11 +2394,11 @@
    "cls": "FacelessUpgrade7",
    "kind": "升级",
    "op": "加",
-   "intermediates": [],
-   "drivers": [],
-   "others": [
-    "Utilities.getAssistantsNum"
+   "intermediates": [
+    "assistants"
    ],
+   "drivers": [],
+   "others": [],
    "notes": [],
    "sid": 190
   },
@@ -2418,10 +2418,11 @@
    "cls": "SunForce",
    "kind": "升级",
    "op": "加",
-   "intermediates": [],
+   "intermediates": [
+    "assistants"
+   ],
    "drivers": [],
    "others": [
-    "Utilities.getAssistantsNum",
     "Utilities.getHour"
    ],
    "notes": [],
@@ -2501,13 +2502,13 @@
    "cls": "WarfareBerserking",
    "kind": "升级",
    "op": "加",
-   "intermediates": [],
+   "intermediates": [
+    "assistants"
+   ],
    "drivers": [
     "spells"
    ],
-   "others": [
-    "Utilities.getAssistantsNum"
-   ],
+   "others": [],
    "notes": [
     "不计入实际上限"
    ],
@@ -2654,11 +2655,11 @@
    "cls": "FacelessPerk1",
    "kind": "升级",
    "op": "加",
-   "intermediates": [],
-   "drivers": [],
-   "others": [
-    "Utilities.getAssistantsNum"
+   "intermediates": [
+    "assistants"
    ],
+   "drivers": [],
+   "others": [],
    "notes": [],
    "sid": 675
   },
@@ -2678,11 +2679,11 @@
    "cls": "UndeadChallenge1",
    "kind": "挑战",
    "op": "加",
-   "intermediates": [],
-   "drivers": [],
-   "others": [
-    "Utilities.getAssistantsNum"
+   "intermediates": [
+    "assistants"
    ],
+   "drivers": [],
+   "others": [],
    "notes": [],
    "sid": 98
   },
@@ -2768,10 +2769,11 @@
    "cls": "DruidBloodline",
    "kind": "血统",
    "op": "乘",
-   "intermediates": [],
+   "intermediates": [
+    "max_mana"
+   ],
    "drivers": [],
    "others": [
-    "Utilities.getMaxMana",
     "Utilities.hasBloodline"
    ],
    "notes": [],
@@ -2793,11 +2795,11 @@
    "cls": "DivineMeditation",
    "kind": "升级",
    "op": "乘",
-   "intermediates": [],
-   "drivers": [],
-   "others": [
-    "Utilities.getMaxMana"
+   "intermediates": [
+    "max_mana"
    ],
+   "drivers": [],
+   "others": [],
    "notes": [],
    "sid": 143614
   },
@@ -3253,11 +3255,11 @@
    "cls": "SpellcraftLeylines",
    "kind": "升级",
    "op": "乘",
-   "intermediates": [],
-   "drivers": [],
-   "others": [
-    "Utilities.getAssistantsNum"
+   "intermediates": [
+    "assistants"
    ],
+   "drivers": [],
+   "others": [],
    "notes": [],
    "sid": 205332
   },
@@ -3739,11 +3741,11 @@
    "cls": "WarfareInvasion",
    "kind": "升级",
    "op": "乘",
-   "intermediates": [],
-   "drivers": [],
-   "others": [
-    "Utilities.getAssistantsNum"
+   "intermediates": [
+    "assistants"
    ],
+   "drivers": [],
+   "others": [],
    "notes": [],
    "sid": 131810
   },
@@ -3783,11 +3785,11 @@
    "cls": "SpellcraftIncantation",
    "kind": "升级",
    "op": "乘",
-   "intermediates": [],
-   "drivers": [],
-   "others": [
-    "Utilities.getManaPerTick"
+   "intermediates": [
+    "mana_regen"
    ],
+   "drivers": [],
+   "others": [],
    "notes": [],
    "sid": 130407
   },
@@ -4049,11 +4051,11 @@
    "cls": "SeraphimUpgrade3",
    "kind": "升级",
    "op": "乘",
-   "intermediates": [],
-   "drivers": [],
-   "others": [
-    "Utilities.getManaPerTick"
+   "intermediates": [
+    "mana_regen"
    ],
+   "drivers": [],
+   "others": [],
    "notes": [],
    "sid": 731
   },
@@ -4151,11 +4153,12 @@
    "cls": "CraftsmanshipScintillation",
    "kind": "升级",
    "op": "乘",
-   "intermediates": [],
+   "intermediates": [
+    "max_mana"
+   ],
    "drivers": [],
    "others": [
-    "Formulas.getGemMultiplier",
-    "Utilities.getMaxMana"
+    "Formulas.getGemMultiplier"
    ],
    "notes": [],
    "sid": 162125
@@ -4246,11 +4249,11 @@
    "cls": "LanternOfGuidance",
    "kind": "升级",
    "op": "乘",
-   "intermediates": [],
-   "drivers": [],
-   "others": [
-    "Utilities.getManaPerTick"
+   "intermediates": [
+    "mana_regen"
    ],
+   "drivers": [],
+   "others": [],
    "notes": [],
    "sid": 1224
   },
@@ -4258,11 +4261,11 @@
    "cls": "OilLamp",
    "kind": "升级",
    "op": "乘",
-   "intermediates": [],
-   "drivers": [],
-   "others": [
-    "Utilities.getMaxMana"
+   "intermediates": [
+    "max_mana"
    ],
+   "drivers": [],
+   "others": [],
    "notes": [],
    "sid": 1225
   },
@@ -4296,11 +4299,11 @@
    "cls": "CraftsmanshipRestauration",
    "kind": "升级",
    "op": "乘",
-   "intermediates": [],
-   "drivers": [],
-   "others": [
-    "Utilities.getAssistantsNum"
+   "intermediates": [
+    "assistants"
    ],
+   "drivers": [],
+   "others": [],
    "notes": [],
    "sid": 203930
   },
@@ -4330,11 +4333,11 @@
    "cls": "LegacyFairyElven",
    "kind": "升级",
    "op": "乘",
-   "intermediates": [],
-   "drivers": [],
-   "others": [
-    "Utilities.getAssistantsNum"
+   "intermediates": [
+    "assistants"
    ],
+   "drivers": [],
+   "others": [],
    "notes": [],
    "sid": 1148
   },
@@ -4485,11 +4488,11 @@
    "cls": "DrowUpgrade3",
    "kind": "升级",
    "op": "乘",
-   "intermediates": [],
-   "drivers": [],
-   "others": [
-    "Utilities.getMaxMana"
+   "intermediates": [
+    "max_mana"
    ],
+   "drivers": [],
+   "others": [],
    "notes": [],
    "sid": 130
   },
@@ -4533,11 +4536,11 @@
    "cls": "DruidUpgrade5",
    "kind": "升级",
    "op": "乘",
-   "intermediates": [],
-   "drivers": [],
-   "others": [
-    "Utilities.getMaxMana"
+   "intermediates": [
+    "max_mana"
    ],
+   "drivers": [],
+   "others": [],
    "notes": [],
    "sid": 134
   },
@@ -4707,11 +4710,11 @@
    "cls": "AngelUpgrade6",
    "kind": "升级",
    "op": "乘",
-   "intermediates": [],
-   "drivers": [],
-   "others": [
-    "Utilities.getManaPerTick"
+   "intermediates": [
+    "mana_regen"
    ],
+   "drivers": [],
+   "others": [],
    "notes": [],
    "sid": 49
   },
@@ -4803,11 +4806,11 @@
    "cls": "DjinnUpgrade7",
    "kind": "升级",
    "op": "乘",
-   "intermediates": [],
-   "drivers": [],
-   "others": [
-    "Utilities.getAssistantsNum"
+   "intermediates": [
+    "assistants"
    ],
+   "drivers": [],
+   "others": [],
    "notes": [],
    "sid": 900
   },
@@ -4840,11 +4843,11 @@
    "cls": "DragonUpgrade12",
    "kind": "升级",
    "op": "乘",
-   "intermediates": [],
-   "drivers": [],
-   "others": [
-    "Utilities.getMaxMana"
+   "intermediates": [
+    "max_mana"
    ],
+   "drivers": [],
+   "others": [],
    "notes": [],
    "sid": 858
   },
@@ -4879,12 +4882,12 @@
    "cls": "DwarvenUpgrade11",
    "kind": "升级",
    "op": "乘",
-   "intermediates": [],
-   "drivers": [],
-   "others": [
-    "Utilities.getManaPerTick",
-    "Utilities.getMaxMana"
+   "intermediates": [
+    "mana_regen",
+    "max_mana"
    ],
+   "drivers": [],
+   "others": [],
    "notes": [],
    "sid": 850
   },
@@ -4914,13 +4917,14 @@
    "cls": "CallToArms",
    "kind": "法术生效",
    "op": "乘",
-   "intermediates": [],
+   "intermediates": [
+    "assistants"
+   ],
    "drivers": [
     "production",
     "spells"
    ],
    "others": [
-    "Utilities.getAssistantsNum",
     "Utilities.getOfflineTime"
    ],
    "notes": [],
@@ -4943,14 +4947,15 @@
    "cls": "GodsHand",
    "kind": "法术生效",
    "op": "乘",
-   "intermediates": [],
+   "intermediates": [
+    "mana_regen"
+   ],
    "drivers": [
     "mana_regen",
     "spells"
    ],
    "others": [
-    "Game.getSpell",
-    "Utilities.getManaPerTick"
+    "Game.getSpell"
    ],
    "notes": [],
    "spell": 9
@@ -5001,12 +5006,13 @@
    "cls": "AllCreation",
    "kind": "法术生效",
    "op": "乘",
-   "intermediates": [],
+   "intermediates": [
+    "mana_regen"
+   ],
    "drivers": [
     "spells"
    ],
    "others": [
-    "Utilities.getManaPerTick",
     "Utilities.getStatMax",
     "Utilities.hasUnion"
    ],
@@ -5483,11 +5489,11 @@
    "cls": "DivineDeliverance",
    "kind": "升级",
    "op": "乘",
-   "intermediates": [],
-   "drivers": [],
-   "others": [
-    "Utilities.getManaPerTick"
+   "intermediates": [
+    "mana_regen"
    ],
+   "drivers": [],
+   "others": [],
    "notes": [],
    "sid": 143316
   },
@@ -5674,11 +5680,11 @@
    "cls": "UndeadUpgrade8",
    "kind": "升级",
    "op": "乘",
-   "intermediates": [],
-   "drivers": [],
-   "others": [
-    "Utilities.getManaPerTick"
+   "intermediates": [
+    "mana_regen"
    ],
+   "drivers": [],
+   "others": [],
    "notes": [],
    "sid": 395
   },
@@ -5711,11 +5717,11 @@
    "cls": "ElvenUpgrade11",
    "kind": "升级",
    "op": "乘",
-   "intermediates": [],
-   "drivers": [],
-   "others": [
-    "Utilities.getAssistantsNum"
+   "intermediates": [
+    "assistants"
    ],
+   "drivers": [],
+   "others": [],
    "notes": [],
    "sid": 812
   },

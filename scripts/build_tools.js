@@ -49,7 +49,7 @@
     ['tl-seconds', 'tl-interval', 'tl-upgrades', 'tl-buildings', 'tl-clicks'].forEach(function (id) { $(id).disabled = running; });
     $('gl-run').disabled = searching || !state.loaded || state.loading;
     $('gl-run').textContent = searching ? '搜索中…' : '开始搜索';
-    ['gl-goal', 'gl-target', 'gl-spell', 'gl-limit'].forEach(function (id) { $(id).disabled = searching; });
+    ['gl-goal', 'gl-target', 'gl-spell', 'gl-limit', 'gl-depth'].forEach(function (id) { $(id).disabled = searching; });
     $('gl-mode').querySelectorAll('button').forEach(function (b) { b.disabled = searching; });
   }
 
@@ -237,9 +237,9 @@
   function rankCmp(a, b) {
     var ka = a.ok ? (a.reached ? 0 : 1) : 2, kb = b.ok ? (b.reached ? 0 : 1) : 2;
     if (ka !== kb) return ka - kb;
-    if (ka === 0 && Math.abs(a.time - b.time) > .05) return a.time - b.time;
+    if (ka === 0 && a.time !== b.time) return a.time - b.time;
     if (ka === 2) return a.id - b.id;
-    // 同样快达到的（游戏每秒检查一次，用时常常相同），按达到那一刻的数值排：数值越高越早越过目标
+    // 相同检查时刻达到的，以该时刻实测数值打破平局。
     return (b.value || 0) - (a.value || 0) || a.id - b.id;
   }
   function resultText(e, reach) {
@@ -333,10 +333,10 @@
       });
     }
     updateSats(st.finished ? 0 : (st.workers || 3));
-    // 进度环：三个阶段按大致耗时加权
-    var w = [0, .35, .3, .35], p = 0;
-    for (var i = 1; i < Math.min(st.phase, 4); i++) p += w[i];
-    if (st.phase >= 1 && st.phase <= 3 && st.total) p += w[st.phase] * st.done / st.total;
+    // 进度环：四个阶段按大致耗时加权；当前阶段用后台给的完成比例（没有就按这一批的进度）
+    var w = [0, .04, .34, .50, .12], p = 0;
+    for (var i = 1; i < Math.min(st.phase, 5); i++) p += w[i];
+    if (st.phase >= 1 && st.phase <= 4) p += w[st.phase] * (st.phase_frac != null ? st.phase_frac : st.total ? st.done / st.total : 0);
     if (st.finished) p = 1;
     run.progress = Math.max(run.progress || 0, p);
     o.prog.setAttribute('stroke-dashoffset', (o.circ * (1 - run.progress)).toFixed(1));
@@ -377,7 +377,7 @@
       li.className = st.finished || p < st.phase ? 'past' : p === st.phase ? 'now' : '';
     });
     $('gl-t-verified').textContent = st.verified || 0;
-    $('gl-t-pruned').textContent = (st.pruned || 0) + (st.unexplored ? '+' + st.unexplored : '');
+    $('gl-t-pruned').textContent = fmt(st.runs || 0);
     $('gl-t-elapsed').textContent = duration(st.elapsed || 0);
   }
   function logZh(line) {
@@ -420,7 +420,7 @@
       var key = unitKey(u), n = nodes[k];
       var best = u.best && run.entries[u.best.id], s = best ? score(best, top, reach) : 0;
       n.querySelector('i').style.width = (best ? Math.max(3, s * 100) : 0).toFixed(1) + '%';
-      n.querySelector('em').textContent = best ? resultText(best, reach) : u.state === 'failed' ? '跑不了' : running[key] ? '计算中…' : u.state === 'ready' ? '已估算' : '等待';
+      n.querySelector('em').textContent = best ? resultText(best, reach) : u.state === 'failed' ? '跑不了' : running[key] ? '计算中…' : st.finished ? '暂无可执行方案' : '等待试跑';
       n.querySelector('.sub').textContent = u.state === 'failed' ? (u.note || '') : u.combos ? '组合 ' + u.combos + ' · 验证 ' + u.verified + (best ? ' · ' + buildName(best) : '') : '';
       n.classList.toggle('top', !!(best && top && best.id === top.id));
       n.classList.toggle('run', !!running[key]);
@@ -458,7 +458,7 @@
       '<span class="gx-name"><b>' + esc(unitName(e)) + '</b><small>' + esc(buildName(e)) + '</small></span>' +
       '<span class="gx-val">' + esc(resultText(e, reach)) + '</span>' +
       '<span class="gx-rel"><i><b></b></i><em></em></span>' +
-      '<span class="gx-cnt">' + (e.ok ? '研究 ' + e.research.length + (e.merc.length ? ' · 佣兵 ' + e.merc.length : '') : esc(e.note || '')) + '</span></div>';
+      '<span class="gx-cnt">' + (e.ok ? '研究 ' + e.research.length + (e.merc.length ? ' · 佣兵 ' + e.merc.length : '') + (e.verified_exact ? ' · 已复核' : '') : esc(e.note || '')) + '</span></div>';
   }
   function goalChart(curve, target) {
     if (!curve || curve.length < 2) return '';
@@ -474,7 +474,7 @@
       (target ? '<line class="target" x1="0" x2="' + W + '" y1="' + y(Math.log10(target)) + '" y2="' + y(Math.log10(target)) + '"/>' : '') + '<path d="' + d + '"/></svg>';
   }
   function why(e) {
-    // 每一项去掉后目标会掉到原来的几分之一；路径来自游戏公式的依赖关系
+    // 每一项去掉后重新整局试跑；显示实测变化，不把关联当成独立乘数。
     var rows = (e.contributions || []).filter(function (c) { return c.ratio && c.ratio > 1.0005; });
     if (!rows.length) return '';
     return '<div class="gl-why">' + rows.map(function (c) {
@@ -497,7 +497,9 @@
       (e.skipped.length ? '<p>研究没买上：' + esc(e.skipped.join('、')) + '</p>' : '') +
       (e.skipped_merc.length ? '<p>佣兵升级到时间上限还买不起（阵营币不够）：' + esc(e.skipped_merc.join('、')) + '</p>' : '') +
       '<p>' + (reach ? '' : '第 ' + duration(o.limit) + ' 时 ' + num(e.value) + '；') + '选择时间：' + esc(Object.keys(e.picks).map(function (k) { return k + ' ' + duration(e.picks[k]); }).join('、')) +
-      '；闭环 ' + e.rounds + ' 轮' + (e.estimate ? '，最初估算 ' + fmt(e.estimate) : '') + (e.finished_at != null ? '；搜索第 ' + duration(e.finished_at) + ' 验证完' : '') + '</p>';
+      (e.finished_at != null ? '；搜索第 ' + duration(e.finished_at) + ' 得到' : '') + '</p>' +
+      (e.verified_exact ? '<p>已独立复核：数值、购买记录和整条增长曲线与首次试跑一致。</p>' : '') +
+      (e.contributions && e.contributions.length ? '<p>上面的变化来自去掉对应项目后的整局实测，各项之间存在联动，不能直接相乘。</p>' : '');
   }
   function updateRows(run) {
     var box = $('gl-rows'), reach = run.options.mode === 'reach', top = run.sorted[0], f = run.filter;
@@ -547,13 +549,20 @@
   }
   function updateFoot(run) {
     var st = run.status;
-    $('gl-foot').textContent = (st.pruned ? st.pruned + ' 套按估算不可能更好、跳过（估算 × 本阵营实测系数 × 1.2 仍低于已验证最好的）。' : '') +
-      (st.unexplored ? st.unexplored + ' 套到验证上限没验证。' : '') +
+    $('gl-foot').textContent = '一共整局跑了 ' + fmt(st.runs || 0) + ' 次' + (st.improved ? '，更新了 ' + st.improved + ' 次更好方案' : '') + '。' +
+      (st.unexplored ? '本次预算内还有 ' + st.unexplored + ' 种结构未得到可执行方案。' : '') +
+      '排名是已试跑方案中的最好结果，标「已复核」的已独立重跑。' +
       '数值以整局跑为准。玩家只按「全部购买」，自动施法按退位前的设置' + (run.options.spell ? '并打开所选法术' : '') + '；手动施法、点击、挑战不在内。结果不写回存档。';
   }
   function renderGoal(run) {
     var st = run.status;
-    run.sorted = Object.keys(run.entries).map(function (k) { return run.entries[k]; }).sort(rankCmp);
+    var gone = {};
+    (st.superseded || []).forEach(function (id) { gone[id] = true; });
+    Object.keys(gone).forEach(function (id) {
+      var n = run.rows[id];
+      if (n) { n.remove(); delete run.rows[id]; }
+    });
+    run.sorted = Object.keys(run.entries).filter(function (k) { return !gone[k]; }).map(function (k) { return run.entries[k]; }).sort(rankCmp);
     $('gl-live').classList.toggle('done', !!st.finished);
     $('gl-stop').hidden = !!st.finished;
     if (st.finished && st.error && st.error !== '已停止') error(st.error);
@@ -568,7 +577,7 @@
     var target = mode === 'reach' ? parseTarget($('gl-target').value) : null;
     if (mode === 'reach' && target == null) { error('目标数值看不懂，写成 40000、4万 或 1e60'); return; }
     error('');
-    var options = {goal: $('gl-goal').value, mode: mode, target: target, limit: Number($('gl-limit').value), spell: $('gl-spell').value || null};
+    var options = {goal: $('gl-goal').value, mode: mode, target: target, limit: Number($('gl-limit').value), spell: $('gl-spell').value || null, depth: $('gl-depth').value};
     var run = state.goal = state.goalView = {options: options, entries: {}, rows: {}, sorted: [], filter: {}, status: {phase: 0}};
     controls();
     $('gl-intro').hidden = true; $('gl-live').hidden = false; $('gl-board').hidden = true;

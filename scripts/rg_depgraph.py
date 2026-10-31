@@ -42,6 +42,9 @@ INTERMEDIATE = {
     'Formulas.getProductionPerTick': 'production', 'Formulas.getProductionPerTickReal': 'production',
     'Formulas.getProductionPerSecond': 'production', 'Formulas.getProductionPerSecondReal': 'production',
     'Formulas.getAssistantsMultiplier': 'assistant_efficiency',
+    # Utilities 里的包装：先调 Formulas 的同名函数，再乘几个永久加成（DrowPerk5、DjinnPerk5 等）
+    'Utilities.getMaxMana': 'max_mana', 'Utilities.getAssistantsNum': 'assistants',
+    'Utilities.getManaPerTick': 'mana_regen',
 }
 # 一局里攒的量：输入调用 → 推动它的速率（目标名；clicks / spells / fc 没有单独的目标函数）
 DRIVERS = {

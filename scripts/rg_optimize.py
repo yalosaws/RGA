@@ -133,6 +133,7 @@ class Planner:
         if self._gen != gen:
             self._on = {k for k, u in self.objects.items() if u.S__3c__21_7}
             self._gen = gen
+            self._struct_cache = {}
 
     def _own(self, u, v):
         k = id(u)
@@ -156,6 +157,7 @@ class Planner:
         G = self.G
         flags = {k: u.S__3c__21_7 for k, u in self.objects.items()}
         self._on, self._gen = {k for k, v in flags.items() if v}, getattr(self.r, 'gen', 0)
+        self._struct_cache = {}       # 状态可能变了（推进过时间）：结构部分重新算
         self.saved = (flags, G.S__2c__21_Y, G.S__2d__21__5e_, G.S__23_3, self.formulas.S_3_22_)
 
     def restore(self):
@@ -168,8 +170,38 @@ class Planner:
         self.sim.refresh()
 
     def set_structure(self, plan):
-        G = self.G
+        """设定方案的拥有标记。结构部分（立场、阵营、显赫、血统、世系）在同一个状态上结果不变，
+        算一次记下；之后只按差别切换标记（和逐个重设结果相同）。"""
         self._sync()
+        key = (plan['alignment'], plan['faction'], plan.get('prestige'), plan.get('bloodline'), plan.get('lineage', True))
+        cache = self.__dict__.setdefault('_struct_cache', {})
+        hit = cache.get(key)
+        if hit is None:
+            self._set_structure_full(dict(plan, merc=[], research=[]))
+            hit = cache[key] = (frozenset(self._on), self.G.S__2c__21_Y, self.G.S__2d__21__5e_, self.G.S__23_3,
+                                self.formulas.S_3_22_)
+        on_struct, a, f, p, lin = hit
+        want = set(on_struct)
+        for code in plan.get('merc', []):
+            want.add(id(self.codes[code]))
+        for code in plan.get('research', []):
+            sid = self.r.by_code.get(code)
+            if sid in self.research:
+                want.add(id(self.research[sid]))
+        objects, on = self.objects, self._on
+        for k in [k for k in on if k not in want]:
+            objects[k].S__3c__21_7 = False
+            on.discard(k)
+        for k in want:
+            if k not in on:
+                objects[k].S__3c__21_7 = True
+                on.add(k)
+        G = self.G
+        G.S__2c__21_Y, G.S__2d__21__5e_, G.S__23_3 = a, f, p
+        self.formulas.S_3_22_ = lin
+
+    def _set_structure_full(self, plan):
+        G = self.G
         own_ = self._own
         self._clear_all()
         align = plan['alignment']
@@ -248,6 +280,13 @@ class Planner:
     def merc_prices(self, picks):
         """按 Runner 放格子的顺序（龙族先占每组第 4 格，其他按顺序占 1、2、3……）算每种阵营币的总价。"""
         cls = rg_goal.game_class(self.slots[0])
+        key = tuple(picks)
+        memo = self.__dict__.setdefault('_total_cache', {})
+        hit = memo.get(key)
+        if hit is not None:
+            if hit[1] is not None:
+                cls.S__2b__21_Q = hit[1]
+            return list(hit[0])
         cache = self._price_cache
         total = [0.0] * 16
         last = None
@@ -266,6 +305,7 @@ class Planner:
                     total[coin] += prices[coin]
         if last is not None:
             cls.S__2b__21_Q = last                      # 和逐个算时一样：§+!Q§ 留在最后一个格子号
+        memo[key] = (tuple(total), last)
         return total
 
     def merc_budget(self, owned_picks):
@@ -316,15 +356,26 @@ def solve_static(pl, struct, *, banned_merc=(), banned_research=(), owned_merc=(
     merc_c = [c for c, u in pl.codes.items() if merc and u.S_6_21_Z in pl.relevant and c not in banned_merc and pl.merc_ok(c)]
     budget = pl.merc_budget(list(owned_merc)) if merc else None
 
+    # 同一个状态上，目标值只取决于拥有哪些项（不看顺序）；各轮穷举会反复碰到同一组，记下来
+    f_memo, a_memo = {}, {}
+
     def f(research, mercs):
-        info['evals'] += 1
-        return pl.value(dict(struct, research=list(research), merc=list(mercs)))
+        key = (frozenset(research), frozenset(mercs))
+        v = f_memo.get(key)
+        if v is None:
+            info['evals'] += 1
+            v = f_memo[key] = pl.value(dict(struct, research=list(research), merc=list(mercs)))
+        return v
 
     def affordable(mercs):
         if not merc:
             return True
-        price = pl.merc_prices(mercs)
-        return all(p <= b + 0.5 for p, b in zip(price, budget))
+        key = tuple(mercs)
+        ok = a_memo.get(key)
+        if ok is None:
+            price = pl.merc_prices(mercs)
+            ok = a_memo[key] = all(p <= b + 0.5 for p, b in zip(price, budget))
+        return ok
 
     # 1. 全部放上，去掉不起作用的（去掉后不变小的）
     R, M = list(research_c), list(merc_c)
@@ -578,24 +629,248 @@ def closed_loop(runner, pl, plan, goal, T, *, target=None, spell=None, rounds=4,
     if best is None:
         return dict(ok=False, plan=plan, history=history)
     o, p = best
-    # 给用户的方案只列实际买到的（到时间上限还买不起的单独列出），贡献也只算买到的，
-    # 在这套方案自己跑出来的状态上算（达到目标的方案只跑到达到为止）
-    bought = dict(p, merc=[c for c in p.get('merc', []) if c not in (o.get('skipped_merc') or [])],
-                  research=[c for c in p.get('research', []) if c not in (o.get('skipped') or [])])
-    o2 = runner.run(bought, goal, tgt, T, spell=spell)
-    # 去掉买不起的之后再跑一次：没有在等的升级挡着，可能更好；数值取两次里好的那次（都是整局跑的）
-    if o2['ok'] and rg_goal.rank_key(o2) < rg_goal.rank_key(o):
-        o = o2
-        history.append(dict(round='去掉买不起的', value=o2['value'], time=o2['time'], reached=o2['reached']))
+    # 去掉买不起 / 买不上的再跑一次：没有在等的升级挡着，可能更好。给用户的方案和数值来自同一次整局跑：
+    # 去掉后的更好（或一样）就给去掉后的，否则给原方案并列出没买上的
+    if o.get('skipped_merc') or o.get('skipped'):
+        bought = without_skipped(p, o)
+        o2 = runner.run(bought, goal, tgt, T, spell=spell)
+        if o2['ok'] and rg_goal.rank_key(o2) <= rg_goal.rank_key(o):
+            o, p = o2, bought
+            history.append(dict(round='去掉买不起的', value=o2['value'], time=o2['time'], reached=o2['reached']))
     pl.save()
     try:
-        contrib = pl.contributions(bought)
+        contrib = pl.contributions(without_skipped(p, o))
     finally:
         pl.restore()
-    return dict(ok=True, plan=bought, value=o['value'], time=o['time'], reached=o['reached'], picks=o['picks'],
-                lineage=o.get('lineage'),
-                merc_times=o.get('merc_times'), skipped_merc=o.get('skipped_merc'), skipped=o.get('skipped'),
-                curve=o['curve'], history=history, contributions=contrib)
+    return dict(pack(o, p), history=history, contributions=contrib)
+
+
+def without_skipped(plan, o):
+    return dict(plan, merc=[c for c in plan.get('merc', []) if c not in (o.get('skipped_merc') or [])],
+                research=[c for c in plan.get('research', []) if c not in (o.get('skipped') or [])])
+
+
+def pack(o, plan):
+    """一次整局跑的结果 + 跑的那套方案（界面和排名用）。"""
+    return dict(ok=True, plan={k: v for k, v in plan.items() if not k.startswith('_')}, value=o['value'], time=o['time'],
+                reached=o['reached'], picks=o['picks'], lineage=o.get('lineage'), merc_times=o.get('merc_times'),
+                skipped_merc=o.get('skipped_merc'), skipped=o.get('skipped'), curve=o['curve'],
+                research_ready=o.get('research_ready'))
+
+
+# ---------------------------------------------------------------- 整局实测调优（每一步都用整局跑裁定）
+def evaluate(runner, plan, goal, T, *, target=None, spell=None):
+    """整局跑一套方案。有买不上的就再跑去掉它们的版本，取好的那次；返回的方案就是跑出这个数值的那套。"""
+    tgt = target if target is not None else float('inf')
+    o = runner.run(plan, goal, tgt, T, spell=spell)
+    if not o['ok']:
+        return dict(ok=False, plan=plan, note=o.get('note'))
+    if o.get('skipped_merc') or o.get('skipped'):
+        bought = without_skipped(plan, o)
+        o2 = runner.run(bought, goal, tgt, T, spell=spell)
+        if o2['ok'] and rg_goal.rank_key(o2) <= rg_goal.rank_key(o):
+            return pack(o2, bought)
+    return pack(o, plan)
+
+
+def research_pool(pl, struct):
+    """这个结构能买的全部研究（没买研究时游戏显示、能买的；和研究模板导入时的判断一致）。"""
+    pl.save()
+    try:
+        pl.set_structure(dict(struct, research=[], merc=[]))
+        pl.sim.refresh()
+        return [pl.r.codes[sid] for sid, u in pl.research.items() if pl.research_ok(u)]
+    finally:
+        pl.restore()
+
+
+def merc_pool(pl, struct):
+    if struct['faction'] != 'Mercenary':
+        return []
+    pl.save()
+    try:
+        pl.set_structure(dict(struct, research=[], merc=[]))
+        pl.sim.refresh()
+        return [c for c in pl.codes if pl.merc_ok(c)]
+    finally:
+        pl.restore()
+
+
+def gen_moves(runner, pl, plan, goal, T, *, target=None, spell=None, horizon=None, full=False, top=16, top_driver=8):
+    """一套方案的「改一项」邻域。full=False 时用静态打分挑最有希望的 top + top_driver 个（整局跑裁定）；
+    full=True 时列出全部（研究增删换、佣兵增删换和顺序、世系开关、换血统 / 显赫阵营）。
+
+    打分：在这套方案自己整局跑的几个时刻上，逐项切换拥有标记重算目标（不推进时间）。替换 a→b 的分数
+    取「加 b」和「去 a」两次的乘积（游戏公式里各来源基本是相乘的，这样每个时刻只要 n 次重算）。
+    另外按产出 / 回魔的变化给「驱动」分：目标值不直接变、但让一局攒得更快的项靠它排进来。"""
+    struct = {k: plan.get(k) for k in ('alignment', 'faction', 'prestige', 'bloodline')}
+    R, M = list(plan.get('research', [])), list(plan.get('merc', []))
+    # 候选池在存档载入的状态上算（调用前 runner.reset()，和 unit_estimates 一样）
+    rpool, mpool = research_pool(pl, struct), merc_pool(pl, struct)
+    horizon = horizon or T
+    probes = sorted({round(max(8.0, horizon * f), 1) for f in (0.25, 0.5, 1.0)})
+    probes = [p for p in probes if p <= T] or [T]
+    goal_s, drive_s = {}, {}       # 项 → [每个时刻的 log 比值]
+    state = dict(ready=False, branch={}, caps={})
+
+    def flip(u, v):
+        u.S__3c__21_7 = v
+        pl.sim.refresh()
+
+    def probe(rn, t):
+        if rn.ns['S__26_c'].S_9X():
+            state['ready'] = True
+        base = rn.metric(goal)
+        rates = pl.rates()
+        if not base > 0:
+            return
+
+        def measure(key, u, v):
+            old = bool(u.S__3c__21_7)
+            if old == v:
+                return
+            flip(u, v)
+            val = rn.metric(goal)
+            r2 = pl.rates()
+            flip(u, old)
+            goal_s.setdefault(key, []).append(math.log(max(val, 1e-300) / base))
+            drive_s.setdefault(key, []).append(sum(math.log(r2[d] / rates[d]) for d in ('production', 'mana_regen')
+                                                   if rates[d] > 0 and r2[d] > 0))
+        if state['ready']:
+            for code in set(R) | set(rpool):
+                sid = rn.by_code.get(code)
+                u = rn.research.get(sid)
+                if u is None:
+                    continue
+                state['branch'][code] = u.S__21_G
+                measure(('r', code), u, code not in R)
+            state['caps'] = {b: int(pl.core.S_0U(b)) for b in range(6)}
+        for code in set(M) | set(mpool):
+            measure(('m', code), pl.codes[code], code not in M)
+        pl.sim.refresh()
+
+    o = runner.run(plan, goal, float('inf'), max(probes) + 0.05, spell=spell, probes=probes, probe_fn=probe)
+    if not o['ok']:
+        return dict(moves=[], note=o.get('note'))
+
+    def sc(table, key):
+        xs = table.get(key)
+        return sum(xs) / len(xs) if xs else 0.0
+
+    moves = []
+    if state['ready']:
+        branch, caps = state['branch'], state['caps']
+        count = {}
+        for c in R:
+            count[branch.get(c)] = count.get(branch.get(c), 0) + 1
+        for b_code in rpool:
+            if b_code in R or b_code not in branch:
+                continue
+            b = branch[b_code]
+            if count.get(b, 0) < caps.get(b, 0):
+                moves.append(dict(k='R+', add=b_code, g=sc(goal_s, ('r', b_code)), d=sc(drive_s, ('r', b_code))))
+            for a in R:
+                if branch.get(a) == b:
+                    moves.append(dict(k='R~', rem=a, add=b_code, g=sc(goal_s, ('r', b_code)) + sc(goal_s, ('r', a)),
+                                      d=sc(drive_s, ('r', b_code)) + sc(drive_s, ('r', a))))
+        if full:
+            moves += [dict(k='R-', rem=a, g=sc(goal_s, ('r', a)), d=sc(drive_s, ('r', a))) for a in R]
+    if mpool:
+        grp = {c: pl.group(pl.codes[c]) for c in mpool}
+        dragon = {c for c in mpool if pl.codes[c].S__2d__21__5e_ == DRAGON}
+        for c in mpool:
+            if c in M:
+                continue
+            g = grp[c]
+            mine = [x for x in M if grp.get(x) == g]
+            if len(mine) < 4 and not (c in dragon and any(x in dragon for x in mine)):
+                moves.append(dict(k='M+', add=c, g=sc(goal_s, ('m', c)), d=sc(drive_s, ('m', c))))
+            for a in mine:
+                if c in dragon and any(x in dragon and x != a for x in mine):
+                    continue
+                moves.append(dict(k='M~', rem=a, add=c, g=sc(goal_s, ('m', c)) + sc(goal_s, ('m', a)),
+                                  d=sc(drive_s, ('m', c)) + sc(drive_s, ('m', a))))
+        if full:
+            moves += [dict(k='M-', rem=a, g=sc(goal_s, ('m', a)), d=0.0) for a in M]
+            moves += [dict(k='Mo', i=i, g=0.0, d=0.0) for i in range(len(M) - 1)]
+    if full:
+        if plan.get('bloodline') and o.get('lineage'):
+            moves.append(dict(k='L-', g=0.0, d=0.0))
+        elif plan.get('bloodline') and plan.get('lineage') is False:
+            moves.append(dict(k='L+', g=0.0, d=0.0))
+        for b in [None] + list(rg_goal.BLOODLINES):
+            if b != plan.get('bloodline'):
+                moves.append(dict(k='B', to=b, g=0.0, d=0.0))
+        if plan['faction'] != 'Mercenary':
+            for p, a in [(None, None)] + list(PRESTIGE_ALIGN.items()):
+                if p != plan.get('prestige') and (p is None or a == plan['alignment']):
+                    moves.append(dict(k='P', to=p, g=0.0, d=0.0))
+        return dict(moves=moves, total=len(moves))
+    total = len(moves)
+    by_goal = sorted(moves, key=lambda m: -m['g'])
+    picked = by_goal[:top]
+    rest = [m for m in by_goal[top:] if m['d'] > EPS]
+    picked += sorted(rest, key=lambda m: -m['d'])[:top_driver]
+    return dict(moves=picked, total=total)
+
+
+def apply_move(plan, m):
+    p = {k: (list(v) if isinstance(v, list) else v) for k, v in plan.items() if not k.startswith('_')}
+    k = m['k']
+    if k == 'R+':
+        p['research'].append(m['add'])
+    elif k == 'R~':
+        p['research'][p['research'].index(m['rem'])] = m['add']
+    elif k == 'R-':
+        p['research'].remove(m['rem'])
+    elif k == 'M+':
+        p['merc'].append(m['add'])
+    elif k == 'M~':
+        p['merc'][p['merc'].index(m['rem'])] = m['add']
+    elif k == 'M-':
+        p['merc'].remove(m['rem'])
+    elif k == 'Mo':
+        i = m['i']
+        p['merc'][i], p['merc'][i + 1] = p['merc'][i + 1], p['merc'][i]
+    elif k == 'L-':
+        p['lineage'] = False
+    elif k == 'L+':
+        p['lineage'] = True
+    elif k == 'B':
+        p['bloodline'] = m['to']
+        p.pop('lineage', None)
+    elif k == 'P':
+        p['prestige'] = m['to']
+    return p
+
+
+def move_text(m):
+    k = m['k']
+    return {'R+': lambda: '加研究 ' + m['add'], 'R~': lambda: '研究 %s→%s' % (m['rem'], m['add']),
+            'R-': lambda: '去研究 ' + m['rem'], 'M+': lambda: '加佣兵 ' + m['add'],
+            'M~': lambda: '佣兵 %s→%s' % (m['rem'], m['add']), 'M-': lambda: '去佣兵 ' + m['rem'],
+            'Mo': lambda: '佣兵第 %d、%d 个换顺序' % (m['i'] + 1, m['i'] + 2), 'L-': lambda: '不选世系',
+            'L+': lambda: '选世系', 'B': lambda: '血统换成 ' + str(m['to']), 'P': lambda: '显赫阵营换成 ' + str(m['to'])}[k]()
+
+
+def plan_key(plan):
+    return (plan.get('alignment'), plan.get('faction'), plan.get('prestige'), plan.get('bloodline'),
+            plan.get('lineage', True) is not False, tuple(sorted(plan.get('research', []))), tuple(plan.get('merc', [])))
+
+
+def struct_key(plan):
+    return (plan.get('alignment'), plan.get('faction'), plan.get('prestige'), plan.get('bloodline'))
+
+
+def explain(runner, pl, plan, goal, T, *, target=None, spell=None):
+    """在这套方案自己跑出来的状态上算每项的静态贡献（调优中途给界面看；最后前几名换成整局实测的）。"""
+    tgt = target if target is not None else float('inf')
+    runner.run(plan, goal, tgt, T, spell=spell)
+    pl.save()
+    try:
+        return pl.contributions(plan)
+    finally:
+        pl.restore()
 
 
 def units(spell_ok=None):
@@ -659,9 +934,8 @@ def unit_estimates(runner, pl, unit, goal, T, *, target=None, spell=None, log=No
     rows = []
     pl.save()
     try:
+        # 试跑选不上的显赫阵营也照样列出来：选不选得上还要看血统（无面者血统能凑出龙族的条件），由每套自己整局跑决定
         for p in prestiges:
-            if p is not None and p not in feasible_prestige:
-                continue
             for b in [None] + list(rg_goal.BLOODLINES):
                 struct = dict(unit, prestige=p, bloodline=b)
                 plan, info = solve_static(pl, struct, banned_merc=banned_m,
@@ -686,6 +960,7 @@ def worker_main(source=None, sink=None):
         try:
             req = json.loads(raw.decode('utf-8'))
             op = req.get('op')
+            runs0 = getattr(runner, 'n_runs', 0)
             if op == 'init':
                 runner = rg_goal.Runner(req['game_py'], save_path=req.get('save_path'), encoded_save=req.get('save'),
                                         timestamp=req.get('timestamp'), research_json=req.get('research_json'))
@@ -698,10 +973,22 @@ def worker_main(source=None, sink=None):
             elif op == 'loop':
                 result = closed_loop(runner, pl, req['plan'], req['goal'], req['T'], target=req.get('target'),
                                      spell=req.get('spell'))
+            elif op == 'eval':
+                result = evaluate(runner, req['plan'], req['goal'], req['T'], target=req.get('target'), spell=req.get('spell'))
+            elif op == 'moves':
+                runner.reset()
+                result = gen_moves(runner, pl, req['plan'], req['goal'], req['T'], target=req.get('target'),
+                                   spell=req.get('spell'), horizon=req.get('horizon'), full=bool(req.get('full')),
+                                   top=req.get('top', 16), top_driver=req.get('top_driver', 8))
+            elif op == 'explain':
+                result = dict(contributions=explain(runner, pl, req['plan'], req['goal'], req['T'],
+                                                    target=req.get('target'), spell=req.get('spell')))
             else:
                 raise ValueError('未知请求')
             if isinstance(result, dict):
                 result['elapsed'] = round(time.time() - started, 3)
+                if runner is not None:
+                    result['runs'] = getattr(runner, 'n_runs', 0) - runs0
             reply = dict(ok=True, result=result)
         except Exception as error:
             import traceback
@@ -710,18 +997,117 @@ def worker_main(source=None, sink=None):
         sink.flush()
 
 
-class Optimize:
-    """后台线程里协调：各阵营单位并行估算 → 按估算从高到低闭环验证 → 剪枝。status() 给界面轮询。"""
+REFINE_TOP = 8          # 调优：总排名前几，加上每个阵营单位自己的第一
+REFINE_ROUNDS = 30      # 每套最多调几步（一般先用满时间）
+SWEEP_TOP = 3           # 全邻域检查：总排名前几
+SWEEP_ROUNDS = 200          # 实际由时间预算限制
+REFINE_BUDGET = 300     # 调优阶段最多用这么多秒（超过就停在当前结果，结果里写明）
+SWEEP_BUDGET = 300
+REL_EPS = 1e-6          # 数值至少好这么多（相对）才算更好，免得在一样的结果之间来回换
+TIME_EPS = 0.05
+COMBINE_MAX = 8          # 每步最多叠加几项改进
+PAIR_N = 20              # 走到「改一项都不更好」后，最接近变好的几项两两组合
+MAX_KICKS = 8            # 每套最多跳出去重搜几次
+KICK_POOL, KICK_SIZE = 40, 3   # 跳出去：从最接近变好的 40 项里随机改 3 项
+STRUCT_MOVES = ('B', 'P', 'L-', 'L+', 'Mo')
+SCAN_CHUNK = 24          # 逐项检查每批每套跑几个候选
 
-    def __init__(self, command, init, *, goal, T, target=None, spell=None, workers=rg_goal.WORKERS, max_loops=40):
+
+def stack_moves(plan, moves):
+    """把几项改动依次叠加（和前面已叠加的碰到同一项就跳过；结构类的只叠一项）。返回每个前缀 [(改动, 方案)]，至少两项。"""
+    out, used, structural, applied = [], set(), False, []
+    for m in moves:
+        codes = {m.get('rem'), m.get('add')} - {None}
+        is_struct = m['k'] in STRUCT_MOVES
+        if codes & used or (is_struct and structural):
+            continue
+        plan = apply_move(plan, m)
+        used |= codes
+        structural |= is_struct
+        applied.append(m)
+        if len(applied) >= 2:
+            out.append((list(applied), plan))
+    return out
+
+
+def recombination_candidates(recipient, donors):
+    """用同阵营其他结构的整套研究/整分支替换；一次可改变多项，交给整局跑判断。
+
+    不拼接预算，不强行拥有升级；实际买不上的仍由 evaluate 处理。保留研究的执行顺序。
+    """
+    seen = {plan_key(recipient)}
+    for donor in donors:
+        if (donor['alignment'], donor['faction']) != (recipient['alignment'], recipient['faction']):
+            continue
+        variants = [('全部', list(donor.get('research', [])))]
+        branches = sorted({c[0] for c in recipient.get('research', []) + donor.get('research', [])})
+        for branch in branches:
+            rs = [c for c in recipient.get('research', []) if c[0] != branch]
+            rs += [c for c in donor.get('research', []) if c[0] == branch]
+            variants.append((branch, rs))
+        for branch, rs in variants:
+            plan = dict(recipient, research=rs)
+            key = plan_key(plan)
+            if key not in seen:
+                seen.add(key)
+                yield branch, plan
+
+
+# 搜索深度（界面「搜索深度」）：调优、逐项检查各用多少秒
+DEPTHS = {'fast': (60, 0), 'normal': (REFINE_BUDGET, SWEEP_BUDGET), 'deep': (600, 1800)}
+
+
+def search_budget(options):
+    """界面设置 → Optimize 的时间预算参数（build_engine 转过来，免得那边文件变大）。"""
+    depth = (options or {}).get('depth') or 'normal'
+    if depth not in DEPTHS:
+        raise ValueError('未知搜索深度')
+    refine, sweep = DEPTHS[depth]
+    return dict(refine_budget=refine, sweep_budget=sweep)
+
+
+def rank_of(r):
+    return rg_goal.rank_key(dict(ok=bool(r.get('ok')), reached=r.get('reached'), time=r.get('time'), value=r.get('value')))
+
+
+def improves(a, b):
+    """a 是不是比 b 好（整局跑的结果，带一点容差）。"""
+    if not a.get('ok'):
+        return False
+    if not b.get('ok'):
+        return True
+    if a['reached'] != b['reached']:
+        return bool(a['reached'])
+    if a['reached'] and abs(a['time'] - b['time']) > TIME_EPS:
+        return a['time'] < b['time']
+    return (a['value'] or 0) > (b['value'] or 0) * (1 + REL_EPS)
+
+
+class Optimize:
+    """后台线程里协调，status() 给界面轮询。数值一律以整局跑为准，估算只决定先试哪些：
+    1. 各阵营单位跑出自己的状态，估算所有血统 / 显赫阵营；
+    2. 全部组合闭环整局验证（不按估算跳过）；
+    3. 前几名（和每个阵营的第一）整局实测调优：静态打分挑出最有希望的「改一项」，全部整局跑，更好才换，到不再变好；
+    4. 前 3 名全邻域检查：所有「改一项」（含换血统 / 显赫阵营、世系、佣兵顺序）都整局跑，没有更好的才算完；
+       贡献也换成「去掉这一项整局跑」的实测值。"""
+
+    def __init__(self, command, init, *, goal, T, target=None, spell=None, workers=rg_goal.WORKERS, max_loops=None,
+                 refine_budget=REFINE_BUDGET, sweep_budget=SWEEP_BUDGET):
         self.goal, self.T, self.target, self.spell = goal, T, target, spell
-        self.max_loops = max_loops
+        self.refine_budget, self.sweep_budget = refine_budget, sweep_budget
         self.stage, self.done_n, self.total_n = '启动计算进程', 0, 0
         self.results, self.units, self.error, self.finished, self.cancelled = [], [], None, False, False
         self.pruned, self.margin, self.log_lines, self.unexplored = 0, None, [], 0
-        # 给界面：阶段（0 启动、1 各阵营跑状态估算、2 每个阵营验证一套、3 验证其余、4 结束）、每批在算什么、各阵营的组合
-        self.phase, self.batch_labels, self.by_unit, self.ratio = 0, [], {}, {}
-        self.cost = {}       # 各阵营单位第一阶段实测用时：后面的验证按它排顺序，慢的先跑
+        # 阶段：0 启动、1 各阵营跑状态估算、2 全部组合验证、3 调优、4 全邻域检查、5 结束
+        self.phase, self.phase_frac, self.batch_labels, self.by_unit, self.ratio = 0, 0.0, [], {}, {}
+        self.cost = {}
+        self.superseded = set()      # 被同一结构更好的结果取代的条目（界面不再显示）
+        self.best_of = {}            # 结构 → 当前最好的条目编号
+        self.cache = {}              # 方案 → 整局跑结果（同一套不重复跑）
+        self.runs = 0                # 一共整局跑了几次
+        self.improved = 0            # 调优 / 检查一共换了几步
+        self.checked = []            # 全邻域检查做完（没有更好的「改一项」）的条目编号
+        self.local_cands = {}        # 方案 → 它的全部「改一项」（都整局跑过、没有更好的）
         self.started = time.time()
         self.thread = threading.Thread(target=self._main, args=(command, dict(init, goal=goal), workers), daemon=True)
         self.thread.start()
@@ -743,136 +1129,418 @@ class Optimize:
             except queue.Empty:
                 continue
             out[tag] = reply['result'] if reply.get('ok') else dict(ok=False, note=reply.get('error'), trace=reply.get('trace'))
+            if isinstance(out[tag], dict):
+                self.runs += out[tag].get('runs', 0)
             self.done_n += 1
             yield tag, out[tag]
         return out
 
+    def _all(self, stage, reqs, labels):
+        out = [None] * len(reqs)
+        for tag, res in self._batch(stage, reqs, labels):
+            out[tag] = res
+        return out
+
+    # ---- 结果 ----
+    def record(self, res, *, estimate=None):
+        """记一条结果。同一结构只保留最好的：更好就取代旧的；不比旧的好就不记，返回 None。"""
+        plan = res.get('plan') or {}
+        sk = struct_key(plan)
+        old = self.best_of.get(sk)
+        if res.get('ok') and old is not None and not improves(res, self.results[old]):
+            return None
+        entry = dict(res, struct=dict(res.get('struct') or {k: plan.get(k) for k in ('alignment', 'faction', 'prestige', 'bloodline')}),
+                     id=len(self.results), finished_at=round(time.time() - self.started, 1))
+        if estimate is not None:
+            entry['estimate'] = estimate
+        if res.get('ok'):
+            if old is not None:
+                self.superseded.add(old)
+            self.best_of[sk] = entry['id']
+        self.results.append(entry)
+        return entry
+
+    def live(self):
+        return [r for r in self.results if r.get('ok') and r['id'] not in self.superseded]
+
+    def best(self):
+        return sorted(self.live(), key=rank_of)
+
+    # ---- 主流程 ----
     def _main(self, command, init, workers):
         try:
             self.pool = rg_goal.Pool(command, workers, init)
-            # 1. 每个阵营单位跑出自己的状态，估算所有血统 / 显赫阵营
-            estimates = []
-            self.phase = 1
-            # 慢的先跑：佣兵单位整局跑明显更久（实测 2～5 秒，其他阵营约 1 秒），排在最前，免得最后大家等它
-            unit_list = sorted(units(), key=lambda u: u['faction'] != 'Mercenary')
-            for tag, res in self._batch('各阵营跑出自己的状态并估算', [dict(op='unit', unit=u) for u in unit_list],
-                                        [dict(u, prestige=None, bloodline=None) for u in unit_list]):
-                res.setdefault('unit', unit_list[tag])
-                self.units.append(res)
-                self.cost[(unit_list[tag]['alignment'], unit_list[tag]['faction'])] = res.get('elapsed', 0)
-                if res.get('ok'):
-                    estimates += res['estimates']
-                    self.log('%s%s：整局 %s，估算最高 %.4g' % (
-                        rg_goal.FACTIONS.get(res['unit']['faction'], ('', ''))[1] if False else res['unit']['alignment'],
-                        res['unit']['faction'], ('%.1f 秒达到' % res['run']['time']) if res['run']['reached'] else '%.4g' % res['run']['value'],
-                        max(r['estimate'] for r in res['estimates'])))
-                else:
-                    self.log('%s %s：%s' % (res.get('unit', {}).get('alignment'), res.get('unit', {}).get('faction'), res.get('note')))
-            if not estimates:
-                raise RuntimeError('没有可行的阵营：' + '; '.join(sorted({str(u.get('note')) for u in self.units}))[:300])
-            # 2. 每个阵营先完整闭环验证自己估算最好的那套，得到这个阵营的「实测 / 估算」系数
-            by_unit = self.by_unit
-            self.phase = 2
-            for row in estimates:
-                key = (row['struct']['alignment'], row['struct']['faction'])
-                by_unit.setdefault(key, []).append(row)
-            for rows in by_unit.values():
-                rows.sort(key=lambda r: -r['estimate'])
-            heads = [rows[0] for rows in by_unit.values()]
-            ratio, best_value = self.ratio, None
-            done = set()
-
-            def verify(rows, stage):
-                nonlocal best_value
-                # 同一批里按这个阵营第一阶段实测的用时排序，慢的先跑（只改顺序，不改验证哪些）
-                rows = sorted(rows, key=lambda r: -self.cost.get((r['struct']['alignment'], r['struct']['faction']), 0))
-                for tag, res in self._batch(stage, [dict(op='loop', plan=dict(r['plan'], _estimate=r['estimate'])) for r in rows],
-                                            [r['struct'] for r in rows]):
-                    row = rows[tag]
-                    key = (row['struct']['alignment'], row['struct']['faction'])
-                    res['estimate'] = row['estimate']
-                    res['struct'] = row['struct']
-                    res['id'] = len(self.results)          # 稳定编号：界面按它增量更新，不整块重画
-                    res['finished_at'] = round(time.time() - self.started, 1)
-                    self.results.append(res)
-                    s = row['struct']
-                    self.log('验证 %s %s%s%s：%s' % (
-                        s['alignment'], s['faction'], (' 血统 ' + s['bloodline']) if s.get('bloodline') else '',
-                        (' 显赫 ' + s['prestige']) if s.get('prestige') else '',
-                        (('%.1f 秒达到' % res['time']) if res.get('reached') else '整局 %.4g' % res['value']) if res.get('ok')
-                        else '没跑成（%s）' % (res.get('note') or (res.get('history') or [{}])[-1].get('note'))))
-                    done.add(id(row))
-                    if not res.get('ok') and row['struct'].get('prestige'):
-                        # 显赫阵营实际选不上：这个阵营带同一显赫阵营的组合都不再考虑
-                        bad = (key, row['struct']['prestige'])
-                        by_unit[key][:] = [x for x in by_unit[key] if (key, x['struct'].get('prestige')) != bad or id(x) in done]
-                    if res.get('ok') and row['estimate'] > 0:
-                        ratio[key] = max(ratio.get(key, 0), res['value'] / row['estimate'])
-                        if self.target is None and (best_value is None or res['value'] > best_value):
-                            best_value = res['value']
-            verify(heads, '每个阵营验证估算最好的一套')
-            # 第一套验证失败（例如显赫阵营实际选不上）的阵营，接着验证它的下一套，直到每个阵营都有实测结果
-            for attempt in range(1, 4):
-                retry = [next(x for x in rows if id(x) not in done) for key, rows in by_unit.items()
-                         if key not in ratio and any(id(x) not in done for x in rows)]
-                if not retry or self.cancelled:
-                    break
-                verify(retry, '补验证第一套失败的阵营')
-            self.margin = {('%s %s' % k): round(v, 3) for k, v in ratio.items()}
-            for k, v in sorted(ratio.items(), key=lambda kv: -kv[1]):
-                self.log('%s %s：实测 / 估算 = %.2f' % (k[0], k[1], v))
-            # 3. 其余组合：估算 × 本阵营系数 × 1.2 仍够不上已验证最好的，不可能更好，跳过；其余按可能值从高到低验证
-            rest = [r for rows in by_unit.values() for r in rows if id(r) not in done]
-            self.phase = 3
-
-            def potential(r):
-                k = (r['struct']['alignment'], r['struct']['faction'])
-                return r['estimate'] * ratio.get(k, 1.0) * SAFETY
-
-            rest.sort(key=lambda r: -potential(r))
-            if self.target is not None:
-                # 最快达到：数值和用时不能直接比，每个阵营再验证可能值最高的两套，不做数值剪枝
-                picked, per = [], {}
-                for r in rest:
-                    k = (r['struct']['alignment'], r['struct']['faction'])
-                    if per.get(k, 0) < 2:
-                        per[k] = per.get(k, 0) + 1
-                        picked.append(r)
-                self.pruned = len(rest) - len(picked)
-                rest = picked
-            while rest and len(self.results) < self.max_loops:
-                if self.cancelled:
-                    raise RuntimeError('已停止')
-                if self.target is None and best_value is not None:
-                    keep = [r for r in rest if potential(r) >= best_value]
-                    self.pruned += len(rest) - len(keep)
-                    rest = keep
-                if not rest:
-                    break
-                batch, rest = rest[:self.pool_size()], rest[self.pool_size():]
-                verify(batch, '验证其余可能更好的组合（已验证 %d 套）' % len(self.results))
-            if rest:
-                self.unexplored = len(rest)
-                self.log('达到验证上限，还有 %d 套没验证（可能值都低于已验证的前几名）' % len(rest))
+            rows = self._estimate_units()
+            self._verify_all(rows)
+            self._refine()
+            self._recombine()
+            self._sweep()
             self.stage = '完成'
         except Exception as error:
             self.error = str(error)
         finally:
-            self.phase = 4
+            self.phase = 5
             self.batch_labels = []
             self.finished = True
             if hasattr(self, 'pool'):
                 self.pool.close()
+
+    def _estimate_units(self):
+        """1. 每个阵营单位跑出自己的状态，估算所有血统 / 显赫阵营。"""
+        estimates = []
+        self.phase = 1
+        unit_list = sorted(units(), key=lambda u: u['faction'] != 'Mercenary')     # 佣兵整局跑更久，先跑
+        for tag, res in self._batch('各阵营跑出自己的状态并估算', [dict(op='unit', unit=u) for u in unit_list],
+                                    [dict(u, prestige=None, bloodline=None) for u in unit_list]):
+            res.setdefault('unit', unit_list[tag])
+            self.units.append(res)
+            self.cost[(unit_list[tag]['alignment'], unit_list[tag]['faction'])] = res.get('elapsed', 0)
+            if res.get('ok'):
+                estimates += res['estimates']
+                self.log('%s %s：整局 %s，估算最高 %.4g' % (
+                    res['unit']['alignment'], res['unit']['faction'],
+                    ('%.1f 秒达到' % res['run']['time']) if res['run']['reached'] else '%.4g' % res['run']['value'],
+                    max(r['estimate'] for r in res['estimates'])))
+            else:
+                self.log('%s %s：%s' % (res.get('unit', {}).get('alignment'), res.get('unit', {}).get('faction'), res.get('note')))
+        if not estimates:
+            raise RuntimeError('没有可行的阵营：' + '; '.join(sorted({str(u.get('note')) for u in self.units}))[:300])
+        return estimates
+
+    def _verify_all(self, estimates):
+        """2. 全部组合闭环整局验证（选不上显赫阵营的也逐套跑：能不能选上和血统有关）。"""
+        self.phase = 2
+        by_unit = self.by_unit
+        for row in estimates:
+            by_unit.setdefault((row['struct']['alignment'], row['struct']['faction']), []).append(row)
+        for rows in by_unit.values():
+            rows.sort(key=lambda r: -r['estimate'])
+        total = sum(len(v) for v in by_unit.values())
+        done = set()
+        # 先每个阵营估算最好的一套（尽早有每个阵营的成绩），再按估算从高到低一批批跑
+        order = [rows[0] for rows in by_unit.values()]
+        order += sorted((r for rows in by_unit.values() for r in rows[1:]), key=lambda r: -r['estimate'])
+        chunk = 2 * self.pool_size()
+        while order:
+            batch = []
+            while order and len(batch) < chunk:
+                r = order.pop(0)
+                key = (r['struct']['alignment'], r['struct']['faction'])
+                batch.append(r)
+            if not batch:
+                break
+            batch.sort(key=lambda r: -self.cost.get((r['struct']['alignment'], r['struct']['faction']), 0))
+            for tag, res in self._batch('全部组合整局验证（%d / %d）' % (len(done), total),
+                                        [dict(op='loop', plan=dict(r['plan'], _estimate=r['estimate'])) for r in batch],
+                                        [r['struct'] for r in batch]):
+                row = batch[tag]
+                key = (row['struct']['alignment'], row['struct']['faction'])
+                res['struct'] = row['struct']
+                done.add(id(row))
+                self.phase_frac = len(done) / max(total, 1)
+                if res.get('ok'):
+                    self.cache[plan_key(res['plan'])] = res
+                self.record(res, estimate=row['estimate'])
+                s = row['struct']
+                self.log('验证 %s %s%s%s：%s' % (
+                    s['alignment'], s['faction'], (' 血统 ' + s['bloodline']) if s.get('bloodline') else '',
+                    (' 显赫 ' + s['prestige']) if s.get('prestige') else '',
+                    (('%.1f 秒达到' % res['time']) if res.get('reached') else '整局 %.4g' % res['value']) if res.get('ok')
+                    else '没跑成（%s）' % (res.get('note') or (res.get('history') or [{}])[-1].get('note'))))
+                if res.get('ok') and row['estimate'] > 0:
+                    self.ratio[key] = max(self.ratio.get(key, 0), res['value'] / row['estimate'])
+        self.margin = {('%s %s' % k): round(v, 3) for k, v in self.ratio.items()}
+
+    def _eval_many(self, stage, plans):
+        """整局跑一批方案（去重；跑过的直接用缓存）。"""
+        reqs, keys, labels = [], [], []
+        for p in plans:
+            k = plan_key(p)
+            if k not in self.cache and k not in keys:
+                keys.append(k)
+                reqs.append(dict(op='eval', plan=p))
+                labels.append({x: p.get(x) for x in ('alignment', 'faction', 'prestige', 'bloodline')})
+        if reqs:
+            for tag, res in self._batch(stage % len(reqs), reqs, labels):
+                self.cache[keys[tag]] = res
+        return len(reqs)
+
+    def _climb(self, phase, stage, starts, *, full, rounds, budget, progress_span=1.0):
+        """从 starts（条目编号）出发逐步改进：每步把候选（「改一项」，full 时是全部）整局跑，
+        再把变好的几项依次叠加也整局跑，取最好的；比当前好才换。
+        full 时走到「改一项都不更好」后，再试最接近变好的几项两两组合；还不行就随机改几项跳出去重新搜
+        （每个结构始终记着最好的那套，跳出去只会多找到、不会丢）。"""
+        self.phase, self.phase_frac = phase, 0.0
+        t0 = time.time()
+        climbers = [dict(cur=dict(self.results[i]), done=False, kicks=0, rng=random.Random(i)) for i in starts]
+        rnd = 0
+        while True:
+            active = [c for c in climbers if not c['done']]
+            if not active:
+                break
+            if rnd >= rounds or time.time() - t0 > budget:
+                self.log('%s用满%s，停在当前结果' % (stage, ' %d 秒' % budget if rnd < rounds else ' %d 步' % rounds))
+                break
+            self.phase_frac = progress_span * min(0.95, max(rnd / rounds, (time.time() - t0) / budget))
+            entries = [c['cur'] for c in active]
+            labels = [e['struct'] for e in entries]
+            mv = self._all('%s：第 %d 步，挑候选' % (stage, rnd + 1),
+                           [dict(op='moves', plan=e['plan'], full=full,
+                                 horizon=e['time'] if e.get('reached') else self.T) for e in entries], labels)
+            per = [[(m, apply_move(e['plan'], m)) for m in (x or {}).get('moves', [])] for e, x in zip(entries, mv)]
+            scanned = [True] * len(per)
+            if full:
+                # 按打分从高到低一小批一小批跑（换血统 / 显赫阵营等结构类改动排最后：全部组合验证时已经比过），一套里出现变好的就不再往下跑；
+                # 只有走到「改一项都不更好」时才会把全部候选跑完
+                per = [sorted(c, key=lambda x: (x[0]['k'] in STRUCT_MOVES, -(x[0]['g'] + x[0]['d']))) for c in per]
+                pos, found, fresh = [0] * len(per), [False] * len(per), 0
+                while time.time() - t0 <= budget:
+                    chunk = []
+                    for i, c in enumerate(per):
+                        if not found[i] and pos[i] < len(c):
+                            chunk += [p for _, p in c[pos[i]:pos[i] + SCAN_CHUNK]]
+                            pos[i] += SCAN_CHUNK
+                    if not chunk:
+                        break
+                    fresh += self._eval_many('%s：第 %d 步，整局跑 %%d 个候选' % (stage, rnd + 1), chunk)
+                    for i, (e, c) in enumerate(zip(entries, per)):
+                        if not found[i]:
+                            found[i] = any(improves(self.cache[plan_key(p)], e) for _, p in c[:pos[i]] if plan_key(p) in self.cache)
+                scanned = [pos[i] >= len(c) for i, c in enumerate(per)]
+                per = [c[:pos[i]] for i, c in enumerate(per)]
+            else:
+                fresh = self._eval_many('%s：第 %d 步，整局跑 %%d 个候选' % (stage, rnd + 1), [p for cands in per for _, p in cands])
+            per = [[(m, plan_key(p)) for m, p in cands] for cands in per]
+            n_c = sum(len(x) for x in per)
+            # 变好的几项依次叠加（前 2、前 3……项）
+            combo_of = []
+            for e, cands in zip(entries, per):
+                good = sorted(((self.cache[k], m) for m, k in cands if self.cache.get(k) and improves(self.cache[k], e)),
+                              key=lambda x: rank_of(x[0]))
+                combo_of.append(stack_moves(e['plan'], [m for _, m in good[:COMBINE_MAX]]))
+            self._eval_many('%s：第 %d 步，叠加 %%d 套' % (stage, rnd + 1), [p for combos in combo_of for _, p in combos])
+            combo_of = [[(ms, plan_key(p)) for ms, p in combos] for combos in combo_of]
+            # 走到「改一项都不更好」的：两两组合最接近变好的几项
+            pair_of = [[] for _ in active]
+            if full:
+                for i, (e, cands) in enumerate(zip(entries, per)):
+                    if not scanned[i] or any(self.cache.get(k) and improves(self.cache[k], e) for m, k in cands):
+                        continue
+                    self.local_cands[plan_key(e['plan'])] = cands
+                    near = [m for m, k in sorted(((m, k) for m, k in cands
+                                                  if self.cache.get(k, {}).get('ok') and m['k'] not in STRUCT_MOVES),
+                                                 key=lambda x: rank_of(self.cache[x[1]]))[:PAIR_N]]
+                    for a, b in itertools.combinations(near, 2):
+                        got = stack_moves(e['plan'], [a, b])
+                        if got and len(got[-1][0]) == 2:
+                            pair_of[i].append(got[-1])
+                self._eval_many('%s：第 %d 步，两两组合 %%d 套' % (stage, rnd + 1), [p for pairs in pair_of for _, p in pairs])
+                pair_of = [[(ms, plan_key(p)) for ms, p in pairs] for pairs in pair_of]
+            # 每套取最好的（单项、叠加或两两组合）
+            accepted, kicked = [], 0
+            for c, e, cands, combos, pairs, whole in zip(active, entries, per, combo_of, pair_of, scanned):
+                best, best_m = e, None
+                for m, k in cands + combos + pairs:
+                    r = self.cache.get(k)
+                    if r and improves(r, best):
+                        best, best_m = r, m
+                if best_m is not None:
+                    accepted.append((c, e, best, best_m))
+                elif not whole:
+                    continue                  # 时间用完、候选没跑完：停在这里
+                elif not full or c['kicks'] >= MAX_KICKS:
+                    c['done'] = True
+                else:
+                    # 跳出去：从接近变好的里随机改几项，从那里接着搜（结果不一定更好，不记）
+                    near = [m for m, k in sorted(((m, k) for m, k in cands if self.cache.get(k, {}).get('ok')),
+                                                 key=lambda x: rank_of(self.cache[x[1]]))[:KICK_POOL]]
+                    c['rng'].shuffle(near)
+                    got = stack_moves(e['plan'], near[:KICK_SIZE * 2])
+                    plan = next((p for ms, p in got if len(ms) >= KICK_SIZE), got[-1][1] if got else None)
+                    c['kicks'] += 1
+                    if plan is None:
+                        c['done'] = True
+                        continue
+                    c['kick_plan'] = plan
+                    kicked += 1
+            kick = [c for c in active if c.get('kick_plan')]
+            if kick:
+                self._eval_many('%s：第 %d 步，跳出 %%d 套' % (stage, rnd + 1), [c['kick_plan'] for c in kick])
+                for c in kick:
+                    r = self.cache.get(plan_key(c.pop('kick_plan')))
+                    if r and r.get('ok'):
+                        c['cur'] = dict(r, struct={x: r['plan'].get(x) for x in ('alignment', 'faction', 'prestige', 'bloodline')},
+                                        history=c['cur'].get('history'), refined=list(c['cur'].get('refined') or []) + ['（跳出）'],
+                                        estimate=c['cur'].get('estimate'))
+                    else:
+                        c['done'] = True
+            # 换上的：只有比这个结构已有的最好还好，才算贡献并记成结果
+            keep = []
+            for c, e, r, m in accepted:
+                steps = [move_text(y) for y in (m if isinstance(m, list) else [m])]
+                cur = dict(r, struct={x: r['plan'].get(x) for x in ('alignment', 'faction', 'prestige', 'bloodline')},
+                           history=list(e.get('history') or []) + [dict(round=stage, step='、'.join(steps), value=r['value'],
+                                                                         time=r['time'], reached=r['reached'])],
+                           refined=list(e.get('refined') or []) + steps, estimate=e.get('estimate'))
+                c['cur'] = cur
+                self.improved += 1
+                old = self.best_of.get(struct_key(r['plan']))
+                if old is None or improves(r, self.results[old]):
+                    keep.append((c, cur, steps))
+                elif not full:
+                    c['done'] = True          # 调优时换到了已经有更好结果的结构：并进去
+            if keep:
+                ex = self._all('%s：第 %d 步，算贡献' % (stage, rnd + 1), [dict(op='explain', plan=cur['plan']) for _, cur, _ in keep],
+                               [cur['struct'] for _, cur, _ in keep])
+                for (c, cur, steps), x in zip(keep, ex):
+                    new = self.record(dict(cur, contributions=(x or {}).get('contributions') or []), estimate=cur.get('estimate'))
+                    if new is not None:
+                        self.log('%s %s：%s → %s' % (stage, unit_label(new['struct']), '、'.join(steps), result_text(new)))
+            self.log('%s第 %d 步：%d 套，候选 %d 个（新跑 %d），%d 套变好%s' % (
+                stage, rnd + 1, len(active), n_c, fresh, len(accepted), '，%d 套跳出去重搜' % kicked if kicked else ''))
+            rnd += 1
+        self.unexplored += sum(1 for c in climbers if not c['done'] and not full)
+        return climbers
+
+    def _refine(self):
+        """3. 调优：总排名前几 + 每个阵营单位自己的第一。"""
+        live = self.best()
+        starts = [e['id'] for e in live[:REFINE_TOP]]
+        seen_units = set()
+        for e in live:
+            u = (e['struct']['alignment'], e['struct']['faction'])
+            if u not in seen_units:
+                seen_units.add(u)
+                if e['id'] not in starts:
+                    starts.append(e['id'])
+        reserve = min(20.0, self.refine_budget / 3)
+        budget = self.refine_budget - reserve
+        self._climb(3, '调优', starts, full=False, rounds=REFINE_ROUNDS, budget=budget,
+                    progress_span=budget / self.refine_budget if self.refine_budget else 1.0)
+
+    def _recombine(self):
+        """把跨血统/显赫验证过的研究组合整分支交换，突破一次只能改一项的限制。
+
+        从原调优预算预留最多 1/3、上限 20 秒（批次软预算），不无条件追加时间。
+        只接受精确整局更好的方案，已有最好结果始终保留。
+        """
+        if self.refine_budget <= 0:
+            return
+        budget = min(20.0, self.refine_budget / 3)
+        progress_start = 1 - budget / self.refine_budget
+        started = time.time()
+        for rnd in range(4):
+            if time.time() - started >= budget:
+                break
+            live = self.best()
+            donors = [e['plan'] for e in live if e['plan'].get('research')]
+            pending = {}
+            for e in live[:3]:
+                if not e['plan'].get('research'):
+                    continue
+                for branch, plan in recombination_candidates(e['plan'], donors):
+                    key = plan_key(plan)
+                    if key not in self.cache:
+                        pending.setdefault(key, (e, branch, plan))
+            if not pending:
+                break
+            self.phase = 3
+            self.phase_frac = progress_start + (1 - progress_start) * min(0.95, (time.time() - started) / budget)
+            self._eval_many('研究分支交叉：整局跑 %d 套', [p for _, _, p in pending.values()])
+            winners = {}
+            for key, (parent, branch, plan) in pending.items():
+                r = self.cache.get(key)
+                if not r or not improves(r, parent):
+                    continue
+                sk = struct_key(r['plan'])
+                incumbent = winners.get(sk)
+                if incumbent is None or improves(r, incumbent[0]):
+                    winners[sk] = (r, parent, branch)
+            if not winners:
+                self.log('研究分支交叉第 %d 轮：%d 套，没有更好的' % (rnd + 1, len(pending)))
+                break
+            picked = list(winners.values())
+            ex = self._all('研究分支交叉：计算贡献', [dict(op='explain', plan=r['plan']) for r, _, _ in picked],
+                           [{x: r['plan'].get(x) for x in ('alignment', 'faction', 'prestige', 'bloodline')}
+                            for r, _, _ in picked])
+            accepted = 0
+            for (r, parent, branch), explanation in zip(picked, ex):
+                step = '研究%s分支整体替换' % branch
+                hist = list(parent.get('history') or []) + [dict(round='研究分支交叉', step=step,
+                    value=r['value'], time=r['time'], reached=r['reached'])]
+                entry = self.record(dict(r, history=hist, refined=list(parent.get('refined') or []) + [step],
+                                         contributions=(explanation or {}).get('contributions') or []))
+                if entry is not None:
+                    accepted += 1
+                    self.improved += 1
+                    self.log('研究分支交叉 %s：%s → %s' % (unit_label(entry['struct']), step, result_text(entry)))
+            self.log('研究分支交叉第 %d 轮：%d 套，%d 套变好' % (rnd + 1, len(pending), accepted))
+            if not accepted:
+                break
+
+    def _sweep(self):
+        """4. 前几名全邻域检查（加两两组合、跳出重搜），时间用满为止。
+        最后各结构最好的那套如果做过全邻域检查（改一项都不更好），贡献换成整局实测。"""
+        if self.sweep_budget <= 0:          # 「快速」：不做逐项检查
+            return
+        starts = [e['id'] for e in self.best()[:SWEEP_TOP]]
+        self._climb(4, '逐项检查', starts, full=True, rounds=SWEEP_ROUNDS, budget=self.sweep_budget)
+        for e in list(self.best()):
+            cands = self.local_cands.get(plan_key(e['plan']))
+            if not cands:
+                continue
+            contrib = self.exact_contributions(e, cands)
+            new = dict({k: v for k, v in e.items() if k not in ('id', 'finished_at')}, contributions=contrib, checked=True)
+            # 同一套结果换成带实测贡献的一条（数值相同）
+            self.best_of.pop(struct_key(e['plan']), None)
+            self.superseded.add(e['id'])
+            entry = self.record(new, estimate=e.get('estimate'))
+            self.checked.append(entry['id'])
+            self.log('逐项检查 %s：所有「改一项」都整局跑过，没有更好的' % unit_label(entry['struct']))
+        self.phase_frac = 1.0
+
+    def exact_contributions(self, e, moves):
+        """每项去掉后整局跑：最高模式给「数值是去掉后的几倍」，最快模式给「去掉后用时是几倍」。"""
+        out = []
+        plan = e['plan']
+        for move, k in moves:
+            km = move['k']
+            if km == 'R-':
+                kind, item = '研究', move['rem']
+            elif km == 'M-':
+                kind, item = '佣兵', move['rem']
+            elif km == 'L-':
+                kind, item = '世系', plan.get('bloodline')
+            elif km == 'B' and move['to'] is None and plan.get('bloodline'):
+                kind, item = '血统', plan['bloodline']
+            elif km == 'P' and move['to'] is None and plan.get('prestige'):
+                kind, item = '显赫阵营', plan['prestige']
+            else:
+                continue
+            r = self.cache.get(k) or {}
+            ratio, path = None, '整局实测'
+            lost = [n for n in (e.get('picks') or {}) if n not in (r.get('picks') or {})] if r.get('ok') else []
+            if lost and kind not in ('血统', '世系', '显赫阵营'):
+                path = '去掉后选不上 ' + '、'.join(lost)
+            if not r.get('ok'):
+                path = '去掉后跑不成'
+            elif e.get('reached'):
+                if r.get('reached'):
+                    ratio = r['time'] / e['time'] if e['time'] else None
+                else:
+                    ratio, path = self.T / e['time'] if e['time'] else None, '去掉后到时间上限也达不到（至少）'
+            elif r.get('value'):
+                ratio = e['value'] / r['value']
+            if kind == '血统' and plan.get('lineage', True) is not False and e.get('lineage'):
+                path += '（含世系）'
+            out.append(dict(kind=kind, item=item, ratio=ratio, path=path, exact=True))
+        return sorted(out, key=lambda x: -(x['ratio'] or 0))
 
     def pool_size(self):
         return len(self.pool.procs)
 
     def stop(self):
         self.cancelled = True
-
-    def best(self):
-        ok = [r for r in self.results if r.get('ok')]
-        return sorted(ok, key=lambda r: rg_goal.rank_key(dict(ok=True, reached=r['reached'], time=r['time'], value=r['value'])))
 
     def status(self):
         now = time.time()
@@ -882,10 +1550,12 @@ class Optimize:
             for tag, since in sorted(list(pool.running.items()), key=lambda kv: kv[1]):
                 if tag < len(labels):
                     running.append(dict(labels[tag], seconds=round(now - since, 1)))
-        return dict(stage=self.stage, phase=self.phase, done=self.done_n, total=self.total_n, finished=self.finished,
-                    error=self.error, elapsed=now - self.started, entries=list(self.results), units=self.unit_stats(),
+        return dict(stage=self.stage, phase=self.phase, phase_frac=self.phase_frac, done=self.done_n, total=self.total_n,
+                    finished=self.finished, error=self.error, elapsed=now - self.started, entries=list(self.results),
+                    superseded=sorted(self.superseded), units=self.unit_stats(),
                     running=running, workers=len(pool.procs) if pool is not None else 0,
-                    verified=len(self.results), pruned=self.pruned, margin=self.margin, unexplored=self.unexplored,
+                    verified=len({struct_key(r.get('plan') or r.get('struct') or {}) for r in self.results}), runs=self.runs, improved=self.improved, checked=list(self.checked),
+                    pruned=self.pruned, margin=self.margin, unexplored=self.unexplored,
                     log=self.log_lines[-30:], log_total=len(self.log_lines))
 
     def unit_stats(self):
@@ -893,22 +1563,32 @@ class Optimize:
         out = []
         done = {(u['unit']['alignment'], u['unit']['faction']): u for u in list(self.units) if u.get('unit')}
         results = list(self.results)
+        gone = set(self.superseded)
         for u in units():
             key = (u['alignment'], u['faction'])
             res = done.get(key)
             mine = [r for r in results if r.get('struct') and (r['struct']['alignment'], r['struct']['faction']) == key]
-            ok = [r for r in mine if r.get('ok')]
-            best = min(ok, key=lambda r: rg_goal.rank_key(dict(ok=True, reached=r['reached'], time=r['time'], value=r['value']))) if ok else None
+            ok = [r for r in mine if r.get('ok') and r['id'] not in gone]
+            best = min(ok, key=rank_of) if ok else None
             rows = self.by_unit.get(key) or (res or {}).get('estimates') or []
             out.append(dict(u, state='waiting' if res is None else ('ready' if res.get('ok') else 'failed'),
                             note=None if res is None or res.get('ok') else res.get('note'),
-                            combos=len(rows), verified=len(mine),
+                            combos=len(rows), verified=len({struct_key(r.get('plan') or {}) for r in mine}),
                             estimate=max((r['estimate'] for r in rows), default=None),
                             ratio=self.ratio.get(key),
                             best=dict(id=best['id'], value=best['value'], time=best['time'], reached=best['reached'],
                                       bloodline=best['struct'].get('bloodline'), prestige=best['struct'].get('prestige'),
                                       lineage=best.get('lineage')) if best else None))
         return out
+
+
+def unit_label(s):
+    return '%s %s%s%s' % (s.get('alignment'), s.get('faction'), (' 血统 ' + s['bloodline']) if s.get('bloodline') else '',
+                          (' 显赫 ' + s['prestige']) if s.get('prestige') else '')
+
+
+def result_text(r):
+    return ('%.1f 秒达到' % r['time']) if r.get('reached') else '%.4g' % (r.get('value') or 0)
 
 
 FACTION_ZH = {'Fairy': '仙灵', 'Elven': '精灵', 'Angel': '天使', 'Goblin': '地精', 'Undead': '亡灵', 'Demon': '恶魔',
@@ -942,7 +1622,8 @@ def ui_status(status, request, translate, research_names, options, revision):
             skipped=r.get('skipped') or [], skipped_merc=r.get('skipped_merc') or [],
             picks={translate(k): v for k, v in (r.get('picks') or {}).items()},
             contributions=[dict(c, name=research_names.get(c['item'], c['item'])) for c in r.get('contributions') or []],
-            curve=r.get('curve') or [], rounds=len(r.get('history') or [])))
+            curve=r.get('curve') or [], rounds=len([h for h in r.get('history') or [] if not h.get('step')]),
+            refined=r.get('refined') or [], checked=bool(r.get('checked'))))
     units = []
     for u in status['units']:
         best = u.get('best')
@@ -966,6 +1647,8 @@ def main():
     ap.add_argument('--target', type=float, help='给了就按「最快达到」')
     ap.add_argument('--spell')
     ap.add_argument('--workers', type=int, default=rg_goal.WORKERS)
+    ap.add_argument('--refine-budget', type=float, default=REFINE_BUDGET, help='调优阶段最多几秒')
+    ap.add_argument('--sweep-budget', type=float, default=SWEEP_BUDGET, help='逐项检查阶段最多几秒')
     ap.add_argument('--output')
     args = ap.parse_args()
     if args.worker:
@@ -973,7 +1656,8 @@ def main():
         return
     command = [sys.executable, '-X', 'utf8', str(Path(__file__).resolve()), '--worker']
     init = dict(game_py=str(Path(args.game_py).resolve()), save_path=args.save)
-    opt = Optimize(command, init, goal=args.goal, T=args.at, target=args.target, spell=args.spell, workers=args.workers)
+    opt = Optimize(command, init, goal=args.goal, T=args.at, target=args.target, spell=args.spell, workers=args.workers,
+                   refine_budget=args.refine_budget, sweep_budget=args.sweep_budget)
     shown = 0
     last = 0
     while not opt.finished:
@@ -982,11 +1666,13 @@ def main():
             continue
         last = time.time()
         st = opt.status()
-        for line in st['log'][shown:] if len(opt.log_lines) > shown else []:
+        for line in opt.log_lines[shown:]:
             print(line, file=sys.stderr, flush=True)
         shown = len(opt.log_lines)
-        print('%s %d/%d  已验证 %d  跳过 %d  用时 %.0f 秒' % (st['stage'], st['done'], st['total'], st['verified'],
-                                                       st['pruned'], st['elapsed']), file=sys.stderr, flush=True)
+        print('%s %d/%d  结果 %d  整局跑 %d 次  用时 %.0f 秒' % (st['stage'], st['done'], st['total'], st['verified'],
+                                                          st['runs'], st['elapsed']), file=sys.stderr, flush=True)
+    for line in opt.log_lines[shown:]:
+        print(line, file=sys.stderr, flush=True)
     st = opt.status()
     if st['error']:
         print('出错：' + st['error'], file=sys.stderr)
@@ -998,7 +1684,10 @@ def main():
         if p.get('merc'):
             print('  佣兵：' + ','.join(p['merc']))
         print('  研究：' + ','.join(p['research']))
-        print('  贡献：' + '、'.join('%s ×%.2f（%s）' % (c['item'], c['ratio'], c['path']) for c in r['contributions'][:10] if c['ratio']))
+        if r.get('refined'):
+            print('  调优：' + ' → '.join(r['refined']))
+        print('  贡献%s：' % ('（整局实测）' if r.get('checked') else '') +
+              '、'.join('%s ×%.2f（%s）' % (c['item'], c['ratio'], c['path']) for c in r['contributions'][:10] if c['ratio']))
     if args.output:
         Path(args.output).write_text(json.dumps(dict(status=st, units=opt.units, results=opt.results), ensure_ascii=False,
                                                 indent=1, default=str), encoding='utf-8')

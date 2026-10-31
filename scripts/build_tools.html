@@ -12,12 +12,13 @@
       <label class="bx-field" id="gl-target-label">达到<input id="gl-target" type="text" inputmode="decimal" value="400万" placeholder="40000、4万、1e60"></label>
       <label class="bx-field"><span id="gl-limit-name">最长等多久</span><select id="gl-limit"><option value="60">1 分钟</option><option value="300" selected>5 分钟</option><option value="600">10 分钟</option><option value="1800">30 分钟</option><option value="3600">1 小时</option></select></label>
       <label class="bx-field">要求能用的法术<select id="gl-spell"><option value="">不限</option></select></label>
+      <label class="bx-field">搜索深度<select id="gl-depth"><option value="fast">快速（约 1～2 分钟）</option><option value="normal" selected>标准（约 4 分钟）</option><option value="deep">精细（约 15 分钟）</option></select></label>
       <button type="button" class="bx-go" id="gl-run" disabled>开始搜索</button>
     </div>
 
     <div class="gx-intro" id="gl-intro">
-      <p>从存档退位重开，按游戏公式找出和目标相关的升级、研究，每个阵营用自己整局跑出来的状态求最优组合，再整局验证。结果给出立场、阵营、血统、显赫阵营、佣兵和研究模板，可以直接存进游戏的模板库。</p>
-      <p>同时开 3 个低优先级计算进程，一般十几分钟；可以随时停，停下时保留已验证的。</p>
+      <p>从存档退位重开，联合比较研究、佣兵、血统、世系和显赫阵营的整套搭配。结合增长关系和试跑结果继续寻找更好的组合，排名使用独立整局模拟的实测值；最终前 3 名重新回放复核。研究和佣兵模板可以直接存进游戏的模板库。</p>
+      <p>同时开 6 个低优先级计算进程。快速约 1～2 分钟、标准约 4 分钟、精细约 15 分钟；长时目标的在途计算和最终复核可能稍晚完成。可以随时停，保留已有结果。</p>
     </div>
 
     <div class="gx-live" id="gl-live" hidden>
@@ -27,15 +28,16 @@
       </div>
       <div class="gx-side">
         <ol class="gx-steps" id="gl-steps">
-          <li data-phase="0"><b>启动计算进程</b><span>载入存档、准备 3 份游戏副本</span></li>
-          <li data-phase="1"><b>各阵营跑出自己的状态</b><span>12 个阵营各整局跑两次，估算所有血统 / 显赫阵营</span></li>
-          <li data-phase="2"><b>每个阵营验证一套</b><span>闭环整局验证估算最好的，得到实测 / 估算系数</span></li>
-          <li data-phase="3"><b>验证可能更好的</b><span>估算 × 系数 × 1.2 仍不如最好的就跳过</span></li>
+          <li data-phase="0"><b>启动计算进程</b><span>载入存档、准备 6 份游戏副本</span></li>
+          <li data-phase="1"><b>读取研究约束和增长关系</b><span>按当前存档确定可选研究、名额与预算</span></li>
+          <li data-phase="2"><b>各结构独立整局模拟</b><span>不同阵营、血统和显赫组合分别从退位开始试跑</span></li>
+          <li data-phase="3"><b>整套方案联合搜索</b><span>结合增长关系和试跑结果更新整套研究、佣兵及世系</span></li>
+          <li data-phase="4"><b>最佳方案精确复核</b><span>前 3 名重新独立跑一遍，核对数值、购买记录和增长曲线</span></li>
         </ol>
         <div class="gx-progress"><i id="gl-progress"></i></div>
         <div class="gx-tiles">
           <div><span>已验证</span><strong id="gl-t-verified">0</strong></div>
-          <div><span>跳过</span><strong id="gl-t-pruned">0</strong></div>
+          <div><span>整局跑</span><strong id="gl-t-pruned">0</strong></div>
           <div><span>用时</span><strong id="gl-t-elapsed">0 秒</strong></div>
         </div>
         <div class="gx-ticker" id="gl-ticker" aria-live="polite"></div>
