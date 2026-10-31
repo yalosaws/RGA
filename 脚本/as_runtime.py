@@ -51,6 +51,13 @@ class Cnt(Exception):
 
 # ------------------------------------------------------------------ 基础转换
 def T(x):
+    t = type(x)
+    if t is bool:
+        return x
+    if t is float:
+        return not (x == 0 or x != x)
+    if t is int:
+        return x != 0
     if x is None or x is UNDEFINED:
         return False
     if x is True or x is False:
@@ -65,6 +72,9 @@ def T(x):
 
 
 def tonum(x):
+    t = type(x)
+    if t is float or t is int:
+        return x
     if x is UNDEFINED:
         return NaN
     if isinstance(x, bool):
@@ -93,6 +103,8 @@ def tonum(x):
 
 
 def toint(x):
+    if type(x) is int and -2147483648 <= x <= 2147483647:
+        return x
     v = tonum(x)
     if isinstance(v, int):
         return ((v + 2 ** 31) % 2 ** 32) - 2 ** 31
@@ -103,6 +115,8 @@ def toint(x):
 
 
 def touint(x):
+    if type(x) is int and 0 <= x <= 4294967295:
+        return x
     v = tonum(x)
     if isinstance(v, float):
         if v != v or v in (INF, -INF):
@@ -135,11 +149,12 @@ def tostr(x):
     return str(x)
 
 
-def tobool(x):
-    return T(x)
+tobool = T
 
 
 def to_number(x):
+    if type(x) is float:
+        return x
     try:
         return float(tonum(x))
     except OverflowError:
@@ -151,6 +166,11 @@ def slot_string(x):
 
 
 def strict_eq(a, b):
+    ta, tb = type(a), type(b)
+    if (ta is int or ta is float) and (tb is int or tb is float):
+        return a == b
+    if ta is str and tb is str:
+        return a == b
     scalar = (bool, int, float, str, type(None), _Undefined)
     if not isinstance(a, scalar) or not isinstance(b, scalar):
         return a is b
@@ -160,6 +180,11 @@ def strict_eq(a, b):
 
 
 def eq(a, b):
+    ta, tb = type(a), type(b)
+    if (ta is int or ta is float) and (tb is int or tb is float):
+        return a == b
+    if ta is str and tb is str:
+        return a == b
     if a is UNDEFINED or b is UNDEFINED:
         return a is b or a is None or b is None
     if strict_eq(a, b):
@@ -178,11 +203,17 @@ def eq(a, b):
 
 
 def slot_value(ty, value):
-    return {'int': toint, 'uint': touint, 'Number': to_number,
-            'Boolean': tobool, 'String': slot_string}.get(ty, lambda x: x)(value)
+    f = _SLOT_CONVERT.get(ty)
+    return value if f is None else f(value)
+
+
+_SLOT_CONVERT = {'int': toint, 'uint': touint, 'Number': to_number, 'Boolean': tobool, 'String': slot_string}
 
 
 def add(a, b):
+    ta, tb = type(a), type(b)
+    if (ta is int or ta is float) and (tb is int or tb is float):
+        return a + b
     if isinstance(a, str) or isinstance(b, str):
         return tostr(a) + tostr(b)
     if isinstance(a, (int, float)) and isinstance(b, (int, float)):
@@ -388,7 +419,32 @@ class Arr(list):
         return self
 
     def sortOn(self, key, opts=0):
-        list.sort(self, key=lambda o: idx_get(o, key))
+        # AS3 Array.sortOn：键可以是字段名数组，选项可以逐字段给（1 不分大小写、2 降序、16 按数值）
+        import functools
+        keys = list(key) if isinstance(key, list) else [key]
+        if isinstance(opts, list):
+            flags = [toint(o) for o in opts] + [0] * len(keys)
+        else:
+            flags = [toint(opts)] * len(keys)
+
+        def field(o, k, f):
+            v = idx_get(o, k)
+            if f & 16:
+                return tonum(v)
+            v = tostr(v)
+            return v.lower() if f & 1 else v
+
+        def cmp(a, b):
+            for i, k in enumerate(keys):
+                f = flags[i]
+                x, y = field(a, k, f), field(b, k, f)
+                c = (x > y) - (x < y)
+                if f & 2:
+                    c = -c
+                if c:
+                    return c
+            return 0
+        list.sort(self, key=functools.cmp_to_key(cmp))
         return self
 
     def forEach(self, fn, *a):
@@ -493,6 +549,10 @@ def keys(c):
 
 
 def idx_get(o, k):
+    t = type(o)
+    if (t is TypedVector or t is Arr) and type(k) is int:
+        # 同 Arr.__getitem__ 的整数分支
+        return list.__getitem__(o, k) if 0 <= k < len(o) else UNDEFINED
     if isinstance(o, list):
         return o[k] if not isinstance(o, Arr) else o[k]
     if isinstance(o, dict):
@@ -797,35 +857,72 @@ class StaticProp:
 
     def __init__(self, name, fget=None, fset=None):
         self.name, self.fget, self.fset = name, fget, fset
+        self._owner = {}
+
+    def _store(self, cls):
+        try:
+            return self._owner[cls]
+        except KeyError:
+            store = None
+            for c in cls.__mro__:
+                sv = c.__dict__.get('_sv')
+                if sv is not None and self.name in sv:
+                    store = sv
+                    break
+            self._owner[cls] = store
+            return store
 
     def __get__(self, cls, meta=None):
-        if cls is None:
-            return self
-        for c in cls.__mro__:
-            sv = c.__dict__.get('_sv')
-            if sv is not None and self.name in sv:
-                return sv[self.name]
+        try:
+            sv = self._owner[cls]
+        except KeyError:
+            if cls is None:
+                return self
+            sv = self._store(cls)
+        if sv is not None:
+            return sv[self.name]
         if self.fget is None:
             return None
         return self.fget(cls)
 
     def __set__(self, cls, v):
-        for c in cls.__mro__:
-            sv = c.__dict__.get('_sv')
-            if sv is not None and self.name in sv:
-                sv[self.name] = v
-                return
+        sv = self._store(cls)
+        if sv is not None:
+            sv[self.name] = v
+            return
         if self.fset is not None:
             self.fset(cls, v)
 
 
+def _class_cache(cls):
+    # 每个类自己的查找缓存（随这份游戏副本一起释放）；存的是类定义里固定的表项。
+    cache = cls.__dict__.get('_lookup_cache')
+    if cache is None:
+        cache = {}
+        type.__setattr__(cls, '_lookup_cache', cache)
+    return cache
+
+
+def _type_of(cls, name, table):
+    cache = _class_cache(cls)
+    key = (table, name)
+    try:
+        return cache[key]
+    except KeyError:
+        ty = None
+        for base in cls.__mro__:
+            ty = base.__dict__.get(table, {}).get(name)
+            if ty is not None:
+                break
+        cache[key] = ty
+        return ty
+
+
 class AsMeta(type):
     def __setattr__(cls, name, value):
-        for base in cls.__mro__:
-            ty = base.__dict__.get('_stypes', {}).get(name)
-            if ty is not None:
-                value = slot_value(ty, value)
-                break
+        ty = _type_of(cls, name, '_stypes')
+        if ty is not None:
+            value = slot_value(ty, value)
         super().__setattr__(name, value)
 
     def hasOwnProperty(cls, n):
@@ -833,11 +930,22 @@ class AsMeta(type):
 
 
 def _idef_lookup(obj, n):
-    for c in type(obj).__mro__:
-        d = c.__dict__.get('_idef')
-        if d is not None and n in d:
-            return True, d[n]
-    return False, None
+    cls = type(obj)
+    cache = _class_cache(cls)
+    key = ('_idef', n)
+    try:
+        d = cache[key]
+    except KeyError:
+        d = None
+        for c in cls.__mro__:
+            table = c.__dict__.get('_idef')
+            if table is not None and n in table:
+                d = table
+                break
+        cache[key] = d
+    if d is None:
+        return False, None
+    return True, d[n]
 
 
 class AsObject(metaclass=AsMeta):
@@ -845,14 +953,18 @@ class AsObject(metaclass=AsMeta):
         pass
 
     def __setattr__(self, name, value):
-        for base in type(self).__mro__:
-            ty = base.__dict__.get('_itypes', {}).get(name)
-            if ty is not None:
-                value = slot_value(ty, value)
-                break
+        ty = _type_of(type(self), name, '_itypes')
+        if ty is not None:
+            value = slot_value(ty, value)
         object.__setattr__(self, name, value)
 
     def __getattr__(self, n):
+        # 未赋值的实例字段取类里声明的默认值；常见情况直接查本类缓存
+        cache = type(self).__dict__.get('_lookup_cache')
+        if cache is not None:
+            d = cache.get(('_idef', n))
+            if d is not None:
+                return d[n]
         if n.startswith('__'):
             raise AttributeError(n)
         ok, v = _idef_lookup(self, n)

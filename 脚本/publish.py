@@ -89,7 +89,9 @@ def publish(a):
     for root, _, files in os.walk(APP_DIR):  # 自动点击不能进发布版
         for f in files:
             if f.endswith(('.js', '.html', '.css')):
-                assert 'click_status' not in open(os.path.join(root, f), encoding='utf-8').read(), '发布版界面里有自动点击：' + f
+                text = open(os.path.join(root, f), encoding='utf-8').read()
+                assert 'click_status' not in text, '发布版界面里有自动点击：' + f
+                assert 'timeline_start' not in text, '发布版界面里有构筑辅助（只给自用版）：' + f
     shutil.rmtree(OUT, ignore_errors=True)
     shutil.copytree(SITE, OUT)
     k = content.key()

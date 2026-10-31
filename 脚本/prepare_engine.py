@@ -21,11 +21,18 @@ def prepare():
                       (ROOT / 'build/rg_installed_game.py.manifest.json', 'provenance.json'),
                       (ROOT / '资料/只读内存布局（当前安装版）.json', 'live-profile.json'),
                       (ROOT / 'build/client-audit/member-names.json', 'member-names.json'),
-                      (ROOT / '资料/客户端研究对照.json', 'research.json')]:
+                      (ROOT / '资料/客户端研究对照.json', 'research.json'),
+                      (ROOT / '资料/依赖图（客户端4.3.14）.json', 'depgraph.json')]:
         shutil.copyfile(src, destination / name)
-    for name in ('as2py', 'as_runtime', 'rg_sim', 'rg_growth', 'simulation_state',
-                 'game_memory_probe', 'avm2_memory', 'read_game_live', 'live_state', 'live_snapshot'):
+    for name in ('as2py', 'as_runtime', 'rg_sim', 'rg_growth', 'rg_timeline', 'rg_goal', 'rg_optimize', 'simulation_state',
+                 'game_memory_probe', 'avm2_memory', 'read_game_live', 'live_state', 'live_snapshot', 'rg_native'):
         shutil.copyfile(ROOT / '脚本' / (name + '.py'), destination / (name + '.py'))
+    # 原生（C++）计算引擎：转写 + 增量编译（最多 3 个低优先级进程），和 Python 版逐 tick 一致，快一百多倍
+    import build_native
+    pyd = build_native.build()
+    for old in destination.glob('rgcore*.pyd'):
+        old.unlink()
+    shutil.copyfile(pyd, destination / pyd.name)
     from live_layout import generate
     (destination / 'live-layout.json').write_text(json.dumps(generate(), ensure_ascii=False), encoding='utf-8')
     py_compile.compile(str(destination / 'game.py'), doraise=True,

@@ -20,6 +20,7 @@ from as2py import mangle
 class Simulation:
     def __init__(self, game_py, sol_path=rg_sim.SOL, **context):
         self.preserve_live_caches = False
+        self.game_py = game_py
         self.ns, self.G, self.g = rg_sim.make_game(game_py, sol_path, require_pcode=True, **context)
         self.core = self.ns['S__23__21__21_']
         self.core_names = rg_sim._real2obf()

@@ -146,6 +146,8 @@ class Engine:
             self.member_maps.setdefault(mangle(cls), {})[real] = mangle(member if member == real else '§' + member + '§')
         self.sim = None
         self.revision = None
+        self.timeline = None
+        self.live_snapshot = None
 
     def translate(self, text, *args):
         text = str(text)
@@ -232,6 +234,7 @@ class Engine:
         self.save, self.timestamp, self.revision = save, timestamp, revision
         sim = reuse or self.new_sim()
         self.live_mode = live is not None
+        self.live_snapshot = live
         if live is not None:
             from live_snapshot import LiveSnapshot
             LiveSnapshot(sim, live).apply()
@@ -394,8 +397,254 @@ class Engine:
         self.comparisons[cache_key] = deepcopy(result)
         return result
 
+    # ---- 连续模拟：在单独的一份游戏副本上分段推进，每段几秒，界面轮询进度。
+    # 和查询、即时试算用的副本互不影响；结束或中止后直接丢掉。
+    def timeline_start(self, request):
+        import math
+        import importlib
+        self.require(request)
+        self.timeline_end()
+        options = request.get('options')
+        if not isinstance(options, dict):
+            raise ValueError('模拟设置格式错误')
 
-def worker_main():
+        def number(name, low, high, default):
+            value = options.get(name, default)
+            if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value) or not low <= value <= high:
+                raise ValueError('模拟设置超出范围：' + name)
+            return value
+        seconds = number('seconds', 1, 24 * 3600, 300)
+        sample = number('sample', 1, 3600, max(5, seconds / 60))
+        interval = number('buy_interval', 0, 3600, 10)
+        clicks = number('clicks', 0, 30, 0)
+        mode = options.get('building_mode', 'max')
+        if mode not in ('max', 'save'):
+            raise ValueError('建筑购买数量设置无效')
+        Timeline = importlib.import_module('rg_timeline').Timeline
+        sim = self.new_sim()
+        if self.live_snapshot is not None:
+            from live_snapshot import LiveSnapshot
+            LiveSnapshot(sim, self.live_snapshot).apply()
+            sim.preserve_live_caches = True
+        try:
+            timeline = Timeline(sim, buy_interval=interval or None,
+                                buy_upgrades=bool(options.get('buy_upgrades', True)),
+                                buy_buildings=bool(options.get('buy_buildings', True)),
+                                building_mode=mode, clicks_per_second=clicks)
+            spell_ends = []
+            if self.live_snapshot is None:
+                # 存档不存法术结束帧，按施放后的那份存档还原（实时快照直接读到了游戏里的结束帧）
+                spell_ends = self._restore_spell_ends(sim, request.get('history'))
+                # 自动存档写在 tick 中间，先补完那一 tick，和不中断的游戏对齐（实时快照不在 tick 中间）
+                timeline.finish_save_tick()
+            timeline.begin(seconds, sample_every=sample)
+        except Exception:
+            self.timeline_end()
+            raise
+        self.timeline, self.timeline_sent, self.timeline_revision = timeline, (0, 0), self.revision
+        return dict(self.timeline_step(dict(revision=self.revision, budget=1)), spell_ends=spell_ends)
+
+    def _restore_spell_ends(self, sim, history):
+        import importlib
+        import math
+        import random
+        timeline_module = importlib.import_module('rg_timeline')
+        if history is None:
+            history = []
+        if not isinstance(history, list) or len(history) > 200:
+            raise ValueError('存档记录格式错误')
+        saves, entries = {}, []
+        for item in history:
+            if not isinstance(item, dict):
+                raise ValueError('存档记录格式错误')
+            save, ts = item.get('save'), item.get('timestamp')
+            if not isinstance(save, str) or len(save) > 2_000_000 or isinstance(ts, bool) \
+                    or not isinstance(ts, (int, float)) or not math.isfinite(ts):
+                raise ValueError('存档记录格式错误')
+            key = hashlib.sha256((save + '\n' + str(ts)).encode()).hexdigest()
+            saves[key] = (save, ts)
+            entries.append((ts, key))
+        entries.sort()
+        cache = self.__dict__.setdefault('spell_timer_cache', {})
+
+        def timers_of(key):
+            if key not in cache:
+                save, ts = saves[key]
+                # 载入旧存档不能动模拟用的随机数，否则结果取决于缓存命中与否
+                state = random.getstate()
+                try:
+                    old = self.Simulation(self.assets / 'game.py', encoded_save=save, timestamp=ts)
+                finally:
+                    random.setstate(state)
+                if len(cache) >= 200:
+                    cache.pop(next(iter(cache)))
+                cache[key] = timeline_module.spell_timers(old)
+            return cache[key]
+        rows = timeline_module.restore_spell_ends(sim, self.timestamp, entries, timers_of)
+        return [dict(name=self.translate(row['name']), corrected=row['source'] is not None,
+                     loaded_end=row['loaded_end'], end=row['end'], source=row['source']) for row in rows]
+
+    def timeline_require(self, request):
+        if self.timeline is None or request.get('revision') != self.timeline_revision:
+            raise ValueError('没有进行中的模拟')
+
+    def timeline_step(self, request):
+        self.timeline_require(request)
+        timeline = self.timeline
+        if timeline is None:
+            raise ValueError('没有进行中的模拟')
+        budget = request.get('budget', 5)
+        if isinstance(budget, bool) or not isinstance(budget, (int, float)) or not 0 < budget <= 20:
+            budget = 5
+        try:
+            timeline.step(wall_budget=budget)
+        except Exception:
+            self.timeline_end()
+            raise
+        return self._timeline_payload(final=timeline.done)
+
+    def timeline_stop(self, request):
+        self.timeline_require(request)
+        return self._timeline_payload(final=True)
+
+    def _timeline_payload(self, final):
+        timeline = self.timeline
+        samples_sent, events_sent = self.timeline_sent
+        names = lambda d: {self.translate(k): v for k, v in d.items()}
+        samples = []
+        for row in timeline.samples[samples_sent:]:
+            row = dict(row, buildings=names(row['buildings']), spells=[self.translate(x) for x in row['spells']])
+            samples.append(row)
+        events = []
+        for event in timeline.events[events_sent:]:
+            event = dict(event)
+            if 'name' in event:
+                event['name'] = self.translate(event['name'])
+            if 'upgrades' in event:
+                event['upgrades'] = [self.translate(x) for x in event['upgrades']]
+            if 'buildings' in event:
+                event['buildings'] = names(event['buildings'])
+            events.append(event)
+        self.timeline_sent = len(timeline.samples), len(timeline.events)
+        out = dict(revision=self.timeline_revision, progress=timeline.progress, done=final,
+                   seconds=timeline.seconds - timeline.samples[0]['t'], wall_seconds=timeline.wall,
+                   samples=samples, events=events)
+        if final:
+            result = timeline.result()
+            out.update(growth=result['growth'], settings=result['settings'], stopped=result['stopped'],
+                       finished=timeline.done)
+            self.timeline_end()
+        return out
+
+    def timeline_end(self):
+        """丢掉模拟用的游戏副本。"""
+        self.timeline = None
+
+    # ---- 按目标找 build：另起几个试跑进程，在后台线程里搜索，界面轮询 goal_status。
+    def goal_start(self, request):
+        """按目标求最优 build（rg_optimize）：另起 3 个低优先级进程，在后台线程里协调，界面轮询 goal_status。"""
+        import importlib
+        import math
+        self.require(request)
+        if self.live_snapshot is not None:
+            raise ValueError('按目标找 build 要从存档退位重开，请先点「使用存档计算」')
+        self.goal_stop(dict(request, quiet=True))
+        rg_goal = importlib.import_module('rg_goal')
+        rg_optimize = importlib.import_module('rg_optimize')
+        options = request.get('options')
+        if not isinstance(options, dict):
+            raise ValueError('搜索设置格式错误')
+        goal = options.get('goal')
+        if goal not in rg_goal.GOALS:
+            raise ValueError('未知目标')
+        mode = options.get('mode', 'reach')
+        if mode not in ('reach', 'max'):
+            raise ValueError('未知搜索方式')
+        limit = options.get('limit', 300)
+        target = options.get('target') if mode == 'reach' else None
+        for value, low, high in ((limit, 10, 3600),) + (((target, 0, 1e300),) if mode == 'reach' else ()):
+            if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value) or not low < value <= high:
+                raise ValueError('搜索设置超出范围')
+        spell = options.get('spell') or None
+        if spell is not None and (not isinstance(spell, str) or spell not in {s.S_1i for s in self.sim.G.S_0_21_A}):
+            raise ValueError('未知法术')
+        init = dict(game_py=str(self.assets / 'game.py'), save=self.save, timestamp=self.timestamp,
+                    research_json=str(self.assets / 'research.json'), graph=str(self.assets / 'depgraph.json'))
+        self.goal = rg_optimize.Optimize(_worker_command('--opt-worker'), init, goal=goal, T=float(limit),
+                                         target=float(target) if target is not None else None, spell=spell,
+                                         workers=rg_goal.WORKERS)
+        self.goal_revision = self.revision
+        self.goal_options = dict(goal=goal, mode=mode, target=target, limit=limit, spell=spell, workers=rg_goal.WORKERS)
+        return self.goal_status(dict(revision=self.revision))
+
+    def goal_status(self, request):
+        search = getattr(self, 'goal', None)
+        if search is None:
+            raise ValueError('没有进行中的搜索')
+        status = search.status()
+        if not hasattr(self, 'research_names'):
+            rows = json.loads((self.assets / 'research.json').read_text(encoding='utf-8'))
+            self.research_names = {row['code']: self.translate(row['name']) for row in rows}
+        out = rg_optimize_module().ui_status(status, request, self.translate, self.research_names, self.goal_options, self.goal_revision)
+        if status['finished']:
+            self.goal = None
+        return out
+
+    def goal_stop(self, request):
+        search = getattr(self, 'goal', None)
+        if search is None:
+            if request.get('quiet'):
+                return {}
+            raise ValueError('没有进行中的搜索')
+        search.stop()
+        if request.get('quiet'):
+            self.goal = None
+            return {}
+        return self.goal_status(request)
+
+
+def rg_optimize_module():
+    import importlib
+    return importlib.import_module('rg_optimize')
+
+
+def _calculation_assets():
+    assets = Path(sys._MEIPASS) / 'calculation' if getattr(sys, 'frozen', False) else ROOT / 'build' / 'calculation'
+    if str(assets) not in sys.path:
+        sys.path.insert(0, str(assets))
+    return assets
+
+
+def _worker_command(flag):
+    command = [sys.executable]
+    if not getattr(sys, 'frozen', False):
+        command += ['-X', 'utf8', str(ROOT / '应用' / 'rg_app.py')]
+    return command + [flag]
+
+
+def opt_worker_main():
+    """按目标求最优 build 的子进程（rg_optimize）。"""
+    assets = _calculation_assets()
+    import rg_sim
+    rg_sim._real2obf.cache_clear()
+    rg_sim.MEMBER_NAMES = assets / 'member-names.json'
+    import rg_optimize
+    source, sink = _std_pipes()
+    rg_optimize.worker_main(source, sink)
+
+
+def goal_worker_main():
+    """按目标找 build 的试跑子进程：每个进程一份游戏副本，按行收发 JSON。"""
+    assets = _calculation_assets()
+    import rg_sim
+    rg_sim._real2obf.cache_clear()
+    rg_sim.MEMBER_NAMES = assets / 'member-names.json'
+    import rg_goal
+    source, sink = _std_pipes()
+    rg_goal.worker_main(source, sink)
+
+
+def _std_pipes():
     # 收发都按 UTF-8 字节读写，不经过 Python 文本流：打包版子进程的标准流默认是系统编码（中文 Windows 为 GBK），
     # 遇到零宽字符之类会崩，改编码设置在打包版里也不可靠
     if getattr(sys, 'frozen', False) and sys.stdin is None:
@@ -414,6 +663,11 @@ def worker_main():
         sys.stderr = open(os.devnull, 'w', encoding='utf-8')
     else:
         source, sink = sys.stdin.buffer, sys.stdout.buffer
+    return source, sink
+
+
+def worker_main():
+    source, sink = _std_pipes()
     engine = engine_error = None
     for raw in source:
         try:
@@ -430,7 +684,8 @@ def worker_main():
                     engine_error = error
                     raise
             op = request.get('op')
-            if op not in ('load', 'load_live', 'describe', 'compare'):
+            if op not in ('load', 'load_live', 'describe', 'compare', 'timeline_start', 'timeline_step', 'timeline_stop',
+                          'goal_start', 'goal_status', 'goal_stop'):
                 raise ValueError('未知计算请求')
             result = dict(ok=True, **getattr(engine, op)(request))
             json.dumps(result, allow_nan=False)  # 非有限值明确报错，不能在界面悄悄变成 0。

@@ -1,0 +1,5747 @@
+{
+ "max_mana": [
+  {
+   "cls": "DruidHeritage",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 140
+  },
+  {
+   "cls": "FairyUpgrade9",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 208
+  },
+  {
+   "cls": "DruidUpgrade4",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 142
+  },
+  {
+   "cls": "DragonUpgrade7",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [
+    "fc"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 595
+  },
+  {
+   "cls": "FacelessBloodline",
+   "kind": "血统",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [
+    "mana_regen"
+   ],
+   "others": [
+    "Utilities.hasBloodline"
+   ],
+   "notes": [],
+   "sid": 183
+  },
+  {
+   "cls": "SpellcraftVacuumancy",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getTimeStat"
+   ],
+   "notes": [],
+   "sid": 130903
+  },
+  {
+   "cls": "CraftsmanshipOverload",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getResearchValue"
+   ],
+   "notes": [],
+   "sid": 143116
+  },
+  {
+   "cls": "WarfareRampage",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Formulas.getTrophyNum"
+   ],
+   "notes": [],
+   "sid": 132005
+  },
+  {
+   "cls": "Premeditation",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 357
+  },
+  {
+   "cls": "ManaWaste",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 646
+  },
+  {
+   "cls": "Reincarnation1",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Formulas.applyReincarnationBonus"
+   ],
+   "notes": [
+    "R 条件"
+   ],
+   "sid": 36
+  },
+  {
+   "cls": "Reincarnation2",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Formulas.applyReincarnationBonus"
+   ],
+   "notes": [
+    "R 条件"
+   ],
+   "sid": 1204
+  },
+  {
+   "cls": "DemonChallenge2",
+   "kind": "挑战",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 83
+  },
+  {
+   "cls": "RubyPower",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getFullStat"
+   ],
+   "notes": [],
+   "sid": 480
+  },
+  {
+   "cls": "ValentineContainer",
+   "kind": "其他",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getFullStat"
+   ],
+   "notes": [
+    "活动期间"
+   ],
+   "sid": 0
+  },
+  {
+   "cls": "DruidChallenge3",
+   "kind": "挑战",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 487
+  },
+  {
+   "cls": "FacelessChallenge2",
+   "kind": "挑战",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 491
+  },
+  {
+   "cls": "SpellcraftHeirlooms",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getArtifact"
+   ],
+   "notes": [],
+   "sid": 153722
+  },
+  {
+   "cls": "DwarvenUpgrade9",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 161
+  },
+  {
+   "cls": "GiantEgg",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 560
+  },
+  {
+   "cls": "SeraphimUpgrade2",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 730
+  },
+  {
+   "cls": "DivineTransubstantiation",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getArtifact"
+   ],
+   "notes": [],
+   "sid": 143915
+  },
+  {
+   "cls": "FairyUpgrade10",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 777
+  },
+  {
+   "cls": "UndeadSet",
+   "kind": "遗物契印",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Formulas.getOfflineBonus",
+    "Utilities.applySetBonus",
+    "Utilities.hasSet"
+   ],
+   "notes": [],
+   "sid": 838
+  },
+  {
+   "cls": "TitanFaction04",
+   "kind": "联合",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getTimeStat",
+    "Utilities.hasUnion"
+   ],
+   "notes": [
+    "R 条件"
+   ],
+   "sid": 780
+  },
+  {
+   "cls": "MakersUpgrade5",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [
+    "fc"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 920
+  },
+  {
+   "cls": "DruidUpgrade11",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.applyTimeBonuses"
+   ],
+   "notes": [],
+   "sid": 811
+  },
+  {
+   "cls": "SpellcraftInvocation",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 205231
+  },
+  {
+   "cls": "SpellcraftEncompass",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 209234
+  },
+  {
+   "cls": "DemonUpgrade6",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 109
+  },
+  {
+   "cls": "AngelUpgrade7",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getAlignmentTime"
+   ],
+   "notes": [],
+   "sid": 52
+  },
+  {
+   "cls": "DragonChallenge2",
+   "kind": "挑战",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 638
+  },
+  {
+   "cls": "DjinnChallenge2",
+   "kind": "挑战",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Formulas.getTrophyNum"
+   ],
+   "notes": [],
+   "sid": 990
+  },
+  {
+   "cls": "ManaMatrix",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 505
+  },
+  {
+   "cls": "TitanChallenge3",
+   "kind": "挑战",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "fc"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 497
+  },
+  {
+   "cls": "AngelChallenge2",
+   "kind": "挑战",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 79
+  },
+  {
+   "cls": "SpellCataclysm",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 585
+  },
+  {
+   "cls": "DivineTransubstantiation",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getArtifact"
+   ],
+   "notes": [],
+   "sid": 143915
+  },
+  {
+   "cls": "AlchemyElixirs",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getResearchValue"
+   ],
+   "notes": [],
+   "sid": 152122
+  },
+  {
+   "cls": "HeldenSterbenNicht",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 635
+  },
+  {
+   "cls": "AngelUpgrade10",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 771
+  },
+  {
+   "cls": "FightTheGoblinArmy",
+   "kind": "可见",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getFullStat"
+   ],
+   "notes": [],
+   "sid": 735
+  },
+  {
+   "cls": "HalloweenGhost",
+   "kind": "奖杯",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "clicks"
+   ],
+   "others": [
+    "Utilities.getMonsterLevel"
+   ],
+   "notes": [],
+   "sid": null
+  },
+  {
+   "cls": "AngelPerk4",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [],
+   "notes": [
+    "不计入实际上限"
+   ],
+   "sid": 794
+  },
+  {
+   "cls": "UndeadPerk3",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 693
+  },
+  {
+   "cls": "DrowPerk1",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 659
+  },
+  {
+   "cls": "WarfareCataclysm",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "clicks"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 163227
+  },
+  {
+   "cls": "RubyPower",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getFullStat"
+   ],
+   "notes": [],
+   "sid": 480
+  },
+  {
+   "cls": "DwarvenUpgrade12",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getTimeStat"
+   ],
+   "notes": [],
+   "sid": 848
+  },
+  {
+   "cls": "ArtOfTheCrow",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "mana_regen",
+    "production"
+   ],
+   "others": [
+    "Utilities.getExcavation"
+   ],
+   "notes": [
+    "第二立场条件"
+   ],
+   "sid": 854
+  },
+  {
+   "cls": "DrowFaction04",
+   "kind": "联合",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [
+    "Utilities.hasUnion"
+   ],
+   "notes": [
+    "第二立场条件"
+   ],
+   "sid": 846
+  },
+  {
+   "cls": "DragonFaction04",
+   "kind": "联合",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getLineageLevel",
+    "Utilities.hasUnion"
+   ],
+   "notes": [
+    "第二立场条件"
+   ],
+   "sid": 855
+  },
+  {
+   "cls": "AdvancedTitanHeritage",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [
+    "Utilities.getAdvancedHeritageBonus"
+   ],
+   "notes": [],
+   "sid": 871
+  },
+  {
+   "cls": "DjinnUpgrade3",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getDigitSum"
+   ],
+   "notes": [],
+   "sid": 903
+  },
+  {
+   "cls": "MakersHeritage",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 924
+  },
+  {
+   "cls": "DjinnMask",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 926
+  },
+  {
+   "cls": "AngelUpgrade12",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "mana_regen",
+    "spells"
+   ],
+   "others": [
+    "Game.getSpell"
+   ],
+   "notes": [],
+   "sid": 807
+  },
+  {
+   "cls": "DruidUpgrade11",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getOfflineTime"
+   ],
+   "notes": [],
+   "sid": 811
+  },
+  {
+   "cls": "IdilliumOrderPerk3",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 1020
+  },
+  {
+   "cls": "SpellcraftInvocation",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 205231
+  },
+  {
+   "cls": "CraftsmanshipGenuineness",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getLineageMin"
+   ],
+   "notes": [],
+   "sid": 203733
+  },
+  {
+   "cls": "MakersChallenge5",
+   "kind": "挑战",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "clicks",
+    "fc",
+    "mana_regen",
+    "spells"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 999
+  },
+  {
+   "cls": "AlchemyAnimaMundi",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "fc"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 207137
+  },
+  {
+   "cls": "LegacyAngelUndead",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getTimeStat"
+   ],
+   "notes": [],
+   "sid": 1141
+  },
+  {
+   "cls": "CraftsmanshipEngineering",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "clicks"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 171229
+  },
+  {
+   "cls": "DragonUpgrade7",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "fc"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 595
+  },
+  {
+   "cls": "Eggsercise",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 1208
+  },
+  {
+   "cls": "DjinnChallenge4",
+   "kind": "挑战",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 992
+  },
+  {
+   "cls": "InfiniteSpiral",
+   "kind": "法术生效",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "fc",
+    "spells"
+   ],
+   "others": [
+    "Game.getSpell"
+   ],
+   "notes": [
+    "不计入实际上限"
+   ],
+   "spell": 28
+  },
+  {
+   "cls": "ArchonFaction04",
+   "kind": "联合",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [
+    "Game.getSpell",
+    "Utilities.getTimeStat",
+    "Utilities.hasUnion"
+   ],
+   "notes": [
+    "不计入实际上限"
+   ],
+   "sid": 880
+  },
+  {
+   "cls": "LimitedWish",
+   "kind": "法术生效",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [
+    "Game.getSpell"
+   ],
+   "notes": [
+    "不计入实际上限"
+   ],
+   "spell": 29
+  },
+  {
+   "cls": "DjinnChallenge5",
+   "kind": "挑战",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getSpellAlignment"
+   ],
+   "notes": [],
+   "sid": 993
+  },
+  {
+   "cls": "FairySet",
+   "kind": "遗物契印",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [
+    "Utilities.applySetBonus",
+    "Utilities.hasSet"
+   ],
+   "notes": [],
+   "sid": 832
+  },
+  {
+   "cls": "ArchonLineage",
+   "kind": "世系",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getBaseLineage",
+    "Utilities.hasLineage"
+   ],
+   "notes": [],
+   "sid": 955
+  },
+  {
+   "cls": "ArchonUpgrade2",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getTimeStat"
+   ],
+   "notes": [],
+   "sid": 885
+  },
+  {
+   "cls": "FacelessPerk3",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 677
+  },
+  {
+   "cls": "DemonPerk6",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Formulas.getTrophyNum"
+   ],
+   "notes": [],
+   "sid": 1229
+  },
+  {
+   "cls": "ArcaneBrilliance",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [
+    "Game.getTrophyTypeNum"
+   ],
+   "notes": [],
+   "sid": 1203
+  },
+  {
+   "cls": "GrandBalance",
+   "kind": "法术生效",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [
+    "Game.getSpell"
+   ],
+   "notes": [],
+   "spell": 10
+  },
+  {
+   "cls": "DjinnPerk1",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [
+    "Utilities.hasBloodline"
+   ],
+   "notes": [],
+   "sid": 962
+  },
+  {
+   "cls": "WhiteHotMagic",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 1247
+  },
+  {
+   "cls": "Dragonblood",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 1257
+  },
+  {
+   "cls": "GiftOfTheFaithful",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 0
+  }
+ ],
+ "assistants": [
+  {
+   "cls": "DemonUpgrade3",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [
+    "Game.getBuildingTier"
+   ],
+   "notes": [],
+   "sid": 112
+  },
+  {
+   "cls": "UndeadUpgrade5",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getTimeStat"
+   ],
+   "notes": [],
+   "sid": 389
+  },
+  {
+   "cls": "Reincarnation1",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Formulas.applyReincarnationBonus"
+   ],
+   "notes": [
+    "R 条件"
+   ],
+   "sid": 36
+  },
+  {
+   "cls": "Reincarnation2",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Formulas.applyReincarnationBonus"
+   ],
+   "notes": [
+    "R 条件"
+   ],
+   "sid": 1204
+  },
+  {
+   "cls": "AlchemyVivification",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getMaxMana"
+   ],
+   "notes": [],
+   "sid": 124907
+  },
+  {
+   "cls": "DruidUpgrade2",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getTimeStat"
+   ],
+   "notes": [],
+   "sid": 133
+  },
+  {
+   "cls": "FacelessUpgrade5",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 191
+  },
+  {
+   "cls": "ElvenUpgrade12",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [
+    "fc"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 813
+  },
+  {
+   "cls": "AssistantSquasher",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 324
+  },
+  {
+   "cls": "FairyUpgrade6",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 206
+  },
+  {
+   "cls": "EconomicsCommerce",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 128202
+  },
+  {
+   "cls": "HolyCrusaders",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 227
+  },
+  {
+   "cls": "DivineResurrection",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 127108
+  },
+  {
+   "cls": "AlchemyTransfusion",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 142518
+  },
+  {
+   "cls": "WarfareOverwhelm",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 131909
+  },
+  {
+   "cls": "WarfareSwarming",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Formulas.getTrophyNum"
+   ],
+   "notes": [],
+   "sid": 132112
+  },
+  {
+   "cls": "FairyChallenge1",
+   "kind": "挑战",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 90
+  },
+  {
+   "cls": "SunForce",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getHour"
+   ],
+   "notes": [],
+   "sid": 647
+  },
+  {
+   "cls": "RubyPower",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getFullStat"
+   ],
+   "notes": [],
+   "sid": 480
+  },
+  {
+   "cls": "ValentineContainer",
+   "kind": "其他",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getFullStat"
+   ],
+   "notes": [
+    "活动期间"
+   ],
+   "sid": 0
+  },
+  {
+   "cls": "TitanChallenge1",
+   "kind": "挑战",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 495
+  },
+  {
+   "cls": "FacelessChallenge1",
+   "kind": "挑战",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 490
+  },
+  {
+   "cls": "SummeraanUpgrade2",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [
+    "clicks"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 589
+  },
+  {
+   "cls": "AsmodeanUpgrade1",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getFullStat"
+   ],
+   "notes": [],
+   "sid": 724
+  },
+  {
+   "cls": "EconomicsHirelings",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [
+    "fc"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 171629
+  },
+  {
+   "cls": "GoblinUpgrade1",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [
+    "fc"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 223
+  },
+  {
+   "cls": "MakersMask",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 927
+  },
+  {
+   "cls": "AdvancedFairyHeritage",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [
+    "Utilities.getAdvancedHeritageBonus"
+   ],
+   "notes": [],
+   "sid": 869
+  },
+  {
+   "cls": "AdvancedFacelessHeritage",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [
+    "Utilities.getAdvancedHeritageBonus"
+   ],
+   "notes": [],
+   "sid": 868
+  },
+  {
+   "cls": "DivineVampirism",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Formulas.getOfflineBonus"
+   ],
+   "notes": [],
+   "sid": 171429
+  },
+  {
+   "cls": "DragonUpgrade4",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getTimeConstant",
+    "Utilities.getTimeStat"
+   ],
+   "notes": [],
+   "sid": 599
+  },
+  {
+   "cls": "FacelessSet",
+   "kind": "遗物契印",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.applySetBonus",
+    "Utilities.hasSet"
+   ],
+   "notes": [],
+   "sid": 831
+  },
+  {
+   "cls": "WarfareRevolution",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 209634
+  },
+  {
+   "cls": "DruidChallenge1",
+   "kind": "挑战",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getTimeStat"
+   ],
+   "notes": [],
+   "sid": 485
+  },
+  {
+   "cls": "MakersChallenge1",
+   "kind": "挑战",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 995
+  },
+  {
+   "cls": "CraftsmanshipGolemcraft",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getOfflineTime"
+   ],
+   "notes": [],
+   "sid": 142815
+  },
+  {
+   "cls": "FairyUpgrade11",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getTimeStat"
+   ],
+   "notes": [],
+   "sid": 817
+  },
+  {
+   "cls": "TitanUpgrade12",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getTimeStat"
+   ],
+   "notes": [],
+   "sid": 820
+  },
+  {
+   "cls": "MakersUpgrade12",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "clicks"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 917
+  },
+  {
+   "cls": "FairyPerk3",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 681
+  },
+  {
+   "cls": "WarfareStalking",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 154421
+  },
+  {
+   "cls": "HolyCrusaders",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 227
+  },
+  {
+   "cls": "FacelessFaction04",
+   "kind": "联合",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getTimeConstant",
+    "Utilities.getTimeStat",
+    "Utilities.hasUnion"
+   ],
+   "notes": [
+    "R 条件"
+   ],
+   "sid": 776
+  },
+  {
+   "cls": "DragonUpgrade10",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 859
+  },
+  {
+   "cls": "DrowUpgrade12",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 852
+  },
+  {
+   "cls": "UndeadChallenge3",
+   "kind": "挑战",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 100
+  },
+  {
+   "cls": "UndeadBloodline",
+   "kind": "血统",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.hasBloodline"
+   ],
+   "notes": [],
+   "sid": 396
+  },
+  {
+   "cls": "WarfareSwarming",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 132112
+  },
+  {
+   "cls": "DivineDemonology",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "fc"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 126712
+  },
+  {
+   "cls": "ElvenUpgrade12",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "fc"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 813
+  },
+  {
+   "cls": "DivineDescent",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 143418
+  },
+  {
+   "cls": "AlchemyTransfusion",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "mana_regen"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 142518
+  },
+  {
+   "cls": "CraftsmanshipPlasmation",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "mana_regen"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 162026
+  },
+  {
+   "cls": "DwarvenSet",
+   "kind": "遗物契印",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Formulas.getExchangeBonus",
+    "Utilities.applySetBonus",
+    "Utilities.hasSet"
+   ],
+   "notes": [],
+   "sid": 829
+  },
+  {
+   "cls": "UndeadLineage",
+   "kind": "世系",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getBaseLineage",
+    "Utilities.hasLineage"
+   ],
+   "notes": [],
+   "sid": 690
+  },
+  {
+   "cls": "SupportTheGoblinArmy",
+   "kind": "可见",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getFullStat"
+   ],
+   "notes": [],
+   "sid": 741
+  },
+  {
+   "cls": "UndeadUpgrade10",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 784
+  },
+  {
+   "cls": "RubyPower",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getFullStat"
+   ],
+   "notes": [],
+   "sid": 480
+  },
+  {
+   "cls": "ArtOfTheCrow",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "mana_regen",
+    "production"
+   ],
+   "others": [
+    "Utilities.getExcavation"
+   ],
+   "notes": [
+    "第二立场条件"
+   ],
+   "sid": 854
+  },
+  {
+   "cls": "DwarvenFaction04",
+   "kind": "联合",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [
+    "Utilities.hasUnion"
+   ],
+   "notes": [
+    "第二立场条件"
+   ],
+   "sid": 847
+  },
+  {
+   "cls": "DragonPerk6",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 1231
+  },
+  {
+   "cls": "ArchonUpgrade5",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getLineageLevel"
+   ],
+   "notes": [],
+   "sid": 881
+  },
+  {
+   "cls": "AngelUpgrade12",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "mana_regen",
+    "spells"
+   ],
+   "others": [
+    "Game.getSpell"
+   ],
+   "notes": [],
+   "sid": 807
+  },
+  {
+   "cls": "DjinnUpgrade9",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 902
+  },
+  {
+   "cls": "DjinnUpgrade5",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getOfflineTime"
+   ],
+   "notes": [],
+   "sid": 898
+  },
+  {
+   "cls": "WarfareResilience",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "clicks"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 154323
+  },
+  {
+   "cls": "DivineVampirism",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Formulas.getOfflineBonus"
+   ],
+   "notes": [],
+   "sid": 171429
+  },
+  {
+   "cls": "TheUndecidedArmada",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 1005
+  },
+  {
+   "cls": "IdilliumChaos",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 1012
+  },
+  {
+   "cls": "SpellcraftMirrors",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 205433
+  },
+  {
+   "cls": "WarfareOfficers",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Formulas.getTrophyNum"
+   ],
+   "notes": [],
+   "sid": 205731
+  },
+  {
+   "cls": "EconomicsSurplus",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 208537
+  },
+  {
+   "cls": "FacelessUpgrade3",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getTimeStat"
+   ],
+   "notes": [],
+   "sid": 181
+  },
+  {
+   "cls": "DrowUpgrade7",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 131
+  },
+  {
+   "cls": "SpellcraftFantasia",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "mana_regen"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 218240
+  },
+  {
+   "cls": "LegacyFairyDemon",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getActiveSpellsAlignment"
+   ],
+   "notes": [],
+   "sid": 1147
+  },
+  {
+   "cls": "DragonUpgrade4",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getTimeConstant",
+    "Utilities.getTimeStat"
+   ],
+   "notes": [],
+   "sid": 599
+  },
+  {
+   "cls": "MakersPerk1",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getOfflineTime"
+   ],
+   "notes": [],
+   "sid": 968
+  },
+  {
+   "cls": "ArchonChallenge2",
+   "kind": "挑战",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Formulas.getOfflineBonus"
+   ],
+   "notes": [],
+   "sid": 984
+  },
+  {
+   "cls": "FacelessChallenge3",
+   "kind": "挑战",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Formulas.getExchangeBonus"
+   ],
+   "notes": [],
+   "sid": 492
+  },
+  {
+   "cls": "DjinnChallenge4",
+   "kind": "挑战",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 992
+  },
+  {
+   "cls": "DjinnChallenge5",
+   "kind": "挑战",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getSpellAlignment"
+   ],
+   "notes": [],
+   "sid": 993
+  },
+  {
+   "cls": "FrenziedArmy",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 1138
+  },
+  {
+   "cls": "ForbiddenAvatars",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getDifferentLegacies"
+   ],
+   "notes": [],
+   "sid": 216209
+  },
+  {
+   "cls": "JingleChoir",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 1214
+  },
+  {
+   "cls": "PlatinumEgg",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 1244
+  },
+  {
+   "cls": "HiredChampions",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 1253
+  },
+  {
+   "cls": "GeneralWinter",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 1255
+  },
+  {
+   "cls": "GiftOfTheFaithful",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 0
+  },
+  {
+   "cls": "MercenaryChallengeTier",
+   "kind": "挑战",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "production",
+    "spells"
+   ],
+   "others": [],
+   "notes": [
+    "第二立场条件",
+    "不计入实际上限"
+   ],
+   "sid": 1068
+  },
+  {
+   "cls": "InfiniteSpiral",
+   "kind": "法术生效",
+   "op": "乘",
+   "intermediates": [
+    "mana_regen"
+   ],
+   "drivers": [
+    "spells"
+   ],
+   "others": [
+    "Game.getSpell",
+    "Utilities.getMaxMana"
+   ],
+   "notes": [
+    "不计入实际上限"
+   ],
+   "spell": 28
+  },
+  {
+   "cls": "LimitedWish",
+   "kind": "法术生效",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [
+    "Game.getSpell"
+   ],
+   "notes": [
+    "不计入实际上限"
+   ],
+   "spell": 29
+  },
+  {
+   "cls": "FairyChoir",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [],
+   "notes": [
+    "不计入实际上限"
+   ],
+   "sid": 336
+  },
+  {
+   "cls": "FairyPerk4",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [],
+   "notes": [
+    "不计入实际上限"
+   ],
+   "sid": 802
+  },
+  {
+   "cls": "DragonUpgrade3",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [
+    "Utilities.getTimeStat"
+   ],
+   "notes": [
+    "不计入实际上限"
+   ],
+   "sid": 609
+  },
+  {
+   "cls": "DjinnChallenge1",
+   "kind": "挑战",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [],
+   "notes": [
+    "不计入实际上限"
+   ],
+   "sid": 989
+  },
+  {
+   "cls": "NightTime",
+   "kind": "法术生效",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [
+    "Game.getSpell",
+    "Utilities.getCatalystSpellTierBonus"
+   ],
+   "notes": [
+    "不计入实际上限"
+   ],
+   "spell": 15
+  },
+  {
+   "cls": "SpellcraftIllusion",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [],
+   "notes": [
+    "不计入实际上限"
+   ],
+   "sid": 145018
+  },
+  {
+   "cls": "ShadowEmbrace",
+   "kind": "法术生效",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [],
+   "notes": [
+    "不计入实际上限"
+   ],
+   "spell": 23
+  },
+  {
+   "cls": "DragonsBreath",
+   "kind": "法术生效",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [
+    "Utilities.getAlignmentTime"
+   ],
+   "notes": [
+    "不计入实际上限"
+   ],
+   "spell": 21
+  }
+ ],
+ "mana_regen": [
+  {
+   "cls": "FairyUpgrade3",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 207
+  },
+  {
+   "cls": "ElvenUpgrade3",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [
+    "clicks"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 177
+  },
+  {
+   "cls": "CraftsmanshipLightCondenser",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 125702
+  },
+  {
+   "cls": "TradeLords",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getOfflineTime"
+   ],
+   "notes": [],
+   "sid": 236
+  },
+  {
+   "cls": "AngelUpgrade1",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 51
+  },
+  {
+   "cls": "DemonUpgrade2",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [
+    "Game.getBuildingTier"
+   ],
+   "notes": [],
+   "sid": 111
+  },
+  {
+   "cls": "UndeadUpgrade3",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 392
+  },
+  {
+   "cls": "TitanUpgrade2",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [
+    "clicks"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 374
+  },
+  {
+   "cls": "DruidUpgrade8",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 143
+  },
+  {
+   "cls": "DruidUpgrade6",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getAssistantsNum"
+   ],
+   "notes": [],
+   "sid": 146
+  },
+  {
+   "cls": "FacelessUpgrade7",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getAssistantsNum"
+   ],
+   "notes": [],
+   "sid": 190
+  },
+  {
+   "cls": "DrowUpgrade4",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getTimeStat"
+   ],
+   "notes": [],
+   "sid": 128
+  },
+  {
+   "cls": "SunForce",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getAssistantsNum",
+    "Utilities.getHour"
+   ],
+   "notes": [],
+   "sid": 647
+  },
+  {
+   "cls": "DragonUpgrade3",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 609
+  },
+  {
+   "cls": "SpellcraftVacuumancy",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getTimeStat"
+   ],
+   "notes": [],
+   "sid": 130903
+  },
+  {
+   "cls": "SpellcraftMysticism",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getResearchValue"
+   ],
+   "notes": [],
+   "sid": 130504
+  },
+  {
+   "cls": "DivineIllumination",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 126905
+  },
+  {
+   "cls": "EconomicsOffering",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Formulas.getExchangeBonus"
+   ],
+   "notes": [],
+   "sid": 144214
+  },
+  {
+   "cls": "SpellcraftHeirlooms",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getArtifact"
+   ],
+   "notes": [],
+   "sid": 153722
+  },
+  {
+   "cls": "WarfareBerserking",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [
+    "Utilities.getAssistantsNum"
+   ],
+   "notes": [
+    "不计入实际上限"
+   ],
+   "sid": 131108
+  },
+  {
+   "cls": "EconomicsTradeRoutes",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 128912
+  },
+  {
+   "cls": "DivineRitualism",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Formulas.getTrophyNum"
+   ],
+   "notes": [],
+   "sid": 153023
+  },
+  {
+   "cls": "AlchemyCalefaction",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getExcavation"
+   ],
+   "notes": [],
+   "sid": 161626
+  },
+  {
+   "cls": "Reincarnation1",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Formulas.applyReincarnationBonus"
+   ],
+   "notes": [],
+   "sid": 36
+  },
+  {
+   "cls": "GiftOfTheHeroes",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 0
+  },
+  {
+   "cls": "GiftOfTheMyths",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 0
+  },
+  {
+   "cls": "UnlimitedMana",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 372
+  },
+  {
+   "cls": "AdvancedAngelicHeritage",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [
+    "Utilities.getAdvancedHeritageBonus"
+   ],
+   "notes": [],
+   "sid": 861
+  },
+  {
+   "cls": "RuleDis",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 511
+  },
+  {
+   "cls": "GiftOfTheFaithful",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 0
+  },
+  {
+   "cls": "AngelSet",
+   "kind": "遗物契印",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.applySetBonus",
+    "Utilities.hasSet"
+   ],
+   "notes": [],
+   "sid": 824
+  },
+  {
+   "cls": "RubyPower",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getFullStat"
+   ],
+   "notes": [],
+   "sid": 480
+  },
+  {
+   "cls": "FacelessPerk1",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getAssistantsNum"
+   ],
+   "notes": [],
+   "sid": 675
+  },
+  {
+   "cls": "SeraphimUpgrade1",
+   "kind": "升级",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 729
+  },
+  {
+   "cls": "UndeadChallenge1",
+   "kind": "挑战",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getAssistantsNum"
+   ],
+   "notes": [],
+   "sid": 98
+  },
+  {
+   "cls": "ArchonChallenge1",
+   "kind": "挑战",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 983
+  },
+  {
+   "cls": "ValentineContainer",
+   "kind": "其他",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getFullStat"
+   ],
+   "notes": [
+    "活动期间"
+   ],
+   "sid": 0
+  },
+  {
+   "cls": "DragonChallenge2",
+   "kind": "挑战",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 638
+  },
+  {
+   "cls": "ImprovedAutocast",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 25
+  },
+  {
+   "cls": "MasterfulAutocast",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 29
+  },
+  {
+   "cls": "AngelUpgrade5",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 48
+  },
+  {
+   "cls": "AngelicHeritage",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 47
+  },
+  {
+   "cls": "DruidBloodline",
+   "kind": "血统",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getMaxMana",
+    "Utilities.hasBloodline"
+   ],
+   "notes": [],
+   "sid": 136
+  },
+  {
+   "cls": "AlchemyCreeping",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "mana_regen"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 142115
+  },
+  {
+   "cls": "DivineMeditation",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getMaxMana"
+   ],
+   "notes": [],
+   "sid": 143614
+  },
+  {
+   "cls": "EconomicsUndercutting",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 153522
+  },
+  {
+   "cls": "NoviceCombinator",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getMinMaxAlignmentTimeStat"
+   ],
+   "notes": [],
+   "sid": 1168
+  },
+  {
+   "cls": "Heresiarchs",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getAlignmentSpellCastTime"
+   ],
+   "notes": [],
+   "sid": 226
+  },
+  {
+   "cls": "Spellfury",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 368
+  },
+  {
+   "cls": "PowerOrb",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 502
+  },
+  {
+   "cls": "AngelChallengeTier",
+   "kind": "挑战",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [],
+   "notes": [
+    "不计入实际上限"
+   ],
+   "sid": 81
+  },
+  {
+   "cls": "DragonsBreath",
+   "kind": "法术生效",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [],
+   "notes": [
+    "不计入实际上限"
+   ],
+   "spell": 21
+  },
+  {
+   "cls": "GiftOfTheFaithful",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 0
+  },
+  {
+   "cls": "FairyChallenge3",
+   "kind": "挑战",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 92
+  },
+  {
+   "cls": "DruidChallenge2",
+   "kind": "挑战",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 486
+  },
+  {
+   "cls": "ArcaneEgg",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 557
+  },
+  {
+   "cls": "ColorfulAutocasting",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 584
+  },
+  {
+   "cls": "HeldenSterbenNicht",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 635
+  },
+  {
+   "cls": "PrismaticMana",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 699
+  },
+  {
+   "cls": "AngelLineage",
+   "kind": "世系",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getBaseLineage",
+    "Utilities.hasLineage"
+   ],
+   "notes": [],
+   "sid": 649
+  },
+  {
+   "cls": "SpellcraftManipulation",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 171729
+  },
+  {
+   "cls": "AngelUpgrade12",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "mana_regen",
+    "spells"
+   ],
+   "others": [
+    "Game.getSpell"
+   ],
+   "notes": [],
+   "sid": 807
+  },
+  {
+   "cls": "GoblinUpgrade11",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 819
+  },
+  {
+   "cls": "FairyUpgrade12",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 816
+  },
+  {
+   "cls": "FightTheGoblinArmy",
+   "kind": "可见",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getFullStat"
+   ],
+   "notes": [],
+   "sid": 735
+  },
+  {
+   "cls": "Reincarnation3",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Formulas.applyReincarnationBonus"
+   ],
+   "notes": [
+    "R 条件"
+   ],
+   "sid": 1205
+  },
+  {
+   "cls": "Reincarnation5",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Formulas.applyReincarnationBonus"
+   ],
+   "notes": [
+    "R 条件"
+   ],
+   "sid": 1243
+  },
+  {
+   "cls": "TemporalFlux",
+   "kind": "法术生效",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [
+    "Game.getSpell",
+    "Utilities.getTimeStat"
+   ],
+   "notes": [
+    "不计入实际上限"
+   ],
+   "spell": 25
+  },
+  {
+   "cls": "DwarvenPerk4",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [],
+   "notes": [
+    "不计入实际上限"
+   ],
+   "sid": 799
+  },
+  {
+   "cls": "HalloweenGhost",
+   "kind": "奖杯",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "clicks"
+   ],
+   "others": [
+    "Utilities.getMonsterLevel"
+   ],
+   "notes": [],
+   "sid": null
+  },
+  {
+   "cls": "DwarvenUpgrade12",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getTimeStat"
+   ],
+   "notes": [],
+   "sid": 848
+  },
+  {
+   "cls": "DragonUpgrade10",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 859
+  },
+  {
+   "cls": "RubyPower",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getFullStat"
+   ],
+   "notes": [],
+   "sid": 480
+  },
+  {
+   "cls": "ArtOfTheCrow",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "mana_regen",
+    "production"
+   ],
+   "others": [
+    "Utilities.getExcavation"
+   ],
+   "notes": [
+    "第二立场条件"
+   ],
+   "sid": 854
+  },
+  {
+   "cls": "DwarvenFaction04",
+   "kind": "联合",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "clicks"
+   ],
+   "others": [
+    "Utilities.hasUnion"
+   ],
+   "notes": [
+    "第二立场条件"
+   ],
+   "sid": 847
+  },
+  {
+   "cls": "MakersUpgrade4",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getArtifact"
+   ],
+   "notes": [],
+   "sid": 908
+  },
+  {
+   "cls": "ArchonUpgrade4",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 882
+  },
+  {
+   "cls": "DjinnUpgrade11",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 895
+  },
+  {
+   "cls": "AngelFaction04",
+   "kind": "联合",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "mana_regen"
+   ],
+   "others": [
+    "Utilities.hasUnion"
+   ],
+   "notes": [
+    "R 条件"
+   ],
+   "sid": 770
+  },
+  {
+   "cls": "ArchonPerk3",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 958
+  },
+  {
+   "cls": "IdilliumChaosPerk3",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 1015
+  },
+  {
+   "cls": "SpellcraftLeylines",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getAssistantsNum"
+   ],
+   "notes": [],
+   "sid": 205332
+  },
+  {
+   "cls": "DivineZealotry",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 204331
+  },
+  {
+   "cls": "AlchemySublimation",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 161827
+  },
+  {
+   "cls": "UndeadChallenge1",
+   "kind": "挑战",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 98
+  },
+  {
+   "cls": "ArchonChallenge1",
+   "kind": "挑战",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 983
+  },
+  {
+   "cls": "LimitedWish",
+   "kind": "法术生效",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [
+    "Game.getSpell"
+   ],
+   "notes": [
+    "不计入实际上限"
+   ],
+   "spell": 29
+  },
+  {
+   "cls": "DjinnChallenge5",
+   "kind": "挑战",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getSpellAlignment"
+   ],
+   "notes": [],
+   "sid": 993
+  },
+  {
+   "cls": "ElvenChallenge2",
+   "kind": "挑战",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "clicks"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 87
+  },
+  {
+   "cls": "AlchemyToxicity",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getAlignmentFaction",
+    "Utilities.getTimeConstant",
+    "Utilities.getTimeStat",
+    "Utilities.invertAlignment"
+   ],
+   "notes": [],
+   "sid": 207334
+  },
+  {
+   "cls": "TitanUpgrade2",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "clicks"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 374
+  },
+  {
+   "cls": "GoblinUpgrade5",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 221
+  },
+  {
+   "cls": "DwarvenUpgrade4",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 162
+  },
+  {
+   "cls": "LegacyFairyUndead",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getTimeStat"
+   ],
+   "notes": [],
+   "sid": 1150
+  },
+  {
+   "cls": "DivineAfterlife",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getStatMax"
+   ],
+   "notes": [],
+   "sid": 217641
+  },
+  {
+   "cls": "HolyLight",
+   "kind": "法术生效",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [
+    "Game.getSpell",
+    "Utilities.getCatalystSpellTierBonus"
+   ],
+   "notes": [],
+   "spell": 12
+  },
+  {
+   "cls": "Monstrous",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 1199
+  },
+  {
+   "cls": "AlchemyFolgoration",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [
+    "Utilities.getTotalExcavation"
+   ],
+   "notes": [],
+   "sid": 215439
+  },
+  {
+   "cls": "GiftOfTheGods",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 0
+  },
+  {
+   "cls": "GiftOfTheMyths",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 0
+  },
+  {
+   "cls": "DwarvenSet",
+   "kind": "遗物契印",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.applySetBonus",
+    "Utilities.getTimeStat",
+    "Utilities.hasSet"
+   ],
+   "notes": [],
+   "sid": 829
+  }
+ ],
+ "production": [
+  {
+   "cls": "Game",
+   "kind": "其他",
+   "op": "加",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": null
+  },
+  {
+   "cls": "Game",
+   "kind": "其他",
+   "op": "乘",
+   "intermediates": [
+    "assistants"
+   ],
+   "drivers": [
+    "mana_regen",
+    "spells"
+   ],
+   "others": [
+    "Formulas.getAssistantsNumOffline",
+    "Game.getSpell",
+    "Utilities.getAdvancedHeritageBonus",
+    "Utilities.getOfflineTime"
+   ],
+   "notes": [],
+   "sid": null
+  },
+  {
+   "cls": "AlchemyFusion",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "fc"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 124206
+  },
+  {
+   "cls": "DivinePurity",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [
+    "Utilities.getFactionSpellCast"
+   ],
+   "notes": [],
+   "sid": 152922
+  },
+  {
+   "cls": "WarfareBloodlust",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [
+    "Utilities.getFactionSpellCast"
+   ],
+   "notes": [],
+   "sid": 154222
+  },
+  {
+   "cls": "Rewind",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 365
+  },
+  {
+   "cls": "MasterArcheologist",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 349
+  },
+  {
+   "cls": "ScarabOfFortune",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Formulas.getTrophyNum"
+   ],
+   "notes": [],
+   "sid": 366
+  },
+  {
+   "cls": "SunForce",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "fc"
+   ],
+   "others": [
+    "Utilities.getHour"
+   ],
+   "notes": [],
+   "sid": 647
+  },
+  {
+   "cls": "RealmDigger",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getExcavation"
+   ],
+   "notes": [],
+   "sid": 358
+  },
+  {
+   "cls": "Bloodstream",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getTimeConstant",
+    "Utilities.getTimeStat",
+    "Utilities.getUpgradeNumber"
+   ],
+   "notes": [],
+   "sid": 327
+  },
+  {
+   "cls": "Harlequin",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Formulas.getDifferentUpgrades",
+    "Utilities.getMinMaxAlignmentTimeStat"
+   ],
+   "notes": [],
+   "sid": 343
+  },
+  {
+   "cls": "MercenarySpirit",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 351
+  },
+  {
+   "cls": "WailOfTheBanshee",
+   "kind": "法术生效",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "mana_regen",
+    "spells"
+   ],
+   "others": [],
+   "notes": [],
+   "spell": 24
+  },
+  {
+   "cls": "Heatwave",
+   "kind": "法术生效",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [],
+   "notes": [],
+   "spell": 20
+  },
+  {
+   "cls": "Hailstorm",
+   "kind": "法术生效",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [
+    "Game.getSpell"
+   ],
+   "notes": [],
+   "spell": 19
+  },
+  {
+   "cls": "WarfareWarFunds",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 132202
+  },
+  {
+   "cls": "AlchemyDecay",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getTimeStat"
+   ],
+   "notes": [],
+   "sid": 123808
+  },
+  {
+   "cls": "CraftsmanshipTinkering",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getResearchValue"
+   ],
+   "notes": [],
+   "sid": 126208
+  },
+  {
+   "cls": "WarfareInvasion",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getAssistantsNum"
+   ],
+   "notes": [],
+   "sid": 131810
+  },
+  {
+   "cls": "AlchemySoulweaving",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 124710
+  },
+  {
+   "cls": "EconomicsAcquisition",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 127709
+  },
+  {
+   "cls": "SpellcraftEmpoweredLuck",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "clicks"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 130208
+  },
+  {
+   "cls": "SpellcraftIncantation",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getManaPerTick"
+   ],
+   "notes": [],
+   "sid": 130407
+  },
+  {
+   "cls": "AlchemyAdaptation",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getFactionTime",
+    "Utilities.getTimeStat"
+   ],
+   "notes": [],
+   "sid": 141917
+  },
+  {
+   "cls": "EconomicsCollection",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getArtifact"
+   ],
+   "notes": [],
+   "sid": 144017
+  },
+  {
+   "cls": "EconomicsRepurpose",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 144318
+  },
+  {
+   "cls": "AlchemyHexing",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "mana_regen"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 152224
+  },
+  {
+   "cls": "Reincarnation1",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Formulas.applyReincarnationBonus"
+   ],
+   "notes": [
+    "R 条件"
+   ],
+   "sid": 36
+  },
+  {
+   "cls": "Reincarnation1",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Formulas.applyReincarnationBonus",
+    "Utilities.getTimeStat"
+   ],
+   "notes": [
+    "R 条件"
+   ],
+   "sid": 36
+  },
+  {
+   "cls": "VanillaResearcher",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getResearchValue"
+   ],
+   "notes": [],
+   "sid": 373
+  },
+  {
+   "cls": "AncientResearcher",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getResearchValue"
+   ],
+   "notes": [],
+   "sid": 471
+  },
+  {
+   "cls": "UnderworldResearcher",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getResearchValue"
+   ],
+   "notes": [],
+   "sid": 551
+  },
+  {
+   "cls": "SecretsOfTheUnderworld",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "clicks",
+    "spells"
+   ],
+   "others": [
+    "Game.getSpell"
+   ],
+   "notes": [],
+   "sid": 549
+  },
+  {
+   "cls": "VanillaFlavorJuice",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 509
+  },
+  {
+   "cls": "ChocolateFlavorSmoothie",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 788
+  },
+  {
+   "cls": "KnowYourEnemyPartI",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getFactionTime",
+    "Utilities.getTimeStat"
+   ],
+   "notes": [],
+   "sid": 508
+  },
+  {
+   "cls": "VoodooDoll",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Formulas.getTrophyNum"
+   ],
+   "notes": [],
+   "sid": 548
+  },
+  {
+   "cls": "Anniversary",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getTimeStat"
+   ],
+   "notes": [],
+   "sid": 580
+  },
+  {
+   "cls": "BlueOmelette",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getFullStat"
+   ],
+   "notes": [],
+   "sid": 554
+  },
+  {
+   "cls": "GoldenEgg",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 555
+  },
+  {
+   "cls": "WinterlyUpgrade1",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getFullStat"
+   ],
+   "notes": [],
+   "sid": 592
+  },
+  {
+   "cls": "Antipodes",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getFullStat"
+   ],
+   "notes": [],
+   "sid": 586
+  },
+  {
+   "cls": "CrucibleOfDarkness",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getFullStat"
+   ],
+   "notes": [],
+   "sid": 636
+  },
+  {
+   "cls": "BrokenMirror",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getFullStat"
+   ],
+   "notes": [],
+   "sid": 1022
+  },
+  {
+   "cls": "SeraphimUpgrade3",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getManaPerTick"
+   ],
+   "notes": [],
+   "sid": 731
+  },
+  {
+   "cls": "NephilimGlory",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getFullStat"
+   ],
+   "notes": [],
+   "sid": 727
+  },
+  {
+   "cls": "TheGreatestArmy",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getFullStat"
+   ],
+   "notes": [],
+   "sid": 745
+  },
+  {
+   "cls": "Avalanche",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getFullStat"
+   ],
+   "notes": [],
+   "sid": 483
+  },
+  {
+   "cls": "SummeraanUpgrade1",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 588
+  },
+  {
+   "cls": "SupportUpgrade3",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getTimeStat"
+   ],
+   "notes": [],
+   "sid": 744
+  },
+  {
+   "cls": "DragonTamer",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 613
+  },
+  {
+   "cls": "SecretsOfTheWarriors",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 704
+  },
+  {
+   "cls": "CraftsmanshipCustomizing",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getArtifact"
+   ],
+   "notes": [],
+   "sid": 171128
+  },
+  {
+   "cls": "CraftsmanshipScintillation",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Formulas.getGemMultiplier",
+    "Utilities.getMaxMana"
+   ],
+   "notes": [],
+   "sid": 162125
+  },
+  {
+   "cls": "KnowYourEnemyPartII",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getFactionTime",
+    "Utilities.getTimeStat"
+   ],
+   "notes": [],
+   "sid": 721
+  },
+  {
+   "cls": "Reincarnation2",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Formulas.applyReincarnationBonus"
+   ],
+   "notes": [
+    "R 条件"
+   ],
+   "sid": 1204
+  },
+  {
+   "cls": "DrowPerk4",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [
+    "Game.getSpell",
+    "Utilities.getComboStrike"
+   ],
+   "notes": [],
+   "sid": 797
+  },
+  {
+   "cls": "HolyFrenzy",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [
+    "Game.getSpell"
+   ],
+   "notes": [],
+   "sid": 841
+  },
+  {
+   "cls": "Reincarnation3",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Formulas.applyReincarnationBonus"
+   ],
+   "notes": [
+    "R 条件"
+   ],
+   "sid": 1205
+  },
+  {
+   "cls": "MADMasks",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getMaxExcavation"
+   ],
+   "notes": [],
+   "sid": 931
+  },
+  {
+   "cls": "LanternOfGuidance",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getManaPerTick"
+   ],
+   "notes": [],
+   "sid": 1224
+  },
+  {
+   "cls": "OilLamp",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getMaxMana"
+   ],
+   "notes": [],
+   "sid": 1225
+  },
+  {
+   "cls": "SparkOfLife",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "fc"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 1226
+  },
+  {
+   "cls": "Reincarnation4",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Formulas.applyReincarnationBonus"
+   ],
+   "notes": [
+    "R 条件"
+   ],
+   "sid": 1206
+  },
+  {
+   "cls": "CraftsmanshipRestauration",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getAssistantsNum"
+   ],
+   "notes": [],
+   "sid": 203930
+  },
+  {
+   "cls": "TrueHarlequin",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Formulas.getDifferentUpgrades"
+   ],
+   "notes": [],
+   "sid": 1060
+  },
+  {
+   "cls": "LegacyAngelGoblin",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 1140
+  },
+  {
+   "cls": "LegacyFairyElven",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getAssistantsNum"
+   ],
+   "notes": [],
+   "sid": 1148
+  },
+  {
+   "cls": "LegacyGoblinUndead",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getUnspentBudgetSum"
+   ],
+   "notes": [],
+   "sid": 1152
+  },
+  {
+   "cls": "WarfareEradication",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getMinMaxFactionTimeStat"
+   ],
+   "notes": [],
+   "sid": 209437
+  },
+  {
+   "cls": "SpellcraftLegerdemain",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Formulas.getExchangeBonus"
+   ],
+   "notes": [],
+   "sid": 218341
+  },
+  {
+   "cls": "WarfareRaiding",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 216639
+  },
+  {
+   "cls": "TitanSet",
+   "kind": "遗物契印",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [
+    "Utilities.applySetBonus",
+    "Utilities.hasSet"
+   ],
+   "notes": [],
+   "sid": 837
+  },
+  {
+   "cls": "ForbiddenTaboo",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Formulas.getTotalFactionUpgrades"
+   ],
+   "notes": [],
+   "sid": 218010
+  },
+  {
+   "cls": "EconomicsGrayFriday",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Formulas.getExchangeBonus"
+   ],
+   "notes": [],
+   "sid": 208235
+  },
+  {
+   "cls": "AngelUpgrade9",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 53
+  },
+  {
+   "cls": "DemonicHeritage",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 108
+  },
+  {
+   "cls": "MercenaryBadge",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 228
+  },
+  {
+   "cls": "DemonUpgrade8",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 102
+  },
+  {
+   "cls": "UndeadUpgrade9",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getOfflineTime"
+   ],
+   "notes": [],
+   "sid": 402
+  },
+  {
+   "cls": "DrowUpgrade3",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getMaxMana"
+   ],
+   "notes": [],
+   "sid": 130
+  },
+  {
+   "cls": "DrowUpgrade5",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 119
+  },
+  {
+   "cls": "DrowUpgrade1",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getTimeStat"
+   ],
+   "notes": [],
+   "sid": 132
+  },
+  {
+   "cls": "DrowUpgrade9",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getComboStrike"
+   ],
+   "notes": [],
+   "sid": 118
+  },
+  {
+   "cls": "DruidUpgrade5",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getMaxMana"
+   ],
+   "notes": [],
+   "sid": 134
+  },
+  {
+   "cls": "DwarvenUpgrade7",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getFactionCoin"
+   ],
+   "notes": [],
+   "sid": 147
+  },
+  {
+   "cls": "DwarvenHeritage",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getExcavation"
+   ],
+   "notes": [],
+   "sid": 155
+  },
+  {
+   "cls": "DwarvenUpgrade3",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getExcavation"
+   ],
+   "notes": [],
+   "sid": 160
+  },
+  {
+   "cls": "ElvenUpgrade6",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "clicks"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 176
+  },
+  {
+   "cls": "FacelessHeritage",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 187
+  },
+  {
+   "cls": "FacelessUpgrade9",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getTimeStat"
+   ],
+   "notes": [],
+   "sid": 189
+  },
+  {
+   "cls": "FacelessUpgrade6",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 192
+  },
+  {
+   "cls": "FairyHeritage",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 200
+  },
+  {
+   "cls": "FairyUpgrade8",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 205
+  },
+  {
+   "cls": "GoblinHeritage",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 219
+  },
+  {
+   "cls": "GoblinUpgrade2",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 222
+  },
+  {
+   "cls": "TitanUpgrade5",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 375
+  },
+  {
+   "cls": "TitanUpgrade1",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 376
+  },
+  {
+   "cls": "AngelUpgrade2",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 44
+  },
+  {
+   "cls": "AngelUpgrade6",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getManaPerTick"
+   ],
+   "notes": [],
+   "sid": 49
+  },
+  {
+   "cls": "UndeadUpgrade2",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 390
+  },
+  {
+   "cls": "UndeadUpgrade6",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 393
+  },
+  {
+   "cls": "GoblinUpgrade6",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [
+    "Utilities.hasLineage"
+   ],
+   "notes": [],
+   "sid": 214
+  },
+  {
+   "cls": "FacelessUpgrade9",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getTimeStat"
+   ],
+   "notes": [],
+   "sid": 189
+  },
+  {
+   "cls": "ArchonUpgrade9",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "mana_regen"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 876
+  },
+  {
+   "cls": "ArchonUpgrade1",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 887
+  },
+  {
+   "cls": "DjinnUpgrade1",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 904
+  },
+  {
+   "cls": "DjinnUpgrade7",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getAssistantsNum"
+   ],
+   "notes": [],
+   "sid": 900
+  },
+  {
+   "cls": "DjinnUpgrade10",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 905
+  },
+  {
+   "cls": "AdvancedDemonicHeritage",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Formulas.getTrophyNum",
+    "Utilities.getAdvancedHeritageBonus"
+   ],
+   "notes": [],
+   "sid": 862
+  },
+  {
+   "cls": "DragonUpgrade12",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getMaxMana"
+   ],
+   "notes": [],
+   "sid": 858
+  },
+  {
+   "cls": "AdvancedDrowHeritage",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Formulas.getOfflineBonus",
+    "Utilities.getAdvancedHeritageBonus",
+    "Utilities.getTimeStat"
+   ],
+   "notes": [],
+   "sid": 864
+  },
+  {
+   "cls": "AdvancedDwarvenHeritage",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getAdvancedHeritageBonus",
+    "Utilities.getExcavation"
+   ],
+   "notes": [],
+   "sid": 866
+  },
+  {
+   "cls": "DwarvenUpgrade11",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getManaPerTick",
+    "Utilities.getMaxMana"
+   ],
+   "notes": [],
+   "sid": 850
+  },
+  {
+   "cls": "MakersUpgrade2",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 911
+  },
+  {
+   "cls": "MakersUpgrade7",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getExcavation"
+   ],
+   "notes": [],
+   "sid": 918
+  },
+  {
+   "cls": "CallToArms",
+   "kind": "法术生效",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "production",
+    "spells"
+   ],
+   "others": [
+    "Utilities.getAssistantsNum",
+    "Utilities.getOfflineTime"
+   ],
+   "notes": [],
+   "spell": 3
+  },
+  {
+   "cls": "MoonBlessing",
+   "kind": "法术生效",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "clicks",
+    "spells"
+   ],
+   "others": [],
+   "notes": [],
+   "spell": 14
+  },
+  {
+   "cls": "GodsHand",
+   "kind": "法术生效",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "mana_regen",
+    "spells"
+   ],
+   "others": [
+    "Game.getSpell",
+    "Utilities.getManaPerTick"
+   ],
+   "notes": [],
+   "spell": 9
+  },
+  {
+   "cls": "GoblinsGreed",
+   "kind": "法术生效",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "fc",
+    "spells"
+   ],
+   "others": [],
+   "notes": [],
+   "spell": 8
+  },
+  {
+   "cls": "ComboStrike",
+   "kind": "法术生效",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [
+    "Utilities.getComboStrike",
+    "Utilities.getTimeStat"
+   ],
+   "notes": [],
+   "spell": 4
+  },
+  {
+   "cls": "SpiritualSurge",
+   "kind": "法术生效",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [
+    "Formulas.getEventBonus"
+   ],
+   "notes": [],
+   "spell": 17
+  },
+  {
+   "cls": "AllCreation",
+   "kind": "法术生效",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [
+    "Utilities.getManaPerTick",
+    "Utilities.getStatMax",
+    "Utilities.hasUnion"
+   ],
+   "notes": [],
+   "spell": 26
+  },
+  {
+   "cls": "GemPower",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 20
+  },
+  {
+   "cls": null,
+   "kind": "其他",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": null
+  },
+  {
+   "cls": "Leet",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 345
+  },
+  {
+   "cls": "Unitary",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 371
+  },
+  {
+   "cls": "Equality",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 331
+  },
+  {
+   "cls": "Uniformity",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getMinMaxAlignmentTimeStat"
+   ],
+   "notes": [],
+   "sid": 840
+  },
+  {
+   "cls": "AdvisorInsight",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 583
+  },
+  {
+   "cls": "SuggestionMaster",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 504
+  },
+  {
+   "cls": "NoRecruiting",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 474
+  },
+  {
+   "cls": "IdilliumOrder",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 1017
+  },
+  {
+   "cls": "SecretsOfTheUnderworld",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.hasResearchReady"
+   ],
+   "notes": [],
+   "sid": 549
+  },
+  {
+   "cls": "FacilityForbidden",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "clicks",
+    "spells"
+   ],
+   "others": [
+    "Game.getSpell"
+   ],
+   "notes": [],
+   "sid": 1031
+  },
+  {
+   "cls": "TitanChallenge2",
+   "kind": "挑战",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getTimeStat"
+   ],
+   "notes": [],
+   "sid": 496
+  },
+  {
+   "cls": "FacelessChallenge4",
+   "kind": "挑战",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getTimeStat"
+   ],
+   "notes": [],
+   "sid": 493
+  },
+  {
+   "cls": "DwarvenChallenge4",
+   "kind": "挑战",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "production",
+    "spells"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 567
+  },
+  {
+   "cls": "DrowChallenge2",
+   "kind": "挑战",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "fc"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 571
+  },
+  {
+   "cls": "MakersPerk4",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [
+    "Game.getSpell"
+   ],
+   "notes": [],
+   "sid": 971
+  },
+  {
+   "cls": "TitanBloodline",
+   "kind": "血统",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [
+    "Utilities.hasBloodline"
+   ],
+   "notes": [],
+   "sid": 380
+  },
+  {
+   "cls": "DrowBloodline",
+   "kind": "血统",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "mana_regen"
+   ],
+   "others": [
+    "Utilities.hasBloodline"
+   ],
+   "notes": [],
+   "sid": 120
+  },
+  {
+   "cls": "DwarvenPerk1",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getExcavation"
+   ],
+   "notes": [],
+   "sid": 667
+  },
+  {
+   "cls": "SearingSummer",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 1170
+  },
+  {
+   "cls": "RoundTable",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "mana_regen",
+    "production",
+    "spells"
+   ],
+   "others": [
+    "Formulas.getTrophyNum",
+    "Game.getSpell",
+    "Utilities.getAdvancedHeritageBonus",
+    "Utilities.getBaseLineage",
+    "Utilities.hasLineage"
+   ],
+   "notes": [],
+   "sid": 702
+  },
+  {
+   "cls": "DragonFaction04",
+   "kind": "联合",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getTimeStat",
+    "Utilities.hasUnion"
+   ],
+   "notes": [
+    "第二立场条件"
+   ],
+   "sid": 855
+  },
+  {
+   "cls": "DwarvenFaction04",
+   "kind": "联合",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getTimeStat",
+    "Utilities.hasUnion"
+   ],
+   "notes": [
+    "第二立场条件"
+   ],
+   "sid": 847
+  },
+  {
+   "cls": "GiftOfTheHeroes",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 0
+  },
+  {
+   "cls": "GiftOfTheKings",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 0
+  },
+  {
+   "cls": "GiftOfTheGods",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 0
+  },
+  {
+   "cls": "GiftOfTheFaithful",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 0
+  },
+  {
+   "cls": "GiftOfTheMyths",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 0
+  },
+  {
+   "cls": "AngelUpgrade9",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 53
+  },
+  {
+   "cls": "GoblinUpgrade6",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [
+    "Utilities.hasLineage"
+   ],
+   "notes": [],
+   "sid": 214
+  },
+  {
+   "cls": "UndeadUpgrade9",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getOfflineTime"
+   ],
+   "notes": [],
+   "sid": 402
+  },
+  {
+   "cls": "GiftOfTheFaithful",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 0
+  },
+  {
+   "cls": "LimitedWish",
+   "kind": "法术生效",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [],
+   "notes": [],
+   "spell": 29
+  },
+  {
+   "cls": "AngelChallenge1",
+   "kind": "挑战",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 78
+  },
+  {
+   "cls": "DemonChallenge1",
+   "kind": "挑战",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getAllUpgradeNumber"
+   ],
+   "notes": [],
+   "sid": 82
+  },
+  {
+   "cls": "SpellcraftReverberation",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 145217
+  },
+  {
+   "cls": "SpellcraftProjection",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [
+    "Game.getSpell"
+   ],
+   "notes": [],
+   "sid": 130709
+  }
+ ],
+ "assistant_efficiency": [
+  {
+   "cls": "SpellcraftNecromancy",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 130611
+  },
+  {
+   "cls": "DivineDeliverance",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getManaPerTick"
+   ],
+   "notes": [],
+   "sid": 143316
+  },
+  {
+   "cls": "Reincarnation1",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Formulas.applyReincarnationBonus"
+   ],
+   "notes": [
+    "R 条件"
+   ],
+   "sid": 36
+  },
+  {
+   "cls": "WarfareTorture",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getTimeStat"
+   ],
+   "notes": [],
+   "sid": 154524
+  },
+  {
+   "cls": "WinterlyUpgrade2",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getFullStat"
+   ],
+   "notes": [],
+   "sid": 593
+  },
+  {
+   "cls": "AsmodeanUpgrade2",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getTimeStat"
+   ],
+   "notes": [],
+   "sid": 725
+  },
+  {
+   "cls": "EconomicsSlavery",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getNonUniqueBuildingNumber"
+   ],
+   "notes": [],
+   "sid": 153424
+  },
+  {
+   "cls": "BeardCarpet",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 326
+  },
+  {
+   "cls": "FairyFaction04",
+   "kind": "联合",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [
+    "Utilities.hasUnion"
+   ],
+   "notes": [
+    "R 条件"
+   ],
+   "sid": 778
+  },
+  {
+   "cls": "UndeadChallenge2",
+   "kind": "挑战",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [],
+   "notes": [],
+   "sid": 99
+  },
+  {
+   "cls": "NightTime",
+   "kind": "法术生效",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "production",
+    "spells"
+   ],
+   "others": [
+    "Game.getBuildingTier",
+    "Utilities.getTimeStat",
+    "Utilities.hasCatalyst"
+   ],
+   "notes": [
+    "不计入实际上限"
+   ],
+   "spell": 15
+  },
+  {
+   "cls": "DrowHeritage",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 125
+  },
+  {
+   "cls": "DwarvenUpgrade6",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getTimeStat"
+   ],
+   "notes": [],
+   "sid": 148
+  },
+  {
+   "cls": "FacelessUpgrade8",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "spells"
+   ],
+   "others": [],
+   "notes": [
+    "不计入实际上限"
+   ],
+   "sid": 180
+  },
+  {
+   "cls": "TitanUpgrade7",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getTimeStat"
+   ],
+   "notes": [],
+   "sid": 387
+  },
+  {
+   "cls": "TitanUpgrade9",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 386
+  },
+  {
+   "cls": "UndeadUpgrade8",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getManaPerTick"
+   ],
+   "notes": [],
+   "sid": 395
+  },
+  {
+   "cls": "DragonUpgrade4",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getTimeConstant",
+    "Utilities.getTimeStat"
+   ],
+   "notes": [],
+   "sid": 599
+  },
+  {
+   "cls": "DragonHeritage",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getTimeStat"
+   ],
+   "notes": [],
+   "sid": 603
+  },
+  {
+   "cls": "ElvenUpgrade11",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [],
+   "others": [
+    "Utilities.getAssistantsNum"
+   ],
+   "notes": [],
+   "sid": 812
+  },
+  {
+   "cls": "TitanUpgrade9",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 386
+  },
+  {
+   "cls": "TitanPerk3",
+   "kind": "升级",
+   "op": "乘",
+   "intermediates": [],
+   "drivers": [
+    "production"
+   ],
+   "others": [],
+   "notes": [],
+   "sid": 689
+  }
+ ]
+}

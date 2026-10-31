@@ -1,24 +1,78 @@
 <section id="sec-calc" class="build-tools" hidden>
-  <div class="bt-context"><span id="bt-status" role="status">等待读取存档…</span><div><button type="button" id="bt-live">读取游戏快照</button><button type="button" id="bt-refresh">使用存档计算</button></div></div>
+  <header class="bx-top">
+    <div class="own-seg bx-tabs" id="bx-tabs" role="tablist"><button type="button" class="on" data-tab="goal" role="tab">按目标找 build</button><button type="button" data-tab="tl" role="tab">连续模拟</button></div>
+    <div class="bx-save"><i class="bx-dot" id="bx-dot"></i><span id="bt-status" role="status">等待读取存档…</span><button type="button" id="bt-refresh" class="bx-ghost">重新计算</button></div>
+  </header>
   <div id="bt-error" class="bt-error" role="alert" hidden></div>
-  <div class="bt-stats" id="bt-stats">
-    <div><span>总产出 / 秒</span><strong data-stat="total">—</strong></div>
-    <div><span>建筑产出 / 秒</span><strong data-stat="buildings">—</strong></div>
-    <div><span>助手收入 / 秒</span><strong data-stat="assistants">—</strong></div>
-    <div><span>回魔 / 秒</span><strong data-stat="mana_per_second">—</strong></div>
+
+  <div class="bx-panel" id="bx-goal">
+    <div class="bx-form" id="gl-form">
+      <label class="bx-field">目标<select id="gl-goal"><option value="max_mana">魔上限</option><option value="assistants">助手数</option><option value="mana_regen">每秒回魔</option><option value="production">总产出 / 秒</option></select></label>
+      <div class="bx-field">方式<div class="own-seg bx-seg" id="gl-mode"><button type="button" class="on" data-mode="reach">最快达到</button><button type="button" data-mode="max">数值最高</button></div></div>
+      <label class="bx-field" id="gl-target-label">达到<input id="gl-target" type="text" inputmode="decimal" value="400万" placeholder="40000、4万、1e60"></label>
+      <label class="bx-field"><span id="gl-limit-name">最长等多久</span><select id="gl-limit"><option value="60">1 分钟</option><option value="300" selected>5 分钟</option><option value="600">10 分钟</option><option value="1800">30 分钟</option><option value="3600">1 小时</option></select></label>
+      <label class="bx-field">要求能用的法术<select id="gl-spell"><option value="">不限</option></select></label>
+      <button type="button" class="bx-go" id="gl-run" disabled>开始搜索</button>
+    </div>
+
+    <div class="gx-intro" id="gl-intro">
+      <p>从存档退位重开，按游戏公式找出和目标相关的升级、研究，每个阵营用自己整局跑出来的状态求最优组合，再整局验证。结果给出立场、阵营、血统、显赫阵营、佣兵和研究模板，可以直接存进游戏的模板库。</p>
+      <p>同时开 3 个低优先级计算进程，一般十几分钟；可以随时停，停下时保留已验证的。</p>
+    </div>
+
+    <div class="gx-live" id="gl-live" hidden>
+      <div class="gx-orbit" id="gl-orbit-wrap">
+        <svg id="gl-orbit" viewBox="0 0 400 400" aria-hidden="true"></svg>
+        <div class="gx-core"><small id="gl-core-label">正在启动</small><strong id="gl-core-value">—</strong><span id="gl-core-who"></span></div>
+      </div>
+      <div class="gx-side">
+        <ol class="gx-steps" id="gl-steps">
+          <li data-phase="0"><b>启动计算进程</b><span>载入存档、准备 3 份游戏副本</span></li>
+          <li data-phase="1"><b>各阵营跑出自己的状态</b><span>12 个阵营各整局跑两次，估算所有血统 / 显赫阵营</span></li>
+          <li data-phase="2"><b>每个阵营验证一套</b><span>闭环整局验证估算最好的，得到实测 / 估算系数</span></li>
+          <li data-phase="3"><b>验证可能更好的</b><span>估算 × 系数 × 1.2 仍不如最好的就跳过</span></li>
+        </ol>
+        <div class="gx-progress"><i id="gl-progress"></i></div>
+        <div class="gx-tiles">
+          <div><span>已验证</span><strong id="gl-t-verified">0</strong></div>
+          <div><span>跳过</span><strong id="gl-t-pruned">0</strong></div>
+          <div><span>用时</span><strong id="gl-t-elapsed">0 秒</strong></div>
+        </div>
+        <div class="gx-ticker" id="gl-ticker" aria-live="polite"></div>
+        <button type="button" class="bx-ghost gx-stop" id="gl-stop">停止</button>
+      </div>
+    </div>
+
+    <div class="gx-board" id="gl-board" hidden>
+      <div class="gx-card gx-units">
+        <div class="gx-card-head"><b>各阵营最好</b><small id="gl-units-note">点一行只看这个阵营</small></div>
+        <div id="gl-bars"></div>
+      </div>
+      <div class="gx-card gx-rank">
+        <div class="gx-card-head">
+          <b>排行</b>
+          <div class="gx-filters">
+            <div class="own-seg bx-seg" id="gl-f-align"><button type="button" class="on" data-v="">全部</button><button type="button" data-v="good">善良</button><button type="button" data-v="evil">邪恶</button><button type="button" data-v="neutral">中立</button></div>
+            <select id="gl-f-faction" aria-label="阵营"><option value="">所有阵营</option></select>
+            <select id="gl-f-blood" aria-label="血统"><option value="">所有血统</option></select>
+          </div>
+        </div>
+        <div class="gx-row gx-row-head"><span>#</span><span>构筑</span><span id="gl-col-result">结果</span><span>和第一比</span><span>研究 / 佣兵</span></div>
+        <div id="gl-rows"></div>
+        <p class="gx-empty-rows" id="gl-rows-empty">第一批验证结果出来后显示在这里。</p>
+        <p class="gx-foot" id="gl-foot"></p>
+      </div>
+    </div>
   </div>
-  <div class="bt-meta" id="bt-meta">助手数 — · 最大魔力 —</div>
-  <details class="bt-precision"><summary>精确数值与计算范围</summary><pre id="bt-precision">尚未读取存档</pre><p id="bt-scope"></p></details>
-  <div class="bt-query">
-    <div class="bt-query-top"><div class="bt-pills" id="bt-mode"><button class="on" type="button" data-mode="search">查升级</button><button type="button" data-mode="related">找同类升级</button></div><input type="search" id="bt-search" aria-label="搜索升级" placeholder="中文名、英文名、研究代号…"></div>
-    <div class="bt-pills bt-categories" id="bt-categories" hidden></div>
-    <div class="bt-query-note"><span id="bt-count">等待读取计算目录</span><span>自身公式值与总产出收益分开显示</span></div>
-    <div class="bt-table-wrap"><table class="bt-table"><thead><tr><th>升级 / 研究</th><th>相关数值</th><th>自身公式值</th><th>状态</th><th></th></tr></thead><tbody id="bt-rows"><tr><td colspan="5">读取存档后显示</td></tr></tbody></table></div>
-    <div class="bt-pages"><button type="button" id="bt-prev">上一页</button><span id="bt-page">—</span><button type="button" id="bt-next">下一页</button></div>
-    <div class="bt-detail" id="bt-detail" hidden></div>
-  </div>
-  <div class="bt-trial">
-    <div class="bt-action"><b>即时试算</b><p>每次从上方存档重新开始</p><label>操作<select id="bt-kind"><option value="building">购买建筑</option><option value="upgrade">购买升级</option><option value="spell">施放法术</option></select></label><label>条目<select id="bt-target"></select></label><label id="bt-quantity-label">购买数量<input id="bt-quantity" type="number" min="1" max="10000" step="1" value="1"></label><button type="button" class="bt-primary" id="bt-run" disabled>试算一次</button><small>仅在独立内存副本中执行</small></div>
-    <div class="bt-result" id="bt-result" aria-live="polite"><p class="bt-placeholder">选择建筑、升级或法术，比较动作前后的真实产出。</p></div>
+
+  <div class="bx-panel" id="bx-tl" hidden>
+    <div class="bx-form">
+      <label class="bx-field">模拟时长<select id="tl-seconds"><option value="60">1 分钟</option><option value="300" selected>5 分钟</option><option value="900">15 分钟</option><option value="1800">30 分钟</option><option value="3600">1 小时</option></select></label>
+      <label class="bx-field">「全部购买」间隔（秒）<input id="tl-interval" type="number" min="0" max="3600" step="1" value="10"></label>
+      <label class="bx-field">手动点击 / 秒<input id="tl-clicks" type="number" min="0" max="30" step="1" value="0"></label>
+      <div class="bx-field">购买<div class="bx-checks"><label><input type="checkbox" id="tl-upgrades" checked>升级</label><label><input type="checkbox" id="tl-buildings" checked>建筑（最大）</label></div></div>
+      <button type="button" class="bx-go" id="tl-run" disabled>开始模拟</button>
+    </div>
+    <div class="tl-out" id="tl-result" aria-live="polite"><div class="gx-intro"><p>从存档开始一帧一帧推进，看一段时间后的产出和宝石增长，用来比较不同构筑或买法。玩家只按两个「全部购买」，自动施法照存档设置。1 分钟游戏时间约需 10～30 秒计算。</p></div></div>
   </div>
 </section>

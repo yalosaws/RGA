@@ -44,10 +44,11 @@ ALIAS = {'TC': '征税', 'CtA': '动员令', 'HoL': '传说圣殿', 'BF': '嗜�
 ART_FACTIONS = ['仙灵', '精灵', '天使', '地精', '亡灵', '恶魔', '泰坦', '德鲁伊', '无面者', '矮人', '卓尔', '佣兵']
 # 程序版本：改了功能就加版本号，在 CHANGES 最前面写这一版改了什么
 VERSION = '0.5.5'  # 还没到正式发布，用 0.x（用户要求）
-# 构筑辅助、实时读数暂时下线，测试完再进更新（用户要求）；本地测试用 RGA_BUILD_TOOLS=1 生成
-BUILD_TOOLS = os.environ.get('RGA_BUILD_TOOLS') == '1'
 # 自动点击已从发布版永久移除（0.5.5），只留在作者本机自用版里：默认生成自用版界面，publish.py 设 RGA_PUBLIC=1 生成发布版
 PRIVATE = os.environ.get('RGA_PUBLIC') != '1'
+# 构筑辅助（含连续模拟）、实时读数还不进发布版（用户要求）；本机自用版默认带上。
+# RGA_BUILD_TOOLS=1 / 0 可强制开关
+BUILD_TOOLS = os.environ.get('RGA_BUILD_TOOLS', '1' if PRIVATE else '0') == '1'
 AUTHOR = 'Yalosaws'
 CHANGES = [
     ('0.5.5', '2026-10-30', [

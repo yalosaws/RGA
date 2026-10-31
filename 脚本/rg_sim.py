@@ -94,6 +94,42 @@ class _SO:
         pass
 
 
+_HAS_UPGRADE_SOURCE = '''    @staticmethod
+    def S_7d(param1=_UNSET):
+        param1 = touint(param1)
+        return tobool(idx_get(S_8G.S__2d__21_4, param1).S__3c__21_7)
+'''
+
+
+def _install_fast_paths(ns):
+    """给最热的游戏函数换上结果相同的快速版本（连续模拟里每秒调用几万次）。
+
+    Game.hasUpgrade(id) = §-!4§[id].§<!7§。只有转写源码和预期逐字相同时才替换，
+    客户端更新后对不上就保持原样；参数不是常见情况（非整数、越界）时交回原函数。
+    """
+    import inspect
+    if os.environ.get('RGA_NO_FAST_PATHS') == '1':   # 核对用：关掉后结果应逐位相同
+        return
+    G = ns['S_8G']
+    original = G.S_7d
+    try:
+        source = inspect.getsource(original)
+    except (OSError, TypeError):
+        return
+    if source != _HAS_UPGRADE_SOURCE:
+        return
+    vector_type, truthy = R.TypedVector, R.T
+
+    def has_upgrade(param1=R._UNSET):
+        if type(param1) is int and 0 <= param1 <= 4294967295:
+            upgrades = G.S__2d__21_4
+            if type(upgrades) is vector_type and param1 < len(upgrades):
+                owned = list.__getitem__(upgrades, param1).S__3c__21_7
+                return owned if type(owned) is bool else truthy(owned)
+        return original(param1)
+    type.__setattr__(G, 'S_7d', staticmethod(has_upgrade))
+
+
 def make_game(game_py, sol_path=SOL, *, offline=False, timestamp=None, season=None, event_cache=None, require_pcode=False, encoded_save=None):
     """载入内存中的独立游戏；默认保留存档时刻，offline=True 才补算离线时间。
 
@@ -149,6 +185,7 @@ def make_game(game_py, sol_path=SOL, *, offline=False, timestamp=None, season=No
     for required in ('S_8G', 'S__23__21__21_', 'S__26_c'):
         if required not in ns or ns[required] is R.Stub:
             raise ValueError('游戏计算模块缺少必需的类：' + required + '；请检查转写日志')
+    _install_fast_paths(ns)
     provenance = ns.get('_source_provenance', {})
     if require_pcode and not provenance.get('pcode'):
         raise ValueError('该模块未关联原始字节码；请用 as2py.py --pcode 重新生成后再试算')
