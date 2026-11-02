@@ -1,4 +1,4 @@
-"""通过真实应用入口验证新求解器、增量结果、停止清理和快照隔离，不启动窗口。"""
+"""通过真实应用入口验证求解器（精确赛跑 rg_race）、增量结果、停止清理和快照隔离，不启动窗口。"""
 import hashlib
 import json
 from pathlib import Path
@@ -52,15 +52,15 @@ class PopulationIntegrationTests(unittest.TestCase):
         return e,dict(revision=loaded['revision'])
 
     def test_real_app_entry_uses_new_search_and_incremental_verified_rows(self):
-        import rg_search
+        import rg_race
         e,request=self.engine()
-        with patch.object(rg_search,'search_budget',return_value=dict(budget=12)):
+        with patch.object(rg_race,'search_budget',return_value=dict(budget=12)):
             st=e.goal_start(dict(request,options=dict(goal='max_mana',mode='max',limit=60,depth='fast')))
         search=e.goal
         seen={}
         try:
             while not st['finished']:
-                self.assertEqual(st['algorithm'],'population-response-v1')
+                self.assertEqual(st['algorithm'],'exact-race-v1')
                 for row in st['entries']:
                     self.assertNotIn(row['id'],seen)
                     seen[row['id']]=row
@@ -95,6 +95,15 @@ class PopulationIntegrationTests(unittest.TestCase):
         self.assertEqual(search.error,'已停止')
         self.assertTrue(all(p.poll() is not None or p.wait(timeout=3) is not None for p in search.pool.procs))
         self.assertTrue(all(p.stdout.closed for p in search.pool.procs))
+
+    def test_external_search_templates_are_rejected(self):
+        import rg_race
+        with self.assertRaises(ValueError):
+            rg_race.Search([],dict(reference_templates=[dict(plan={})]),goal='coins',T=300)
+        e,request=self.engine()
+        with self.assertRaises(ValueError):
+            e.goal_start(dict(request,options=dict(goal='coins',mode='max',limit=300,community=True)))
+        self.assertIsNone(getattr(e,'goal',None))
 
 
 if __name__=='__main__':

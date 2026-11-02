@@ -542,7 +542,7 @@ class Engine:
 
     # ---- 按目标找 build：另起几个试跑进程，在后台线程里搜索，界面轮询 goal_status。
     def goal_start(self, request):
-        """新种群求解器：完整方案响应学习与精确回放，6 个低优先级进程。"""
+        """精确赛跑求解器（rg_race）：短跑成对淘汰、领先者跑满全程、前 3 名精确回放，6 个低优先级进程。"""
         import importlib
         import math
         self.require(request)
@@ -550,8 +550,10 @@ class Engine:
             raise ValueError('按目标找 build 要从存档退位重开，请先点「使用存档计算」')
         self.goal_stop(dict(request, quiet=True))
         rg_goal = importlib.import_module('rg_goal')
-        rg_search = importlib.import_module('rg_search')
+        rg_search = importlib.import_module('rg_race')
         options = request.get('options')
+        if options.get('community') or options.get('reference_templates'):
+            raise ValueError('独立求解不接受社区或外部模板作为搜索起点')
         if not isinstance(options, dict):
             raise ValueError('搜索设置格式错误')
         goal = options.get('goal')
@@ -570,11 +572,15 @@ class Engine:
             raise ValueError('未知法术')
         init = dict(game_py=str(self.assets / 'game.py'), save=self.save, timestamp=self.timestamp,
                     research_json=str(self.assets / 'research.json'), model=str(self.assets / 'build-model.json'))
+        from rg_events import read_schedule
+        schedule, source = read_schedule()
+        init['event_cache'] = schedule
         self.goal = rg_search.Search(_worker_command('--search-worker'), init, goal=goal, T=float(limit),
                                          target=float(target) if target is not None else None, spell=spell,
                                          workers=rg_goal.WORKERS, **rg_search.search_budget(options))
         self.goal_revision = self.revision
         self.goal_options = dict(goal=goal, mode=mode, target=target, limit=limit, spell=spell, workers=rg_goal.WORKERS, depth=options.get('depth'))
+        self.goal_options['event_context'] = dict(source, schedule=schedule, assumed=not bool(schedule))
         return self.goal_status(dict(revision=self.revision))
 
     def goal_status(self, request):
@@ -602,6 +608,10 @@ class Engine:
             self.goal = None
             return {}
         return self.goal_status(request)
+
+    def template_evaluate(self, request):
+        from rg_template_api import evaluate
+        return evaluate(self, request, _worker_command('--search-worker'))
 
 
 def _calculation_assets():
@@ -634,9 +644,9 @@ def search_worker_main():
     import rg_sim
     rg_sim._real2obf.cache_clear()
     rg_sim.MEMBER_NAMES = assets / 'member-names.json'
-    import rg_search
+    import rg_race
     source, sink = _std_pipes()
-    rg_search.worker_main(source, sink)
+    rg_race.worker_main(source, sink)
 
 
 def goal_worker_main():
@@ -691,11 +701,13 @@ def worker_main():
                     raise
             op = request.get('op')
             if op not in ('load', 'load_live', 'describe', 'compare', 'timeline_start', 'timeline_step', 'timeline_stop',
-                          'goal_start', 'goal_status', 'goal_stop'):
+                          'goal_start', 'goal_status', 'goal_stop', 'template_evaluate'):
                 raise ValueError('未知计算请求')
             result = dict(ok=True, **getattr(engine, op)(request))
             json.dumps(result, allow_nan=False)  # 非有限值明确报错，不能在界面悄悄变成 0。
         except Exception as error:
             result = dict(ok=False, error=str(error))
+            if hasattr(error, 'result'):
+                result['evaluation'] = error.result
         sink.write(json.dumps(result, ensure_ascii=False, allow_nan=False).encode('utf-8') + b'\n')
         sink.flush()

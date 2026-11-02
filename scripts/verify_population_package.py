@@ -52,7 +52,7 @@ def main():
     archive=CArchiveReader(str(args.exe))
     paths={k.replace('\\','/'):k for k in archive.toc}
     checks={}
-    for name in ('rg_search.py','rg_mechanisms.py','rg_search_ui.py','rg_goal.py'):
+    for name in ('rg_search.py','rg_mechanisms.py','rg_search_ui.py','rg_goal.py','rg_portfolio.py'):
         key=paths['calculation/'+name]
         h=digest(archive.extract(key))
         assert h==digest((ROOT/'scripts'/name).read_bytes()),name
@@ -82,6 +82,8 @@ def main():
                 assert r['ok'] and r['plan']==row['plan'],r
                 for key in fields:
                     assert r.get(key)==row.get(key),(path,key,r.get(key),row.get(key))
+                if 'research_times' in row:
+                    assert r['research_times']==row['research_times'],(path,'research_times')
                 results.append(dict(report=path.name,value=r['value'],all_exact=True))
     finally:
         worker.close()
@@ -96,7 +98,7 @@ def main():
         while not status['entries'] and time.monotonic()<until:
             time.sleep(.2)
             status=worker.call(dict(request,op='goal_status',known=0))
-        assert status['algorithm']=='population-response-v1' and status['entries'],status
+        assert status['algorithm']=='portfolio-response-v2' and status['entries'],status
         stopped=worker.call(dict(request,op='goal_stop'))
         assert stopped['finished'] and stopped['error']=='已停止',stopped
         app_check=dict(algorithm=status['algorithm'],entries=len(status['entries']),workers=status['workers'],stop_clean=True)

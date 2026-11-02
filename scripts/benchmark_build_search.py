@@ -35,6 +35,7 @@ def freeze(name):
 
 
 def runtime(module_dir, algorithm):
+    sys.path.append(str(ROOT / 'app'))
     if module_dir:
         sys.path.insert(0, str(module_dir))
         os.environ['RGA_CORE_DIR'] = str(module_dir)
@@ -81,7 +82,7 @@ def main():
     metadata = dict(save_sha256=initial_hash, timestamp=initial_stamp, goal=args.goal, at=args.at, target=args.target,
                     module_dir=str(args.module_dir or HERE), workers=args.workers, algorithm=args.algorithm, seed=args.seed,
                     hashes={p.name: digest(p) for name in ('rg_optimize.py','rg_search.py','rg_mechanisms.py','rg_goal.py',
-                                                          'build-model.json')
+                                                          'rg_portfolio.py', 'build-model.json')
                             if (p := (args.module_dir or HERE) / name).exists()})
     graph = (args.module_dir / 'depgraph.json') if args.module_dir else ROOT / 'docs/依赖图（客户端4.3.14）.json'
     if args.task == 'search':
@@ -92,6 +93,12 @@ def main():
                     research_json=str(ROOT / 'build/calculation/research.json'), graph=str(graph.resolve()))
         model = ((args.module_dir / 'build-model.json') if args.module_dir else ROOT / 'build/calculation/build-model.json')
         init['model'] = str(model.resolve())
+        if args.algorithm == 'population':
+            from rg_events import read_schedule
+            schedule, provenance = read_schedule()
+            init.update(event_cache=schedule, seed=0)
+            metadata.update(event_cache=schedule, event_source=provenance, simulation_seed=0,
+                            model_sha256=digest(model))
         started = time.perf_counter()
         if args.algorithm == 'population':
             search = opt.Search(command, init, goal=args.goal, T=args.at, target=args.target, workers=args.workers,
@@ -111,7 +118,10 @@ def main():
         elapsed = time.perf_counter() - started
         result = dict(metadata=metadata, elapsed=elapsed, refine_budget=args.refine_budget, sweep_budget=args.sweep_budget,
                       budget=args.budget if args.algorithm == 'population' else None,
-                      runs=search.runs, error=search.error, best=search.best(), results=search.results, log=search.log_lines)
+                      runs=search.runs, error=search.error, best=search.best(), results=search.results, log=search.log_lines,
+                      populations={str(h):dict(summary=b.summary(),best=b.best()[:5]) for h,b in getattr(search,'banks',{}).items()})
+        if args.algorithm == 'population':
+            result['search_status'] = search.status()
         if search.error:
             raise RuntimeError(search.error)
         print(json.dumps(dict(elapsed=elapsed, runs=search.runs, value=result['best'][0]['value'],

@@ -27,6 +27,7 @@ import subprocess
 import sys
 import threading
 import time
+from as2py import mangle
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
@@ -74,7 +75,8 @@ GOALS = {
     'max_mana': '魔上限',
     'mana_regen': '每秒回魔',
     'production': '总产出（每秒）',
-    'gems': '现在重生可得宝石',
+    'coins': '本局累计产币',
+    'gems': '退位可得宝石',
 }
 
 TICK = rg_timeline.TICK
@@ -92,8 +94,6 @@ def _curve_at(curve, t):
         value = cv
     return value
 WORKERS = 6 if use_native() else 3   # 同时试跑的进程数（低优先级）。Python 版时开 12 个卡死过电脑，定为 3；原生引擎每个进程轻得多，2026-10-31 用户同意放宽到 6
-PICK_WAIT = 120        # 选择类升级等这么多秒还买不起，就当这个组合不可行
-RESEARCH_WAIT = 30     # 选完阵营后，研究在这么多秒内买不上的就跳过（记在结果里）
 
 
 def research_table(path=None):
@@ -106,17 +106,23 @@ class Runner:
     """一份游戏副本；每次试跑前恢复到「刚载入存档」的状态。"""
 
     def __init__(self, game_py, *, save_path=None, encoded_save=None, timestamp=None, research_json=None, seed=0,
-                 native=None):
+                 native=None, event_cache=None, event_policy='snapshot'):
         random.seed(seed)
+        self.seed = seed
         kwargs = {}
+        from rg_events import read_schedule, configure
+        schedule, provenance = read_schedule() if event_cache is None and event_policy!='raw' else (event_cache or {},dict(source='provided' if event_cache else 'missing'))
         if encoded_save is not None:
             kwargs.update(encoded_save=encoded_save, timestamp=timestamp)
         self.native = use_native() if native is None else native
+        if schedule and not self.native:
+            kwargs['event_cache'] = schedule
         if self.native:
             self.sim = sim = rg_native.NativeSim(game_py, save_path or rg_sim.SOL, **kwargs)
         else:
             self.sim = sim = rg_growth.Simulation(game_py, save_path or rg_sim.SOL, **kwargs)
         self.G, self.ns = sim.G, sim.ns
+        self.environment = configure(sim, schedule, provenance, event_policy)
         self.codes = research_table(research_json)
         self.ups = {u.S_6_21_Z: u for u in self.G.S__2d__21_4}
         self.research = {sid: self.ups[sid] for sid in self.codes if sid in self.ups}
@@ -183,6 +189,8 @@ class Runner:
             return 30 * sim.core_call('getManaPerTick')
         if goal == 'production':
             return rg_sim.production(self.ns, cached=True)['total']
+        if goal == 'coins':
+            return self.G.S_5_21_V[0]
         if goal == 'gems':
             return sim.core_call('getGemsReset')
         raise ValueError('未知目标：' + str(goal))
@@ -192,7 +200,7 @@ class Runner:
 
     # ---- 一次试跑 ----
     def run(self, build, goal, target, limit, *, spell=None, buy_interval=2.0, sample_every=10.0,
-            probes=(), probe_fn=None, step=None, cutoff=None, coarse=None):
+            probes=(), probe_fn=None, step=None, cutoff=None, coarse=None, race_bar=None):
         """返回 dict(ok, reached, time, value, curve, skipped, ...)。
 
         build：alignment / faction / prestige / bloodline（名字，可为 None）、research（代号列表，按顺序买）。
@@ -202,12 +210,18 @@ class Runner:
         coarse：粗跑（近似，只用原生引擎）。开局选完、研究佣兵都买好以后，每 coarse 秒只调用一次
         advanceTicks(30·coarse)：产出、回魔、助手点击按游戏公式一次积分，每秒逻辑、自动施法、
         「全部购买」都变成每 coarse 秒一次（见 _coarse_advance）。
+        race_bar：[(秒, 最低目标值)]，在曲线采样时刻检查；低于门槛就停（stopped_at、raced），停下的局不是成绩。
         """
+        race_bar = sorted([float(a), float(b)] for a, b in race_bar) if race_bar else None
         self.reset()
         self.n_runs = getattr(self, 'n_runs', 0) + 1
         G, sim, tl = self.G, self.sim, self.tl
         sim.game_call('softReset')
         sim.refresh()
+        opener=None
+        if build.get('opening') is not None:
+            from rg_opening import ControlledOpening
+            opener=ControlledOpening(self,build)
         faction = build.get('faction')
         alignment = build.get('alignment') or (FACTIONS[faction][1] if faction else None)
         # (存档 ID, 是否必须马上可选)。显赫阵营要等本阵营「联盟」买下才出现，并且必须在买研究之前选
@@ -233,10 +247,12 @@ class Runner:
         late_since = None
         research =[self.by_code[c] for c in build.get('research', []) if c in self.by_code]
         pending_research = list(research)
-        merc_codes = self.merc_codes() if build.get('merc') else {}
+        merc_codes = self.merc_codes() if build.get('merc') or build.get('merc_alliance') else {}
         # 和 MercenaryTemplateLoad.loadTemplate 一样：先放龙族（只能放每组第 4 格），再放其他
         pending_merc = sorted((c for c in build.get('merc', []) if c in merc_codes),
                               key=lambda c: merc_codes[c].S__2d__21__5e_ != 12)
+        pending_spells = list(enumerate(build.get('merc_spells', [])))
+        pending_alliance = list(build.get('merc_alliance', []))
         pending_autocast = [sid for sid in AUTOCAST_UPGRADES if sid in self.ups]
         target_spell = self.spell(spell) if spell else None
         out = dict(build=build, goal=goal, target=target, limit=limit, ok=True, reached=False,
@@ -289,7 +305,8 @@ class Runner:
                 prev, n = n, n + k
             t = n * TICK
             if n // buy_ticks != prev // buy_ticks:
-                tl.press_buy_all()
+                if opener:opener.buy_all(t)
+                else:tl.press_buy_all()
                 if picks_done_at is not None:
                     buys_after_picks += 1
             if n // 30 == prev // 30:
@@ -303,12 +320,6 @@ class Runner:
                     picks.pop(0)
                     pick_since = t
                     continue
-                if immediate and not u.S__2d_6:
-                    out.update(ok=False, note='不能选：' + u.S_1i)
-                    return out
-                if t - pick_since > PICK_WAIT:
-                    out.update(ok=False, note=('%d 秒内没能选上：' % PICK_WAIT) + u.S_1i)
-                    return out
                 break
             if lineage is not None and self.ups[BLOODLINES[build['bloodline']]].S__3c__21_7:
                 # LineageUpgradePopup 打开时才允许选满级的世系；Game.buyUpgrade 对世系不查可见性
@@ -323,12 +334,6 @@ class Runner:
                     out['picks'][lineage.S_1i] = round(t, 1)
                     lineage = None
                 # 没选上（这一局该阵营的皇家贸易令还不到 400 次等）就下一秒再试
-            # 显赫阵营也能解锁法术（例如龙息），必须等结构选齐再判断。
-            if target_spell is not None and not spell_checked and not picks and late_prestige is None:
-                spell_checked = True
-                if not target_spell.S__2d_6:
-                    out.update(ok=False, note='这个组合用不了' + target_spell.S_1i)
-                    return out
             if not picks:
                 if picks_done_at is None:
                     picks_done_at = t
@@ -341,6 +346,17 @@ class Runner:
                 # 后面的大平衡、金牌的收税都轮不到（收税给的阵营币是买龙族协定的主要来源）
                 if buys_after_picks:
                     self._restore_autocast(spell)     # 每秒：阶层升级买到了就恢复「放到第几阶」
+                if pending_spells:
+                    pending_spells = [(slot, name) for slot, name in pending_spells
+                                      if not self._place_merc_spell(slot, name, out, t)]
+                if pending_alliance:
+                    remaining = []
+                    for code in pending_alliance:
+                        if self._place_merc(merc_codes[code], alliance=True):
+                            out.setdefault('merc_alliance_times', {})[code] = round(t, 1)
+                        else:
+                            remaining.append(code)
+                    pending_alliance = remaining
                 if pending_merc:
                     # 一直试到时间上限：佣兵升级花各阵营的阵营币，要攒够才买得起
                     # 按模板顺序优先：前面的还在攒某种阵营币时，后面要花同一种币的先等着，
@@ -368,25 +384,22 @@ class Runner:
                     if u.S__3c__21_7 or self._buy(late_prestige):
                         out['picks'][u.S_1i] = round(t, 1)
                         late_prestige = None
-                    elif t - late_since > PICK_WAIT:
-                        out.update(ok=False, note=('%d 秒内没能选上：' % PICK_WAIT) + u.S_1i)
-                        return out
                 # 研究：和 Game.buyUpgrade 一样，看得见或已经解锁就能买（升华这类解锁了但列表里不显示的也算）
                 if pending_research and out.get('research_ready') is not None:
-                    pending_research = [sid for sid in pending_research
-                                        if not (self.research[sid].S__3c__21_7 or self._buy(sid))]
-                    if pending_research and t - out['research_ready'] > RESEARCH_WAIT:
-                        out['skipped'] = [self.codes[sid] for sid in pending_research]
-                        pending_research = []
+                    remaining=[]
+                    for sid in pending_research:
+                        if self.research[sid].S__3c__21_7 or self._buy(sid):
+                            out.setdefault('research_times',{})[self.codes[sid]]=round(t,1)
+                        else:remaining.append(sid)
+                    pending_research=remaining
                 if late_prestige is not None and not pending_research:
                     u = self.ups[late_prestige]
                     late_since = t if late_since is None else late_since
                     if u.S__3c__21_7 or self._buy(late_prestige):
                         out['picks'][u.S_1i] = round(t, 1)
                         late_prestige = None
-                    elif t - late_since > PICK_WAIT:
-                        out.update(ok=False, note=('%d 秒内没能选上：' % PICK_WAIT) + u.S_1i)
-                        return out
+            if opener:
+                opener.tick(t)
             # 粗跑：选完、按过「全部购买」、研究佣兵和显赫阵营都处理完（买到或放弃）以后才开始
             if coarse and not settled:
                 settled = (not picks and buys_after_picks > 0 and not pending_merc and not pending_research
@@ -396,6 +409,8 @@ class Runner:
             while probes and t >= probes[0]:
                 probe_fn(self, probes.pop(0))
             # 产出、宝石要重算全部建筑，每 5 秒查一次；助手、魔力类每秒查
+            if goal in ('coins','gems') and picks_done_at is not None and n // 150 != prev // 150:
+                self.metric('production')  # 经济目标使用同一读数刷新时序，避免缓存刷新改变轨迹。
             if picks_done_at is not None and (goal not in SLOW_GOALS or n // 150 != prev // 150):
                 value = self.metric(goal)
                 if n // sample_ticks != prev // sample_ticks:
@@ -404,21 +419,63 @@ class Runner:
                     if bar and t >= CUTOFF_AFTER * limit and value < CUTOFF_RATIO * bar:
                         out.update(value=value, note='落后太多，第 %d 秒提前停' % t, stopped_at=round(t, 1))
                         break
-                if value >= target:
+                complete = not picks and not pending_research and not pending_merc and not pending_spells and not pending_alliance and late_prestige is None and (opener is None or opener.released_at is not None)
+                if value >= target and complete and (target_spell is None or target_spell.S__2d_6):
                     out.update(reached=True, time=round(t, 1), value=value)
                     break
+                # 赛跑（rg_race）：到检查点时低于门槛就停。只决定这局还值不值得跑完，停下的局不给分；
+                # 门槛之前的推进和不带门槛时完全相同（检查只读已算好的目标值）。
+                if race_bar and n // sample_ticks != prev // sample_ticks:
+                    behind = False
+                    while race_bar and t >= race_bar[0][0] - 1e-6:
+                        behind = value < race_bar.pop(0)[1] or behind
+                    if behind:
+                        out.update(value=value, note='赛跑：检查点落后于对照方案', stopped_at=round(t, 1), raced=True)
+                        break
         if out['value'] is None:
             out['value'] = self.metric(goal) if picks_done_at is not None else 0
         if late_prestige is not None and not out.get('reached') and not out.get('stopped_at'):
             # 到时间上限都没选上显赫阵营：这套组合在这个时间内不成立（以前会照样按带显赫阵营的结果显示）
             out.update(ok=False, note=out.get('note') or '到时间上限没能选上：' + self.ups[late_prestige].S_1i)
-        if pending_research and out.get('research_ready') is None:   # 到最后研究都没显示出来（如 R75 前的佣兵）
+        if picks:
+            out.update(ok=False, note='到达时间上限仍有结构尚未选定')
+        if target_spell is not None and not target_spell.S__2d_6:
+            out.update(ok=False, note='到达时间上限仍未能使用：'+target_spell.S_1i)
+        if pending_research:   # 未完成只描述当前时限，不删除请求或推断永远买不到
             out['skipped'] = out.get('skipped', []) + [self.codes[sid] for sid in pending_research]
         out['research'] = [self.codes[sid] for sid in research if self.research[sid].S__3c__21_7]
         if pending_merc:
             out['skipped_merc'] = pending_merc
+        if pending_spells:
+            out['skipped_spells'] = [name for _, name in pending_spells]
+        if pending_alliance:
+            out['skipped_alliance'] = pending_alliance
+        if opener:out['opening']=opener.report()
         out['curve'].append((round(n * TICK, 1), out['value']))
         return out
+
+    def _place_merc_spell(self, slot, name, out, t):
+        """沿用 MercenaryTemplateLoad 的选法术检查和合同槽位，不越过实际购买规则。"""
+        s = self.spell(name)
+        contract = self.ups[233 + slot]
+        if self.G.S__2d__21__5e_ != 11 or contract.S__3c__21_7 or not contract.S__2d_6:
+            return False
+        if s.S__2d_6 or not s.S__22_h or s.S__2d__21__5e_ == -1:
+            return False
+        if s.S__2d__21__5e_ == 12:
+            trophy = next(x for x in self.G.S_0Q if x.S_1i == 'Dragon Tamer')
+            if not trophy.S_4_21_K:
+                return False
+        if s.S__2d__21__5e_ >= 13 or name in ('Catalyst', 'Chaos Madness', 'Twisting Nether'):
+            return False   # 后续契约能力尚未接入，严格入口会报出未选定。
+        cls = game_class(self.ups[233])
+        cls.S_9_21__5b_ = slot
+        if not self.sim.game_call('buyMercSpell', s, slot):
+            return False
+        contract.S__3c__21_7 = True
+        self.sim.refresh()
+        out.setdefault('merc_spell_times', {})[name] = round(t, 1)
+        return True
 
     def merc_codes(self):
         """佣兵模板代号 → 升级对象（MercenaryTemplateLoad.initializeElement 的编号方式）。"""
@@ -453,26 +510,35 @@ class Runner:
                 cls.S__2b__21_Q = old
         return cache[u.S_6_21_Z]
 
-    def _place_merc(self, u):
+    def _place_merc(self, u, alliance=False):
         """按 MercenaryTemplateLoad.loadTemplate 的规则给一个升级找格子并买下；成功返回 True。"""
         if u.S__3c__21_7:
             return True
+        if not u.S__22_h or not u.S_9_21__25_:
+            return False
         n = getattr(u, self._merc_num)
         dragon = u.S__2d__21__5e_ == 12
         for slot in self._merc_slots:
             tier = slot.S_6_21_Z - 100000
-            if tier > 12 or not slot.S__2d_6 or slot.S__3c__21_7:
+            if (tier != 13 if alliance else tier > 12) or not slot.S__2d_6 or slot.S__3c__21_7:
                 continue
             if dragon and tier % 4 != 0:
                 continue
-            if not ((1 <= tier <= 4 and 1 <= n <= 3) or (5 <= tier <= 8 and 4 <= n <= 6)
-                    or (9 <= tier <= 12 and 7 <= n <= 9)):
+            regular = ((1 <= tier <= 4 and 1 <= n <= 3) or (5 <= tier <= 8 and 4 <= n <= 6)
+                       or (9 <= tier <= 12 and 7 <= n <= 9))
+            if alliance:
+                has = lambda name: any(x.S_1i == name and x.S__3c__21_7 for x in self.G.S__2d__21_4)
+                regular = (1 <= n <= 9 and ((u.S__2c__21_Y == 1 and has('Round Table')) or
+                                           (u.S__2c__21_Y == 2 and has('Dark Covenant'))))
+            if not regular:
                 continue
             cls = game_class(slot)
             cls.S_9_21__5b_ = (tier + 3) // 4      # MercenaryUpgrade.§9![§
             cls.S__2b__21_Q = tier                 # MercenaryUpgrade.§+!Q§
             if self.sim.game_call('buyMercUpgrade', u):
                 slot.S__3c__21_7 = True
+                if alliance:
+                    setattr(self.sim.core, mangle('§;"0§'), u.S_6_21_Z)
                 self.sim.refresh()
                 return True
             return False

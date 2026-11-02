@@ -22,7 +22,9 @@ FUNCTION_OUTPUT = {
     'getMaxMana': 'mana_read', 'getManaProduced': 'mana_produced_read',
     'hasBloodline': 'bloodline', 'hasUnion': 'union', 'hasSet': 'set',
     'hasUnique': 'unique', 'applyLineageBonuses': 'lineage', 'getGemMultiplierBase': 'gem_bonus',
-    'getGemMultiplier': 'gem_gain', 'getOfflineBonus': 'offline',
+    'getGemMultiplier': 'gem_bonus', 'getOfflineBonus': 'offline',
+    'getProductionPerTick': 'production', 'getProductionPerSecondReal': 'production',
+    'getProductionPerSecond': 'production', 'applyReincarnationBonus': 'reincarnation',
     'getAssistantsMultiplierReal': 'assistant_efficiency',
     'getAutoClickPower': 'click_rate', 'getTaxCollectionDuplicate': 'tax_duplicate',
     'getTrophyNum': 'trophies', 'getResearchCap': 'capacity', 'getResearchBudget': 'budget',
@@ -66,13 +68,37 @@ def compile_model(output):
     research = {r['cls']: r for r in meta.values()}
     all_classes = set(D.FILES)
     roots = {}
+    methods = {}
     for cls, text in D.FILES.items():
         lines, funcs, _ = D.functions_of(text)
-        for name, (a, b) in funcs.items():
-            if cls in ('Formulas', 'Utilities', 'FactionExchangeUpgrade') and name in FUNCTION_OUTPUT:
-                for used in set(re.findall(r'\b([A-Z]\w*)\.', '\n'.join(lines[a:b]))):
-                    if used in all_classes:
-                        roots.setdefault(used, set()).add(FUNCTION_OUTPUT[name])
+        methods[cls] = {name:'\n'.join(lines[a:b]) for name,(a,b) in funcs.items()}
+    quantity_roots = {(cls,name):q for cls in ('Formulas','Utilities','FactionExchangeUpgrade')
+                      for name,q in FUNCTION_OUTPUT.items() if name in methods.get(cls,{})}
+    for origin, quantity in quantity_roots.items():
+        todo, seen = [origin], set()
+        while todo:
+            cls, name = todo.pop()
+            if (cls,name) in seen:
+                continue
+            seen.add((cls,name))
+            body = methods.get(cls,{}).get(name,'')
+            for used, member in re.findall(r'\b([A-Z]\w*)\.(\w+)', body):
+                if used not in all_classes:
+                    continue
+                roots.setdefault(used,set()).add(quantity)
+                callee = (used,member)
+                # 数量提供函数是边界：回魔→施法次数这样的反馈由数量图表达，
+                # 不把所有上游研究都误标成“直接产出研究”。
+                if callee in quantity_roots and quantity_roots[callee] != quantity:
+                    continue
+                if member in methods.get(used,{}) and member not in D.UI_FUNCS:
+                    todo.append(callee)
+            # AS3 同类函数调用通常省略类名。
+            for member in re.findall(r'(?<![.\w])([A-Za-z_]\w*)\(', body):
+                if member in methods[cls] and member not in D.UI_FUNCS:
+                    callee=(cls,member)
+                    if callee not in quantity_roots or quantity_roots[callee] == quantity:
+                        todo.append(callee)
 
     def ancestors(cls):
         seen = set()
@@ -81,6 +107,15 @@ def compile_model(output):
             m = re.search(r'class \S+ extends (\S+)', D.FILES.get(cls, ''))
             cls = m[1] if m else None
         return seen
+
+    def method_owner(cls, name):
+        seen=set()
+        while cls and cls not in seen:
+            seen.add(cls)
+            if name in methods.get(cls,{}):return cls
+            parent=re.search(r'class \S+ extends (\S+)',D.FILES.get(cls,''))
+            cls=parent[1] if parent else None
+        return None
 
     items = {}
     for cls, text in D.FILES.items():
@@ -97,6 +132,8 @@ def compile_model(output):
             for call in re.findall(r'\b(?:Utilities|Formulas|Game)\.(\w+)\(', body):
                 if call in READ_QUANTITY:
                     inputs.add(READ_QUANTITY[call])
+            if 'Formulas.reincarnation' in body:
+                inputs.add('reincarnation')
             if '§5!V§' in body or '§=y§' in body or '§@w§' in body:
                 inputs.add('statistics')
             m = re.fullmatch(r'\s*return ([^;]*);\s*', body, re.S)
@@ -104,16 +141,48 @@ def compile_model(output):
                 if m is None:
                     raise ValueError('多语句')
                 ast = RF.Parser(m[1]).parse()
-                expressions.append(dict(method=name, ast=ast, output=METHOD_OUTPUT.get(name)))
+                static=bool(re.search(r'static function '+re.escape(name)+r'\(',text))
+                expressions.append(dict(method=name, ast=ast, output=METHOD_OUTPUT.get(name),
+                                        arguments=len([x for x in args.split(',') if x.strip()]),static=static))
             except (ValueError, KeyError, IndexError):
                 opaque.append(name)
         sid = re.search(r'§6!Z§ = (\d+);', text)
         entry = dict(cls=cls, sid=int(sid[1]) if sid else None, outputs=sorted(outputs), inputs=sorted(inputs),
                      expressions=expressions, opaque=opaque, source_sha256=hashlib.sha256(text.encode()).hexdigest())
+        variant=re.search(r'§"!U§ = ([^;]+);',text)
+        if sid and variant and cls not in research:
+            entry['sid_base']=int(sid[1])
+            try:
+                tag=int(variant[1])
+                if tag!=-1:entry['sid']=100000+entry['sid_base']*100+tag
+            except ValueError:
+                entry['sid']=None
+                entry['sid_encoding']='100000 + sid_base * 100 + instance_variant'
+        assignments=re.findall(r'§6!Z§ = ([^;]+);',text)
+        if assignments and not assignments[-1].isdigit() and cls not in research:
+            # initialize() 可以再次重写编号；不能把构造函数里的原始号冒充存档号。
+            entry['sid']=None
+            # 没有覆盖时沿用 Upgrade 中声明的初始编号 0。
+            assert sid or 'public var §6!Z§:uint = 0;' in D.FILES['Upgrade']
+            entry['sid_base']=int(sid[1]) if sid else 0
+            expression=assignments[-1]
+            entry['sid_runtime_expression']=expression
+            if expression=='100000 + §6!Z§ * 100 + tier':
+                entry['sid_encoding']='100000 + sid_base * 100 + tier'
+            elif expression=='400000 + Game.getSpell(§`g§).§6!Z§ * 100 + tier':
+                entry['sid_encoding']='400000 + spell_sid * 100 + tier'
+            elif expression=='100000 + §6!Z§ * 100 + §"!U§':
+                entry['sid_encoding']='100000 + sid_base * 100 + instance_variant'
+            elif expression=='500000 + §,!Y§ * 20000 + §%<§.tier * 1000 + §"!U§':
+                entry['sid_encoding']='500000 + building_index * 20000 + building_tier * 1000 + instance_variant'
+            else:
+                entry['sid_encoding']='runtime_expression'
         if cls in research:
             r = research[cls]
             entry.update(code=r['code'], sid=r['id'], branch=r['branch'], level=r['num'],
                          faction=r['bound'], condition_faction=r['cond_faction'], alignment=r['align'])
+            entry['eligibility']=dict(purchasable_owner=method_owner(cls,'purchasable'),
+                                      research_visible_owner=method_owner(cls,'researchVisible'))
         items[cls] = entry
     # 辅助关系描述实际增长方向；它们只指导提案，不给最终数值，也不排除未知项。
     bridges = {
@@ -133,7 +202,7 @@ def compile_model(output):
     names = json.loads((ROOT / 'build/installed-as3-named/names.json').read_text(encoding='utf-8'))
     runtime_classes = {v['name']: dict(raw=k, python=mangle(k)) for k, v in names.items()
                        if 'class' in str(v.get('kind'))}
-    result = dict(version=1, source='installed-client-4.3.14', purpose='proposal model; exact game remains the oracle',
+    result = dict(version=3, source='installed-client-4.3.14', purpose='proposal model; exact game remains the oracle',
                   runtime_classes=runtime_classes,
                   items=items, research={r['code']: r for r in rows}, bridges=bridges,
                   coverage=dict(upgrades_and_spells=len(items), research=len(rows),

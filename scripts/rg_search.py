@@ -1,4 +1,4 @@
-"""整套方案种群求解器：机制图提案、整局响应学习、精确仿真和独立回放。
+"""多时长组合求解器：独立实测种群、按成本分配试跑、长局验证和独立回放。
 
 不调用旧 Planner、静态子集求解、闭环重配或逐项爬山。rg_goal 只提供游戏执行器和进程池。
 """
@@ -18,7 +18,8 @@ import time
 import rg_goal
 import rg_sim
 from as2py import mangle
-from rg_mechanisms import Mechanisms, ResponseModel, fitness, improves, plan_key, rank_key, structure_key
+from rg_mechanisms import Mechanisms, ResponseModel, improves, plan_key, rank_key, structure_key
+from rg_portfolio import Population, balanced_structures
 
 ROOT = Path(__file__).resolve().parents[1]
 FACTION_INDEX = {'Fairy': 0, 'Elven': 1, 'Angel': 2, 'Goblin': 3, 'Undead': 4, 'Demon': 5,
@@ -74,15 +75,27 @@ def catalogue(runner, model_path):
             quotas = {str(b): dict(kind='budget' if asc >= 3 else 'slots', value=float(
                 runner.sim.core_call('getResearchBudget', b) if asc >= 3 else runner.sim.core_call('getResearchCap', b)))
                 for b in range(7)}
-            rs, free = [], []
+            rs, free, ready = [], [], []
             for sid, u in runner.research.items():
                 code = runner.codes[sid]
                 row = data['research'][code]
-                if points[row['branch']] < row['level'] and row['level'] != 1:
-                    continue
-                if not (u.S__2b__21_a and u.S_9_21__25_ and not u.S_9_21__3f_() and not u.S__3e_I()):
-                    continue
+                # 只依据已确认的客户端基类规则排除永久冲突。
+                # 研究点仅由手动 ResearchTier.onPurchase 增加；本执行策略不做该动作。
+                evidence = row.get('eligibility', {})
+                unlocked = bool(getattr(u, mangle('§?!6§')))
+                if evidence.get('research_visible_owner') == 'ResearchUpgrade':
+                    if row['level'] >= 5000 and reincarnation < 180:
+                        continue
+                    if points[row['branch']] < row['level'] and row['level'] != 1 and not unlocked:
+                        continue
+                if evidence.get('purchasable_owner') == 'ResearchUpgrade':
+                    if asc >= 4 and row['level'] < 5000 or asc >= 3 and row['level'] < 405:
+                        continue
+                    if row['faction'] != -1 and row['faction'] not in (f, p) and f != 11:
+                        continue
+                # 未解锁、问号、感叹号、当前资源/自定义条件都允许留待整局验证。
                 rs.append(code)
+                if u.S_9_21__25_ and (unlocked or u.S__2d_6):ready.append(code)
                 if asc == 2 and row['faction'] != -1 and row['faction'] in (f, p):
                     free.append(code)
             if f == 11 and asc == 1 and reincarnation < 75:
@@ -96,48 +109,24 @@ def catalogue(runner, model_path):
                         merc.append(code)
                         groups[code] = (n + 2) // 3
                         ids[code] = u.S_6_21_Z
-            domains.append(dict(structure=struct, research=rs, quotas=quotas, free=free,
+            domains.append(dict(structure=struct, research=rs, ready_research=ready, quotas=quotas, free=free,
                                 merc=merc, merc_groups=groups, merc_ids=ids))
     finally:
         runner.reset()
-    return dict(domains=domains, current=runner.current, ascension=asc, reincarnation=reincarnation)
+    return dict(domains=domains, ascension=asc, reincarnation=reincarnation)
 
 
 def exact_evaluate(runner, plan, goal, T, target=None, spell=None):
     """每次从原始世界恢复，真实购买、施法、逐 tick 推进；不切换标记估值。"""
+    from rg_evaluate import evaluate_template, TemplateEvaluationError
     p = copy.deepcopy(plan)
-    for _ in range(4):
-        out = runner.run(p, goal, target if target is not None else float('inf'), T, spell=spell, coarse=0)
-        if not out['ok']:
-            return dict(ok=False, plan=p, note=out.get('note'), value=out.get('value'))
-        required = []
-        if p.get('alignment'):
-            required.append(rg_goal.ALIGNMENTS[p['alignment']])
-        if p.get('faction'):
-            required.append(rg_goal.MERC_PICK if p['faction']=='Mercenary' else rg_goal.FACTIONS[p['faction']][0])
-        if p.get('bloodline'):
-            required.append(rg_goal.BLOODLINES[p['bloodline']])
-        if any(not runner.ups[sid].S__3c__21_7 for sid in required):
-            return dict(ok=False, plan=p, note='到达终点时未能完成立场、阵营或血统选择', value=out.get('value'))
-        skipped_r = set(out.get('skipped') or [])
-        if 'research' in out:
-            # 达标可能早于研究等待超时：不能仅凭 skipped 为空断言整张模板已买齐。
-            skipped_r.update(set(p.get('research', [])) - set(out['research']))
-        skipped_m = set(out.get('skipped_merc') or [])
-        missing_prestige = (p.get('prestige') and not runner.ups[rg_goal.PRESTIGE[p['prestige']]].S__3c__21_7)
-        if not skipped_r and not skipped_m and not missing_prestige:
-            keys = ('value', 'time', 'reached', 'curve', 'picks', 'lineage', 'merc_times', 'skipped',
-                    'skipped_merc', 'research_ready')
-            result = dict(ok=True, plan=p, **{k: out.get(k) for k in keys})
-            # 结束后读数不会再进入这条轨迹；下一次试跑先完整恢复原始世界。
-            result['growth'] = dict(mana_generated=runner.G.S_5_21_V[16], casts=runner.G.S_5_21_V[15],
-                                    coins_generated=runner.G.S_5_21_V[0], buildings=runner.G.S_5_21_V[12])
-            return result
-        p = dict(p, research=[c for c in p.get('research', []) if c not in skipped_r],
-                 merc=[c for c in p.get('merc', []) if c not in skipped_m])
-        if missing_prestige:
-            p['prestige'] = None
-    return dict(ok=False, plan=p, note='未得到全部项目可执行的配方')
+    try:
+        result = evaluate_template(runner, p, goal, T, target, spell)
+    except TemplateEvaluationError as error:
+        return dict(error.result, plan=p, deferred=True, note=str(error))
+    result['growth'] = dict(mana_generated=runner.G.S_5_21_V[16], casts=runner.G.S_5_21_V[15],
+                            coins_generated=runner.G.S_5_21_V[0], buildings=runner.G.S_5_21_V[12])
+    return result
 
 
 def worker_main(source=None, sink=None):
@@ -152,13 +141,17 @@ def worker_main(source=None, sink=None):
             before = getattr(runner, 'n_runs', 0)
             if req['op'] == 'init':
                 runner = rg_goal.Runner(req['game_py'], save_path=req.get('save_path'), encoded_save=req.get('save'),
-                                        timestamp=req.get('timestamp'), research_json=req.get('research_json'))
+                                        timestamp=req.get('timestamp'), research_json=req.get('research_json'), seed=req.get('seed', 0),
+                                        event_cache=req.get('event_cache'), event_policy=req.get('event_policy', 'snapshot'))
                 model_path = req.get('model') or MODEL_PATH
-                result = dict(current=runner.current)
+                result = dict(current={}, environment=runner.environment)
             elif req['op'] == 'catalogue':
                 result = catalogue(runner, model_path)
             elif req['op'] == 'evaluate':
                 result = exact_evaluate(runner, req['plan'], req['goal'], req['T'], req.get('target'), req.get('spell'))
+            elif req['op'] == 'evaluate_strict':
+                from rg_evaluate import evaluate_template
+                result = evaluate_template(runner, req['plan'], req['goal'], req['T'], req.get('target'), req.get('spell'))
             else:
                 raise ValueError('未知新搜索请求')
             result['runs'] = getattr(runner, 'n_runs', 0) - before
@@ -167,6 +160,8 @@ def worker_main(source=None, sink=None):
         except Exception as error:
             import traceback
             reply = dict(ok=False, error=str(error), trace=traceback.format_exc()[-1600:])
+            if hasattr(error, 'result'):
+                reply['evaluation'] = error.result
         sink.write(json.dumps(reply, ensure_ascii=False, allow_nan=False).encode('utf-8') + b'\n')
         sink.flush()
 
@@ -176,7 +171,7 @@ def search_budget(options):
     if depth not in ('fast', 'normal', 'deep'):
         raise ValueError('未知搜索深度')
     # 回魔的跨分支增长需要更多整局反馈；快速档按实测保留两分钟，魔上限为一分钟。
-    fast = 120 if (options or {}).get('goal') == 'mana_regen' else 60
+    fast = 120 if (options or {}).get('goal') in ('mana_regen','production','coins','gems') else 60
     return dict(budget={'fast': fast, 'normal': 240, 'deep': 900}[depth])
 
 
@@ -187,6 +182,7 @@ class Search:
         self.started = time.monotonic()
         self.deadline = self.started + budget
         self.rng = random.Random(seed)
+        self.seed = seed
         self.stage, self.phase, self.phase_frac = '启动新求解器', 0, 0.0
         self.results, self.superseded, self.best_of = [], set(), {}
         self.cache, self.archive, self.failures = {}, collections.defaultdict(list), collections.Counter()
@@ -196,6 +192,10 @@ class Search:
         self.log_lines = []
         self.runs = self.evaluated = self.improved = self.done_n = self.total_n = 0
         self.generation = 0
+        self.banks = {}
+        self.promotions = []
+        if init.get('reference_templates'):
+            raise ValueError('独立求解不接受外部模板作为搜索起点')
         self.model = Mechanisms(init.get('model') or MODEL_PATH, goal)
         self.response = ResponseModel(self.model, target, T)
         self.thread = threading.Thread(target=self._main, args=(command, init, workers), daemon=True)
@@ -210,6 +210,8 @@ class Search:
     def record(self, row, *, verified=False):
         if not row.get('ok'):
             return None
+        if hasattr(self, 'T') and row.get('horizon', self.T) != self.T:
+            raise ValueError('不同目标时长的成绩不能进入同一排名')
         sk = structure_key(row['plan'])
         old = self.best_of.get(sk)
         if old is not None and not improves(row, self.results[old]) and not verified:
@@ -286,56 +288,126 @@ class Search:
             submit()
         return [row for _, row in sorted(out)]
 
-    def _preferences(self, domain):
-        key = structure_key(domain['structure'])
-        own = self.archive.get(key, [])[:8]
-        # 同阵营其他结构提供训练样本，但其终态从不拿来给本结构静态估值。
-        unit = (domain['structure']['alignment'], domain['structure']['faction'])
-        others = [r for sk, rs in self.archive.items() if sk[:2] == unit for r in rs[:2]]
-        rows = own + sorted(others, key=rank_key)[:8]
-        if not rows:
-            return {}
-        count = collections.Counter(c for r in rows for c in r['plan'].get('research', []) + r['plan'].get('merc', []))
-        return {c: 0.45 + 1.8 * count[c]/len(rows) for c in domain['research'] + domain.get('merc', [])}
+    def _portfolio_candidate(self, bank, inflight):
+        rng = bank.rng
+        if bank.horizon == min(self.banks):
+            return bank.next_proposal(rng, inflight), 'explore'
+        if bank.initial:
+            return bank.initial.popleft(), 'baseline'
+        # 每四次长局至少有一次不以短局名次为条件，保留慢启动和模型未知路线。
+        blind = (bank.promoted + bank.blind) % 4 == 3
+        if blind:
+            for h in sorted(self.banks,reverse=True):
+                if h >= bank.horizon:continue
+                for key,row in self.banks[h].deferred.items():
+                    if key not in bank.cache and key not in inflight:
+                        return row['plan'], 'blind'
+        # 目标时长自己的组合优化需要固定预算，不能一直被短局新候选挤占。
+        if (bank.promoted+bank.blind)%4==1 and bank.valid:
+            plan=bank.next_proposal(rng,inflight,seeds=False)
+            if plan is not None:return plan,'blind'
+        if not blind:
+            lower = [self.banks[h] for h in sorted(self.banks, reverse=True) if h < bank.horizon]
+            fronts = [collections.deque(b.fronts()) for b in lower]
+            while any(fronts):
+                for rows in fronts:
+                    if not rows:
+                        continue
+                    row = rows.popleft()
+                    key = plan_key(row['plan'])
+                    if key not in bank.cache and key not in inflight:
+                        return row['plan'], 'promote'
+        if bank.valid and rng.random() < 0.5:
+            plan = bank.next_proposal(rng, inflight, seeds=False)
+            if plan is not None:
+                return plan, 'blind'
+        # 独立长局抽样不从短局差分推断“不值得跑”。
+        ordered = self.ordered_domains
+        for _ in range(64):
+            domain = ordered[bank.blind_cursor % len(ordered)]
+            bank.blind_cursor += 1
+            plan = self.model.sample(domain, rng, route=rng.randrange(4))
+            if plan_key(plan) not in bank.cache and plan_key(plan) not in inflight:
+                return plan, 'blind'
+        return None, 'blind'
 
-    def _proposals(self, count=600):
-        best = self.best()
-        if not best:
-            return [self.model.sample(d, self.rng, route=self.rng.randrange(4)) for d in self.domains[:count]]
-        fmax = fitness(best[0], self.target, self.T)
-        weights = [math.exp(max(-30, (fitness(r, self.target, self.T)-fmax)/0.9)) for r in best]
-        pending, seen, preferences = [], set(), {}
-        for i in range(count):
-            if self.rng.random() < 0.16:
-                domain = self.rng.choice(self.domains)
-                arc = self.archive.get(structure_key(domain['structure']), [])
-                parent = arc[0]['plan'] if arc else self.model.sample(domain, self.rng, route=self.rng.randrange(4))
-            else:
-                row = self.rng.choices(best, weights=weights, k=1)[0]
-                domain = self.domain_map[structure_key(row['plan'])]
-                arc = self.archive[structure_key(row['plan'])]
-                parent = self.rng.choice(arc[:min(6, len(arc))])['plan']
-            sk = structure_key(domain['structure'])
-            if sk not in preferences:
-                preferences[sk] = self._preferences(domain)
-            pref = preferences[sk]
-            donor = None
-            if self.rng.random() < 0.6:
-                compatible = [r for r in best if r['plan']['faction'] == parent['faction'] and r['plan']['alignment'] == parent['alignment']]
-                if compatible:
-                    donor = self.rng.choice(compatible)['plan']
-            p = self.model.mutate(parent, domain, self.rng, donor=donor, preferences=pref)
-            key = plan_key(p)
-            if key not in self.cache and key not in seen:
-                seen.add(key)
-                pending.append(p)
-        ranked = sorted(pending, key=lambda p: -self.response.predict(p, self.domain_map[structure_key(p)], explore=0.18))
-        n = self.workers * 10
-        chosen = ranked[:int(n*0.7)]
-        rest = ranked[int(n*0.7):]
-        if rest:
-            chosen += self.rng.sample(rest, min(len(rest), n-len(chosen)))
-        return chosen
+    def _portfolio_search(self):
+        short = min(60,self.T)
+        horizons = sorted({short, self.T} | ({300} if self.T > 600 else set()))
+        shares = [1.0] if len(horizons) == 1 else [0.80, 0.20] if len(horizons) == 2 else [0.70, 0.12, 0.18]
+        self.banks = {h: Population(self.model, self.domains, h, self.target if h == self.T else None, seed=self.seed) for h in horizons}
+        self.ordered_domains = balanced_structures(self.domains)
+        first = self.banks[short]
+        first.initial.extend(self.model.sample(d, first.rng, route=i % 4, greedy=True) for i,d in enumerate(self.ordered_domains))
+        self.cache = self.banks[self.T].cache
+        self.archive = self.banks[self.T].archive
+        self.response = self.banks[self.T].response
+        pending, tag = {}, 0
+        cutoff = self.started + self.budget * 0.94
+        last_log = 0
+        self.phase, self.stage = 3, '多时长探索与目标时长验证'
+        while pending or time.monotonic() < cutoff:
+            if self.cancelled:
+                raise RuntimeError('已停止')
+            while len(pending) < self.workers and time.monotonic() < cutoff:
+                now = time.monotonic()
+                if now >= self.started + self.budget * 0.84:
+                    choices = [self.banks[self.T]]
+                else:
+                    def debt(item):
+                        h, share = item
+                        b = self.banks[h]
+                        cost = b.seconds / max(1, b.completed) if b.completed else 0.35 * h / 60 + 0.05
+                        reserved = sum(max(cost, now - started) for bh, _, started, _ in pending.values() if bh == h)
+                        return (b.seconds + reserved) / share
+                    choices = [self.banks[h] for h, _ in sorted(zip(horizons, shares), key=debt)]
+                submitted = False
+                for bank in choices:
+                    inflight = {plan_key(p) for h, p, _, _ in pending.values() if h == bank.horizon}
+                    plan, role = self._portfolio_candidate(bank, inflight)
+                    if plan is None:
+                        continue
+                    if role == 'promote':
+                        bank.promoted += 1
+                    elif role == 'blind':
+                        bank.blind += 1
+                    pending[tag] = bank.horizon, plan, time.monotonic(), role
+                    self.active[tag] = plan
+                    self.pool.submit(tag, dict(op='evaluate', plan=plan, goal=self.goal, T=bank.horizon,
+                                              target=bank.target, spell=self.spell))
+                    tag += 1
+                    submitted = True
+                    break
+                if not submitted:
+                    break
+            if not pending:
+                break
+            try:
+                done, reply = self.pool.results.get(timeout=0.2)
+            except queue.Empty:
+                continue
+            h, plan, started, role = pending.pop(done)
+            self.active.pop(done, None)
+            if not reply.get('ok'):
+                raise RuntimeError(reply.get('error', '计算进程失败'))
+            row = dict(reply['result'], horizon=h)
+            bank = self.banks[h]
+            bank.observe(plan, row)
+            self.runs += row.get('runs', 0)
+            self.evaluated += 1
+            self.done_n = self.evaluated
+            self.total_n = self.evaluated + len(pending)
+            self.generation = first.trained // 48
+            if h == self.T:
+                self.record(row)
+            self.phase_frac = min(0.99, (time.monotonic()-self.started) / max(1, self.budget))
+            if time.monotonic() - last_log >= 20:
+                last_log = time.monotonic()
+                best = self.best()
+                self.log('已评估 %d 套；%s；目标时长最好 %s' % (self.evaluated,
+                    ' / '.join('%g秒:%d套' % (b.horizon, b.completed) for b in self.banks.values()),
+                    '%.6g' % best[0]['value'] if best else '等待验证'))
+        self.log('预算分配：' + json.dumps([b.summary() for b in self.banks.values()], ensure_ascii=False))
 
     def _contributions(self, leader):
         """剩余预算内对第一名做真实去项回放；不切换拥有标记，不用静态贡献冒充。"""
@@ -389,51 +461,7 @@ class Search:
             self.domains = cat['domains']
             self.domain_map = {structure_key(d['structure']): d for d in self.domains}
             self.log('机制模型：%d 项研究，%d 种结构；研究配额由游戏提供' % (len(self.model.research), len(self.domains)))
-            self.phase, self.stage = 2, '各结构独立整局模拟'
-            seeds = [self.model.sample(d, self.rng, greedy=True) for d in self.domains]
-            current = cat['current']
-            if structure_key(current) in self.domain_map:
-                seeds.insert(0, self.model.repair(dict(current, merc=current.get('merc', [])), self.domain_map[structure_key(current)]))
-            # 先给每个基础阵营一个结果，随后覆盖全部结构。
-            banks = collections.defaultdict(collections.deque)
-            for p in seeds:
-                u = (p['alignment'], p['faction'])
-                banks[u].append(p)
-            order = []
-            while any(banks.values()):
-                for bank in banks.values():
-                    if bank:
-                        order.append(bank.popleft())
-            search_deadline = self.started + self.budget * 0.88
-            # 长时局也必须留下联合搜索预算；剩余结构穿插在后续每批提案中。
-            complete_scout = self.T <= 60 and self.goal == 'max_mana'
-            if complete_scout:
-                order = seeds
-            self._evaluate_batch(order, search_deadline if complete_scout else self.started + self.budget * 0.38)
-            unvisited = [p for p in order if plan_key(p) not in self.cache]
-            self.phase, self.stage = 3, '整套方案联合搜索与响应学习'
-            if complete_scout:
-                routes = [self.model.sample(self.domain_map[structure_key(row['plan'])], self.rng, route=route, greedy=True)
-                          for row in self.best()[:12] for route in (1, 2, 3)]
-                self._evaluate_batch(routes, search_deadline)
-            while time.monotonic() < search_deadline and not self.cancelled:
-                self.generation += 1
-                before = self.best()
-                rows = [r for r in self.cache.values() if r.get('ok')]
-                self.response.train(rows, self.domain_map, self.rng)
-                proposals = self._proposals()
-                if unvisited:
-                    n = min(len(unvisited), self.workers * 3)
-                    proposals = unvisited[:n] + proposals[:self.workers * 10 - n]
-                    unvisited = unvisited[n:]
-                if not proposals:
-                    break
-                self._evaluate_batch(proposals, search_deadline)
-                after = self.best()
-                self.phase_frac = max(0, min(0.99, (time.monotonic()-self.started-self.budget*0.38)/max(1, self.budget*0.50)))
-                if after:
-                    self.log('第 %d 代：已评估 %d 套，最好 %.6g%s' % (self.generation, self.evaluated, after[0]['value'],
-                        '（提高）' if before and improves(after[0], before[0]) else ''))
+            self._portfolio_search()
             if not self.best():
                 raise RuntimeError('在本次预算内没有找到可执行方案')
             if self.cancelled:
@@ -442,8 +470,6 @@ class Search:
             leaders = self.best()[:3]
             # 预算控制搜索；最终三次独立回放必须完成，即使长时局的单次运行跨过预算。
             checked = self._evaluate_batch([r['plan'] for r in leaders], float('inf'), force=True, remember=False)
-            if checked and checked[0].get('ok') and time.monotonic() < self.deadline:
-                checked[0]['contributions'] = self._contributions(checked[0])
             for row in checked:
                 if row.get('ok'):
                     self.record(row, verified=True)
@@ -503,7 +529,8 @@ class Search:
             superseded=sorted(self.superseded), units=self.unit_stats(), running=running, workers=self.workers,
             verified=len(verified_structs), runs=self.runs, improved=self.improved, checked=[], pruned=0, margin=None,
             unexplored=max(0, len(self.domains)-len(verified_structs)), log=self.log_lines[-30:], log_total=len(self.log_lines),
-            algorithm='population-response-v1', evaluated=self.evaluated, generations=self.generation)
+            algorithm='portfolio-response-v2', evaluated=self.evaluated, generations=self.generation,
+            allocation=[b.summary() for b in self.banks.values()])
 
 
 def main():
@@ -543,7 +570,7 @@ def main():
     assert input_hash == hashlib.sha256(args.save.read_bytes()).hexdigest(), '固定存档改变'
     assert input_stamp == args.save.stat().st_mtime, '固定存档时间改变'
     result = dict(metadata=dict(goal=args.goal, at=args.at, target=args.target, budget=args.budget,
-                  save_sha256=input_hash, timestamp=input_stamp, algorithm='population-response-v1', workers=args.workers,
+                  save_sha256=input_hash, timestamp=input_stamp, algorithm='portfolio-response-v2', workers=args.workers,
                   seed=args.seed, model_sha256=hashlib.sha256(MODEL_PATH.read_bytes()).hexdigest()),
                   elapsed=time.monotonic()-search.started, runs=search.runs, error=search.error,
                   best=search.best(), log=search.log_lines, status=search.status())

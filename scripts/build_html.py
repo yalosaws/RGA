@@ -43,7 +43,7 @@ ALIAS = {'TC': '征税', 'CtA': '动员令', 'HoL': '传说圣殿', 'BF': '嗜�
 # 遗物表里阵营遗物按全阶英豪奖杯的顺序排，每个阵营两个
 ART_FACTIONS = ['仙灵', '精灵', '天使', '地精', '亡灵', '恶魔', '泰坦', '德鲁伊', '无面者', '矮人', '卓尔', '佣兵']
 # 程序版本：改了功能就加版本号，在 CHANGES 最前面写这一版改了什么
-VERSION = '0.5.7'  # 还没到正式发布，用 0.x（用户要求）
+VERSION = '0.5.8'  # 还没到正式发布，用 0.x（用户要求）
 # 自动点击已从发布版永久移除（0.5.5），只留在作者本机自用版里：默认生成自用版界面，publish.py 设 RGA_PUBLIC=1 生成发布版
 PRIVATE = os.environ.get('RGA_PUBLIC') != '1'
 # 构筑辅助（含连续模拟）、实时读数还不进发布版（用户要求）；本机自用版默认带上。
@@ -51,6 +51,12 @@ PRIVATE = os.environ.get('RGA_PUBLIC') != '1'
 BUILD_TOOLS = os.environ.get('RGA_BUILD_TOOLS', '1' if PRIVATE else '0') == '1'
 AUTHOR = 'Yalosaws'
 CHANGES = [
+    ('0.5.8', '2026-11-02', [
+        '按目标找 build 改用「精确赛跑」：当前最好方案的每一个单项改动都只跑到开局定型（约 20～40 秒）和原方案成对比较，领先的及其叠加组合才跑满；同样时间里结果明显更好，搜索路线可复现。仍只从客户端机制独立生成候选，不用社区模板或当前配方作起点，前 3 名独立复核',
+        '构筑辅助新增本局累计产币（含收税）和退位可得宝石目标，分别衡量整局收益与指定时刻的每秒产出',
+        '构筑辅助新增严格模板评测：未买齐必选项直接报错；模拟恢复本机活动排期，修正长时活动加成被提前清除',
+        '必选研究持续尝试到时间上限，暂时买不到不再提前放弃；缺项不评分、不删项冒充完整方案',
+    ]),
     ('0.5.7', '2026-11-01', [
         '按目标找 build 改用独立种群求解器：结合研究增长关系与整局反馈联合搜索，前 3 名独立精确复核',
         '按目标找 build 修正依赖图：加魔上限、回魔的研究不再漏选',
@@ -2108,11 +2114,26 @@ def main():
     if BUILD_TOOLS:
         # 实时读数和构筑辅助的游戏快照不依赖存档库，没有 RG-tools 也照常生成。
         nav = item('live', '实时读数') + item('calc', '构筑辅助') + nav
-        page('calc', open(os.path.join(ROOT, 'scripts', 'build_tools.html'), encoding='utf-8').read())
+        from rg_community import template_rows
+        model=json.load(open(os.path.join(ROOT,'build','calculation','build-model.json'),encoding='utf-8'))
+        presets=[]
+        for row in template_rows():
+            if not row['plans']:continue
+            p=row['plans'][0].copy()
+            bounds={model['research'][c]['faction'] for c in p['research']}
+            needed={9:'Dwarven',10:'Drow',12:'Dragon'}
+            for f in bounds & needed.keys():p['prestige']=needed[f]
+            presets.append(dict(name=row['name'],kind=row['kind'],structure={k:p[k] for k in ('alignment','faction','bloodline','prestige')},
+                research=','.join(p['research']),merc=','.join(p['merc']+['MA:'+c for c in p['merc_alliance']]+['SP:'+s for s in p['merc_spells']]),
+                hint='已按模板名称及研究归属填入结构，请核对。'+row.get('note','')))
+        template_data='<script id="ev-data" type="application/json">'+json.dumps(presets,ensure_ascii=False).replace('<','\\u003c')+'</script>'
+        calc=open(os.path.join(ROOT,'scripts','build_tools.html'),encoding='utf-8').read().replace('<!--COMMUNITY_TEMPLATE_DATA-->',template_data)
+        page('calc',calc)
         page('live', open(os.path.join(ROOT, 'scripts', 'live_tools.html'), encoding='utf-8').read())
         parts.append(('js/live.js', open(os.path.join(ROOT, 'scripts', 'live_tools.js'), encoding='utf-8').read()))
         parts.append(('css/build.css', open(os.path.join(ROOT, 'scripts', 'build_tools.css'), encoding='utf-8').read()))
-        parts.append(('js/build.js', open(os.path.join(ROOT, 'scripts', 'build_tools.js'), encoding='utf-8').read()))
+        parts.append(('js/build.js', open(os.path.join(ROOT, 'scripts', 'build_tools_i18n.js'), encoding='utf-8').read()
+                      + '\n' + open(os.path.join(ROOT, 'scripts', 'build_tools.js'), encoding='utf-8').read()))
     nav = '<div class="grp">工具</div>' + nav
     nav += '<div class="grp">关于</div>' + item('ver', '版本 ' + VERSION)
     page('ver', version_page())

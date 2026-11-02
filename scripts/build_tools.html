@@ -1,24 +1,42 @@
 <section id="sec-calc" class="build-tools" hidden>
   <header class="bx-top">
     <div class="own-seg bx-tabs" id="bx-tabs" role="tablist"><button type="button" class="on" data-tab="goal" role="tab">按目标找 build</button><button type="button" data-tab="tl" role="tab">连续模拟</button></div>
-    <div class="bx-save"><i class="bx-dot" id="bx-dot"></i><span id="bt-status" role="status">等待读取存档…</span><button type="button" id="bt-refresh" class="bx-ghost">重新计算</button></div>
+    <div class="bx-save"><div class="own-seg bx-lang" id="bx-lang" role="group" aria-label="Language"><button type="button" data-lang="zh">中文</button><button type="button" data-lang="en">EN</button></div><i class="bx-dot" id="bx-dot"></i><span id="bt-status" role="status">等待读取存档…</span><button type="button" id="bt-refresh" class="bx-ghost">重新计算</button></div>
   </header>
   <div id="bt-error" class="bt-error" role="alert" hidden></div>
 
   <div class="bx-panel" id="bx-goal">
     <div class="bx-form" id="gl-form">
-      <label class="bx-field">目标<select id="gl-goal"><option value="max_mana">魔上限</option><option value="assistants">助手数</option><option value="mana_regen">每秒回魔</option><option value="production">总产出 / 秒</option></select></label>
+      <label class="bx-field">目标<select id="gl-goal"><option value="max_mana">魔上限</option><option value="assistants">助手数</option><option value="mana_regen">每秒回魔</option><option value="production">总产出 / 秒</option><option value="coins">本局累计产币（含收税）</option><option value="gems">退位可得宝石</option></select></label>
       <div class="bx-field">方式<div class="own-seg bx-seg" id="gl-mode"><button type="button" class="on" data-mode="reach">最快达到</button><button type="button" data-mode="max">数值最高</button></div></div>
       <label class="bx-field" id="gl-target-label">达到<input id="gl-target" type="text" inputmode="decimal" value="400万" placeholder="40000、4万、1e60"></label>
       <label class="bx-field"><span id="gl-limit-name">最长等多久</span><select id="gl-limit"><option value="60">1 分钟</option><option value="300" selected>5 分钟</option><option value="600">10 分钟</option><option value="1800">30 分钟</option><option value="3600">1 小时</option></select></label>
       <label class="bx-field">要求能用的法术<select id="gl-spell"><option value="">不限</option></select></label>
-      <label class="bx-field">搜索深度<select id="gl-depth"><option value="fast">快速（约 1～2 分钟）</option><option value="normal" selected>标准（约 4 分钟）</option><option value="deep">精细（约 15 分钟）</option></select></label>
+      <label class="bx-field">搜索深度<select id="gl-depth"><option value="fast" selected>快速（约 1～2 分钟）</option><option value="normal">标准（约 4 分钟）</option><option value="deep">精细（约 15 分钟）</option></select></label>
       <button type="button" class="bx-go" id="gl-run" disabled>开始搜索</button>
     </div>
+    <p id="gl-objective-hint" class="bt-muted" hidden></p>
 
+    <details class="gx-intro" id="ev-panel">
+      <summary>评测已有 build</summary>
+      <p>按上方目标、时长和法术要求独立试跑。每 2 秒全部购买，自动施法沿用存档。任何必选项没买齐都会报错，不补选结构、不删改配方。固定随机流，不自动择色或瞄准。</p>
+      <label class="bx-field">社区模板<select id="ev-preset"><option value="">手动输入</option></select></label>
+      <!--COMMUNITY_TEMPLATE_DATA-->
+      <div class="bx-form">
+        <label class="bx-field">立场<select id="ev-alignment"><option value="good">善良</option><option value="evil">邪恶</option><option value="neutral" selected>中立</option></select></label>
+        <label class="bx-field">阵营<select id="ev-faction"></select></label>
+        <label class="bx-field">血统<select id="ev-bloodline"></select></label>
+        <label class="bx-field">显赫阵营<select id="ev-prestige"><option value="">无</option><option value="Dwarven">矮人</option><option value="Drow">卓尔</option><option value="Dragon" selected>龙族</option></select></label>
+      </div>
+      <label class="bx-field">研究模板<textarea id="ev-research" rows="3" placeholder="S200,S215,…"></textarea></label>
+      <label class="bx-field">佣兵模板<textarea id="ev-merc" rows="3" placeholder="FR1,…,SP:Lightning Strike,SP:Dragon's Breath"></textarea></label>
+      <p id="ev-hint">请核对阵营、血统与显赫阵营；模板代码本身不包含这些选择。</p>
+      <button type="button" class="bx-go" id="ev-run" disabled>完整评测</button>
+      <div id="ev-result" role="status" aria-live="polite"></div>
+    </details>
     <div class="gx-intro" id="gl-intro">
-      <p>从存档退位重开，联合比较研究、佣兵、血统、世系和显赫阵营的整套搭配。结合增长关系和试跑结果继续寻找更好的组合，排名使用独立整局模拟的实测值；最终前 3 名重新回放复核。研究和佣兵模板可以直接存进游戏的模板库。</p>
-      <p>同时开 6 个低优先级计算进程。快速约 1～2 分钟、标准约 4 分钟、精细约 15 分钟；长时目标的在途计算和最终复核可能稍晚完成。可以随时停，保留已有结果。</p>
+      <p>从存档退位重开，候选只从客户端机制独立生成。方案之间「赛跑」：每个单项改动只跑到开局定型的那一刻（研究买完、滚雪球结束，通常 20～40 秒），和原方案成对比较，落后的停掉，领先的单项和它们的叠加组合才跑满全程；换血统、显赫这类改变事件早晚的改动一律跑满。排名只用上方目标时长的完整模拟结果，最终前 3 名重新回放复核。研究和佣兵模板可以直接存进游戏的模板库。</p>
+      <p>同时开 6 个低优先级计算进程。快速约 1～2 分钟、标准约 4 分钟、精细约 15 分钟；找不到更好的改动时会提前结束。可以随时停，保留已有结果。</p>
     </div>
 
     <div class="gx-live" id="gl-live" hidden>
@@ -30,8 +48,8 @@
         <ol class="gx-steps" id="gl-steps">
           <li data-phase="0"><b>启动计算进程</b><span>载入存档、准备 6 份游戏副本</span></li>
           <li data-phase="1"><b>读取研究约束和增长关系</b><span>按当前存档确定可选研究、名额与预算</span></li>
-          <li data-phase="2"><b>各结构独立整局模拟</b><span>不同阵营、血统和显赫组合分别从退位开始试跑</span></li>
-          <li data-phase="3"><b>整套方案联合搜索</b><span>结合增长关系和试跑结果更新整套研究、佣兵及世系</span></li>
+          <li data-phase="2"><b>各结构粗筛</b><span>每种阵营、血统和显赫组合用机制模型给一套初始研究，前几名跑满全程</span></li>
+          <li data-phase="3"><b>单项改动赛跑</b><span>对当前最好的方案试每一个单项改动，短跑成对淘汰，领先的及其叠加组合跑满</span></li>
           <li data-phase="4"><b>最佳方案精确复核</b><span>前 3 名重新独立跑一遍，核对数值、购买记录和增长曲线</span></li>
         </ol>
         <div class="gx-progress"><i id="gl-progress"></i></div>

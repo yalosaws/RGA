@@ -87,7 +87,7 @@ class Reader:
             raise ValueError('模板分类包含非预期的数组内容')
         return obj
 
-    def read(self):
+    def read(self, expected_name=b'rg-tp'):
         if self.take(2) != b'\x00\xbf':
             raise ValueError('不是 SOL 模板文件')
         if int.from_bytes(self.take(4), 'big') != len(self.data) - 6:
@@ -95,7 +95,7 @@ class Reader:
         if self.take(10) != b'TCSO\x00\x04\x00\x00\x00\x00':
             raise ValueError('模板文件头不符')
         name = self.take(int.from_bytes(self.take(2), 'big'))
-        if name != b'rg-tp' or self.take(4) != b'\x00\x00\x00\x03':
+        if name != expected_name or self.take(4) != b'\x00\x00\x00\x03':
             raise ValueError('模板文件版本不符')
         result = {}
         while self.pos < len(self.data):

@@ -2,6 +2,7 @@
 import copy
 import collections
 import json
+import io
 from pathlib import Path
 import random
 import time
@@ -28,7 +29,24 @@ class SearchRulesTests(unittest.TestCase):
     def test_goal_specific_fast_budget(self):
         self.assertEqual(search_budget(dict(goal='max_mana',depth='fast')),dict(budget=60))
         self.assertEqual(search_budget(dict(goal='mana_regen',depth='fast')),dict(budget=120))
+        self.assertEqual(search_budget(dict(goal='coins',depth='fast')),dict(budget=120))
         self.assertEqual(search_budget(dict(goal='mana_regen',depth='normal')),dict(budget=240))
+
+    def test_search_worker_does_not_export_the_saved_recipe(self):
+        from unittest.mock import patch
+        from rg_search import worker_main
+        class PhysicalWorld:
+            environment={}
+            @property
+            def current(self):
+                raise AssertionError('the saved recipe must not be read by search handshake')
+        source=io.BytesIO(b'{"op":"init","game_py":"unused"}\n')
+        sink=io.BytesIO()
+        with patch('rg_goal.Runner',return_value=PhysicalWorld()):
+            worker_main(source,sink)
+        reply=json.loads(sink.getvalue())
+        self.assertTrue(reply['ok'],reply)
+        self.assertEqual(reply['result']['current'],{})
 
     def test_strategy_cache_keeps_order_and_lineage(self):
         p = dict(alignment='neutral', faction='Druid', research=['S400', 'S30'], merc=['FR1', 'AN1'])
@@ -90,46 +108,19 @@ class SearchRulesTests(unittest.TestCase):
         self.assertEqual(a['value'],10)
         self.assertEqual(b['value'],100)
 
-    def test_unpurchased_items_require_a_fresh_complete_run(self):
-        class Runner:
-            def __init__(self):
-                self.calls=[]
-                self.G=type('G',(),{'S_5_21_V': [0]*17})()
-                self.ups=collections.defaultdict(lambda:type('U',(),{'S__3c__21_7':True})())
-            def run(self,p,*args,**kw):
-                self.calls.append((copy.deepcopy(p),kw))
-                return dict(ok=True,skipped=['S400'] if 'S400' in p['research'] else [],skipped_merc=[],
-                            value=999 if 'S400' in p['research'] else 10)
-        r=Runner()
+    def test_failed_full_plan_is_kept_and_has_no_score(self):
+        from unittest.mock import patch
+        from rg_evaluate import TemplateEvaluationError
         p=dict(alignment='neutral',faction='Druid',research=['S400','S30'],merc=[])
-        result=exact_evaluate(r,p,'mana_regen',60)
-        self.assertEqual(len(r.calls),2)
-        self.assertTrue(all(kw['coarse']==0 for _,kw in r.calls))
-        self.assertEqual(result['value'],10)
-        self.assertEqual(result['plan']['research'],['S30'])
-        self.assertEqual(p['research'],['S400','S30'])
-
-    def test_reach_before_purchase_timeout_does_not_claim_unbought_research(self):
-        class Runner:
-            def __init__(self):
-                self.calls=[]
-                self.G=type('G',(),{'S_5_21_V':[0]*17})()
-                self.ups=collections.defaultdict(lambda:type('U',(),{'S__3c__21_7':True})())
-            def run(self,p,*args,**kw):
-                self.calls.append(copy.deepcopy(p))
-                return dict(ok=True,reached=True,time=2,value=100,skipped=[],research=['S30'])
-        r=Runner()
-        out=exact_evaluate(r,dict(faction='Druid',research=['S400','S30']),'max_mana',60,target=100)
-        self.assertEqual(len(r.calls),2)
-        self.assertEqual(out['plan']['research'],['S30'])
-
-    def test_unfinished_structure_is_not_a_feasible_zero_score(self):
-        class Runner:
-            ups=collections.defaultdict(lambda:type('U',(),{'S__3c__21_7':False})())
-            def run(self,*args,**kwargs):
-                return dict(ok=True,value=0,research=[],skipped=[])
-        result=exact_evaluate(Runner(),dict(faction='Druid',bloodline='Angel',research=[]),'max_mana',60)
-        self.assertFalse(result['ok'])
+        original=copy.deepcopy(p)
+        with patch('rg_evaluate.evaluate_template',side_effect=TemplateEvaluationError([dict(message='仍未满足条件',item='S400')])) as evaluate:
+            out=exact_evaluate(object(),p,'mana_regen',60)
+        self.assertEqual(evaluate.call_count,1)
+        self.assertEqual(out['plan'],original)
+        self.assertEqual(p,original)
+        self.assertFalse(out['ok'])
+        self.assertTrue(out['deferred'])
+        self.assertIsNone(out['value'])
 
     def test_better_ablation_cannot_remain_hidden_in_cache(self):
         s=Search.__new__(Search)

@@ -152,8 +152,12 @@ class Mechanisms:
     def sample(self, domain, rng, *, route=0, greedy=False, preferences=None):
         prior = self.priorities(domain, route)
         weights = {c: max(0.01, w * (preferences or {}).get(c, 1)) for c, w in prior.items()}
+        ready=set(domain.get('ready_research',domain['research']))
+        for c in domain['research']:
+            if c not in ready:weights[c]*=0.03
         pools = collections.defaultdict(list)
         for c in domain['research']:
+            if greedy and c not in ready:continue
             pools[self.research[c]['branch']].append(c)
         rs = []
         for branch, pool in sorted(pools.items()):
@@ -184,7 +188,7 @@ class Mechanisms:
                 replacement = donor or self.sample(domain, rng, route=rng.randrange(4), preferences=preferences)
                 p['research'] = [c for c in p['research'] if c[0] not in chosen] + [c for c in replacement.get('research', []) if c[0] in chosen]
         elif kind < 0.75 and domain['research']:
-            pivot = rng.choice(domain['research'])
+            pivot = rng.choices(domain['research'],weights=[1 if c in domain.get('ready_research',domain['research']) else .05 for c in domain['research']],k=1)[0]
             linked = sorted(self.links(domain).get(pivot, ()))
             add = [pivot] + (rng.sample(linked, min(len(linked), rng.randint(1, 3))) if linked else [])
             touched = {c[0] for c in add}
@@ -194,7 +198,7 @@ class Mechanisms:
             # 被指定的生产者/消费者先保留，再按真实配额修复。
             weights = None
         elif domain['research']:
-            add = rng.choice(domain['research'])
+            add = rng.choices(domain['research'],weights=[1 if c in domain.get('ready_research',domain['research']) else .05 for c in domain['research']],k=1)[0]
             same = [c for c in p['research'] if c[0] == add[0] and c != add]
             if add not in p['research']:
                 if same:
@@ -208,7 +212,8 @@ class Mechanisms:
             p['merc'] = [c for c in p['merc'] if domain['merc_groups'].get(c) != g] + [c for c in alt['merc'] if domain['merc_groups'][c] == g]
         if p.get('bloodline') and rng.random() < 0.06:
             p['lineage'] = not p.get('lineage', True)
-        return self.repair(p, domain, weights)
+        # 变异已经明确选择要替换的项，保留购买顺序；重新按先验排序会把新项挤回原配方。
+        return self.repair(p, domain)
 
 
 class ResponseModel:
@@ -229,6 +234,9 @@ class ResponseModel:
         out = {'r:' + c: 1.0 for c in chosen}
         unit = plan['faction'] + ':'
         out.update({'u:' + unit + c: 1.0 for c in chosen})
+        for field in ('bloodline', 'prestige'):
+            if plan.get(field):
+                out.update({field + ':' + plan[field] + ':' + c: 1.0 for c in chosen})
         for c in chosen:
             for d in self.m.links(domain).get(c, set()) & chosen:
                 out['p:' + c + ':' + d] = 1.0

@@ -4,6 +4,10 @@
 
 /* ---- 通用控件 ---- */
 .build-tools input,.build-tools select{font:inherit;font-size:13px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--fg);padding:7px 10px}
+.build-tools textarea{font:13px/1.5 Consolas,monospace;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--fg);padding:9px 10px;resize:vertical;width:100%;box-sizing:border-box}
+.build-tools input[type=checkbox]{width:15px;height:15px;padding:0;accent-color:var(--blue)}
+.build-tools .bt-muted{color:var(--muted);font-size:12px;line-height:1.6}
+#ev-panel{margin:16px 0}#ev-panel summary{cursor:pointer;font-weight:600;color:var(--blue)}#ev-panel>.bx-field{display:flex;margin:12px 0}#ev-result{margin-top:12px;white-space:pre-wrap}
 .build-tools input:focus,.build-tools select:focus,.build-tools button:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
 .build-tools button{font:inherit;cursor:pointer}.build-tools button:disabled{opacity:.45;cursor:default}
 .bx-ghost{font-size:12px!important;border:1px solid var(--line);border-radius:999px;background:var(--card);color:var(--muted);padding:4px 12px;transition:color .15s,border-color .15s}

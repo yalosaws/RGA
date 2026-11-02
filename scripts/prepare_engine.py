@@ -26,10 +26,15 @@ def prepare():
         shutil.copyfile(src, destination / name)
     for name in ('as2py', 'as_runtime', 'rg_sim', 'rg_growth', 'rg_timeline', 'rg_goal', 'rg_optimize', 'simulation_state',
                  'game_memory_probe', 'avm2_memory', 'read_game_live', 'live_state', 'live_snapshot', 'rg_native',
-                 'rg_mechanisms', 'rg_search', 'rg_search_ui'):
+                 'rg_mechanisms', 'rg_search', 'rg_search_ui', 'rg_evaluate', 'rg_events', 'rg_template_api', 'rg_portfolio',
+                 'rg_race'):
         shutil.copyfile(ROOT / 'scripts' / (name + '.py'), destination / (name + '.py'))
     from compile_build_model import compile_model
     compile_model(destination / 'build-model.json')
+    for stale_name in ('rg_baselines.py', 'community-seeds.json', 'rg_formula_hints.py'):
+        stale = (destination / stale_name).resolve()
+        assert stale.parent == destination.resolve()
+        if stale.is_file():stale.unlink()
     # 原生（C++）计算引擎：转写 + 增量编译（最多 3 个低优先级进程），和 Python 版逐 tick 一致，快一百多倍
     import build_native
     pyd = build_native.build()
